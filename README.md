@@ -1,4 +1,6 @@
-# WordPress Documentation as Markdown Files
+# WordPress Documentation as Markdown Files for LLMs
+
+[![Update Documentation](https://github.com/kasparsd/wp-docs-md/actions/workflows/update-docs.yml/badge.svg)](https://github.com/kasparsd/wp-docs-md/actions/workflows/update-docs.yml)
 
 Collection of single markdown files for each post type on [WordPress Developer Resources](https://developer.wordpress.org):
 
