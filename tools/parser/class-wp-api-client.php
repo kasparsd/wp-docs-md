@@ -428,68 +428,45 @@ class WP_API_Client {
 	}
 
 	public function sort_posts( array $posts_by_id, array $parent_ids, array $post_order ): array {
-		// Create a comparison function for sorting posts by weight
+		// Create a comparison function for sorting posts by weight.
 		$compare_by_weight = function( $a_id, $b_id ) use ( $post_order ) {
 			$a_weight = $post_order[ $a_id ] ?? 0;
 			$b_weight = $post_order[ $b_id ] ?? 0;
 			
 			return $a_weight <=> $b_weight;
 		};
-		
-		// Group posts into top-level and children collections
-		$top_level_posts = [];
-		$child_posts_by_parent = [];
 
+		$children_ids = [];
 		foreach ( array_keys( $posts_by_id ) as $post_id ) {
-			$parent_id = $parent_ids[ $post_id ] ?? 0;
-			
-			if ( $parent_id === 0 ) {
-				$top_level_posts[] = $post_id;
-			} else {
-				$child_posts_by_parent[ $parent_id ][] = $post_id;
-			}
+			$children_ids[ $parent_ids[ $post_id ] ?? 0 ][] = $post_id;
 		}
 
-		// Sort top-level posts by weight
-		usort( $top_level_posts, $compare_by_weight );
-
-		// Helper function to recursively build the sorted list
-		$collect_posts_with_children = function( $post_id ) use (
-			&$collect_posts_with_children,
-			&$child_posts_by_parent,
-			$compare_by_weight,
-			$posts_by_id
-		) {
-			// Start with the current post
-			$collected_posts = [ $posts_by_id[ $post_id ] ];
-			
-			// Add all children (if any) in the correct order
-			if ( isset( $child_posts_by_parent[ $post_id ] ) ) {
-				// Sort children by weight
-				$children = $child_posts_by_parent[ $post_id ];
+		// Sort all children by weight.
+		$children_ids = array_map(
+			function ( $children ) use ( $compare_by_weight ) {
 				usort( $children, $compare_by_weight );
-				
-				// Add each child and its descendants
-				foreach ( $children as $child_id ) {
-					$collected_posts = array_merge(
-						$collected_posts,
-						$collect_posts_with_children( $child_id )
-					);
+				return $children;
+			},
+			$children_ids
+		);
+
+		$process_post = function( $parent_id ) use ( &$process_post, $children_ids ) {
+			$children = [];
+
+			if ( ! empty( $children_ids[ $parent_id ] ) ) {
+				foreach ( $children_ids[ $parent_id ] as $child_id ) {
+					$children[] = $child_id;
+					$children = array_merge( $children, $process_post( $child_id ) );
 				}
 			}
 			
-			return $collected_posts;
+			return $children;
 		};
 
-		// Build the final sorted list
-		$sorted_posts = [];
-		foreach ( $top_level_posts as $post_id ) {
-			$sorted_posts = array_merge(
-				$sorted_posts,
-				$collect_posts_with_children( $post_id )
-			);
-		}
-		
-		return $sorted_posts;
+		// Map back to the original post objects.
+		return array_map(
+			fn( $post_id ) => $posts_by_id[ $post_id ],
+			$process_post( 0 )
+		);
 	}
 }
