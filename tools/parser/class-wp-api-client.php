@@ -455,8 +455,10 @@ class WP_API_Client {
 
 			if ( ! empty( $children_ids[ $parent_id ] ) ) {
 				foreach ( $children_ids[ $parent_id ] as $child_id ) {
-					$children[] = $child_id;
-					$children = array_merge( $children, $process_post( $child_id ) );
+					if ( $child_id !== $parent_id ) { // Avoid circular references.
+						$children[] = $child_id;
+						$children = array_merge( $children, $process_post( $child_id ) );
+					}
 				}
 			}
 			
