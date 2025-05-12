@@ -426,4 +426,49 @@ class WP_API_Client {
 	
 		return $responses;
 	}
+
+	public function sort_posts( array $posts_by_id, array $parent_ids, array $post_order ): array {
+		// Create a comparison function for sorting posts by weight.
+		$compare_by_weight = function( $a_id, $b_id ) use ( $post_order ) {
+			$a_weight = $post_order[ $a_id ] ?? 0;
+			$b_weight = $post_order[ $b_id ] ?? 0;
+			
+			return $a_weight <=> $b_weight;
+		};
+
+		$children_ids = [];
+		foreach ( array_keys( $posts_by_id ) as $post_id ) {
+			$children_ids[ $parent_ids[ $post_id ] ?? 0 ][] = $post_id;
+		}
+
+		// Sort all children by weight.
+		$children_ids = array_map(
+			function ( $children ) use ( $compare_by_weight ) {
+				usort( $children, $compare_by_weight );
+				return $children;
+			},
+			$children_ids
+		);
+
+		$process_post = function( $parent_id ) use ( &$process_post, $children_ids ) {
+			$children = [];
+
+			if ( ! empty( $children_ids[ $parent_id ] ) ) {
+				foreach ( $children_ids[ $parent_id ] as $child_id ) {
+					if ( $child_id !== $parent_id ) { // Avoid circular references.
+						$children[] = $child_id;
+						$children = array_merge( $children, $process_post( $child_id ) );
+					}
+				}
+			}
+			
+			return $children;
+		};
+
+		// Map back to the original post objects.
+		return array_map(
+			fn( $post_id ) => $posts_by_id[ $post_id ],
+			$process_post( 0 )
+		);
+	}
 }

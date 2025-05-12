@@ -1,17 +1,48 @@
 Table of Contents:
 
+- [Getting Started with Secure Custom Fields](#secure-custom-fields)
+- [Installing Secure Custom Fields](#secure-custom-fields/welcome/installation)
+- [Quick Start Guide](#secure-custom-fields/welcome/quick-start)
 - [Core Concepts](#secure-custom-fields/concepts)
 - [Architecture](#secure-custom-fields/concepts/architecture)
 - [Security in Secure Custom Fields](#secure-custom-fields/concepts/security)
 - [Contributing to SCF](#secure-custom-fields/contributing)
 - [Documentation Guidelines](#secure-custom-fields/contributing/documentation)
 - [Features](#secure-custom-fields/features)
-- [Api](#secure-custom-fields/code-reference/api)
 - [Custom Post Types](#secure-custom-fields/features/post-types)
-- [Installing Secure Custom Fields](#secure-custom-fields/welcome/installation)
-- [Quick Start Guide](#secure-custom-fields/welcome/quick-start)
+- [API Reference](#secure-custom-fields/features/scf-api)
+- [Field Types](#secure-custom-fields/features/field)
+- [Repeater Field](#secure-custom-fields/features/field/repeater)
+- [Using the Repeater Field](#secure-custom-fields/features/field/repeater/repeater-tutorial)
+- [Select Field](#secure-custom-fields/features/field/select)
+- [Using the Select Field](#secure-custom-fields/features/field/select/select-tutorial)
+- [Separator Field](#secure-custom-fields/features/field/separator)
+- [Using the Separator Field](#secure-custom-fields/features/field/separator/separator-tutorial)
+- [Tab Field](#secure-custom-fields/features/field/tab)
+- [Using the Tab Field](#secure-custom-fields/features/field/tab/tab-tutorial)
+- [Taxonomy Field](#secure-custom-fields/features/field/taxonomy)
+- [Using the Taxonomy Field](#secure-custom-fields/features/field/taxonomy/taxonomy-tutorial)
+- [Text Field](#secure-custom-fields/features/field/text)
+- [Using the Text Field](#secure-custom-fields/features/field/text/text-tutorial)
+- [Textarea Field](#secure-custom-fields/features/field/textarea)
+- [Using the Textarea Field](#secure-custom-fields/features/field/textarea/textarea-tutorial)
+- [Time Picker Field](#secure-custom-fields/features/field/time-picker)
+- [Using the Time Picker Field](#secure-custom-fields/features/field/time-picker/time-picker-tutorial)
+- [True/False Field](#secure-custom-fields/features/field/true-false)
+- [Using the True/False Field](#secure-custom-fields/features/field/true-false/true-false-tutorial)
+- [URL Field](#secure-custom-fields/features/field/url)
+- [Using the URL Field](#secure-custom-fields/features/field/url/url-tutorial)
+- [User Field](#secure-custom-fields/features/field/user)
+- [Using the User Field](#secure-custom-fields/features/field/user/user-tutorial)
+- [WYSIWYG Field](#secure-custom-fields/features/field/wysiwyg)
+- [Using the WYSIWYG Field](#secure-custom-fields/features/field/wysiwyg/wysiwyg-tutorial)
 - [Tutorials](#secure-custom-fields/tutorials)
 - [Creating Your First Post Type](#secure-custom-fields/tutorials/first-post-type)
+- [Code Reference](#secure-custom-fields/code-reference)
+- [Api](#secure-custom-fields/code-reference/api)
+- [API Helpers Global Functions](#secure-custom-fields/code-reference/api/api-helpers-file)
+- [API Template Global Functions](#secure-custom-fields/code-reference/api/api-template-file)
+- [API Term Global Functions](#secure-custom-fields/code-reference/api/api-term-file)
 - [Fields](#secure-custom-fields/code-reference/fields)
 - [Accordion Field](#secure-custom-fields/code-reference/fields/accordion)
 - [Using the Accordion Field](#secure-custom-fields/code-reference/fields/accordion/accordion-tutorial)
@@ -61,7 +92,7 @@ Table of Contents:
 - [Using the Radio Field](#secure-custom-fields/code-reference/fields/radio/radio-tutorial)
 - [Range Field](#secure-custom-fields/code-reference/fields/range)
 - [Using the Range Field](#secure-custom-fields/code-reference/fields/range/range-tutorial)
-- [Code Reference](#secure-custom-fields/code-reference)
+- [ACF_Repeater_Table](#secure-custom-fields/code-reference/fields/class-acf-repeater-table-file)
 - [Acf Bidirectional Functions Global Functions](#secure-custom-fields/code-reference/acf-bidirectional-functions-file)
 - [Acf Field Functions Global Functions](#secure-custom-fields/code-reference/acf-field-functions-file)
 - [Acf Field Group Functions Global Functions](#secure-custom-fields/code-reference/acf-field-group-functions-file)
@@ -93,48 +124,129 @@ Table of Contents:
 - [Scf Ui Options Page Functions Global Functions](#secure-custom-fields/code-reference/scf-ui-options-page-functions-file)
 - [Upgrades Global Functions](#secure-custom-fields/code-reference/upgrades-file)
 - [Validation Global Functions](#secure-custom-fields/code-reference/validation-file)
-- [API Reference](#secure-custom-fields/features/scf-api)
+- [Admin](#secure-custom-fields/code-reference/admin)
 - [Admin Notices Global Functions](#secure-custom-fields/code-reference/admin/admin-notices-file)
 - [Admin Tools Global Functions](#secure-custom-fields/code-reference/admin/admin-tools-file)
-- [Admin](#secure-custom-fields/code-reference/admin)
-- [API Helpers Global Functions](#secure-custom-fields/code-reference/api/api-helpers-file)
-- [API Template Global Functions](#secure-custom-fields/code-reference/api/api-template-file)
-- [API Term Global Functions](#secure-custom-fields/code-reference/api/api-term-file)
-- [ACF_Repeater_Table](#secure-custom-fields/code-reference/fields/class-acf-repeater-table-file)
 - [Form Front Global Functions](#secure-custom-fields/code-reference/form-front-file)
 - [Forms](#secure-custom-fields/code-reference/forms)
 - [Hooks](#secure-custom-fields/code-reference/hooks)
-- [Acf Rest API Functions Global Functions](#secure-custom-fields/code-reference/class-acf-rest-api-file/acf-rest-api-functions-file)
 - [ACF_Rest_Api](#secure-custom-fields/code-reference/class-acf-rest-api-file)
+- [Acf Rest API Functions Global Functions](#secure-custom-fields/code-reference/class-acf-rest-api-file/acf-rest-api-functions-file)
 - [ACF_Rest_Embed_Links](#secure-custom-fields/code-reference/class-acf-rest-api-file/class-acf-rest-embed-links-file)
 - [ACF_Rest_Request](#secure-custom-fields/code-reference/class-acf-rest-api-file/class-acf-rest-request-file)
 - [REST API](#secure-custom-fields/code-reference/rest-api)
-- [Field Types](#secure-custom-fields/features/field)
-- [Repeater Field](#secure-custom-fields/features/field/repeater)
-- [Using the Repeater Field](#secure-custom-fields/features/field/repeater/repeater-tutorial)
-- [Select Field](#secure-custom-fields/features/field/select)
-- [Using the Select Field](#secure-custom-fields/features/field/select/select-tutorial)
-- [Separator Field](#secure-custom-fields/features/field/separator)
-- [Using the Separator Field](#secure-custom-fields/features/field/separator/separator-tutorial)
-- [Tab Field](#secure-custom-fields/features/field/tab)
-- [Using the Tab Field](#secure-custom-fields/features/field/tab/tab-tutorial)
-- [Taxonomy Field](#secure-custom-fields/features/field/taxonomy)
-- [Using the Taxonomy Field](#secure-custom-fields/features/field/taxonomy/taxonomy-tutorial)
-- [Text Field](#secure-custom-fields/features/field/text)
-- [Using the Text Field](#secure-custom-fields/features/field/text/text-tutorial)
-- [Textarea Field](#secure-custom-fields/features/field/textarea)
-- [Using the Textarea Field](#secure-custom-fields/features/field/textarea/textarea-tutorial)
-- [Time Picker Field](#secure-custom-fields/features/field/time-picker)
-- [Using the Time Picker Field](#secure-custom-fields/features/field/time-picker/time-picker-tutorial)
-- [True/False Field](#secure-custom-fields/features/field/true-false)
-- [Using the True/False Field](#secure-custom-fields/features/field/true-false/true-false-tutorial)
-- [URL Field](#secure-custom-fields/features/field/url)
-- [Using the URL Field](#secure-custom-fields/features/field/url/url-tutorial)
-- [User Field](#secure-custom-fields/features/field/user)
-- [Using the User Field](#secure-custom-fields/features/field/user/user-tutorial)
-- [WYSIWYG Field](#secure-custom-fields/features/field/wysiwyg)
-- [Using the WYSIWYG Field](#secure-custom-fields/features/field/wysiwyg/wysiwyg-tutorial)
-- [Getting Started with Secure Custom Fields](#secure-custom-fields)
+
+# Getting Started with Secure Custom Fields <a name="secure-custom-fields" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/
+
+This section helps you get up and running with Secure Custom Fields (SCF). Whether you’re new to WordPress development or an experienced developer, these guides will help you start using SCF effectively.
+
+## In This Section
+
+- [Installation](installation) – How to install and activate SCF
+- [Quick Start](quick-start) – Create your first custom field group in minutes
+
+## Documentation Sections
+
+- [Concepts](../concepts/) – Core concepts and architecture
+- [Features](../features/) – Detailed feature documentation
+- [Tutorials](../tutorials/) – Step-by-step guides
+- [Contributing](../contributing/) – How to contribute to SCF
+
+## Code Reference
+
+The [Code Reference](../code-reference/) provides detailed technical documentation of SCF’s functions, classes, hooks, and APIs. This is particularly useful for developers who want to:
+
+- Extend SCF’s functionality
+- Integrate SCF with other plugins or themes
+- Understand SCF’s internal architecture
+- Find specific hooks and filters
+
+## Prerequisites
+
+- WordPress 6.0 or later
+- PHP 7.4 or later
+- Basic understanding of WordPress development
+
+---
+
+# Installing Secure Custom Fields <a name="secure-custom-fields/welcome/installation" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/welcome/installation/
+
+This guide walks you through installing Secure Custom Fields (SCF) on your WordPress site.
+
+## Requirements
+
+Before installing, ensure your site meets these requirements:
+
+- WordPress 6.0 or later
+- PHP 7.4 or later
+- WordPress memory limit of 40MB or greater (64MB recommended)
+
+## Installation Methods
+
+### Via WordPress Admin (Recommended)
+
+1. Log in to your WordPress admin panel
+2. Navigate to Plugins → Add New
+3. Search for “Secure Custom Fields”
+4. Click “Install Now”
+5. Click “Activate”
+
+### Manual Installation
+
+1. Download the latest release from WordPress.org
+2. Extract the plugin files
+3. Upload the plugin folder to `/wp-content/plugins/`
+4. Activate through the WordPress admin interface
+
+## Verification
+
+After installation:
+
+1. Navigate to Custom Fields in your admin menu
+2. Verify you can access all plugin features
+3. Create a test field group to ensure functionality
+
+---
+
+# Quick Start Guide <a name="secure-custom-fields/welcome/quick-start" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/welcome/quick-start/
+
+This guide will help you create your first custom field group with Secure Custom Fields.
+
+## Creating a Field Group
+
+1. Navigate to Custom Fields → Add New
+2. Enter a title for your field group
+3. Click “Add Field”
+4. Choose a field type
+5. Configure the field settings
+6. Set the location rules
+7. Save the field group
+
+## Example: Author Bio
+
+Let’s create a simple author bio field group:
+
+1. Create a new field group called “Author Profile”
+2. Add these fields: 
+    - Profile Image (Image field)
+    - Bio (Textarea field)
+    - Social Links (Repeater field)
+3. Set location to “User Form”
+4. Save and test
+
+## Next Steps
+
+- Learn about [field types](../features/fields)
+- Explore [advanced features](../features/README)
+- Read the [security guidelines](../concepts/security)
+
+---
 
 # Core Concepts <a name="secure-custom-fields/concepts" />
 
@@ -436,18 +548,6 @@ This section details all features available in Secure Custom Fields.
 
 ---
 
-# Api <a name="secure-custom-fields/code-reference/api" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/code-reference/api/
-
-## Files
-
-- [Api Helpers](api-helpers-file)
-- [Api Template](api-template-file)
-- [Api Term](api-term-file)
-
----
-
 # Custom Post Types <a name="secure-custom-fields/features/post-types" />
 
 Source: https://developer.wordpress.org/secure-custom-fields/features/post-types/
@@ -492,80 +592,795 @@ Common use cases for custom post types:
 
 ---
 
-# Installing Secure Custom Fields <a name="secure-custom-fields/welcome/installation" />
+# API Reference <a name="secure-custom-fields/features/scf-api" />
 
-Source: https://developer.wordpress.org/secure-custom-fields/welcome/installation/
+Source: https://developer.wordpress.org/secure-custom-fields/features/scf-api/
 
-This guide walks you through installing Secure Custom Fields (SCF) on your WordPress site.
+The Secure Custom Fields API provides programmatic access to field data and plugin functionality.
 
-## Requirements
+## Core Functions
 
-Before installing, ensure your site meets these requirements:
+### Field Operations
 
-- WordPress 6.0 or later
-- PHP 7.4 or later
-- WordPress memory limit of 40MB or greater (64MB recommended)
+- Get field values
+- Update field data
+- Delete field content
+- Check field existence
 
-## Installation Methods
+### Post Type Management
 
-### Via WordPress Admin (Recommended)
+- Register post types
+- Modify post type settings
+- Handle custom capabilities
+- Manage taxonomies
 
-1. Log in to your WordPress admin panel
-2. Navigate to Plugins → Add New
-3. Search for “Secure Custom Fields”
-4. Click “Install Now”
-5. Click “Activate”
+## Integration Points
 
-### Manual Installation
+1. **WordPress Core**
+    - Post type registration
+    - Taxonomy integration
+    - Capability handling
+2. **Theme Integration**
+    - Template functions
+    - Conditional tags
+    - Layout helpers
+3. **Plugin Compatibility**
+    - REST API support
+    - Cache integration
+    - Query modifications
 
-1. Download the latest release from WordPress.org
-2. Extract the plugin files
-3. Upload the plugin folder to `/wp-content/plugins/`
-4. Activate through the WordPress admin interface
+## Best Practices
 
-## Verification
-
-After installation:
-
-1. Navigate to Custom Fields in your admin menu
-2. Verify you can access all plugin features
-3. Create a test field group to ensure functionality
+1. Always sanitize input
+2. Validate data types
+3. Use proper escaping
+4. Check capabilities
+5. Follow WordPress coding standards
 
 ---
 
-# Quick Start Guide <a name="secure-custom-fields/welcome/quick-start" />
+# Field Types <a name="secure-custom-fields/features/field" />
 
-Source: https://developer.wordpress.org/secure-custom-fields/welcome/quick-start/
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/
 
-This guide will help you create your first custom field group with Secure Custom Fields.
+Documentation for all available field types in Secure Custom Fields.
 
-## Creating a Field Group
+Each field type has its own documentation and tutorial showing how to implement and use it effectively.
 
-1. Navigate to Custom Fields → Add New
-2. Enter a title for your field group
-3. Click “Add Field”
-4. Choose a field type
-5. Configure the field settings
-6. Set the location rules
-7. Save the field group
+## Available Fields
 
-## Example: Author Bio
+- [Accordion](accordion) – Group fields into collapsible sections
+- [Button Group](button-group) – Select one option from a group of buttons
+- [Checkbox](checkbox) – Select one or more choices
+- [Clone](clone) – Duplicate and reuse existing field configurations
+- [Color Picker](color-picker) – Choose colors with a visual picker
+- [Date Picker](date-picker) – Select dates from a calendar
+- [Date/Time Picker](date-time-picker) – Select dates and times
+- [Email](email) – Input and validate email addresses
+- [File](file) – Upload and manage files
+- [Flexible Content](flexible-content) – Create flexible content layouts
+- [Gallery](gallery) – Manage collections of images
+- [Google Map](google-map) – Add location data with Google Maps
+- [Group](group) – Group fields together
+- [Icon Picker](icon-picker) – Select from available icons
+- [Image](image) – Upload and manage images
+- [Link](link) – Create links with titles and targets
+- [Message](message) – Display instructional text
+- [Number](number) – Input numeric values
+- [oEmbed](oembed) – Embed external content
+- [Page Link](page-link) – Link to internal content
+- [Password](password) – Securely input passwords
+- [Post Object](post-object) – Relate to other posts
+- [Radio](radio) – Select one choice from options
+- [Range](range) – Select a numeric value with a slider
+- [Repeater](repeater) – Create repeatable groups of fields
+- [Select](select) – Choose from dropdown options
+- [Separator](separator) – Add visual breaks between fields
+- [Tab](tab) – Organize fields into tabbed sections
+- [Taxonomy](taxonomy) – Select taxonomy terms
+- [Text](text) – Single line text input
+- [Textarea](textarea) – Multi-line text input
+- [Time Picker](time-picker) – Select time values
+- [True/False](true-false) – Toggle switch for yes/no choices
+- [URL](url) – Input and validate web addresses
+- [User](user) – Select WordPress users
+- [WYSIWYG](wysiwyg) – Rich text editor
 
-Let’s create a simple author bio field group:
+---
 
-1. Create a new field group called “Author Profile”
-2. Add these fields: 
-    - Profile Image (Image field)
-    - Bio (Textarea field)
-    - Social Links (Repeater field)
-3. Set location to “User Form”
-4. Save and test
+# Repeater Field <a name="secure-custom-fields/features/field/repeater" />
 
-## Next Steps
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/repeater/
 
-- Learn about [field types](../features/fields)
-- Explore [advanced features](../features/README)
-- Read the [security guidelines](../concepts/security)
+The Repeater field allows you to create a set of sub fields which can be repeated again and again.
+
+## Key Features
+
+- Flexible row management
+- Multiple field types support
+- Nested repeater capability
+- Row reordering
+- Min/max rows control
+
+## Settings
+
+- Sub Fields – Add fields to repeat
+- Minimum Rows – Set required rows
+- Maximum Rows – Limit total rows
+- Layout – Table or block display
+- Button Label – Customize add row text
+
+---
+
+# Using the Repeater Field <a name="secure-custom-fields/features/field/repeater/repeater-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/repeater/repeater-tutorial/
+
+## Basic Setup
+
+1. Create a new Field Group
+2. Add a Repeater field
+3. Configure options: 
+    - Add sub fields
+    - Set min/max rows
+    - Choose layout style
+    - Configure labels
+
+## Common Use Cases
+
+1. Dynamic Content 
+    - Social media links
+    - Team members
+    - Feature lists
+2. Content Management 
+    - Gallery items
+    - Related links
+    - Service offerings
+
+## Tips
+
+- Plan field structure carefully
+- Consider nesting depth
+- Use clear labels
+- Set appropriate limits
+
+---
+
+# Select Field <a name="secure-custom-fields/features/field/select" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/select/
+
+The Select field provides a dropdown interface for selecting single or multiple options from a predefined list.
+
+## Key Features
+
+- Single/multiple selection
+- Custom choices
+- Ajax loading support
+- Placeholder text
+- Conditional logic
+
+## Settings
+
+- Choices – Define available options
+- Default Value – Set initial selection
+- Allow Null – Make selection optional
+- Multiple – Enable multiple selections
+- UI – Enhanced select interface
+
+---
+
+# Using the Select Field <a name="secure-custom-fields/features/field/select/select-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/select/select-tutorial/
+
+## Basic Setup
+
+1. Create a new Field Group
+2. Add a Select field
+3. Configure options: 
+    - Add choice options
+    - Set default value
+    - Configure UI settings
+    - Enable/disable features
+
+## Common Use Cases
+
+1. Option Selection 
+    - Status choices
+    - Category selection
+    - Preference settings
+2. Data Filtering 
+    - View options
+    - Content filtering
+    - Display settings
+
+## Tips
+
+- Use clear option labels
+- Consider grouping options
+- Enable search for long lists
+- Set meaningful defaults
+
+---
+
+# Separator Field <a name="secure-custom-fields/features/field/separator" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/separator/
+
+The Separator field provides visual separation between fields in the editing interface. It helps organize and structure field layouts.
+
+## Key Features
+
+- Visual organization
+- Custom styling
+- Layout control
+- Group separation
+- Visual hierarchy
+
+## Settings
+
+- Label – Optional separator text
+- Instructions – Field description
+- Wrapper – CSS class options
+
+---
+
+# Using the Separator Field <a name="secure-custom-fields/features/field/separator/separator-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/separator/separator-tutorial/
+
+## Basic Setup
+
+1. Create a new Field Group
+2. Add a Separator field
+3. Configure options: 
+    - Set label text
+    - Add instructions
+    - Style wrapper
+    - Position field
+
+## Common Use Cases
+
+1. Content Organization 
+    - Section breaks
+    - Field grouping
+    - Visual hierarchy
+2. Form Structure 
+    - Content sections
+    - Logical breaks
+    - Visual spacing
+
+## Tips
+
+- Use clear labels
+- Keep consistent styling
+- Consider spacing
+- Group related fields
+
+---
+
+# Tab Field <a name="secure-custom-fields/features/field/tab" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/tab/
+
+The Tab field creates navigation tabs to organize fields into sections. It improves the editing interface by grouping related fields together.
+
+## Key Features
+
+- Field organization
+- Visual navigation
+- Grouped content
+- Layout control
+- Conditional display
+
+## Settings
+
+- Placement – Top/Left alignment
+- Endpoint – Tab section end
+- Label – Tab name
+- Instructions – Optional help text
+
+---
+
+# Using the Tab Field <a name="secure-custom-fields/features/field/tab/tab-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/tab/tab-tutorial/
+
+## Basic Setup
+
+1. Create a new Field Group
+2. Add a Tab field
+3. Configure options: 
+    - Set tab label
+    - Choose placement
+    - Set endpoint
+    - Add instructions
+
+## Common Use Cases
+
+1. Content Organization 
+    - Content sections
+    - Settings groups
+    - Form organization
+2. Interface Design 
+    - Complex forms
+    - Settings panels
+    - Data grouping
+
+## Tips
+
+- Use clear tab labels
+- Group related fields
+- Consider tab order
+- Plan section breaks
+
+---
+
+# Taxonomy Field <a name="secure-custom-fields/features/field/taxonomy" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/taxonomy/
+
+The Taxonomy field creates an interface for selecting taxonomy terms. It supports multiple selection methods and term management.
+
+## Key Features
+
+- Term selection
+- Multiple display types
+- Term creation
+- Hierarchical support
+- Load on demand
+
+## Settings
+
+- Taxonomy – Choose taxonomy
+- Appearance – Select UI style
+- Allow Create – Enable term creation
+- Load Terms – Auto-load options
+- Save Terms – Term relationships
+
+---
+
+# Using the Taxonomy Field <a name="secure-custom-fields/features/field/taxonomy/taxonomy-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/taxonomy/taxonomy-tutorial/
+
+## Basic Setup
+
+1. Create a new Field Group
+2. Add a Taxonomy field
+3. Configure options: 
+    - Select taxonomy
+    - Choose field type
+    - Set load behavior
+    - Configure saving
+
+## Common Use Cases
+
+1. Content Classification 
+    - Categories
+    - Tags
+    - Custom taxonomies
+2. Term Management 
+    - Content organization
+    - Filtering systems
+    - Related content
+
+## Tips
+
+- Choose appropriate UI
+- Consider term hierarchy
+- Enable term creation
+- Plan relationship structure
+
+---
+
+# Text Field <a name="secure-custom-fields/features/field/text" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/text/
+
+The Text field provides a standard single-line text input with various formatting and validation options.
+
+## Key Features
+
+- Text input
+- Character limits
+- Placeholder text
+- Prepend/append
+- Custom formatting
+
+## Settings
+
+- Default Value – Preset text
+- Placeholder – Input helper text
+- Character Limit – Set max length
+- Prepend – Text before input
+- Append – Text after input
+
+---
+
+# Using the Text Field <a name="secure-custom-fields/features/field/text/text-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/text/text-tutorial/
+
+## Basic Setup
+
+1. Create a new Field Group
+2. Add a Text field
+3. Configure options: 
+    - Set placeholder
+    - Add character limits
+    - Configure formatting
+    - Set default value
+
+## Common Use Cases
+
+1. Basic Information 
+    - Titles
+    - Names
+    - Short descriptions
+    - References
+2. Form Elements 
+    - Input fields
+    - Search boxes
+    - Labels
+    - Identifiers
+
+## Tips
+
+- Use clear placeholders
+- Set appropriate limits
+- Consider validation
+- Use meaningful defaults
+
+---
+
+# Textarea Field <a name="secure-custom-fields/features/field/textarea" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/textarea/
+
+The Textarea field provides a multi-line text input for longer content with formatting options and character limits.
+
+## Key Features
+
+- Multi-line text input
+- Character counting
+- Rows configuration
+- New line handling
+- Placeholder support
+
+## Settings
+
+- Default Value – Preset content
+- Placeholder – Helper text
+- Character Limit – Max length
+- Rows – Input height
+- New Lines – Handling options
+
+---
+
+# Using the Textarea Field <a name="secure-custom-fields/features/field/textarea/textarea-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/textarea/textarea-tutorial/
+
+## Basic Setup
+
+1. Create a new Field Group
+2. Add a Textarea field
+3. Configure options: 
+    - Set rows
+    - Add placeholder
+    - Configure limits
+    - Set line handling
+
+## Common Use Cases
+
+1. Long Text Content 
+    - Descriptions
+    - Biographies
+    - Instructions
+    - Notes
+2. Content Management 
+    - Excerpts
+    - Summaries
+    - Meta descriptions
+    - Comments
+
+## Tips
+
+- Set appropriate height
+- Consider word limits
+- Use clear placeholders
+- Plan for formatting
+
+---
+
+# Time Picker Field <a name="secure-custom-fields/features/field/time-picker" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/time-picker/
+
+The Time Picker field provides an interface for selecting time values with customizable display and increment options.
+
+## Key Features
+
+- Time selection
+- Format options
+- Step intervals
+- Range limits
+- Display customization
+
+## Settings
+
+- Display Format – Time format
+- Return Format – Data format
+- Time Increment – Minute steps
+- Placeholder – Helper text
+- Default Value – Preset time
+
+---
+
+# Using the Time Picker Field <a name="secure-custom-fields/features/field/time-picker/time-picker-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/time-picker/time-picker-tutorial/
+
+## Basic Setup
+
+1. Create a new Field Group
+2. Add a Time Picker field
+3. Configure options: 
+    - Set time format
+    - Choose increment
+    - Set default time
+    - Configure display
+
+## Common Use Cases
+
+1. Schedule Management 
+    - Event times
+    - Opening hours
+    - Appointment slots
+2. Time Settings 
+    - Scheduling
+    - Time restrictions
+    - Operating hours
+
+## Tips
+
+- Use consistent formats
+- Set appropriate steps
+- Consider time zones
+- Plan for validation
+
+---
+
+# True/False Field <a name="secure-custom-fields/features/field/true-false" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/true-false/
+
+The True/False field provides a simple toggle switch for boolean values. It offers a clean interface for yes/no choices.
+
+## Key Features
+
+- Toggle interface
+- Custom labels
+- Default state
+- Message display
+- UI customization
+
+## Settings
+
+- Message – Field description
+- Default Value – Initial state
+- On Text – Custom label
+- Off Text – Custom label
+- UI – Style options
+
+---
+
+# Using the True/False Field <a name="secure-custom-fields/features/field/true-false/true-false-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/true-false/true-false-tutorial/
+
+## Basic Setup
+
+1. Create a new Field Group
+2. Add a True/False field
+3. Configure options: 
+    - Set message
+    - Choose default
+    - Configure labels
+    - Style interface
+
+## Common Use Cases
+
+1. Simple Toggles 
+    - Feature flags
+    - Display options
+    - Status switches
+2. Settings Control 
+    - Visibility settings
+    - Enable/disable
+    - Option toggles
+
+## Tips
+
+- Use clear labels
+- Set logical defaults
+- Consider UI placement
+- Plan conditional logic
+
+---
+
+# URL Field <a name="secure-custom-fields/features/field/url" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/url/
+
+The URL field provides input for web addresses with validation and formatting options. It ensures proper URL format and structure.
+
+## Key Features
+
+- URL validation
+- Protocol handling
+- Placeholder text
+- Custom formatting
+- Link preview
+
+## Settings
+
+- Default Value – Preset URL
+- Placeholder – Helper text
+- Protocol – Required/optional
+- Return Format – URL structure
+
+---
+
+# Using the URL Field <a name="secure-custom-fields/features/field/url/url-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/url/url-tutorial/
+
+## Basic Setup
+
+1. Create a new Field Group
+2. Add a URL field
+3. Configure options: 
+    - Set placeholder
+    - Configure protocol
+    - Set validation
+    - Choose format
+
+## Common Use Cases
+
+1. Web Links 
+    - Website URLs
+    - Social profiles
+    - Resource links
+2. Reference Links 
+    - Documentation
+    - External content
+    - Media sources
+
+## Tips
+
+- Validate URLs properly
+- Consider protocols
+- Use clear placeholders
+- Check link validity
+
+---
+
+# User Field <a name="secure-custom-fields/features/field/user" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/user/
+
+The User field creates an interface for selecting WordPress users. It supports multiple selection methods and user filtering.
+
+## Key Features
+
+- User selection
+- Role filtering
+- Multiple formats
+- Search capability
+- Multiple selection
+
+## Settings
+
+- Roles – Filter by role
+- Allow Null – Optional selection
+- Multiple – Enable multiple
+- Return Format – Object/ID/Array
+- Filter – User query args
+
+---
+
+# Using the User Field <a name="secure-custom-fields/features/field/user/user-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/user/user-tutorial/
+
+## Basic Setup
+
+1. Create a new Field Group
+2. Add a User field
+3. Configure options: 
+    - Select roles
+    - Set return format
+    - Configure multiple
+    - Set filters
+
+## Common Use Cases
+
+1. User Assignment 
+    - Author selection
+    - Team members
+    - User permissions
+2. User Relations 
+    - Content ownership
+    - User groups
+    - Access control
+
+## Tips
+
+- Filter appropriate roles
+- Consider permissions
+- Use clear search
+- Plan user structure
+
+---
+
+# WYSIWYG Field <a name="secure-custom-fields/features/field/wysiwyg" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/wysiwyg/
+
+The WYSIWYG (What You See Is What You Get) field provides a rich text editor with formatting tools and media integration.
+
+## Key Features
+
+- Rich text editing
+- Media integration
+- Toolbar customization
+- HTML handling
+- Editor styles
+
+## Settings
+
+- Toolbar – Editor tools
+- Media Upload – Enable/disable
+- Tabs – Visual/Text tabs
+- Height – Editor height
+- Default Value – Initial content
+
+---
+
+# Using the WYSIWYG Field <a name="secure-custom-fields/features/field/wysiwyg/wysiwyg-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/wysiwyg/wysiwyg-tutorial/
+
+## Basic Setup
+
+1. Create a new Field Group
+2. Add a WYSIWYG field
+3. Configure options: 
+    - Choose toolbar
+    - Set media options
+    - Configure height
+    - Set defaults
+
+## Common Use Cases
+
+1. Rich Content 
+    - Post content
+    - Product descriptions
+    - Page sections
+2. Formatted Text 
+    - Documentation
+    - Guidelines
+    - Formatted messages
+
+## Tips
+
+- Configure appropriate tools
+- Consider media handling
+- Plan content structure
+- Set consistent styling
 
 ---
 
@@ -634,6 +1449,1584 @@ A step-by-step guide to creating a custom post type using Secure Custom Fields.
 - Add custom fields to your post type
 - Configure archive displays
 - Set up custom taxonomies
+
+---
+
+# Code Reference <a name="secure-custom-fields/code-reference" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/code-reference/
+
+## Files
+
+- [Acf Bidirectional Functions](acf-bidirectional-functions-file)
+- [Acf Field Functions](acf-field-functions-file)
+- [Acf Field Group Functions](acf-field-group-functions-file)
+- [Acf Form Functions](acf-form-functions-file)
+- [Acf Helper Functions](acf-helper-functions-file)
+- [Acf Hook Functions](acf-hook-functions-file)
+- [Acf Input Functions](acf-input-functions-file)
+- [Acf Internal Post Type Functions](acf-internal-post-type-functions-file)
+- [Acf Meta Functions](acf-meta-functions-file)
+- [Acf Post Functions](acf-post-functions-file)
+- [Acf Post Type Functions](acf-post-type-functions-file)
+- [Acf Taxonomy Functions](acf-taxonomy-functions-file)
+- [Acf User Functions](acf-user-functions-file)
+- [Acf Utility Functions](acf-utility-functions-file)
+- [Acf Value Functions](acf-value-functions-file)
+- [Acf Wp Functions](acf-wp-functions-file)
+- [Assets](assets-file)
+- [Blocks](blocks-file)
+- [Compatibility](compatibility-file)
+- [Deprecated](deprecated-file)
+- [Fields](fields-file)
+- [L10n](l10n-file)
+- [Local Fields](local-fields-file)
+- [Local Json](local-json-file)
+- [Local Meta](local-meta-file)
+- [Locations](locations-file)
+- [Loop](loop-file)
+- [Revisions](revisions-file)
+- [Scf Ui Options Page Functions](scf-ui-options-page-functions-file)
+- [Upgrades](upgrades-file)
+- [Validation](validation-file)
+
+---
+
+# Api <a name="secure-custom-fields/code-reference/api" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/code-reference/api/
+
+## Files
+
+- [Api Helpers](api-helpers-file)
+- [Api Template](api-template-file)
+- [Api Term](api-term-file)
+
+---
+
+# API Helpers Global Functions <a name="secure-custom-fields/code-reference/api/api-helpers-file" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/code-reference/api/api-helpers-file/
+
+## `acf_is_array()`
+
+This function will return true for a non empty array
+
+- @since ACF 5.4.0
+- @param mixed $array The variable to test.
+- @return boolean
+
+## `acf_has_setting()`
+
+Alias of acf()-&gt;has\_setting()
+
+- @since ACF 5.6.5
+- @param string $name Name of the setting to check for.
+- @return boolean
+
+## `acf_raw_setting()`
+
+acf\_raw\_setting
+
+- alias of acf()-&gt;get\_setting()
+- @since ACF 5.6.5
+- @param n/a
+- @return n/a
+
+## `acf_update_setting()`
+
+acf\_update\_setting
+
+- alias of acf()-&gt;update\_setting()
+- @since ACF 5.0.0
+- @param $name (string)
+- @param $value (mixed)
+- @return n/a
+
+## `acf_validate_setting()`
+
+acf\_validate\_setting
+
+- Returns the changed setting name if available.
+- @since ACF 5.6.5
+- @param n/a
+- @return n/a
+
+## `acf_get_setting()`
+
+Alias of acf()-&gt;get\_setting()
+
+- @since ACF 5.0.0
+- @param string $name The name of the setting to test.
+- @param string $value An optional default value for the setting if it doesn’t exist.
+- @return n/a
+
+## `acf_get_internal_post_types()`
+
+Return an array of ACF’s internal post type names
+
+- @since ACF 6.1
+- @return array An array of ACF’s internal post type names
+
+## `acf_append_setting()`
+
+acf\_append\_setting
+
+- This function will add a value into the settings array found in the acf object
+- @since ACF 5.0.0
+- @param $name (string)
+- @param $value (mixed)
+- @return n/a
+
+## `acf_get_data()`
+
+acf\_get\_data
+
+- Returns data.
+- @since ACF 5.0.0
+- @param string $name
+- @return mixed
+
+## `acf_set_data()`
+
+acf\_set\_data
+
+- Sets data.
+- @since ACF 5.0.0
+- @param string $name
+- @param mixed $value
+- @return n/a
+
+## `acf_append_data()`
+
+Appends data to an existing key.
+
+- @since ACF 5.9.0
+- @param string $name The data name.
+- @param mixed $data The data to append to name.
+
+## `acf_init()`
+
+Alias of acf()-&gt;[init()](#reference/functions/init) – the core ACF init function.
+
+- @since ACF 5.0.0
+
+## `acf_has_done()`
+
+acf\_has\_done
+
+- This function will return true if this action has already been done
+- @since ACF 5.3.2
+- @param $name (string)
+- @return (boolean)
+
+## `acf_get_external_path()`
+
+This function will return the path to a file within an external folder
+
+- @since ACF 5.5.8
+- @param string $file Directory path.
+- @param string $path Optional file path.
+- @return string File path.
+
+## `acf_get_external_dir()`
+
+This function will return the url to a file within an internal ACF folder
+
+- @since ACF 5.5.8
+- @param string $file Directory path.
+- @param string $path Optional file path.
+- @return string File path.
+
+## `acf_plugin_dir_url()`
+
+This function will calculate the url to a plugin folder.  
+Different to the WP [plugin\_dir\_url()](#reference/functions/plugin_dir_url) , this function can calculate for urls outside of the plugins folder (theme include).
+
+- @since ACF 5.6.8
+- @param string $file A file path inside the ACF plugin to get the plugin directory path from.
+- @return string The plugin directory path.
+
+## `acf_parse_args()`
+
+This function will merge together 2 arrays and also convert any numeric values to ints
+
+- @since ACF 5.0.0
+- @param array $args The configured arguments array.
+- @param array $defaults The default properties for the passed args to inherit.
+- @return array $args Parsed arguments with defaults applied.
+
+## `acf_parse_types()`
+
+acf\_parse\_types
+
+- This function will convert any numeric values to int and trim strings
+- @since ACF 5.0.0
+- @param $var (mixed)
+- @return $var (mixed)
+
+## `acf_parse_type()`
+
+acf\_parse\_type
+
+- description
+- @since ACF 5.0.9
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_get_view()`
+
+This function will load in a file from the ‘admin/views’ folder and allow variables to be passed through
+
+- @since ACF 5.0.0
+- @param string $view\_path
+- @param array $view\_args
+
+## `acf_merge_atts()`
+
+acf\_merge\_atts
+
+- description
+- @since ACF 5.0.9
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_nonce_input()`
+
+This function will create and echo a basic nonce input
+
+- @since ACF 5.6.0
+- @param string $nonce The nonce parameter string.
+
+## `acf_extract_var()`
+
+This function will remove the var from the array, and return the var
+
+- @since ACF 5.0.0
+- @param array $extract\_array an array passed as reference to be extracted.
+- @param string $key The key to extract from the array.
+- @param mixed $default\_value The default value if it doesn’t exist in the extract array.
+- @return mixed Extracted var or default.
+
+## `acf_extract_vars()`
+
+This function will remove the vars from the array, and return the vars
+
+- @since ACF 5.0.0
+- @param array $extract\_array an array passed as reference to be extracted.
+- @param array $keys An array of keys to extract from the original array.
+- @return array An array of extracted values.
+
+## `acf_get_sub_array()`
+
+acf\_get\_sub\_array
+
+- This function will return a sub array of data
+- @since ACF 5.3.2
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_get_post_types()`
+
+Returns an array of post type names.
+
+- @since ACF 5.0.0
+- @param array $args Optional. An array of key =&gt; value arguments to match against the post type objects. Default empty array.
+- @return array A list of post type names.
+
+## `acf_get_post_stati()`
+
+Function acf\_get\_post\_stati()
+
+- Returns an array of post status names.
+- @since ACF 6.1.0
+- @param array $args Optional. An array of key =&gt; value arguments to match against the post status objects. Default empty array.
+- @return array A list of post status names.
+
+## `acf_get_pretty_post_statuses()`
+
+Function acf\_get\_pretty\_post\_statuses()
+
+- Returns a clean array of post status names.
+- @since ACF 6.1.0
+- @param array $post\_statuses Optional. An array of post status objects. Default empty array.
+- @return array An array of post status names.
+
+## `acf_get_post_type_label()`
+
+acf\_get\_post\_type\_label
+
+- This function will return a pretty label for a specific post\_type
+- @since ACF 5.4.0
+- @param $post\_type (string)
+- @return (string)
+
+## `acf_get_post_status_label()`
+
+Function acf\_get\_post\_status\_label()
+
+- This function will return a pretty label for a specific post\_status
+- @since ACF 6.1.0
+- @param string $post\_status The post status.
+- @return string The post status label.
+
+## `acf_verify_nonce()`
+
+acf\_verify\_nonce
+
+- This function will look at the $\_POST\[‘\_acf\_nonce’\] value and return true or false
+- @since ACF 5.0.0
+- @param $nonce (string)
+- @return (boolean)
+
+## `acf_verify_ajax()`
+
+Returns true if the current AJAX request is valid.  
+It’s action will also allow WPML to set the lang and avoid AJAX get\_posts issues
+
+- @since ACF 5.2.3
+- @param string $nonce The nonce to check.
+- @param string $action The action of the nonce.
+- @return boolean
+
+## `acf_get_image_sizes()`
+
+acf\_get\_image\_sizes
+
+- This function will return an array of available image sizes
+- @since ACF 5.0.0
+- @param n/a
+- @return (array)
+
+## `acf_version_compare()`
+
+acf\_version\_compare
+
+- Similar to the version\_compare() function but with extra functionality.
+- @since ACF 5.5.0
+- @param string $left The left version number.
+- @param string $compare The compare operator.
+- @param string $right The right version number.
+- @return boolean
+
+## `acf_get_full_version()`
+
+acf\_get\_full\_version
+
+- This function will remove any ‘-beta1’ or ‘-RC1’ strings from a version
+- @since ACF 5.5.0
+- @param $version (string)
+- @return (string)
+
+## `acf_get_terms()`
+
+acf\_get\_terms
+
+- This function is a wrapper for the [get\_terms()](#reference/functions/get_terms) function
+- @since ACF 5.4.0
+- @param $args (array)
+- @return (array)
+
+## `acf_get_taxonomy_terms()`
+
+acf\_get\_taxonomy\_terms
+
+- This function will return an array of available taxonomy terms
+- @since ACF 5.0.0
+- @param $taxonomies (array)
+- @return (array)
+
+## `acf_decode_taxonomy_terms()`
+
+acf\_decode\_taxonomy\_terms
+
+- This function decodes the $taxonomy:$term strings into a nested array
+- @since ACF 5.0.0
+- @param $terms (array)
+- @return (array)
+
+## `acf_decode_taxonomy_term()`
+
+acf\_decode\_taxonomy\_term
+
+- This function will return the taxonomy and term slug for a given value
+- @since ACF 5.0.0
+- @param $string (string)
+- @return (array)
+
+## `acf_array()`
+
+acf\_array
+
+- Casts the value into an array.
+- @since ACF 5.7.10
+- @param mixed $val The value to cast.
+- @return array
+
+## `acf_unarray()`
+
+Returns a non-array value.
+
+- @since ACF 5.8.10
+- @param mixed $val The value to review.
+- @return mixed
+
+## `acf_get_array()`
+
+acf\_get\_array
+
+- This function will force a variable to become an array
+- @since ACF 5.0.0
+- @param $var (mixed)
+- @return (array)
+
+## `acf_get_numeric()`
+
+acf\_get\_numeric
+
+- This function will return numeric values
+- @since ACF 5.4.0
+- @param $value (mixed)
+- @return (mixed)
+
+## `acf_get_posts()`
+
+acf\_get\_posts
+
+- Similar to the [get\_posts()](#reference/functions/get_posts) function but with extra functionality.
+- @since ACF 5.1.5
+- @param array $args The query args.
+- @return array
+
+## `_acf_query_remove_post_type()`
+
+\_acf\_query\_remove\_post\_type
+
+- This function will remove the ‘wp\_posts.post\_type’ WHERE clause completely  
+    When using ‘post\_\_in’, this clause is unnecessary and slow.
+- @since ACF 5.1.5
+- @param $sql (string)
+- @return $sql
+
+## `acf_get_grouped_posts()`
+
+acf\_get\_grouped\_posts
+
+- This function will return all posts grouped by post\_type  
+    This is handy for select settings
+- @since ACF 5.0.0
+- @param $args (array)
+- @return (array)
+
+## `_acf_orderby_post_type()`
+
+The internal ACF function to add order by post types for use in `acf_get_grouped_posts`
+
+- @param string $orderby The current orderby value for a query.
+- @param object $wp\_query The [WP\_Query](#reference/classes/wp_query).
+- @return string The potentially modified orderby string.
+
+## `acf_get_pretty_user_roles()`
+
+acf\_get\_pretty\_user\_roles
+
+- description
+- @since ACF 5.3.2
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_get_grouped_users()`
+
+acf\_get\_grouped\_users
+
+- This function will return all users grouped by role  
+    This is handy for select settings
+- @since ACF 5.0.0
+- @param $args (array)
+- @return (array)
+
+## `acf_json_encode()`
+
+acf\_json\_encode
+
+- Returns json\_encode() ready for file / database use.
+- @since ACF 5.0.0
+- @param array $json The array of data to encode.
+- @return string
+
+## `acf_str_exists()`
+
+acf\_str\_exists
+
+- This function will return true if a sub string is found
+- @since ACF 5.0.0
+- @param $needle (string)
+- @param $haystack (string)
+- @return (boolean)
+
+## `acf_debug()`
+
+A legacy function designed for developer debugging.
+
+- @deprecated 6.2.6 Removed for security, but keeping the definition in case third party devs have it in their code.
+- @since ACF 5.0.0
+- @return false
+
+## `acf_debug_start()`
+
+A legacy function designed for developer debugging.
+
+- @deprecated 6.2.6 Removed for security, but keeping the definition in case third party devs have it in their code.
+- @since ACF 5.0.0
+- @return false
+
+## `acf_debug_end()`
+
+A legacy function designed for developer debugging.
+
+- @deprecated 6.2.6 Removed for security, but keeping the definition in case third party devs have it in their code.
+- @since ACF 5.0.0
+- @return false
+
+## `acf_encode_choices()`
+
+acf\_encode\_choices
+
+- description
+- @since ACF 5.0.0
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_str_replace()`
+
+acf\_str\_replace
+
+- This function will replace an array of strings much like str\_replace  
+    The difference is the extra logic to avoid replacing a string that has already been replaced  
+    This is very useful for replacing date characters as they overlap with each other
+- @since ACF 5.3.8
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_split_date_time()`
+
+acf\_split\_date\_time
+
+- This function will split a format string into separate date and time
+- @since ACF 5.3.8
+- @param $date\_time (string)
+- @return $formats (array)
+
+## `acf_convert_date_to_php()`
+
+acf\_convert\_date\_to\_php
+
+- This function converts a date format string from JS to PHP
+- @since ACF 5.0.0
+- @param $date (string)
+- @return (string)
+
+## `acf_convert_date_to_js()`
+
+acf\_convert\_date\_to\_js
+
+- This function converts a date format string from PHP to JS
+- @since ACF 5.0.0
+- @param $date (string)
+- @return (string)
+
+## `acf_convert_time_to_php()`
+
+acf\_convert\_time\_to\_php
+
+- This function converts a time format string from JS to PHP
+- @since ACF 5.0.0
+- @param $time (string)
+- @return (string)
+
+## `acf_convert_time_to_js()`
+
+acf\_convert\_time\_to\_js
+
+- This function converts a date format string from PHP to JS
+- @since ACF 5.0.0
+- @param $time (string)
+- @return (string)
+
+## `acf_update_user_setting()`
+
+acf\_update\_user\_setting
+
+- description
+- @since ACF 5.0.0
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_get_user_setting()`
+
+acf\_get\_user\_setting
+
+- description
+- @since ACF 5.0.0
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_in_array()`
+
+acf\_in\_array
+
+- description
+- @since ACF 5.0.0
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_get_valid_post_id()`
+
+acf\_get\_valid\_post\_id
+
+- This function will return a valid post\_id based on the current screen / parameter
+- @since ACF 5.0.0
+- @param $post\_id (mixed)
+- @return $post\_id (mixed)
+
+## `acf_get_post_id_info()`
+
+acf\_get\_post\_id\_info
+
+- This function will return the type and id for a given $post\_id string
+- @since ACF 5.4.0
+- @param $post\_id (mixed)
+- @return $info (array)
+
+## `acf_isset_termmeta()`
+
+acf\_isset\_termmeta
+
+- This function will return true if the termmeta table exists  
+    [\#reference/functions/get\_term\_meta](#reference/functions/get_term_meta)
+- @since ACF 5.4.0
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_upload_files()`
+
+This function will walk through the $\_FILES data and upload each found.
+
+- @since ACF 5.0.9
+- @param array $ancestors An internal parameter, not required.
+
+## `acf_upload_file()`
+
+acf\_upload\_file
+
+- This function will upload a $\_FILE
+- @since ACF 5.0.9
+- @param $uploaded\_file (array) array found from $\_FILE data
+- @return $id (int) new attachment ID
+
+## `acf_update_nested_array()`
+
+acf\_update\_nested\_array
+
+- This function will update a nested array value. Useful for modifying the $\_POST array
+- @since ACF 5.0.9
+- @param $array (array) target array to be updated
+- @param $ancestors (array) array of keys to navigate through to find the child
+- @param $value (mixed) The new value
+- @return (boolean)
+
+## `acf_is_screen()`
+
+acf\_is\_screen
+
+- This function will return true if all args are matched for the current screen
+- @since ACF 5.1.5
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_is_acf_admin_screen()`
+
+Check if we’re in an ACF admin screen
+
+- @since ACF 6.2.2
+- @return boolean Returns true if the current screen is an ACF admin screen.
+
+## `acf_maybe_get()`
+
+acf\_maybe\_get
+
+- This function will return a var if it exists in an array
+- @since ACF 5.1.5
+- @param $array (array) the array to look within
+- @param $key (key) the array key to look for. Nested values may be found using ‘/’
+- @param $default (mixed) the value returned if not found
+- @return $post\_id (int)
+
+## `acf_get_attachment()`
+
+Returns an array of attachment data.
+
+- @since ACF 5.1.5
+- @param integer|[WP\_Post](#reference/classes/wp_post) The attachment ID or object
+- @return array|false
+
+## `acf_get_truncated()`
+
+This function will truncate and return a string
+
+- @since ACF 5.0.0
+- @param string $text The text to truncate.
+- @param integer $length The number of characters to allow in the string.
+- @return string
+
+## `acf_current_user_can_admin()`
+
+acf\_current\_user\_can\_admin
+
+- This function will return true if the current user can administrate the ACF field groups
+- @since ACF 5.1.5
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_current_user_can_edit_post()`
+
+Wrapper function for current\_user\_can( ‘edit\_post’, $post\_id ).
+
+- @since ACF 6.3.4
+- @param integer $post\_id The post ID to check.
+- @return boolean
+
+## `acf_get_filesize()`
+
+acf\_get\_filesize
+
+- This function will return a numeric value of bytes for a given filesize string
+- @since ACF 5.1.5
+- @param $size (mixed)
+- @return (int)
+
+## `acf_format_filesize()`
+
+acf\_format\_filesize
+
+- This function will return a formatted string containing the filesize and unit
+- @since ACF 5.1.5
+- @param $size (mixed)
+- @return (int)
+
+## `acf_get_valid_terms()`
+
+acf\_get\_valid\_terms
+
+- This function will replace old terms with new split term ids
+- @since ACF 5.1.5
+- @param $terms (int|array)
+- @param $taxonomy (string)
+- @return $terms
+
+## `acf_validate_attachment()`
+
+acf\_validate\_attachment
+
+- This function will validate an attachment based on a field’s restrictions and return an array of errors
+- @since ACF 5.2.3
+- @param $attachment (array) attachment data. Changes based on context
+- @param $field (array) field settings containing restrictions
+- @param context (string) $file is different when uploading / preparing
+- @return $errors (array)
+
+## `acf_translate()`
+
+acf\_translate
+
+- This function will translate a string using the new ‘l10n\_textdomain’ setting  
+    Also works for arrays which is great for fields – select -&gt; choices
+- @since ACF 5.3.2
+- @param mixed $string String or array containing strings to be translated.
+- @return mixed
+
+## `acf_maybe_add_action()`
+
+acf\_maybe\_add\_action
+
+- This function will determine if the action has already run before adding / calling the function
+- @since ACF 5.3.2
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_is_row_collapsed()`
+
+acf\_is\_row\_collapsed
+
+- This function will return true if the field’s row is collapsed
+- @since ACF 5.3.2
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_get_attachment_image()`
+
+Return an image tag for the provided attachment ID
+
+- @since ACF 5.5.0
+- @deprecated 6.3.2
+- @param integer $attachment\_id The attachment ID
+- @param string $size The image size to use in the image tag.
+- @return false
+
+## `acf_get_post_thumbnail()`
+
+acf\_get\_post\_thumbnail
+
+- This function will return a thumbnail image url for a given post
+- @since ACF 5.3.8
+- @param $post (obj)
+- @param $size (mixed)
+- @return (string)
+
+## `acf_get_browser()`
+
+acf\_get\_browser
+
+- Returns the name of the current browser.
+- @since ACF 5.0.0
+- @return string
+
+## `acf_is_ajax()`
+
+acf\_is\_ajax
+
+- This function will return true if performing a wp ajax call
+- @since ACF 5.3.8
+- @param n/a
+- @return (boolean)
+
+## `acf_format_date()`
+
+Returns a date value in a formatted string.
+
+- @since ACF 5.3.8
+- @param string $value The date value to format.
+- @param string $format The format to use.
+- @return string
+
+## `acf_clear_log()`
+
+Previously, deletes the debug.log file.
+
+- @since ACF 5.7.10
+- @deprecated 6.2.7
+
+## `acf_log()`
+
+acf\_log
+
+- description
+- @since ACF 5.3.8
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `acf_dev_log()`
+
+acf\_dev\_log
+
+- Used to log variables only if ACF\_DEV is defined
+- @since ACF 5.7.4
+- @param mixed
+- @return void
+
+## `acf_doing()`
+
+acf\_doing
+
+- This function will tell ACF what task it is doing
+- @since ACF 5.3.8
+- @param $event (string)
+- @param context (string)
+- @return n/a
+
+## `acf_is_doing()`
+
+acf\_is\_doing
+
+- This function can be used to state what ACF is doing, or to check
+- @since ACF 5.3.8
+- @param $event (string)
+- @param context (string)
+- @return (boolean)
+
+## `acf_is_plugin_active()`
+
+acf\_is\_plugin\_active
+
+- This function will return true if the ACF plugin is active
+- May be included within a theme or other plugin
+- @since ACF 5.4.0
+- @param $basename (int)
+- @return $post\_id (int)
+
+## `acf_send_ajax_results()`
+
+acf\_send\_ajax\_results
+
+- This function will print JSON data for a Select2 AJAX query
+- @since ACF 5.4.0
+- @param $response (array)
+- @return n/a
+
+## `acf_is_sequential_array()`
+
+acf\_is\_sequential\_array
+
+- This function will return true if the array contains only numeric keys
+- @source <http://stackoverflow.com/questions/173400/how-to-check-if-php-array-is-associative-or-sequential>
+- @since ACF 5.4.0
+- @param $array (array)
+- @return (boolean)
+
+## `acf_is_associative_array()`
+
+acf\_is\_associative\_array
+
+- This function will return true if the array contains one or more string keys
+- @source <http://stackoverflow.com/questions/173400/how-to-check-if-php-array-is-associative-or-sequential>
+- @since ACF 5.4.0
+- @param $array (array)
+- @return (boolean)
+
+## `acf_add_array_key_prefix()`
+
+acf\_add\_array\_key\_prefix
+
+- This function will add a prefix to all array keys  
+    Useful to preserve numeric keys when performing array\_multisort
+- @since ACF 5.4.0
+- @param $array (array)
+- @param $prefix (string)
+- @return (array)
+
+## `acf_remove_array_key_prefix()`
+
+acf\_remove\_array\_key\_prefix
+
+- This function will remove a prefix to all array keys  
+    Useful to preserve numeric keys when performing array\_multisort
+- @since ACF 5.4.0
+- @param $array (array)
+- @param $prefix (string)
+- @return (array)
+
+## `acf_connect_attachment_to_post()`
+
+This function will connect an attachment (image etc) to the post  
+Used to connect attachments uploaded directly to media that have not been attached to a post
+
+- @since ACF 5.8.0 Added filter to prevent connection.
+- @since ACF 5.5.4
+- @param integer $attachment\_id The attachment ID.
+- @param integer $post\_id The post ID.
+- @return boolean True if attachment was connected.
+
+## `acf_encrypt()`
+
+acf\_encrypt
+
+- This function will encrypt a string using PHP  
+    [https://bhoover.com/using-php-openssl\_encrypt-openssl\_decrypt-encrypt-decrypt-data/](https://bhoover.com/using-php-openssl_encrypt-openssl_decrypt-encrypt-decrypt-data/)
+- @since ACF 5.5.8
+- @param $data (string)
+- @return (string)
+
+## `acf_decrypt()`
+
+acf\_decrypt
+
+- This function will decrypt an encrypted string using PHP  
+    [https://bhoover.com/using-php-openssl\_encrypt-openssl\_decrypt-encrypt-decrypt-data/](https://bhoover.com/using-php-openssl_encrypt-openssl_decrypt-encrypt-decrypt-data/)
+- @since ACF 5.5.8
+- @param $data (string)
+- @return (string)
+
+## `acf_parse_markdown()`
+
+acf\_parse\_markdown
+
+- A very basic regex-based Markdown parser function based off [slimdown](https://gist.github.com/jbroadway/2836900).
+- @since ACF 5.7.2
+- @param string $text The string to parse.
+- @return string
+
+## `acf_get_sites()`
+
+acf\_get\_sites
+
+- Returns an array of sites for a network.
+- @since ACF 5.4.0
+- @return array
+
+## `acf_convert_rules_to_groups()`
+
+acf\_convert\_rules\_to\_groups
+
+- Converts an array of rules from ACF4 to an array of groups for ACF5
+- @since ACF 5.7.4
+- @param array $rules An array of rules.
+- @param string $anyorall The anyorall setting used in ACF4. Defaults to ‘any’.
+- @return array
+
+## `acf_register_ajax()`
+
+acf\_register\_ajax
+
+- Registers an ajax callback.
+- @since ACF 5.7.7
+- @param string $name The ajax action name.
+- @param array $callback The callback function or array.
+- @param boolean $public Whether to allow access to non logged in users.
+- @return void
+
+## `acf_str_camel_case()`
+
+acf\_str\_camel\_case
+
+- Converts a string into camelCase.  
+    Thanks to <https://stackoverflow.com/questions/31274782/convert-array-keys-from-underscore-case-to-camelcase-recursively>
+- @since ACF 5.8.0
+- @param string $string The string ot convert.
+- @return string
+
+## `acf_array_camel_case()`
+
+acf\_array\_camel\_case
+
+- Converts all array keys to camelCase.
+- @since ACF 5.8.0
+- @param array $array The array to convert.
+- @return array
+
+## `acf_is_block_editor()`
+
+Returns true if the current screen is using the block editor.
+
+- @since ACF 5.8.0
+- @return boolean
+
+## `acf_get_wp_reserved_terms()`
+
+Return an array of the WordPress reserved terms
+
+- @since ACF 6.1
+- @return array The WordPress reserved terms list.
+
+## `acf_is_multisite_sub_site()`
+
+Detect if we’re on a multisite subsite.
+
+- @since ACF 6.2.4
+- @return boolean true if we’re in a multisite install and not on the main site
+
+## `acf_is_multisite_main_site()`
+
+Detect if we’re on a multisite main site.
+
+- @since ACF 6.2.4
+- @return boolean true if we’re in a multisite install and on the main site
+
+---
+
+---
+
+# API Template Global Functions <a name="secure-custom-fields/code-reference/api/api-template-file" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/code-reference/api/api-template-file/
+
+## `get_field()`
+
+This function will return a custom field value for a specific field name/key + post\_id.  
+There is a 3rd parameter to turn on/off formatting. This means that an image field will not use  
+its ‘return option’ to format the value but return only what was saved in the database
+
+- @since ACF 3.6
+- @param string $selector The field name or key.
+- @param mixed $post\_id The post\_id of which the value is saved against.
+- @param boolean $format\_value Whether or not to format the value as described above.
+- @param boolean $escape\_html If we’re formatting the value, make sure it’s also HTML safe.
+- @return mixed
+
+## `the_field()`
+
+This function is the same as echo get\_field(), but will escape the value for safe HTML output regardless of parameters.
+
+- @since ACF 1.0.3
+- @param string $selector The field name or key.
+- @param mixed $post\_id The post\_id of which the value is saved against.
+- @param boolean $format\_value Enable formatting of value. Default true.
+- @return void
+
+## `_acf_log_escaped_html()`
+
+Logs instances of ACF successfully escaping unsafe HTML.
+
+- @since ACF 6.2.5
+- @param string $function The function that resulted in HTML being escaped.
+- @param string $selector The selector (field key, name, etc.) passed to that function.
+- @param array $field The field being queried when HTML was escaped.
+- @param mixed $post\_id The post ID the function was called on.
+- @return void
+
+## `_acf_get_escaped_html_log()`
+
+Returns an array of instances where HTML was altered due to escaping in the\_field or a shortcode.
+
+- @since ACF 6.2.5
+- @return array
+
+## `_acf_update_escaped_html_log()`
+
+Updates the array of instances where HTML was altered due to escaping in the\_field or a shortcode.
+
+- @since ACF 6.2.5
+- @param array $escaped The array of instances.
+- @return boolean True on success, or false on failure.
+
+## `_acf_delete_escaped_html_log()`
+
+Deletes the array of instances where HTML was altered due to escaping in the\_field or a shortcode.  
+Since 6.2.7, also clears the legacy `acf_will_escape_html_log` option to clean up.
+
+- @since ACF 6.2.5
+- @return boolean True on success, or false on failure.
+
+## `get_field_object()`
+
+This function will return an array containing all the field data for a given field\_name.
+
+- @since ACF 3.6
+- @param string $selector The field name or key.
+- @param mixed $post\_id The post\_id of which the value is saved against.
+- @param boolean $format\_value Whether to format the field value.
+- @param boolean $load\_value Whether to load the field value.
+- @param boolean $escape\_html Should the field return a HTML safe formatted value if $format\_value is true.
+- @return array|false $field
+
+## `acf_maybe_get_field()`
+
+This function will return a field for the given selector.  
+It will also review the field\_reference to ensure the correct field is returned which makes it useful for the template API
+
+- @since ACF 5.2.3
+- @param $selector (mixed) identifier of field. Can be an ID, key, name or post object
+- @param $post\_id (mixed) the post\_id of which the value is saved against
+- @param $strict (boolean) if true, return a field only when a field key is found.
+- @return $field (array)
+
+## `acf_maybe_get_sub_field()`
+
+This function will attempt to find a sub field
+
+- @since ACF 5.4.0
+- @param $post\_id (int)
+- @return $post\_id (int)
+
+## `get_fields()`
+
+This function will return an array containing all the custom field values for a specific post\_id.  
+The function is not very elegant and wastes a lot of PHP memory / SQL queries if you are not using all the values.
+
+- @since ACF 3.6
+- @param mixed $post\_id The post\_id of which the value is saved against.
+- @param boolean $format\_value Whether or not to format the field value.
+- @param boolean $escape\_html Should the field return a HTML safe formatted value if $format\_value is true.
+- @return array|false Associative array where field name =&gt; field value, or false on failure.
+
+## `get_field_objects()`
+
+This function will return an array containing all the custom field objects for a specific post\_id.  
+The function is not very elegant and wastes a lot of PHP memory / SQL queries if you are not using all the fields / values.
+
+- @since ACF 3.6
+- @param mixed $post\_id The post\_id of which the value is saved against.
+- @param boolean $format\_value Whether or not to format the field value.
+- @param boolean $load\_value Whether or not to load the field value.
+- @param boolean $escape\_html Should the field return a HTML safe formatted value if $format\_value is true.
+- @return array|false Associative array where field name =&gt; field, or false on failure.
+
+## `have_rows()`
+
+Checks if a field (such as Repeater or Flexible Content) has any rows of data to loop over.  
+This function is intended to be used in conjunction with the\_row() to step through available values.
+
+- @since ACF 4.3.0
+- @param string $selector The field name or field key.
+- @param mixed $post\_id The post ID where the value is saved. Defaults to the current post.
+- @return boolean
+
+## `the_row()`
+
+This function will progress the global repeater or flexible content value 1 row
+
+- @since ACF 4.3.0
+- @param N/A
+- @return (array) the current row data
+
+## `get_row_sub_field()`
+
+This function is used inside a ‘has\_sub\_field’ while loop to return a sub field object
+
+- @since ACF 5.3.8
+- @param $selector (string)
+- @return (array)
+
+## `get_row_sub_value()`
+
+This function is used inside a ‘has\_sub\_field’ while loop to return a sub field value
+
+- @since ACF 5.3.8
+- @param $selector (string)
+- @return (mixed)
+
+## `reset_rows()`
+
+This function will find the current loop and unset it from the global array.  
+To be used when loop finishes or a break is used
+
+- @since ACF 5.0.0
+- @param $hard\_reset (boolean) completely wipe the global variable, or just unset the active row
+- @return (boolean)
+
+## `has_sub_field()`
+
+This function is used inside a while loop to return either true or false (loop again or stop).  
+When using a repeater or flexible content field, it will loop through the rows until  
+there are none left or a break is detected
+
+- @since ACF 1.0.3
+- @param $field\_name (string) the field name
+- @param $post\_id (mixed) the post\_id of which the value is saved against
+- @return (boolean)
+
+## `has_sub_fields()`
+
+Alias of has\_sub\_field
+
+## `get_sub_field()`
+
+This function is used inside a ‘has\_sub\_field’ while loop to return a sub field value
+
+- @since ACF 1.0.3
+- @param string $selector The field name or key.
+- @param boolean $format\_value Whether or not to format the value as described above.
+- @param boolean $escape\_html If we’re formatting the value, make sure it’s also HTML safe.
+- @return mixed
+
+## `the_sub_field()`
+
+This function is the same as echo get\_sub\_field(), but will escape the value for safe HTML output.
+
+- @since ACF 1.0.3
+- @param string $field\_name The field name.
+- @param boolean $format\_value Enable formatting of value. When false, the field value will be escaped at this level with `acf_esc_html`. Default true.
+- @return void
+
+## `get_sub_field_object()`
+
+This function is used inside a ‘has\_sub\_field’ while loop to return a sub field object
+
+- @since ACF 3.5.8.1
+- @param string $selector The field name or key.
+- @param boolean $format\_value Whether to format the field value.
+- @param boolean $load\_value Whether to load the field value.
+- @param boolean $escape\_html Should the field return a HTML safe formatted value.
+- @return mixed
+
+## `get_row_layout()`
+
+This function will return a string representation of the current row layout within a ‘have\_rows’ loop
+
+- @since ACF 3.0.6
+- @return mixed
+
+## `acf_shortcode()`
+
+This function is used to add basic shortcode support for the ACF plugin  
+eg. \[acf field=”heading” post\_id=”123″ format\_value=”1″\]
+
+- @since ACF 1.1.1
+- @param array $atts The shortcode attributes.
+- @return string|void
+
+## `update_field()`
+
+This function will update a value in the database
+
+- @since ACF 3.1.9
+- @param string $selector The field name or key.
+- @param mixed $value The value to save in the database.
+- @param mixed $post\_id The post\_id of which the value is saved against.
+- @return boolean
+
+## `update_sub_field()`
+
+This function will update a value of a sub field in the database
+
+- @since ACF 5.0.0
+- @param $selector (mixed) the sub field name or key, or an array of ancestors
+- @param $value (mixed) the value to save in the database
+- @param $post\_id (mixed) the post\_id of which the value is saved against
+- @return boolean
+
+## `delete_field()`
+
+This function will remove a value from the database
+
+- @since ACF 3.1.9
+- @param $selector (string) the field name or key
+- @param $post\_id (mixed) the post\_id of which the value is saved against
+- @return boolean
+
+## `delete_sub_field()`
+
+This function will delete a value of a sub field in the database
+
+- @since ACF 5.0.0
+- @param $selector (mixed) the sub field name or key, or an array of ancestors
+- @param $value (mixed) the value to save in the database
+- @param $post\_id (mixed) the post\_id of which the value is saved against
+- @return (boolean)
+
+## `add_row()`
+
+This function will add a row of data to a field
+
+- @since ACF 5.2.3
+- @param $selector (string)
+- @param $row (array)
+- @param $post\_id (mixed)
+- @return (boolean)
+
+## `add_sub_row()`
+
+This function will add a row of data to a field
+
+- @since ACF 5.2.3
+- @param $selector (string)
+- @param $row (array)
+- @param $post\_id (mixed)
+- @return (boolean)
+
+## `update_row()`
+
+This function will update a row of data to a field
+
+- @since ACF 5.2.3
+- @param $selector (string)
+- @param $i (int)
+- @param $row (array)
+- @param $post\_id (mixed)
+- @return (boolean)
+
+## `update_sub_row()`
+
+This function will add a row of data to a field
+
+- @since ACF 5.2.3
+- @param $selector (string)
+- @param $row (array)
+- @param $post\_id (mixed)
+- @return (boolean)
+
+## `delete_row()`
+
+This function will delete a row of data from a field
+
+- @since ACF 5.2.3
+- @param $selector (string)
+- @param $i (int)
+- @param $post\_id (mixed)
+- @return (boolean)
+
+## `delete_sub_row()`
+
+This function will add a row of data to a field
+
+- @since ACF 5.2.3
+- @param $selector (string)
+- @param $row (array)
+- @param $post\_id (mixed)
+- @return (boolean)
+
+## `create_field()`
+
+Deprecated Functions
+
+- These functions are outdated
+- @since ACF 1.0.0
+- @param n/a
+- @return n/a
+
+---
+
+---
+
+# API Term Global Functions <a name="secure-custom-fields/code-reference/api/api-term-file" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/code-reference/api/api-term-file/
+
+## `acf_get_taxonomies()`
+
+Returns an array of taxonomy names.
+
+- @date 7/10/13
+- @since ACF 5.0.0
+- @param array $args An array of args used in the [get\_taxonomies()](#reference/functions/get_taxonomies) function.
+- @return array An array of taxonomy names.
+
+## `acf_get_taxonomies_for_post_type()`
+
+acf\_get\_taxonomies\_for\_post\_type
+
+- Returns an array of taxonomies for a given post type(s)
+- @date 7/9/18
+- @since ACF 5.7.5
+- @param string|array $post\_types The post types to compare against.
+- @return array
+
+## `acf_get_taxonomy_labels()`
+
+Returns an array of taxonomies in the format “name =&gt; label” for use in a select field.
+
+- @date 3/8/18
+- @since ACF 5.7.2
+- @param array $taxonomies Optional. An array of specific taxonomies to return.
+- @return array
+
+## `acf_get_term_title()`
+
+acf\_get\_term\_title
+
+- Returns the title for this term object.
+- @date 10/9/18
+- @since ACF 5.0.0
+- @param object $term The [WP\_Term](#reference/classes/wp_term) object.
+- @return string
+
+## `acf_get_grouped_terms()`
+
+acf\_get\_grouped\_terms
+
+- Returns an array of terms for the given query $args and groups by taxonomy name.
+- @date 2/8/18
+- @since ACF 5.7.2
+- @param array $args An array of args used in the [get\_terms()](#reference/functions/get_terms) function.
+- @return array
+
+## `_acf_terms_clauses()`
+
+\_acf\_terms\_clauses
+
+- Used in the ‘terms\_clauses’ filter to order terms by taxonomy name.
+- @date 2/8/18
+- @since ACF 5.7.2
+- @param array $pieces Terms query SQL clauses.
+- @param array $taxonomies An array of taxonomies.
+- @param array $args An array of terms query arguments.
+- @return array $pieces
+
+## `acf_get_pretty_taxonomies()`
+
+acf\_get\_pretty\_taxonomies
+
+- Deprecated in favor of acf\_get\_taxonomy\_labels() function.
+- @date 7/10/13
+- @since ACF 5.0.0
+- @deprecated 5.7.2
+
+## `acf_get_term()`
+
+acf\_get\_term
+
+- Similar to [get\_term()](#reference/functions/get_term) but with some extra functionality.
+- @date 19/8/18
+- @since ACF 5.7.3
+- @param mixed $term\_id The term ID or a string of “taxonomy:slug”.
+- @param string $taxonomy The taxonomyname.
+- @return [WP\_Term](#reference/classes/wp_term)
+
+## `acf_encode_term()`
+
+acf\_encode\_term
+
+- Returns a “taxonomy:slug” string for a given [WP\_Term](#reference/classes/wp_term).
+- @date 27/8/18
+- @since ACF 5.7.4
+- @param [WP\_Term](#reference/classes/wp_term) $term The term object.
+- @return string
+
+## `acf_decode_term()`
+
+acf\_decode\_term
+
+- Decodes a “taxonomy:slug” string into an array of taxonomy and slug.
+- @date 27/8/18
+- @since ACF 5.7.4
+- @param [WP\_Term](#reference/classes/wp_term) $term The term object.
+- @return string
+
+## `acf_get_encoded_terms()`
+
+acf\_get\_encoded\_terms
+
+- Returns an array of [WP\_Term](#reference/classes/wp_term) objects from an array of encoded strings
+- @date 9/9/18
+- @since ACF 5.7.5
+- @param array $values The array of encoded strings.
+- @return array
+
+## `acf_get_choices_from_terms()`
+
+acf\_get\_choices\_from\_terms
+
+- Returns an array of choices from the terms provided.
+- @date 8/9/18
+- @since ACF 5.7.5
+- @param array $values and array of WP\_Terms objects or encoded strings.
+- @param string $format The value format (term\_id, slug).
+- @return array
+
+## `acf_get_choices_from_grouped_terms()`
+
+acf\_get\_choices\_from\_grouped\_terms
+
+- Returns an array of choices from the grouped terms provided.
+- @date 8/9/18
+- @since ACF 5.7.5
+- @param array $value A grouped array of WP\_Terms objects.
+- @param string $format The value format (term\_id, slug).
+- @return array
+
+## `acf_get_choice_from_term()`
+
+acf\_get\_choice\_from\_term
+
+- Returns an array containing the id and text for this item.
+- @date 10/9/18
+- @since ACF 5.7.6
+- @param object $item The item object such as [WP\_Post](#reference/classes/wp_post) or [WP\_Term](#reference/classes/wp_term).
+- @param string $format The value format (term\_id, slug)
+- @return array
+
+## `acf_get_term_post_id()`
+
+Returns a valid post\_id string for a given term and taxonomy.  
+No longer needed since WP introduced the termmeta table in WP 4.4.
+
+- @date 6/2/17
+- @since ACF 5.5.6
+- @deprecated 5.9.2
+- @param $taxonomy (string) The taxonomy type.
+- @param $term\_id (int) The term ID.
+- @return (string)
+
+---
 
 ---
 
@@ -2015,43 +4408,135 @@ Source: https://developer.wordpress.org/secure-custom-fields/code-reference/fiel
 
 ---
 
-# Code Reference <a name="secure-custom-fields/code-reference" />
+# ACF_Repeater_Table <a name="secure-custom-fields/code-reference/fields/class-acf-repeater-table-file" />
 
-Source: https://developer.wordpress.org/secure-custom-fields/code-reference/
+Source: https://developer.wordpress.org/secure-custom-fields/code-reference/fields/class-acf-repeater-table-file/
 
-## Files
+ACF\_Repeater\_Table
 
-- [Acf Bidirectional Functions](acf-bidirectional-functions-file)
-- [Acf Field Functions](acf-field-functions-file)
-- [Acf Field Group Functions](acf-field-group-functions-file)
-- [Acf Form Functions](acf-form-functions-file)
-- [Acf Helper Functions](acf-helper-functions-file)
-- [Acf Hook Functions](acf-hook-functions-file)
-- [Acf Input Functions](acf-input-functions-file)
-- [Acf Internal Post Type Functions](acf-internal-post-type-functions-file)
-- [Acf Meta Functions](acf-meta-functions-file)
-- [Acf Post Functions](acf-post-functions-file)
-- [Acf Post Type Functions](acf-post-type-functions-file)
-- [Acf Taxonomy Functions](acf-taxonomy-functions-file)
-- [Acf User Functions](acf-user-functions-file)
-- [Acf Utility Functions](acf-utility-functions-file)
-- [Acf Value Functions](acf-value-functions-file)
-- [Acf Wp Functions](acf-wp-functions-file)
-- [Assets](assets-file)
-- [Blocks](blocks-file)
-- [Compatibility](compatibility-file)
-- [Deprecated](deprecated-file)
-- [Fields](fields-file)
-- [L10n](l10n-file)
-- [Local Fields](local-fields-file)
-- [Local Json](local-json-file)
-- [Local Meta](local-meta-file)
-- [Locations](locations-file)
-- [Loop](loop-file)
-- [Revisions](revisions-file)
-- [Scf Ui Options Page Functions](scf-ui-options-page-functions-file)
-- [Upgrades](upgrades-file)
-- [Validation](validation-file)
+- Helper class for rendering repeater tables.
+
+## Properties
+
+### `$field`
+
+The main field array used to render the repeater.
+
+- @var array
+
+### `$sub_fields`
+
+An array containing the subfields used in the repeater.
+
+- @var array
+
+### `$value`
+
+The value(s) of the repeater field.
+
+- @var array
+
+### `$show_add`
+
+If we should show the “Add Row” button.
+
+- @var boolean
+
+### `$show_remove`
+
+If we should show the “Remove Row” button.
+
+- @var boolean
+
+### `$show_order`
+
+If we should show the order of the fields.
+
+- @var boolean
+
+## Methods
+
+### `__construct`
+
+Constructs the ACF\_Repeater\_Table class.
+
+- @param array $field The main field array for the repeater being rendered.
+
+### `setup`
+
+Sets up the field for rendering.
+
+- @since ACF 6.0.0
+- @return void
+
+### `prepare_value`
+
+Prepares the repeater values for rendering.
+
+- @since ACF 6.0.0
+- @return array
+
+### `render`
+
+Renders the full repeater table.
+
+- @since ACF 6.0.0
+- @return void
+
+### `thead`
+
+Renders the table head.
+
+- @since ACF 6.0.0
+- @return void
+
+### `rows`
+
+Renders or returns rows for the repeater field table.
+
+- @since ACF 6.0.0
+- @param boolean $should\_return If we should return the rows or render them.
+- @return array|void
+
+### `row`
+
+Renders an individual row.
+
+- @since ACF 6.0.0
+- @param integer $i The row number.
+- @param array $row An array containing the row values.
+- @param boolean $should\_return If we should return the row or render it.
+- @return string|void
+
+### `row_handle`
+
+Renders the row handle at the start of each row.
+
+- @since ACF 6.0.0
+- @param integer $i The current row number.
+- @return void
+
+### `row_actions`
+
+Renders the actions displayed at the end of each row.
+
+- @since ACF 6.0.0
+- @return void
+
+### `table_actions`
+
+Renders the actions displayed underneath the table.
+
+- @since ACF 6.0.0
+- @return void
+
+### `pagination`
+
+Renders the table pagination.  
+Mostly lifted from the WordPress core [WP\_List\_Table](#reference/classes/wp_list_table) class.
+
+- @since ACF 6.0.0
+- @return void
 
 ---
 
@@ -6282,50 +8767,14 @@ This function will validate a field’s value
 
 ---
 
-# API Reference <a name="secure-custom-fields/features/scf-api" />
+# Admin <a name="secure-custom-fields/code-reference/admin" />
 
-Source: https://developer.wordpress.org/secure-custom-fields/features/scf-api/
+Source: https://developer.wordpress.org/secure-custom-fields/code-reference/admin/
 
-The Secure Custom Fields API provides programmatic access to field data and plugin functionality.
+## Files
 
-## Core Functions
-
-### Field Operations
-
-- Get field values
-- Update field data
-- Delete field content
-- Check field existence
-
-### Post Type Management
-
-- Register post types
-- Modify post type settings
-- Handle custom capabilities
-- Manage taxonomies
-
-## Integration Points
-
-1. **WordPress Core**
-    - Post type registration
-    - Taxonomy integration
-    - Capability handling
-2. **Theme Integration**
-    - Template functions
-    - Conditional tags
-    - Layout helpers
-3. **Plugin Compatibility**
-    - REST API support
-    - Cache integration
-    - Query modifications
-
-## Best Practices
-
-1. Always sanitize input
-2. Validate data types
-3. Use proper escaping
-4. Check capabilities
-5. Follow WordPress coding standards
+- [Admin Notices](admin-notices-file)
+- [Admin Tools](admin-tools-file)
 
 ---
 
@@ -6402,1675 +8851,6 @@ This function will return the admin URL to the tools page
 
 ---
 
-# Admin <a name="secure-custom-fields/code-reference/admin" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/code-reference/admin/
-
-## Files
-
-- [Admin Notices](admin-notices-file)
-- [Admin Tools](admin-tools-file)
-
----
-
-# API Helpers Global Functions <a name="secure-custom-fields/code-reference/api/api-helpers-file" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/code-reference/api/api-helpers-file/
-
-## `acf_is_array()`
-
-This function will return true for a non empty array
-
-- @since ACF 5.4.0
-- @param mixed $array The variable to test.
-- @return boolean
-
-## `acf_has_setting()`
-
-Alias of acf()-&gt;has\_setting()
-
-- @since ACF 5.6.5
-- @param string $name Name of the setting to check for.
-- @return boolean
-
-## `acf_raw_setting()`
-
-acf\_raw\_setting
-
-- alias of acf()-&gt;get\_setting()
-- @since ACF 5.6.5
-- @param n/a
-- @return n/a
-
-## `acf_update_setting()`
-
-acf\_update\_setting
-
-- alias of acf()-&gt;update\_setting()
-- @since ACF 5.0.0
-- @param $name (string)
-- @param $value (mixed)
-- @return n/a
-
-## `acf_validate_setting()`
-
-acf\_validate\_setting
-
-- Returns the changed setting name if available.
-- @since ACF 5.6.5
-- @param n/a
-- @return n/a
-
-## `acf_get_setting()`
-
-Alias of acf()-&gt;get\_setting()
-
-- @since ACF 5.0.0
-- @param string $name The name of the setting to test.
-- @param string $value An optional default value for the setting if it doesn’t exist.
-- @return n/a
-
-## `acf_get_internal_post_types()`
-
-Return an array of ACF’s internal post type names
-
-- @since ACF 6.1
-- @return array An array of ACF’s internal post type names
-
-## `acf_append_setting()`
-
-acf\_append\_setting
-
-- This function will add a value into the settings array found in the acf object
-- @since ACF 5.0.0
-- @param $name (string)
-- @param $value (mixed)
-- @return n/a
-
-## `acf_get_data()`
-
-acf\_get\_data
-
-- Returns data.
-- @since ACF 5.0.0
-- @param string $name
-- @return mixed
-
-## `acf_set_data()`
-
-acf\_set\_data
-
-- Sets data.
-- @since ACF 5.0.0
-- @param string $name
-- @param mixed $value
-- @return n/a
-
-## `acf_append_data()`
-
-Appends data to an existing key.
-
-- @since ACF 5.9.0
-- @param string $name The data name.
-- @param mixed $data The data to append to name.
-
-## `acf_init()`
-
-Alias of acf()-&gt;[init()](#reference/functions/init) – the core ACF init function.
-
-- @since ACF 5.0.0
-
-## `acf_has_done()`
-
-acf\_has\_done
-
-- This function will return true if this action has already been done
-- @since ACF 5.3.2
-- @param $name (string)
-- @return (boolean)
-
-## `acf_get_external_path()`
-
-This function will return the path to a file within an external folder
-
-- @since ACF 5.5.8
-- @param string $file Directory path.
-- @param string $path Optional file path.
-- @return string File path.
-
-## `acf_get_external_dir()`
-
-This function will return the url to a file within an internal ACF folder
-
-- @since ACF 5.5.8
-- @param string $file Directory path.
-- @param string $path Optional file path.
-- @return string File path.
-
-## `acf_plugin_dir_url()`
-
-This function will calculate the url to a plugin folder.  
-Different to the WP [plugin\_dir\_url()](#reference/functions/plugin_dir_url) , this function can calculate for urls outside of the plugins folder (theme include).
-
-- @since ACF 5.6.8
-- @param string $file A file path inside the ACF plugin to get the plugin directory path from.
-- @return string The plugin directory path.
-
-## `acf_parse_args()`
-
-This function will merge together 2 arrays and also convert any numeric values to ints
-
-- @since ACF 5.0.0
-- @param array $args The configured arguments array.
-- @param array $defaults The default properties for the passed args to inherit.
-- @return array $args Parsed arguments with defaults applied.
-
-## `acf_parse_types()`
-
-acf\_parse\_types
-
-- This function will convert any numeric values to int and trim strings
-- @since ACF 5.0.0
-- @param $var (mixed)
-- @return $var (mixed)
-
-## `acf_parse_type()`
-
-acf\_parse\_type
-
-- description
-- @since ACF 5.0.9
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_get_view()`
-
-This function will load in a file from the ‘admin/views’ folder and allow variables to be passed through
-
-- @since ACF 5.0.0
-- @param string $view\_path
-- @param array $view\_args
-
-## `acf_merge_atts()`
-
-acf\_merge\_atts
-
-- description
-- @since ACF 5.0.9
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_nonce_input()`
-
-This function will create and echo a basic nonce input
-
-- @since ACF 5.6.0
-- @param string $nonce The nonce parameter string.
-
-## `acf_extract_var()`
-
-This function will remove the var from the array, and return the var
-
-- @since ACF 5.0.0
-- @param array $extract\_array an array passed as reference to be extracted.
-- @param string $key The key to extract from the array.
-- @param mixed $default\_value The default value if it doesn’t exist in the extract array.
-- @return mixed Extracted var or default.
-
-## `acf_extract_vars()`
-
-This function will remove the vars from the array, and return the vars
-
-- @since ACF 5.0.0
-- @param array $extract\_array an array passed as reference to be extracted.
-- @param array $keys An array of keys to extract from the original array.
-- @return array An array of extracted values.
-
-## `acf_get_sub_array()`
-
-acf\_get\_sub\_array
-
-- This function will return a sub array of data
-- @since ACF 5.3.2
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_get_post_types()`
-
-Returns an array of post type names.
-
-- @since ACF 5.0.0
-- @param array $args Optional. An array of key =&gt; value arguments to match against the post type objects. Default empty array.
-- @return array A list of post type names.
-
-## `acf_get_post_stati()`
-
-Function acf\_get\_post\_stati()
-
-- Returns an array of post status names.
-- @since ACF 6.1.0
-- @param array $args Optional. An array of key =&gt; value arguments to match against the post status objects. Default empty array.
-- @return array A list of post status names.
-
-## `acf_get_pretty_post_statuses()`
-
-Function acf\_get\_pretty\_post\_statuses()
-
-- Returns a clean array of post status names.
-- @since ACF 6.1.0
-- @param array $post\_statuses Optional. An array of post status objects. Default empty array.
-- @return array An array of post status names.
-
-## `acf_get_post_type_label()`
-
-acf\_get\_post\_type\_label
-
-- This function will return a pretty label for a specific post\_type
-- @since ACF 5.4.0
-- @param $post\_type (string)
-- @return (string)
-
-## `acf_get_post_status_label()`
-
-Function acf\_get\_post\_status\_label()
-
-- This function will return a pretty label for a specific post\_status
-- @since ACF 6.1.0
-- @param string $post\_status The post status.
-- @return string The post status label.
-
-## `acf_verify_nonce()`
-
-acf\_verify\_nonce
-
-- This function will look at the $\_POST\[‘\_acf\_nonce’\] value and return true or false
-- @since ACF 5.0.0
-- @param $nonce (string)
-- @return (boolean)
-
-## `acf_verify_ajax()`
-
-Returns true if the current AJAX request is valid.  
-It’s action will also allow WPML to set the lang and avoid AJAX get\_posts issues
-
-- @since ACF 5.2.3
-- @param string $nonce The nonce to check.
-- @param string $action The action of the nonce.
-- @return boolean
-
-## `acf_get_image_sizes()`
-
-acf\_get\_image\_sizes
-
-- This function will return an array of available image sizes
-- @since ACF 5.0.0
-- @param n/a
-- @return (array)
-
-## `acf_version_compare()`
-
-acf\_version\_compare
-
-- Similar to the version\_compare() function but with extra functionality.
-- @since ACF 5.5.0
-- @param string $left The left version number.
-- @param string $compare The compare operator.
-- @param string $right The right version number.
-- @return boolean
-
-## `acf_get_full_version()`
-
-acf\_get\_full\_version
-
-- This function will remove any ‘-beta1’ or ‘-RC1’ strings from a version
-- @since ACF 5.5.0
-- @param $version (string)
-- @return (string)
-
-## `acf_get_terms()`
-
-acf\_get\_terms
-
-- This function is a wrapper for the [get\_terms()](#reference/functions/get_terms) function
-- @since ACF 5.4.0
-- @param $args (array)
-- @return (array)
-
-## `acf_get_taxonomy_terms()`
-
-acf\_get\_taxonomy\_terms
-
-- This function will return an array of available taxonomy terms
-- @since ACF 5.0.0
-- @param $taxonomies (array)
-- @return (array)
-
-## `acf_decode_taxonomy_terms()`
-
-acf\_decode\_taxonomy\_terms
-
-- This function decodes the $taxonomy:$term strings into a nested array
-- @since ACF 5.0.0
-- @param $terms (array)
-- @return (array)
-
-## `acf_decode_taxonomy_term()`
-
-acf\_decode\_taxonomy\_term
-
-- This function will return the taxonomy and term slug for a given value
-- @since ACF 5.0.0
-- @param $string (string)
-- @return (array)
-
-## `acf_array()`
-
-acf\_array
-
-- Casts the value into an array.
-- @since ACF 5.7.10
-- @param mixed $val The value to cast.
-- @return array
-
-## `acf_unarray()`
-
-Returns a non-array value.
-
-- @since ACF 5.8.10
-- @param mixed $val The value to review.
-- @return mixed
-
-## `acf_get_array()`
-
-acf\_get\_array
-
-- This function will force a variable to become an array
-- @since ACF 5.0.0
-- @param $var (mixed)
-- @return (array)
-
-## `acf_get_numeric()`
-
-acf\_get\_numeric
-
-- This function will return numeric values
-- @since ACF 5.4.0
-- @param $value (mixed)
-- @return (mixed)
-
-## `acf_get_posts()`
-
-acf\_get\_posts
-
-- Similar to the [get\_posts()](#reference/functions/get_posts) function but with extra functionality.
-- @since ACF 5.1.5
-- @param array $args The query args.
-- @return array
-
-## `_acf_query_remove_post_type()`
-
-\_acf\_query\_remove\_post\_type
-
-- This function will remove the ‘wp\_posts.post\_type’ WHERE clause completely  
-    When using ‘post\_\_in’, this clause is unnecessary and slow.
-- @since ACF 5.1.5
-- @param $sql (string)
-- @return $sql
-
-## `acf_get_grouped_posts()`
-
-acf\_get\_grouped\_posts
-
-- This function will return all posts grouped by post\_type  
-    This is handy for select settings
-- @since ACF 5.0.0
-- @param $args (array)
-- @return (array)
-
-## `_acf_orderby_post_type()`
-
-The internal ACF function to add order by post types for use in `acf_get_grouped_posts`
-
-- @param string $orderby The current orderby value for a query.
-- @param object $wp\_query The [WP\_Query](#reference/classes/wp_query).
-- @return string The potentially modified orderby string.
-
-## `acf_get_pretty_user_roles()`
-
-acf\_get\_pretty\_user\_roles
-
-- description
-- @since ACF 5.3.2
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_get_grouped_users()`
-
-acf\_get\_grouped\_users
-
-- This function will return all users grouped by role  
-    This is handy for select settings
-- @since ACF 5.0.0
-- @param $args (array)
-- @return (array)
-
-## `acf_json_encode()`
-
-acf\_json\_encode
-
-- Returns json\_encode() ready for file / database use.
-- @since ACF 5.0.0
-- @param array $json The array of data to encode.
-- @return string
-
-## `acf_str_exists()`
-
-acf\_str\_exists
-
-- This function will return true if a sub string is found
-- @since ACF 5.0.0
-- @param $needle (string)
-- @param $haystack (string)
-- @return (boolean)
-
-## `acf_debug()`
-
-A legacy function designed for developer debugging.
-
-- @deprecated 6.2.6 Removed for security, but keeping the definition in case third party devs have it in their code.
-- @since ACF 5.0.0
-- @return false
-
-## `acf_debug_start()`
-
-A legacy function designed for developer debugging.
-
-- @deprecated 6.2.6 Removed for security, but keeping the definition in case third party devs have it in their code.
-- @since ACF 5.0.0
-- @return false
-
-## `acf_debug_end()`
-
-A legacy function designed for developer debugging.
-
-- @deprecated 6.2.6 Removed for security, but keeping the definition in case third party devs have it in their code.
-- @since ACF 5.0.0
-- @return false
-
-## `acf_encode_choices()`
-
-acf\_encode\_choices
-
-- description
-- @since ACF 5.0.0
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_str_replace()`
-
-acf\_str\_replace
-
-- This function will replace an array of strings much like str\_replace  
-    The difference is the extra logic to avoid replacing a string that has already been replaced  
-    This is very useful for replacing date characters as they overlap with each other
-- @since ACF 5.3.8
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_split_date_time()`
-
-acf\_split\_date\_time
-
-- This function will split a format string into separate date and time
-- @since ACF 5.3.8
-- @param $date\_time (string)
-- @return $formats (array)
-
-## `acf_convert_date_to_php()`
-
-acf\_convert\_date\_to\_php
-
-- This function converts a date format string from JS to PHP
-- @since ACF 5.0.0
-- @param $date (string)
-- @return (string)
-
-## `acf_convert_date_to_js()`
-
-acf\_convert\_date\_to\_js
-
-- This function converts a date format string from PHP to JS
-- @since ACF 5.0.0
-- @param $date (string)
-- @return (string)
-
-## `acf_convert_time_to_php()`
-
-acf\_convert\_time\_to\_php
-
-- This function converts a time format string from JS to PHP
-- @since ACF 5.0.0
-- @param $time (string)
-- @return (string)
-
-## `acf_convert_time_to_js()`
-
-acf\_convert\_time\_to\_js
-
-- This function converts a date format string from PHP to JS
-- @since ACF 5.0.0
-- @param $time (string)
-- @return (string)
-
-## `acf_update_user_setting()`
-
-acf\_update\_user\_setting
-
-- description
-- @since ACF 5.0.0
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_get_user_setting()`
-
-acf\_get\_user\_setting
-
-- description
-- @since ACF 5.0.0
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_in_array()`
-
-acf\_in\_array
-
-- description
-- @since ACF 5.0.0
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_get_valid_post_id()`
-
-acf\_get\_valid\_post\_id
-
-- This function will return a valid post\_id based on the current screen / parameter
-- @since ACF 5.0.0
-- @param $post\_id (mixed)
-- @return $post\_id (mixed)
-
-## `acf_get_post_id_info()`
-
-acf\_get\_post\_id\_info
-
-- This function will return the type and id for a given $post\_id string
-- @since ACF 5.4.0
-- @param $post\_id (mixed)
-- @return $info (array)
-
-## `acf_isset_termmeta()`
-
-acf\_isset\_termmeta
-
-- This function will return true if the termmeta table exists  
-    [\#reference/functions/get\_term\_meta](#reference/functions/get_term_meta)
-- @since ACF 5.4.0
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_upload_files()`
-
-This function will walk through the $\_FILES data and upload each found.
-
-- @since ACF 5.0.9
-- @param array $ancestors An internal parameter, not required.
-
-## `acf_upload_file()`
-
-acf\_upload\_file
-
-- This function will upload a $\_FILE
-- @since ACF 5.0.9
-- @param $uploaded\_file (array) array found from $\_FILE data
-- @return $id (int) new attachment ID
-
-## `acf_update_nested_array()`
-
-acf\_update\_nested\_array
-
-- This function will update a nested array value. Useful for modifying the $\_POST array
-- @since ACF 5.0.9
-- @param $array (array) target array to be updated
-- @param $ancestors (array) array of keys to navigate through to find the child
-- @param $value (mixed) The new value
-- @return (boolean)
-
-## `acf_is_screen()`
-
-acf\_is\_screen
-
-- This function will return true if all args are matched for the current screen
-- @since ACF 5.1.5
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_is_acf_admin_screen()`
-
-Check if we’re in an ACF admin screen
-
-- @since ACF 6.2.2
-- @return boolean Returns true if the current screen is an ACF admin screen.
-
-## `acf_maybe_get()`
-
-acf\_maybe\_get
-
-- This function will return a var if it exists in an array
-- @since ACF 5.1.5
-- @param $array (array) the array to look within
-- @param $key (key) the array key to look for. Nested values may be found using ‘/’
-- @param $default (mixed) the value returned if not found
-- @return $post\_id (int)
-
-## `acf_get_attachment()`
-
-Returns an array of attachment data.
-
-- @since ACF 5.1.5
-- @param integer|[WP\_Post](#reference/classes/wp_post) The attachment ID or object
-- @return array|false
-
-## `acf_get_truncated()`
-
-This function will truncate and return a string
-
-- @since ACF 5.0.0
-- @param string $text The text to truncate.
-- @param integer $length The number of characters to allow in the string.
-- @return string
-
-## `acf_current_user_can_admin()`
-
-acf\_current\_user\_can\_admin
-
-- This function will return true if the current user can administrate the ACF field groups
-- @since ACF 5.1.5
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_current_user_can_edit_post()`
-
-Wrapper function for current\_user\_can( ‘edit\_post’, $post\_id ).
-
-- @since ACF 6.3.4
-- @param integer $post\_id The post ID to check.
-- @return boolean
-
-## `acf_get_filesize()`
-
-acf\_get\_filesize
-
-- This function will return a numeric value of bytes for a given filesize string
-- @since ACF 5.1.5
-- @param $size (mixed)
-- @return (int)
-
-## `acf_format_filesize()`
-
-acf\_format\_filesize
-
-- This function will return a formatted string containing the filesize and unit
-- @since ACF 5.1.5
-- @param $size (mixed)
-- @return (int)
-
-## `acf_get_valid_terms()`
-
-acf\_get\_valid\_terms
-
-- This function will replace old terms with new split term ids
-- @since ACF 5.1.5
-- @param $terms (int|array)
-- @param $taxonomy (string)
-- @return $terms
-
-## `acf_validate_attachment()`
-
-acf\_validate\_attachment
-
-- This function will validate an attachment based on a field’s restrictions and return an array of errors
-- @since ACF 5.2.3
-- @param $attachment (array) attachment data. Changes based on context
-- @param $field (array) field settings containing restrictions
-- @param context (string) $file is different when uploading / preparing
-- @return $errors (array)
-
-## `acf_translate()`
-
-acf\_translate
-
-- This function will translate a string using the new ‘l10n\_textdomain’ setting  
-    Also works for arrays which is great for fields – select -&gt; choices
-- @since ACF 5.3.2
-- @param mixed $string String or array containing strings to be translated.
-- @return mixed
-
-## `acf_maybe_add_action()`
-
-acf\_maybe\_add\_action
-
-- This function will determine if the action has already run before adding / calling the function
-- @since ACF 5.3.2
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_is_row_collapsed()`
-
-acf\_is\_row\_collapsed
-
-- This function will return true if the field’s row is collapsed
-- @since ACF 5.3.2
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_get_attachment_image()`
-
-Return an image tag for the provided attachment ID
-
-- @since ACF 5.5.0
-- @deprecated 6.3.2
-- @param integer $attachment\_id The attachment ID
-- @param string $size The image size to use in the image tag.
-- @return false
-
-## `acf_get_post_thumbnail()`
-
-acf\_get\_post\_thumbnail
-
-- This function will return a thumbnail image url for a given post
-- @since ACF 5.3.8
-- @param $post (obj)
-- @param $size (mixed)
-- @return (string)
-
-## `acf_get_browser()`
-
-acf\_get\_browser
-
-- Returns the name of the current browser.
-- @since ACF 5.0.0
-- @return string
-
-## `acf_is_ajax()`
-
-acf\_is\_ajax
-
-- This function will return true if performing a wp ajax call
-- @since ACF 5.3.8
-- @param n/a
-- @return (boolean)
-
-## `acf_format_date()`
-
-Returns a date value in a formatted string.
-
-- @since ACF 5.3.8
-- @param string $value The date value to format.
-- @param string $format The format to use.
-- @return string
-
-## `acf_clear_log()`
-
-Previously, deletes the debug.log file.
-
-- @since ACF 5.7.10
-- @deprecated 6.2.7
-
-## `acf_log()`
-
-acf\_log
-
-- description
-- @since ACF 5.3.8
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `acf_dev_log()`
-
-acf\_dev\_log
-
-- Used to log variables only if ACF\_DEV is defined
-- @since ACF 5.7.4
-- @param mixed
-- @return void
-
-## `acf_doing()`
-
-acf\_doing
-
-- This function will tell ACF what task it is doing
-- @since ACF 5.3.8
-- @param $event (string)
-- @param context (string)
-- @return n/a
-
-## `acf_is_doing()`
-
-acf\_is\_doing
-
-- This function can be used to state what ACF is doing, or to check
-- @since ACF 5.3.8
-- @param $event (string)
-- @param context (string)
-- @return (boolean)
-
-## `acf_is_plugin_active()`
-
-acf\_is\_plugin\_active
-
-- This function will return true if the ACF plugin is active
-- May be included within a theme or other plugin
-- @since ACF 5.4.0
-- @param $basename (int)
-- @return $post\_id (int)
-
-## `acf_send_ajax_results()`
-
-acf\_send\_ajax\_results
-
-- This function will print JSON data for a Select2 AJAX query
-- @since ACF 5.4.0
-- @param $response (array)
-- @return n/a
-
-## `acf_is_sequential_array()`
-
-acf\_is\_sequential\_array
-
-- This function will return true if the array contains only numeric keys
-- @source <http://stackoverflow.com/questions/173400/how-to-check-if-php-array-is-associative-or-sequential>
-- @since ACF 5.4.0
-- @param $array (array)
-- @return (boolean)
-
-## `acf_is_associative_array()`
-
-acf\_is\_associative\_array
-
-- This function will return true if the array contains one or more string keys
-- @source <http://stackoverflow.com/questions/173400/how-to-check-if-php-array-is-associative-or-sequential>
-- @since ACF 5.4.0
-- @param $array (array)
-- @return (boolean)
-
-## `acf_add_array_key_prefix()`
-
-acf\_add\_array\_key\_prefix
-
-- This function will add a prefix to all array keys  
-    Useful to preserve numeric keys when performing array\_multisort
-- @since ACF 5.4.0
-- @param $array (array)
-- @param $prefix (string)
-- @return (array)
-
-## `acf_remove_array_key_prefix()`
-
-acf\_remove\_array\_key\_prefix
-
-- This function will remove a prefix to all array keys  
-    Useful to preserve numeric keys when performing array\_multisort
-- @since ACF 5.4.0
-- @param $array (array)
-- @param $prefix (string)
-- @return (array)
-
-## `acf_connect_attachment_to_post()`
-
-This function will connect an attachment (image etc) to the post  
-Used to connect attachments uploaded directly to media that have not been attached to a post
-
-- @since ACF 5.8.0 Added filter to prevent connection.
-- @since ACF 5.5.4
-- @param integer $attachment\_id The attachment ID.
-- @param integer $post\_id The post ID.
-- @return boolean True if attachment was connected.
-
-## `acf_encrypt()`
-
-acf\_encrypt
-
-- This function will encrypt a string using PHP  
-    [https://bhoover.com/using-php-openssl\_encrypt-openssl\_decrypt-encrypt-decrypt-data/](https://bhoover.com/using-php-openssl_encrypt-openssl_decrypt-encrypt-decrypt-data/)
-- @since ACF 5.5.8
-- @param $data (string)
-- @return (string)
-
-## `acf_decrypt()`
-
-acf\_decrypt
-
-- This function will decrypt an encrypted string using PHP  
-    [https://bhoover.com/using-php-openssl\_encrypt-openssl\_decrypt-encrypt-decrypt-data/](https://bhoover.com/using-php-openssl_encrypt-openssl_decrypt-encrypt-decrypt-data/)
-- @since ACF 5.5.8
-- @param $data (string)
-- @return (string)
-
-## `acf_parse_markdown()`
-
-acf\_parse\_markdown
-
-- A very basic regex-based Markdown parser function based off [slimdown](https://gist.github.com/jbroadway/2836900).
-- @since ACF 5.7.2
-- @param string $text The string to parse.
-- @return string
-
-## `acf_get_sites()`
-
-acf\_get\_sites
-
-- Returns an array of sites for a network.
-- @since ACF 5.4.0
-- @return array
-
-## `acf_convert_rules_to_groups()`
-
-acf\_convert\_rules\_to\_groups
-
-- Converts an array of rules from ACF4 to an array of groups for ACF5
-- @since ACF 5.7.4
-- @param array $rules An array of rules.
-- @param string $anyorall The anyorall setting used in ACF4. Defaults to ‘any’.
-- @return array
-
-## `acf_register_ajax()`
-
-acf\_register\_ajax
-
-- Registers an ajax callback.
-- @since ACF 5.7.7
-- @param string $name The ajax action name.
-- @param array $callback The callback function or array.
-- @param boolean $public Whether to allow access to non logged in users.
-- @return void
-
-## `acf_str_camel_case()`
-
-acf\_str\_camel\_case
-
-- Converts a string into camelCase.  
-    Thanks to <https://stackoverflow.com/questions/31274782/convert-array-keys-from-underscore-case-to-camelcase-recursively>
-- @since ACF 5.8.0
-- @param string $string The string ot convert.
-- @return string
-
-## `acf_array_camel_case()`
-
-acf\_array\_camel\_case
-
-- Converts all array keys to camelCase.
-- @since ACF 5.8.0
-- @param array $array The array to convert.
-- @return array
-
-## `acf_is_block_editor()`
-
-Returns true if the current screen is using the block editor.
-
-- @since ACF 5.8.0
-- @return boolean
-
-## `acf_get_wp_reserved_terms()`
-
-Return an array of the WordPress reserved terms
-
-- @since ACF 6.1
-- @return array The WordPress reserved terms list.
-
-## `acf_is_multisite_sub_site()`
-
-Detect if we’re on a multisite subsite.
-
-- @since ACF 6.2.4
-- @return boolean true if we’re in a multisite install and not on the main site
-
-## `acf_is_multisite_main_site()`
-
-Detect if we’re on a multisite main site.
-
-- @since ACF 6.2.4
-- @return boolean true if we’re in a multisite install and on the main site
-
----
-
----
-
-# API Template Global Functions <a name="secure-custom-fields/code-reference/api/api-template-file" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/code-reference/api/api-template-file/
-
-## `get_field()`
-
-This function will return a custom field value for a specific field name/key + post\_id.  
-There is a 3rd parameter to turn on/off formatting. This means that an image field will not use  
-its ‘return option’ to format the value but return only what was saved in the database
-
-- @since ACF 3.6
-- @param string $selector The field name or key.
-- @param mixed $post\_id The post\_id of which the value is saved against.
-- @param boolean $format\_value Whether or not to format the value as described above.
-- @param boolean $escape\_html If we’re formatting the value, make sure it’s also HTML safe.
-- @return mixed
-
-## `the_field()`
-
-This function is the same as echo get\_field(), but will escape the value for safe HTML output regardless of parameters.
-
-- @since ACF 1.0.3
-- @param string $selector The field name or key.
-- @param mixed $post\_id The post\_id of which the value is saved against.
-- @param boolean $format\_value Enable formatting of value. Default true.
-- @return void
-
-## `_acf_log_escaped_html()`
-
-Logs instances of ACF successfully escaping unsafe HTML.
-
-- @since ACF 6.2.5
-- @param string $function The function that resulted in HTML being escaped.
-- @param string $selector The selector (field key, name, etc.) passed to that function.
-- @param array $field The field being queried when HTML was escaped.
-- @param mixed $post\_id The post ID the function was called on.
-- @return void
-
-## `_acf_get_escaped_html_log()`
-
-Returns an array of instances where HTML was altered due to escaping in the\_field or a shortcode.
-
-- @since ACF 6.2.5
-- @return array
-
-## `_acf_update_escaped_html_log()`
-
-Updates the array of instances where HTML was altered due to escaping in the\_field or a shortcode.
-
-- @since ACF 6.2.5
-- @param array $escaped The array of instances.
-- @return boolean True on success, or false on failure.
-
-## `_acf_delete_escaped_html_log()`
-
-Deletes the array of instances where HTML was altered due to escaping in the\_field or a shortcode.  
-Since 6.2.7, also clears the legacy `acf_will_escape_html_log` option to clean up.
-
-- @since ACF 6.2.5
-- @return boolean True on success, or false on failure.
-
-## `get_field_object()`
-
-This function will return an array containing all the field data for a given field\_name.
-
-- @since ACF 3.6
-- @param string $selector The field name or key.
-- @param mixed $post\_id The post\_id of which the value is saved against.
-- @param boolean $format\_value Whether to format the field value.
-- @param boolean $load\_value Whether to load the field value.
-- @param boolean $escape\_html Should the field return a HTML safe formatted value if $format\_value is true.
-- @return array|false $field
-
-## `acf_maybe_get_field()`
-
-This function will return a field for the given selector.  
-It will also review the field\_reference to ensure the correct field is returned which makes it useful for the template API
-
-- @since ACF 5.2.3
-- @param $selector (mixed) identifier of field. Can be an ID, key, name or post object
-- @param $post\_id (mixed) the post\_id of which the value is saved against
-- @param $strict (boolean) if true, return a field only when a field key is found.
-- @return $field (array)
-
-## `acf_maybe_get_sub_field()`
-
-This function will attempt to find a sub field
-
-- @since ACF 5.4.0
-- @param $post\_id (int)
-- @return $post\_id (int)
-
-## `get_fields()`
-
-This function will return an array containing all the custom field values for a specific post\_id.  
-The function is not very elegant and wastes a lot of PHP memory / SQL queries if you are not using all the values.
-
-- @since ACF 3.6
-- @param mixed $post\_id The post\_id of which the value is saved against.
-- @param boolean $format\_value Whether or not to format the field value.
-- @param boolean $escape\_html Should the field return a HTML safe formatted value if $format\_value is true.
-- @return array|false Associative array where field name =&gt; field value, or false on failure.
-
-## `get_field_objects()`
-
-This function will return an array containing all the custom field objects for a specific post\_id.  
-The function is not very elegant and wastes a lot of PHP memory / SQL queries if you are not using all the fields / values.
-
-- @since ACF 3.6
-- @param mixed $post\_id The post\_id of which the value is saved against.
-- @param boolean $format\_value Whether or not to format the field value.
-- @param boolean $load\_value Whether or not to load the field value.
-- @param boolean $escape\_html Should the field return a HTML safe formatted value if $format\_value is true.
-- @return array|false Associative array where field name =&gt; field, or false on failure.
-
-## `have_rows()`
-
-Checks if a field (such as Repeater or Flexible Content) has any rows of data to loop over.  
-This function is intended to be used in conjunction with the\_row() to step through available values.
-
-- @since ACF 4.3.0
-- @param string $selector The field name or field key.
-- @param mixed $post\_id The post ID where the value is saved. Defaults to the current post.
-- @return boolean
-
-## `the_row()`
-
-This function will progress the global repeater or flexible content value 1 row
-
-- @since ACF 4.3.0
-- @param N/A
-- @return (array) the current row data
-
-## `get_row_sub_field()`
-
-This function is used inside a ‘has\_sub\_field’ while loop to return a sub field object
-
-- @since ACF 5.3.8
-- @param $selector (string)
-- @return (array)
-
-## `get_row_sub_value()`
-
-This function is used inside a ‘has\_sub\_field’ while loop to return a sub field value
-
-- @since ACF 5.3.8
-- @param $selector (string)
-- @return (mixed)
-
-## `reset_rows()`
-
-This function will find the current loop and unset it from the global array.  
-To be used when loop finishes or a break is used
-
-- @since ACF 5.0.0
-- @param $hard\_reset (boolean) completely wipe the global variable, or just unset the active row
-- @return (boolean)
-
-## `has_sub_field()`
-
-This function is used inside a while loop to return either true or false (loop again or stop).  
-When using a repeater or flexible content field, it will loop through the rows until  
-there are none left or a break is detected
-
-- @since ACF 1.0.3
-- @param $field\_name (string) the field name
-- @param $post\_id (mixed) the post\_id of which the value is saved against
-- @return (boolean)
-
-## `has_sub_fields()`
-
-Alias of has\_sub\_field
-
-## `get_sub_field()`
-
-This function is used inside a ‘has\_sub\_field’ while loop to return a sub field value
-
-- @since ACF 1.0.3
-- @param string $selector The field name or key.
-- @param boolean $format\_value Whether or not to format the value as described above.
-- @param boolean $escape\_html If we’re formatting the value, make sure it’s also HTML safe.
-- @return mixed
-
-## `the_sub_field()`
-
-This function is the same as echo get\_sub\_field(), but will escape the value for safe HTML output.
-
-- @since ACF 1.0.3
-- @param string $field\_name The field name.
-- @param boolean $format\_value Enable formatting of value. When false, the field value will be escaped at this level with `acf_esc_html`. Default true.
-- @return void
-
-## `get_sub_field_object()`
-
-This function is used inside a ‘has\_sub\_field’ while loop to return a sub field object
-
-- @since ACF 3.5.8.1
-- @param string $selector The field name or key.
-- @param boolean $format\_value Whether to format the field value.
-- @param boolean $load\_value Whether to load the field value.
-- @param boolean $escape\_html Should the field return a HTML safe formatted value.
-- @return mixed
-
-## `get_row_layout()`
-
-This function will return a string representation of the current row layout within a ‘have\_rows’ loop
-
-- @since ACF 3.0.6
-- @return mixed
-
-## `acf_shortcode()`
-
-This function is used to add basic shortcode support for the ACF plugin  
-eg. \[acf field=”heading” post\_id=”123″ format\_value=”1″\]
-
-- @since ACF 1.1.1
-- @param array $atts The shortcode attributes.
-- @return string|void
-
-## `update_field()`
-
-This function will update a value in the database
-
-- @since ACF 3.1.9
-- @param string $selector The field name or key.
-- @param mixed $value The value to save in the database.
-- @param mixed $post\_id The post\_id of which the value is saved against.
-- @return boolean
-
-## `update_sub_field()`
-
-This function will update a value of a sub field in the database
-
-- @since ACF 5.0.0
-- @param $selector (mixed) the sub field name or key, or an array of ancestors
-- @param $value (mixed) the value to save in the database
-- @param $post\_id (mixed) the post\_id of which the value is saved against
-- @return boolean
-
-## `delete_field()`
-
-This function will remove a value from the database
-
-- @since ACF 3.1.9
-- @param $selector (string) the field name or key
-- @param $post\_id (mixed) the post\_id of which the value is saved against
-- @return boolean
-
-## `delete_sub_field()`
-
-This function will delete a value of a sub field in the database
-
-- @since ACF 5.0.0
-- @param $selector (mixed) the sub field name or key, or an array of ancestors
-- @param $value (mixed) the value to save in the database
-- @param $post\_id (mixed) the post\_id of which the value is saved against
-- @return (boolean)
-
-## `add_row()`
-
-This function will add a row of data to a field
-
-- @since ACF 5.2.3
-- @param $selector (string)
-- @param $row (array)
-- @param $post\_id (mixed)
-- @return (boolean)
-
-## `add_sub_row()`
-
-This function will add a row of data to a field
-
-- @since ACF 5.2.3
-- @param $selector (string)
-- @param $row (array)
-- @param $post\_id (mixed)
-- @return (boolean)
-
-## `update_row()`
-
-This function will update a row of data to a field
-
-- @since ACF 5.2.3
-- @param $selector (string)
-- @param $i (int)
-- @param $row (array)
-- @param $post\_id (mixed)
-- @return (boolean)
-
-## `update_sub_row()`
-
-This function will add a row of data to a field
-
-- @since ACF 5.2.3
-- @param $selector (string)
-- @param $row (array)
-- @param $post\_id (mixed)
-- @return (boolean)
-
-## `delete_row()`
-
-This function will delete a row of data from a field
-
-- @since ACF 5.2.3
-- @param $selector (string)
-- @param $i (int)
-- @param $post\_id (mixed)
-- @return (boolean)
-
-## `delete_sub_row()`
-
-This function will add a row of data to a field
-
-- @since ACF 5.2.3
-- @param $selector (string)
-- @param $row (array)
-- @param $post\_id (mixed)
-- @return (boolean)
-
-## `create_field()`
-
-Deprecated Functions
-
-- These functions are outdated
-- @since ACF 1.0.0
-- @param n/a
-- @return n/a
-
----
-
----
-
-# API Term Global Functions <a name="secure-custom-fields/code-reference/api/api-term-file" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/code-reference/api/api-term-file/
-
-## `acf_get_taxonomies()`
-
-Returns an array of taxonomy names.
-
-- @date 7/10/13
-- @since ACF 5.0.0
-- @param array $args An array of args used in the [get\_taxonomies()](#reference/functions/get_taxonomies) function.
-- @return array An array of taxonomy names.
-
-## `acf_get_taxonomies_for_post_type()`
-
-acf\_get\_taxonomies\_for\_post\_type
-
-- Returns an array of taxonomies for a given post type(s)
-- @date 7/9/18
-- @since ACF 5.7.5
-- @param string|array $post\_types The post types to compare against.
-- @return array
-
-## `acf_get_taxonomy_labels()`
-
-Returns an array of taxonomies in the format “name =&gt; label” for use in a select field.
-
-- @date 3/8/18
-- @since ACF 5.7.2
-- @param array $taxonomies Optional. An array of specific taxonomies to return.
-- @return array
-
-## `acf_get_term_title()`
-
-acf\_get\_term\_title
-
-- Returns the title for this term object.
-- @date 10/9/18
-- @since ACF 5.0.0
-- @param object $term The [WP\_Term](#reference/classes/wp_term) object.
-- @return string
-
-## `acf_get_grouped_terms()`
-
-acf\_get\_grouped\_terms
-
-- Returns an array of terms for the given query $args and groups by taxonomy name.
-- @date 2/8/18
-- @since ACF 5.7.2
-- @param array $args An array of args used in the [get\_terms()](#reference/functions/get_terms) function.
-- @return array
-
-## `_acf_terms_clauses()`
-
-\_acf\_terms\_clauses
-
-- Used in the ‘terms\_clauses’ filter to order terms by taxonomy name.
-- @date 2/8/18
-- @since ACF 5.7.2
-- @param array $pieces Terms query SQL clauses.
-- @param array $taxonomies An array of taxonomies.
-- @param array $args An array of terms query arguments.
-- @return array $pieces
-
-## `acf_get_pretty_taxonomies()`
-
-acf\_get\_pretty\_taxonomies
-
-- Deprecated in favor of acf\_get\_taxonomy\_labels() function.
-- @date 7/10/13
-- @since ACF 5.0.0
-- @deprecated 5.7.2
-
-## `acf_get_term()`
-
-acf\_get\_term
-
-- Similar to [get\_term()](#reference/functions/get_term) but with some extra functionality.
-- @date 19/8/18
-- @since ACF 5.7.3
-- @param mixed $term\_id The term ID or a string of “taxonomy:slug”.
-- @param string $taxonomy The taxonomyname.
-- @return [WP\_Term](#reference/classes/wp_term)
-
-## `acf_encode_term()`
-
-acf\_encode\_term
-
-- Returns a “taxonomy:slug” string for a given [WP\_Term](#reference/classes/wp_term).
-- @date 27/8/18
-- @since ACF 5.7.4
-- @param [WP\_Term](#reference/classes/wp_term) $term The term object.
-- @return string
-
-## `acf_decode_term()`
-
-acf\_decode\_term
-
-- Decodes a “taxonomy:slug” string into an array of taxonomy and slug.
-- @date 27/8/18
-- @since ACF 5.7.4
-- @param [WP\_Term](#reference/classes/wp_term) $term The term object.
-- @return string
-
-## `acf_get_encoded_terms()`
-
-acf\_get\_encoded\_terms
-
-- Returns an array of [WP\_Term](#reference/classes/wp_term) objects from an array of encoded strings
-- @date 9/9/18
-- @since ACF 5.7.5
-- @param array $values The array of encoded strings.
-- @return array
-
-## `acf_get_choices_from_terms()`
-
-acf\_get\_choices\_from\_terms
-
-- Returns an array of choices from the terms provided.
-- @date 8/9/18
-- @since ACF 5.7.5
-- @param array $values and array of WP\_Terms objects or encoded strings.
-- @param string $format The value format (term\_id, slug).
-- @return array
-
-## `acf_get_choices_from_grouped_terms()`
-
-acf\_get\_choices\_from\_grouped\_terms
-
-- Returns an array of choices from the grouped terms provided.
-- @date 8/9/18
-- @since ACF 5.7.5
-- @param array $value A grouped array of WP\_Terms objects.
-- @param string $format The value format (term\_id, slug).
-- @return array
-
-## `acf_get_choice_from_term()`
-
-acf\_get\_choice\_from\_term
-
-- Returns an array containing the id and text for this item.
-- @date 10/9/18
-- @since ACF 5.7.6
-- @param object $item The item object such as [WP\_Post](#reference/classes/wp_post) or [WP\_Term](#reference/classes/wp_term).
-- @param string $format The value format (term\_id, slug)
-- @return array
-
-## `acf_get_term_post_id()`
-
-Returns a valid post\_id string for a given term and taxonomy.  
-No longer needed since WP introduced the termmeta table in WP 4.4.
-
-- @date 6/2/17
-- @since ACF 5.5.6
-- @deprecated 5.9.2
-- @param $taxonomy (string) The taxonomy type.
-- @param $term\_id (int) The term ID.
-- @return (string)
-
----
-
----
-
-# ACF_Repeater_Table <a name="secure-custom-fields/code-reference/fields/class-acf-repeater-table-file" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/code-reference/fields/class-acf-repeater-table-file/
-
-ACF\_Repeater\_Table
-
-- Helper class for rendering repeater tables.
-
-## Properties
-
-### `$field`
-
-The main field array used to render the repeater.
-
-- @var array
-
-### `$sub_fields`
-
-An array containing the subfields used in the repeater.
-
-- @var array
-
-### `$value`
-
-The value(s) of the repeater field.
-
-- @var array
-
-### `$show_add`
-
-If we should show the “Add Row” button.
-
-- @var boolean
-
-### `$show_remove`
-
-If we should show the “Remove Row” button.
-
-- @var boolean
-
-### `$show_order`
-
-If we should show the order of the fields.
-
-- @var boolean
-
-## Methods
-
-### `__construct`
-
-Constructs the ACF\_Repeater\_Table class.
-
-- @param array $field The main field array for the repeater being rendered.
-
-### `setup`
-
-Sets up the field for rendering.
-
-- @since ACF 6.0.0
-- @return void
-
-### `prepare_value`
-
-Prepares the repeater values for rendering.
-
-- @since ACF 6.0.0
-- @return array
-
-### `render`
-
-Renders the full repeater table.
-
-- @since ACF 6.0.0
-- @return void
-
-### `thead`
-
-Renders the table head.
-
-- @since ACF 6.0.0
-- @return void
-
-### `rows`
-
-Renders or returns rows for the repeater field table.
-
-- @since ACF 6.0.0
-- @param boolean $should\_return If we should return the rows or render them.
-- @return array|void
-
-### `row`
-
-Renders an individual row.
-
-- @since ACF 6.0.0
-- @param integer $i The row number.
-- @param array $row An array containing the row values.
-- @param boolean $should\_return If we should return the row or render it.
-- @return string|void
-
-### `row_handle`
-
-Renders the row handle at the start of each row.
-
-- @since ACF 6.0.0
-- @param integer $i The current row number.
-- @return void
-
-### `row_actions`
-
-Renders the actions displayed at the end of each row.
-
-- @since ACF 6.0.0
-- @return void
-
-### `table_actions`
-
-Renders the actions displayed underneath the table.
-
-- @since ACF 6.0.0
-- @return void
-
-### `pagination`
-
-Renders the table pagination.  
-Mostly lifted from the WordPress core [WP\_List\_Table](#reference/classes/wp_list_table) class.
-
-- @since ACF 6.0.0
-- @return void
-
----
-
 # Form Front Global Functions <a name="secure-custom-fields/code-reference/form-front-file" />
 
 Source: https://developer.wordpress.org/secure-custom-fields/code-reference/form-front-file/
@@ -8108,43 +8888,6 @@ Source: https://developer.wordpress.org/secure-custom-fields/code-reference/hook
 
 - [Action](action)
 - [Filter](filter)
-
----
-
-# Acf Rest API Functions Global Functions <a name="secure-custom-fields/code-reference/class-acf-rest-api-file/acf-rest-api-functions-file" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/code-reference/class-acf-rest-api-file/acf-rest-api-functions-file/
-
-## `acf_get_field_rest_schema()`
-
-Get the REST API schema for a given field.
-
-- @param array $field
-- @return array
-
-## `acf_get_field_rest_links()`
-
-Get the REST API field links for a given field. The links are appended to the REST response under the \_links property  
-and provide API resource links to related objects. If a link is marked as ’embeddable’, WordPress can load the resource  
-in the main request under the\_embedded property when the request contains the \_embed URL parameter.
-
-- @see \\acf\_field::get\_rest\_links()  
-    @see [\#rest-api/using-the-rest-api/linking-and-embedding](#rest-api/using-the-rest-api/linking-and-embedding)
-- @param string|integer $post\_id
-- @param array $field
-- @return array
-
-## `acf_format_value_for_rest()`
-
-Format a given field’s value for output in the REST API.
-
-- @param $value
-- @param $post\_id
-- @param $field
-- @param string $format ‘light’ for normal REST API formatting or ‘standard’ to apply ACF’s normal field formatting.
-- @return mixed
-
----
 
 ---
 
@@ -8253,6 +8996,43 @@ Get all ACF fields for a given field group and allow third party filtering.
     context, we’re only using the field group arrays.
 - @param null|integer $object\_id The ID of the object being prepared.
 - @return array
+
+---
+
+# Acf Rest API Functions Global Functions <a name="secure-custom-fields/code-reference/class-acf-rest-api-file/acf-rest-api-functions-file" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/code-reference/class-acf-rest-api-file/acf-rest-api-functions-file/
+
+## `acf_get_field_rest_schema()`
+
+Get the REST API schema for a given field.
+
+- @param array $field
+- @return array
+
+## `acf_get_field_rest_links()`
+
+Get the REST API field links for a given field. The links are appended to the REST response under the \_links property  
+and provide API resource links to related objects. If a link is marked as ’embeddable’, WordPress can load the resource  
+in the main request under the\_embedded property when the request contains the \_embed URL parameter.
+
+- @see \\acf\_field::get\_rest\_links()  
+    @see [\#rest-api/using-the-rest-api/linking-and-embedding](#rest-api/using-the-rest-api/linking-and-embedding)
+- @param string|integer $post\_id
+- @param array $field
+- @return array
+
+## `acf_format_value_for_rest()`
+
+Format a given field’s value for output in the REST API.
+
+- @param $value
+- @param $post\_id
+- @param $field
+- @param string $format ‘light’ for normal REST API formatting or ‘standard’ to apply ACF’s normal field formatting.
+- @return mixed
+
+---
 
 ---
 
@@ -8405,783 +9185,3 @@ Source: https://developer.wordpress.org/secure-custom-fields/code-reference/rest
 - [Class Acf REST API](class-acf-rest-api-file)
 - [Class ACF REST Embed Links](class-acf-rest-embed-links-file)
 - [Class ACF REST Request](class-acf-rest-request-file)
-
----
-
-# Field Types <a name="secure-custom-fields/features/field" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/
-
-Documentation for all available field types in Secure Custom Fields.
-
-Each field type has its own documentation and tutorial showing how to implement and use it effectively.
-
-## Available Fields
-
-- [Accordion](accordion) – Group fields into collapsible sections
-- [Button Group](button-group) – Select one option from a group of buttons
-- [Checkbox](checkbox) – Select one or more choices
-- [Clone](clone) – Duplicate and reuse existing field configurations
-- [Color Picker](color-picker) – Choose colors with a visual picker
-- [Date Picker](date-picker) – Select dates from a calendar
-- [Date/Time Picker](date-time-picker) – Select dates and times
-- [Email](email) – Input and validate email addresses
-- [File](file) – Upload and manage files
-- [Flexible Content](flexible-content) – Create flexible content layouts
-- [Gallery](gallery) – Manage collections of images
-- [Google Map](google-map) – Add location data with Google Maps
-- [Group](group) – Group fields together
-- [Icon Picker](icon-picker) – Select from available icons
-- [Image](image) – Upload and manage images
-- [Link](link) – Create links with titles and targets
-- [Message](message) – Display instructional text
-- [Number](number) – Input numeric values
-- [oEmbed](oembed) – Embed external content
-- [Page Link](page-link) – Link to internal content
-- [Password](password) – Securely input passwords
-- [Post Object](post-object) – Relate to other posts
-- [Radio](radio) – Select one choice from options
-- [Range](range) – Select a numeric value with a slider
-- [Repeater](repeater) – Create repeatable groups of fields
-- [Select](select) – Choose from dropdown options
-- [Separator](separator) – Add visual breaks between fields
-- [Tab](tab) – Organize fields into tabbed sections
-- [Taxonomy](taxonomy) – Select taxonomy terms
-- [Text](text) – Single line text input
-- [Textarea](textarea) – Multi-line text input
-- [Time Picker](time-picker) – Select time values
-- [True/False](true-false) – Toggle switch for yes/no choices
-- [URL](url) – Input and validate web addresses
-- [User](user) – Select WordPress users
-- [WYSIWYG](wysiwyg) – Rich text editor
-
----
-
-# Repeater Field <a name="secure-custom-fields/features/field/repeater" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/repeater/
-
-The Repeater field allows you to create a set of sub fields which can be repeated again and again.
-
-## Key Features
-
-- Flexible row management
-- Multiple field types support
-- Nested repeater capability
-- Row reordering
-- Min/max rows control
-
-## Settings
-
-- Sub Fields – Add fields to repeat
-- Minimum Rows – Set required rows
-- Maximum Rows – Limit total rows
-- Layout – Table or block display
-- Button Label – Customize add row text
-
----
-
-# Using the Repeater Field <a name="secure-custom-fields/features/field/repeater/repeater-tutorial" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/repeater/repeater-tutorial/
-
-## Basic Setup
-
-1. Create a new Field Group
-2. Add a Repeater field
-3. Configure options: 
-    - Add sub fields
-    - Set min/max rows
-    - Choose layout style
-    - Configure labels
-
-## Common Use Cases
-
-1. Dynamic Content 
-    - Social media links
-    - Team members
-    - Feature lists
-2. Content Management 
-    - Gallery items
-    - Related links
-    - Service offerings
-
-## Tips
-
-- Plan field structure carefully
-- Consider nesting depth
-- Use clear labels
-- Set appropriate limits
-
----
-
-# Select Field <a name="secure-custom-fields/features/field/select" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/select/
-
-The Select field provides a dropdown interface for selecting single or multiple options from a predefined list.
-
-## Key Features
-
-- Single/multiple selection
-- Custom choices
-- Ajax loading support
-- Placeholder text
-- Conditional logic
-
-## Settings
-
-- Choices – Define available options
-- Default Value – Set initial selection
-- Allow Null – Make selection optional
-- Multiple – Enable multiple selections
-- UI – Enhanced select interface
-
----
-
-# Using the Select Field <a name="secure-custom-fields/features/field/select/select-tutorial" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/select/select-tutorial/
-
-## Basic Setup
-
-1. Create a new Field Group
-2. Add a Select field
-3. Configure options: 
-    - Add choice options
-    - Set default value
-    - Configure UI settings
-    - Enable/disable features
-
-## Common Use Cases
-
-1. Option Selection 
-    - Status choices
-    - Category selection
-    - Preference settings
-2. Data Filtering 
-    - View options
-    - Content filtering
-    - Display settings
-
-## Tips
-
-- Use clear option labels
-- Consider grouping options
-- Enable search for long lists
-- Set meaningful defaults
-
----
-
-# Separator Field <a name="secure-custom-fields/features/field/separator" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/separator/
-
-The Separator field provides visual separation between fields in the editing interface. It helps organize and structure field layouts.
-
-## Key Features
-
-- Visual organization
-- Custom styling
-- Layout control
-- Group separation
-- Visual hierarchy
-
-## Settings
-
-- Label – Optional separator text
-- Instructions – Field description
-- Wrapper – CSS class options
-
----
-
-# Using the Separator Field <a name="secure-custom-fields/features/field/separator/separator-tutorial" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/separator/separator-tutorial/
-
-## Basic Setup
-
-1. Create a new Field Group
-2. Add a Separator field
-3. Configure options: 
-    - Set label text
-    - Add instructions
-    - Style wrapper
-    - Position field
-
-## Common Use Cases
-
-1. Content Organization 
-    - Section breaks
-    - Field grouping
-    - Visual hierarchy
-2. Form Structure 
-    - Content sections
-    - Logical breaks
-    - Visual spacing
-
-## Tips
-
-- Use clear labels
-- Keep consistent styling
-- Consider spacing
-- Group related fields
-
----
-
-# Tab Field <a name="secure-custom-fields/features/field/tab" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/tab/
-
-The Tab field creates navigation tabs to organize fields into sections. It improves the editing interface by grouping related fields together.
-
-## Key Features
-
-- Field organization
-- Visual navigation
-- Grouped content
-- Layout control
-- Conditional display
-
-## Settings
-
-- Placement – Top/Left alignment
-- Endpoint – Tab section end
-- Label – Tab name
-- Instructions – Optional help text
-
----
-
-# Using the Tab Field <a name="secure-custom-fields/features/field/tab/tab-tutorial" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/tab/tab-tutorial/
-
-## Basic Setup
-
-1. Create a new Field Group
-2. Add a Tab field
-3. Configure options: 
-    - Set tab label
-    - Choose placement
-    - Set endpoint
-    - Add instructions
-
-## Common Use Cases
-
-1. Content Organization 
-    - Content sections
-    - Settings groups
-    - Form organization
-2. Interface Design 
-    - Complex forms
-    - Settings panels
-    - Data grouping
-
-## Tips
-
-- Use clear tab labels
-- Group related fields
-- Consider tab order
-- Plan section breaks
-
----
-
-# Taxonomy Field <a name="secure-custom-fields/features/field/taxonomy" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/taxonomy/
-
-The Taxonomy field creates an interface for selecting taxonomy terms. It supports multiple selection methods and term management.
-
-## Key Features
-
-- Term selection
-- Multiple display types
-- Term creation
-- Hierarchical support
-- Load on demand
-
-## Settings
-
-- Taxonomy – Choose taxonomy
-- Appearance – Select UI style
-- Allow Create – Enable term creation
-- Load Terms – Auto-load options
-- Save Terms – Term relationships
-
----
-
-# Using the Taxonomy Field <a name="secure-custom-fields/features/field/taxonomy/taxonomy-tutorial" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/taxonomy/taxonomy-tutorial/
-
-## Basic Setup
-
-1. Create a new Field Group
-2. Add a Taxonomy field
-3. Configure options: 
-    - Select taxonomy
-    - Choose field type
-    - Set load behavior
-    - Configure saving
-
-## Common Use Cases
-
-1. Content Classification 
-    - Categories
-    - Tags
-    - Custom taxonomies
-2. Term Management 
-    - Content organization
-    - Filtering systems
-    - Related content
-
-## Tips
-
-- Choose appropriate UI
-- Consider term hierarchy
-- Enable term creation
-- Plan relationship structure
-
----
-
-# Text Field <a name="secure-custom-fields/features/field/text" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/text/
-
-The Text field provides a standard single-line text input with various formatting and validation options.
-
-## Key Features
-
-- Text input
-- Character limits
-- Placeholder text
-- Prepend/append
-- Custom formatting
-
-## Settings
-
-- Default Value – Preset text
-- Placeholder – Input helper text
-- Character Limit – Set max length
-- Prepend – Text before input
-- Append – Text after input
-
----
-
-# Using the Text Field <a name="secure-custom-fields/features/field/text/text-tutorial" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/text/text-tutorial/
-
-## Basic Setup
-
-1. Create a new Field Group
-2. Add a Text field
-3. Configure options: 
-    - Set placeholder
-    - Add character limits
-    - Configure formatting
-    - Set default value
-
-## Common Use Cases
-
-1. Basic Information 
-    - Titles
-    - Names
-    - Short descriptions
-    - References
-2. Form Elements 
-    - Input fields
-    - Search boxes
-    - Labels
-    - Identifiers
-
-## Tips
-
-- Use clear placeholders
-- Set appropriate limits
-- Consider validation
-- Use meaningful defaults
-
----
-
-# Textarea Field <a name="secure-custom-fields/features/field/textarea" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/textarea/
-
-The Textarea field provides a multi-line text input for longer content with formatting options and character limits.
-
-## Key Features
-
-- Multi-line text input
-- Character counting
-- Rows configuration
-- New line handling
-- Placeholder support
-
-## Settings
-
-- Default Value – Preset content
-- Placeholder – Helper text
-- Character Limit – Max length
-- Rows – Input height
-- New Lines – Handling options
-
----
-
-# Using the Textarea Field <a name="secure-custom-fields/features/field/textarea/textarea-tutorial" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/textarea/textarea-tutorial/
-
-## Basic Setup
-
-1. Create a new Field Group
-2. Add a Textarea field
-3. Configure options: 
-    - Set rows
-    - Add placeholder
-    - Configure limits
-    - Set line handling
-
-## Common Use Cases
-
-1. Long Text Content 
-    - Descriptions
-    - Biographies
-    - Instructions
-    - Notes
-2. Content Management 
-    - Excerpts
-    - Summaries
-    - Meta descriptions
-    - Comments
-
-## Tips
-
-- Set appropriate height
-- Consider word limits
-- Use clear placeholders
-- Plan for formatting
-
----
-
-# Time Picker Field <a name="secure-custom-fields/features/field/time-picker" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/time-picker/
-
-The Time Picker field provides an interface for selecting time values with customizable display and increment options.
-
-## Key Features
-
-- Time selection
-- Format options
-- Step intervals
-- Range limits
-- Display customization
-
-## Settings
-
-- Display Format – Time format
-- Return Format – Data format
-- Time Increment – Minute steps
-- Placeholder – Helper text
-- Default Value – Preset time
-
----
-
-# Using the Time Picker Field <a name="secure-custom-fields/features/field/time-picker/time-picker-tutorial" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/time-picker/time-picker-tutorial/
-
-## Basic Setup
-
-1. Create a new Field Group
-2. Add a Time Picker field
-3. Configure options: 
-    - Set time format
-    - Choose increment
-    - Set default time
-    - Configure display
-
-## Common Use Cases
-
-1. Schedule Management 
-    - Event times
-    - Opening hours
-    - Appointment slots
-2. Time Settings 
-    - Scheduling
-    - Time restrictions
-    - Operating hours
-
-## Tips
-
-- Use consistent formats
-- Set appropriate steps
-- Consider time zones
-- Plan for validation
-
----
-
-# True/False Field <a name="secure-custom-fields/features/field/true-false" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/true-false/
-
-The True/False field provides a simple toggle switch for boolean values. It offers a clean interface for yes/no choices.
-
-## Key Features
-
-- Toggle interface
-- Custom labels
-- Default state
-- Message display
-- UI customization
-
-## Settings
-
-- Message – Field description
-- Default Value – Initial state
-- On Text – Custom label
-- Off Text – Custom label
-- UI – Style options
-
----
-
-# Using the True/False Field <a name="secure-custom-fields/features/field/true-false/true-false-tutorial" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/true-false/true-false-tutorial/
-
-## Basic Setup
-
-1. Create a new Field Group
-2. Add a True/False field
-3. Configure options: 
-    - Set message
-    - Choose default
-    - Configure labels
-    - Style interface
-
-## Common Use Cases
-
-1. Simple Toggles 
-    - Feature flags
-    - Display options
-    - Status switches
-2. Settings Control 
-    - Visibility settings
-    - Enable/disable
-    - Option toggles
-
-## Tips
-
-- Use clear labels
-- Set logical defaults
-- Consider UI placement
-- Plan conditional logic
-
----
-
-# URL Field <a name="secure-custom-fields/features/field/url" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/url/
-
-The URL field provides input for web addresses with validation and formatting options. It ensures proper URL format and structure.
-
-## Key Features
-
-- URL validation
-- Protocol handling
-- Placeholder text
-- Custom formatting
-- Link preview
-
-## Settings
-
-- Default Value – Preset URL
-- Placeholder – Helper text
-- Protocol – Required/optional
-- Return Format – URL structure
-
----
-
-# Using the URL Field <a name="secure-custom-fields/features/field/url/url-tutorial" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/url/url-tutorial/
-
-## Basic Setup
-
-1. Create a new Field Group
-2. Add a URL field
-3. Configure options: 
-    - Set placeholder
-    - Configure protocol
-    - Set validation
-    - Choose format
-
-## Common Use Cases
-
-1. Web Links 
-    - Website URLs
-    - Social profiles
-    - Resource links
-2. Reference Links 
-    - Documentation
-    - External content
-    - Media sources
-
-## Tips
-
-- Validate URLs properly
-- Consider protocols
-- Use clear placeholders
-- Check link validity
-
----
-
-# User Field <a name="secure-custom-fields/features/field/user" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/user/
-
-The User field creates an interface for selecting WordPress users. It supports multiple selection methods and user filtering.
-
-## Key Features
-
-- User selection
-- Role filtering
-- Multiple formats
-- Search capability
-- Multiple selection
-
-## Settings
-
-- Roles – Filter by role
-- Allow Null – Optional selection
-- Multiple – Enable multiple
-- Return Format – Object/ID/Array
-- Filter – User query args
-
----
-
-# Using the User Field <a name="secure-custom-fields/features/field/user/user-tutorial" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/user/user-tutorial/
-
-## Basic Setup
-
-1. Create a new Field Group
-2. Add a User field
-3. Configure options: 
-    - Select roles
-    - Set return format
-    - Configure multiple
-    - Set filters
-
-## Common Use Cases
-
-1. User Assignment 
-    - Author selection
-    - Team members
-    - User permissions
-2. User Relations 
-    - Content ownership
-    - User groups
-    - Access control
-
-## Tips
-
-- Filter appropriate roles
-- Consider permissions
-- Use clear search
-- Plan user structure
-
----
-
-# WYSIWYG Field <a name="secure-custom-fields/features/field/wysiwyg" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/wysiwyg/
-
-The WYSIWYG (What You See Is What You Get) field provides a rich text editor with formatting tools and media integration.
-
-## Key Features
-
-- Rich text editing
-- Media integration
-- Toolbar customization
-- HTML handling
-- Editor styles
-
-## Settings
-
-- Toolbar – Editor tools
-- Media Upload – Enable/disable
-- Tabs – Visual/Text tabs
-- Height – Editor height
-- Default Value – Initial content
-
----
-
-# Using the WYSIWYG Field <a name="secure-custom-fields/features/field/wysiwyg/wysiwyg-tutorial" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/features/field/wysiwyg/wysiwyg-tutorial/
-
-## Basic Setup
-
-1. Create a new Field Group
-2. Add a WYSIWYG field
-3. Configure options: 
-    - Choose toolbar
-    - Set media options
-    - Configure height
-    - Set defaults
-
-## Common Use Cases
-
-1. Rich Content 
-    - Post content
-    - Product descriptions
-    - Page sections
-2. Formatted Text 
-    - Documentation
-    - Guidelines
-    - Formatted messages
-
-## Tips
-
-- Configure appropriate tools
-- Consider media handling
-- Plan content structure
-- Set consistent styling
-
----
-
-# Getting Started with Secure Custom Fields <a name="secure-custom-fields" />
-
-Source: https://developer.wordpress.org/secure-custom-fields/
-
-This section helps you get up and running with Secure Custom Fields (SCF). Whether you’re new to WordPress development or an experienced developer, these guides will help you start using SCF effectively.
-
-## In This Section
-
-- [Installation](installation) – How to install and activate SCF
-- [Quick Start](quick-start) – Create your first custom field group in minutes
-
-## Documentation Sections
-
-- [Concepts](../concepts/) – Core concepts and architecture
-- [Features](../features/) – Detailed feature documentation
-- [Tutorials](../tutorials/) – Step-by-step guides
-- [Contributing](../contributing/) – How to contribute to SCF
-
-## Code Reference
-
-The [Code Reference](../code-reference/) provides detailed technical documentation of SCF’s functions, classes, hooks, and APIs. This is particularly useful for developers who want to:
-
-- Extend SCF’s functionality
-- Integrate SCF with other plugins or themes
-- Understand SCF’s internal architecture
-- Find specific hooks and filters
-
-## Prerequisites
-
-- WordPress 6.0 or later
-- PHP 7.4 or later
-- Basic understanding of WordPress development

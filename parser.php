@@ -55,6 +55,10 @@ foreach ( $content_types as $content_type ) {
 	$content_md = [];
 	$toc = [];
 	
+	// Collect for sorting.
+	$post_parents = [];
+	$post_order = [];
+
 	if ( isset( $cli_options['update'] ) ) {
 		$json_files = $wp_developer->get_from_rest_api( $content_type );
 	} else {
@@ -63,9 +67,16 @@ foreach ( $content_types as $content_type ) {
 
 	foreach ( $json_files as $json_file ) {
 		$json = $wp_developer->get_json( $json_file );
-		$toc[] = sprintf( '- [%s](#%s)', $json['title']['rendered'], $docs->get_anchor_id_for_url( $json['link'] ) );
-		$content_md[] = $docs->get_post_json_as_markdown( $json );
+		
+		$post_parents[ $json['id'] ] = $json['parent'] ?? 0;
+		$post_order[ $json['id'] ] = $json['menu_order'] ?? 0;
+
+		$toc[ $json['id'] ] = sprintf( '- [%s](#%s)', $json['title']['rendered'], $docs->get_anchor_id_for_url( $json['link'] ) );
+		$content_md[ $json['id'] ] = $docs->get_post_json_as_markdown( $json );
 	}
+
+	$toc = $wp_developer->sort_posts( $toc, $post_parents, $post_order );
+	$content_md = $wp_developer->sort_posts( $content_md, $post_parents, $post_order );
 
 	$handbooks_md[ $content_type ] = implode( 
 		"\n\n",
@@ -126,11 +137,22 @@ foreach ( $content_types as $content_type ) {
 		$json_files = $wp_org->get_json_files_for_content_types( [ $content_type ] );
 	}
 
+	// Collect for sorting.
+	$post_parents = [];
+	$post_order = [];
+
 	foreach ( $json_files as $json_file ) {
 		$json = $wp_org->get_json( $json_file );
-		$toc[] = sprintf( '- [%s](#%s)', $json['title']['rendered'], $docs->get_anchor_id_for_url( $json['link'] ) );
-		$content_md[] = $docs->get_post_json_as_markdown( $json );
+
+		$post_parents[ $json['id'] ] = $json['parent'] ?? 0;
+		$post_order[ $json['id'] ] = $json['menu_order'] ?? 0;
+
+		$toc[ $json['id'] ] = sprintf( '- [%s](#%s)', $json['title']['rendered'], $docs->get_anchor_id_for_url( $json['link'] ) );
+		$content_md[ $json['id'] ] = $docs->get_post_json_as_markdown( $json );
 	}
+
+	$toc = $wp_org->sort_posts( $toc, $post_parents, $post_order );
+	$content_md = $wp_org->sort_posts( $content_md, $post_parents, $post_order );
 
 	$content_md = implode( 
 		"\n\n",

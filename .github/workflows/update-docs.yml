@@ -23,5 +23,8 @@ jobs:
       - name: Install tooling
         run: composer install
 
+      - name: Test
+        run: composer test
+
       - name: Update Content
         run: php parser.php --update

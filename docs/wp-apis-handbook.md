@@ -1,3588 +1,51 @@
 Table of Contents:
 
 - [Common APIs Handbook](#apis)
+- [Responsive Images](#apis/responsive-images)
+- [Hooks](#apis/hooks)
+- [Filter Reference](#apis/hooks/filter-reference)
+- [Action Reference](#apis/hooks/action-reference)
 - [Dashboard widgets API](#apis/dashboard-widgets)
 - [Database API](#apis/database)
+- [Internationalization](#apis/internationalization)
+- [Internationalization Functions](#apis/internationalization/internationalization-functions)
+- [Internationalization Guidelines](#apis/internationalization/internationalization-guidelines)
+- [Localization](#apis/internationalization/localization)
 - [Filesystem](#apis/filesystem)
 - [Global Variables](#apis/global-variables)
 - [Metadata](#apis/metadata)
 - [Options](#apis/options)
 - [Plugins](#apis/plugins)
 - [Quicktags](#apis/quicktags)
-- [REST](#apis/rest)
-- [Rewrite](#apis/rewrite)
-- [Settings](#apis/settings)
-- [Shortcode](#apis/shortcode)
-- [Theme](#apis/theme)
-- [Transients](#apis/transients)
-- [XML-RPC](#apis/xml-rpc)
-- [Internationalization](#apis/internationalization)
-- [Internationalization Functions](#apis/internationalization/internationalization-functions)
-- [Internationalization Guidelines](#apis/internationalization/internationalization-guidelines)
-- [Localization](#apis/internationalization/localization)
-- [Performance](#apis/making-http-requests/performance)
-- [POSTing data to an external service](#apis/making-http-requests/posting-data-to-an-external-service)
+- [Making HTTP requests](#apis/making-http-requests)
 - [GETting data from an external service](#apis/making-http-requests/getting-data-from-an-external-service)
+- [POSTing data to an external service](#apis/making-http-requests/posting-data-to-an-external-service)
+- [Performance](#apis/making-http-requests/performance)
 - [Advanced](#apis/making-http-requests/advanced)
 - [Authentication](#apis/making-http-requests/authentication)
-- [Making HTTP requests](#apis/making-http-requests)
-- [Responsive Images](#apis/responsive-images)
-- [Site Health](#apis/site-health)
-- [wp-config.php](#apis/wp-config-php)
-- [Filter Reference](#apis/hooks/filter-reference)
-- [Action Reference](#apis/hooks/action-reference)
+- [REST](#apis/rest)
+- [Rewrite](#apis/rewrite)
 - [Security](#apis/security)
 - [Sanitizing Data](#apis/security/sanitizing)
 - [Validating Data](#apis/security/data-validation)
 - [Escaping Data](#apis/security/escaping)
 - [Nonces](#apis/security/nonces)
-- [Example](#apis/security/example)
 - [User Roles and Capabilities](#apis/security/user-roles-and-capabilities)
 - [Common Vulnerabilities](#apis/security/common-vulnerabilities)
-- [Hooks](#apis/hooks)
+- [Example](#apis/security/example)
+- [Settings](#apis/settings)
+- [Shortcode](#apis/shortcode)
+- [Site Health](#apis/site-health)
+- [Theme](#apis/theme)
+- [Transients](#apis/transients)
+- [XML-RPC](#apis/xml-rpc)
+- [wp-config.php](#apis/wp-config-php)
 
 # Common APIs Handbook <a name="apis" />
 
 Source: https://developer.wordpress.org/apis/
 
 This handbook serves as a clearinghouse for documentation on all APIs present within the WordPress software as well as APIs available from the WordPress.org ecosystem.
-
----
-
-# Dashboard widgets API <a name="apis/dashboard-widgets" />
-
-Source: https://developer.wordpress.org/apis/dashboard-widgets/
-
-Added in WordPress Version [2.7](https://wordpress.org/support/wordpress-version/version-2-7/), the **Dashboard Widgets API** makes it simple to add new widgets to the [administration dashboard](https://wordpress.org/support/article/dashboard-screen/).
-
-Doing so requires working knowledge of PHP and the WordPress [Plugin API](#plugins), but to plugin or theme authors familiar with hooking actions and filters, it only takes a few minutes and can be a great way to make your plugin even more useful.
-
-[![](https://i0.wp.com/developer.wordpress.org/files/2019/08/admin-dashboard-widget-api.png?resize=1024%2C464&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2019/08/admin-dashboard-widget-api.png?ssl=1)Default Dashboard Widgets## Overview
-
-### The main function
-
-The main tool needed to add Dashboard Widgets is the [wp\_add\_dashboard\_widget()](#reference/functions/wp_add_dashboard_widget) function. You will find a complete description of this function on that link, but a brief overview is given below.
-
-### Usage
-
-```php
-wp_add_dashboard_widget( $widget_id, $widget_name, $callback, $control_callback, $callback_args );
-```
-
-- `$widget_id`: an identifying slug for your widget. This will be used as its CSS class and its key in the array of widgets.
-- `$widget_name`: this is the name your widget will display in its heading.
-- `$callback`: The name of a function you will create that will display the actual contents of your widget.
-- `$control_callback` (Optional): The name of a function you create that will handle submission of widget options forms, and will also display the form elements.
-- `$callback_args` (Optional): Set of arguments for the callback function.
-
-### Action hooks
-
-To run the function you will need to hook into the action [wp\_dashboard\_setup](#reference/hooks/wp_dashboard_setup) via [add\_action()](#reference/functions/add_action). For the Network Admin dashboard, use the hook [wp\_network\_dashboard\_setup](#reference/hooks/wp_network_dashboard_setup).
-
-```php
-/**
- * Add a widget to the dashboard.
- *
- * This function is hooked into the 'wp_dashboard_setup' action below.
- */
-function wporg_add_dashboard_widgets() {
-	// Add function here
-}
-add_action( 'wp_dashboard_setup', 'wporg_add_dashboard_widgets' );
-```
-
-Network dashboard:
-
-```php
-/**
- * Add a widget to the network dashboard.
- *
- * This function is hooked into the 'wp_network_dashboard_setup' action below.
- */
-function wporg_add_network_dashboard_widgets() {
-	// Add function here
-}
-add_action( 'wp_network_dashboard_setup', 'wporg_add_network_dashboard_widgets' );
-```
-
-## Examples
-
-### Basic usage
-
-```php
-/**
- * Add a widget to the dashboard.
- *
- * This function is hooked into the 'wp_dashboard_setup' action below.
- */
-function wporg_add_dashboard_widgets() {
-	wp_add_dashboard_widget(
-		'wporg_dashboard_widget',                          // Widget slug.
-		esc_html__( 'Example Dashboard Widget', 'wporg' ), // Title.
-		'wporg_dashboard_widget_render'                    // Display function.
-	); 
-}
-add_action( 'wp_dashboard_setup', 'wporg_add_dashboard_widgets' );
-
-/**
- * Create the function to output the content of our Dashboard Widget.
- */
-function wporg_dashboard_widget_render() {
-	// Display whatever you want to show.
-	esc_html_e( "Howdy! I'm a great Dashboard Widget.", "wporg" );
-}
-```
-
-### Forcing your widget to the top
-
-Normally you should just let the users of your plugin put your Dashboard Widget wherever they want by dragging it around. There currently isn’t an easy API way to pre-sort the default widgets, meaning your new widget will always be at the bottom of the list. Until sorting is added to the API its a bit complicated to get around this problem.
-
-Below is an example hooking function that will try to put your widget before the default ones. It does so by manually altering the internal array of metaboxes (of which dashboard widgets are one type) and putting your widget at the top of the list so it shows first.
-
-```php
-function wporg_add_dashboard_widgets() {
-	wp_add_dashboard_widget( 
-		'wporg_dashboard_widget', 
-		esc_html__( 'Example Dashboard Widget', 'wporg' ), 
-		'wporg_dashboard_widget_function' 
-	);
-	
-	// Globalize the metaboxes array, this holds all the widgets for wp-admin.
-	global $wp_meta_boxes;
-	
-	// Get the regular dashboard widgets array 
-	// (which already has our new widget but appended at the end).
-	$default_dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
-	
-	// Backup and delete our new dashboard widget from the end of the array.
-	$example_widget_backup = array( 'example_dashboard_widget' => $default_dashboard['example_dashboard_widget'] );
-	unset( $default_dashboard['example_dashboard_widget'] );
- 
-	// Merge the two arrays together so our widget is at the beginning.
-	$sorted_dashboard = array_merge( $example_widget_backup, $default_dashboard );
- 
-	// Save the sorted array back into the original metaboxes. 
-	$wp_meta_boxes['dashboard']['normal']['core'] = $sorted_dashboard;
-}
-add_action( 'wp_dashboard_setup', 'wporg_add_dashboard_widgets' );
-```
-
-Unfortunately this only works for people who have never re-ordered their widgets. Once a user has done so their existing preferences will override this and they will have to move your widget to the top for it to stay there.
-
-### Removing default Dashboard Widgets
-
-In some situations, especially on multi-user blogs, it may be useful to completely remove widgets from the interface. Each individual user can, by default, turn off any given widget using the *[Screen Options](https://wordpress.org/support/article/administration-screens/#screen-options)* tab at the top, but if you have a lot of non-technical users it might be nicer for them to not see it at all.
-
-To remove dashboard widget, use the [remove\_meta\_box()](#reference/functions/remove_meta_box) function. See the example codes below for the required parameters.
-
-These are the names of the default widgets on the dashboard:
-
-```php
-// Main column (left): 
-// Browser Update Required
-$wp_meta_boxes['dashboard']['normal']['high']['dashboard_browser_nag']; 
-// PHP Update Required
-$wp_meta_boxes['dashboard']['normal']['high']['dashboard_php_nag']; 
-
-// At a Glance
-$wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now'];
-// Right Now
-$wp_meta_boxes['dashboard']['normal']['core']['network_dashboard_right_now'];
-// Activity
-$wp_meta_boxes['dashboard']['normal']['core']['dashboard_activity'];
-// Site Health Status
-$wp_meta_boxes['dashboard']['normal']['core']['dashboard_site_health'];
-
-// Side Column (right): 
-// WordPress Events and News
-$wp_meta_boxes['dashboard']['side']['core']['dashboard_primary'];
-// Quick Draft, Your Recent Drafts
-$wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']; 
-```
-
-Here is an example function that removes the QuickPress widget:
-
-```php
-// Create the function to use in the action hook
-function wporg_remove_dashboard_widget() {
-	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
-} 
-// Hook into the 'wp_dashboard_setup' action to register our function
-add_action( 'wp_dashboard_setup', 'wporg_remove_dashboard_widget' );
-```
-
-The example below removes all Dashboard Widgets:
-
-```php
-function wporg_remove_all_dashboard_metaboxes() {
-	// Remove Welcome panel
-	remove_action( 'welcome_panel', 'wp_welcome_panel' );
-	// Remove the rest of the dashboard widgets
-	remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
-	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
-	remove_meta_box( 'health_check_status', 'dashboard', 'normal' );
-	remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
-	remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
-}
-add_action( 'wp_dashboard_setup', 'wporg_remove_all_dashboard_metaboxes' );
-```
-
-### Adding Widgets in the right side
-
-The function doesn’t allow you to choose where you want your widget to go and will automatically add it to the “core” which is the left side. However you are able to get it on the right side very easily.
-
-You can use the [add\_meta\_box()](#reference/functions/add_meta_box) function instead of `wp_add_dashboard_widget`. Simply specify ‘dashboard’ in place of the $post\_type. For example:
-
-```php
-add_meta_box( 
-	'dashboard_widget_id', 
-	esc_html__( 'Dashboard Widget Title', 'wporg' ), 
-	'dashboard_widget', 
-	'dashboard', 
-	'side', 'high' 
-);
-```
-
-Or, after creating the widget:
-
-```php
-function wporg_add_dashboard_widget() {
-	wp_add_dashboard_widget( 
-		'wporg_dashboard_widget', 
-		esc_html__( 'Example Dashboard Widget', 'wporg' ), 
-		'wporg_dashboard_widget_function' 
-	);
-	
-	// Global the $wp_meta_boxes variable (this will allow us to alter the array).
-	global $wp_meta_boxes;
-
-	// Then we make a backup of your widget.
-	$wporg_widget = $wp_meta_boxes['dashboard']['normal']['core']['wporg_dashboard_widget'];
-
-	// We then unset that part of the array.
-	unset( $wp_meta_boxes['dashboard']['normal']['core']['wporg_dashboard_widget'] );
-
-	// Now we just add your widget back in.
-	$wp_meta_boxes['dashboard']['side']['core']['wporg_dashboard_widget'] = $wporg_widget;
-}
-add_action( 'wp_dashboard_setup', 'wporg_add_dashboard_widget' );
-```
-
-### Aggregating RSS feeds in the dashboard
-
-If you need to aggregate RSS in your widget you should take a look at the way the existing plugins are set up with caching in `<a href="https://core.trac.wordpress.org/browser/tags/5.2.1/src//wp-admin/includes/dashboard.php#L0">/wp-admin/includes/dashboard.php</a>`.
-
-## Widget Options
-
-WordPress does not provide a built-in way to fetch options for a specific widget. By default, you would need to use `<a href="#reference/functions/get_option">get_option( 'dashboard_widget_options' )</a>` to fetch all widget options and then filter the returned array manually. This section presents some functions that can easily be added to a theme or plugin to help getting and setting of widget options.
-
-### Getting Widget Options
-
-This function will fetch all widget options, or only options for a specified widget:
-
-```php
-
-/**
- * Gets all widget options, or only options for a specified widget if a widget id is provided.
- *
- * @param string $widget_id Optional. If provided, will only get options for that widget.
- * @return array An associative array
- */
-function wporg_get_dashboard_widget_options( $widget_id = '' ) {
-    // Fetch ALL dashboard widget options from the db
-    $options = get_option( 'dashboard_widget_options' );
- 
-    // If no widget is specified, return everything
-    if ( empty( $widget_id ) ) {
-        return $options;
-    }
- 
-    // If we request a widget and it exists, return it
-    if ( isset( $options[$widget_id] ) ) {
-        return $options[$widget_id];
-    }
- 
-    // Something went wrong...
-    return false;
-}
-```
-
-### Get a Single Widget Option
-
-If you want to easily fetch only a single option (for outputting to a theme), the following function will make that easier.
-
-This example should be used with the previous [Getting Widget Options](#apis/handbook/dashboard-widgets) example function.
-
-```php
-/**
- * Gets one specific option for the specified widget.
- * 
- * @param  string $widget_id Widget ID.
- * @param  string $option    Widget option.
- * @param  string $default   Default option.
- * 
- * @return string            Returns single widget option.
- */
-function wporg_get_dashboard_widget_option( $widget_id, $option, $default = NULL ) {
-	$options = wporg_get_dashboard_widget_options( $widget_id );
-
-	// If widget options don't exist, return false.
-	if ( ! $options ) {
-		return false;
-	}
-
-	// Otherwise fetch the option or use default
-	if ( isset( $options[$option] ) && ! empty( $options[$option] ) ) {
-		return $options[$option];
-	} else {
-		return ( isset( $default ) ) ? $default : false;
-	}
-}
-```
-
-### Update Widget Options
-
-This function can be used to easily update all of a widget’s options. It can also be used to add a widget option non-destructively. Simply set the $add\_option argument to true, and this will **NOT overwrite** any existing options (although it will add any missing ones).
-
-```php
-/**
- * Saves an array of options for a single dashboard widget to the database.
- * Can also be used to define default values for a widget.
- *
- * @param string $widget_id  The name of the widget being updated
- * @param array $args        An associative array of options being saved.
- * @param bool $add_only     Set to true if you don't want to override any existing options.
- */
-function update_dashboard_widget_options( $widget_id , $args = array(), $add_only = false ) {
-	// Fetch ALL dashboard widget options from the db...
-	$options = get_option( 'dashboard_widget_options' );
-
-	// Get just our widget's options, or set empty array.
-	$widget_options = ( isset( $options[$widget_id] ) ) ? $options[$widget_id] : array();
-
-	if ( $add_only ) {
-		// Flesh out any missing options (existing ones overwrite new ones).
-		$options[$widget_id] = array_merge( $args, $widget_options );
-	} else {
-		// Merge new options with existing ones, and add it back to the widgets array.
-		$options[$widget_id] = array_merge( $widget_options, $args );
-	}
-
-	// Save the entire widgets array back to the db.
-	return update_option( 'dashboard_widget_options', $options );
-}
-```
-
----
-
-# Database API <a name="apis/database" />
-
-Source: https://developer.wordpress.org/apis/database/
-
-## Overview
-
-This page lists all holistic pages of a given Database related API. Each covers the functions involved in and use of a given set of functionality. Together they form what might be called the **WordPress Database API**, which is the plugin/theme/add-on interface created by the entire WordPress project in respect to access data as named values stored in the database layer.
-
-If you’ve read through all of these you should have a good sense of how to extend WordPress through Plugins that do access the database in an easy way.
-
-## APIs
-
-- [Options API](#apis/handbook/options)
-- [Transients API](#apis/handbook/transients)
-- [Metadata API](#apis/handbook/metadata)
-
----
-
-# Filesystem <a name="apis/filesystem" />
-
-Source: https://developer.wordpress.org/apis/filesystem/
-
-## Overview
-
-The **Filesystem API**, added in [WordPress 2.6](/support/wordpress-version/version-2.6), was originally created for WordPress’ own automatic updates feature.
-
-The Filesystem API abstracts out the functionality needed for reading and writing local files to the filesystem to be done securely, on a variety of host types.
-
-It does this through the [WP\_Filesystem\_Base](#reference/classes/wp_filesystem_base) class, and several subclasses which implement different ways of connecting to the local filesystem, depending on individual host support.
-
-Any theme or plugin that needs to write files locally should do so using the `WP_Filesystem` family of classes.
-
-## Purpose
-
-Different hosting systems have different limitations in the way that their webservers are configured.
-
-In particular, many hosting systems have the webserver running as a different user than the owner of the WordPress files. When this is the case, a process writing files from the webserver user will have the resulting files owned by the webserver’s user account instead of the actual user’s account. This can lead to a security problem in shared hosting situations, where multiple users are sharing the same webserver for different sites.
-
-`WP_Filesystem` is capable of detecting when the users for written files will not match, and switches to a method using FTP or similar instead. Depending on the available PHP libraries, [WP\_Filesystem](#reference/functions/wp_filesystem) supports three different methods of using FTP (via extension, sockets, or over-SSH) and will automatically choose the correct method.
-
-In such a case, the plugin or theme implementing this code needs to request FTP credentials from the user. Functions have been added to make this easy to do and to standardize the look and feel of the credentials entry form.
-
-## Filesystem API Class Reference
-
-- Class: [WP\_Filesystem\_Base](#reference/classes/wp_filesystem_base)
-- Class: [WP\_Filesystem\_Direct](#reference/classes/wp_filesystem_direct)
-- Class: [WP\_Filesystem\_FTPext](#reference/classes/wp_filesystem_ftpext)
-- Class: [WP\_Filesystem\_ftpsocket](#reference/classes/wp_filesystem_ftpsockets)
-- Class: [WP\_Filesystem\_SSH2](#reference/classes/wp_filesystem_ssh2)
-- Function: [request\_filesystem\_credentials()](#reference/functions/request_filesystem_credentials)
-
-## Getting Credentials
-
-The first step in using the WP\_Filesystem is requesting credentials from the user. The normal way this is accomplished is at the time when you’re saving the results of a form input, or you have otherwise determined that you need to write to a file.
-
-The credentials form can be displayed onto an admin page by using the following code:
-
-```php
-$url = wp_nonce_url( 'themes.php?page=example', 'example-theme-options' );
-if ( false === ( $creds = request_filesystem_credentials( $url, '', false, false, null ) ) ) {
-	return; // stop processing here
-}
-```
-
-The [request\_filesystem\_credentials()](#reference/functions/request_filesystem_credentials) call takes five arguments.
-
-- The URL to which the form should be submitted (a nonced URL to a theme page was used in the example above)
-- A method override (normally you should leave this as the empty string: “”)
-- An error flag (normally false unless an error is detected, see below)
-- A context directory (false, or a specific directory path that you want to test for access)
-- Form fields (an array of form field names from your previous form that you wish to “pass-through” the resulting credentials form, or null if there are none)
-
-The `request_filesystem_credentials` call will test to see if it is capable of writing to the local filesystem directly without credentials first. If this is the case, then it will return true and not do anything. Your code can then proceed to use the `WP_Filesystem` class.
-
-The `request_filesystem_credentials` call also takes into account hardcoded information, such as hostname or username or password, which has been inserted into the `wp-config.php` file using defines. If these are pre-defined in that file, then this call will return that information instead of displaying a form, bypassing the form for the user.
-
-If it does need credentials from the user, then it will output the FTP information form and return false. In this case, you should stop processing further, in order to allow the user to input credentials. Any form fields names you specified will be included in the resulting form as hidden inputs, and will be returned when the user resubmits the form, this time with FTP credentials.
-
-Note: Do not use the reserved names of `hostname`, `username`, `password`, `public_key`, or `private_key` for your own inputs. These are used by the credentials form itself. Alternatively, if you do use them, the `request_filesystem_credentials` function will assume that they are the incoming FTP credentials.
-
-When the credentials form is submitted, it will look in the incoming POST data for these fields, and if found, it will return them in an array suitable for passing to WP\_Filesystem, which is the next step.
-
-## Initializing [WP\_Filesystem\_Base](#reference/classes/wp_filesystem_base)
-
-Before the WP\_Filesystem can be used, it must be initialized with the proper credentials. This can be done like so:
-
-```php
-if ( ! WP_Filesystem( $creds ) ) {
-	request_filesystem_credentials( $url, '', true, false, null );
-	return;
-}
-```
-
-First you call the `WP_Filesystem` function, passing it the credentials from before. It will then attempt to verify the credentials. If they are good, then it will return true. If not, then it will return false.
-
-In the case of bad credentials, the above code then makes another call to `request_filesystem_credentials()`, but this time with the error flag set to true. This forces the function to display the form again, this time with an error message for the user saying that their information was incorrect. The user can then re-enter their information and try again.
-
-## Using the [WP\_Filesystem\_Base](#reference/classes/wp_filesystem_base) Class
-
-Once the class has been initialized, then the global `$wp_filesystem` variable becomes defined and available for you to use. The `WP_Filesystem_Base` class defines several methods you can use to read and write local files. For example, to write a file, you could do this:
-
-```php
-global $wp_filesystem;
-$wp_filesystem->put_contents(
-  '/tmp/example.txt',
-  'Example contents of a file',
-  FS_CHMOD_FILE // predefined mode settings for WP files
-);
-```
-
-Other available methods include `get_contents()` and `get_contents_array()` to read files; `wp_content_dir()`, `wp_plugins_dir()`, and `wp_themes_dir()` which will return the filesystem paths to those directories; `mkdir()` and `rmdir()` to make and remove directories; along with several other handy filesystem related functions.
-
-## Tips and Tricks
-
-**When can you call `request_filesystem_credentials()`?**  
-One of the initial challenges for developers using the WP Filesystem API is you cannot initialize it just anywhere. The `request_filesystem_credentials()` function isn’t available until AFTER the `wp_loaded` action hook, and is only included in the admin area. One of the earliest hooks you can utilize is admin\_init.
-
-**The WP Filesystem API Methodology**  
-Another problem with calling `request_filesystem_credentials()` directly is you cannot determine if you will have direct access to the file system or if the user will be prompted for credentials. From a UX standpoint this becomes problematic if you want to make changes to files when a plugin is activated. Just imagine, a user goes to install your plugin via their admin area, enters their FTP details, completes the installation and activates your plugin. But as soon as they do, they are prompted to enter their FTP details again and are left scratching their head as to why.
-
-A better solution is to add a notice (using admin\_notice for instance) that explains to the user that your plugin needs to write to the file system to complete the installation. Along with that notice, you would add a button or link which triggers your function call to `request_filesystem_credentials()`.
-
-But let’s expand on this scenario further and say this plugin needs to access the file system every time the plugin updated. If you’re regularly releasing updates and bug fixes, it soon becomes tenuous for users to click your actionable button every time they upgrade. What would be nice is to determine if we have direct write access before calling `request_filesystem_credentials()` and silently do the installation. That’s where the `get_filesystem_method()` function comes into play.
-
-```php
-$access_type = get_filesystem_method();
-if ( $access_type === 'direct' )
-{
-	/* you can safely run request_filesystem_credentials() without any issues and don't need to worry about passing in a URL */
-	$creds = request_filesystem_credentials( site_url() . '/wp-admin/', '', false, false, array() );
-	/* initialize the API */
-	if ( ! WP_Filesystem( $creds ) ) {
-		/* any problems and we exit */
-		return false;
-	}	
-	global $wp_filesystem;
-	/* do our file manipulations below */
-}	
-else
-{
-	/* don't have direct write access. Prompt user with our notice */
-	add_action( 'admin_notices', 'you_admin_notice_function' ); 	
-}
-```
-
-This approach works well for all involved. Users who don’t have direct write permissions get prompted to make changes to the file system, while the plugin goes unnoticed (in a good way) on sites who can directly write to the file system.
-
-**Working with Paths**  
-WordPress developers worth their salt should be familiar with setting up constants or variables to access their plugin’s path. It usually looks like this:
-
-```php
-define( 'MY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) ); 
-```
-
-What you need to take into consideration when working with the Filesystem API is the path to the files won’t always be the same. When using the direct method you can safely use the `MY_PLUGIN_DIR` constant, but if you tried to do the same when the FTP or SSH method is used then you can run into problems. This is because FTP and SSH are usually rooted to a directory somewhere along the absolute path. Now, the Filesystem API gives us ways of overcoming this problem with methods like `$wp_filesystem->wp_content_dir()` and `$wp_filesystem->wp_plugins_dir()`, but it isn’t practical to define the path to your plugin twice.
-
-```php
-/* replace the 'direct' absolute path with the Filesystem API path */
- $plugin_path = str_replace( ABSPATH, $wp_filesystem->abspath(), MY_PLUGIN_DIR );
-/* Now we can use $plugin_path in all our Filesystem API method calls */
-if ( ! $wp_filesystem->is_dir( $plugin_path . '/config/' ) ) {
-	/* directory didn't exist, so let's create it */
-	$wp_filesystem->mkdir( $plugin_path . '/config/' );
-}
-```
-
-**`unzip_file($file, $to);`**
-
-While this function requires the Filesystem API to be initialized, it isn’t a method of the `$wp_filesystem` object, which might be why its arguments are at odds with each other. The first parameter, `$file`, needs to be the absolute ‘direct’ path to the file, while the `$toparameter` needs to point to the absolute path of the Filesystem.
-
-```php
-define( 'MY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) ); 
-global $wp_filesystem; // already initialised the Filesystem API previously
-$plugin_path = str_replace( ABSPATH, $wp_filesystem->abspath(), MY_PLUGIN_DIR ); // get remote system absolute path
-/* Acceptable way to use the function */
-$file = MY_PLUGIN_DIR . '/plugin-file.zip'; 
-$to = $plugin_path;
-$result = unzip_file( $file, $to ); 
-if ( $result !== true ) {
-	// unzip failed. Handle Error
-}
-/* Not acceptable */
-$file = MY_PLUGIN_DIR . '/plugin-file.zip';
-$to = MY_PLUGIN_DIR; // $to cannot be the 'direct' absolute path to the folder otherwise FTP and SSH methods are left in the cold
-unzip_file( $file, $to ); 
-$file = $plugin_path . '/plugin-file.zip'; // If $file isn't the 'direct' absolute path then users not using FTP and SSH methods are left in the cold
-$to = $plugin_path;
-unzip_file( $file, $to );
-```
-
-## External references
-
-- [Tutorial: Using the WP\_Filesystem](http://ottopress.com/2011/tutorial-using-the-wp_filesystem/) by Otto
-- [Filesystem Debug Helper Plugin](https://github.com/eventespresso/filesystem-debug-helper)
-
----
-
-# Global Variables <a name="apis/global-variables" />
-
-Source: https://developer.wordpress.org/apis/global-variables/
-
-## Introduction
-
-WordPress-specific global variables are used throughout WordPress code for various reasons. Almost all data that WordPress generates can be found in a global variable.
-
-Note that it’s best to use the appropriate API functions when available, instead of modifying globals directly.
-
-To access a global variable in your code, you first need to globalize the variable with `global $variable;`.
-
-**Accessing other globals besides the ones listed below is not recommended.**
-
-### Inside the Loop variables
-
-While inside the loop, these globals are set, containing information about the current post being processed.
-
-- `$post` ([WP\_Post](#reference/classes/wp_post)): The post object for the current post. Object described in [WP\_Post Class Reference](#reference/classes/wp_post).
-- `$posts`: Used by some core functions, not to be mistaken for `$query->$posts`.
-- `$authordata` ([WP\_User](#reference/classes/wp_user)): The author object for the current post. Object described in [WP\_User Class Reference](#reference/classes/wp_user).
-- `$currentday` (string): Day that the current post was published.
-- `$currentmonth` (string): Month that the curent post was published.
-- `$page` (int): The page of the current post being viewed. Specified by the query var page.
-- `$pages` (array): The content of the pages of the current post. Each page elements contains part of the content separated by the `<!--nextpage-->` tag.
-- `$multipage` (boolean): Flag to know if the current post has multiple pages or not. Returns `true` if the post has multiple pages, related to `$pages`.
-- `$more` (boolean): Flag to know if WordPress should enforce the `<!--more-->` tag for the current post. WordPress will not enforce the more tag if `true`.
-- `$numpages` (int): Returns the number of pages in the post, related to `$pages`.
-
-### Browser Detection Booleans
-
-These globals store data about which browser the user is on.
-
-- `$is_iphone` (boolean): iPhone Safari
-- `$is_chrome` (boolean): Google Chrome
-- `$is_safari` (boolean): Safari
-- `$is_NS4` (boolean): Netscape 4
-- `$is_opera` (boolean): Opera
-- `$is_macIE` (boolean): Mac Internet Explorer
-- `$is_winIE` (boolean): Windows Internet Explorer
-- `$is_gecko` (boolean): FireFox
-- `$is_lynx` (boolean): Lynx
-- `$is_IE` (boolean): Internet Explorer
-- `$is_edge` (boolean): Microsoft Edge
-
-### Web Server Detection Booleans
-
-These globals store data about which web server WordPress is running on.
-
-- `$is_apache` (boolean): Apache HTTP Server
-- `$is_IIS` (boolean): Microsoft Internet Information Services (IIS)
-- `$is_iis7` (boolean): Microsoft Internet Information Services (IIS) v7.x
-- `$is_nginx` (boolean): Nginx web server
-
-### Version Variables
-
-- `$wp_version` (string): The installed version of WordPress
-- `$wp_db_version` (int): The version number of the database
-- `$tinymce_version` (string): The installed version of TinyMCE
-- `$manifest_version` (string): The cache manifest version
-- `$required_php_version` (string): The version of PHP this install of WordPress requires
-- `$required_mysql_version` (string): The version of MySQL this install of WordPress requires
-
-### Misc
-
-- `$super_admins` (array): An array of user IDs that should be granted super admin privileges (multisite). This global is only set by the site owner (e.g., in `wp-config.php`), and contains an array of IDs of users who should have super admin privileges. If set it will override the list of super admins in the database.
-- `$wp_query` (object): The global instance of the [WP\_Query](#reference/classes/wp_query) class.
-- `$wp_rewrite` (object): The global instance of the [WP\_Rewrite](#reference/classes/wp_rewrite) class.
-- `$wp` (object): The global instance of the [WP](#reference/classes/wp) environment setup class.
-- `$wpdb` (object): The global instance of the [wpdb](#reference/classes/wpdb) class.
-- `$wp_locale` (object): The global instance of the [WP\_Locale](#reference/classes/wp_locale) class.
-- `$wp_admin_bar` (object): The global instance of the [WP\_Admin\_Bar](#reference/classes/wp_admin_bar) class.
-- `$wp_roles` (object): The global instance of the [WP\_Roles](#reference/classes/wp_roles) class.
-- `$wp_meta_boxes` (array): Object containing all registered metaboxes, including their id’s, args, callback functions and title for all post types including custom.
-- `$wp_registered_sidebars` (array)
-- `$wp_registered_widgets` (array)
-- `$wp_registered_widget_controls` (array)
-- `$wp_registered_widget_updates` (array)
-
-### Admin Globals
-
-- `$pagenow` (string): Used in wp-admin.   
-    See also [get\_current\_screen()](#reference/functions/get_current_screen) for the WordPress Admin Screen API.
-- `$post_type` (string): Used in wp-admin
-- `$allowedposttags` (array)
-- `$allowedtags` (array)
-- `$menu` (array)
-
----
-
-# Metadata <a name="apis/metadata" />
-
-Source: https://developer.wordpress.org/apis/metadata/
-
-## Overview
-
-The **Metadata API** is a simple and standarized way for retrieving and manipulating metadata of various WordPress object types.
-
-Metadata for an object is a represented by a simple key-value pair.
-
-Objects may contain multiple metadata entries that share the same key and differ only in their value.
-
-## Function Reference
-
-Add/Delete Metadata:
-
-- [add\_metadata()](#reference/functions/add_metadata)
-- [delete\_metadata()](#reference/functions/delete_metadata)
-
-Get/Update Metadata:
-
-- [get\_metadata()](#reference/functions/get_metadata)
-- [update\_metadata()](#reference/functions/update_metadata)
-
-## Database Requirements
-
-This function assumes that a dedicated MySQL table exists for the `$meta_type` you specify. Some desired `$meta_types` do not come with pre-installed WordPress tables, and so they must be created manually.
-
-### Default Meta Tables
-
-Assuming a prefix of `wp_`, WordPress’s included meta tables are:
-
-- `wp_commentmeta`: Metadata for specific comments.
-- `wp_postmeta`: Metadata for pages, posts, and all other post types.
-- `wp_usermeta`: Metadata for users.
-
-### Meta Table Structure
-
-To store data for meta types not included in the above table list, a new table needs to be created. All meta tables require four columns.
-
-- `meta_id` – BIGINT(20): unsigned, auto\_increment, not null, primary key.
-- `object_id` – BIGINT(20): unsigned, not null.  
-    Replace *object* with the singular name of the content type being used.  
-    For instance, this column might be named post\_id or term\_id.  
-    Although this column is used like a foreign key, it should not be defined as one.
-- `meta_key` – VARCHAR(255): The key of your custom meta data.
-- `meta_value` – LONGTEXT: The value of your custom meta data.
-
-## Source File
-
-Metadata API is located in `<a href="https://core.trac.wordpress.org/browser/tags/5.2.1/src/wp-includes/meta.php#L0">wp-includes/meta.php</a>`.
-
-## Related
-
-****Metadata API****: [add\_metadata()](#reference/functions/add_metadata), [get\_metadata()](#reference/functions/get_metadata), [update\_metadata()](#reference/functions/update_metadata), [delete\_metadata()](#reference/functions/delete_metadata).
-
----
-
-# Options <a name="apis/options" />
-
-Source: https://developer.wordpress.org/apis/options/
-
-## Overview
-
-The **Options API** is a simple and standardized way of storing data in the database. The API makes it easy to create, access, update, and delete options. All the data is stored in the [wp\_options table](#apis/handbook/database) under a given custom name.
-
-This page contains the technical documentation needed to use the Options API. A list of default options can be found in the [Option Reference](https://codex.wordpress.org/Option_Reference) (link to Codex version, waiting for content migration to HelpHub).
-
-Note that the `_site_` functions are essentially the same as their counterparts. The only differences occur for WP Multisite, when the options apply network-wide and the data is stored in the [wp\_sitemeta](#apis/handbook/database) table under the given custom name.
-
-## Function Reference
-
-**Add/Delete Option**:
-
-- [add\_option()](#reference/functions/add_option)
-- [delete\_option()](#reference/functions/delete_option)
-- [add\_site\_option()](#reference/functions/add_site_option)
-- [delete\_site\_option()](#reference/functions/delete_site_option)
-
-**Get/Update Option:**
-
-- [get\_option()](#reference/functions/get_option)
-- [update\_option()](#reference/functions/update_option)
-- [get\_site\_option()](#reference/functions/get_site_option)
-- [update\_site\_option()](#reference/functions/update_site_option)
-
-## Examples
-
-```php
-// Create an option to the database
-add_option( $option, $value = , $deprecated = , $autoload = 'yes' );
-
-// Removes option by name.
-delete_option( $option );
-
-// Fetch a saved option
-get_option( $option, $default = false );
-
-// Update the value of an option that was already added.
-update_option( $option, $newvalue );
-```
-
-## Available options by category
-
-### Discussion
-
-- `blacklist_keys`: When a comment contains any of these words in its content, name, URL, e-mail, or IP, it will be marked as spam. One word or IP per line. It will match inside words, so “press” will match “WordPress.”  
-    Default: NULL  
-    *Data type:***String (possibly multi-line)**
-- `comment_max_links`: Hold a comment in the queue if it contains the value of this option or more.  
-    Default: 2  
-    *Data type:***Integer**
-- `comment_moderation`: Before a comment appears, an administrator must always approve the comment.  
-    **1** : *Yes*  
-    0 : *False* (default)  
-    *Data type:***Integer**
-- `comments_notify`: E-mail me when anyone posts a comment.  
-    **1** : *Yes* (default)  
-    0 : *No*  
-    *Data type:***Integer**
-- `default_comment_status`: Allow comments (can be overridden with individual posts)  
-    **open** : *Allow comments* (default)  
-    **closed** : *Disallow comments*  
-    *Data type:***String**
-- `default_ping_status`: Allow link notifications from other blogs (pingbacks and trackbacks).  
-    **open** : *Allow pingbacks and trackbacks from other blogs* (default)  
-    **closed** : *Disallow pingbacks and trackbacks from other blogs*  
-    *Data type:***String**
-- `default_pingback_flag`: Attempt to notify any blogs linked to from the article (slows down posting).  
-    **1** : *Yes* (default)  
-    0 : *No*  
-    *Data type:***Integer**
-- `moderation_keys`: When a comment contains any of these words in its content, name, URL, e-mail, or IP, it will be held in the moderation queue. One word or IP per line. It will match inside words, so “press” will match “WordPress.”  
-    Default: NULL  
-    *Data type:***String (possibly multi-line)**
-- `moderation_notify`: E-mail me when a comment is held for moderation.  
-    **1** : *Yes* (default)  
-    0 : *No*  
-    *Data type:***Integer**
-- `require_name_email`: Before a comment appears, the comment author must fill out his/her name and email.  
-    **1** : *Yes* (default)  
-    0 : *No*  
-    *Data type:***Integer**
-- `thread_comments`: Enable WP-native threaded (nested) comments.  
-    **1** : *Yes*  
-    0 : *No* (default)  
-    *Data type:***Integer**
-- `thread_comments_depth`: Set the number of threading levels for comments.  
-    **1** thru   
-    **10** : levels  
-    Default: 5  
-    *Data type:***Integer**
-- `show_avatars`: Avatar Display  
-    **1** : (default) *Show Avatars*  
-    0 : *Do not show Avatars*  
-    *Data type:***Integer**
-- `avatar_rating`: Maximum Rating  
-    **G** : (default) *Suitable for all audiences*  
-    **PG** : *Possibly offensive, usually for audiences 13 and above*  
-    **R** : *Intended for adult audiences above 17*  
-    **X** : *Even more mature than above*  
-    *Data type:***String**
-- `avatar_default`: Default Avatar  
-    **mystery** : (default) *Mystery Man*  
-    **blank** : *Blank*  
-    **gravatar\_default** : *Gravatar Logo*  
-    **identicon** : *Identicon (Generated)*  
-    **wavatar** : *Wavatar (Generated)*  
-    **monsterid** : *MonsterID (Generated)*  
-    **retro** : *Retro (Generated)*  
-    *Data type:***String**
-- `close_comments_for_old_posts`: Automatically close comments on old articles  
-    **1** : *Yes*  
-    0 : *No* (default)  
-    *Data type:***Integer**
-- `close_comments_days_old`: Automatically close comments on articles older than x days  
-    Default: 14  
-    *Data type:***Integer**
-- `show_comments_cookies_opt_in`: Show the cookies opt-in checkbox on the comment form and enable comment cookies  
-    **1** : *Yes* (default as of 4.9.8)  
-    0 : *No*  
-    *Data type:***Integer**
-- `page_comments`: Break comments into pages  
-    **1** : *Yes* (default)  
-    0 : *No*  
-    *Data type:***Integer**
-- `comments_per_page`:  
-    Default: 50  
-    *Data type:***Integer**
-- `default_comments_page`:  
-    Default: ‘newest’  
-    *Data type:***String**
-- `comment_order`:  
-    **asc** : (default)  
-    **desc** :  
-    *Data type:***String**
-- `comment_whitelist`: Comment author must have a previously approved comment  
-    **1** : *Yes* (default)  
-    0 : *No*  
-    *Data type:*
-
-### General
-
-- `admin_email`: Administrator email  
-    Default: ‘you@example.com’  
-    *Data type:***String**
-- `blogdescription`: Blog tagline  
-    Default: ‘\_\_(‘Just another WordPress weblog’)’  
-    *Data type:***String**
-- `blogname`: Blog title  
-    Default: ‘\_\_(‘My Blog’)’  
-    *Data type:***String**
-- `comment_registration`: Users must be registered and logged in to comment  
-    **1** : *Yes*  
-    0 : *No* (default)  
-    *Data type:***Integer**
-- `date_format`: Default date format  
-    Default: ‘\_\_(‘F j, Y’)’  
-    *Data type:***String**
-- `default_role`: The default role of users who register at the blog.  
-    **subscriber** (default)  
-    **administrator**  
-    **editor**  
-    **author**  
-    **contributor**  
-    *Data type:***String**
-- `gmt_offset`: Times in the blog should differ by this value.  
-    **-6** : *GMT -6 (aka Central Time, USA)*  
-    0 : *GMT (aka Greenwich Mean Time)*  
-    Default: [date](http://www.php.net/manual/en/function.date.php)(‘Z’) / 3600  
-    *Data type:***Integer**
-- `home`: Blog address (URL)  
-    Default: [wp\_guess\_url()](#reference/functions/wp_guess_url)   
-    *Data type:***String (URI)**
-- `siteurl`: WordPress address (URL)  
-    Default `wp_guess_url()`  
-    *Data type:***String (URI)**
-- `start_of_week`: The starting day of the week.  
-    0 : *Sunday*  
-    **1** : *Monday* (default)  
-    **2** : *Tuesday*  
-    **3** : *Wednesday*  
-    **4** : *Thursday*  
-    **5** : *Friday*  
-    **6** : *Saturday*  
-    *Data type:***Integer**
-- `time_format`: Default time format  
-    Default: ‘\_\_(‘g:i a’)’  
-    *Data type:***String**
-- `timezone_string`: Timezone  
-    Default: NULL  
-    *Data type:***String**
-- `users_can_register`: Anyone can register  
-    **1** : *Yes*  
-    0 : *No* (default)  
-    *Data type:***Integer**
-
-### Links
-
-- `links_updated_date_format`:  
-    Default `__('F j, Y g:i a')`  
-    *Data type:***String**
-- `links_recently_updated_prepend`:  
-    Default empty  
-    *Data type: **String***
-- `links_recently_updated_append`  
-    *Default* empty  
-    *Data type:***String**
-- `links_recently_updated_time`  
-    Default: 120  
-    *Data type:***Integer**
-
-### Media
-
-- `thumbnail_size_w`:  
-    Default: 150  
-    *Data type:***Integer**
-- `thumbnail_size_h`:  
-    Default: 150  
-    *Data type:***Integer**
-- `thumbnail_crop`: Crop thumbnail to exact dimensions (normally thumbnails are proportional)  
-    **1** : *Yes* (default)  
-    0 : *No*  
-    *Data type:***Integer**
-- `medium_size_w`:   
-    Default: 300  
-    *Data type:***Integer**
-- `medium_size_h`  
-    Default: 300  
-    *Data type:***Integer**
-- `large_size_w`  
-    Default: 1024  
-    *Data type:***Integer**
-- `large_size_h`  
-    Default: 1024  
-    *Data type:***Integer**
-- `embed_autourls`: Attempt to automatically embed all plain text URLs  
-    Default: 1  
-    *Data type:***Integer**
-- `embed_size_w`  
-    Default: NULL  
-    *Data type:***Integer**
-- `embed_size_h`  
-    Default: 600  
-    *Data type:***Integer**
-
-### Miscellaneous
-
-- `hack_file`: Use legacy `my-hacks.php` file support  
-    **1** : *Yes*  
-    0 : *No* (default)  
-    *Data type:***Integer**
-- `html_type`: Default MIME type for blog pages (text/html, text/xml+html, etc.)  
-    Default: ‘text/html’  
-    *Data type:***String (MIME type)**
-- `secret`: Secret value created during installation used with salting, etc.  
-    Default: wp\_generate\_password(64)  
-    *Data type:***String (MD5)**
-- `upload_path`: Store uploads in this folder (relative to the WordPress root)  
-    Default: NULL  
-    *Data type:***String (relative path)**
-- `upload_url_path`: URL path to upload folder (will be blank by default – Editable in “All Settings” Screen.  
-    *Data type:***String (URL path)**
-- `uploads_use_yearmonth_folders`: Organize my uploads into month- and year-based folders  
-    **1** : *Yes* (default)  
-    0 : *No* (default for safe mode)  
-    *Data type:***Integer**
-- `use_linksupdate`: Track links’ update times  
-    **1** : *Yes*  
-    0 : *No* (default)  
-    *Data type:***Integer**
-
-### Permalinks
-
-- `permalink_structure`: The desired structure of your blog’s permalinks. Some examples:  
-    `/%year%/%monthnum%/%day%/%postname%/`: Date and name based  
-    `/archives/%post_id%/`: Numeric  
-    `/%postname%/`: Post name-based  
-    Default: NULL  
-    *Data type:***String**
-- `category_base`: The default category base of your blog categories permalink.  
-    Default: NULL  
-    *Data type:***String**
-- `tag_base`: The default tag base for your blog tags permalink.  
-    Default: NULL  
-    *Data type:***String**
-
-### Privacy
-
-- `blog_public`:  
-    **1** : *I would like my blog to be visible to everyone, including search engines (like Google, Sphere, Technorati) and archivers.* (default)  
-    0 : *I would like to block search engines, but allow normal visitors.*  
-    *Data type:***Integer**
-
-### Reading
-
-- `blog_charset`: Encoding for pages and feeds. The character encoding you write your blog in (UTF-8 is recommended).  
-    Default: `UTF-8`  
-    *Data type:***String**
-- `gzipcompression`: WordPress should compress articles (with gzip) if browsers ask for them.  
-    **1** : *Yes*  
-    0 : *No* (default)  
-    *Data type:***Integer**
-- `page_on_front`: The ID of the page that should be displayed on the front page. Requires `show_on_front`‘s value to be **page**.  
-    *Data type:***Integer**
-- `page_for_posts`: The ID of the page that displays posts. Useful when `show_on_front`‘s value is **page**.  
-    *Data type:***Integer**
-- `posts_per_page`: Show at most **x** many posts on blog pages.  
-    Default: 10  
-    *Data type:***Integer**
-- `posts_per_rss`: Show at most **x** many posts in RSS feeds.  
-    Default: 10  
-    *Data type:***Integer**
-- `rss_language`: Language for RSS feeds (metadata purposes only)  
-    Default: `en`  
-    *Data type:***String (ISO two-letter language code)**
-- `rss_use_excerpt`: Show an excerpt instead of the full text of a post in RSS feeds  
-    **1** : *Yes*  
-    0 : *No* (default)  
-    *Data type:***Integer**
-- `show_on_front`: What to show on the front page  
-    **posts** : *Your latest posts* (default)  
-    **page** : *A static page (see page\_on\_front)*  
-    *Data type:***String**
-
-### Themes
-
-- `template`: The slug of the currently activated theme (how it is accessed by path, ex. `/wp-content/themes/my-theme` (`my-theme` would be the value of this option).  
-    Default: ‘default’  
-    *Data type:***String**
-- `stylesheet`: The slug of the currently activated stylesheet (style.css) (how it is accessed by path, ex. `/wp-content/themes/my-style` (my-style would be the value of this option)  
-    Default: ‘default’  
-    *Data type:***String**
-
-### Writing
-
-- `default_category`: ID of the category that posts will be put in by default  
-    Default: 1  
-    *Data type:***Integer**
-- `default_email_category`: ID of the category that posts will be put in by default when written via e-mail  
-    Default: 1  
-    *Data type:***Integer**
-- `default_link_category`: ID of the category that links will be put in by default  
-    Default: 2  
-    *Data type:***Integer**
-- `default_post_edit_rows`: Size of the post box (in lines)  
-    Default: 10  
-    *Data type:***Integer**
-- `mailserver_login`: Mail server username for posting to WordPress by e-mail  
-    Default: ‘login@example.com’  
-    *Data type:***String**
-- `mailserver_pass`: Mail server password for posting to WordPress by e-mail  
-    Default: ‘password’  
-    *Data type:***String**
-- `mailserver_port`: Mail server port for posting to WordPress by e-mail  
-    Default: 110  
-    *Data type:***Integer**
-- `mailserver_url`: Mail server for posting to WordPress by e-mail  
-    Default: ‘mail.example.com’  
-    *Data type:***String**
-- `ping_sites`: When you publish a new post, WordPress automatically notifies the following site update services. For more about this, see [Update Services](https://codex.wordpress.org/Update_Services). Separate multiple service URLs with line breaks. Requires `blog_public` to have a value of **1**.  
-    Default: ‘[http://rpc.pingomatic.com/’](http://rpc.pingomatic.com/')  
-    *Data type:***String (possibly multi-line)**
-- `use_balanceTags`: Correct invalidly-nested XHTML automatically  
-    **1** : *Yes*  
-    0 : *No* (default)  
-    *Data type:***Integer**
-- `use_smilies`: Convert emoticons like `:-)` and `:P` to graphics when displayed  
-    **1** : *Yes* (default)  
-    0 : *No*  
-    *Data type:***Integer**
-- `use_trackback`: Enable sending and receiving of trackbacks  
-    **1** : *Yes*  
-    0 : *No* (default)
-- `enable_app`: Enable the Atom Publishing Protocol  
-    **1** : *Yes*  
-    0 : *No* (default)  
-    *Data type:***Integer**
-- `enable_xmlrpc`: Enable the WordPress, Movable Type, MetaWeblog and Blogger XML-RPC publishing protocols  
-    **1** : *Yes*  
-    0 : *No* (default)  
-    *Data type:***Integer**
-
-### Uncategorized
-
-- `active_plugins`: Returns an array of strings containing the path of the *main* php file of the plugin. The path is relative to the *plugins* folder. An example of path in the array : `/mainpage.php`.  
-    Default: array()  
-    *Data type:***Array**
-- `advanced_edit`:   
-    Default: 0  
-    *Data type:***Integer**
-- `recently_edited`:   
-    Default: NULL  
-    *Data type:*
-- `image_default_link_type`:   
-    Default: ‘file’  
-    *Data type:* ‘file’, ‘none’
-- `image_default_size`:   
-    Default: NULL  
-    *Data type:* ‘thumbnail’, ‘medium’, ‘large’ or Custom size
-- `image_default_align`:   
-    Default: NULL  
-    *Data type:* ‘left’, ‘right’, ‘center’, ‘none’
-- `sidebars_widgets`: Returns array of sidebar states (list of active and inactive widgets).  
-    Default:  
-    *Data type:***Array**
-- `sticky_posts`:   
-    Default: array()  
-    *Data type:*
-- `widget_categories`:  
-    Default: array()  
-    *Data type:*
-- `widget_text`:  
-    Default: array()  
-    *Data type:*
-- `widget_rss`:  
-    Default: array()  
-    *Data type:*
-
-## All Settings Screen
-
-[WordPress 3.0](https://wordpress.org/documentation/wordpress-version/version-3-0/) removed Settings &gt; Miscellaneous screen and some of the options cannot be reached (e.g. `upload_url_path`). You may use the All Settings Screen to view and change almost all options listed above. It is accessible by visiting `/wp-admin/options.php`
-
-![](https://i0.wp.com/developer.wordpress.org/files/2019/08/all-settings-screen.png?resize=1024%2C640&ssl=1)
-
----
-
-# Plugins <a name="apis/plugins" />
-
-Source: https://developer.wordpress.org/apis/plugins/
-
-Refer [Plugin Developer Handbook](#plugins).
-
----
-
-# Quicktags <a name="apis/quicktags" />
-
-Source: https://developer.wordpress.org/apis/quicktags/
-
-## Description
-
-The Quicktags API allows you to include additional buttons in the Text (HTML) mode of the WordPress Classic editor.
-
-![](https://i0.wp.com/developer.wordpress.org/files/2019/08/quicktags-editor.png?resize=550%2C90&ssl=1)## History
-
-This API was introduced in [WordPress 3.3](/support/wordpress-version/version-3-3).
-
-## Usage
-
-```js
-QTags.addButton( id, display, arg1, arg2, access_key, title, priority, instance, object );
-```
-
-## Parameters
-
-- `<strong>id</strong>` **(*****string*****) (*****required*****):** The html id for the button. Default: *None*
-- `<strong>display</strong>` **(*****string*****) (*****required*****):** The html value for the button. Default: *None*
-- `<strong>arg1</strong>` **(*****string*****) (*****required*****):** Either a starting tag to be inserted like “&lt;span&gt;” or a callback that is executed when the button is clicked. Default: *None*
-- `<strong>arg2</strong>` **(*****string*****) (*****optional*****):** Ending tag like “&lt;/span&gt;”. Leave empty if tag doesn’t need to be closed (i.e. “&lt;hr /&gt;”). Default: *None*
-- `<strong>access_key</strong>` **(*****string*****) (*****optional*****):** **Deprecated and Not used.** Shortcut access key for the button. Default: *None*
-- `<strong>title</strong>` **(*****string*****) (*****optional*****):** The html title value for the button. Default: *None*
-- `<strong>priority</strong>` **(*****int*****) (*****optional*****):** A number representing the desired position of the button in the toolbar. 1 – 9 = first, 11 – 19 = second, 21 – 29 = third, etc. Default: *None*
-- `<strong>instance</strong>` **(*****string*****) (*****optional*****):** Limit the button to a specific instance of Quicktags, add to all instances if not present. Default: *None*
-- `<strong>object</strong>` **(*****attr*****) (*****optional*****):** Used to pass additional attributes. Currently supports `ariaLabel` and `ariaLabelClose` (for “close tag” state)
-
-## Return Values
-
-(*mixed*) Null or the button object that is needed for back-compat.
-
-## Examples
-
-Below examples would add HTML buttons to the default Quicktags in the Text editor.
-
-### Modern example
-
-This example uses the inline JS API to add the JavaScript when quicktags are enqueued.
-
-```php
-/**
- * Add a paragraph tag button to the quicktags toolbar
- *
- * @return void
- */
-function wporg_add_quicktag_paragraph() {
-	wp_add_inline_script(
-		'quicktags',
-		"QTags.addButton( 'eg_paragraph_v2', 'p_v2', '<p>', '</p>', '', 'Paragraph tag v2', 2, '', { ariaLabel: 'Paragraph', ariaLabelClose: 'Close Paragraph tag' });"
-	);
-}
-add_action( 'admin_enqueue_scripts', 'wporg_add_quicktag_paragraph' );
-```
-
-### Another modern example
-
-In this example,
-
-1. Enqueue a script using the proper WordPress function [`wp_enqueue_script`](#reference/functions/wp_enqueue_script).
-2. Call any JavaScript that you want to fire when or after the QuickTag was clicked inside the QuickTag call-back.
-
-#### Enqueue the script
-
-Put below codes into active theme’s `functions.php`.
-
-```php
-function enqueue_quicktag_script(){
-	wp_enqueue_script( 'your-handle', get_template_directory_uri() . '/editor-script.js', array( 'jquery', 'quicktags' ), '1.0.0', true );
-}
-add_action( 'admin_enqueue_scripts', 'enqueue_quicktag_script' );
-```
-
-#### The JavaScript itself
-
-Create new file `editor-script` and save under the active theme directory.
-
-```javascript
-QTags.addButton( 'eg_paragraph_v3', 'p_v3', my_callback, '', '', 'Prompted Paragraph tag', 3, '', { ariaLabel: 'Prompted Paragraph' } ); 
-
-function my_callback(){
-  var my_stuff = prompt( 'Enter Some Stuff:', '' );
-  if ( my_stuff ) {
-    QTags.insertContent( '<p>' + my_stuff + '</p>' );
-  }
-}
-```
-
-### Traditional example
-
-This example manually add hardcoded JavaScript with `wp_script_is` on the admin footer hook. You should consider to use modern example. See above.
-
-```php
-/**
- * Add more buttons to the quicktags HTML editor
- *
- * @return void
- */
-function wporg_traditional_add_quicktags() {
-	if ( ! wp_script_is( 'quicktags' ) ) {
-		return;
-	}
-
-	?>
-	<script type="text/javascript">
-		QTags.addButton( 'eg_paragraph', 'p', '<p>', '</p>', '', 'Paragraph tag', 1, '', { ariaLabel: 'Paragraph', ariaLabelClose: 'Close Paragraph tag' } );
-		QTags.addButton( 'eg_hr', 'hr', '<hr />', '', '', 'Horizontal rule line', 201, '', { ariaLabel: 'Horizontal' } );
-		QTags.addButton( 'eg_pre', 'pre', '', '', '', 'Preformatted text tag', 111, '', { ariaLabel: 'Pre', ariaLabelClose: 'Close Pre tag' } );
-	</script>
-	<?php
-}
-
-add_action( 'admin_print_footer_scripts', 'wporg_traditional_add_quicktags', 11 );
-```
-
-Note:
-
-- To avoid a Reference Error we check to see whether or not the ‘quicktags’ script is in use.
-- Since WordPress 6.0, the script loading order was changed and the error “QTags is not defined” occurs without 3rd parameter of `add_action()`. Also, you have to specfy the larger number than 10 (ex.11).
-
-The “p” button HTML would be:
-
-```markup
-<input type="button" id="qt_content_eg_paragraph" class="ed_button button button-small" title="Paragraph tag" aria-label="Paragraph" value="p">
-```
-
-The ID value for each button is automatically prepended with the string qt\_content\_.
-
-Here is a dump of the docblock from `quicktags.js`, it’s pretty useful on it’s own.
-
-```php
-/**
- * Main API function for adding a button to Quicktags
- *
- * Adds qt.Button or qt.TagButton depending on the args. The first three args are always required.
- * To be able to add button(s) to Quicktags, your script should be enqueued as dependent
- * on "quicktags" and outputted in the footer. If you are echoing JS directly from PHP,
- * use add_action( 'admin_print_footer_scripts', 'output_my_js', 100 ) or add_action( 'wp_footer', 'output_my_js', 100 )
- *
- * Minimum required to add a button that calls an external function:
- *     QTags.addButton( 'my_id', 'my button', my_callback );
- *     function my_callback() { alert('yeah!'); }
- *
- * Minimum required to add a button that inserts a tag:
- *     QTags.addButton( 'my_id', 'my button', '<span>', '</span>' );
- *     QTags.addButton( 'my_id2', 'my button', '<br />' );
- */
-```
-
-## Default Quicktags
-
-Here are the values of the default Quicktags added by WordPress to the Text editor. ID must be unique. When adding your own buttons, do not use these values:
-
-| **ID** | **Value** | **Tag Start** | **Tag End** |
-|---|---|---|---|
-| link | link | &lt;a href=”‘ + URL + ‘”&gt; | &lt;/a&gt; |
-| strong | b | &lt;strong&gt; | &lt;/strong&gt; |
-| code | code | &lt;code&gt; | &lt;/code&gt; |
-| del | del | &lt;del datetime=”‘ + \_datetime + ‘”&gt; | &lt;/del&gt; |
-| fullscreen | fullscreen |  |  |
-| em | i | &lt;em&gt; | &lt;/em&gt; |
-| li | li | t&lt;li&gt; | &lt;/li&gt;n |
-| img | img | &lt;img src=”‘ + src + ‘” alt=”‘ + alt + ‘” /&gt; |  |
-| ol | ol | &lt;ol&gt;n | &lt;/ol&gt;nn |
-| block | b-quote | nn&lt;blockquote&gt; | &lt;/blockquote&gt;nn |
-| ins | ins | &lt;ins datetime=”‘ + \_datetime + ‘”&gt; | &lt;/ins&gt; |
-| more | more | &lt;!–more–&gt; |  |
-| ul | ul | &lt;ul&gt;n | &lt;/ul&gt;nn |
-| spell | lookup |  |  |
-| close | close |  |
-
-Some tag values above use variables, such as URL and `_datetime`, passed from functions.
-
-## Source File
-
-qt.addButton() source is located in `<a href="https://core.trac.wordpress.org/browser/tags/5.2.1/src/js/_enqueues/lib/quicktags.js#L0">js/_enqueues/lib/quicktags.js</a>`, during build it’s output in `wp-incudes/js/quicktags.js` and `wp-includes/js/quicktags.min.js`.
-
----
-
-# REST <a name="apis/rest" />
-
-Source: https://developer.wordpress.org/apis/rest/
-
-Refer [REST API Handbook](#rest-api).
-
----
-
-# Rewrite <a name="apis/rewrite" />
-
-Source: https://developer.wordpress.org/apis/rewrite/
-
-## Description
-
-WordPress allows theme and plugin developers to programmatically specify new, custom rewrite rules.
-
-The following functions (which are mostly aliases for [WP\_Rewrite](#reference/classes/wp_rewrite) methods) can be used to achieve this.
-
-Please note that these rules are usually called inside the `init` hook. Furthermore, permalinks will need to be refreshed (you can do this from WP-Admin under Settings -&gt; Permalinks) before the rewrite changes will take effect. Requires one-time use of `flush_rules()` to take effect.
-
-## API Reference
-
-#### Articles
-
-- Class: [`WP_Rewrite`](#reference/classes/wp_rewrite) – An overview of WordPress’s built-in URL rewrite class.
-
-#### Hooks
-
-- Filter: [`root_rewrite_rules`](#reference/hooks/root_rewrite_rules) – Filters the rewrite rules generated for the root of your weblog.
-- Filter: [`post_rewrite_rules`](#reference/hooks/post_rewrite_rules) – Filters the rewrite rules generated for permalink URLs.
-- Filter: [`page_rewrite_rules`](#reference/hooks/page_rewrite_rules) – Filters the rewrite rules generated for your Pages.
-- Filter: [`date_rewrite_rules`](#reference/hooks/date_rewrite_rules) – Filters the rewrite rules generated for dated archive URLs.
-- Filter: [`search_rewrite_rules`](#reference/hooks/search_rewrite_rules) – Filters the rewrite rules generated for search URLs.
-- Filter: [`comments_rewrite_rules`](#reference/hooks/comments_rewrite_rules) – Filters the rewrite rules generated for the latest comment feed URLs.
-- Filter: [`author_rewrite_rules`](#reference/hooks/author_rewrite_rules) – Filters the rewrite rules generated for author archive URLs.
-- Filter: [`rewrite_rules_array`](#reference/hooks/rewrite_rules_array) – Filters *all* the rewrite rules at once.
-- Filter: [`{$permastructname}_rewrite_rules`](#reference/hooks/permastructname_rewrite_rules) – Can be used to create or modify rewrite rules for any custom permastructs, such as taxonomies or custom post types.
-- Action: [`generate_rewrite_rules`](#reference/hooks/generate_rewrite_rules) – Runs **after** all the rules have been created.
-
-#### Functions
-
-- [`add_rewrite_tag()`](#reference/functions/add_rewrite_tag) – Can be used to allow WordPress to recognize custom variables (particularly custom querystring variables).
-- [`add_rewrite_rule()`](#reference/functions/add_rewrite_rule) – Allows you to specify new, custom rewrite rules.
-- [`add_rewrite_endpoint()`](#reference/functions/add_rewrite_endpoint) – Add a new endpoint like /trackback/
-- [`flush_rules()`](#reference/classes/wp_rewriteflush_rules/) – Regenerate the rewrite rules and save them to the database.
-- [`flush_rewrite_rules()`](#reference/functions/flush_rewrite_rules) – Remove rewrite rules and then recreate rewrite rules.
-- [`generate_rewrite_rules()`](#reference/hooks/generate_rewrite_rules) – Generates rewrite rules from a permalink structure
-- [`add_permastruct()`](#reference/functions/add_permastruct) – Add a new permastruct
-- [`add_feed()`](#reference/functions/add_feed)– Add a new feed type like `/atom1/`
-
----
-
-# Settings <a name="apis/settings" />
-
-Source: https://developer.wordpress.org/apis/settings/
-
-## Overview
-
-The **Settings API**, added in [WordPress 2.7](/support/wordpress-version/version-2-7), allows admin pages containing settings forms to be managed semi-automatically. It lets you define settings pages, sections within those pages and fields within the sections.
-
-New settings pages can be registered along with sections and fields inside them. Existing settings pages can also be added to by registering new settings sections or fields inside of them.
-
-Organizing registration and validation of fields still requires some effort from developers using the Settings API, but avoids a lot of complex debugging of underlying options management.
-
-NOTE: When using the Settings API, the form posts to `wp-admin/options.php` which provides fairly strict capabilities checking. Users will need `manage_options` capability (and in MultiSite will have to be a Super Admin) to submit the form.
-
-The functions are found in `<a href="https://core.trac.wordpress.org/browser/tags/5.2.1/src/wp-admin/includes/plugin.php#L0">wp-admin/includes/plugin.php</a>` and `<a href="https://core.trac.wordpress.org/browser/tags/5.2.1/src/wp-admin/includes/template.php#L0">wp-admin/includes/template.php</a>`
-
-## Function Reference
-
-**Setting Register/Unregister:**
-
-- [register\_setting()](#reference/functions/register_setting)
-- [unregister\_setting()](#reference/functions/unregister_setting)
-
-**Add Field/Section:**
-
-- [add\_settings\_field()](#reference/functions/add_settings_field)
-- [add\_settings\_section()](#reference/functions/add_settings_section)
-
-**Options Form Rendering:**
-
-- [settings\_fields()](#reference/functions/settings_fields)
-- [do\_settings\_sections()](#reference/functions/do_settings_sections)
-- [do\_settings\_fields()](#reference/functions/do_settings_fields)
-
-**Errors:**
-
-- [add\_settings\_error()](#reference/functions/add_settings_error)
-- [get\_settings\_errors()](#reference/functions/get_settings_errors)
-- [settings\_errors()](#reference/functions/settings_errors)
-
-## Adding Setting Fields
-
-You can add new settings fields (basically, an option in the `wp_options` database table but totally managed for you) to the existing WordPress pages using this function. Your callback function just needs to output the appropriate HTML input and fill it with the old value, the saving will be done behind the scenes. You can create your own sections on existing pages using `add_settings_section()` as described below.
-
-**NOTE:** You MUST register any options you use with `add_settings_field()` or they won’t be saved and updated automatically. See below for details and an example.
-
-```php
-add_settings_field( $id, $title, $callback, $page, $section = 'default', $args = array() )
-```
-
-- `$id` – String for use in the ‘id’ attribute of tags.
-- `$title` – Title of the field.
-- `$callback` – Function that fills the field with the desired inputs as part of the larger form. Name and id of the input should match the $id given to this function. The function should echo its output.
-- `$page` – The type of settings page on which to show the field (general, reading, writing, …).
-- `$section` – The section of the settings page in which to show the box (default or a section you added with add\_settings\_section, look at the page in the source to see what the existing ones are.)
-- `$args` – Extra arguments passed into the callback function
-
-## Adding Settings Sections
-
-Settings Sections are the groups of settings you see on WordPress settings pages with a shared heading. In your plugin you can add new sections to existing settings pages rather than creating a whole new page. This makes your plugin simpler to maintain and creates fewer new pages for users to learn. You just tell them to change your setting on the relevant existing page.
-
-```php
-add_settings_section( $id, $title, $callback, $page );
-```
-
-- `$id` – String for use in the ‘id’ attribute of tags.
-- `$title` – Title of the section.
-- `$callback` – Function that fills the section with the desired content. The function should echo its output.
-- `$page` – The type of settings page on which to show the section (general, reading, writing, media etc.)
-
-## Registering Settings
-
-```php
-register_setting( $option_group, $option_name, $args );
-```
-
-```php
-unregister_setting( $option_group, $option_name );
-```
-
-**NOTE:** `register_setting()` as well as the above mentioned `add_settings_*()` functions should all be called from a `admin_init` action hook callback function. Refer to the “Examples” section below.
-
-## Options Form Rendering
-
-When using the API to add settings to existing options pages, you do not need to be concerned about the form itself, as it has already been defined for the page. When you define a new page from scratch, you need to output a minimal form structure that contains a few tags that in turn output the actual sections and settings for the page.
-
-To display the hidden fields and handle security of your options form, the Settings API provides the [settings\_fields()](#reference/functions/settings_fields) function. `settings_fields( $option_group ); `
-
-`<strong>$option_group</strong>` **(*****string*****) (*****required*****):**
-
-A settings group name. This must match the group name used in [register\_setting()](#reference/functions/register_setting), which is the page slug name on which the form is to appear. Default: *None*
-
-To display the sections assigned to the page and the settings contained within, the Settings API provides the [do\_settings\_sections()](#reference/functions/do_settings_sections) function. ` do_settings_sections( $page ); `
-
-`<strong>$page</strong>` **(*****string*****) (*****required*****):**
-
-The slug name of the page whose settings sections you want to output. This should match the page name used in [add\_settings\_section()](#reference/functions/add_settings_section). Default: *None*
-
-The [do\_settings\_fields()](#reference/functions/do_settings_fields) function is provided to output the fields assigned to a particular page and section. You should not call this function directly, rather use `do_settings_sections()` to output the Section content as well as the associated fields.
-
-Your options form also needs a submit button. You can use the [submit\_button()](#reference/functions/submit_button) function to do this.
-
-Finally, you need to output the HTML &lt;form&gt; tag defining the action destination of options.php and method of POST. Here is an example options form code to generate all the sections and fields added to a page who’s slug name is `my-page`:
-
-```php
-<form method="POST" action="options.php">
-<?php 
-settings_fields( 'my-page' ); // pass slug name of page, also referred to in Settings API as option group name
-do_settings_sections( 'my-page' );  // pass slug name of page
-submit_button(); // submit button
-?>
-</form>
-```
-
-## Example
-
-### Adding a settings section with a new field in it
-
-```php
-<?php 
-/**
- * Add all your sections, fields and settings during admin_init
- */
- 
-function wporg_settings_api_init() {
- 	// Add the section to reading settings so we can add our
- 	// fields to it
- 	add_settings_section(
-		'wporg_setting_section',
-		'Example settings section in reading',
-		'wporg_setting_section_callback_function',
-		'reading'
-	);
- 	
- 	// Add the field with the names and function to use for our new
- 	// settings, put it in our new section
- 	add_settings_field(
-		'wporg_setting_name',
-		'Example setting Name',
-		'wporg_setting_callback_function',
-		'reading',
-		'wporg_setting_section'
-	);
- 	
- 	// Register our setting so that $_POST handling is done for us and
- 	// our callback function just has to echo the <input>
- 	register_setting( 'reading', 'wporg_setting_name' );
- } // wporg_settings_api_init()
- 
- add_action( 'admin_init', 'wporg_settings_api_init' );
- 
-  
-/**
- * Settings section callback function
- *
- * This function is needed if we added a new section. This function 
- * will be run at the start of our section
- */
- 
- function wporg_setting_section_callback_function() {
- 	echo '<p>Intro text for our settings section</p>';
- }
- 
-/*
- * Callback function for our example setting
- *
- * creates a checkbox true/false option. Other types are surely possible
- */
- 
- function wporg_setting_callback_function() {
- 	echo '<input name="wporg_setting_name" id="wporg_setting_name" type="checkbox" value="1" class="code" ' . checked( 1, get_option( 'wporg_setting_name' ), false ) . ' /> <label for="wporg_setting_name">Explanation text</label>';
- }
-```
-
-#### Graphical Representation of where all those code should go
-
-[![](https://i0.wp.com/developer.wordpress.org/files/2019/08/editing-settings-api-example.png?resize=949%2C924&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2019/08/editing-settings-api-example.png?ssl=1)## External References
-
-- [The WordPress Settings API](http://kovshenin.com/2012/the-wordpress-settings-api/) by Konstantin Kovshenin, Oct 23 2012
-- [Incorporating the Settings API in WordPress Themes](http://www.chipbennett.net/2011/02/17/incorporating-the-settings-api-in-wordpress-themes/) by Chip Bennett, Feb 2011
-- [Settings API Explained](http://www.presscoders.com/wordpress-settings-api-explained/) by David Gwyer
-- [WordPress Settings API Tutorial](http://ottopress.com/2009/wordpress-settings-api-tutorial/) by Otto
-- [Handling Plugin Options with register\_setting()](http://planetozh.com/blog/2009/05/handling-plugins-options-in-wordpress-28-with-register_setting/) by Ozh
-- [Intro to the WordPress Settings API](http://blog.gneu.org/2010/09/intro-to-the-wordpress-settings-api/) by BobGneu
-- Using The Settings API: [Part 1](http://wp.tutsplus.com/tutorials/using-the-settings-api-part-1-create-a-theme-options-page/), [Part 2](http://wp.tutsplus.com/tutorials/using-the-settings-api-part-2-create-a-top-level-admin-menu/) by [Sarah Neuber](https://twitter.com/srhnbr/)
-- [Class Based Settings with WordPress](https://www.yaconiello.com/blog/how-to-handle-wordpress-settings) by Francis Yaconiello
-- [Adding multiple sections on a single settings screen](http://www.mendoweb.be/blog/wordpress-settings-api-multiple-sections-on-same-page/) by Mathieu Decaffmeyer
-- [Adding multiple forms on a single settings screen](http://www.mendoweb.be/blog/wordpress-settings-api-multiple-forms-on-same-page/) by Mathieu Decaffmeyer
-- [The Complete Guide To The WordPress Settings API](http://wp.tutsplus.com/tutorials/the-complete-guide-to-the-wordpress-settings-api-part-1/) by Tom McFarlin, Jan 31st 2012
-- [WordPress Settings API Cheat Sheet](http://techblog.kjodle.net/2015/07/16/wordpress-settings-api-cheat-sheet/) by Kenneth Odle, July 16th 2015
-
-## Generators
-
-- [WordPress Settings API (options page) Generator](http://wpsettingsapi.jeroensormani.com/)
-
-## PHP Class
-
-- [WordPress settings API Class](https://github.com/tareq1988/wordpress-settings-api-class/)
-
----
-
-# Shortcode <a name="apis/shortcode" />
-
-Source: https://developer.wordpress.org/apis/shortcode/
-
-## The Shortcode API
-
-The **Shortcode API** is a simple set of functions for creating WordPress [shortcodes](#plugins/shortcodes) for use in posts and pages. For instance, the following shortcode (in the body of a post or page) would add a photo gallery of images attached to that post or page: `[ gallery ]`
-
-The API enables plugin developers to create special kinds of content (e.g. forms, content generators) that users can attach to certain pages by adding the corresponding shortcode into the page text.
-
-The Shortcode API makes it easy to create shortcodes that support attributes like this:
-
-```php
-[ gallery id="123" size="medium" ]
-```
-
-The API handles all the tricky parsing, eliminating the need for writing a custom regular expression for each shortcode. Helper functions are included for setting and fetching default attributes. The API supports both self-closing and enclosing shortcodes.
-
-As a quick start for those in a hurry, here’s a minimal example of the PHP code required to create a shortcode:
-
-```php
-// [foobar]
-function wporg_foobar_func( $atts ) {
-	return "foo and bar";
-}
-add_shortcode( 'foobar', 'wporg_foobar_func' );
-```
-
-This will create `[foobar]` shortcode that returns as: foo and bar
-
-With attributes:
-
-```php
-// [bartag foo="foo-value"]
-function bartag_func( $atts ) {
-	$a = shortcode_atts( array(
-		'foo' => 'something',
-		'bar' => 'something else',
-	), $atts );
-
-	return "foo = {$a['foo']}";
-}
-add_shortcode( 'bartag', 'bartag_func' );
-```
-
-This creates a `[bartag]` shortcode that supports two attributes: “foo” and “bar”. Both attributes are optional and will take on default options `[foo="something" bar="something else"]` if they are not provided. The shortcode will return as `foo = {the value of the foo attribute}`.
-
-## History
-
-The Shortcode API was introduced in WordPress 2.5.
-
-## Overview
-
-Shortcodes are written by providing a handler function. Shortcode handlers are broadly similar to WordPress filters: they accept parameters (attributes) and return a result (the shortcode output).
-
-Shortcode names should be all lowercase and use all letters, but numbers and underscores should work fine too. Be wary of using hyphens (dashes), you’ll be better off not using them.
-
-The `<a href="#reference/functions/add_shortcode">add_shortcode</a>` function is used to register a shortcode handler. It takes two parameters: the shortcode name (the string used in a post body), and the callback function name.
-
-Three parameters are passed to the shortcode callback function. You can choose to use any number of them including none of them.
-
-- `$atts`: an associative array of attributes, or an empty string if no attributes are given
-- `$content`: the enclosed content (if the shortcode is used in its enclosing form)
-- `$tag`: the shortcode tag, useful for shared callback functions
-
-The API call to register the shortcode handler would look something like this:
-
-```php
-add_shortcode( 'wporgshortcode', 'wporg_shortcode_handler' );
-```
-
-When [the\_content](#reference/functions/the_content) is displayed, the shortcode API will parse any registered shortcodes such as `[myshortcode]`, separate and parse the attributes and content, if any, and pass them the corresponding shortcode handler function. Any string *returned* (not echoed) by the shortcode handler will be inserted into the post body in place of the shortcode itself.
-
-Shortcode attributes are entered like this:
-
-`[wporgshortcode foo="bar" bar="bing"]`
-
-These attributes will be converted into an associative array like the following, passed to the handler function as its `$atts` parameter:
-
-```php
-array( 'foo' => 'bar', 'bar' => 'bing' )
-```
-
-The array keys are the attribute names; array values are the corresponding attribute values. In addition, the zeroeth entry (`$atts[0]`) will hold the string that matched the shortcode regex, but ONLY IF that is different from the callback name.
-
-### Handling Attributes
-
-The raw `$atts` array may include any arbitrary attributes that are specified by the user. (In addition, the zeroeth entry of the array may contain the string that was recognized by the regex; see the note below.)
-
-In order to help set default values for missing attributes, and eliminate any attributes that are not recognized by your shortcode, the API provides a [shortcode\_atts()](#reference/functions/shortcode_atts) function.
-
-`<a href="#reference/functions/shortcode_atts">shortcode_atts()</a>` resembles the `<a href="#reference/functions/wp_parse_args">wp_parse_args</a>` function, but has some important differences. Its parameters are:
-
-```php
-shortcode_atts( $defaults_array, $atts );
-```
-
-Both parameters are required. `$defaults_array` is an associative array that specifies the recognized attribute names and their default values. `$atts` is the raw attributes array as passed into your shortcode handler. `shortcode_atts()` will return a normalized array containing all of the keys from the `$defaults_array`, filled in with values from the `$atts` array if present. For example:
-
-```php
-$a = shortcode_atts( array(
-	'title' => 'My Title',
-	'foo' => 123,
-), $atts );
-```
-
-If `$atts` were to contain `array( 'foo' => 456, 'bar' => 'something' )`, the resulting `$a` would be `array( 'title' => 'My Title', 'foo' => 456 )`. The value of `$atts['foo']` overrides the default of 123. `$atts['title']` is not set, so the default ‘My Title’ is used. There is no ‘bar’ item in the defaults array, so it is not included in the result.
-
-Attribute names are always converted to lowercase before they are passed into the handler function. Values are untouched.`[myshortcode FOO="BAR"]` produces `$atts = array( 'foo' => 'BAR' )`.
-
-A suggested code idiom for declaring defaults and parsing attributes in a shortcode handler is as follows:
-
-```php
-function wporg_shortcode_handler( $atts, $content = null ) {
-	$a = shortcode_atts( array(
-		'attr_1' => 'attribute 1 default',
-		'attr_2' => 'attribute 2 default',
-		// ...etc
-	), $atts );
-}
-```
-
-This will parse the attributes, set default values, eliminate any unsupported attributes, and store the results in a local array variable named `$a` with the attributes as keys – `$a['attr_1']`, `$a['attr_2']`, and so on. In other words, the array of defaults approximates a list of local variable declarations.
-
-**IMPORTANT – Don’t use camelCase or UPPER-CASE for your `$atts` attribute names**:
-
-`$atts` values are ***lower-cased*** during `shortcode_atts( array( 'attr_1' => 'attr_1 default', // ...etc ), $atts )` processing, so you might want to *just use lower-case*.
-
-**NOTE on confusing regex/callback name reference:**
-
-The zeroeth entry of the attributes array (**`$atts[0]`**) will contain the string that matched the shortcode regex, but ONLY if that differs from the callback name, which otherwise appears as the third argument to the callback function.
-
-```php
-add_shortcode('foo','foo'); // two shortcodes referencing the same callback
- add_shortcode('bar','foo');
-    produces this behavior:
- [foo a='b'] ==> callback to: foo(array('a'=>'b'),NULL,"foo");
- [bar a='c'] ==> callback to: foo(array(0 => 'bar', 'a'=>'c'),NULL,"");
-```
-
-This is confusing and perhaps reflects an underlying bug, but an overloaded callback routine can correctly determine what shortcode was used to call it, by checking BOTH the third argument to the callback and the zeroeth attribute. (It is NOT an error to have two shortcodes reference the same callback routine, which allows for common code.)
-
-### Output
-
-The return value of a shortcode handler function is inserted into the post content output in place of the shortcode macro. **Remember to use return and not echo – anything that is echoed will be output to the browser, but it won’t appear in the correct place on the page**.
-
-Shortcodes are parsed after [wpautop](#reference/functions/wpautop) and [wptexturize](#reference/functions/wptexturize) post formatting has been applied. This means that your shortcode output HTML won’t automatically have curly quotes applied, p and br tags added, and so on. If you do want your shortcode output to be formatted, you should call `wpautop()` or `wptexturize()` directly when you return the output from your shortcode handler.
-
-wpautop recognizes shortcode syntax and will attempt not to wrap p or br tags around shortcodes that stand alone on a line by themselves. Shortcodes intended for use in this manner should ensure that the output is wrapped in an appropriate block tag such as `<p>` or `<div>`.
-
-If the shortcode produces a lot of HTML then `ob_start` can be used to capture output and convert it to a string as follows:
-
-```php
-function wporg_shortcode() {
-	ob_start();
-	?> <HTML> <here> ... <?php
-	return ob_get_clean();
-}
-```
-
-### Enclosing vs self-closing shortcodes
-
-The examples above show self-closing shortcode macros such as `[myshortcode]`. The API also supports enclosing shortcodes such as `[myshortcode]content[/myshortcode]`.
-
-If a shortcode macro is used to enclose content, its handler function will receive a second parameter containing that content. Users might write shortcodes in either form, so it is necessary to allow for either case by providing a default value for the second parameter to your handler function:
-
-```php
-function wporg_shortcode_handler( $atts, $content = null )
-```
-
-`empty( $content )` can be used to distinguish between the self-closing and enclosing cases.
-
-When content is enclosed, the complete shortcode macro including its content will be replaced with the function output. It is the responsibility of the handler function to provide any necessary escaping or encoding of the raw content string, and include it in the output.
-
-Here’s a trivial example of an enclosing shortcode:
-
-```php
-function wporg_caption_shortcode( $atts, $content = null ) {
-	return '<span class="caption">' . $content . '</span>';
-}
-add_shortcode( 'caption', 'wporg_caption_shortcode' );
-```
-
-When used like this:
-
-```php
-My Caption
-```
-
-The output would be:
-
-```php
-<span class="caption">My Caption</span>
-```
-
-Since `$content` is included in the return value without any escaping or encoding, the user can include raw HTML:
-
-```php
-<a href="http://example.com/">My Caption</a>
-```
-
-Which would produce:
-
-```php
-<span class="caption"><a href="http://example.com/">My Caption</a></span>
-```
-
-This may or may not be intended behaviour – if the shortcode should not permit raw HTML in its output, it should use an escaping or filtering function to deal with it before returning the result.
-
-The shortcode parser uses a single pass on the post content. This means that if the `$content` parameter of a shortcode handler contains another shortcode, it won’t be parsed:
-
-```php
-Caption: [myshortcode]
-```
-
-This would produce:
-
-```php
-<span class="caption">Caption: [myshortcode]</span>
-```
-
-If the enclosing shortcode is intended to permit other shortcodes in its output, the handler function can call [do\_shortcode()](#reference/functions/do_shortcode) recursively:
-
-```php
-function wporg_caption_shortcode( $atts, $content = null ) {
-    return '<span class="caption">' . do_shortcode($content) . '</span>';
-}
-```
-
-In the previous example, this would ensure the `[myshortcode]` macro in the enclosed content is parsed, and its output enclosed by the caption span:
-
-```php
-<span class="caption">Caption: The result of myshortcode's handler function</span>
-```
-
-The parser does not handle mixing of enclosing and non-enclosing forms of the same shortcode as you would want it to. For example, if you have:
-
-```php
-[myshortcode example='non-enclosing' /] non-enclosed content [myshortcode] enclosed content [/myshortcode]
-```
-
-Instead of being treated as two shortcodes separated by the text ” non-enclosed content “, the parser treats this as a single shortcode enclosing ” non-enclosed content `[myshortcode]` enclosed content”.
-
-Enclosing shortcodes support attributes in the same way as self-closing shortcodes. Here’s an example of the `caption_shortcode()` improved to support a ‘class’ attribute:
-
-```php
-function wporg_caption_shortcode( $atts, $content = null ) {
-	$a = shortcode_atts( array(
-		'class' => 'caption',
-	), $atts );
-
-	return '<span class="' . esc_attr($a['class']) . '">' . $content . '</span>';
-}
-```
-
-```php
-My Caption
-```
-
-```php
-<span class="headline">My Caption</span>
-```
-
-### Other features in brief
-
-- The parser supports xhtml-style closing shortcodes like `[myshortcode /]`, but this is optional.
-- Shortcode macros may use single or double quotes for attribute values, or omit them entirely if the attribute value does not contain spaces. `[myshortcode foo='123' bar=456]` is equivalent to `[myshortcode foo="123" bar="456"]`. Note the attribute value in the last position may not end with a forward slash because the feature in the paragraph above will consume that slash.
-- For backwards compatibility with older ad-hoc shortcodes, attribute names may be omitted. If an attribute has no name it will be given a positional numeric key in the `$atts` array. For example, `[myshortcode 123]` will produce `$atts = array( 0 => 123 )`. Positional attributes may be mixed with named ones, and quotes may be used if the values contain spaces or other significant characters.
-- The shortcode API has test cases. The tests — which contain a number of examples of error cases and unusual syntax — can be found at <http://svn.automattic.com/wordpress-tests/trunk/tests/shortcode.php>
-
-### Function reference
-
-The following Shortcode API functions are available:
-
-```php
-function add_shortcode( $tag, $func )
-```
-
-Registers a new shortcode handler function. `$tag` is the shortcode string as written by the user (without braces), such as “myshortcode”. $func is the handler function name.
-
-Only one handler function may exist for a given shortcode. Calling `add_shortcode()` again with the same $tag name will overwrite the previous handler.
-
-```php
-function remove_shortcode( $tag )
-```
-
-Deregisters an existing shortcode. `$tag` is the shortcode name as used in `add_shortcode()`.
-
-```php
-function remove_all_shortcodes()
-```
-
-Deregisters all shortcodes.
-
-```php
-function shortcode_atts( $pairs, $atts )
-```
-
-Process a raw array of attributes `$atts` against the set of defaults specified in `$pairs`. Returns an array. The result will contain every key from `$pairs`, merged with values from `$atts`. Any keys in `$atts` that do not exist in $pairs are ignored.
-
-```php
-function do_shortcode( $content )
-```
-
-Parse any known shortcode macros in the `$content` string. Returns a string containing the original content with shortcode macros replaced by their handler functions output.
-
-[do\_shortcode()](#reference/functions/do_shortcode) is registered as a default filter on ‘the\_content’ with a priority of 11.
-
-### Limitations
-
-#### Nested Shortcodes
-
-The shortcode parser correctly deals with nested shortcode macros, provided their handler functions support it by recursively calling [do\_shortcode()](#reference/functions/do_shortcode):
-
-```php
-[tag-a]
-   [tag-b]
-      [tag-c]
-   [/tag-b]
-[/tag-a]
-```
-
-However the parser will fail if a shortcode macro is used to enclose another macro of the same name:
-
-```php
-[tag-a]
-   [tag-a]
-   [/tag-a]
-[/tag-a]
-```
-
-This is a limitation of the context-free regexp parser used by `do_shortcode()` – it is very fast but does not count levels of nesting, so it can’t match each opening tag with its correct closing tag in these cases.
-
-In future versions of WordPress, it may be necessary for plugins having a nested shortcode syntax to ensure that the `wptexturize()` processor does not interfere with the inner codes. It is recommended that for such complex syntax, the [no\_texturize\_shortcodes](#reference/hooks/no_texturize_shortcodes) filter should be used on the outer tags. In the examples used here, tag-a should be added to the list of shortcodes to not texturize. If the contents of tag-a or tag-b still need to be texturized, then you can call `wptexturize()` before calling `do_shortcode()` as described above.
-
-#### Unregistered Names
-
-Some plugin authors have chosen a strategy of not registering shortcode names, for example to disable a nested shortcode until the parent shortcode’s handler function is called. This may have unintended consequences, such as failure to parse shortcode attribute values. For example:
-
-```php
-[tag-a unit="north"]
-   [tag-b size="24"]
-      [tag-c color="red"]
-   [/tag-b]
-[/tag-a]
-```
-
-Starting with version 4.0.1, if a plugin fails to register tag-b and tag-c as valid shortcodes, the `wptexturize()` processor will output the following text prior to any shortcode being parsed:
-
-```php
-[tag-a unit="north"]
-   [tag-b size=”24”]
-      [tag-c color=”red”]
-   [/tag-b]
-[/tag-a]
-```
-
-Unregistered shortcodes should be considered normal plain text that have no special meaning, and the practice of using unregistered shortcodes is discouraged. If you must enclose raw code between shortcode tags, at least consider using the [no\_texturize\_shortcodes](#reference/hooks/no_texturize_shortcodes) filter to prevent texturization of the contents of tag-a:
-
-```php
-add_shortcode( 'tag-a', 'wporg_tag_a_handler' );
-add_filter( 'no_texturize_shortcodes', 'wporg_ignore_tag_a' );
-
-function wporg_ignore_tag_a( $list ) {
-  $list[] = 'tag-a';
-  return $list;
-}
-```
-
-#### Unclosed Shortcodes
-
-In certain cases the shortcode parser cannot correctly deal with the use of both closed and unclosed shortcodes. For instance in this case the parser will only correctly identify the second instance of the shortcode:
-
-```php
-[tag]
-[tag]
-   CONTENT
-[/tag]
-```
-
-However in this case the parser will identify both:
-
-```php
-[tag]
-   CONTENT
-[/tag]
-[tag]
-```
-
-#### Hyphens
-
-Take caution when using hyphens in the name of your shortcodes. In the following instance WordPress may see the second opening shortcode as equivalent to the first (basically WordPress sees the first part before the hyphen):
-
-```php
-[tag]
-[tag-a]
-```
-
-It all depends on which shortcode is defined first. If you are going to use hyphens then define the shortest shortcode first.
-
-To avoid this, use an underscore or simply no separator:
-
-```php
-[tag]
-[tag_a]
-
-[tag]
-[taga]
-```
-
-If the first part of the shortcode is different from one another, you can get away with using hyphens:
-
-```php
-[tag]
-[tagfoo-a]
-```
-
-**Important:** Using hyphens can have implications that you may not be aware of; such as if other installed shortcodes also are use hyphens, the use of generic words with hyphens may cause collisions (if shortcodes are used together within the same request):
-
-```php
-// plugin-A
-[is-logged-in]
-
-// plugin-B
-[is-admin]
-```
-
-#### Square Brackets
-
-The shortcode parser does not accept square brackets within attributes. Thus the following will fail:
-
-```php
-[tag attribute="[Some value]"]
-```
-
-Tags surrounded by cosmetic brackets are not yet fully supported by [wptexturize()](#reference/functions/wptexturize) or its filters. These codes may give unexpected results:
-
-```php
-[I put random text near my captions. ]
-```
-
-**Note:** these limitations may change in future versions of WordPress, you should test to be absolutely sure.
-
-#### HTML
-
-Starting with version 3.9.3, use of HTML is limited inside shortcode attributes. For example, this shortcode will not work correctly because it contains a `>` character:
-
-```php
-[tag value1="35" value2="25" compare=">"]
-```
-
-Version 4.0 is designed to allow validated HTML, so this will work:
-
-```php
-[tag description="<b>Greetings</b>"]
-```
-
-The suggested workaround for HTML limitations is to use HTML encoding for all user input, and then add HTML decoding in the custom shortcode handler. Extra API functions are planned.
-
-Full usage of HTML in shortcode attributes was never officially supported, and this will not be expanded in future versions.
-
-Starting with version 4.2.3, similar limitations were placed on use of shortcodes inside HTML. For example, this shortcode will not work correctly because it is nested inside a scripting attribute:
-
-```php
-<a onclick="[tag]">
-```
-
-The suggested workaround for dynamic attributes is to design a shortcode that outputs all needed HTML rather than just a single value. This will work better:
-
-```php
-[link onclick="tag"]
-```
-
-Also notice the following shortcode is no longer allowed because of incorrect attribute quoting:
-
-```php
-<a title="[tag attr="id"]">
-```
-
-The only way to parse this as valid HTML is to use single quotes and double quotes in a nested manner:
-
-```php
-<a title="[tag attr='id']">
-```
-
-#### Registration Count
-
-The API is known to become unstable when registering hundreds of shortcodes. Plugin authors should create solutions that rely on only a small number of shortcodes names. This limitation might change in future versions.
-
-### Formal Syntax
-
-WordPress shortcodes do not use special characters in the same way as HTML. The square braces may seem magical at first glance, but they are not truly part of any language. For example:
-
-```php
-[gallery]
-```
-
-The gallery shortcode is parsed by the API as a special symbol because it is a registered shortcode. On the other hand, square braces are simply ignored when a shortcode is not registered:
-
-```php
-[randomthing]
-```
-
-The randomthing symbol and its square braces are ignored because they are not part of any registered shortcode.
-
-In a perfect world, any `[*]` symbol could be handled by the API, but we have to consider the following challenges: Square braces are allowed in HTML and are not always shortcodes, angle braces are allowed inside of shortcodes only in limited situations, and all of this code must run through multiple layers of customizeable filters and parsers before output. Because of these language compatibility issues, square braces can’t be magical.
-
-The shortcode syntax uses these general parts:
-
-```php
-[name attributes close]
-```
-
-```php
-[name attributes]Any HTML or shortcode may go here.[/name]
-```
-
-Escaped shortcodes are identical but have exactly two extra braces:
-
-```php
-[[name attributes close]]
-```
-
-```php
-[[name attributes]Any HTML or shortcode may go here.[/name]]
-```
-
-Again, the shortcode name must be registered, otherwise all four examples would be ignored.
-
-#### Names
-
-Shortcode names must never contain the following characters:
-
-- Square braces: `[ ]`
-- Angle braces: `< >`
-- Ampersand: `&`
-- Forward slash: `/`
-- Whitespace: space linefeed tab
-- Non-printing characters: `x00` – `x20`
-
-It is recommended to also avoid quotes in the names of shortcodes.
-
-#### Attributes
-
-Attributes are optional. A space is required between the shortcode name and the shortcode attributes. When more than one attribute is used, each attribute must be separated by at least one space.
-
-Each attribute should conform to one of these formats:
-
-```php
-attribute_name = 'value'
-```
-
-```php
-attribute_name = "value"
-```
-
-```php
-attribute_name = value
-```
-
-```php
-"value"
-```
-
-```php
-value
-```
-
-Attribute names are optional and should contain only the following characters for compatibility across all platforms:
-
-- Upper-case and lower-case letters: `A-Z` `a-z`
-- Digits: `0-9`
-- Underscore: `_`
-- Hyphen: `-`
-
-Spaces are not allowed in attribute names. Optional spaces may be used between the name and the `=` sign. Optional spaces may also be used between the `=` sign and the value.
-
-It should be noted that even though attributes can be used with mixed case in the editor, they will always be lowercase after parsing.
-
-Attribute values must never contain the following characters:
-
-- Square braces: `[ ]`
-- Quotes: `"`, `'`
-
-Unquoted values also must never contain spaces.
-
-HTML characters `<` and `>` have only limited support in attributes.
-
-The recommended method of escaping special characters in shortcode attributes is HTML encoding. Most importantly, any user input appearing in a shortcode attribute must be escaped or stripped of special characters.
-
-Note that double quotes are allowed inside of single-quoted values and vice versa, however this is not recommended when dealing with user input.
-
-The following characters, if they are not escaped within an attribute value, will be automatically stripped and converted to spaces:
-
-- No-break space: `xC2xA0`
-- Zero-width space: `xE2x80x8B`
-
-#### Self-Closing
-
-The self-closing marker, a single forward slash, is optional. Space before the marker is optional. Spaces are not allowed after the marker.
-
-```php
-[example /]
-```
-
-The self-closing marker is purely cosmetic and has no effect except that it will force the shortcode parser to ignore any closing tag that follows it.
-
-The enclosing type shortcodes may not use a self-closing marker.
-
-#### Escaping
-
-WordPress attempts to insert curly quotes between the `[name]` and `[/name]` tags. It will process that content just like any other. As of 4.0.1, unregistered shortcodes are also “texturized” and this may give unexpected curly quotes:
-
-```php
-[randomthing param="test"]
-```
-
-A better example would be:
-
-```php
-[randomthing param="test"]
-```
-
-The `` element is always avoided for the sake of curly quotes.
-
-Registered shortcodes are still processed inside of `` elements. To escape a registered shortcode for display on your website, the syntax becomes:
-
-```php
-[[caption param="test"]]
-```
-
-which will output:
-
-```php
-[caption param="test"]
-```
-
-The `` element is optional in that situation.
-
-For enclosing shortcodes, use the following syntax:
-
-```php
-[[caption]My Caption]
-```
-
-## External Resources
-
-- [WordPress Shortcodes Generator](http://generatewp.com/shortcodes/)
-- [Add Shortcode – WordPress Code Snippet Generator](https://www.nimbusthemes.com/add-shortcode-wordpress-snippet-generator/) – A snippet generator and full documentation about how to add the code to a WordPress website.
-- [Shortcode summary by Aaron D. Campbell](http://ran.ge/2008/04/15/wordpress-25-shortcodes/) – Explains shortcodes and gives examples including how to incorporate shortcodes into a meta box for sending them to the editor using js.
-- [Innovative WordPress Shortcodes In Action](https://wordpress.org/extend/plugins/iblocks/) – a WordPress plugin that shows you how to effectively use shortcodes to change your post content designs.
-- [WordPress Shortcode API Overview](http://planetozh.com/blog/2008/03/wordpress-25-shortcodes-api-overview/) – explanations on usage and example of plugin using shortcodes.
-- [Simple shortcode-powered BBCode plugin](https://wordpress.org/extend/plugins/bbcode/) – a simple plugin that adds support for BBCode via shortcode. A good way to see shortcodes in action.
-
-## Default Shortcodes
-
-- `<a href="#reference/hooks/wp_audio_shortcode">[ audio ]</a>`
-- `[ wp_caption ]`
-- `[ caption ]`
-- `<a href="#reference/classes/wp_embed/shortcode">[ embed ]</a>`
-- `<a href="#reference/functions/gallery_shortcode">[ gallery ]</a>`
-- `<a href="#reference/hooks/wp_video_shortcode">[ video ]</a>`
-- `<a href="#reference/functions/wp_playlist_shortcode">[ playlist ]</a>`
-
-## Shortcode API functions list
-
-- Function: [do\_shortcode()](#reference/functions/do_shortcode)
-- Function: [add\_shortcode()](#reference/functions/add_shortcode)
-- Function: [remove\_shortcode()](#reference/functions/remove_shortcode)
-- Function: [remove\_all\_shortcodes()](#reference/functions/remove_all_shortcodes)
-- Function: [shortcode\_atts()](#reference/functions/shortcode_atts)
-- Function: [strip\_shortcodes()](#reference/functions/strip_shortcodes)
-- Function: [shortcode\_exists()](#reference/functions/shortcode_exists)
-- Function: [has\_shortcode()](#reference/functions/has_shortcode)
-- Function: [get\_shortcode\_regex()](#reference/functions/get_shortcode_regex)
-- Function: [wp\_audio\_shortcode()](#reference/functions/wp_audio_shortcode)
-- Function: [wp\_video\_shortcode()](#reference/functions/wp_video_shortcode)
-- Filter: [no\_texturize\_shortcodes](#reference/hooks/no_texturize_shortcodes)
-
----
-
-# Theme <a name="apis/theme" />
-
-Source: https://developer.wordpress.org/apis/theme/
-
-See [Theme Developer Handbook](#themes).
-
----
-
-# Transients <a name="apis/transients" />
-
-Source: https://developer.wordpress.org/apis/transients/
-
-## Overview
-
-This page contains the technical documentation of **WordPress Transients API**, which offers a simple and standardized way of storing cached data in the database temporarily by giving it a custom name and a timeframe after which it will expire and be deleted.
-
-The Transients API is very similar to the [Options API](#plugins/settings/options-api) but with the added feature of an expiration time, which simplifies the process of using the `wp_options` database table to temporarily store cached information.
-
-Note that the “site\_” functions are essentially the same as their counterparts, but work network wide when using WordPress [Multisite](https://codex.wordpress.org/Glossary#Multisite).
-
-Also of note is that Transients are inherently sped up by caching plugins, where normal Options are not. A *memcached* plugin, for example, would make WordPress store transient values in fast memory instead of in the database. For this reason, transients should be used to store any data that is expected to expire, or which can expire at any time. Transients should also never be assumed to be in the database, since they may not be stored there at all.
-
-Furthermore, it is possible for the transient to not be available before the expiration time. Much like what is done with caching, your code should have a fall back method to re-generate the data if the transient is not available.
-
-Ryan McCue explained it this way on a [ticket](https://core.trac.wordpress.org/ticket/20316#comment:47):
-
-> Everyone seems to misunderstand how transient expiration works, so the long and short of it is: transient expiration times are a maximum time. There is no minimum age. Transients might disappear one second after you set them, or 24 hours, but they will never be around after the expiration time.
-
-The intended audience for this article includes WordPress theme authors, plugin authors and anyone who needs to cache specific data but wants it to be refreshed within a given timeframe. This document assumes a basic understanding of PHP scripting.
-
-## Function Reference
-
-**Set/Get Transient:**
-
-- [set\_transient()](#reference/functions/set_transient)
-- [get\_transient()](#reference/functions/get_transient)
-- [set\_site\_transient()](#reference/functions/set_site_transient)
-- [get\_site\_transient()](#reference/functions/get_site_transient)
-
-**Delete Transient:**
-
-- [delete\_transient()](#reference/functions/delete_transient)
-- [delete\_site\_transient()](#reference/functions/delete_site_transient)
-
-## Using Transients
-
-### Saving Transients
-
-To save a transient you use [set\_transient()](#reference/functions/set_transient):
-
-```php
-set_transient( $transient, $value, $expiration );
-```
-
-- `$transient` (string): Transient name.   
-    Expected to not be SQL-escaped. Must be 172 characters or fewer in length.
-- `$value` (array|object): Data to save, either a regular variable or an array/object.   
-    The API will handle serialization of complex data for you.
-- `$expiration` (integer): The maximum of seconds to keep the data before refreshing.   
-    Transients may expire before the `$expiration` (Due to External Object Caches, or database upgrades) but will never return their value past $expiration.
-
-So for example to save the `$special_query_results` object for 12 hours you would do:
-
-```php
-set_transient( 'special_query_results', $special_query_results, 60*60*12 );
-```
-
-#### Using Time Constants
-
-In [WordPress 3.5](https://codex.wordpress.org/Version_3.5), several constants were introduced to easily express time:
-
-```php
-MINUTE_IN_SECONDS  = 60 (seconds)
-HOUR_IN_SECONDS    = 60 * MINUTE_IN_SECONDS
-DAY_IN_SECONDS     = 24 * HOUR_IN_SECONDS
-WEEK_IN_SECONDS    = 7 * DAY_IN_SECONDS
-MONTH_IN_SECONDS   = 30 * DAY_IN_SECONDS
-YEAR_IN_SECONDS    = 365 * DAY_IN_SECONDS
-```
-
-So for example, the code sample from above can be simplified to:
-
-```php
-set_transient( 'special_query_results', $special_query_results, 12 * HOUR_IN_SECONDS );
-```
-
-### Fetching Transients
-
-To get a saved transient you use [get\_transient()](#reference/functions/get_transient):
-
-```php
-get_transient( $transient );
-```
-
-`$transient`: the unique slug used while saving the transient with `set_transient()`.
-
-In our case we could fetch our special query results with:
-
-```php
-get_transient( 'special_query_results' );
-```
-
-If the transient does not exist, or has expired, then `get_transient()` will return `false`. This should be checked using the identity operator `===` instead of the normal equality operator `==`, because an integer value of zero (or other “empty”/”falsey” data) could be the data you’re wanting to store. Because of this “false” value, transients should not be used to hold plain boolean values (true/false). Put them into an array or convert them to integers instead.
-
-Example usage:
-
-```php
-if ( false === ( $value = get_transient( 'value' ) ) ) {
-	// this code runs when there is no valid transient set
-}
-```
-
-The above code will get the transient and put it into `$value`. The code inside the if block only runs when there’s not a valid transient for it to get. This is typically a method to re-generate the transient value through other means. Keep in mind that it’s possible for a transient to not be available before it’s normal expiration time.
-
-### Removing Saved Transients
-
-Our transient will die naturally of old age once $expiration seconds have passed since we last ran [set\_transient()](#reference/functions/set_transient), but we can force the transient to die early by manually deleting it. This is useful for times when a given activity (saving a post, adding a category etc.) will make the cached data inherently stale and in need of updating.
-
-```php
-delete_transient( $transient );
-```
-
-`$transient`: the unique name used when saving with `set_transient()`.
-
-In our case, obviously, this would be:
-
-```php
-delete_transient( 'special_query_results' );
-```
-
-WordPress infrequently cleans out expired transients. To prevent expired transients from building up in the database, it’s a good practice to always remove your transient once you are done with it and no longer need it.
-
-## Complete Example
-
-Putting it all together here is an example of how to use transients in your code.
-
-```php
-<?php
-// Get any existing copy of our transient data
-if ( false === ( $special_query_results = get_transient( 'special_query_results' ) ) ) {
-	// It wasn't there, so regenerate the data and save the transient
-	$special_query_results = new WP_Query( 'cat=5&order=random&tag=tech&post_meta_key=thumbnail' );
-	set_transient( 'special_query_results', $special_query_results, 12 * HOUR_IN_SECONDS );
-}
-// Use the data like you would have normally...
-?>
-```
-
-And an example of using [delete\_transient()](#reference/functions/delete_transient). In this case we’ll add a function to the `edit_term` action, which will run every time a category or tag is edited (i.e. we’re assuming that the editing of a term invalidates our data and we want to remove the cached version).
-
-```php
-<?php
-// Create a simple function to delete our transient
-function edit_term_delete_transient() {
-	delete_transient( 'special_query_results' );
-}
-// Add the function to the edit_term hook so it runs when categories/tags are edited
-add_action( 'edit_term', 'edit_term_delete_transient' );
-?>
-```
-
-Use transients with [WP\_Query](#reference/classes/wp_query) to retrieve “featured posts”:
-
-```php
-<?php 
-// Check for transient. If none, then execute WP_Query
-if ( false === ( $featured = get_transient( 'foo_featured_posts' ) ) ) {
-	$featured = new WP_Query(
-		array(
-			'category' => 'featured',
-			'posts_per_page' => 5
-		)
-	);
-
-	// Put the results in a transient. Expire after 12 hours.
-	set_transient( 'foo_featured_posts', $featured, 12 * HOUR_IN_SECONDS );
-}
-?>
- 
-// Run the loop as normal
-
-<?php if ( $featured->have_posts() ) : ?>
-
-	<?php while ( $featured->have_posts() ) : $featured->the_post(); ?>
-		// featured posts found, do stuff
-	<?php endwhile; ?>
-
-<?php else: ?>
-	// no featured posts found
-<?php endif; ?>
-
-<?php wp_reset_postdata(); ?>
-
-```
-
-Using transients in your plugins and themes is simple and only adds a few extra lines of code, but if used in the right situations (long/expensive database queries or complex processed data) it can save seconds off the load times on your site.
-
----
-
-# XML-RPC <a name="apis/xml-rpc" />
-
-Source: https://developer.wordpress.org/apis/xml-rpc/
-
-XML-RPC API that supersedes the legacy Blogger, MovableType, and metaWeblog APIs. Some clients also exist for different programming languages.
-
-## Components
-
-- Posts (for posts, pages, and custom post types) – Added in [WordPress 3.4](/support/wordpress-version/version-3-4/)
-    - [wp.getPost](#reference/classes/wp_xmlrpc_server/wp_getpost)
-    - [wp.getPosts](#reference/classes/wp_xmlrpc_server/wp_getposts)
-    - [wp.newPost](#reference/classes/wp_xmlrpc_server/wp_newpost)
-    - [wp.editPost](#reference/classes/wp_xmlrpc_server/wp_editpost)
-    - [wp.deletePost](#reference/classes/wp_xmlrpc_server/wp_deletepost)
-    - [wp.getPostType](#reference/classes/wp_xmlrpc_server/wp_getposttype)
-    - [wp.getPostTypes](#reference/classes/wp_xmlrpc_server/wp_getposttypes)
-    - [wp.getPostFormats](#reference/classes/wp_xmlrpc_server/wp_getpostformats)
-    - [wp.getPostStatusList](#reference/classes/wp_xmlrpc_server/wp_getpoststatuslist)
-
-- Taxonomies (for categories, tags, and custom taxonomies) – Added in [WordPress 3.4](#support/wordpress-version/version-3-4)
-    - [wp.getTaxonomy](#reference/classes/wp_xmlrpc_server/wp_gettaxonomy)
-    - [wp.getTaxonomies](#reference/classes/wp_xmlrpc_server/wp_gettaxonomies)
-    - [wp.getTerm](#reference/classes/wp_xmlrpc_server/wp_getterm)
-    - [wp.getTerms](#reference/classes/wp_xmlrpc_server/wp_getterms)
-    - [wp.newTerm](#reference/classes/wp_xmlrpc_server/wp_newterm)
-    - [wp.editTerm](#reference/classes/wp_xmlrpc_server/wp_editterm)
-    - [wp.deleteTerm](#reference/classes/wp_xmlrpc_server/wp_deleteterm)
-- Media – Added in [WordPress 3.1](#support/wordpress-version/version-3-4)
-    - [wp.getMediaItem](#reference/classes/wp_xmlrpc_server/wp_getmediaitem)
-    - [wp.getMediaLibrary](#reference/classes/wp_xmlrpc_server/wp_getmedialibrary)
-    - wp.uploadFile
-- Comments – Added in [WordPress 2.7](#support/wordpress-version/version-3-4)
-    - [wp.getCommentCount](#reference/classes/wp_xmlrpc_server/wp_getcommentcount)
-    - [wp.getComment](#reference/classes/wp_xmlrpc_server/wp_getcomment)
-    - [wp.getComments](#reference/classes/wp_xmlrpc_server/wp_getcomments)
-    - [wp.newComment](#reference/classes/wp_xmlrpc_server/wp_newcomment)
-    - [wp.editComment](#reference/classes/wp_xmlrpc_server/wp_editcomment)
-    - [wp.deleteComment](#reference/classes/wp_xmlrpc_server/wp_deletecomment)
-    - [wp.getCommentStatusList](#reference/classes/wp_xmlrpc_server/wp_getcommentstatuslist)
-- Options – Added in [WordPress 2.6](#support/wordpress-version/version-2-6)
-    - [wp.getOptions](#reference/classes/wp_xmlrpc_server/wp_getoptions)
-    - [wp.setOptions](#reference/classes/wp_xmlrpc_server/wp_setoptions)
-- Users – Added in [WordPress 3.5](#support/wordpress-version/version-3-5)
-    - [wp.getUsersBlogs](#reference/classes/wp_xmlrpc_server/wp_getusersblogs)
-    - [wp.getUser](#reference/classes/wp_xmlrpc_server/wp_getuser)
-    - [wp.getUsers](#reference/classes/wp_xmlrpc_server/wp_getusers)
-    - [wp.getProfile](#reference/classes/wp_xmlrpc_server/wp_getprofile)
-    - [wp.editProfile](#reference/classes/wp_xmlrpc_server/wp_editprofile)
-    - [wp.getAuthors](#reference/classes/wp_xmlrpc_server/wp_getauthors)
-
-## Obsolete Components
-
-- Categories – use Taxonomies instead, with taxonomy=’category’
-    - wp.getCategories
-    - wp.suggestCategories
-    - wp.newCategory
-    - wp.deleteCategory
-- Tags – use Taxonomies instead, with taxonomy=’post\_tag’
-    - wp.getTags
-- Pages – use Posts instead, with post\_type=’page’
-    - wp.getPage
-    - wp.getPages
-    - wp.getPageList
-    - wp.newPage
-    - wp.editPage
-    - wp.deletePage
-    - wp.getPageStatusList
-    - wp.getPageTemplates
-
-## Clients
-
-- [rubypress](https://github.com/zachfeldman/rubypress): WordPress XML-RPC client for Ruby projects. Mirrors this documentation closely, full test suite built in
-- [wordpress-xmlrpc-client](http://letrunghieu.github.io/wordpress-xmlrpc-client/): PHP client with full test suite. This library implement WordPress API closely to this documentation.
-- [WordPressSharp](http://abrudtkuhl.github.io/WordPressSharp/): XML-RPC Client for C#.net
-- [plugins/jetpack](https://wordpress.org/plugins/jetpack): Jetpack by WordPress.com enables a JSON API for sites that run the plugin
-- [plugins/json-api](https://wordpress.org/plugins/json-api/): WordPress JSON api
-
----
-
-# Internationalization <a name="apis/internationalization" />
-
-Source: https://developer.wordpress.org/apis/internationalization/
-
-## What is internationalization?
-
-Internationalization is the process of developing your application in a way it can easily be translated into other languages. Internationalization is often abbreviated as `i18n` (because there are 18 letters between the letters i and n).
-
-## Why is internationalization important?
-
-WordPress is used all over the world, by people who speak many different languages. The strings in WordPress need to be coded in a special way so that they can be easily translated into other languages. As a developer, you may not be able to provide localization for all your users; however, a translator can successfully localize your code without needing to modify the source code itself.
-
-While making your code translatable is called Internationalization, the act of translating it and adapting the strings to a specific location is called [Localization](#apis/handbook/internationalization/localization). Read more about [Localization in WordPress](#apis/handbook/internationalization/localization).
-
-## The basics
-
-In order to make a string translatable, you have to wrap the original strings in a call to one of the [WordPress i18n functions](#apis/handbook/internationalization/internationalization-functions).
-
-For example, the PHP function [\_e()](#reference/functions/_e) echoes a translatable string:
-
-```php
- _e('Edit post'); 
-```
-
-You will find code like this all over WordPress core files. However, if you are internationalizing a theme or a plugin, there is another argument that all i18n functions take called Text Domain.
-
-Text Domains set the domain your plugin or theme translations belong. This assures there is no conflict between strings in plugins, themes, and the WordPress core.
-
-With a text-domain, the most basic call to a i18n function that will output a string would be like:
-
-```php
- _e('Edit movie', 'my-plugin'); 
-```
-
-## Setting up your plugin and theme to i18n
-
-Setting up i18n is slightly different for Plugins and Themes, therefore this information is detailed in each respective Handbook:
-
-- [How to internationalize your theme](#themes/functionality/internationalization)
-- [How to internationalize your plugin](#plugins/internationalization/how-to-internationalize-your-plugin)
-
-### Internationalizing JavaScript
-
-Since WordPress 5.0 it’s possible to internationalize JavaScript files using the same set of i18n functions used in PHP.
-
-In order to be able to use i18n functions in your JavaScript code, you have to declare `wp-i18n` as a dependency on your script when registering or enqueueing it. For example:
-
-```php
-wp_register_script(
-     'my-script',
-     plugins_url( 'js/my-script.js', FILE ),
-     array( 'wp-i18n' ),
-     '0.0.1'
- );
-```
-
-Now that you have added the dependency to your script, you can use i18n functions in it, however you still have to tell WordPress to load the translations.
-
-You do this by calling `wp_set_script_translations()`. This function takes three arguments: the registered/enqueued script handle, the text domain, and optionally a path to the directory containing translation files. The latter is only needed if your plugin or theme is not hosted on WordPress.org, which provides these translation files automatically.
-
-```php
-wp_set_script_translations('my-script', 'my-plugin');
-```
-
-For better performance, always make sure to enqueue your scripts and load their translations only when they are really used.
-
-In your JavaScript code you will use i18n functions pretty much the same way you do in your PHP code:
-
-```js
-const { __, _x, _n, sprintf } = wp.i18n;
-
-// simple string
-__( 'Hello World', 'my-plugin' );
-
-// string with context
-_x( 'My Gutenberg block name', 'block name', 'my-plugin' );
-```
-
-The available i18n for you to use in your JS code are (See internationalization functions for more details):
-
-- [\_\_()](#reference/functions/__)
-- [\_x()](#reference/functions/_x)
-- [\_n()](#reference/functions/_n)
-- [\_nx()](#reference/functions/_nx)
-- sprintf()
-
-Notice that the wp-i18n package also includes the `sprintf` function. This is very useful to internationalize strings that have variables in it.
-
-Now refer to the Internationalization Guidelines to learn how to use all these functions and the best practices on writing your strings.
-
- If you are not hosting your plugin or theme on WordPress.org, you will need to create your translation files yourself. Check [this post](https://pascalbirchler.com/internationalization-in-wordpress-5-0/) out to learn how to do this.
-
-#### Internationalizing JavaScript before WP 5.0
-
-Another way to internationalize your JavaScript files is to use the [wp\_localize\_script()](#reference/functions/wp_localize_script) function.
-
-With this function you can register translatable strings and have them available in your JavaScript to be used.
-
-Please refer to the [`wp_localize_script`() reference](#reference/functions/wp_localize_script) to learn how to use it.
-
-## Internationalization Guidelines
-
-Now that you are ready to internationalize your application, read through the [Internationalization Guidelines](#apis/handbook/internationalization/internationalization-guidelines) and learn what each i18n function is for, how to use them, and the best practices when writing your strings.
-
----
-
-# Internationalization Functions <a name="apis/internationalization/internationalization-functions" />
-
-Source: https://developer.wordpress.org/apis/internationalization/internationalization-functions/
-
-Check the [Internationalization Guidelines](#apis/handbook/internationalization/internationalization-guidelines) and learn what each i18n function is for, how to use them, and the best practices when writing your strings.
-
-## Basic functions
-
-- [\_\_()](#reference/functions/__)
-- [\_e()](#reference/functions/_e)
-- [\_x()](#reference/functions/_x)
-- [\_ex()](#reference/functions/_ex)
-- [\_n()](#reference/functions/_n)
-- [\_nx()](#reference/functions/_nx)
-- [\_n\_noop()](#reference/functions/_n_noop)
-- [\_nx\_noop()](#reference/functions/_nx_noop)
-- [translate\_nooped\_plural()](#reference/functions/translate_nooped_plural())
-
-## Translate &amp; Escape functions
-
-Strings that require translation and is used in attributes of html tags must be escaped.
-
-- [esc\_html\_\_()](#reference/functions/esc_html__)
-- [esc\_html\_e()](#reference/functions/esc_html_e)
-- [esc\_html\_x()](#reference/functions/esc_html_x)
-- [esc\_attr\_\_()](#reference/functions/esc_attr__)
-- [esc\_attr\_e()](#reference/functions/esc_attr_e)
-- [esc\_attr\_x()](#reference/functions/esc_attr_x)
-
-## Date and number functions
-
-- [number\_format\_i18n()](#reference/functions/number_format_i18n)
-- [date\_i18n()](#reference/functions/date_i18n)
-
-## Functions also available in javascript
-
-- [\_\_()](#reference/functions/__)
-- [\_x()](#reference/functions/_x)
-- [\_n()](#reference/functions/_n)
-- [\_nx()](#reference/functions/_nx)
-- sprintf()
-
-Note: To be able to use these functions available in your javascript, you have to [set up your plugin/theme javascript localization](#apis/handbook/internationalization).
-
----
-
-# Internationalization Guidelines <a name="apis/internationalization/internationalization-guidelines" />
-
-Source: https://developer.wordpress.org/apis/internationalization/internationalization-guidelines/
-
-In this article, you will learn when and how to use all available i18n functions and the best practices for writing your strings.
-
-The recommendations in this article applies both for your PHP and your javascript code. You can see all the available functions for each language in the [I18n functions](#apis/handbook/internationalization/internationalization-functions) page. The functions available for javascript will also be highlighted.
-
-## Basic strings
-
-The most commonly used function is `<a href="#reference/functions/__">__()</a>`. It returns the translation of its argument:
-
-```php
-__( 'Blog Options', 'my-theme' );
-```
-
-Another simple one is `<a href="#reference/functions/_e">_e()</a>`, which outputs the translation of its argument. Instead of writing:
-
-```php
-echo __( 'WordPress is the best!', 'my-theme' );
-```
-
-you can use the shorter:
-
-```php
-_e( 'WordPress is the best!', 'my-theme' );
-```
-
-`__()`is also available for javascript
-
-## Variables
-
-If you are using variables in strings, similar to the example below, you need to use placeholders.
-
-```php
-echo 'Your city is $city.'
-```
-
-Use the `printf` family of functions. Especially helpful are `<a href="http://php.net/printf">printf</a>` and `<a href="http://php.net/sprintf">sprintf</a>`. For example:
-
-```php
-printf(
-    /* translators: %s: Name of a city */
-    __( 'Your city is %s.', 'my-theme' ),
-    $city
-);
-```
-
-Notice that the string for translation is the template `"Your city is %s."`, which is the same in both the source and at run-time.
-
-If you have more than one placeholder in a string, it is recommended that you use [argument swapping](http://www.php.net/manual/en/function.sprintf.php#example-4829). In this case, single quotes `(')` are mandatory : double quotes `(")` tell php to interpret the `$s` as the `s` variable, which is not what we want.
-
-```php
-printf(
-    /* translators: 1: Name of a city 2: ZIP code */
-    __( 'Your city is %1$s, and your zip code is %2$s.', 'my-theme' ),
-    $city,
-    $zipcode
-);
-```
-
-Here the zip code is displayed after the city name. In some languages, displaying the zip code and city in opposite order is more appropriate. Using %s prefix, as in the above example, allows for this. A translation can be written:
-
-```php
-printf(
-    /* translators: 1:ZIP code 2:Name of a city */
-    __( 'Your zip code is %2$s, and your city is %1$s.', 'my-theme' ),
-    $city,
-    $zipcode
-);
-```
-
-`sprintf` is also available for javascript translations:
-
-```js
-const zipCodeMessage = sprintf(
-    /* translators: 1:ZIP code 2:Name of a city */
-    __( 'Your zip code is %2$s, and your city is %1$s.', 'my-theme'),
-    city,
-    zipcode
-);
-```
-
-The following example tells you what not to do
-
-This is incorrect.
-
-```php
-// This is incorrect do not use.
-_e( "Your city is $city.", 'my-theme' );
-```
-
-The strings for translation are extracted from the source without executing the PHP associated with it. For example: The variable `$city` may be Vancouver, so your string will read `"Your city is Vancouver"` when the template is run but gettext won’t know what is inside the PHP variable in advance.
-
-As the value of the variable is unknown when your string is translated, it would require the translator to know every case for the variable `$country`. This is not ideal, and it is best to remove dynamic content and allow translators to focus on static content.
-
-## Plurals
-
-### Basic Pluralization
-
-If you have a string that changes when the number of items changes. In English you have `"One comment"` and `"Two comments"`. In other languages, you can have multiple plural forms. To handle this in WordPress, you can use the `<a href="#reference/functions/_n">_n()</a>` function.
-
-```php
-printf(
-    _n(
-        '%s comment',
-        '%s comments',
-        get_comments_number(),
-        'my-theme'
-    ),
-    number_format_i18n( get_comments_number() )
-);
-```
-
-`_n()` accepts 4 arguments:
-
-- singular – the singular form of the string (note that it can be used for numbers other than one in some languages, so `'%s item'` should be used instead of `'One item'`)
-- plural – the plural form of the string
-- count – the number of objects, which will determine whether the singular or the plural form should be returned (there are languages, which have far more than 2 forms)
-- text domain – the theme’s text domain
-
-The return value of the functions is the correct translated form, corresponding to the given count.
-
-`[\_n()](#reference/functions/_n) is also available for javascript
-
-### Pluralization done later
-
-You first set the plural strings with `<a href="#reference/functions/_n_noop">_n_noop()</a>` or `<a href="#reference/functions/_nx_noop">_nx_noop()</a>`.
-
-```php
-$comments_plural = _n_noop(
-    '%s comment.',
-    '%s comments.'
-);
-```
-
-At a later point in the code, you can use `<a href="#reference/functions/translate_nooped_plural">translate_nooped_plural()</a>` to load the strings.
-
-```php
-printf(
-    translate_nooped_plural(
-        $comments_plural,
-        get_comments_number(),
-        'my-theme'
-    ),
-    number_format_i18n( get_comments_number() )
-);
-```
-
-## Disambiguation by context
-
-Sometimes a term is used in more than one context and must be translated separately in other languages, even though the same word is used for each context in English. For example, the word `Post` can be used both as a verb `"Click here to post your comment"` and as a noun `"Edit this Post"`. In such cases the `<a href="#reference/functions/_x">_x()</a>` or `<a href="#reference/functions/_ex">_ex</a>()` function should be used. It is similar to `__()` and `_e()`, but it has an additional argument — the context:
-
-```php
-_x( 'Post', 'noun', 'my-theme' );
-_x( 'post', 'verb', 'my-theme' );
-```
-
-Using this method in both cases, we get the string Comment for the original version. However, translators will see two Comment strings for translation, each in a different context.
-
-Taking an example from the German version of WordPress as an illustration: Post is Beiträge. The corresponding verb form in German is beitragen.
-
-Note that similar to `__()`, `_x()` has an `echo` version: `_ex()`. The previous example could be written as:
-
-```php
-_ex( 'Post', 'noun', 'my-theme' );
-_ex( 'post', 'verb', 'my-theme' );
-```
-
-Use the one you feel enhances legibility and ease of coding.
-
-`_x() and _nx()`are also available for javascript
-
-## Descriptions
-
-You can add a clarifying comment in the source code, so translators know how to translate a string like `__( 'g:i:s a' )` . It must start with the word `translators:`, in all lowercase, and be the last PHP comment before the gettext call. Here is an example:
-
-```php
-/* translators: draft saved date format, see http://php.net/date */
-$saved_date_format = __( 'g:i:s a' );
-```
-
-Multi-line example:
-
-```php
-/*
- * translators: Replace with a city related to your locale.
- * Test that it matches the expected location and has upcoming
- * events before including it. If no cities related to your
- * locale have events, then use a city related to your locale
- * that would be recognizable to most users.
- */
-?>
-<input placeholder="<?php esc_attr_e( 'Cincinnati' ); ?>" id="location" type="text" name="location" />
-```
-
-## Newline characters
-
-Gettext doesn’t like `r` (ASCII code: 13) in translatable strings, so avoid it and use `n` instead.
-
-## Empty strings
-
-The empty string is reserved for internal Gettext usage, and you must not try to internationalize the empty string. It also doesn’t make any sense because translators won’t have context.
-
-If you have a valid use-case to internationalize an empty string, add context to both help translators and be in peace with the Gettext system.
-
-## Escaping strings
-
-It is good to escape all of your strings, preventing translators from running malicious code. There are a few escape functions that are integrated with internationalization functions.
-
-```php
-<a title="<?php esc_attr_e( 'Skip to content', 'my-theme' ); ?>" class="screen-reader-text skip-link" href="#content" >
-  <?php _e( 'Skip to content', 'my-theme' ); ?>
-</a>
-```
-
-```php
-<label for="nav-menu">
-  <?php esc_html_e( 'Select Menu:', 'my-theme' ); ?>
-</label>
-```
-
-## Best Practices for writing strings
-
-Here are the best practices for writing strings
-
-- Use decent English style – minimize slang and abbreviations.
-- Use entire sentences – in most languages, word order is different than English.
-- Split at paragraphs – merge related sentences, but do not include a whole page of text in one string.
-- Do not leave leading or trailing whitespace in a translatable phrase.
-- Assume strings can double in length when translated.
-- Avoid unusual markup and unusual control characters – do not include tags that surround your text.
-- Do not put unnecessary HTML markup into the translated string.
-- Do not leave URLs for translation, unless they could have a version in another language.
-- Add the variables as placeholders to the string as in some languages the placeholders change position.
-
-```php
-printf(
-    __( 'Search results for: %s', 'my-theme' ),
-    get_search_query()
-);
-```
-
-- Use format strings instead of string concatenation – translate phrases and not words –
-
-```php
-printf(
-    __( 'Your city is %1$s, and your zip code is %2$s.', 'my-theme' ),
-    $city,
-    $zipcode
-);
-```
-
-is always better than
-
-```php
-__( 'Your city is ', 'my-theme' ) . $city . __( ', and your zip code is ', 'my-theme' ) . $zipcode;
-```
-
-- Try to use the same words and symbols to prevent translating multiple similar strings (e.g. don’t do the following)
-
-```php
-__( 'Posts:', 'my-theme' ); and __( 'Posts', 'my-theme' );
-```
-
----
-
-# Localization <a name="apis/internationalization/localization" />
-
-Source: https://developer.wordpress.org/apis/internationalization/localization/
-
-## What is localization?
-
-Localization describes the process of translating a software and adapting its strings to a specific location. Localization is abbreviated as `l10n` (because there are 10 letters between the l and the n.)
-
-The process of localizing software has two steps. The first step is when the developers provide a mechanism and method for the eventual translation of the program and its interface to suit local preferences and languages for users worldwide. This process is [internationalization](#apis/handbook/internationalization) (i18n). WordPress developers have done this already, so in theory, WordPress can be used in any language.
-
-The second step is the actual **localization** (l10n), the process by which the text on the page and other settings are translated and adapted to another language and culture, using the framework prescribed by the developers of the software. WordPress has already been localized into many languages (see the list of [polyglots teams](https://make.wordpress.org/polyglots/teams/) for more information).
-
-## Translating WordPress, Plugins and Themes
-
-If you want to help translating WordPress, or any Theme or Plugin hosted in WordPress.org themes and plugins directories, you should go to [Translate WordPress.](https://make.wordpress.org/polyglots)
-
-There you will get to know all the translators teams and learn about [translate.wordpress.org](https://translate.wordpress.org), where you can work on translations online and in collaboration with thousands of translators around the world.
-
-## Translating Themes and Plugins
-
-If you want to translating plugins and themes that are not hosted on WordPress.org, or if, for any reason, you want to translate themes or plugins offline and directly in the plugins/themes files, you can do this creating and editing Localization Files.
-
-### Localization files
-
-There are three types of Localiztion files you need in order to translate your plugin/theme:
-
-- POT files: a template file with all your original strings
-- PO files: editable file with the translations to one language (one file per language)
-- MO files: compiled versions of the PO files, actually used by the application
-
-### POT (Portable Object Template) files
-
-This file contains the original strings (in English) in your plugin/theme. Here is an example `POT` file entry:
-
-```
-#: plugin-name.php:123
-msgid "Page Title"
-msgstr ""
-```
-
-### PO (Portable Object) files
-
-Every translator will take the `POT` file and translate the `msgstr` sections in their own language. The result is a `PO` file with the same format as a `POT`, but with translations and some specific headers. There is one PO file per language.
-
-### MO (Machine Object) files
-
-From every translated `PO` file a `MO` file is built. These are machine-readable, binary files that the gettext functions actually use (they don’t care about .POT or .PO files), and are a “compiled” version of the PO file. The conversion is done using the `msgfmt` tool. In general, an application may use more than one large logical translatable module and a different `MO` file accordingly. A text domain is a handle of each module, which has a different `MO` file.
-
-### Generating POT file
-
-The POT file is the one you need to hand to translators, so that they can do their work. The POT and PO files can easily be interchangeably renamed to change file types without issues. It is a good idea to offer the POT file along with your plugin/theme, so that translators won’t have to ask you specifically about it. There are a couple of ways to generate a POT file for your plugin:
-
-#### WP-CLI
-
-Install [WP-CLI](https://make.wordpress.org/cli/handbook/installing/) and use the `wp i18n make-pot` command according to the [documentation](#cli/commands/i18n/make-pot).
-
-Open command line and run the command like this:
-
-```
-wp i18n make-pot path/to/your-plugin-directory
-```
-
-#### Poedit
-
-You can also use [Poedit](http://www.poedit.net/) locally when translating. This is an open source tool for all major OS. The free Poedit default version supports manual scanning of all source code with Gettext functions. A pro version of it also features one-click scanning for WordPress plugins. After generating the po file you can rename the file to POT. If a mo was generated then you can delete that file as it is not needed. If you don’t have the pro version you can easily get the [Blank POT](https://github.com/fxbenard/Blank-WordPress-Pot) and use that as the base of your POT file. Once you have placed the blank POT in the languages folder you can click “Update” in Poedit to update the POT file with your strings.
-
-![internationalization-localization-03](https://i0.wp.com/developer.wordpress.org/files/2014/10/internationalization-localization-03.jpg?resize=613%2C662&ssl=1)
-
-#### Grunt Tasks
-
-There are even some grunt tasks that you can use to create the POTs. [grunt-wp-i18n](https://github.com/blazersix/grunt-wp-i18n) &amp; [grunt-pot](https://www.npmjs.org/package/grunt-pot)  
-To set it up you need to install [node.js](http://nodejs.org/). It is a simple installation. Then you need to [install grunt](http://gruntjs.com/getting-started) in the directory that you would like to use grunt in. This is done via [command line](http://leveluptuts.com/tutorials/command-line-basics). An [example Grunt.js and package.json](https://gist.github.com/grappler/10187003) that you can place in the root of your plugin. You can the grunt tasks with a simple command in the command line.
-
-### Translate PO file
-
-There are multiple ways to translate a PO file.
-
-The easiest way is to use [Poedit](http://www.poedit.net/) when translating. This is an open source tool for all major OS. The free Poedit default version supports manual scanning of all source code with Gettext functions. A pro version of it also features one-click scanning for WordPress plugins and themes.
-
-You can also use a text editor to enter the translation. In a text editor the strings will look like this.
-
-```
-#: plugin-name.php:123 
-msgid "Page Title" 
-msgstr ""
-```
-
-You can enter the translation between the quotation marks. For the German translation, the final result would look like this.
-
-```
-#: plugin-name.php:123 
-msgid "Page Title" 
-msgstr "Seitentitel"
-```
-
-A third option is to use an online translation service. The general idea is that you upload the POT file and then you can give permission to users or translators to translate your plugin. This allows you to track the changes, always have the latest translation and reduce the translation being done twice.
-
-Here are a few tools that can be used to translate PO files online:
-
-- [Transifex](https://www.transifex.com/)
-- [WebTranslateIt](https://webtranslateit.com/en)
-- [Poeditor](https://poeditor.com/)
-- [Google Translator Toolkit](http://translate.google.com/toolkit/)
-- [GlotPress](http://blog.glotpress.org/)
-
-The translated file is to be saved as `my-plugin-{locale}.mo`. The locale is the language code and/or country code you defined in the constant `WPLANG` in the file `wp-config.php`. For example, the locale for German is `de_DE`. From the code example above the text domain is ‘my-plugin’ therefore the German MO and PO files should be named `my-plugin-de_DE.mo` and `my-plugin-de_DE.po`. For more information about language and country codes, see [Installing WordPress in Your Language](https://codex.wordpress.org/Installing_WordPress_in_Your_Language).
-
-### Generate MO file
-
-#### Command line
-
-A program `msgfmt` is used to create the MO file. `msgfmt` is part of Gettext package. Otherwise command line can be used. A typical `msgfmt` command looks like this:
-
-**Unix Operating Systems**
-
-```
-msgfmt -o filename.mo filename.po
-```
-
-**Windows Operating Systems**
-
-```
-msgfmt -o filename.mo filename.po
-```
-
-#### Converting multiple PO files at once
-
-If you have a lot of `PO` files to convert at once, you can run it as a batch. For example, using a `bash` command:
-
-**Unix Operating Systems**
-
-```
-# Find PO files, process each with msgfmt and rename the result to MO 
-for file in `find . -name "*.po"` ; do msgfmt -o ${file/.po/.mo} $file ; 
-done
-```
-
-**Windows Operating Systems**  
-For Windows, you need to install [Cygwin](http://www.cygwin.com/) first.
-
-Create a file called potomo.sh with the following content:
-
-```
-#! /bin/sh # Find PO files, process each with msgfmt and rename the result to MO 
-for file in `/usr/bin/find . -name '*.po'` ; do /usr/bin/msgfmt -o ${file/.po/.mo} $file ; 
-done
-```
-
-You can then run this command in the command line.
-
-```
-cd C:/path/to/language/folder/my-plugin/languages 
-C:/cygwin/bin/bash -c /cygdrive/c/path/to/script/directory/potomo.sh
-```
-
-#### Poedit
-
-`msgfmt` is also integrated in [Poedit](http://www.poedit.net/) allowing you to use it to generate the MO file. There is a setting in the preferences where you can enable or disable it.
-
-![internationalization-localization-04](https://i0.wp.com/developer.wordpress.org/files/2014/10/internationalization-localization-04.jpg?resize=436%2C448&ssl=1)
-
-#### Grunt task
-
-There is [grunt-po2mo](https://www.npmjs.org/package/grunt-po2mo) that will convert all of the files.
-
-## Tips for Good Translations
-
-### Don’t translate literally, translate organically
-
-Being bi- or multi-lingual, you undoubtedly know that the languages you speak have different structures, rhythms, tones, and inflections. Translated messages don’t need to be structured the same way as the English ones: take the ideas that are presented and come up with a message that expresses the same thing in a natural way for the target language. It’s the difference between creating an equal message and an equivalent message: don’t replicate, replace. Even with more structural items in messages, you have creative license to adapt and change if you feel it will be more logical for, or better adapted to, your target audience.
-
-### Try to keep the same level of formality (or informality)
-
-Each message has a different level of formality or informality. Exactly what level of formality or informality to use for each message in your target language is something you’ll have to figure out on your own (or with your team), but WordPress messages (informational messages in particular) tend to have a politely informal tone in English. Try to accomplish the equivalent in the target language, within your cultural context.
-
-### Don’t use slang or audience-specific terms
-
-Some amount of terminology is to be expected in a blog, but refrain from using colloquialisms that only the “in” crowd will get. If the uninitiated blogger were to install WordPress in your language, would they know what the term means? Words like pingback, trackback, and feed are exceptions to this rule; they’re terminology that are typically difficult to translate, and many translators choose to leave in English.
-
-### Read other software’s localizations in your language
-
-If you get stuck or need direction, try reading through the translations of other popular software tools to get a feel for what terms are commonly used, how formality is addressed, etc. Of course, WordPress has its own tone and feel, so keep that in mind when you’re reading other localizations, but feel free to dig up UI terms and the like to maintain consistency with other software in your language.
-
-## Using Localizations
-
-Place the localization files in the language folder, either in the plugin `languages` folder or as of WordPress 3.7 in the plugin `languages` folder normally under `wp-content`. The full path would be `wp-content/languages/plugins/my-plugin-fr_FR.mo`.
-
-As of [WordPress 4.0](https://make.wordpress.org/core/2014/09/05/language-chooser-in-4-0/) you can change the language in the “General Settings”. If you do not see any option or the language that you want to switch to then do the following steps:
-
-- Define WPLANG inside of wp-config.php to your chosen language. For example, if you wanted to use french, you would have: ```php
-    define ('WPLANG', 'fr_FR');
-    ```
-- Go to `wp-admin/options-general.php` or “Settings” -&gt; “General”
-- Select your language in “Site Language” dropdown
-- Go to `wp-admin/update-core.php`
-- Click “Update translations”, when available
-- Core translations files are downloaded, when available
-
-## Resources
-
-- [Creating .pot file for your theme or plugin](https://foxland.fi/creating-pot-file-for-your-theme-or-plugin/)
-- [How To Internationalize WordPress Plugins](http://tommcfarlin.com/internationalize-wordpress-plugins/)
-- [Translating Your Theme](http://wp.tutsplus.com/tutorials/theme-development/translating-your-theme/)
-- [Blank WordPress POT](https://github.com/fxbenard/Blank-WordPress-Pot)
-- [Improved i18n WordPress tools](https://github.com/grappler/i18n)
-- [How to update translations quickly](http://ulrich.pogson.ch/update-translations-quickly)
-- [Workflow between GitHub/Transifex](http://wp-translations.org/workflow-using-github/)
-- [Gist: Complete Localization Grunt task](https://gist.github.com/grappler/10187003)
-- [WordPress.tv](http://wordpress.tv/) tags: [i18n](http://wordpress.tv/tag/i18n/), [internationalization](http://wordpress.tv/tag/internationalization/) and [translation](http://wordpress.tv/tag/translation/)
-
----
-
-# Performance <a name="apis/making-http-requests/performance" />
-
-Source: https://developer.wordpress.org/apis/making-http-requests/performance/
-
-When you make an HTTP request, your application has to wait for the external server to respond to the request and for all the data to be transferred over the network. This can be very time consuming, and your application performance might be heavily impacted.
-
-## Caching
-
-That’s why you should always consider caching your API requests, so you don’t have to do them all the time.
-
-Caching the response means storing the response on your server so you can easily use it multiple times without the need of an HTTP request every time.
-
-For example, let’s say your site makes an HTTP request to Github to fetch your user’s stats and display it on your sidebar. If you don’t cache, every visitor in your site will trigger that API request and wait for github to response. And if you stop and think, they are all seeing the same information, because your stats don’t change so fast.
-
-In the other hand, if you use cache, only the first visitor will have to wait for Github to respond. All the next users will see the same information that was quickly grabbed from the local database.
-
-You can then define how often this information has to be updated. In other words, how often the cache has to be cleaned.
-
-There are multiple apporaches to caching. An easy one provided by WordPress is the [Transient API](#apis/handbook/transients). Check it out!
-
-## Check Headers
-
-Many APIs allow you to make a HEAD request to check the status of things before actually retrieving the data you want. For example, you can make a HEAD request to check if there’s an update, before doing a GET request to actually fetch the data. This is a much faster request because it only responds a short piece of information.
-
-Check the Advanced &gt; Headers section for more information.
-
----
-
-# POSTing data to an external service <a name="apis/making-http-requests/posting-data-to-an-external-service" />
-
-Source: https://developer.wordpress.org/apis/making-http-requests/posting-data-to-an-external-service/
-
-POST is used to send data to the server for the server to act upon in some way. For example, a contact form. When you enter data into the form fields and click the submit button the browser takes the data and sends a POST request to the server with the text you entered into the form. From there the server will process the contact request.
-
-## POSTing data to an API
-
-The same helper methods (`<a href="#reference/functions/wp_remote_retrieve_body">wp_remote_retrieve_body()</a>`, etc ) are available for all of the HTTP method requests, and utilized in the same fashion.
-
-POSTing data is done using the `<a href="#reference/functions/wp_remote_post">wp_remote_post()</a>` function, and takes exactly the same parameters as `<a href="#reference/functions/wp_remote_get">wp_remote_get()</a>`.
-
-To send data to the server you will need to build an associative array of data. This data will be assigned to the `'body'` value. From the server side of things the value will appear in the `$_POST` variable as you would expect. i.e. if `body => array( 'myvar' => 5 )` on the server `$_POST['myvar'] = 5`.
-
-Because GitHub does not allow POSTing to the API used in the previous example, this example will pretend that it does. Typically if you want to POST data to an API you will need to contact the maintainers of the API and get an API key or some other form of authentication token. This simply proves that your application is allowed to manipulate data on the API the same way logging into a website as a user does to the website.
-
-Let’s assume we are submitting a contact form with the following fields: name, email, subject, comment. To set up the body we do the following:
-
-```php
-$body = array(
-	'name'    => sanitize_text_field( 'Jane Smith' ),
-	'email'   => sanitize_email( 'some@email.com' ),
-	'subject' => sanitize_text_field( 'Checkout this API stuff' ),
-	'comment' => sanitize_textarea_field( 'I just read a great tutorial. You gotta check it out!' ),
-);
-```
-
-Now we add the body to the `$args` array that will be passed as the second argument. (The second argument accepts many options, see Advanced section for more details)
-
-```php
-$args = array(
-	'body'        => $body,
-);
-```
-
-  
-Then of course to make the call
-
-```php
-$response = wp_remote_post( 'https://your-contact-form.com', $args );
-```
-
----
-
-# GETting data from an external service <a name="apis/making-http-requests/getting-data-from-an-external-service" />
-
-Source: https://developer.wordpress.org/apis/making-http-requests/getting-data-from-an-external-service/
-
-GETting data is made incredibly simple in WordPress through the `<a href="#reference/functions/wp_remote_get" title="wp_remote_get">wp_remote_get()</a>` function. This function takes the following two arguments:
-
-1. `$url` – Resource to retrieve data from. This must be in a standard HTTP format
-2. `$args` – OPTIONAL – You may pass an array of arguments in here to alter behavior and headers, such as cookies, follow redirects, etc.
-
-The following defaults are assumed, though they can be changed via the `$args` parameter:
-
-- method – GET
-- timeout – 5 – How long to wait before giving up
-- redirection – 5 – How many times to follow redirections.
-- httpversion – 1.0
-- blocking – true – Should the rest of the page wait to finish loading until this operation is complete?
-- headers – array()
-- body – null
-- cookies – array()
-
-Because [GitHub](https://github.com/) provides an excellent API that does not require app registration for many public aspects we will target GitHub API in the following examples.
-
-Let’s use the URL to a GitHub WordPress organization and see what sort of information we can get.
-
-```php
-$response = wp_remote_get( 'https://api.github.com/users/wordpress' );
-```
-
-`$response` will contain all the headers, content, and other meta data about our request.
-
-Response from previous example will be something like
-
-```php
-Array(
-	[headers] => Array(
-		[server] => nginx
-		[date] => Fri, 05 Oct 2012 04:43:50 GMT
-		[content-type] => application/json; charset=utf-8
-		[connection] => close
-		[status] => 200 OK
-		[vary] => Accept
-		[x-ratelimit-remaining] => 4988
-		[content-length] => 594
-		[last-modified] => Fri, 05 Oct 2012 04:39:58 GMT
-		[etag] => "5d5e6f7a09462d6a2b473fb616a26d2a"
-		[x-github-media-type] => github.beta
-		[cache-control] => public, s-maxage=60, max-age=60
-		[x-content-type-options] => nosniff
-		[x-ratelimit-limit] => 5000
-	)
-
-	[body] => {
-"login": "WordPress",
-"id": 276006,
-"node_id": "MDEyOk9yZ2FuaXphdGlvbjI3NjAwNg==",
-"avatar_url": "https://avatars0.githubusercontent.com/u/276006?v=4",
-"gravatar_id": "",
-"url": "https://api.github.com/users/WordPress",
-"html_url": "https://github.com/WordPress",
-"followers_url": "https://api.github.com/users/WordPress/followers",
-"following_url": "https://api.github.com/users/WordPress/following{/other_user}",
-"gists_url": "https://api.github.com/users/WordPress/gists{/gist_id}",
-"starred_url": "https://api.github.com/users/WordPress/starred{/owner}{/repo}",
-"subscriptions_url": "https://api.github.com/users/WordPress/subscriptions",
-"organizations_url": "https://api.github.com/users/WordPress/orgs",
-"repos_url": "https://api.github.com/users/WordPress/repos",
-"events_url": "https://api.github.com/users/WordPress/events{/privacy}",
-"received_events_url": "https://api.github.com/users/WordPress/received_events",
-"type": "Organization",
-"site_admin": false,
-"name": null,
-"company": null,
-"blog": "https://wordpress.org/",
-"location": null,
-"email": null,
-"hireable": null,
-"bio": null,
-"twitter_username": null,
-"public_repos": 50,
-"public_gists": 0,
-"followers": 0,
-"following": 0,
-"created_at": "2010-05-13T22:42:10Z",
-"updated_at": "2020-05-22T14:27:02Z"
-}
-	[response] => Array(
-		[preserved_text 5237511b45884ac6db1ff9d7e407f225 /] => 200
-		[message] => OK
-	)
-
-	[cookies] => Array()
-	[filename] =>
-)
-```
-
-### GET the body you always wanted
-
-To retrieve response body use `<a href="#reference/functions/wp_remote_retrieve_body" title="wp_remote_retrieve_body">wp_remote_retrieve_body()</a>` function. This function takes just one parameter, the response from `<a href="#reference/functions/wp_remote_get">wp_remote_get()</a>` function.
-
-```php
-$response = wp_remote_get( 'https://api.github.com/users/wordpress' );
-$body     = wp_remote_retrieve_body( $response );
-```
-
-Using the `$response` from the previous example, `$body` will be something like:
-
-```php
-{
-"login": "WordPress",
-"id": 276006,
-"node_id": "MDEyOk9yZ2FuaXphdGlvbjI3NjAwNg==",
-"avatar_url": "https://avatars0.githubusercontent.com/u/276006?v=4",
-"gravatar_id": "",
-"url": "https://api.github.com/users/WordPress",
-"html_url": "https://github.com/WordPress",
-"followers_url": "https://api.github.com/users/WordPress/followers",
-"following_url": "https://api.github.com/users/WordPress/following{/other_user}",
-"gists_url": "https://api.github.com/users/WordPress/gists{/gist_id}",
-"starred_url": "https://api.github.com/users/WordPress/starred{/owner}{/repo}",
-"subscriptions_url": "https://api.github.com/users/WordPress/subscriptions",
-"organizations_url": "https://api.github.com/users/WordPress/orgs",
-"repos_url": "https://api.github.com/users/WordPress/repos",
-"events_url": "https://api.github.com/users/WordPress/events{/privacy}",
-"received_events_url": "https://api.github.com/users/WordPress/received_events",
-"type": "Organization",
-"site_admin": false,
-"name": null,
-"company": null,
-"blog": "https://wordpress.org/",
-"location": null,
-"email": null,
-"hireable": null,
-"bio": null,
-"twitter_username": null,
-"public_repos": 50,
-"public_gists": 0,
-"followers": 0,
-"following": 0,
-"created_at": "2010-05-13T22:42:10Z",
-"updated_at": "2020-05-22T14:27:02Z"
-}
-```
-
-### GET the response code
-
-You may want to check the response code to ensure your retrieval was successful. This can be done via the `<a href="#reference/functions/wp_remote_retrieve_response_code">wp_remote_retrieve_response_code()</a>` function:
-
-```php
-$http_code = wp_remote_retrieve_response_code( $response );
-```
-
-If successful `$http_code` will contain `200`. Otherwise, it will contain some HTTP status codes.
-
-### GET a specific header
-
-If your desire is to retrieve a specific header, say last-modified, you can do so with [wp\_remote\_retrieve\_header()](#reference/functions/wp_remote_retrieve_header). This function takes two parameters
-
-1. `$response` – The response from the get call
-2. `$header` – Name of the header to retrieve
-
-To retrieve the last-modified header:
-
-```php
-$last_modified = wp_remote_retrieve_header( $response, 'last-modified' );
-```
-
-You can also retrieve all of the headers in an array with [wp\_remote\_retrieve\_headers()](#reference/functions/wp_remote_retrieve_headers) function.
-
-### GET using basic authentication
-
-APIs that are secured more provide one or more of many different types of authentication. A common, though not highly secure, the authentication method is HTTP Basic Authentication. It can be used in WordPress bypassing ‘Authorization’ to the second parameter of the `<a href="#reference/functions/wp_remote_get">wp_remote_get()</a>` function, as well as the other HTTP method functions.
-
-```php
-$args = array(
-    'headers' => array(
-        'Authorization' => 'Basic ' . base64_encode( YOUR_USERNAME . ':' . YOUR_PASSWORD )
-    )
-);
-wp_remote_get( $url, $args );
-```
-
-MORE ABOUT AUTH
-
----
-
-# Advanced <a name="apis/making-http-requests/advanced" />
-
-Source: https://developer.wordpress.org/apis/making-http-requests/advanced/
-
-Here are some advanced usage of the HTTP API.
-
-## Other methods
-
-GET and POST are the most commonly used methods when making a HTTP request, but there are many others, such as DELETE, PUT, PATCH, OPTIONS, etc.
-
-The WordPress HTTP API does not have one specific helper function for each method, but rest assured that the great people developing WordPress already thought of that and lovingly provided `<a href="#reference/functions/wp_remote_request">wp_remote_request()</a>`. This function takes the same two parameters as `<a href="#reference/functions/wp_remote_get">wp_remote_get()</a>`, and allows you to specify the HTTP method as well. What data you need to pass along is up to your method.
-
-To send a DELETE method, for example, you may have something similar to the following:
-
-```php
-$args     = array(
-	'method' => 'DELETE',
-);
-$response = wp_remote_request( 'http://some-api.com/object/to/delete', $args );
-```
-
-## Options
-
-As you probably noticed by now, all the helper functions take a second `$args` parameter that allows you to set additional options to your request.
-
-For example, `timeout` allows for setting the time in seconds, before the connection is dropped and an error is returned. The `httpversion` argument sets the HTTP version and defaults to ‘1.0’, however depending on the service you are interacting with you may need to set this to ‘1.1’.
-
-Check `<a href="#reference/classes/WP_Http/request">WP_Http::request()</a>` method documentation for all available options and what they do.
-
-## Headers
-
-It can be pretty important, and sometimes required by the API, to check a resource status using HEAD before retrieving it. On high traffic APIs, GET is often limited to number of requests per minute or hour. There is no need to even attempt a GET request unless the HEAD request shows that the data on the API has been updated.
-
-Going back to the GitHub example, here are are few headers to watch out for. Most of these headers are standard, but you should always check the API docs to ensure you understand which headers are named what, and their purpose.
-
-- `x-ratelimit-limit` – Number of requests allowed in a time period
-- `x-ratelimit-remaining` – Number of remaining available requests in time period
-- `content-length` – How large the content is in bytes. Can be useful to warn the user if the content is fairly large
-- `last-modified` – When the resource was last modified. Highly useful to caching tools
-- `cache-control` – How should the client handle caching
-
-The following will check the HEAD value of my GitHub user account:
-
-```php
-$response = wp_remote_head( 'https://api.github.com/users/wordpress' );
-```
-
-`$response` should look similar to:
-
-```php
-Array(
-	[headers] => Array
-		(
-		[server] => nginx
-		[date] => Fri, 05 Oct 2012 05:21:26 GMT
-		[content-type] => application/json; charset=utf-8
-		[connection] => close
-		[status] => 200 OK
-		[vary] => Accept
-		[x-ratelimit-remaining] => 4982
-		[content-length] => 594
-		[last-modified] => Fri, 05 Oct 2012 04:39:58 GMT
-		[etag] => "5d5e6f7a09462d6a2b473fb616a26d2a"
-		[x-github-media-type] => github.beta
-		[cache-control] => public, s-maxage=60, max-age=60
-		[x-content-type-options] => nosniff
-		[x-ratelimit-limit] => 5000
-	)
-    [body] =>
-    [response] => Array
-		(
-		[preserved_text 39a8515bd2dce2aa06ee8a2a6656b1de /] => 200
-		[message] => OK
-	)
-    [cookies] => Array(
-	)
-	[filename] =>
-)
-```
-
-  
-All of the same helper functions can be used on this function as with the previous two. The exception here being that HEAD never returns a body, so that element will always be empty.
-
----
-
-# Authentication <a name="apis/making-http-requests/authentication" />
-
-Source: https://developer.wordpress.org/apis/making-http-requests/authentication/
-
-Many APIs will require you to make authenticated requests to access some endpoints. A common authentication method is called HTTP Basic Authentication. It can be used in WordPress using the ‘Authorization’ header `<a href="#reference/functions/wp_remote_get">wp_remote_get()</a>`.
-
-```php
-$args = array(
-    'headers' => array(
-        'Authorization' => 'Basic ' . base64_encode( YOUR_USERNAME . ':' . YOUR_PASSWORD )
-    )
-);
-wp_remote_get( $url, $args );
-```
-
-HTTP Basic Auth is very insecure because it exposes the username and password and is only used for testing and development. Check the documentation of the API you want to access for more information on how to authenticate.
-
-If you want to make authenticated requests to the WordPress REST API, check [this article](#rest-api/using-the-rest-api/authentication).
-
----
-
-# Making HTTP requests <a name="apis/making-http-requests" />
-
-Source: https://developer.wordpress.org/apis/making-http-requests/
-
-Very often we need to make HTTP requests from our theme or plugin, for example when we need to fetch data from an external API. Luckily WordPress has many helper functions to help you do that.
-
-In this section, you will learn how to properly make HTTP requests and handle their responses.
-
-Here’s an example of what you’re going to see
-
-```php
-$response = wp_remote_get( 'https://api.github.com/users/wordpress' );
-$body     = wp_remote_retrieve_body( $response );
-```
-
-In the next articles you’ll see a detailed explanation on how to make the requests:
-
-- [GETting data from an external service](#apis/making-http-requests/getting-data-from-an-external-service)
-- [POSTing data to an external service](#apis/making-http-requests/posting-data-to-an-external-service)
-- [Performance](#apis/making-http-requests/performance)
-- [Advanced](#apis/making-http-requests/advanced)
-- [Authentication](#apis/making-http-requests/authentication)
-
-If you’re just looking for the available helper functions, here they are:
-
-The functions below are the ones you will use to retrieve a URL.
-
-- [`wp_remote_get()`](#reference/functions/wp_remote_get): Retrieves a URL using the GET HTTP method.
-- [`wp_remote_post()`](#reference/functions/wp_remote_post): Retrieves a URL using the POST HTTP method.
-- [`wp_remote_head()`](#reference/functions/wp_remote_head): Retrieves a URL using the HEAD HTTP method.
-- [`wp_remote_request()`](#reference/functions/wp_remote_request): Retrieves a URL using either the default GET or a custom HTTP method that you specify.
-
-The other helper functions deal with retrieving different parts of the response. These make usage of the API very simple and are the preferred method for processing response objects.
-
-- `<a href="#reference/functions/wp_remote_retrieve_body">wp_remote_retrieve_body()</a>` – Retrieves just the body from the response.
-- `<a href="#reference/functions/wp_remote_retrieve_header">wp_remote_retrieve_header()</a>` – Retrieve a single header by name from the raw response.
-- `<a href="#reference/functions/wp_remote_retrieve_headers">wp_remote_retrieve_headers()</a>` – Retrieve only the headers from the raw response.
-- `<a href="#reference/functions/wp_remote_retrieve_response_code">wp_remote_retrieve_response_code()</a>` – Retrieve the response code for the HTTP response. This should be 200, but could be 4xx or even 3xx on failure.
-- `<a href="#reference/functions/wp_remote_retrieve_response_message">wp_remote_retrieve_response_message()</a>` – Retrieve only the response message from the raw response.
 
 ---
 
@@ -3671,908 +134,19 @@ $img_srcset = wp_get_attachment_image_srcset( $attachment_id, 'medium' );
 
 ---
 
-# Site Health <a name="apis/site-health" />
+# Hooks <a name="apis/hooks" />
 
-Source: https://developer.wordpress.org/apis/site-health/
+Source: https://developer.wordpress.org/apis/hooks/
 
-Since WordPress 5.8, developers are allowed to extend Site Health screen. This API allows developers to add their own tabs to the Site Health interface.
+Hooks are a way for one piece of code to interact/modify another piece of code at specific, pre-defined spots.
 
-![](https://i0.wp.com/make.wordpress.org/core/files/2021/06/4-menu-items.png?ssl=1)## Registering a custom tab navigation
+You can read more about how to use Hooks in the [Plugin Developer Handbook](#plugins/hooks).
 
-Developers need to start by creating a navigation element, so that users may access the new tab. This is done using the `site_health_navigation_tabs` filter, which is an associated array of tab keys, and their label.
+The reference guides below are a list of action and filter hooks available in WordPress.
 
-```php
-<?php
-function wporg_example_site_health_navigation_tabs( $tabs ) {
-    // translators: Tab heading for Site Health navigation.
-    $tabs['example-site-health-tab'] = esc_html_x( 'My New Tab', 'Site Health', 'text-domain' );
- 
-    return $tabs;
-}
-add_filter( 'site_health_navigation_tabs', 'wporg_example_site_health_navigation_tabs' );
-```
+[Action Reference](#apis/action-reference)
 
-The above example will add the identifier `example-site-health-tab` with the label `My New Tab` to the header navigation located in Site Health screens.
-
-It is also possible to re-order what tabs are displayed first using this filter, or even remove tabs. By default core has two tabs, the `Status` and `Info` screens. The `Status` screen is the default, and therefore has no slug.
-
-To not overburden the navigation area, if there are more than 4 items added, only the first three will be displayed directly, with the remaining items being wrapped inside a sub-navigation. This is based on usage testing in the Health Check plugin, where 4 items have shown to be enough to cover most use cases, but not so many as to become confusing.
-
-## Displaying the content of a custom tab
-
-When a user visits a Site Health tab, other than the default screen, the `site_health_tab_content` action triggers. This action includes a single argument being the slug, as defined by the tab navigation in the previous filter, to help developers to identify which page is being requested.
-
-The action fires after the header itself has been loaded, but does not include any wrappers. This gives you as a developer the full width of the screen (not counting the admin menu) to work with.
-
-```php
-<?php
-function wporg_example_site_health_tab_content( $tab ) {
-    // Do nothing if this is not our tab.
-    if ( 'example-site-health-tab' !== $tab ) {
-        return;
-    }
- 
-    // Include the interface, kept in a separate file just to differentiate code from views.
-    include trailingslashit( plugin_dir_path( __FILE__ ) ) . 'views/site-health-tab.php';
-}
-add_action( 'site_health_tab_content', 'wporg_example_site_health_tab_content' );
-```
-
-The above example loads in a file with your tab content from your plugin, but only if the tab matches the tab key (or slug if you will) which was defined in the previous example.
-
-It is possible to provide output on any tab this way, or on another tab not your own, for example if they interact with each other.
-
-Another example might be to extend the default `Info` tab, which has the slug `debug`, and add a button to copy some information specific to only your plugin or theme:
-
-```php
-<?php
-function wporg_add_button_to_site_health_info_tab( $tab ) {
-    // Do nothing if this is not the "debug" tab.
-    if ( 'debug' !== $tab ) {
-        return;
-    }
-    ?>
-    <button class="copy-my-plugin-info">
-        <?php esc_html_e( 'Click to copy plugin info', 'text-domain' ); ?>
-    </button>
-    <?php
-}
-add_action( 'site_health_tab_content', 'wporg_add_button_to_site_health_info_tab' );
-```
-
----
-
-# wp-config.php <a name="apis/wp-config-php" />
-
-Source: https://developer.wordpress.org/apis/wp-config-php/
-
-One of the most important files in your WordPress installation is the `wp-config.php` file. This file is located in the root of your WordPress file directory and contains your website’s base configuration details, such as database connection information.
-
-## Configure Database Settings
-
-**Important:** *Never* use a word processor like Microsoft Word for editing WordPress files!
-
-Locate the file `wp-config-sample.php` in the base directory of your WordPress directory and open in a [text editor](https://wordpress.org/support/article/editing-files/#text-editors).
-
-### Default wp-config-sample.php
-
-Note: This is an example of a default [wp-config-sample.php](https://core.trac.wordpress.org/browser/trunk/wp-config-sample.php). The values here are examples to show you what to do.
-
-```php
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define( 'DB_NAME', 'database_name_here' );
-/** MySQL database username */
-define( 'DB_USER', 'username_here' );
-/** MySQL database password */
-define( 'DB_PASSWORD', 'password_here' );
-/** MySQL hostname */
-define( 'DB_HOST', 'localhost' );
-```
-
-**Note:** Text inside /\* \*/ are *[comments](http://www.php.net/manual/en/language.basic-syntax.comments.php)*, for information purposes only.
-
-#### Set Database Name
-
-Replace ‘database\_name\_here’, with the name of your database, e.g. *MyDatabaseName*.
-
-```php
-define( 'DB_NAME', 'MyDatabaseName' ); // Example MySQL database name
-```
-
-#### Set Database User
-
-Replace ‘username\_here’, with the name of your username e.g. *MyUserName*.
-
-```php
-define( 'DB_USER', 'MyUserName' ); // Example MySQL username
-```
-
-#### Set Database Password
-
-Replace ‘password\_here’, with the your password, e.g. *MyPassWord*.
-
-```php
-define( 'DB_PASSWORD', 'MyPassWord' ); // Example MySQL password
-```
-
-#### Set Database Host
-
-If needed, replace ‘*localhost*‘, with the name of your database host (e.g. *MyDatabaseHost*). A port number or Unix socket file path may be needed as well.
-
-```php
-define( 'DB_HOST', 'MyDatabaseHost' ); // Example MySQL Database host
-```
-
-**Note:** There is a good chance you will **NOT** have to change it. If you are unsure, try installing with the default value of ‘localhost’ and see if it works. If the install fails, contact your web hosting provider.
-
-##### MySQL Alternate Port
-
-If your host uses an alternate port number for your database, you’ll need to change the **DB\_HOST** value in the `wp-config.php` file to reflect the alternate port provided by your host.
-
-For localhost:
-
-```php
-define( 'DB_HOST', '127.0.0.1:3307' );
-or
-define( 'DB_HOST', 'localhost:3307' );
-```
-
-For specified server:
-
-```php
-define( 'DB_HOST', 'mysql.example.com:3307' );
-```
-
-Replace the number **3307** in either of the code examples above with the port number information provided by your host.
-
-##### MySQL Sockets or Pipes
-
-If your host uses Unix sockets or pipes, you’ll need to change the **DB\_HOST** value in the `wp-config.php` file to reflect the socket or pipe information provided by your host.
-
-```php
-define( 'DB_HOST', '127.0.0.1:/var/run/mysqld/mysqld.sock' );
-// or define( 'DB_HOST', 'localhost:/var/run/mysqld/mysqld.sock' );
-// or define( 'DB_HOST', 'example.tld:/var/run/mysqld/mysqld.sock' );
-
-```
-
-Replace the text string `<strong>/var/run/mysqld/mysqld.sock</strong>` above with the socket or pipe information provided by your host.
-
-### Database character set
-
-**DB\_CHARSET** was made available to allow designation of the database [character set](https://codex.wordpress.org/Glossary#Character_Set) (e.g. tis620 for TIS620 Thai) to be used when defining the MySQL database tables.
-
-The default value of **utf8** ([Unicode](http://en.wikipedia.org/wiki/Unicode) [UTF-8](http://en.wikipedia.org/wiki/UTF-8)) is almost always the best option. UTF-8 supports any language, so you typically want to leave DB\_CHARSET at **utf8** and use the [DB\_COLLATE](https://codex.wordpress.org/Editing_wp-config.php#Database_collation) value for your language instead.
-
-This example shows utf8 which is considered the WordPress default value:
-
-```php
-define( 'DB_CHARSET', 'utf8' );
-```
-
-There usually should be no reason to change the default value of DB\_CHARSET. If your blog needs a different character set, please read [Character Sets and Collations MySQL Supports](http://dev.mysql.com/doc/refman/5.6/en/charset-charsets.html) for valid DB\_CHARSET values. **WARNING:** Those performing upgrades.
-
-If DB\_CHARSET and DB\_COLLATE do not exist in your `wp-config.php` file, **DO NOT** add either definition to your `wp-config.php` file unless you read and understand [Converting Database Character Sets](https://codex.wordpress.org/Converting_Database_Character_Sets). Adding DB\_CHARSET and DB\_COLLATE to the `wp-config.php` file, for an existing blog, can cause major problems.
-
-### Database collation
-
-**DB\_COLLATE** was made available to allow designation of the database [collation](https://codex.wordpress.org/Glossary#Collation) (i.e. the sort order of the character set). In most cases, this value should be left blank (null) so the database collation will be automatically assigned by MySQL based on the database character set specified by DB\_CHARSET. An example of when you may need to set ''’DB\_COLLATE''’ to one of the UTF-8 values defined in [UTF-8 character sets](http://dev.mysql.com/doc/refman/5.6/en/charset-unicode-sets.html) for most Western European languages would be when a different language in which the characters that you entered are not the same as what is being displayed. (See also [Unicode Character Sets](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-sets.html#charset-unicode-sets-general-versus-unicode) in SQL Manual)
-
-The WordPress default DB\_COLLATE value:
-
-```php
-define( 'DB_COLLATE', '' );
-```
-
-UTF-8 Unicode General collation
-
-```php
-define( 'DB_COLLATE', 'utf8_general_ci' );
-```
-
-UTF-8 Unicode Turkish collation
-
-```php
-define( 'DB_COLLATE', 'utf8_turkish_ci' );
-```
-
-There usually should be no reason to change the default value of DB\_COLLATE. Leaving the value blank (null) will insure the collation is automatically assigned by MySQL when the database tables are created. **WARNING:** Those performing upgrades
-
-If DB\_COLLATE and DB\_CHARSET do not exist in your `wp-config.php` file, **DO NOT** add either definition to your `wp-config.php` file unless you read and understand [Converting Database Character Sets](https://codex.wordpress.org/Converting_Database_Character_Sets). And you may be in need of a WordPress upgrade.
-
-### Security Keys
-
-You don’t have to remember the keys, just make them long, random and complicated — or better yet, use the [online generator](https://api.wordpress.org/secret-key/1.1/salt/). You can change these at any point in time to invalidate all existing cookies. This does mean that all users will have to login again.
-
-Example (don’t use these!):
-
-```php
-define( 'AUTH_KEY',         't`DK%X:>xy|e-Z(BXb/f(Ur`8#~UzUQG-^_Cs_GHs5U-&Wb?pgn^p8(2@}IcnCa|' );
-define( 'SECURE_AUTH_KEY',  'D&ovlU#|CvJ##uNq}bel+^MFtT&.b9{UvR]g%ixsXhGlRJ7q!h}XWdEC[BOKXssj' );
-define( 'LOGGED_IN_KEY',    'MGKi8Br(&{H*~&0s;{k0<S(O:+f#WM+q|npJ-+P;RDKT:~jrmgj#/-,[hOBk!ry^' );
-define( 'NONCE_KEY',        'FIsAsXJKL5ZlQo)iD-pt??eUbdc{_Cn<4!d~yqz))&B D?AwK%)+)F2aNwI|siOe' );
-define( 'AUTH_SALT',        '7T-!^i!0,w)L#JK@pc2{8XE[DenYI^BVf{L:jvF,hf}zBf883td6D;Vcy8,S)-&G' );
-define( 'SECURE_AUTH_SALT', 'I6`V|mDZq21-J|ihb u^q0F }F_NUcy`l,=obGtq*p#Ybe4a31R,r=|n#=]@]c #' );
-define( 'LOGGED_IN_SALT',   'w<$4c$Hmd%/*]`Oom>(hdXW|0M=X={we6;Mpvtg+V.o<$|#_}qG(GaVDEsn,~*4i' );
-define( 'NONCE_SALT',       'a|#h{c5|P &xWs4IZ20c2&%4!c(/uG}W:mAvy<I44`jAbup]t=]V<`}.py(wTP%%' );
-```
-
-A **secret key** makes your site harder to successfully attack by adding random elements to the password.
-
-In simple terms, a secret key is a password with elements that make it harder to generate enough options to break through your security barriers. A password like “password” or “test” is simple and easily broken. A random, long password which uses no dictionary words, such as “88a7da62429ba6ad3cb3c76a09641fc” would take a brute force attacker millions of hours to crack. A ‘*salt* is used to further enhance the security of the generated result.
-
-The four keys are required for the enhanced security. The four salts are recommended, but are not required, because WordPress will generate salts for you if none are provided. They are included in `wp-config.php` by default for inclusiveness.
-
-For more information on the technical background and breakdown of secret keys and secure passwords, see:
-
-- [Wikipedia’s explanation of Password Cracking](http://en.wikipedia.org/wiki/Password_cracking)
-- [Lorelle VanFossen – Protect Your Blog With a Solid Password](http://www.blogherald.com/2007/05/08/protect-your-blog-with-a-solid-password/)
-- [Instructables – Security Password Tips](http://www.instructables.com/id/How-to-Choose-a-Good-Password-A-few-quick-tips-on/)
-- [Huffington Post – 17 Tips You Can Do Today to Protect Your Online Passwords](http://www.huffingtonpost.com/arkady-bukh/17-tips-you-can-do-today-to-protect-your-online-passwords_b_6812478.html/)
-
-## Advanced Options
-
-The following sections may contain advanced information and some changes might result in unforeseen issues. Please make sure you practice [regular backups](/support/article/wordpress-backups/) and know how to restore them before modifying these settings.
-
-### table\_prefix
-
-The **$table\_prefix** is the value placed in the front of your database tables. Change the value if you want to use something other than **wp\_** for your database prefix. Typically this is changed if you are [installing multiple WordPress blogs](/support/article/installing-multiple-blogs/) in the same database, as is done with the multisite feature.
-
-It is possible to have multiple installations in one database if you give each a unique prefix. Keep security in mind if you choose to do this.
-
-```php
-$table_prefix = 'r235_'; // Only numbers, letters, and underscores please!
-```
-
-### WP\_SITEURL
-
-WP\_SITEURL allows the WordPress address (URL) to be defined. The value defined is the address where your WordPress core files reside. It should include the `http://` part too. Do not put a slash “**/**” at the end. Setting this value in `wp-config.php` overrides the [wp\_options table](https://codex.wordpress.org/Database_Description#Table:_wp_options) value for **siteurl**. Adding this in can reduce the number of database calls when loading your site. **Note:** This will **not** change the database stored value. The URL will revert to the old database value if this line is ever removed from `wp-config`. [Use the **RELOCATE** constant](https://codex.wordpress.org/Changing_The_Site_URL#Relocate_method) to change the **siteurl** value in the database.
-
-If WordPress is installed into a directory called “wordpress” for the [domain](http://en.wikipedia.org/wiki/Domain_name_system) example.com, define WP\_SITEURL like this:
-
-```php
-define( 'WP_SITEURL', 'http://example.com/wordpress' );
-```
-
-Dynamically set WP\_SITEURL based on $\_SERVER\[‘HTTP\_HOST’\]
-
-```php
-define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/path/to/wordpress' );
-```
-
-**Note:** HTTP\_HOST is created dynamically by PHP based on the value of the HTTP HOST Header in the request, thus possibly allowing for [file inclusion vulnerabilities](https://en.wikipedia.org/wiki/File_inclusion_vulnerability). SERVER\_NAME may also be created dynamically. However, when Apache is configured as UseCanonicalName “on”, SERVER\_NAME is set by the server configuration, instead of dynamically. In that case, it is safer to user SERVER\_NAME than HTTP\_HOST.
-
-Dynamically set WP\_SITEURL based on $\_SERVER\[‘SERVER\_NAME’\]
-
-```php
-define( 'WP_SITEURL', 'http://' . $_SERVER['SERVER_NAME'] . '/path/to/wordpress' );
-```
-
-### Blog address (URL)
-
-Similar to WP\_SITEURL, WP\_HOME *overrides the [wp\_options table](https://codex.wordpress.org/Database_Description#Table:_wp_options) value for* home *but does not change it in the database.* **home** is the address you want people to type in their browser to reach your WordPress blog. It should include the `http://` part and should not have a slash “**/**” at the end. Adding this in can reduce the number of database calls when loading your site.
-
-```php
-define( 'WP_HOME', 'http://example.com/wordpress' );
-```
-
-If you are using the technique described in [Giving WordPress Its Own Directory](/support/article/giving-wordpress-its-own-directory/) then follow the example below. Remember, you will also be placing an `index.php` in your web-root directory if you use a setting like this.
-
-```php
-define( 'WP_HOME', 'http://example.com' );
-```
-
-Dynamically set WP\_HOME based on $\_SERVER\[‘HTTP\_HOST’\]
-
-```php
-define( 'WP_HOME', 'http://' . $_SERVER['HTTP_HOST'] . '/path/to/wordpress' );
-```
-
-### Moving wp-content folder
-
-You can move the `wp-content` directory, which holds your themes, plugins, and uploads, outside of the WordPress application directory.
-
-Set WP\_CONTENT\_DIR to the full **local path** of this directory (no trailing slash), e.g.
-
-```php
-define( 'WP_CONTENT_DIR', dirname(__FILE__) . '/blog/wp-content' );
-```
-
-Set WP\_CONTENT\_URL to the full **URL** of this directory (no trailing slash), e.g.
-
-```php
-define( 'WP_CONTENT_URL', 'http://example/blog/wp-content' );
-```
-
-### Moving plugin folder
-
-Set WP\_PLUGIN\_DIR to the full **local path** of this directory (no trailing slash), e.g.
-
-```php
-define( 'WP_PLUGIN_DIR', dirname(__FILE__) . '/blog/wp-content/plugins' );
-```
-
-Set WP\_PLUGIN\_URL to the full **URI** of this directory (no trailing slash), e.g.
-
-```php
-define( 'WP_PLUGIN_URL', 'http://example/blog/wp-content/plugins' );
-```
-
-If you have compability issues with plugins Set PLUGINDIR to the full **local path** of this directory (no trailing slash), e.g.
-
-```php
-define( 'PLUGINDIR', dirname(__FILE__) . '/blog/wp-content/plugins' );
-```
-
-### Moving themes folder
-
-You cannot move the themes folder because its path is hardcoded relative to the `wp-content` folder:
-
-$theme\_root = WP\_CONTENT\_DIR . ‘/themes’;
-
-However, you can register additional theme directories using [register\_theme\_directory](#reference/functions/register_theme_directory).
-
-See how to [move the wp-content](/support/article/editing-wp-config-php/) folder. For more details how the themes folder is determined, see `wp-includes/theme.php`.
-
-### Moving uploads folder
-
-Set UPLOADS to :
-
-```php
-define( 'UPLOADS', 'blog/wp-content/uploads' );
-```
-
-This path can not be absolute. It is always relative to ABSPATH, therefore does not require a leading slash.
-
-### Modify AutoSave Interval
-
-When editing a post, WordPress uses Ajax to auto-save revisions to the post as you edit. You may want to increase this setting for longer delays in between auto-saves, or decrease the setting to make sure you never lose changes. The default is 60 seconds.
-
-```php
-define( 'AUTOSAVE_INTERVAL', 160 ); // Seconds
-```
-
-### Post Revisions
-
-WordPress, by default, will save copies of each edit made to a post or page, allowing the possibility of reverting to a previous version of that post or page. The saving of revisions can be disabled, or a maximum number of revisions per post or page can be specified.
-
-#### Disable Post Revisions
-
-If you do **not** set this value, WordPress defaults WP\_POST\_REVISIONS to *true* (enable post revisions). If you want to disable the awesome revisions feature, use this setting:
-
-```php
-define( 'WP_POST_REVISIONS', false );
-```
-
-Note: Some users could not get this to function until moving the command to the first line under the initial block comment in `wp-config.php`.
-
-#### Specify the Number of Post Revisions
-
-If you want to specify a maximum number of revisions that WordPress stores, change *false* to an integer/number (*e.g.*, 3 or 12).
-
-```php
-define( 'WP_POST_REVISIONS', 3 );
-```
-
-Note: Some users could not get this to function until moving the command to the first line under the initial block comment in `wp-config.php`.
-
-### Set Cookie Domain
-
-The domain set in the cookies for WordPress can be specified for those with unusual domain setups. For example, if subdomains are used to serve static content, you can set the cookie domain to only your non-static domain to prevent WordPress cookies from being sent with each request to static content on your subdomain .
-
-```php
-define( 'COOKIE_DOMAIN', 'www.example.com' );
-```
-
-### Enable Multisite / Network Ability
-
-WP\_ALLOW\_MULTISITE is a feature enable multisite functionality. If this setting is absent from `wp-config.php` it defaults to false.
-
-```php
-define( 'WP_ALLOW_MULTISITE', true );
-```
-
-### Redirect Nonexistent Blogs
-
-NOBLOGREDIRECT can be used to redirect the browser if the visitor tries to access a nonexistent subdomain or a subfolder.
-
-```php
-define( 'NOBLOGREDIRECT', 'http://example.com' );
-```
-
-### Fatal Error Handler
-
-WordPress 5.2 introduced [Recovery Mode](https://make.wordpress.org/core/2019/04/16/fatal-error-recovery-mode-in-5-2/) which displays error message instead of white screen when plugins causes fatal error.
-
-*The site is experiencing technical difficulties. Please check your site admin email inbox for instructions.*
-
-White screens and PHP error messages are not displayed to users any more. But in a development environment, if you want to enable WP\_DEBUG\_DISPLAY, you have to disable recovery mode by set true to WP\_DISABLE\_FATAL\_ERROR\_HANDLER.
-
-```php
-define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true );   // 5.2 and later define( 'WP_DEBUG', true );
-define( 'WP_DEBUG_DISPLAY', true ); 
-```
-
-### WP\_DEBUG
-
-The [WP\_DEBUG](https://codex.wordpress.org/Debugging_in_WordPress) option controls the reporting of some errors and warnings and enables use of the WP\_DEBUG\_DISPLAY and WP\_DEBUG\_LOG settings. The default boolean value is false.
-
-```php
-define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true );   // 5.2 and later
-define( 'WP_DEBUG', true );
-```
-
-[Database errors are printed only if WP\_DEBUG is set to true](https://trac.wordpress.org/ticket/5473). Database errors are handled by the [wpdb](#reference/classes/wpdb) class and are not affected by [PHP’s error settings](http://www.php.net/errorfunc).
-
-Setting WP\_DEBUG to true also raises the [error reporting level](http://www.php.net/error-reporting) to E\_ALL and activates warnings when deprecated functions or files are used; otherwise, WordPress sets the error reporting level to E\_ALL ^ E\_NOTICE ^ E\_USER\_NOTICE.
-
-### WP\_ENVIRONMENT\_TYPE
-
-The WP\_ENVIRONMENT\_TYPE option controls the environment type for a site: `local`, `development`, `staging`, and `production`.
-
-The values of environment types are processed in the following order with each sequential method overriding any previous values: the WP\_ENVIRONMENT\_TYPE [PHP environment variable](https://www.php.net/manual/en/reserved.variables.environment.php) and the WP\_ENVIRONMENT\_TYPE constant.
-
-For both methods, if the value of an environment type provided is not in the list of allowed environment types, the default `production` value will be returned.
-
-The simplest way to set the value is probably through defining the constant:
-
-```php
-define( 'WP_ENVIRONMENT_TYPE', 'staging' );
-```
-
-Note: When `development` is returned by [wp\_get\_environment\_type()](#reference/functions/wp_get_environment_type), WP\_DEBUG will be set to `true` if it is not defined in the `wp-config.php` file of the site.
-
-### SCRIPT\_DEBUG
-
-[SCRIPT\_DEBUG](/support/article/debugging-in-wordpress/) is a related constant that will force WordPress to use the “dev” versions of scripts and stylesheets in `wp-includes/js`, `wp-includes/css`, `wp-admin/js`, and `wp-admin/css` will be loaded instead of the `.min.css` and `.min.js` versions.. If you are planning on modifying some of WordPress’ built-in JavaScript or Cascading Style Sheets, you should add the following code to your config file:
-
-```php
-define( 'SCRIPT_DEBUG', true );
-```
-
-### Disable Javascript Concatenation
-
-To result in faster administration screens, all JavaScript files are [concatenated](http://en.wikipedia.org/wiki/Concatenation) into one URL. If JavaScript is failing to work in an administration screen, you can try disabling this feature:
-
-```php
-define( 'CONCATENATE_SCRIPTS', false );
-```
-
-### Configure Error Logging
-
-Configuring error logging can be a bit tricky. First of all, default PHP error log and display settings are set in the php.ini file, which you may or may not have access to. If you do, they should be set to the desired settings for live PHP pages served to the public. It’s strongly recommended that no error messages are displayed to the public and instead routed to an error log. Further more, error logs should not be located in the publicly accessible portion of your server. Sample recommended php.ini error settings:
-
-```php
-error_reporting = 4339
-display_errors = Off
-display_startup_errors = Off
-log_errors = On
-error_log = /home/example.com/logs/php_error.log
-log_errors_max_len = 1024
-ignore_repeated_errors = On
-ignore_repeated_source = Off
-html_errors = Off
-```
-
-**About Error Reporting 4339**This is a custom value that only logs issues that affect the functioning of your site, and ignores things like notices that may not even be errors. See [PHP Error Constants](http://php.net/manual/en/errorfunc.constants.php) for the meaning of each binary position for 1000011110011, which is the binary number equal to 4339. The far left 1 means report any E\_RECOVERABLE\_ERROR. The next 0 means do not report E\_STRICT, (which is thrown when sloppy but functional coding is used) and so on. Feel free to determine your own custom error reporting number to use in place of 4339.
-
-Obviously, you will want different settings for your development environment. If your staging copy is on the same server, or you don’t have access to `php.ini`, you will need to override the default settings at run time. It’s a matter of personal preference whether you prefer errors to go to a log file, or you prefer to be notified immediately of any error, or perhaps both. Here’s an example that reports all errors immediately that you could insert into your `wp-config.php` file:
-
-```php
-@ini_set( 'log_errors', 'Off' );
-@ini_set( 'display_errors', 'On' );
-define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true );   // 5.2 and later
-define( 'WP_DEBUG', true );
-define( 'WP_DEBUG_LOG', false );
-define( 'WP_DEBUG_DISPLAY', true );
-```
-
-Because `wp-config.php` is loaded for every page view not loaded from a cache file, it is an excellent location to set `php.ini` settings that control your PHP installation. This is useful if you don’t have access to a `php.ini` file, or if you just want to change some settings on the fly. One exception is ‘error\_reporting’. When WP\_DEBUG is defined as true, ‘error\_reporting’ will be set to E\_ALL by WordPress regardless of anything you try to set in wp-config.php. If you really have a need to set ‘error\_reporting’ to something else, it must be done after `wp-settings.php` is loaded, such as in a plugin file.
-
-If you turn on error logging, remember to delete the file afterwards, as it will often be in a publicly accessible location, where anyone could gain access to your log.
-
-Here is an example that turns PHP error\_logging on and logs them to a specific file. If WP\_DEBUG is defined to true, the errors will also be saved to this file. Just place this above any *require\_once* or *include* commands.
-
-```php
-@ini_set( 'log_errors', 'On' );
-@ini_set( 'display_errors', 'Off' );
-@ini_set( 'error_log', '/home/example.com/logs/php_error.log' );
-/* That's all, stop editing! Happy blogging. */
-```
-
-Another example of logging errors, as suggested by Mike Little on the [wp-hackers email list](http://lists.automattic.com/pipermail/wp-hackers/2010-September/034830.html):
-
-```php
-/**
- * This will log all errors notices and warnings to a file called debug.log in
- * wp-content (if Apache does not have write permission, you may need to create
- * the file first and set the appropriate permissions (i.e. use 666) )
- */
-define( 'WP_DEBUG', true );
-define( 'WP_DEBUG_LOG', true );
-define( 'WP_DEBUG_DISPLAY', false );
-@ini_set( 'display_errors', 0 );
-```
-
-A refined version from Mike Little on the [Manchester WordPress User Group](http://groups.google.com/group/manchester-wordpress-user-group/msg/dcab0836cabc7f76):
-
-```php
-/**
- * This will log all errors notices and warnings to a file called debug.log in
- * wp-content only when WP_DEBUG is true. if Apache does not have write permission,
- * you may need to create the file first and set the appropriate permissions (i.e. use 666).
- */
-define( 'WP_DEBUG', true ); // Or false
-if ( WP_DEBUG ) {
-    define( 'WP_DEBUG_LOG', true );
-    define( 'WP_DEBUG_DISPLAY', false );
-    @ini_set( 'display_errors', 0 );
-}
-```
-
-Confusing the issue is that WordPress has three (3) constants that look like they could do the same thing. First off, remember that if WP\_DEBUG is false, it and the other two WordPress DEBUG constants do not do anything. The PHP directives, whatever they are, will prevail. Except for ‘error\_reporting’, WordPress will set this to 4983 if WP\_DEBUG is defined as false. Second, even if WP\_DEBUG is true, the other constants only do something if they too are set to true. If they are set to false, the PHP directives remain unchanged. For example, if your `php.ini` file has the directive (‘display\_errors’ = ‘On’); but you have the statement define( ‘WP\_DEBUG\_DISPLAY’, false ); in your `wp-config.php` file, errors will still be displayed on screen even though you tried to prevent it by setting WP\_DEBUG\_DISPLAY to false because that is the PHP configured behavior. This is why it’s very important to set the PHP directives to what you need in case any of the related WP constants are set to false. To be safe, explicitly set/define both types. More detailed descriptions of the WP constants is available at [Debugging in WordPress](https://codex.wordpress.org/Debugging_in_WordPress).
-
-For your public, production WordPress installation, you might consider placing the following in your `wp-config.php` file, even though it may be partly redundant:
-
-```php
-@ini_set( 'log_errors', 'On' );
-@ini_set( 'display_errors', 'Off' );
-define( 'WP_DISABLE_FATAL_ERROR_HANDLER', false );   // 5.2 and later
-define( 'WP_DEBUG', false );
-define( 'WP_DEBUG_LOG', false );
-define( 'WP_DEBUG_DISPLAY', false );
-```
-
-The default debug log file is` /wp-content/debug.log`. Placing error logs in publicly accessible locations is a security risk. Ideally, your log files should be placed above you site’s public root directory. If you can’t do this, at the very least, set the log file permissions to 600 and add this entry to the `.htaccess` file in the root directory of your WordPress installation:
-
-```php
-<Files debug.log>
-    Order allow,deny
-    Deny from all
-</Files>
-```
-
-This prevents anyone from accessing the file via HTTP. You can always view the log file by retrieving it from your server via FTP.
-
-### Increasing memory allocated to PHP
-
-**WP\_MEMORY\_LIMIT** option allows you to specify the maximum amount of memory that can be consumed by PHP. This setting may be necessary in the event you receive a message such as “Allowed memory size of xxxxxx bytes exhausted”.
-
-This setting increases PHP Memory only for WordPress, not other applications. By default, WordPress will attempt to increase memory allocated to PHP to 40MB (code is at the beginning of `/wp-includes/default-constants.php`) for single site and 64MB for multisite, so the setting in `wp-config.php` should reflect something higher than 40MB or 64MB depending on your setup.
-
-WordPress will automatically check if PHP has been allocated less memory than the entered value before utilizing this function. For example, if PHP has been allocated 64MB, there is no need to set this value to 64M as WordPress will automatically use all 64MB if need be.
-
-Note: Some hosts do not allow for increasing the PHP memory limit automatically. In that event, contact your host to increase the PHP memory limit. Also, many hosts set the PHP limit at 8MB.
-
-Adjusting the WordPress memory limit potentially creates problems as well. You might end up hiding the root of the issue for it to happen later down the line as you add in more plugins or functionalities.
-
-If you are facing Out of Memory issues even with an elevated memory limit, you should properly debug your installation. Chances are you have too many memory intensive functions tied to a specific action and should move these functions to a cronjob.
-
-Increase PHP Memory to 64MB
-
-```php
-define( 'WP_MEMORY_LIMIT', '64M' );
-```
-
-Increase PHP Memory to 96MB
-
-```php
-define( 'WP_MEMORY_LIMIT', '96M' );
-```
-
-Administration tasks require may require memory than usual operation. When in the administration area, the memory can be increased or decreased from the WP\_MEMORY\_LIMIT by defining WP\_MAX\_MEMORY\_LIMIT. The default value for this is 256MB.
-
-```php
-define( 'WP_MAX_MEMORY_LIMIT', '512M' );
-```
-
-Note: this has to be put before wp-settings.php inclusion.
-
-### Cache
-
-The **WP\_CACHE** setting, if true, includes the `wp-content/advanced-cache.php` script, when executing `wp-settings.php`.
-
-```php
-define( 'WP_CACHE', true );
-```
-
-### Custom User and Usermeta Tables
-
-**CUSTOM\_USER\_TABLE** and **CUSTOM\_USER\_META\_TABLE** are used to designate that the user and usermeta tables normally utilized by WordPress are not used, instead these values/tables are used to store your user information.
-
-```php
-define( 'CUSTOM_USER_TABLE', $table_prefix.'my_users' );
-define( 'CUSTOM_USER_META_TABLE', $table_prefix.'my_usermeta' );
-```
-
-Note: Even if ‘CUSTOM\_USER\_META\_TABLE’ is manually set, a usermeta table is still created for each database with the corresponding permissions for each instance. By default, the WordPress installer will add permissions for the first user (ID #1). You also need to manage permissions to each of the site via a plugin or custom function. If this isn’t setup you will experience permission errors and log-in issues.
-
-CUSTOM\_USER\_TABLE is easiest to adopt during initial Setup your first instance of WordPress. The define statements of the `wp-config.php` on the first instance point to where `wp_users` data will be stored by default. After the first site setup, copying the working `wp-config.php` to your next instance will only require a change the `$table_prefix` variable. Do not use an e-mail address that is already in use by your original install. Once you have finished the setup process log in with the auto generated admin account and password. Next, promote your normal account to the administrator level and Log out of admin. Log back in as yourself, delete the admin account and promote the other user accounts as is needed.
-
-### Language and Language Directory
-
-WordPress [Version 4.0](https://codex.wordpress.org/Version_4.0) allows you to change the language in your WordPress [Administration Screens](/support/article/administration-screens/). To change the language in the admin settings screen. Go to [Settings](/support/article/administration-screens/#settings-configuration-settings) &gt; [General](/support/article/settings-general-screen/) and select Site Language.
-
-#### WordPress v3.9.6 and below
-
-**WPLANG** defines the name of the language translation (.mo) file. **WP\_LANG\_DIR** defines what directory the WPLANG .mo file resides. If WP\_LANG\_DIR is not defined WordPress looks first to wp-content/languages and then `wp-includes/languages` for the .mo defined by WPLANG file.
-
-```php
-define( 'WPLANG', 'de_DE' );
-define( 'WP_LANG_DIR', dirname(__FILE__) . 'wordpress/languages' );
-```
-
-To find out the WPLANG language code, please [refer here](https://make.wordpress.org/polyglots/teams/). The code in WP Local column is what you need.
-
-### Save queries for analysis
-
-The **SAVEQUERIES** definition saves the database queries to an array and that array can be displayed to help analyze those queries. The information saves each query, what function called it, and how long that query took to execute. **Note:** This will have a performance impact on your site, so make sure to turn this off when you aren’t debugging.
-
-First, add this to the `wp-config.php` file:
-
-```php
-define( 'SAVEQUERIES', true );
-```
-
-Then in the footer of your theme put this:
-
-```php
-if ( current_user_can( 'administrator' ) ) {
-    global $wpdb;
-    echo "";
-    print_r( $wpdb->queries );
-    echo "";
-}
-?>
-
-```
-
-Alternatively, consider using [Query Monitor](https://wordpress.org/plugins/query-monitor/)
-
-### Override of default file permissions
-
-The **FS\_CHMOD\_DIR** and **FS\_CHMOD\_FILE** define statements allow override of default file permissions. These two variables were developed in response to the problem of the core update function failing with hosts running under [suexec](https://en.wikipedia.org/wiki/SuEXEC). If a host uses restrictive file permissions (e.g. 400) for all user files, and refuses to access files which have group or world permissions set, these definitions could solve the problem.
-
-```php
-define( 'FS_CHMOD_DIR', ( 0755 & ~ umask() ) );
-define( 'FS_CHMOD_FILE', ( 0644 & ~ umask() ) );
-```
-
-Example to provide setgid:
-
-```php
-define( 'FS_CHMOD_DIR', ( 02755 & ~umask() ) );
-```
-
-Note: ‘**0755′** and ‘**02755**‘ are octal values. Octal values must be prefixed with a 0 and are not delineated with single quotes (‘). See Also: [Changing File Permissions](https://codex.wordpress.org/Changing_File_Permissions)
-
-### WordPress Upgrade Constants
-
-**Note: Define as few of the below constants as needed to correct your update issues.**
-
-The most common causes of needing to define these are:
-
-Host running with a special installation setup involving symlinks. You may need to define the path-related constants (FTP\_BASE, FTP\_CONTENT\_DIR, and FTP\_PLUGIN\_DIR). Often defining simply the base will be enough.
-
-Certain PHP installations shipped with a PHP FTP extension which is incompatible with certain FTP servers. Under these rare situations, you may need to define FS\_METHOD to “ftpsockets”.
-
-The following are valid constants for WordPress updates:
-
-- **FS\_METHOD** forces the filesystem method. It should only be “direct”, “ssh2”, “ftpext”, or “ftpsockets”. Generally, you should only change this if you are experiencing update problems. If you change it and it doesn’t help, **change it back/remove it**. Under most circumstances, setting it to ‘ftpsockets’ will work if the automatically chosen method does not. 
-    - **(Primary Preference) “direct”** forces it to use Direct File I/O requests from within PHP, this is fraught with opening up security issues on poorly configured hosts, This is chosen automatically when appropriate.
-    - **(Secondary Preference) “ssh2”** is to force the usage of the SSH PHP Extension if installed
-    - **(3rd Preference) “ftpext”** is to force the usage of the FTP PHP Extension for FTP Access, and finally
-    - **(4th Preference) “ftpsockets”** utilises the PHP Sockets Class for FTP Access.
-- **FTP\_BASE** is the full path to the “base”(ABSPATH) folder of the WordPress installation.
-- **FTP\_CONTENT\_DIR** is the full path to the wp-content folder of the WordPress installation.
-- **FTP\_PLUGIN\_DIR** is the full path to the plugins folder of the WordPress installation.
-- **FTP\_PUBKEY** is the full path to your SSH public key.
-- **FTP\_PRIKEY** is the full path to your SSH private key.
-- **FTP\_USER** is either user FTP or SSH username. Most likely these are the same, but use the appropriate one for the type of update you wish to do.
-- **FTP\_PASS** is the password for the username entered for **FTP\_USER**. If you are using SSH public key authentication this can be omitted.
-- **FTP\_HOST** is the hostname:port combination for your SSH/FTP server. The default FTP port is 21 and the default SSH port is 22. These do not need to be mentioned.
-- **FTP\_SSL** TRUE for SSL-connection *if supported by the underlying transport* (not available on all servers). This is for “Secure FTP” not for SSH SFTP.
-
-```php
-define( 'FS_METHOD', 'ftpext' );
-define( 'FTP_BASE', '/path/to/wordpress/' );
-define( 'FTP_CONTENT_DIR', '/path/to/wordpress/wp-content/' );
-define( 'FTP_PLUGIN_DIR ', '/path/to/wordpress/wp-content/plugins/' );
-define( 'FTP_PUBKEY', '/home/username/.ssh/id_rsa.pub' );
-define( 'FTP_PRIKEY', '/home/username/.ssh/id_rsa' );
-define( 'FTP_USER', 'username' );
-define( 'FTP_PASS', 'password' );
-define( 'FTP_HOST', 'ftp.example.org' );
-define( 'FTP_SSL', false );
-```
-
-Some configurations should set FTP\_HOST to localhost to avoid 503 problems when trying to update plugins or WP itself.
-
-#### Enabling SSH Upgrade Access
-
-There are two ways to upgrade using SSH2.
-
-The first is to use the [SSH SFTP Updater Support plugin](https://wordpress.org/plugins/ssh-sftp-updater-support/). The second is to use the built-in SSH2 upgrader, which requires the pecl SSH2 extension be installed.
-
-To install the pecl SSH2 extension you will need to issue a command similar to the following or talk to your web hosting provider to get this installed:
-
-```php
-pecl install ssh2
-```
-
-After installing the pecl ssh2 extension you will need to modify your PHP configuration to automatically load this extension.
-
-pecl is provided by the pear package in most linux distributions. To install pecl in Redhat/Fedora/CentOS:
-
-```php
-yum -y install php-pear
-```
-
-To install pecl in Debian/Ubuntu:
-
-```php
-apt-get install php-pear
-```
-
-It is recommended to use a private key that is not pass-phrase protected. There have been numerous reports that pass phrase protected private keys do not work properly. If you decide to try a pass phrase protected private key you will need to enter the pass phrase for the private key as FTP\_PASS, or entering it in the “Password” field in the presented credential field when installing updates.
-
-### Alternative Cron
-
-There might be reason to use an alternative Cron with WP. Most commonly this is done if scheduled posts are not getting published as predicted. This alternative method uses a redirection approach. The users’ browser get a redirect when the cron needs to run, so that they come back to the site immediately while cron continues to run in the connection they just dropped. This method has certain risks, since it depends on a non-native WordPress service.
-
-```php
-define( 'ALTERNATE_WP_CRON', true );
-```
-
-### Disable Cron and Cron Timeout
-
-Disable cron entirely by setting DISABLE\_WP\_CRON to true.
-
-```php
-define( 'DISABLE_WP_CRON', true );
-```
-
-Make sure a cron process cannot run more than once every WP\_CRON\_LOCK\_TIMEOUT seconds.
-
-```php
-define( 'WP_CRON_LOCK_TIMEOUT', 60 );
-```
-
-### Additional Defined Constants
-
-Here are additional constants that can be defined. These probably shouldn’t be set unless other methodologies have been attempted first. The Cookie definitions can be particularly useful if you have an unusual domain setup.
-
-```php
-define( 'COOKIEPATH', preg_replace( '|https?://[^/]+|i', '', get_option( 'home' ) . '/' ) );
-define( 'SITECOOKIEPATH', preg_replace( '|https?://[^/]+|i', '', get_option( 'siteurl' ) . '/' ) );
-define( 'ADMIN_COOKIE_PATH', SITECOOKIEPATH . 'wp-admin' );
-define( 'PLUGINS_COOKIE_PATH', preg_replace( '|https?://[^/]+|i', '', WP_PLUGIN_URL ) );
-define( 'TEMPLATEPATH', get_template_directory() );
-define( 'STYLESHEETPATH', get_stylesheet_directory() );
-```
-
-### Empty Trash
-
-This constant controls the number of days before WordPress permanently deletes posts, pages, attachments, and comments, from the trash bin. The default is 30 days:
-
-```php
-define( 'EMPTY_TRASH_DAYS', 30 ); // 30 days
-```
-
-To disable trash set the number of days to zero.
-
-```php
-define( 'EMPTY_TRASH_DAYS', 0 ); // Zero days
-```
-
-**Note:** WordPress will not ask for confirmation when someone clicks on “Delete Permanently” using this setting.
-
-### Automatic Database Optimizing
-
-There is automatic database repair support, which you can enable by adding the following define to your `wp-config.php` file.
-
-Note: This should only be enabled if needed and disabled once the issue is solved. When enabled, a user does not need to be logged in to access the functionality, since its main intent is to repair a corrupted database and users can often not login when the database is corrupt.
-
-```php
- define( 'WP_ALLOW_REPAIR', true );
-```
-
-The script can be found at `{$your_site}/wp-admin/maint/repair.php`.
-
-### DO\_NOT\_UPGRADE\_GLOBAL\_TABLES
-
-A **DO\_NOT\_UPGRADE\_GLOBAL\_TABLES** define prevents [dbDelta()](#reference/functions/dbdelta) and the upgrade functions from doing expensive queries against global tables.
-
-Sites that have large global tables (particularly users and usermeta), as well as sites that share user tables with bbPress and other WordPress installs, can prevent the upgrade from changing those tables during upgrade by defining **DO\_NOT\_UPGRADE\_GLOBAL\_TABLES** to true. Since an ALTER, or an unbounded DELETE or UPDATE, can take a long time to complete, large sites usually want to avoid these being run as part of the upgrade so they can handle it themselves. Further, if installations are sharing user tables between multiple bbPress and WordPress installs you may to want one site to be the upgrade master.
-
-```php
-define( 'DO_NOT_UPGRADE_GLOBAL_TABLES', true );
-```
-
-### View All Defined Constants
-
-PHP has a function that returns an array of all the currently defined constants with their values.
-
-```php
- print_r( @get_defined_constants() );
-```
-
-### Disable the Plugin and Theme File Editor
-
-Occasionally you may wish to disable the plugin or theme file editor to prevent overzealous users from being able to edit sensitive files and potentially crash the site. Disabling these also provides an additional layer of security if a hacker gains access to a well-privileged user account.
-
-```php
-define( 'DISALLOW_FILE_EDIT', true );
-```
-
-**Note**: The functionality of some plugins may be affected by the use of `current_user_can('edit_plugins')` in their code. Plugin authors should avoid checking for this capability, or at least check if this constant is set and display an appropriate error message. Be aware that if a plugin is not working this may be the cause.
-
-### Disable Plugin and Theme Update and Installation
-
-This will block users being able to use the plugin and theme installation/update functionality from the WordPress admin area. Setting this constant also disables the Plugin and Theme File editor (i.e. you don’t need to set DISALLOW\_FILE\_MODS and DISALLOW\_FILE\_EDIT, as on its own DISALLOW\_FILE\_MODS will have the same effect).
-
-```php
-define( 'DISALLOW_FILE_MODS', true );
-```
-
-### Require SSL for Admin and Logins
-
-**Note:** WordPress [Version 4.0](https://codex.wordpress.org/Version_4.0) deprecated FORCE\_SSL\_LOGIN. Please use FORCE\_SSL\_ADMIN.
-
-FORCE\_SSL\_ADMIN is for when you want to secure logins and the admin area so that both passwords and cookies are never sent in the clear. See also [Administration\_Over\_SSL](/support/article/administration-over-ssl/) for more details.
-
-```php
-define( 'FORCE_SSL_ADMIN', true );
-```
-
-### Block External URL Requests
-
-Block external URL requests by defining WP\_HTTP\_BLOCK\_EXTERNAL as true and this will only allow localhost and your blog to make requests. The constant WP\_ACCESSIBLE\_HOSTS will allow additional hosts to go through for requests. The format of the WP\_ACCESSIBLE\_HOSTS constant is a comma separated list of hostnames to allow, wildcard domains are supported, eg \*.wordpress.org will allow for all subdomains of wordpress.org to be contacted.
-
-```php
-define( 'WP_HTTP_BLOCK_EXTERNAL', true );
-define( 'WP_ACCESSIBLE_HOSTS', 'api.wordpress.org,*.github.com' );
-```
-
-### Disable WordPress Auto Updates
-
-There might be reason for a site to not auto-update, such as customizations or host supplied updates. It can also be done before a major release to allow time for testing on a development or staging environment before allowing the update on a production site.
-
-```php
- define( 'AUTOMATIC_UPDATER_DISABLED', true );
-```
-
-### Disable WordPress Core Updates
-
-The easiest way to manipulate core updates is with the WP\_AUTO\_UPDATE\_CORE constant:
-
-```php
- # Disable all core updates:
- define( 'WP_AUTO_UPDATE_CORE', false );
- # Enable all core updates, including minor and major:
- define( 'WP_AUTO_UPDATE_CORE', true );
- # Enable core updates for minor releases (default):
- define( 'WP_AUTO_UPDATE_CORE', 'minor' );
-```
-
-Reference: [Disabling Auto Updates in WordPress 3.7](https://make.wordpress.org/core/2013/10/25/the-definitive-guide-to-disabling-auto-updates-in-wordpress-3-7/)
-
-### Cleanup Image Edits
-
-By default, WordPress creates a new set of images every time you edit an image and when you restore the original, it leaves all the edits on the server. Defining IMAGE\_EDIT\_OVERWRITE as true changes this behaviour. Only one set of image edits are ever created and when you restore the original, the edits are removed from the server.
-
-```php
- define( 'IMAGE_EDIT_OVERWRITE', true );
-```
-
-## Double Check Before Saving
-
-***Be sure to check for leading and/or trailing spaces around any of the above values you entered, and DON’T delete the single quotes!***
-
-Before you save the file, be sure to **double-check** that you have not accidentally deleted any of the single quotes around the parameter values. Be sure there is nothing after the closing PHP tag in the file. The last thing in the file should be **?&gt;** and nothing else. No spaces.
-
-To save the file, choose **File &gt; Save As &gt; wp-config.php** and save the file in the root of your WordPress install. Upload the file to your web server and you’re ready to install WordPress!
+[Filter Reference](#apis/filter-reference)
 
 ---
 
@@ -6186,6 +1760,2383 @@ This section contains actions that the WordPress Admin login page uses to handle
 
 ---
 
+# Dashboard widgets API <a name="apis/dashboard-widgets" />
+
+Source: https://developer.wordpress.org/apis/dashboard-widgets/
+
+Added in WordPress Version [2.7](https://wordpress.org/support/wordpress-version/version-2-7/), the **Dashboard Widgets API** makes it simple to add new widgets to the [administration dashboard](https://wordpress.org/support/article/dashboard-screen/).
+
+Doing so requires working knowledge of PHP and the WordPress [Plugin API](#plugins), but to plugin or theme authors familiar with hooking actions and filters, it only takes a few minutes and can be a great way to make your plugin even more useful.
+
+[![](https://i0.wp.com/developer.wordpress.org/files/2019/08/admin-dashboard-widget-api.png?resize=1024%2C464&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2019/08/admin-dashboard-widget-api.png?ssl=1)Default Dashboard Widgets## Overview
+
+### The main function
+
+The main tool needed to add Dashboard Widgets is the [wp\_add\_dashboard\_widget()](#reference/functions/wp_add_dashboard_widget) function. You will find a complete description of this function on that link, but a brief overview is given below.
+
+### Usage
+
+```php
+wp_add_dashboard_widget( $widget_id, $widget_name, $callback, $control_callback, $callback_args );
+```
+
+- `$widget_id`: an identifying slug for your widget. This will be used as its CSS class and its key in the array of widgets.
+- `$widget_name`: this is the name your widget will display in its heading.
+- `$callback`: The name of a function you will create that will display the actual contents of your widget.
+- `$control_callback` (Optional): The name of a function you create that will handle submission of widget options forms, and will also display the form elements.
+- `$callback_args` (Optional): Set of arguments for the callback function.
+
+### Action hooks
+
+To run the function you will need to hook into the action [wp\_dashboard\_setup](#reference/hooks/wp_dashboard_setup) via [add\_action()](#reference/functions/add_action). For the Network Admin dashboard, use the hook [wp\_network\_dashboard\_setup](#reference/hooks/wp_network_dashboard_setup).
+
+```php
+/**
+ * Add a widget to the dashboard.
+ *
+ * This function is hooked into the 'wp_dashboard_setup' action below.
+ */
+function wporg_add_dashboard_widgets() {
+	// Add function here
+}
+add_action( 'wp_dashboard_setup', 'wporg_add_dashboard_widgets' );
+```
+
+Network dashboard:
+
+```php
+/**
+ * Add a widget to the network dashboard.
+ *
+ * This function is hooked into the 'wp_network_dashboard_setup' action below.
+ */
+function wporg_add_network_dashboard_widgets() {
+	// Add function here
+}
+add_action( 'wp_network_dashboard_setup', 'wporg_add_network_dashboard_widgets' );
+```
+
+## Examples
+
+### Basic usage
+
+```php
+/**
+ * Add a widget to the dashboard.
+ *
+ * This function is hooked into the 'wp_dashboard_setup' action below.
+ */
+function wporg_add_dashboard_widgets() {
+	wp_add_dashboard_widget(
+		'wporg_dashboard_widget',                          // Widget slug.
+		esc_html__( 'Example Dashboard Widget', 'wporg' ), // Title.
+		'wporg_dashboard_widget_render'                    // Display function.
+	); 
+}
+add_action( 'wp_dashboard_setup', 'wporg_add_dashboard_widgets' );
+
+/**
+ * Create the function to output the content of our Dashboard Widget.
+ */
+function wporg_dashboard_widget_render() {
+	// Display whatever you want to show.
+	esc_html_e( "Howdy! I'm a great Dashboard Widget.", "wporg" );
+}
+```
+
+### Forcing your widget to the top
+
+Normally you should just let the users of your plugin put your Dashboard Widget wherever they want by dragging it around. There currently isn’t an easy API way to pre-sort the default widgets, meaning your new widget will always be at the bottom of the list. Until sorting is added to the API its a bit complicated to get around this problem.
+
+Below is an example hooking function that will try to put your widget before the default ones. It does so by manually altering the internal array of metaboxes (of which dashboard widgets are one type) and putting your widget at the top of the list so it shows first.
+
+```php
+function wporg_add_dashboard_widgets() {
+	wp_add_dashboard_widget( 
+		'wporg_dashboard_widget', 
+		esc_html__( 'Example Dashboard Widget', 'wporg' ), 
+		'wporg_dashboard_widget_function' 
+	);
+	
+	// Globalize the metaboxes array, this holds all the widgets for wp-admin.
+	global $wp_meta_boxes;
+	
+	// Get the regular dashboard widgets array 
+	// (which already has our new widget but appended at the end).
+	$default_dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
+	
+	// Backup and delete our new dashboard widget from the end of the array.
+	$example_widget_backup = array( 'example_dashboard_widget' => $default_dashboard['example_dashboard_widget'] );
+	unset( $default_dashboard['example_dashboard_widget'] );
+ 
+	// Merge the two arrays together so our widget is at the beginning.
+	$sorted_dashboard = array_merge( $example_widget_backup, $default_dashboard );
+ 
+	// Save the sorted array back into the original metaboxes. 
+	$wp_meta_boxes['dashboard']['normal']['core'] = $sorted_dashboard;
+}
+add_action( 'wp_dashboard_setup', 'wporg_add_dashboard_widgets' );
+```
+
+Unfortunately this only works for people who have never re-ordered their widgets. Once a user has done so their existing preferences will override this and they will have to move your widget to the top for it to stay there.
+
+### Removing default Dashboard Widgets
+
+In some situations, especially on multi-user blogs, it may be useful to completely remove widgets from the interface. Each individual user can, by default, turn off any given widget using the *[Screen Options](https://wordpress.org/support/article/administration-screens/#screen-options)* tab at the top, but if you have a lot of non-technical users it might be nicer for them to not see it at all.
+
+To remove dashboard widget, use the [remove\_meta\_box()](#reference/functions/remove_meta_box) function. See the example codes below for the required parameters.
+
+These are the names of the default widgets on the dashboard:
+
+```php
+// Main column (left): 
+// Browser Update Required
+$wp_meta_boxes['dashboard']['normal']['high']['dashboard_browser_nag']; 
+// PHP Update Required
+$wp_meta_boxes['dashboard']['normal']['high']['dashboard_php_nag']; 
+
+// At a Glance
+$wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now'];
+// Right Now
+$wp_meta_boxes['dashboard']['normal']['core']['network_dashboard_right_now'];
+// Activity
+$wp_meta_boxes['dashboard']['normal']['core']['dashboard_activity'];
+// Site Health Status
+$wp_meta_boxes['dashboard']['normal']['core']['dashboard_site_health'];
+
+// Side Column (right): 
+// WordPress Events and News
+$wp_meta_boxes['dashboard']['side']['core']['dashboard_primary'];
+// Quick Draft, Your Recent Drafts
+$wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']; 
+```
+
+Here is an example function that removes the QuickPress widget:
+
+```php
+// Create the function to use in the action hook
+function wporg_remove_dashboard_widget() {
+	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+} 
+// Hook into the 'wp_dashboard_setup' action to register our function
+add_action( 'wp_dashboard_setup', 'wporg_remove_dashboard_widget' );
+```
+
+The example below removes all Dashboard Widgets:
+
+```php
+function wporg_remove_all_dashboard_metaboxes() {
+	// Remove Welcome panel
+	remove_action( 'welcome_panel', 'wp_welcome_panel' );
+	// Remove the rest of the dashboard widgets
+	remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+	remove_meta_box( 'health_check_status', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
+}
+add_action( 'wp_dashboard_setup', 'wporg_remove_all_dashboard_metaboxes' );
+```
+
+### Adding Widgets in the right side
+
+The function doesn’t allow you to choose where you want your widget to go and will automatically add it to the “core” which is the left side. However you are able to get it on the right side very easily.
+
+You can use the [add\_meta\_box()](#reference/functions/add_meta_box) function instead of `wp_add_dashboard_widget`. Simply specify ‘dashboard’ in place of the $post\_type. For example:
+
+```php
+add_meta_box( 
+	'dashboard_widget_id', 
+	esc_html__( 'Dashboard Widget Title', 'wporg' ), 
+	'dashboard_widget', 
+	'dashboard', 
+	'side', 'high' 
+);
+```
+
+Or, after creating the widget:
+
+```php
+function wporg_add_dashboard_widget() {
+	wp_add_dashboard_widget( 
+		'wporg_dashboard_widget', 
+		esc_html__( 'Example Dashboard Widget', 'wporg' ), 
+		'wporg_dashboard_widget_function' 
+	);
+	
+	// Global the $wp_meta_boxes variable (this will allow us to alter the array).
+	global $wp_meta_boxes;
+
+	// Then we make a backup of your widget.
+	$wporg_widget = $wp_meta_boxes['dashboard']['normal']['core']['wporg_dashboard_widget'];
+
+	// We then unset that part of the array.
+	unset( $wp_meta_boxes['dashboard']['normal']['core']['wporg_dashboard_widget'] );
+
+	// Now we just add your widget back in.
+	$wp_meta_boxes['dashboard']['side']['core']['wporg_dashboard_widget'] = $wporg_widget;
+}
+add_action( 'wp_dashboard_setup', 'wporg_add_dashboard_widget' );
+```
+
+### Aggregating RSS feeds in the dashboard
+
+If you need to aggregate RSS in your widget you should take a look at the way the existing plugins are set up with caching in `<a href="https://core.trac.wordpress.org/browser/tags/5.2.1/src//wp-admin/includes/dashboard.php#L0">/wp-admin/includes/dashboard.php</a>`.
+
+## Widget Options
+
+WordPress does not provide a built-in way to fetch options for a specific widget. By default, you would need to use `<a href="#reference/functions/get_option">get_option( 'dashboard_widget_options' )</a>` to fetch all widget options and then filter the returned array manually. This section presents some functions that can easily be added to a theme or plugin to help getting and setting of widget options.
+
+### Getting Widget Options
+
+This function will fetch all widget options, or only options for a specified widget:
+
+```php
+
+/**
+ * Gets all widget options, or only options for a specified widget if a widget id is provided.
+ *
+ * @param string $widget_id Optional. If provided, will only get options for that widget.
+ * @return array An associative array
+ */
+function wporg_get_dashboard_widget_options( $widget_id = '' ) {
+    // Fetch ALL dashboard widget options from the db
+    $options = get_option( 'dashboard_widget_options' );
+ 
+    // If no widget is specified, return everything
+    if ( empty( $widget_id ) ) {
+        return $options;
+    }
+ 
+    // If we request a widget and it exists, return it
+    if ( isset( $options[$widget_id] ) ) {
+        return $options[$widget_id];
+    }
+ 
+    // Something went wrong...
+    return false;
+}
+```
+
+### Get a Single Widget Option
+
+If you want to easily fetch only a single option (for outputting to a theme), the following function will make that easier.
+
+This example should be used with the previous [Getting Widget Options](#apis/handbook/dashboard-widgets) example function.
+
+```php
+/**
+ * Gets one specific option for the specified widget.
+ * 
+ * @param  string $widget_id Widget ID.
+ * @param  string $option    Widget option.
+ * @param  string $default   Default option.
+ * 
+ * @return string            Returns single widget option.
+ */
+function wporg_get_dashboard_widget_option( $widget_id, $option, $default = NULL ) {
+	$options = wporg_get_dashboard_widget_options( $widget_id );
+
+	// If widget options don't exist, return false.
+	if ( ! $options ) {
+		return false;
+	}
+
+	// Otherwise fetch the option or use default
+	if ( isset( $options[$option] ) && ! empty( $options[$option] ) ) {
+		return $options[$option];
+	} else {
+		return ( isset( $default ) ) ? $default : false;
+	}
+}
+```
+
+### Update Widget Options
+
+This function can be used to easily update all of a widget’s options. It can also be used to add a widget option non-destructively. Simply set the $add\_option argument to true, and this will **NOT overwrite** any existing options (although it will add any missing ones).
+
+```php
+/**
+ * Saves an array of options for a single dashboard widget to the database.
+ * Can also be used to define default values for a widget.
+ *
+ * @param string $widget_id  The name of the widget being updated
+ * @param array $args        An associative array of options being saved.
+ * @param bool $add_only     Set to true if you don't want to override any existing options.
+ */
+function update_dashboard_widget_options( $widget_id , $args = array(), $add_only = false ) {
+	// Fetch ALL dashboard widget options from the db...
+	$options = get_option( 'dashboard_widget_options' );
+
+	// Get just our widget's options, or set empty array.
+	$widget_options = ( isset( $options[$widget_id] ) ) ? $options[$widget_id] : array();
+
+	if ( $add_only ) {
+		// Flesh out any missing options (existing ones overwrite new ones).
+		$options[$widget_id] = array_merge( $args, $widget_options );
+	} else {
+		// Merge new options with existing ones, and add it back to the widgets array.
+		$options[$widget_id] = array_merge( $widget_options, $args );
+	}
+
+	// Save the entire widgets array back to the db.
+	return update_option( 'dashboard_widget_options', $options );
+}
+```
+
+---
+
+# Database API <a name="apis/database" />
+
+Source: https://developer.wordpress.org/apis/database/
+
+## Overview
+
+This page lists all holistic pages of a given Database related API. Each covers the functions involved in and use of a given set of functionality. Together they form what might be called the **WordPress Database API**, which is the plugin/theme/add-on interface created by the entire WordPress project in respect to access data as named values stored in the database layer.
+
+If you’ve read through all of these you should have a good sense of how to extend WordPress through Plugins that do access the database in an easy way.
+
+## APIs
+
+- [Options API](#apis/handbook/options)
+- [Transients API](#apis/handbook/transients)
+- [Metadata API](#apis/handbook/metadata)
+
+---
+
+# Internationalization <a name="apis/internationalization" />
+
+Source: https://developer.wordpress.org/apis/internationalization/
+
+## What is internationalization?
+
+Internationalization is the process of developing your application in a way it can easily be translated into other languages. Internationalization is often abbreviated as `i18n` (because there are 18 letters between the letters i and n).
+
+## Why is internationalization important?
+
+WordPress is used all over the world, by people who speak many different languages. The strings in WordPress need to be coded in a special way so that they can be easily translated into other languages. As a developer, you may not be able to provide localization for all your users; however, a translator can successfully localize your code without needing to modify the source code itself.
+
+While making your code translatable is called Internationalization, the act of translating it and adapting the strings to a specific location is called [Localization](#apis/handbook/internationalization/localization). Read more about [Localization in WordPress](#apis/handbook/internationalization/localization).
+
+## The basics
+
+In order to make a string translatable, you have to wrap the original strings in a call to one of the [WordPress i18n functions](#apis/handbook/internationalization/internationalization-functions).
+
+For example, the PHP function [\_e()](#reference/functions/_e) echoes a translatable string:
+
+```php
+ _e('Edit post'); 
+```
+
+You will find code like this all over WordPress core files. However, if you are internationalizing a theme or a plugin, there is another argument that all i18n functions take called Text Domain.
+
+Text Domains set the domain your plugin or theme translations belong. This assures there is no conflict between strings in plugins, themes, and the WordPress core.
+
+With a text-domain, the most basic call to a i18n function that will output a string would be like:
+
+```php
+ _e('Edit movie', 'my-plugin'); 
+```
+
+## Setting up your plugin and theme to i18n
+
+Setting up i18n is slightly different for Plugins and Themes, therefore this information is detailed in each respective Handbook:
+
+- [How to internationalize your theme](#themes/functionality/internationalization)
+- [How to internationalize your plugin](#plugins/internationalization/how-to-internationalize-your-plugin)
+
+### Internationalizing JavaScript
+
+Since WordPress 5.0 it’s possible to internationalize JavaScript files using the same set of i18n functions used in PHP.
+
+In order to be able to use i18n functions in your JavaScript code, you have to declare `wp-i18n` as a dependency on your script when registering or enqueueing it. For example:
+
+```php
+wp_register_script(
+     'my-script',
+     plugins_url( 'js/my-script.js', FILE ),
+     array( 'wp-i18n' ),
+     '0.0.1'
+ );
+```
+
+Now that you have added the dependency to your script, you can use i18n functions in it, however you still have to tell WordPress to load the translations.
+
+You do this by calling `wp_set_script_translations()`. This function takes three arguments: the registered/enqueued script handle, the text domain, and optionally a path to the directory containing translation files. The latter is only needed if your plugin or theme is not hosted on WordPress.org, which provides these translation files automatically.
+
+```php
+wp_set_script_translations('my-script', 'my-plugin');
+```
+
+For better performance, always make sure to enqueue your scripts and load their translations only when they are really used.
+
+In your JavaScript code you will use i18n functions pretty much the same way you do in your PHP code:
+
+```js
+const { __, _x, _n, sprintf } = wp.i18n;
+
+// simple string
+__( 'Hello World', 'my-plugin' );
+
+// string with context
+_x( 'My Gutenberg block name', 'block name', 'my-plugin' );
+```
+
+The available i18n for you to use in your JS code are (See internationalization functions for more details):
+
+- [\_\_()](#reference/functions/__)
+- [\_x()](#reference/functions/_x)
+- [\_n()](#reference/functions/_n)
+- [\_nx()](#reference/functions/_nx)
+- sprintf()
+
+Notice that the wp-i18n package also includes the `sprintf` function. This is very useful to internationalize strings that have variables in it.
+
+Now refer to the Internationalization Guidelines to learn how to use all these functions and the best practices on writing your strings.
+
+ If you are not hosting your plugin or theme on WordPress.org, you will need to create your translation files yourself. Check [this post](https://pascalbirchler.com/internationalization-in-wordpress-5-0/) out to learn how to do this.
+
+#### Internationalizing JavaScript before WP 5.0
+
+Another way to internationalize your JavaScript files is to use the [wp\_localize\_script()](#reference/functions/wp_localize_script) function.
+
+With this function you can register translatable strings and have them available in your JavaScript to be used.
+
+Please refer to the [`wp_localize_script`() reference](#reference/functions/wp_localize_script) to learn how to use it.
+
+## Internationalization Guidelines
+
+Now that you are ready to internationalize your application, read through the [Internationalization Guidelines](#apis/handbook/internationalization/internationalization-guidelines) and learn what each i18n function is for, how to use them, and the best practices when writing your strings.
+
+---
+
+# Internationalization Functions <a name="apis/internationalization/internationalization-functions" />
+
+Source: https://developer.wordpress.org/apis/internationalization/internationalization-functions/
+
+Check the [Internationalization Guidelines](#apis/handbook/internationalization/internationalization-guidelines) and learn what each i18n function is for, how to use them, and the best practices when writing your strings.
+
+## Basic functions
+
+- [\_\_()](#reference/functions/__)
+- [\_e()](#reference/functions/_e)
+- [\_x()](#reference/functions/_x)
+- [\_ex()](#reference/functions/_ex)
+- [\_n()](#reference/functions/_n)
+- [\_nx()](#reference/functions/_nx)
+- [\_n\_noop()](#reference/functions/_n_noop)
+- [\_nx\_noop()](#reference/functions/_nx_noop)
+- [translate\_nooped\_plural()](#reference/functions/translate_nooped_plural())
+
+## Translate &amp; Escape functions
+
+Strings that require translation and is used in attributes of html tags must be escaped.
+
+- [esc\_html\_\_()](#reference/functions/esc_html__)
+- [esc\_html\_e()](#reference/functions/esc_html_e)
+- [esc\_html\_x()](#reference/functions/esc_html_x)
+- [esc\_attr\_\_()](#reference/functions/esc_attr__)
+- [esc\_attr\_e()](#reference/functions/esc_attr_e)
+- [esc\_attr\_x()](#reference/functions/esc_attr_x)
+
+## Date and number functions
+
+- [number\_format\_i18n()](#reference/functions/number_format_i18n)
+- [date\_i18n()](#reference/functions/date_i18n)
+
+## Functions also available in javascript
+
+- [\_\_()](#reference/functions/__)
+- [\_x()](#reference/functions/_x)
+- [\_n()](#reference/functions/_n)
+- [\_nx()](#reference/functions/_nx)
+- sprintf()
+
+Note: To be able to use these functions available in your javascript, you have to [set up your plugin/theme javascript localization](#apis/handbook/internationalization).
+
+---
+
+# Internationalization Guidelines <a name="apis/internationalization/internationalization-guidelines" />
+
+Source: https://developer.wordpress.org/apis/internationalization/internationalization-guidelines/
+
+In this article, you will learn when and how to use all available i18n functions and the best practices for writing your strings.
+
+The recommendations in this article applies both for your PHP and your javascript code. You can see all the available functions for each language in the [I18n functions](#apis/handbook/internationalization/internationalization-functions) page. The functions available for javascript will also be highlighted.
+
+## Basic strings
+
+The most commonly used function is `<a href="#reference/functions/__">__()</a>`. It returns the translation of its argument:
+
+```php
+__( 'Blog Options', 'my-theme' );
+```
+
+Another simple one is `<a href="#reference/functions/_e">_e()</a>`, which outputs the translation of its argument. Instead of writing:
+
+```php
+echo __( 'WordPress is the best!', 'my-theme' );
+```
+
+you can use the shorter:
+
+```php
+_e( 'WordPress is the best!', 'my-theme' );
+```
+
+`__()`is also available for javascript
+
+## Variables
+
+If you are using variables in strings, similar to the example below, you need to use placeholders.
+
+```php
+echo 'Your city is $city.'
+```
+
+Use the `printf` family of functions. Especially helpful are `<a href="http://php.net/printf">printf</a>` and `<a href="http://php.net/sprintf">sprintf</a>`. For example:
+
+```php
+printf(
+    /* translators: %s: Name of a city */
+    __( 'Your city is %s.', 'my-theme' ),
+    $city
+);
+```
+
+Notice that the string for translation is the template `"Your city is %s."`, which is the same in both the source and at run-time.
+
+If you have more than one placeholder in a string, it is recommended that you use [argument swapping](http://www.php.net/manual/en/function.sprintf.php#example-4829). In this case, single quotes `(')` are mandatory : double quotes `(")` tell php to interpret the `$s` as the `s` variable, which is not what we want.
+
+```php
+printf(
+    /* translators: 1: Name of a city 2: ZIP code */
+    __( 'Your city is %1$s, and your zip code is %2$s.', 'my-theme' ),
+    $city,
+    $zipcode
+);
+```
+
+Here the zip code is displayed after the city name. In some languages, displaying the zip code and city in opposite order is more appropriate. Using %s prefix, as in the above example, allows for this. A translation can be written:
+
+```php
+printf(
+    /* translators: 1:ZIP code 2:Name of a city */
+    __( 'Your zip code is %2$s, and your city is %1$s.', 'my-theme' ),
+    $city,
+    $zipcode
+);
+```
+
+`sprintf` is also available for javascript translations:
+
+```js
+const zipCodeMessage = sprintf(
+    /* translators: 1:ZIP code 2:Name of a city */
+    __( 'Your zip code is %2$s, and your city is %1$s.', 'my-theme'),
+    city,
+    zipcode
+);
+```
+
+The following example tells you what not to do
+
+This is incorrect.
+
+```php
+// This is incorrect do not use.
+_e( "Your city is $city.", 'my-theme' );
+```
+
+The strings for translation are extracted from the source without executing the PHP associated with it. For example: The variable `$city` may be Vancouver, so your string will read `"Your city is Vancouver"` when the template is run but gettext won’t know what is inside the PHP variable in advance.
+
+As the value of the variable is unknown when your string is translated, it would require the translator to know every case for the variable `$country`. This is not ideal, and it is best to remove dynamic content and allow translators to focus on static content.
+
+## Plurals
+
+### Basic Pluralization
+
+If you have a string that changes when the number of items changes. In English you have `"One comment"` and `"Two comments"`. In other languages, you can have multiple plural forms. To handle this in WordPress, you can use the `<a href="#reference/functions/_n">_n()</a>` function.
+
+```php
+printf(
+    _n(
+        '%s comment',
+        '%s comments',
+        get_comments_number(),
+        'my-theme'
+    ),
+    number_format_i18n( get_comments_number() )
+);
+```
+
+`_n()` accepts 4 arguments:
+
+- singular – the singular form of the string (note that it can be used for numbers other than one in some languages, so `'%s item'` should be used instead of `'One item'`)
+- plural – the plural form of the string
+- count – the number of objects, which will determine whether the singular or the plural form should be returned (there are languages, which have far more than 2 forms)
+- text domain – the theme’s text domain
+
+The return value of the functions is the correct translated form, corresponding to the given count.
+
+`[\_n()](#reference/functions/_n) is also available for javascript
+
+### Pluralization done later
+
+You first set the plural strings with `<a href="#reference/functions/_n_noop">_n_noop()</a>` or `<a href="#reference/functions/_nx_noop">_nx_noop()</a>`.
+
+```php
+$comments_plural = _n_noop(
+    '%s comment.',
+    '%s comments.'
+);
+```
+
+At a later point in the code, you can use `<a href="#reference/functions/translate_nooped_plural">translate_nooped_plural()</a>` to load the strings.
+
+```php
+printf(
+    translate_nooped_plural(
+        $comments_plural,
+        get_comments_number(),
+        'my-theme'
+    ),
+    number_format_i18n( get_comments_number() )
+);
+```
+
+## Disambiguation by context
+
+Sometimes a term is used in more than one context and must be translated separately in other languages, even though the same word is used for each context in English. For example, the word `Post` can be used both as a verb `"Click here to post your comment"` and as a noun `"Edit this Post"`. In such cases the `<a href="#reference/functions/_x">_x()</a>` or `<a href="#reference/functions/_ex">_ex</a>()` function should be used. It is similar to `__()` and `_e()`, but it has an additional argument — the context:
+
+```php
+_x( 'Post', 'noun', 'my-theme' );
+_x( 'post', 'verb', 'my-theme' );
+```
+
+Using this method in both cases, we get the string Comment for the original version. However, translators will see two Comment strings for translation, each in a different context.
+
+Taking an example from the German version of WordPress as an illustration: Post is Beiträge. The corresponding verb form in German is beitragen.
+
+Note that similar to `__()`, `_x()` has an `echo` version: `_ex()`. The previous example could be written as:
+
+```php
+_ex( 'Post', 'noun', 'my-theme' );
+_ex( 'post', 'verb', 'my-theme' );
+```
+
+Use the one you feel enhances legibility and ease of coding.
+
+`_x() and _nx()`are also available for javascript
+
+## Descriptions
+
+You can add a clarifying comment in the source code, so translators know how to translate a string like `__( 'g:i:s a' )` . It must start with the word `translators:`, in all lowercase, and be the last PHP comment before the gettext call. Here is an example:
+
+```php
+/* translators: draft saved date format, see http://php.net/date */
+$saved_date_format = __( 'g:i:s a' );
+```
+
+Multi-line example:
+
+```php
+/*
+ * translators: Replace with a city related to your locale.
+ * Test that it matches the expected location and has upcoming
+ * events before including it. If no cities related to your
+ * locale have events, then use a city related to your locale
+ * that would be recognizable to most users.
+ */
+?>
+<input placeholder="<?php esc_attr_e( 'Cincinnati' ); ?>" id="location" type="text" name="location" />
+```
+
+## Newline characters
+
+Gettext doesn’t like `r` (ASCII code: 13) in translatable strings, so avoid it and use `n` instead.
+
+## Empty strings
+
+The empty string is reserved for internal Gettext usage, and you must not try to internationalize the empty string. It also doesn’t make any sense because translators won’t have context.
+
+If you have a valid use-case to internationalize an empty string, add context to both help translators and be in peace with the Gettext system.
+
+## Escaping strings
+
+It is good to escape all of your strings, preventing translators from running malicious code. There are a few escape functions that are integrated with internationalization functions.
+
+```php
+<a title="<?php esc_attr_e( 'Skip to content', 'my-theme' ); ?>" class="screen-reader-text skip-link" href="#content" >
+  <?php _e( 'Skip to content', 'my-theme' ); ?>
+</a>
+```
+
+```php
+<label for="nav-menu">
+  <?php esc_html_e( 'Select Menu:', 'my-theme' ); ?>
+</label>
+```
+
+## Best Practices for writing strings
+
+Here are the best practices for writing strings
+
+- Use decent English style – minimize slang and abbreviations.
+- Use entire sentences – in most languages, word order is different than English.
+- Split at paragraphs – merge related sentences, but do not include a whole page of text in one string.
+- Do not leave leading or trailing whitespace in a translatable phrase.
+- Assume strings can double in length when translated.
+- Avoid unusual markup and unusual control characters – do not include tags that surround your text.
+- Do not put unnecessary HTML markup into the translated string.
+- Do not leave URLs for translation, unless they could have a version in another language.
+- Add the variables as placeholders to the string as in some languages the placeholders change position.
+
+```php
+printf(
+    __( 'Search results for: %s', 'my-theme' ),
+    get_search_query()
+);
+```
+
+- Use format strings instead of string concatenation – translate phrases and not words –
+
+```php
+printf(
+    __( 'Your city is %1$s, and your zip code is %2$s.', 'my-theme' ),
+    $city,
+    $zipcode
+);
+```
+
+is always better than
+
+```php
+__( 'Your city is ', 'my-theme' ) . $city . __( ', and your zip code is ', 'my-theme' ) . $zipcode;
+```
+
+- Try to use the same words and symbols to prevent translating multiple similar strings (e.g. don’t do the following)
+
+```php
+__( 'Posts:', 'my-theme' ); and __( 'Posts', 'my-theme' );
+```
+
+---
+
+# Localization <a name="apis/internationalization/localization" />
+
+Source: https://developer.wordpress.org/apis/internationalization/localization/
+
+## What is localization?
+
+Localization describes the process of translating a software and adapting its strings to a specific location. Localization is abbreviated as `l10n` (because there are 10 letters between the l and the n.)
+
+The process of localizing software has two steps. The first step is when the developers provide a mechanism and method for the eventual translation of the program and its interface to suit local preferences and languages for users worldwide. This process is [internationalization](#apis/handbook/internationalization) (i18n). WordPress developers have done this already, so in theory, WordPress can be used in any language.
+
+The second step is the actual **localization** (l10n), the process by which the text on the page and other settings are translated and adapted to another language and culture, using the framework prescribed by the developers of the software. WordPress has already been localized into many languages (see the list of [polyglots teams](https://make.wordpress.org/polyglots/teams/) for more information).
+
+## Translating WordPress, Plugins and Themes
+
+If you want to help translating WordPress, or any Theme or Plugin hosted in WordPress.org themes and plugins directories, you should go to [Translate WordPress.](https://make.wordpress.org/polyglots)
+
+There you will get to know all the translators teams and learn about [translate.wordpress.org](https://translate.wordpress.org), where you can work on translations online and in collaboration with thousands of translators around the world.
+
+## Translating Themes and Plugins
+
+If you want to translating plugins and themes that are not hosted on WordPress.org, or if, for any reason, you want to translate themes or plugins offline and directly in the plugins/themes files, you can do this creating and editing Localization Files.
+
+### Localization files
+
+There are three types of Localiztion files you need in order to translate your plugin/theme:
+
+- POT files: a template file with all your original strings
+- PO files: editable file with the translations to one language (one file per language)
+- MO files: compiled versions of the PO files, actually used by the application
+
+### POT (Portable Object Template) files
+
+This file contains the original strings (in English) in your plugin/theme. Here is an example `POT` file entry:
+
+```
+#: plugin-name.php:123
+msgid "Page Title"
+msgstr ""
+```
+
+### PO (Portable Object) files
+
+Every translator will take the `POT` file and translate the `msgstr` sections in their own language. The result is a `PO` file with the same format as a `POT`, but with translations and some specific headers. There is one PO file per language.
+
+### MO (Machine Object) files
+
+From every translated `PO` file a `MO` file is built. These are machine-readable, binary files that the gettext functions actually use (they don’t care about .POT or .PO files), and are a “compiled” version of the PO file. The conversion is done using the `msgfmt` tool. In general, an application may use more than one large logical translatable module and a different `MO` file accordingly. A text domain is a handle of each module, which has a different `MO` file.
+
+### Generating POT file
+
+The POT file is the one you need to hand to translators, so that they can do their work. The POT and PO files can easily be interchangeably renamed to change file types without issues. It is a good idea to offer the POT file along with your plugin/theme, so that translators won’t have to ask you specifically about it. There are a couple of ways to generate a POT file for your plugin:
+
+#### WP-CLI
+
+Install [WP-CLI](https://make.wordpress.org/cli/handbook/installing/) and use the `wp i18n make-pot` command according to the [documentation](#cli/commands/i18n/make-pot).
+
+Open command line and run the command like this:
+
+```
+wp i18n make-pot path/to/your-plugin-directory
+```
+
+#### Poedit
+
+You can also use [Poedit](http://www.poedit.net/) locally when translating. This is an open source tool for all major OS. The free Poedit default version supports manual scanning of all source code with Gettext functions. A pro version of it also features one-click scanning for WordPress plugins. After generating the po file you can rename the file to POT. If a mo was generated then you can delete that file as it is not needed. If you don’t have the pro version you can easily get the [Blank POT](https://github.com/fxbenard/Blank-WordPress-Pot) and use that as the base of your POT file. Once you have placed the blank POT in the languages folder you can click “Update” in Poedit to update the POT file with your strings.
+
+![internationalization-localization-03](https://i0.wp.com/developer.wordpress.org/files/2014/10/internationalization-localization-03.jpg?resize=613%2C662&ssl=1)
+
+#### Grunt Tasks
+
+There are even some grunt tasks that you can use to create the POTs. [grunt-wp-i18n](https://github.com/blazersix/grunt-wp-i18n) &amp; [grunt-pot](https://www.npmjs.org/package/grunt-pot)  
+To set it up you need to install [node.js](http://nodejs.org/). It is a simple installation. Then you need to [install grunt](http://gruntjs.com/getting-started) in the directory that you would like to use grunt in. This is done via [command line](http://leveluptuts.com/tutorials/command-line-basics). An [example Grunt.js and package.json](https://gist.github.com/grappler/10187003) that you can place in the root of your plugin. You can the grunt tasks with a simple command in the command line.
+
+### Translate PO file
+
+There are multiple ways to translate a PO file.
+
+The easiest way is to use [Poedit](http://www.poedit.net/) when translating. This is an open source tool for all major OS. The free Poedit default version supports manual scanning of all source code with Gettext functions. A pro version of it also features one-click scanning for WordPress plugins and themes.
+
+You can also use a text editor to enter the translation. In a text editor the strings will look like this.
+
+```
+#: plugin-name.php:123 
+msgid "Page Title" 
+msgstr ""
+```
+
+You can enter the translation between the quotation marks. For the German translation, the final result would look like this.
+
+```
+#: plugin-name.php:123 
+msgid "Page Title" 
+msgstr "Seitentitel"
+```
+
+A third option is to use an online translation service. The general idea is that you upload the POT file and then you can give permission to users or translators to translate your plugin. This allows you to track the changes, always have the latest translation and reduce the translation being done twice.
+
+Here are a few tools that can be used to translate PO files online:
+
+- [Transifex](https://www.transifex.com/)
+- [WebTranslateIt](https://webtranslateit.com/en)
+- [Poeditor](https://poeditor.com/)
+- [Google Translator Toolkit](http://translate.google.com/toolkit/)
+- [GlotPress](http://blog.glotpress.org/)
+
+The translated file is to be saved as `my-plugin-{locale}.mo`. The locale is the language code and/or country code you defined in the constant `WPLANG` in the file `wp-config.php`. For example, the locale for German is `de_DE`. From the code example above the text domain is ‘my-plugin’ therefore the German MO and PO files should be named `my-plugin-de_DE.mo` and `my-plugin-de_DE.po`. For more information about language and country codes, see [Installing WordPress in Your Language](https://codex.wordpress.org/Installing_WordPress_in_Your_Language).
+
+### Generate MO file
+
+#### Command line
+
+A program `msgfmt` is used to create the MO file. `msgfmt` is part of Gettext package. Otherwise command line can be used. A typical `msgfmt` command looks like this:
+
+**Unix Operating Systems**
+
+```
+msgfmt -o filename.mo filename.po
+```
+
+**Windows Operating Systems**
+
+```
+msgfmt -o filename.mo filename.po
+```
+
+#### Converting multiple PO files at once
+
+If you have a lot of `PO` files to convert at once, you can run it as a batch. For example, using a `bash` command:
+
+**Unix Operating Systems**
+
+```
+# Find PO files, process each with msgfmt and rename the result to MO 
+for file in `find . -name "*.po"` ; do msgfmt -o ${file/.po/.mo} $file ; 
+done
+```
+
+**Windows Operating Systems**  
+For Windows, you need to install [Cygwin](http://www.cygwin.com/) first.
+
+Create a file called potomo.sh with the following content:
+
+```
+#! /bin/sh # Find PO files, process each with msgfmt and rename the result to MO 
+for file in `/usr/bin/find . -name '*.po'` ; do /usr/bin/msgfmt -o ${file/.po/.mo} $file ; 
+done
+```
+
+You can then run this command in the command line.
+
+```
+cd C:/path/to/language/folder/my-plugin/languages 
+C:/cygwin/bin/bash -c /cygdrive/c/path/to/script/directory/potomo.sh
+```
+
+#### Poedit
+
+`msgfmt` is also integrated in [Poedit](http://www.poedit.net/) allowing you to use it to generate the MO file. There is a setting in the preferences where you can enable or disable it.
+
+![internationalization-localization-04](https://i0.wp.com/developer.wordpress.org/files/2014/10/internationalization-localization-04.jpg?resize=436%2C448&ssl=1)
+
+#### Grunt task
+
+There is [grunt-po2mo](https://www.npmjs.org/package/grunt-po2mo) that will convert all of the files.
+
+## Tips for Good Translations
+
+### Don’t translate literally, translate organically
+
+Being bi- or multi-lingual, you undoubtedly know that the languages you speak have different structures, rhythms, tones, and inflections. Translated messages don’t need to be structured the same way as the English ones: take the ideas that are presented and come up with a message that expresses the same thing in a natural way for the target language. It’s the difference between creating an equal message and an equivalent message: don’t replicate, replace. Even with more structural items in messages, you have creative license to adapt and change if you feel it will be more logical for, or better adapted to, your target audience.
+
+### Try to keep the same level of formality (or informality)
+
+Each message has a different level of formality or informality. Exactly what level of formality or informality to use for each message in your target language is something you’ll have to figure out on your own (or with your team), but WordPress messages (informational messages in particular) tend to have a politely informal tone in English. Try to accomplish the equivalent in the target language, within your cultural context.
+
+### Don’t use slang or audience-specific terms
+
+Some amount of terminology is to be expected in a blog, but refrain from using colloquialisms that only the “in” crowd will get. If the uninitiated blogger were to install WordPress in your language, would they know what the term means? Words like pingback, trackback, and feed are exceptions to this rule; they’re terminology that are typically difficult to translate, and many translators choose to leave in English.
+
+### Read other software’s localizations in your language
+
+If you get stuck or need direction, try reading through the translations of other popular software tools to get a feel for what terms are commonly used, how formality is addressed, etc. Of course, WordPress has its own tone and feel, so keep that in mind when you’re reading other localizations, but feel free to dig up UI terms and the like to maintain consistency with other software in your language.
+
+## Using Localizations
+
+Place the localization files in the language folder, either in the plugin `languages` folder or as of WordPress 3.7 in the plugin `languages` folder normally under `wp-content`. The full path would be `wp-content/languages/plugins/my-plugin-fr_FR.mo`.
+
+As of [WordPress 4.0](https://make.wordpress.org/core/2014/09/05/language-chooser-in-4-0/) you can change the language in the “General Settings”. If you do not see any option or the language that you want to switch to then do the following steps:
+
+- Define WPLANG inside of wp-config.php to your chosen language. For example, if you wanted to use french, you would have: ```php
+    define ('WPLANG', 'fr_FR');
+    ```
+- Go to `wp-admin/options-general.php` or “Settings” -&gt; “General”
+- Select your language in “Site Language” dropdown
+- Go to `wp-admin/update-core.php`
+- Click “Update translations”, when available
+- Core translations files are downloaded, when available
+
+## Resources
+
+- [Creating .pot file for your theme or plugin](https://foxland.fi/creating-pot-file-for-your-theme-or-plugin/)
+- [How To Internationalize WordPress Plugins](http://tommcfarlin.com/internationalize-wordpress-plugins/)
+- [Translating Your Theme](http://wp.tutsplus.com/tutorials/theme-development/translating-your-theme/)
+- [Blank WordPress POT](https://github.com/fxbenard/Blank-WordPress-Pot)
+- [Improved i18n WordPress tools](https://github.com/grappler/i18n)
+- [How to update translations quickly](http://ulrich.pogson.ch/update-translations-quickly)
+- [Workflow between GitHub/Transifex](http://wp-translations.org/workflow-using-github/)
+- [Gist: Complete Localization Grunt task](https://gist.github.com/grappler/10187003)
+- [WordPress.tv](http://wordpress.tv/) tags: [i18n](http://wordpress.tv/tag/i18n/), [internationalization](http://wordpress.tv/tag/internationalization/) and [translation](http://wordpress.tv/tag/translation/)
+
+---
+
+# Filesystem <a name="apis/filesystem" />
+
+Source: https://developer.wordpress.org/apis/filesystem/
+
+## Overview
+
+The **Filesystem API**, added in [WordPress 2.6](/support/wordpress-version/version-2.6), was originally created for WordPress’ own automatic updates feature.
+
+The Filesystem API abstracts out the functionality needed for reading and writing local files to the filesystem to be done securely, on a variety of host types.
+
+It does this through the [WP\_Filesystem\_Base](#reference/classes/wp_filesystem_base) class, and several subclasses which implement different ways of connecting to the local filesystem, depending on individual host support.
+
+Any theme or plugin that needs to write files locally should do so using the `WP_Filesystem` family of classes.
+
+## Purpose
+
+Different hosting systems have different limitations in the way that their webservers are configured.
+
+In particular, many hosting systems have the webserver running as a different user than the owner of the WordPress files. When this is the case, a process writing files from the webserver user will have the resulting files owned by the webserver’s user account instead of the actual user’s account. This can lead to a security problem in shared hosting situations, where multiple users are sharing the same webserver for different sites.
+
+`WP_Filesystem` is capable of detecting when the users for written files will not match, and switches to a method using FTP or similar instead. Depending on the available PHP libraries, [WP\_Filesystem](#reference/functions/wp_filesystem) supports three different methods of using FTP (via extension, sockets, or over-SSH) and will automatically choose the correct method.
+
+In such a case, the plugin or theme implementing this code needs to request FTP credentials from the user. Functions have been added to make this easy to do and to standardize the look and feel of the credentials entry form.
+
+## Filesystem API Class Reference
+
+- Class: [WP\_Filesystem\_Base](#reference/classes/wp_filesystem_base)
+- Class: [WP\_Filesystem\_Direct](#reference/classes/wp_filesystem_direct)
+- Class: [WP\_Filesystem\_FTPext](#reference/classes/wp_filesystem_ftpext)
+- Class: [WP\_Filesystem\_ftpsocket](#reference/classes/wp_filesystem_ftpsockets)
+- Class: [WP\_Filesystem\_SSH2](#reference/classes/wp_filesystem_ssh2)
+- Function: [request\_filesystem\_credentials()](#reference/functions/request_filesystem_credentials)
+
+## Getting Credentials
+
+The first step in using the WP\_Filesystem is requesting credentials from the user. The normal way this is accomplished is at the time when you’re saving the results of a form input, or you have otherwise determined that you need to write to a file.
+
+The credentials form can be displayed onto an admin page by using the following code:
+
+```php
+$url = wp_nonce_url( 'themes.php?page=example', 'example-theme-options' );
+if ( false === ( $creds = request_filesystem_credentials( $url, '', false, false, null ) ) ) {
+	return; // stop processing here
+}
+```
+
+The [request\_filesystem\_credentials()](#reference/functions/request_filesystem_credentials) call takes five arguments.
+
+- The URL to which the form should be submitted (a nonced URL to a theme page was used in the example above)
+- A method override (normally you should leave this as the empty string: “”)
+- An error flag (normally false unless an error is detected, see below)
+- A context directory (false, or a specific directory path that you want to test for access)
+- Form fields (an array of form field names from your previous form that you wish to “pass-through” the resulting credentials form, or null if there are none)
+
+The `request_filesystem_credentials` call will test to see if it is capable of writing to the local filesystem directly without credentials first. If this is the case, then it will return true and not do anything. Your code can then proceed to use the `WP_Filesystem` class.
+
+The `request_filesystem_credentials` call also takes into account hardcoded information, such as hostname or username or password, which has been inserted into the `wp-config.php` file using defines. If these are pre-defined in that file, then this call will return that information instead of displaying a form, bypassing the form for the user.
+
+If it does need credentials from the user, then it will output the FTP information form and return false. In this case, you should stop processing further, in order to allow the user to input credentials. Any form fields names you specified will be included in the resulting form as hidden inputs, and will be returned when the user resubmits the form, this time with FTP credentials.
+
+Note: Do not use the reserved names of `hostname`, `username`, `password`, `public_key`, or `private_key` for your own inputs. These are used by the credentials form itself. Alternatively, if you do use them, the `request_filesystem_credentials` function will assume that they are the incoming FTP credentials.
+
+When the credentials form is submitted, it will look in the incoming POST data for these fields, and if found, it will return them in an array suitable for passing to WP\_Filesystem, which is the next step.
+
+## Initializing [WP\_Filesystem\_Base](#reference/classes/wp_filesystem_base)
+
+Before the WP\_Filesystem can be used, it must be initialized with the proper credentials. This can be done like so:
+
+```php
+if ( ! WP_Filesystem( $creds ) ) {
+	request_filesystem_credentials( $url, '', true, false, null );
+	return;
+}
+```
+
+First you call the `WP_Filesystem` function, passing it the credentials from before. It will then attempt to verify the credentials. If they are good, then it will return true. If not, then it will return false.
+
+In the case of bad credentials, the above code then makes another call to `request_filesystem_credentials()`, but this time with the error flag set to true. This forces the function to display the form again, this time with an error message for the user saying that their information was incorrect. The user can then re-enter their information and try again.
+
+## Using the [WP\_Filesystem\_Base](#reference/classes/wp_filesystem_base) Class
+
+Once the class has been initialized, then the global `$wp_filesystem` variable becomes defined and available for you to use. The `WP_Filesystem_Base` class defines several methods you can use to read and write local files. For example, to write a file, you could do this:
+
+```php
+global $wp_filesystem;
+$wp_filesystem->put_contents(
+  '/tmp/example.txt',
+  'Example contents of a file',
+  FS_CHMOD_FILE // predefined mode settings for WP files
+);
+```
+
+Other available methods include `get_contents()` and `get_contents_array()` to read files; `wp_content_dir()`, `wp_plugins_dir()`, and `wp_themes_dir()` which will return the filesystem paths to those directories; `mkdir()` and `rmdir()` to make and remove directories; along with several other handy filesystem related functions.
+
+## Tips and Tricks
+
+**When can you call `request_filesystem_credentials()`?**  
+One of the initial challenges for developers using the WP Filesystem API is you cannot initialize it just anywhere. The `request_filesystem_credentials()` function isn’t available until AFTER the `wp_loaded` action hook, and is only included in the admin area. One of the earliest hooks you can utilize is admin\_init.
+
+**The WP Filesystem API Methodology**  
+Another problem with calling `request_filesystem_credentials()` directly is you cannot determine if you will have direct access to the file system or if the user will be prompted for credentials. From a UX standpoint this becomes problematic if you want to make changes to files when a plugin is activated. Just imagine, a user goes to install your plugin via their admin area, enters their FTP details, completes the installation and activates your plugin. But as soon as they do, they are prompted to enter their FTP details again and are left scratching their head as to why.
+
+A better solution is to add a notice (using admin\_notice for instance) that explains to the user that your plugin needs to write to the file system to complete the installation. Along with that notice, you would add a button or link which triggers your function call to `request_filesystem_credentials()`.
+
+But let’s expand on this scenario further and say this plugin needs to access the file system every time the plugin updated. If you’re regularly releasing updates and bug fixes, it soon becomes tenuous for users to click your actionable button every time they upgrade. What would be nice is to determine if we have direct write access before calling `request_filesystem_credentials()` and silently do the installation. That’s where the `get_filesystem_method()` function comes into play.
+
+```php
+$access_type = get_filesystem_method();
+if ( $access_type === 'direct' )
+{
+	/* you can safely run request_filesystem_credentials() without any issues and don't need to worry about passing in a URL */
+	$creds = request_filesystem_credentials( site_url() . '/wp-admin/', '', false, false, array() );
+	/* initialize the API */
+	if ( ! WP_Filesystem( $creds ) ) {
+		/* any problems and we exit */
+		return false;
+	}	
+	global $wp_filesystem;
+	/* do our file manipulations below */
+}	
+else
+{
+	/* don't have direct write access. Prompt user with our notice */
+	add_action( 'admin_notices', 'you_admin_notice_function' ); 	
+}
+```
+
+This approach works well for all involved. Users who don’t have direct write permissions get prompted to make changes to the file system, while the plugin goes unnoticed (in a good way) on sites who can directly write to the file system.
+
+**Working with Paths**  
+WordPress developers worth their salt should be familiar with setting up constants or variables to access their plugin’s path. It usually looks like this:
+
+```php
+define( 'MY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) ); 
+```
+
+What you need to take into consideration when working with the Filesystem API is the path to the files won’t always be the same. When using the direct method you can safely use the `MY_PLUGIN_DIR` constant, but if you tried to do the same when the FTP or SSH method is used then you can run into problems. This is because FTP and SSH are usually rooted to a directory somewhere along the absolute path. Now, the Filesystem API gives us ways of overcoming this problem with methods like `$wp_filesystem->wp_content_dir()` and `$wp_filesystem->wp_plugins_dir()`, but it isn’t practical to define the path to your plugin twice.
+
+```php
+/* replace the 'direct' absolute path with the Filesystem API path */
+ $plugin_path = str_replace( ABSPATH, $wp_filesystem->abspath(), MY_PLUGIN_DIR );
+/* Now we can use $plugin_path in all our Filesystem API method calls */
+if ( ! $wp_filesystem->is_dir( $plugin_path . '/config/' ) ) {
+	/* directory didn't exist, so let's create it */
+	$wp_filesystem->mkdir( $plugin_path . '/config/' );
+}
+```
+
+**`unzip_file($file, $to);`**
+
+While this function requires the Filesystem API to be initialized, it isn’t a method of the `$wp_filesystem` object, which might be why its arguments are at odds with each other. The first parameter, `$file`, needs to be the absolute ‘direct’ path to the file, while the `$toparameter` needs to point to the absolute path of the Filesystem.
+
+```php
+define( 'MY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) ); 
+global $wp_filesystem; // already initialised the Filesystem API previously
+$plugin_path = str_replace( ABSPATH, $wp_filesystem->abspath(), MY_PLUGIN_DIR ); // get remote system absolute path
+/* Acceptable way to use the function */
+$file = MY_PLUGIN_DIR . '/plugin-file.zip'; 
+$to = $plugin_path;
+$result = unzip_file( $file, $to ); 
+if ( $result !== true ) {
+	// unzip failed. Handle Error
+}
+/* Not acceptable */
+$file = MY_PLUGIN_DIR . '/plugin-file.zip';
+$to = MY_PLUGIN_DIR; // $to cannot be the 'direct' absolute path to the folder otherwise FTP and SSH methods are left in the cold
+unzip_file( $file, $to ); 
+$file = $plugin_path . '/plugin-file.zip'; // If $file isn't the 'direct' absolute path then users not using FTP and SSH methods are left in the cold
+$to = $plugin_path;
+unzip_file( $file, $to );
+```
+
+## External references
+
+- [Tutorial: Using the WP\_Filesystem](http://ottopress.com/2011/tutorial-using-the-wp_filesystem/) by Otto
+- [Filesystem Debug Helper Plugin](https://github.com/eventespresso/filesystem-debug-helper)
+
+---
+
+# Global Variables <a name="apis/global-variables" />
+
+Source: https://developer.wordpress.org/apis/global-variables/
+
+## Introduction
+
+WordPress-specific global variables are used throughout WordPress code for various reasons. Almost all data that WordPress generates can be found in a global variable.
+
+Note that it’s best to use the appropriate API functions when available, instead of modifying globals directly.
+
+To access a global variable in your code, you first need to globalize the variable with `global $variable;`.
+
+**Accessing other globals besides the ones listed below is not recommended.**
+
+### Inside the Loop variables
+
+While inside the loop, these globals are set, containing information about the current post being processed.
+
+- `$post` ([WP\_Post](#reference/classes/wp_post)): The post object for the current post. Object described in [WP\_Post Class Reference](#reference/classes/wp_post).
+- `$posts`: Used by some core functions, not to be mistaken for `$query->$posts`.
+- `$authordata` ([WP\_User](#reference/classes/wp_user)): The author object for the current post. Object described in [WP\_User Class Reference](#reference/classes/wp_user).
+- `$currentday` (string): Day that the current post was published.
+- `$currentmonth` (string): Month that the curent post was published.
+- `$page` (int): The page of the current post being viewed. Specified by the query var page.
+- `$pages` (array): The content of the pages of the current post. Each page elements contains part of the content separated by the `<!--nextpage-->` tag.
+- `$multipage` (boolean): Flag to know if the current post has multiple pages or not. Returns `true` if the post has multiple pages, related to `$pages`.
+- `$more` (boolean): Flag to know if WordPress should enforce the `<!--more-->` tag for the current post. WordPress will not enforce the more tag if `true`.
+- `$numpages` (int): Returns the number of pages in the post, related to `$pages`.
+
+### Browser Detection Booleans
+
+These globals store data about which browser the user is on.
+
+- `$is_iphone` (boolean): iPhone Safari
+- `$is_chrome` (boolean): Google Chrome
+- `$is_safari` (boolean): Safari
+- `$is_NS4` (boolean): Netscape 4
+- `$is_opera` (boolean): Opera
+- `$is_macIE` (boolean): Mac Internet Explorer
+- `$is_winIE` (boolean): Windows Internet Explorer
+- `$is_gecko` (boolean): FireFox
+- `$is_lynx` (boolean): Lynx
+- `$is_IE` (boolean): Internet Explorer
+- `$is_edge` (boolean): Microsoft Edge
+
+### Web Server Detection Booleans
+
+These globals store data about which web server WordPress is running on.
+
+- `$is_apache` (boolean): Apache HTTP Server
+- `$is_IIS` (boolean): Microsoft Internet Information Services (IIS)
+- `$is_iis7` (boolean): Microsoft Internet Information Services (IIS) v7.x
+- `$is_nginx` (boolean): Nginx web server
+
+### Version Variables
+
+- `$wp_version` (string): The installed version of WordPress
+- `$wp_db_version` (int): The version number of the database
+- `$tinymce_version` (string): The installed version of TinyMCE
+- `$manifest_version` (string): The cache manifest version
+- `$required_php_version` (string): The version of PHP this install of WordPress requires
+- `$required_mysql_version` (string): The version of MySQL this install of WordPress requires
+
+### Misc
+
+- `$super_admins` (array): An array of user IDs that should be granted super admin privileges (multisite). This global is only set by the site owner (e.g., in `wp-config.php`), and contains an array of IDs of users who should have super admin privileges. If set it will override the list of super admins in the database.
+- `$wp_query` (object): The global instance of the [WP\_Query](#reference/classes/wp_query) class.
+- `$wp_rewrite` (object): The global instance of the [WP\_Rewrite](#reference/classes/wp_rewrite) class.
+- `$wp` (object): The global instance of the [WP](#reference/classes/wp) environment setup class.
+- `$wpdb` (object): The global instance of the [wpdb](#reference/classes/wpdb) class.
+- `$wp_locale` (object): The global instance of the [WP\_Locale](#reference/classes/wp_locale) class.
+- `$wp_admin_bar` (object): The global instance of the [WP\_Admin\_Bar](#reference/classes/wp_admin_bar) class.
+- `$wp_roles` (object): The global instance of the [WP\_Roles](#reference/classes/wp_roles) class.
+- `$wp_meta_boxes` (array): Object containing all registered metaboxes, including their id’s, args, callback functions and title for all post types including custom.
+- `$wp_registered_sidebars` (array)
+- `$wp_registered_widgets` (array)
+- `$wp_registered_widget_controls` (array)
+- `$wp_registered_widget_updates` (array)
+
+### Admin Globals
+
+- `$pagenow` (string): Used in wp-admin.   
+    See also [get\_current\_screen()](#reference/functions/get_current_screen) for the WordPress Admin Screen API.
+- `$post_type` (string): Used in wp-admin
+- `$allowedposttags` (array)
+- `$allowedtags` (array)
+- `$menu` (array)
+
+---
+
+# Metadata <a name="apis/metadata" />
+
+Source: https://developer.wordpress.org/apis/metadata/
+
+## Overview
+
+The **Metadata API** is a simple and standarized way for retrieving and manipulating metadata of various WordPress object types.
+
+Metadata for an object is a represented by a simple key-value pair.
+
+Objects may contain multiple metadata entries that share the same key and differ only in their value.
+
+## Function Reference
+
+Add/Delete Metadata:
+
+- [add\_metadata()](#reference/functions/add_metadata)
+- [delete\_metadata()](#reference/functions/delete_metadata)
+
+Get/Update Metadata:
+
+- [get\_metadata()](#reference/functions/get_metadata)
+- [update\_metadata()](#reference/functions/update_metadata)
+
+## Database Requirements
+
+This function assumes that a dedicated MySQL table exists for the `$meta_type` you specify. Some desired `$meta_types` do not come with pre-installed WordPress tables, and so they must be created manually.
+
+### Default Meta Tables
+
+Assuming a prefix of `wp_`, WordPress’s included meta tables are:
+
+- `wp_commentmeta`: Metadata for specific comments.
+- `wp_postmeta`: Metadata for pages, posts, and all other post types.
+- `wp_usermeta`: Metadata for users.
+
+### Meta Table Structure
+
+To store data for meta types not included in the above table list, a new table needs to be created. All meta tables require four columns.
+
+- `meta_id` – BIGINT(20): unsigned, auto\_increment, not null, primary key.
+- `object_id` – BIGINT(20): unsigned, not null.  
+    Replace *object* with the singular name of the content type being used.  
+    For instance, this column might be named post\_id or term\_id.  
+    Although this column is used like a foreign key, it should not be defined as one.
+- `meta_key` – VARCHAR(255): The key of your custom meta data.
+- `meta_value` – LONGTEXT: The value of your custom meta data.
+
+## Source File
+
+Metadata API is located in `<a href="https://core.trac.wordpress.org/browser/tags/5.2.1/src/wp-includes/meta.php#L0">wp-includes/meta.php</a>`.
+
+## Related
+
+****Metadata API****: [add\_metadata()](#reference/functions/add_metadata), [get\_metadata()](#reference/functions/get_metadata), [update\_metadata()](#reference/functions/update_metadata), [delete\_metadata()](#reference/functions/delete_metadata).
+
+---
+
+# Options <a name="apis/options" />
+
+Source: https://developer.wordpress.org/apis/options/
+
+## Overview
+
+The **Options API** is a simple and standardized way of storing data in the database. The API makes it easy to create, access, update, and delete options. All the data is stored in the [wp\_options table](#apis/handbook/database) under a given custom name.
+
+This page contains the technical documentation needed to use the Options API. A list of default options can be found in the [Option Reference](https://codex.wordpress.org/Option_Reference) (link to Codex version, waiting for content migration to HelpHub).
+
+Note that the `_site_` functions are essentially the same as their counterparts. The only differences occur for WP Multisite, when the options apply network-wide and the data is stored in the [wp\_sitemeta](#apis/handbook/database) table under the given custom name.
+
+## Function Reference
+
+**Add/Delete Option**:
+
+- [add\_option()](#reference/functions/add_option)
+- [delete\_option()](#reference/functions/delete_option)
+- [add\_site\_option()](#reference/functions/add_site_option)
+- [delete\_site\_option()](#reference/functions/delete_site_option)
+
+**Get/Update Option:**
+
+- [get\_option()](#reference/functions/get_option)
+- [update\_option()](#reference/functions/update_option)
+- [get\_site\_option()](#reference/functions/get_site_option)
+- [update\_site\_option()](#reference/functions/update_site_option)
+
+## Examples
+
+```php
+// Create an option to the database
+add_option( $option, $value = , $deprecated = , $autoload = 'yes' );
+
+// Removes option by name.
+delete_option( $option );
+
+// Fetch a saved option
+get_option( $option, $default = false );
+
+// Update the value of an option that was already added.
+update_option( $option, $newvalue );
+```
+
+## Available options by category
+
+### Discussion
+
+- `blacklist_keys`: When a comment contains any of these words in its content, name, URL, e-mail, or IP, it will be marked as spam. One word or IP per line. It will match inside words, so “press” will match “WordPress.”  
+    Default: NULL  
+    *Data type:***String (possibly multi-line)**
+- `comment_max_links`: Hold a comment in the queue if it contains the value of this option or more.  
+    Default: 2  
+    *Data type:***Integer**
+- `comment_moderation`: Before a comment appears, an administrator must always approve the comment.  
+    **1** : *Yes*  
+    0 : *False* (default)  
+    *Data type:***Integer**
+- `comments_notify`: E-mail me when anyone posts a comment.  
+    **1** : *Yes* (default)  
+    0 : *No*  
+    *Data type:***Integer**
+- `default_comment_status`: Allow comments (can be overridden with individual posts)  
+    **open** : *Allow comments* (default)  
+    **closed** : *Disallow comments*  
+    *Data type:***String**
+- `default_ping_status`: Allow link notifications from other blogs (pingbacks and trackbacks).  
+    **open** : *Allow pingbacks and trackbacks from other blogs* (default)  
+    **closed** : *Disallow pingbacks and trackbacks from other blogs*  
+    *Data type:***String**
+- `default_pingback_flag`: Attempt to notify any blogs linked to from the article (slows down posting).  
+    **1** : *Yes* (default)  
+    0 : *No*  
+    *Data type:***Integer**
+- `moderation_keys`: When a comment contains any of these words in its content, name, URL, e-mail, or IP, it will be held in the moderation queue. One word or IP per line. It will match inside words, so “press” will match “WordPress.”  
+    Default: NULL  
+    *Data type:***String (possibly multi-line)**
+- `moderation_notify`: E-mail me when a comment is held for moderation.  
+    **1** : *Yes* (default)  
+    0 : *No*  
+    *Data type:***Integer**
+- `require_name_email`: Before a comment appears, the comment author must fill out his/her name and email.  
+    **1** : *Yes* (default)  
+    0 : *No*  
+    *Data type:***Integer**
+- `thread_comments`: Enable WP-native threaded (nested) comments.  
+    **1** : *Yes*  
+    0 : *No* (default)  
+    *Data type:***Integer**
+- `thread_comments_depth`: Set the number of threading levels for comments.  
+    **1** thru   
+    **10** : levels  
+    Default: 5  
+    *Data type:***Integer**
+- `show_avatars`: Avatar Display  
+    **1** : (default) *Show Avatars*  
+    0 : *Do not show Avatars*  
+    *Data type:***Integer**
+- `avatar_rating`: Maximum Rating  
+    **G** : (default) *Suitable for all audiences*  
+    **PG** : *Possibly offensive, usually for audiences 13 and above*  
+    **R** : *Intended for adult audiences above 17*  
+    **X** : *Even more mature than above*  
+    *Data type:***String**
+- `avatar_default`: Default Avatar  
+    **mystery** : (default) *Mystery Man*  
+    **blank** : *Blank*  
+    **gravatar\_default** : *Gravatar Logo*  
+    **identicon** : *Identicon (Generated)*  
+    **wavatar** : *Wavatar (Generated)*  
+    **monsterid** : *MonsterID (Generated)*  
+    **retro** : *Retro (Generated)*  
+    *Data type:***String**
+- `close_comments_for_old_posts`: Automatically close comments on old articles  
+    **1** : *Yes*  
+    0 : *No* (default)  
+    *Data type:***Integer**
+- `close_comments_days_old`: Automatically close comments on articles older than x days  
+    Default: 14  
+    *Data type:***Integer**
+- `show_comments_cookies_opt_in`: Show the cookies opt-in checkbox on the comment form and enable comment cookies  
+    **1** : *Yes* (default as of 4.9.8)  
+    0 : *No*  
+    *Data type:***Integer**
+- `page_comments`: Break comments into pages  
+    **1** : *Yes* (default)  
+    0 : *No*  
+    *Data type:***Integer**
+- `comments_per_page`:  
+    Default: 50  
+    *Data type:***Integer**
+- `default_comments_page`:  
+    Default: ‘newest’  
+    *Data type:***String**
+- `comment_order`:  
+    **asc** : (default)  
+    **desc** :  
+    *Data type:***String**
+- `comment_whitelist`: Comment author must have a previously approved comment  
+    **1** : *Yes* (default)  
+    0 : *No*  
+    *Data type:*
+
+### General
+
+- `admin_email`: Administrator email  
+    Default: ‘you@example.com’  
+    *Data type:***String**
+- `blogdescription`: Blog tagline  
+    Default: ‘\_\_(‘Just another WordPress weblog’)’  
+    *Data type:***String**
+- `blogname`: Blog title  
+    Default: ‘\_\_(‘My Blog’)’  
+    *Data type:***String**
+- `comment_registration`: Users must be registered and logged in to comment  
+    **1** : *Yes*  
+    0 : *No* (default)  
+    *Data type:***Integer**
+- `date_format`: Default date format  
+    Default: ‘\_\_(‘F j, Y’)’  
+    *Data type:***String**
+- `default_role`: The default role of users who register at the blog.  
+    **subscriber** (default)  
+    **administrator**  
+    **editor**  
+    **author**  
+    **contributor**  
+    *Data type:***String**
+- `gmt_offset`: Times in the blog should differ by this value.  
+    **-6** : *GMT -6 (aka Central Time, USA)*  
+    0 : *GMT (aka Greenwich Mean Time)*  
+    Default: [date](http://www.php.net/manual/en/function.date.php)(‘Z’) / 3600  
+    *Data type:***Integer**
+- `home`: Blog address (URL)  
+    Default: [wp\_guess\_url()](#reference/functions/wp_guess_url)   
+    *Data type:***String (URI)**
+- `siteurl`: WordPress address (URL)  
+    Default `wp_guess_url()`  
+    *Data type:***String (URI)**
+- `start_of_week`: The starting day of the week.  
+    0 : *Sunday*  
+    **1** : *Monday* (default)  
+    **2** : *Tuesday*  
+    **3** : *Wednesday*  
+    **4** : *Thursday*  
+    **5** : *Friday*  
+    **6** : *Saturday*  
+    *Data type:***Integer**
+- `time_format`: Default time format  
+    Default: ‘\_\_(‘g:i a’)’  
+    *Data type:***String**
+- `timezone_string`: Timezone  
+    Default: NULL  
+    *Data type:***String**
+- `users_can_register`: Anyone can register  
+    **1** : *Yes*  
+    0 : *No* (default)  
+    *Data type:***Integer**
+
+### Links
+
+- `links_updated_date_format`:  
+    Default `__('F j, Y g:i a')`  
+    *Data type:***String**
+- `links_recently_updated_prepend`:  
+    Default empty  
+    *Data type: **String***
+- `links_recently_updated_append`  
+    *Default* empty  
+    *Data type:***String**
+- `links_recently_updated_time`  
+    Default: 120  
+    *Data type:***Integer**
+
+### Media
+
+- `thumbnail_size_w`:  
+    Default: 150  
+    *Data type:***Integer**
+- `thumbnail_size_h`:  
+    Default: 150  
+    *Data type:***Integer**
+- `thumbnail_crop`: Crop thumbnail to exact dimensions (normally thumbnails are proportional)  
+    **1** : *Yes* (default)  
+    0 : *No*  
+    *Data type:***Integer**
+- `medium_size_w`:   
+    Default: 300  
+    *Data type:***Integer**
+- `medium_size_h`  
+    Default: 300  
+    *Data type:***Integer**
+- `large_size_w`  
+    Default: 1024  
+    *Data type:***Integer**
+- `large_size_h`  
+    Default: 1024  
+    *Data type:***Integer**
+- `embed_autourls`: Attempt to automatically embed all plain text URLs  
+    Default: 1  
+    *Data type:***Integer**
+- `embed_size_w`  
+    Default: NULL  
+    *Data type:***Integer**
+- `embed_size_h`  
+    Default: 600  
+    *Data type:***Integer**
+
+### Miscellaneous
+
+- `hack_file`: Use legacy `my-hacks.php` file support  
+    **1** : *Yes*  
+    0 : *No* (default)  
+    *Data type:***Integer**
+- `html_type`: Default MIME type for blog pages (text/html, text/xml+html, etc.)  
+    Default: ‘text/html’  
+    *Data type:***String (MIME type)**
+- `secret`: Secret value created during installation used with salting, etc.  
+    Default: wp\_generate\_password(64)  
+    *Data type:***String (MD5)**
+- `upload_path`: Store uploads in this folder (relative to the WordPress root)  
+    Default: NULL  
+    *Data type:***String (relative path)**
+- `upload_url_path`: URL path to upload folder (will be blank by default – Editable in “All Settings” Screen.  
+    *Data type:***String (URL path)**
+- `uploads_use_yearmonth_folders`: Organize my uploads into month- and year-based folders  
+    **1** : *Yes* (default)  
+    0 : *No* (default for safe mode)  
+    *Data type:***Integer**
+- `use_linksupdate`: Track links’ update times  
+    **1** : *Yes*  
+    0 : *No* (default)  
+    *Data type:***Integer**
+
+### Permalinks
+
+- `permalink_structure`: The desired structure of your blog’s permalinks. Some examples:  
+    `/%year%/%monthnum%/%day%/%postname%/`: Date and name based  
+    `/archives/%post_id%/`: Numeric  
+    `/%postname%/`: Post name-based  
+    Default: NULL  
+    *Data type:***String**
+- `category_base`: The default category base of your blog categories permalink.  
+    Default: NULL  
+    *Data type:***String**
+- `tag_base`: The default tag base for your blog tags permalink.  
+    Default: NULL  
+    *Data type:***String**
+
+### Privacy
+
+- `blog_public`:  
+    **1** : *I would like my blog to be visible to everyone, including search engines (like Google, Sphere, Technorati) and archivers.* (default)  
+    0 : *I would like to block search engines, but allow normal visitors.*  
+    *Data type:***Integer**
+
+### Reading
+
+- `blog_charset`: Encoding for pages and feeds. The character encoding you write your blog in (UTF-8 is recommended).  
+    Default: `UTF-8`  
+    *Data type:***String**
+- `gzipcompression`: WordPress should compress articles (with gzip) if browsers ask for them.  
+    **1** : *Yes*  
+    0 : *No* (default)  
+    *Data type:***Integer**
+- `page_on_front`: The ID of the page that should be displayed on the front page. Requires `show_on_front`‘s value to be **page**.  
+    *Data type:***Integer**
+- `page_for_posts`: The ID of the page that displays posts. Useful when `show_on_front`‘s value is **page**.  
+    *Data type:***Integer**
+- `posts_per_page`: Show at most **x** many posts on blog pages.  
+    Default: 10  
+    *Data type:***Integer**
+- `posts_per_rss`: Show at most **x** many posts in RSS feeds.  
+    Default: 10  
+    *Data type:***Integer**
+- `rss_language`: Language for RSS feeds (metadata purposes only)  
+    Default: `en`  
+    *Data type:***String (ISO two-letter language code)**
+- `rss_use_excerpt`: Show an excerpt instead of the full text of a post in RSS feeds  
+    **1** : *Yes*  
+    0 : *No* (default)  
+    *Data type:***Integer**
+- `show_on_front`: What to show on the front page  
+    **posts** : *Your latest posts* (default)  
+    **page** : *A static page (see page\_on\_front)*  
+    *Data type:***String**
+
+### Themes
+
+- `template`: The slug of the currently activated theme (how it is accessed by path, ex. `/wp-content/themes/my-theme` (`my-theme` would be the value of this option).  
+    Default: ‘default’  
+    *Data type:***String**
+- `stylesheet`: The slug of the currently activated stylesheet (style.css) (how it is accessed by path, ex. `/wp-content/themes/my-style` (my-style would be the value of this option)  
+    Default: ‘default’  
+    *Data type:***String**
+
+### Writing
+
+- `default_category`: ID of the category that posts will be put in by default  
+    Default: 1  
+    *Data type:***Integer**
+- `default_email_category`: ID of the category that posts will be put in by default when written via e-mail  
+    Default: 1  
+    *Data type:***Integer**
+- `default_link_category`: ID of the category that links will be put in by default  
+    Default: 2  
+    *Data type:***Integer**
+- `default_post_edit_rows`: Size of the post box (in lines)  
+    Default: 10  
+    *Data type:***Integer**
+- `mailserver_login`: Mail server username for posting to WordPress by e-mail  
+    Default: ‘login@example.com’  
+    *Data type:***String**
+- `mailserver_pass`: Mail server password for posting to WordPress by e-mail  
+    Default: ‘password’  
+    *Data type:***String**
+- `mailserver_port`: Mail server port for posting to WordPress by e-mail  
+    Default: 110  
+    *Data type:***Integer**
+- `mailserver_url`: Mail server for posting to WordPress by e-mail  
+    Default: ‘mail.example.com’  
+    *Data type:***String**
+- `ping_sites`: When you publish a new post, WordPress automatically notifies the following site update services. For more about this, see [Update Services](https://codex.wordpress.org/Update_Services). Separate multiple service URLs with line breaks. Requires `blog_public` to have a value of **1**.  
+    Default: ‘[http://rpc.pingomatic.com/’](http://rpc.pingomatic.com/')  
+    *Data type:***String (possibly multi-line)**
+- `use_balanceTags`: Correct invalidly-nested XHTML automatically  
+    **1** : *Yes*  
+    0 : *No* (default)  
+    *Data type:***Integer**
+- `use_smilies`: Convert emoticons like `:-)` and `:P` to graphics when displayed  
+    **1** : *Yes* (default)  
+    0 : *No*  
+    *Data type:***Integer**
+- `use_trackback`: Enable sending and receiving of trackbacks  
+    **1** : *Yes*  
+    0 : *No* (default)
+- `enable_app`: Enable the Atom Publishing Protocol  
+    **1** : *Yes*  
+    0 : *No* (default)  
+    *Data type:***Integer**
+- `enable_xmlrpc`: Enable the WordPress, Movable Type, MetaWeblog and Blogger XML-RPC publishing protocols  
+    **1** : *Yes*  
+    0 : *No* (default)  
+    *Data type:***Integer**
+
+### Uncategorized
+
+- `active_plugins`: Returns an array of strings containing the path of the *main* php file of the plugin. The path is relative to the *plugins* folder. An example of path in the array : `/mainpage.php`.  
+    Default: array()  
+    *Data type:***Array**
+- `advanced_edit`:   
+    Default: 0  
+    *Data type:***Integer**
+- `recently_edited`:   
+    Default: NULL  
+    *Data type:*
+- `image_default_link_type`:   
+    Default: ‘file’  
+    *Data type:* ‘file’, ‘none’
+- `image_default_size`:   
+    Default: NULL  
+    *Data type:* ‘thumbnail’, ‘medium’, ‘large’ or Custom size
+- `image_default_align`:   
+    Default: NULL  
+    *Data type:* ‘left’, ‘right’, ‘center’, ‘none’
+- `sidebars_widgets`: Returns array of sidebar states (list of active and inactive widgets).  
+    Default:  
+    *Data type:***Array**
+- `sticky_posts`:   
+    Default: array()  
+    *Data type:*
+- `widget_categories`:  
+    Default: array()  
+    *Data type:*
+- `widget_text`:  
+    Default: array()  
+    *Data type:*
+- `widget_rss`:  
+    Default: array()  
+    *Data type:*
+
+## All Settings Screen
+
+[WordPress 3.0](https://wordpress.org/documentation/wordpress-version/version-3-0/) removed Settings &gt; Miscellaneous screen and some of the options cannot be reached (e.g. `upload_url_path`). You may use the All Settings Screen to view and change almost all options listed above. It is accessible by visiting `/wp-admin/options.php`
+
+![](https://i0.wp.com/developer.wordpress.org/files/2019/08/all-settings-screen.png?resize=1024%2C640&ssl=1)
+
+---
+
+# Plugins <a name="apis/plugins" />
+
+Source: https://developer.wordpress.org/apis/plugins/
+
+Refer [Plugin Developer Handbook](#plugins).
+
+---
+
+# Quicktags <a name="apis/quicktags" />
+
+Source: https://developer.wordpress.org/apis/quicktags/
+
+## Description
+
+The Quicktags API allows you to include additional buttons in the Text (HTML) mode of the WordPress Classic editor.
+
+![](https://i0.wp.com/developer.wordpress.org/files/2019/08/quicktags-editor.png?resize=550%2C90&ssl=1)## History
+
+This API was introduced in [WordPress 3.3](/support/wordpress-version/version-3-3).
+
+## Usage
+
+```js
+QTags.addButton( id, display, arg1, arg2, access_key, title, priority, instance, object );
+```
+
+## Parameters
+
+- `<strong>id</strong>` **(*****string*****) (*****required*****):** The html id for the button. Default: *None*
+- `<strong>display</strong>` **(*****string*****) (*****required*****):** The html value for the button. Default: *None*
+- `<strong>arg1</strong>` **(*****string*****) (*****required*****):** Either a starting tag to be inserted like “&lt;span&gt;” or a callback that is executed when the button is clicked. Default: *None*
+- `<strong>arg2</strong>` **(*****string*****) (*****optional*****):** Ending tag like “&lt;/span&gt;”. Leave empty if tag doesn’t need to be closed (i.e. “&lt;hr /&gt;”). Default: *None*
+- `<strong>access_key</strong>` **(*****string*****) (*****optional*****):** **Deprecated and Not used.** Shortcut access key for the button. Default: *None*
+- `<strong>title</strong>` **(*****string*****) (*****optional*****):** The html title value for the button. Default: *None*
+- `<strong>priority</strong>` **(*****int*****) (*****optional*****):** A number representing the desired position of the button in the toolbar. 1 – 9 = first, 11 – 19 = second, 21 – 29 = third, etc. Default: *None*
+- `<strong>instance</strong>` **(*****string*****) (*****optional*****):** Limit the button to a specific instance of Quicktags, add to all instances if not present. Default: *None*
+- `<strong>object</strong>` **(*****attr*****) (*****optional*****):** Used to pass additional attributes. Currently supports `ariaLabel` and `ariaLabelClose` (for “close tag” state)
+
+## Return Values
+
+(*mixed*) Null or the button object that is needed for back-compat.
+
+## Examples
+
+Below examples would add HTML buttons to the default Quicktags in the Text editor.
+
+### Modern example
+
+This example uses the inline JS API to add the JavaScript when quicktags are enqueued.
+
+```php
+/**
+ * Add a paragraph tag button to the quicktags toolbar
+ *
+ * @return void
+ */
+function wporg_add_quicktag_paragraph() {
+	wp_add_inline_script(
+		'quicktags',
+		"QTags.addButton( 'eg_paragraph_v2', 'p_v2', '<p>', '</p>', '', 'Paragraph tag v2', 2, '', { ariaLabel: 'Paragraph', ariaLabelClose: 'Close Paragraph tag' });"
+	);
+}
+add_action( 'admin_enqueue_scripts', 'wporg_add_quicktag_paragraph' );
+```
+
+### Another modern example
+
+In this example,
+
+1. Enqueue a script using the proper WordPress function [`wp_enqueue_script`](#reference/functions/wp_enqueue_script).
+2. Call any JavaScript that you want to fire when or after the QuickTag was clicked inside the QuickTag call-back.
+
+#### Enqueue the script
+
+Put below codes into active theme’s `functions.php`.
+
+```php
+function enqueue_quicktag_script(){
+	wp_enqueue_script( 'your-handle', get_template_directory_uri() . '/editor-script.js', array( 'jquery', 'quicktags' ), '1.0.0', true );
+}
+add_action( 'admin_enqueue_scripts', 'enqueue_quicktag_script' );
+```
+
+#### The JavaScript itself
+
+Create new file `editor-script` and save under the active theme directory.
+
+```javascript
+QTags.addButton( 'eg_paragraph_v3', 'p_v3', my_callback, '', '', 'Prompted Paragraph tag', 3, '', { ariaLabel: 'Prompted Paragraph' } ); 
+
+function my_callback(){
+  var my_stuff = prompt( 'Enter Some Stuff:', '' );
+  if ( my_stuff ) {
+    QTags.insertContent( '<p>' + my_stuff + '</p>' );
+  }
+}
+```
+
+### Traditional example
+
+This example manually add hardcoded JavaScript with `wp_script_is` on the admin footer hook. You should consider to use modern example. See above.
+
+```php
+/**
+ * Add more buttons to the quicktags HTML editor
+ *
+ * @return void
+ */
+function wporg_traditional_add_quicktags() {
+	if ( ! wp_script_is( 'quicktags' ) ) {
+		return;
+	}
+
+	?>
+	<script type="text/javascript">
+		QTags.addButton( 'eg_paragraph', 'p', '<p>', '</p>', '', 'Paragraph tag', 1, '', { ariaLabel: 'Paragraph', ariaLabelClose: 'Close Paragraph tag' } );
+		QTags.addButton( 'eg_hr', 'hr', '<hr />', '', '', 'Horizontal rule line', 201, '', { ariaLabel: 'Horizontal' } );
+		QTags.addButton( 'eg_pre', 'pre', '', '', '', 'Preformatted text tag', 111, '', { ariaLabel: 'Pre', ariaLabelClose: 'Close Pre tag' } );
+	</script>
+	<?php
+}
+
+add_action( 'admin_print_footer_scripts', 'wporg_traditional_add_quicktags', 11 );
+```
+
+Note:
+
+- To avoid a Reference Error we check to see whether or not the ‘quicktags’ script is in use.
+- Since WordPress 6.0, the script loading order was changed and the error “QTags is not defined” occurs without 3rd parameter of `add_action()`. Also, you have to specfy the larger number than 10 (ex.11).
+
+The “p” button HTML would be:
+
+```markup
+<input type="button" id="qt_content_eg_paragraph" class="ed_button button button-small" title="Paragraph tag" aria-label="Paragraph" value="p">
+```
+
+The ID value for each button is automatically prepended with the string qt\_content\_.
+
+Here is a dump of the docblock from `quicktags.js`, it’s pretty useful on it’s own.
+
+```php
+/**
+ * Main API function for adding a button to Quicktags
+ *
+ * Adds qt.Button or qt.TagButton depending on the args. The first three args are always required.
+ * To be able to add button(s) to Quicktags, your script should be enqueued as dependent
+ * on "quicktags" and outputted in the footer. If you are echoing JS directly from PHP,
+ * use add_action( 'admin_print_footer_scripts', 'output_my_js', 100 ) or add_action( 'wp_footer', 'output_my_js', 100 )
+ *
+ * Minimum required to add a button that calls an external function:
+ *     QTags.addButton( 'my_id', 'my button', my_callback );
+ *     function my_callback() { alert('yeah!'); }
+ *
+ * Minimum required to add a button that inserts a tag:
+ *     QTags.addButton( 'my_id', 'my button', '<span>', '</span>' );
+ *     QTags.addButton( 'my_id2', 'my button', '<br />' );
+ */
+```
+
+## Default Quicktags
+
+Here are the values of the default Quicktags added by WordPress to the Text editor. ID must be unique. When adding your own buttons, do not use these values:
+
+| **ID** | **Value** | **Tag Start** | **Tag End** |
+|---|---|---|---|
+| link | link | &lt;a href=”‘ + URL + ‘”&gt; | &lt;/a&gt; |
+| strong | b | &lt;strong&gt; | &lt;/strong&gt; |
+| code | code | &lt;code&gt; | &lt;/code&gt; |
+| del | del | &lt;del datetime=”‘ + \_datetime + ‘”&gt; | &lt;/del&gt; |
+| fullscreen | fullscreen |  |  |
+| em | i | &lt;em&gt; | &lt;/em&gt; |
+| li | li | t&lt;li&gt; | &lt;/li&gt;n |
+| img | img | &lt;img src=”‘ + src + ‘” alt=”‘ + alt + ‘” /&gt; |  |
+| ol | ol | &lt;ol&gt;n | &lt;/ol&gt;nn |
+| block | b-quote | nn&lt;blockquote&gt; | &lt;/blockquote&gt;nn |
+| ins | ins | &lt;ins datetime=”‘ + \_datetime + ‘”&gt; | &lt;/ins&gt; |
+| more | more | &lt;!–more–&gt; |  |
+| ul | ul | &lt;ul&gt;n | &lt;/ul&gt;nn |
+| spell | lookup |  |  |
+| close | close |  |
+
+Some tag values above use variables, such as URL and `_datetime`, passed from functions.
+
+## Source File
+
+qt.addButton() source is located in `<a href="https://core.trac.wordpress.org/browser/tags/5.2.1/src/js/_enqueues/lib/quicktags.js#L0">js/_enqueues/lib/quicktags.js</a>`, during build it’s output in `wp-incudes/js/quicktags.js` and `wp-includes/js/quicktags.min.js`.
+
+---
+
+# Making HTTP requests <a name="apis/making-http-requests" />
+
+Source: https://developer.wordpress.org/apis/making-http-requests/
+
+Very often we need to make HTTP requests from our theme or plugin, for example when we need to fetch data from an external API. Luckily WordPress has many helper functions to help you do that.
+
+In this section, you will learn how to properly make HTTP requests and handle their responses.
+
+Here’s an example of what you’re going to see
+
+```php
+$response = wp_remote_get( 'https://api.github.com/users/wordpress' );
+$body     = wp_remote_retrieve_body( $response );
+```
+
+In the next articles you’ll see a detailed explanation on how to make the requests:
+
+- [GETting data from an external service](#apis/making-http-requests/getting-data-from-an-external-service)
+- [POSTing data to an external service](#apis/making-http-requests/posting-data-to-an-external-service)
+- [Performance](#apis/making-http-requests/performance)
+- [Advanced](#apis/making-http-requests/advanced)
+- [Authentication](#apis/making-http-requests/authentication)
+
+If you’re just looking for the available helper functions, here they are:
+
+The functions below are the ones you will use to retrieve a URL.
+
+- [`wp_remote_get()`](#reference/functions/wp_remote_get): Retrieves a URL using the GET HTTP method.
+- [`wp_remote_post()`](#reference/functions/wp_remote_post): Retrieves a URL using the POST HTTP method.
+- [`wp_remote_head()`](#reference/functions/wp_remote_head): Retrieves a URL using the HEAD HTTP method.
+- [`wp_remote_request()`](#reference/functions/wp_remote_request): Retrieves a URL using either the default GET or a custom HTTP method that you specify.
+
+The other helper functions deal with retrieving different parts of the response. These make usage of the API very simple and are the preferred method for processing response objects.
+
+- `<a href="#reference/functions/wp_remote_retrieve_body">wp_remote_retrieve_body()</a>` – Retrieves just the body from the response.
+- `<a href="#reference/functions/wp_remote_retrieve_header">wp_remote_retrieve_header()</a>` – Retrieve a single header by name from the raw response.
+- `<a href="#reference/functions/wp_remote_retrieve_headers">wp_remote_retrieve_headers()</a>` – Retrieve only the headers from the raw response.
+- `<a href="#reference/functions/wp_remote_retrieve_response_code">wp_remote_retrieve_response_code()</a>` – Retrieve the response code for the HTTP response. This should be 200, but could be 4xx or even 3xx on failure.
+- `<a href="#reference/functions/wp_remote_retrieve_response_message">wp_remote_retrieve_response_message()</a>` – Retrieve only the response message from the raw response.
+
+---
+
+# GETting data from an external service <a name="apis/making-http-requests/getting-data-from-an-external-service" />
+
+Source: https://developer.wordpress.org/apis/making-http-requests/getting-data-from-an-external-service/
+
+GETting data is made incredibly simple in WordPress through the `<a href="#reference/functions/wp_remote_get" title="wp_remote_get">wp_remote_get()</a>` function. This function takes the following two arguments:
+
+1. `$url` – Resource to retrieve data from. This must be in a standard HTTP format
+2. `$args` – OPTIONAL – You may pass an array of arguments in here to alter behavior and headers, such as cookies, follow redirects, etc.
+
+The following defaults are assumed, though they can be changed via the `$args` parameter:
+
+- method – GET
+- timeout – 5 – How long to wait before giving up
+- redirection – 5 – How many times to follow redirections.
+- httpversion – 1.0
+- blocking – true – Should the rest of the page wait to finish loading until this operation is complete?
+- headers – array()
+- body – null
+- cookies – array()
+
+Because [GitHub](https://github.com/) provides an excellent API that does not require app registration for many public aspects we will target GitHub API in the following examples.
+
+Let’s use the URL to a GitHub WordPress organization and see what sort of information we can get.
+
+```php
+$response = wp_remote_get( 'https://api.github.com/users/wordpress' );
+```
+
+`$response` will contain all the headers, content, and other meta data about our request.
+
+Response from previous example will be something like
+
+```php
+Array(
+	[headers] => Array(
+		[server] => nginx
+		[date] => Fri, 05 Oct 2012 04:43:50 GMT
+		[content-type] => application/json; charset=utf-8
+		[connection] => close
+		[status] => 200 OK
+		[vary] => Accept
+		[x-ratelimit-remaining] => 4988
+		[content-length] => 594
+		[last-modified] => Fri, 05 Oct 2012 04:39:58 GMT
+		[etag] => "5d5e6f7a09462d6a2b473fb616a26d2a"
+		[x-github-media-type] => github.beta
+		[cache-control] => public, s-maxage=60, max-age=60
+		[x-content-type-options] => nosniff
+		[x-ratelimit-limit] => 5000
+	)
+
+	[body] => {
+"login": "WordPress",
+"id": 276006,
+"node_id": "MDEyOk9yZ2FuaXphdGlvbjI3NjAwNg==",
+"avatar_url": "https://avatars0.githubusercontent.com/u/276006?v=4",
+"gravatar_id": "",
+"url": "https://api.github.com/users/WordPress",
+"html_url": "https://github.com/WordPress",
+"followers_url": "https://api.github.com/users/WordPress/followers",
+"following_url": "https://api.github.com/users/WordPress/following{/other_user}",
+"gists_url": "https://api.github.com/users/WordPress/gists{/gist_id}",
+"starred_url": "https://api.github.com/users/WordPress/starred{/owner}{/repo}",
+"subscriptions_url": "https://api.github.com/users/WordPress/subscriptions",
+"organizations_url": "https://api.github.com/users/WordPress/orgs",
+"repos_url": "https://api.github.com/users/WordPress/repos",
+"events_url": "https://api.github.com/users/WordPress/events{/privacy}",
+"received_events_url": "https://api.github.com/users/WordPress/received_events",
+"type": "Organization",
+"site_admin": false,
+"name": null,
+"company": null,
+"blog": "https://wordpress.org/",
+"location": null,
+"email": null,
+"hireable": null,
+"bio": null,
+"twitter_username": null,
+"public_repos": 50,
+"public_gists": 0,
+"followers": 0,
+"following": 0,
+"created_at": "2010-05-13T22:42:10Z",
+"updated_at": "2020-05-22T14:27:02Z"
+}
+	[response] => Array(
+		[preserved_text 5237511b45884ac6db1ff9d7e407f225 /] => 200
+		[message] => OK
+	)
+
+	[cookies] => Array()
+	[filename] =>
+)
+```
+
+### GET the body you always wanted
+
+To retrieve response body use `<a href="#reference/functions/wp_remote_retrieve_body" title="wp_remote_retrieve_body">wp_remote_retrieve_body()</a>` function. This function takes just one parameter, the response from `<a href="#reference/functions/wp_remote_get">wp_remote_get()</a>` function.
+
+```php
+$response = wp_remote_get( 'https://api.github.com/users/wordpress' );
+$body     = wp_remote_retrieve_body( $response );
+```
+
+Using the `$response` from the previous example, `$body` will be something like:
+
+```php
+{
+"login": "WordPress",
+"id": 276006,
+"node_id": "MDEyOk9yZ2FuaXphdGlvbjI3NjAwNg==",
+"avatar_url": "https://avatars0.githubusercontent.com/u/276006?v=4",
+"gravatar_id": "",
+"url": "https://api.github.com/users/WordPress",
+"html_url": "https://github.com/WordPress",
+"followers_url": "https://api.github.com/users/WordPress/followers",
+"following_url": "https://api.github.com/users/WordPress/following{/other_user}",
+"gists_url": "https://api.github.com/users/WordPress/gists{/gist_id}",
+"starred_url": "https://api.github.com/users/WordPress/starred{/owner}{/repo}",
+"subscriptions_url": "https://api.github.com/users/WordPress/subscriptions",
+"organizations_url": "https://api.github.com/users/WordPress/orgs",
+"repos_url": "https://api.github.com/users/WordPress/repos",
+"events_url": "https://api.github.com/users/WordPress/events{/privacy}",
+"received_events_url": "https://api.github.com/users/WordPress/received_events",
+"type": "Organization",
+"site_admin": false,
+"name": null,
+"company": null,
+"blog": "https://wordpress.org/",
+"location": null,
+"email": null,
+"hireable": null,
+"bio": null,
+"twitter_username": null,
+"public_repos": 50,
+"public_gists": 0,
+"followers": 0,
+"following": 0,
+"created_at": "2010-05-13T22:42:10Z",
+"updated_at": "2020-05-22T14:27:02Z"
+}
+```
+
+### GET the response code
+
+You may want to check the response code to ensure your retrieval was successful. This can be done via the `<a href="#reference/functions/wp_remote_retrieve_response_code">wp_remote_retrieve_response_code()</a>` function:
+
+```php
+$http_code = wp_remote_retrieve_response_code( $response );
+```
+
+If successful `$http_code` will contain `200`. Otherwise, it will contain some HTTP status codes.
+
+### GET a specific header
+
+If your desire is to retrieve a specific header, say last-modified, you can do so with [wp\_remote\_retrieve\_header()](#reference/functions/wp_remote_retrieve_header). This function takes two parameters
+
+1. `$response` – The response from the get call
+2. `$header` – Name of the header to retrieve
+
+To retrieve the last-modified header:
+
+```php
+$last_modified = wp_remote_retrieve_header( $response, 'last-modified' );
+```
+
+You can also retrieve all of the headers in an array with [wp\_remote\_retrieve\_headers()](#reference/functions/wp_remote_retrieve_headers) function.
+
+### GET using basic authentication
+
+APIs that are secured more provide one or more of many different types of authentication. A common, though not highly secure, the authentication method is HTTP Basic Authentication. It can be used in WordPress bypassing ‘Authorization’ to the second parameter of the `<a href="#reference/functions/wp_remote_get">wp_remote_get()</a>` function, as well as the other HTTP method functions.
+
+```php
+$args = array(
+    'headers' => array(
+        'Authorization' => 'Basic ' . base64_encode( YOUR_USERNAME . ':' . YOUR_PASSWORD )
+    )
+);
+wp_remote_get( $url, $args );
+```
+
+MORE ABOUT AUTH
+
+---
+
+# POSTing data to an external service <a name="apis/making-http-requests/posting-data-to-an-external-service" />
+
+Source: https://developer.wordpress.org/apis/making-http-requests/posting-data-to-an-external-service/
+
+POST is used to send data to the server for the server to act upon in some way. For example, a contact form. When you enter data into the form fields and click the submit button the browser takes the data and sends a POST request to the server with the text you entered into the form. From there the server will process the contact request.
+
+## POSTing data to an API
+
+The same helper methods (`<a href="#reference/functions/wp_remote_retrieve_body">wp_remote_retrieve_body()</a>`, etc ) are available for all of the HTTP method requests, and utilized in the same fashion.
+
+POSTing data is done using the `<a href="#reference/functions/wp_remote_post">wp_remote_post()</a>` function, and takes exactly the same parameters as `<a href="#reference/functions/wp_remote_get">wp_remote_get()</a>`.
+
+To send data to the server you will need to build an associative array of data. This data will be assigned to the `'body'` value. From the server side of things the value will appear in the `$_POST` variable as you would expect. i.e. if `body => array( 'myvar' => 5 )` on the server `$_POST['myvar'] = 5`.
+
+Because GitHub does not allow POSTing to the API used in the previous example, this example will pretend that it does. Typically if you want to POST data to an API you will need to contact the maintainers of the API and get an API key or some other form of authentication token. This simply proves that your application is allowed to manipulate data on the API the same way logging into a website as a user does to the website.
+
+Let’s assume we are submitting a contact form with the following fields: name, email, subject, comment. To set up the body we do the following:
+
+```php
+$body = array(
+	'name'    => sanitize_text_field( 'Jane Smith' ),
+	'email'   => sanitize_email( 'some@email.com' ),
+	'subject' => sanitize_text_field( 'Checkout this API stuff' ),
+	'comment' => sanitize_textarea_field( 'I just read a great tutorial. You gotta check it out!' ),
+);
+```
+
+Now we add the body to the `$args` array that will be passed as the second argument. (The second argument accepts many options, see Advanced section for more details)
+
+```php
+$args = array(
+	'body'        => $body,
+);
+```
+
+  
+Then of course to make the call
+
+```php
+$response = wp_remote_post( 'https://your-contact-form.com', $args );
+```
+
+---
+
+# Performance <a name="apis/making-http-requests/performance" />
+
+Source: https://developer.wordpress.org/apis/making-http-requests/performance/
+
+When you make an HTTP request, your application has to wait for the external server to respond to the request and for all the data to be transferred over the network. This can be very time consuming, and your application performance might be heavily impacted.
+
+## Caching
+
+That’s why you should always consider caching your API requests, so you don’t have to do them all the time.
+
+Caching the response means storing the response on your server so you can easily use it multiple times without the need of an HTTP request every time.
+
+For example, let’s say your site makes an HTTP request to Github to fetch your user’s stats and display it on your sidebar. If you don’t cache, every visitor in your site will trigger that API request and wait for github to response. And if you stop and think, they are all seeing the same information, because your stats don’t change so fast.
+
+In the other hand, if you use cache, only the first visitor will have to wait for Github to respond. All the next users will see the same information that was quickly grabbed from the local database.
+
+You can then define how often this information has to be updated. In other words, how often the cache has to be cleaned.
+
+There are multiple apporaches to caching. An easy one provided by WordPress is the [Transient API](#apis/handbook/transients). Check it out!
+
+## Check Headers
+
+Many APIs allow you to make a HEAD request to check the status of things before actually retrieving the data you want. For example, you can make a HEAD request to check if there’s an update, before doing a GET request to actually fetch the data. This is a much faster request because it only responds a short piece of information.
+
+Check the Advanced &gt; Headers section for more information.
+
+---
+
+# Advanced <a name="apis/making-http-requests/advanced" />
+
+Source: https://developer.wordpress.org/apis/making-http-requests/advanced/
+
+Here are some advanced usage of the HTTP API.
+
+## Other methods
+
+GET and POST are the most commonly used methods when making a HTTP request, but there are many others, such as DELETE, PUT, PATCH, OPTIONS, etc.
+
+The WordPress HTTP API does not have one specific helper function for each method, but rest assured that the great people developing WordPress already thought of that and lovingly provided `<a href="#reference/functions/wp_remote_request">wp_remote_request()</a>`. This function takes the same two parameters as `<a href="#reference/functions/wp_remote_get">wp_remote_get()</a>`, and allows you to specify the HTTP method as well. What data you need to pass along is up to your method.
+
+To send a DELETE method, for example, you may have something similar to the following:
+
+```php
+$args     = array(
+	'method' => 'DELETE',
+);
+$response = wp_remote_request( 'http://some-api.com/object/to/delete', $args );
+```
+
+## Options
+
+As you probably noticed by now, all the helper functions take a second `$args` parameter that allows you to set additional options to your request.
+
+For example, `timeout` allows for setting the time in seconds, before the connection is dropped and an error is returned. The `httpversion` argument sets the HTTP version and defaults to ‘1.0’, however depending on the service you are interacting with you may need to set this to ‘1.1’.
+
+Check `<a href="#reference/classes/WP_Http/request">WP_Http::request()</a>` method documentation for all available options and what they do.
+
+## Headers
+
+It can be pretty important, and sometimes required by the API, to check a resource status using HEAD before retrieving it. On high traffic APIs, GET is often limited to number of requests per minute or hour. There is no need to even attempt a GET request unless the HEAD request shows that the data on the API has been updated.
+
+Going back to the GitHub example, here are are few headers to watch out for. Most of these headers are standard, but you should always check the API docs to ensure you understand which headers are named what, and their purpose.
+
+- `x-ratelimit-limit` – Number of requests allowed in a time period
+- `x-ratelimit-remaining` – Number of remaining available requests in time period
+- `content-length` – How large the content is in bytes. Can be useful to warn the user if the content is fairly large
+- `last-modified` – When the resource was last modified. Highly useful to caching tools
+- `cache-control` – How should the client handle caching
+
+The following will check the HEAD value of my GitHub user account:
+
+```php
+$response = wp_remote_head( 'https://api.github.com/users/wordpress' );
+```
+
+`$response` should look similar to:
+
+```php
+Array(
+	[headers] => Array
+		(
+		[server] => nginx
+		[date] => Fri, 05 Oct 2012 05:21:26 GMT
+		[content-type] => application/json; charset=utf-8
+		[connection] => close
+		[status] => 200 OK
+		[vary] => Accept
+		[x-ratelimit-remaining] => 4982
+		[content-length] => 594
+		[last-modified] => Fri, 05 Oct 2012 04:39:58 GMT
+		[etag] => "5d5e6f7a09462d6a2b473fb616a26d2a"
+		[x-github-media-type] => github.beta
+		[cache-control] => public, s-maxage=60, max-age=60
+		[x-content-type-options] => nosniff
+		[x-ratelimit-limit] => 5000
+	)
+    [body] =>
+    [response] => Array
+		(
+		[preserved_text 39a8515bd2dce2aa06ee8a2a6656b1de /] => 200
+		[message] => OK
+	)
+    [cookies] => Array(
+	)
+	[filename] =>
+)
+```
+
+  
+All of the same helper functions can be used on this function as with the previous two. The exception here being that HEAD never returns a body, so that element will always be empty.
+
+---
+
+# Authentication <a name="apis/making-http-requests/authentication" />
+
+Source: https://developer.wordpress.org/apis/making-http-requests/authentication/
+
+Many APIs will require you to make authenticated requests to access some endpoints. A common authentication method is called HTTP Basic Authentication. It can be used in WordPress using the ‘Authorization’ header `<a href="#reference/functions/wp_remote_get">wp_remote_get()</a>`.
+
+```php
+$args = array(
+    'headers' => array(
+        'Authorization' => 'Basic ' . base64_encode( YOUR_USERNAME . ':' . YOUR_PASSWORD )
+    )
+);
+wp_remote_get( $url, $args );
+```
+
+HTTP Basic Auth is very insecure because it exposes the username and password and is only used for testing and development. Check the documentation of the API you want to access for more information on how to authenticate.
+
+If you want to make authenticated requests to the WordPress REST API, check [this article](#rest-api/using-the-rest-api/authentication).
+
+---
+
+# REST <a name="apis/rest" />
+
+Source: https://developer.wordpress.org/apis/rest/
+
+Refer [REST API Handbook](#rest-api).
+
+---
+
+# Rewrite <a name="apis/rewrite" />
+
+Source: https://developer.wordpress.org/apis/rewrite/
+
+## Description
+
+WordPress allows theme and plugin developers to programmatically specify new, custom rewrite rules.
+
+The following functions (which are mostly aliases for [WP\_Rewrite](#reference/classes/wp_rewrite) methods) can be used to achieve this.
+
+Please note that these rules are usually called inside the `init` hook. Furthermore, permalinks will need to be refreshed (you can do this from WP-Admin under Settings -&gt; Permalinks) before the rewrite changes will take effect. Requires one-time use of `flush_rules()` to take effect.
+
+## API Reference
+
+#### Articles
+
+- Class: [`WP_Rewrite`](#reference/classes/wp_rewrite) – An overview of WordPress’s built-in URL rewrite class.
+
+#### Hooks
+
+- Filter: [`root_rewrite_rules`](#reference/hooks/root_rewrite_rules) – Filters the rewrite rules generated for the root of your weblog.
+- Filter: [`post_rewrite_rules`](#reference/hooks/post_rewrite_rules) – Filters the rewrite rules generated for permalink URLs.
+- Filter: [`page_rewrite_rules`](#reference/hooks/page_rewrite_rules) – Filters the rewrite rules generated for your Pages.
+- Filter: [`date_rewrite_rules`](#reference/hooks/date_rewrite_rules) – Filters the rewrite rules generated for dated archive URLs.
+- Filter: [`search_rewrite_rules`](#reference/hooks/search_rewrite_rules) – Filters the rewrite rules generated for search URLs.
+- Filter: [`comments_rewrite_rules`](#reference/hooks/comments_rewrite_rules) – Filters the rewrite rules generated for the latest comment feed URLs.
+- Filter: [`author_rewrite_rules`](#reference/hooks/author_rewrite_rules) – Filters the rewrite rules generated for author archive URLs.
+- Filter: [`rewrite_rules_array`](#reference/hooks/rewrite_rules_array) – Filters *all* the rewrite rules at once.
+- Filter: [`{$permastructname}_rewrite_rules`](#reference/hooks/permastructname_rewrite_rules) – Can be used to create or modify rewrite rules for any custom permastructs, such as taxonomies or custom post types.
+- Action: [`generate_rewrite_rules`](#reference/hooks/generate_rewrite_rules) – Runs **after** all the rules have been created.
+
+#### Functions
+
+- [`add_rewrite_tag()`](#reference/functions/add_rewrite_tag) – Can be used to allow WordPress to recognize custom variables (particularly custom querystring variables).
+- [`add_rewrite_rule()`](#reference/functions/add_rewrite_rule) – Allows you to specify new, custom rewrite rules.
+- [`add_rewrite_endpoint()`](#reference/functions/add_rewrite_endpoint) – Add a new endpoint like /trackback/
+- [`flush_rules()`](#reference/classes/wp_rewriteflush_rules/) – Regenerate the rewrite rules and save them to the database.
+- [`flush_rewrite_rules()`](#reference/functions/flush_rewrite_rules) – Remove rewrite rules and then recreate rewrite rules.
+- [`generate_rewrite_rules()`](#reference/hooks/generate_rewrite_rules) – Generates rewrite rules from a permalink structure
+- [`add_permastruct()`](#reference/functions/add_permastruct) – Add a new permastruct
+- [`add_feed()`](#reference/functions/add_feed)– Add a new feed type like `/atom1/`
+
+---
+
 # Security <a name="apis/security" />
 
 Source: https://developer.wordpress.org/apis/security/
@@ -6958,90 +4909,6 @@ Nonce hooks: `nonce_life`, `nonce_user_logged_out`, `explain_nonce_(verb)-(noun)
 
 ---
 
-# Example <a name="apis/security/example" />
-
-Source: https://developer.wordpress.org/apis/security/example/
-
-Complete example using capability checks, data validation, secure input, secure output and nonces:
-
-```php
-/**
- * Generate a Delete link based on the homepage url.
- *
- * @param string $content   Existing content.
- *
- * @return string|null
- */
-function wporg_generate_delete_link( $content ) {
-	// Run only for single post page.
-	if ( is_single() && in_the_loop() && is_main_query() ) {
-		// Add query arguments: action, post, nonce
-		$url = add_query_arg(
-			[
-				'action' => 'wporg_frontend_delete',
-				'post'   => get_the_ID(),
-				'nonce'  => wp_create_nonce( 'wporg_frontend_delete' ),
-			], home_url()
-		);
-
-		return $content . ' <a href="' . esc_url( $url ) . '">' . esc_html__( 'Delete Post', 'wporg' ) . '</a>';
-	}
-
-	return null;
-}
-
-/**
- * Request handler
- */
-function wporg_delete_post() {
-	if ( isset( $_GET['action'] )
-         && isset( $_GET['nonce'] )
-         && 'wporg_frontend_delete' === $_GET['action']
-         && wp_verify_nonce( $_GET['nonce'], 'wporg_frontend_delete' ) ) {
-
-		// Verify we have a post id.
-		$post_id = ( isset( $_GET['post'] ) ) ? ( $_GET['post'] ) : ( null );
-
-		// Verify there is a post with such a number.
-		$post = get_post( (int) $post_id );
-		if ( empty( $post ) ) {
-			return;
-		}
-
-		// Delete the post.
-		wp_trash_post( $post_id );
-
-		// Redirect to admin page.
-		$redirect = admin_url( 'edit.php' );
-		wp_safe_redirect( $redirect );
-
-		// We are done.
-		die;
-	}
-}
-
-/**
- * Add delete post ability
- */
-add_action('plugins_loaded', 'wporg_add_delete_post_ability');
- 
-function wporg_add_delete_post_ability() {    
-    if ( current_user_can( 'edit_others_posts' ) ) {
-        /**
-         * Add the delete link to the end of the post content.
-         */
-        add_filter( 'the_content', 'wporg_generate_delete_link' );
-      
-        /**
-         * Register our request handler with the init hook.
-         */
-        add_action( 'init', 'wporg_delete_post' );
-    }
-}
-```
-
----
-
 # User Roles and Capabilities <a name="apis/security/user-roles-and-capabilities" />
 
 Source: https://developer.wordpress.org/apis/security/user-roles-and-capabilities/
@@ -7301,16 +5168,2149 @@ It is important to stay current on potential security holes. The following resou
 
 ---
 
-# Hooks <a name="apis/hooks" />
+# Example <a name="apis/security/example" />
 
-Source: https://developer.wordpress.org/apis/hooks/
+Source: https://developer.wordpress.org/apis/security/example/
 
-Hooks are a way for one piece of code to interact/modify another piece of code at specific, pre-defined spots.
+Complete example using capability checks, data validation, secure input, secure output and nonces:
 
-You can read more about how to use Hooks in the [Plugin Developer Handbook](#plugins/hooks).
+```php
+/**
+ * Generate a Delete link based on the homepage url.
+ *
+ * @param string $content   Existing content.
+ *
+ * @return string|null
+ */
+function wporg_generate_delete_link( $content ) {
+	// Run only for single post page.
+	if ( is_single() && in_the_loop() && is_main_query() ) {
+		// Add query arguments: action, post, nonce
+		$url = add_query_arg(
+			[
+				'action' => 'wporg_frontend_delete',
+				'post'   => get_the_ID(),
+				'nonce'  => wp_create_nonce( 'wporg_frontend_delete' ),
+			], home_url()
+		);
 
-The reference guides below are a list of action and filter hooks available in WordPress.
+		return $content . ' <a href="' . esc_url( $url ) . '">' . esc_html__( 'Delete Post', 'wporg' ) . '</a>';
+	}
 
-[Action Reference](#apis/action-reference)
+	return null;
+}
 
-[Filter Reference](#apis/filter-reference)
+/**
+ * Request handler
+ */
+function wporg_delete_post() {
+	if ( isset( $_GET['action'] )
+         && isset( $_GET['nonce'] )
+         && 'wporg_frontend_delete' === $_GET['action']
+         && wp_verify_nonce( $_GET['nonce'], 'wporg_frontend_delete' ) ) {
+
+		// Verify we have a post id.
+		$post_id = ( isset( $_GET['post'] ) ) ? ( $_GET['post'] ) : ( null );
+
+		// Verify there is a post with such a number.
+		$post = get_post( (int) $post_id );
+		if ( empty( $post ) ) {
+			return;
+		}
+
+		// Delete the post.
+		wp_trash_post( $post_id );
+
+		// Redirect to admin page.
+		$redirect = admin_url( 'edit.php' );
+		wp_safe_redirect( $redirect );
+
+		// We are done.
+		die;
+	}
+}
+
+/**
+ * Add delete post ability
+ */
+add_action('plugins_loaded', 'wporg_add_delete_post_ability');
+ 
+function wporg_add_delete_post_ability() {    
+    if ( current_user_can( 'edit_others_posts' ) ) {
+        /**
+         * Add the delete link to the end of the post content.
+         */
+        add_filter( 'the_content', 'wporg_generate_delete_link' );
+      
+        /**
+         * Register our request handler with the init hook.
+         */
+        add_action( 'init', 'wporg_delete_post' );
+    }
+}
+```
+
+---
+
+# Settings <a name="apis/settings" />
+
+Source: https://developer.wordpress.org/apis/settings/
+
+## Overview
+
+The **Settings API**, added in [WordPress 2.7](/support/wordpress-version/version-2-7), allows admin pages containing settings forms to be managed semi-automatically. It lets you define settings pages, sections within those pages and fields within the sections.
+
+New settings pages can be registered along with sections and fields inside them. Existing settings pages can also be added to by registering new settings sections or fields inside of them.
+
+Organizing registration and validation of fields still requires some effort from developers using the Settings API, but avoids a lot of complex debugging of underlying options management.
+
+NOTE: When using the Settings API, the form posts to `wp-admin/options.php` which provides fairly strict capabilities checking. Users will need `manage_options` capability (and in MultiSite will have to be a Super Admin) to submit the form.
+
+The functions are found in `<a href="https://core.trac.wordpress.org/browser/tags/5.2.1/src/wp-admin/includes/plugin.php#L0">wp-admin/includes/plugin.php</a>` and `<a href="https://core.trac.wordpress.org/browser/tags/5.2.1/src/wp-admin/includes/template.php#L0">wp-admin/includes/template.php</a>`
+
+## Function Reference
+
+**Setting Register/Unregister:**
+
+- [register\_setting()](#reference/functions/register_setting)
+- [unregister\_setting()](#reference/functions/unregister_setting)
+
+**Add Field/Section:**
+
+- [add\_settings\_field()](#reference/functions/add_settings_field)
+- [add\_settings\_section()](#reference/functions/add_settings_section)
+
+**Options Form Rendering:**
+
+- [settings\_fields()](#reference/functions/settings_fields)
+- [do\_settings\_sections()](#reference/functions/do_settings_sections)
+- [do\_settings\_fields()](#reference/functions/do_settings_fields)
+
+**Errors:**
+
+- [add\_settings\_error()](#reference/functions/add_settings_error)
+- [get\_settings\_errors()](#reference/functions/get_settings_errors)
+- [settings\_errors()](#reference/functions/settings_errors)
+
+## Adding Setting Fields
+
+You can add new settings fields (basically, an option in the `wp_options` database table but totally managed for you) to the existing WordPress pages using this function. Your callback function just needs to output the appropriate HTML input and fill it with the old value, the saving will be done behind the scenes. You can create your own sections on existing pages using `add_settings_section()` as described below.
+
+**NOTE:** You MUST register any options you use with `add_settings_field()` or they won’t be saved and updated automatically. See below for details and an example.
+
+```php
+add_settings_field( $id, $title, $callback, $page, $section = 'default', $args = array() )
+```
+
+- `$id` – String for use in the ‘id’ attribute of tags.
+- `$title` – Title of the field.
+- `$callback` – Function that fills the field with the desired inputs as part of the larger form. Name and id of the input should match the $id given to this function. The function should echo its output.
+- `$page` – The type of settings page on which to show the field (general, reading, writing, …).
+- `$section` – The section of the settings page in which to show the box (default or a section you added with add\_settings\_section, look at the page in the source to see what the existing ones are.)
+- `$args` – Extra arguments passed into the callback function
+
+## Adding Settings Sections
+
+Settings Sections are the groups of settings you see on WordPress settings pages with a shared heading. In your plugin you can add new sections to existing settings pages rather than creating a whole new page. This makes your plugin simpler to maintain and creates fewer new pages for users to learn. You just tell them to change your setting on the relevant existing page.
+
+```php
+add_settings_section( $id, $title, $callback, $page );
+```
+
+- `$id` – String for use in the ‘id’ attribute of tags.
+- `$title` – Title of the section.
+- `$callback` – Function that fills the section with the desired content. The function should echo its output.
+- `$page` – The type of settings page on which to show the section (general, reading, writing, media etc.)
+
+## Registering Settings
+
+```php
+register_setting( $option_group, $option_name, $args );
+```
+
+```php
+unregister_setting( $option_group, $option_name );
+```
+
+**NOTE:** `register_setting()` as well as the above mentioned `add_settings_*()` functions should all be called from a `admin_init` action hook callback function. Refer to the “Examples” section below.
+
+## Options Form Rendering
+
+When using the API to add settings to existing options pages, you do not need to be concerned about the form itself, as it has already been defined for the page. When you define a new page from scratch, you need to output a minimal form structure that contains a few tags that in turn output the actual sections and settings for the page.
+
+To display the hidden fields and handle security of your options form, the Settings API provides the [settings\_fields()](#reference/functions/settings_fields) function. `settings_fields( $option_group ); `
+
+`<strong>$option_group</strong>` **(*****string*****) (*****required*****):**
+
+A settings group name. This must match the group name used in [register\_setting()](#reference/functions/register_setting), which is the page slug name on which the form is to appear. Default: *None*
+
+To display the sections assigned to the page and the settings contained within, the Settings API provides the [do\_settings\_sections()](#reference/functions/do_settings_sections) function. ` do_settings_sections( $page ); `
+
+`<strong>$page</strong>` **(*****string*****) (*****required*****):**
+
+The slug name of the page whose settings sections you want to output. This should match the page name used in [add\_settings\_section()](#reference/functions/add_settings_section). Default: *None*
+
+The [do\_settings\_fields()](#reference/functions/do_settings_fields) function is provided to output the fields assigned to a particular page and section. You should not call this function directly, rather use `do_settings_sections()` to output the Section content as well as the associated fields.
+
+Your options form also needs a submit button. You can use the [submit\_button()](#reference/functions/submit_button) function to do this.
+
+Finally, you need to output the HTML &lt;form&gt; tag defining the action destination of options.php and method of POST. Here is an example options form code to generate all the sections and fields added to a page who’s slug name is `my-page`:
+
+```php
+<form method="POST" action="options.php">
+<?php 
+settings_fields( 'my-page' ); // pass slug name of page, also referred to in Settings API as option group name
+do_settings_sections( 'my-page' );  // pass slug name of page
+submit_button(); // submit button
+?>
+</form>
+```
+
+## Example
+
+### Adding a settings section with a new field in it
+
+```php
+<?php 
+/**
+ * Add all your sections, fields and settings during admin_init
+ */
+ 
+function wporg_settings_api_init() {
+ 	// Add the section to reading settings so we can add our
+ 	// fields to it
+ 	add_settings_section(
+		'wporg_setting_section',
+		'Example settings section in reading',
+		'wporg_setting_section_callback_function',
+		'reading'
+	);
+ 	
+ 	// Add the field with the names and function to use for our new
+ 	// settings, put it in our new section
+ 	add_settings_field(
+		'wporg_setting_name',
+		'Example setting Name',
+		'wporg_setting_callback_function',
+		'reading',
+		'wporg_setting_section'
+	);
+ 	
+ 	// Register our setting so that $_POST handling is done for us and
+ 	// our callback function just has to echo the <input>
+ 	register_setting( 'reading', 'wporg_setting_name' );
+ } // wporg_settings_api_init()
+ 
+ add_action( 'admin_init', 'wporg_settings_api_init' );
+ 
+  
+/**
+ * Settings section callback function
+ *
+ * This function is needed if we added a new section. This function 
+ * will be run at the start of our section
+ */
+ 
+ function wporg_setting_section_callback_function() {
+ 	echo '<p>Intro text for our settings section</p>';
+ }
+ 
+/*
+ * Callback function for our example setting
+ *
+ * creates a checkbox true/false option. Other types are surely possible
+ */
+ 
+ function wporg_setting_callback_function() {
+ 	echo '<input name="wporg_setting_name" id="wporg_setting_name" type="checkbox" value="1" class="code" ' . checked( 1, get_option( 'wporg_setting_name' ), false ) . ' /> <label for="wporg_setting_name">Explanation text</label>';
+ }
+```
+
+#### Graphical Representation of where all those code should go
+
+[![](https://i0.wp.com/developer.wordpress.org/files/2019/08/editing-settings-api-example.png?resize=949%2C924&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2019/08/editing-settings-api-example.png?ssl=1)## External References
+
+- [The WordPress Settings API](http://kovshenin.com/2012/the-wordpress-settings-api/) by Konstantin Kovshenin, Oct 23 2012
+- [Incorporating the Settings API in WordPress Themes](http://www.chipbennett.net/2011/02/17/incorporating-the-settings-api-in-wordpress-themes/) by Chip Bennett, Feb 2011
+- [Settings API Explained](http://www.presscoders.com/wordpress-settings-api-explained/) by David Gwyer
+- [WordPress Settings API Tutorial](http://ottopress.com/2009/wordpress-settings-api-tutorial/) by Otto
+- [Handling Plugin Options with register\_setting()](http://planetozh.com/blog/2009/05/handling-plugins-options-in-wordpress-28-with-register_setting/) by Ozh
+- [Intro to the WordPress Settings API](http://blog.gneu.org/2010/09/intro-to-the-wordpress-settings-api/) by BobGneu
+- Using The Settings API: [Part 1](http://wp.tutsplus.com/tutorials/using-the-settings-api-part-1-create-a-theme-options-page/), [Part 2](http://wp.tutsplus.com/tutorials/using-the-settings-api-part-2-create-a-top-level-admin-menu/) by [Sarah Neuber](https://twitter.com/srhnbr/)
+- [Class Based Settings with WordPress](https://www.yaconiello.com/blog/how-to-handle-wordpress-settings) by Francis Yaconiello
+- [Adding multiple sections on a single settings screen](http://www.mendoweb.be/blog/wordpress-settings-api-multiple-sections-on-same-page/) by Mathieu Decaffmeyer
+- [Adding multiple forms on a single settings screen](http://www.mendoweb.be/blog/wordpress-settings-api-multiple-forms-on-same-page/) by Mathieu Decaffmeyer
+- [The Complete Guide To The WordPress Settings API](http://wp.tutsplus.com/tutorials/the-complete-guide-to-the-wordpress-settings-api-part-1/) by Tom McFarlin, Jan 31st 2012
+- [WordPress Settings API Cheat Sheet](http://techblog.kjodle.net/2015/07/16/wordpress-settings-api-cheat-sheet/) by Kenneth Odle, July 16th 2015
+
+## Generators
+
+- [WordPress Settings API (options page) Generator](http://wpsettingsapi.jeroensormani.com/)
+
+## PHP Class
+
+- [WordPress settings API Class](https://github.com/tareq1988/wordpress-settings-api-class/)
+
+---
+
+# Shortcode <a name="apis/shortcode" />
+
+Source: https://developer.wordpress.org/apis/shortcode/
+
+## The Shortcode API
+
+The **Shortcode API** is a simple set of functions for creating WordPress [shortcodes](#plugins/shortcodes) for use in posts and pages. For instance, the following shortcode (in the body of a post or page) would add a photo gallery of images attached to that post or page: `[ gallery ]`
+
+The API enables plugin developers to create special kinds of content (e.g. forms, content generators) that users can attach to certain pages by adding the corresponding shortcode into the page text.
+
+The Shortcode API makes it easy to create shortcodes that support attributes like this:
+
+```php
+[ gallery id="123" size="medium" ]
+```
+
+The API handles all the tricky parsing, eliminating the need for writing a custom regular expression for each shortcode. Helper functions are included for setting and fetching default attributes. The API supports both self-closing and enclosing shortcodes.
+
+As a quick start for those in a hurry, here’s a minimal example of the PHP code required to create a shortcode:
+
+```php
+// [foobar]
+function wporg_foobar_func( $atts ) {
+	return "foo and bar";
+}
+add_shortcode( 'foobar', 'wporg_foobar_func' );
+```
+
+This will create `[foobar]` shortcode that returns as: foo and bar
+
+With attributes:
+
+```php
+// [bartag foo="foo-value"]
+function bartag_func( $atts ) {
+	$a = shortcode_atts( array(
+		'foo' => 'something',
+		'bar' => 'something else',
+	), $atts );
+
+	return "foo = {$a['foo']}";
+}
+add_shortcode( 'bartag', 'bartag_func' );
+```
+
+This creates a `[bartag]` shortcode that supports two attributes: “foo” and “bar”. Both attributes are optional and will take on default options `[foo="something" bar="something else"]` if they are not provided. The shortcode will return as `foo = {the value of the foo attribute}`.
+
+## History
+
+The Shortcode API was introduced in WordPress 2.5.
+
+## Overview
+
+Shortcodes are written by providing a handler function. Shortcode handlers are broadly similar to WordPress filters: they accept parameters (attributes) and return a result (the shortcode output).
+
+Shortcode names should be all lowercase and use all letters, but numbers and underscores should work fine too. Be wary of using hyphens (dashes), you’ll be better off not using them.
+
+The `<a href="#reference/functions/add_shortcode">add_shortcode</a>` function is used to register a shortcode handler. It takes two parameters: the shortcode name (the string used in a post body), and the callback function name.
+
+Three parameters are passed to the shortcode callback function. You can choose to use any number of them including none of them.
+
+- `$atts`: an associative array of attributes, or an empty string if no attributes are given
+- `$content`: the enclosed content (if the shortcode is used in its enclosing form)
+- `$tag`: the shortcode tag, useful for shared callback functions
+
+The API call to register the shortcode handler would look something like this:
+
+```php
+add_shortcode( 'wporgshortcode', 'wporg_shortcode_handler' );
+```
+
+When [the\_content](#reference/functions/the_content) is displayed, the shortcode API will parse any registered shortcodes such as `[myshortcode]`, separate and parse the attributes and content, if any, and pass them the corresponding shortcode handler function. Any string *returned* (not echoed) by the shortcode handler will be inserted into the post body in place of the shortcode itself.
+
+Shortcode attributes are entered like this:
+
+`[wporgshortcode foo="bar" bar="bing"]`
+
+These attributes will be converted into an associative array like the following, passed to the handler function as its `$atts` parameter:
+
+```php
+array( 'foo' => 'bar', 'bar' => 'bing' )
+```
+
+The array keys are the attribute names; array values are the corresponding attribute values. In addition, the zeroeth entry (`$atts[0]`) will hold the string that matched the shortcode regex, but ONLY IF that is different from the callback name.
+
+### Handling Attributes
+
+The raw `$atts` array may include any arbitrary attributes that are specified by the user. (In addition, the zeroeth entry of the array may contain the string that was recognized by the regex; see the note below.)
+
+In order to help set default values for missing attributes, and eliminate any attributes that are not recognized by your shortcode, the API provides a [shortcode\_atts()](#reference/functions/shortcode_atts) function.
+
+`<a href="#reference/functions/shortcode_atts">shortcode_atts()</a>` resembles the `<a href="#reference/functions/wp_parse_args">wp_parse_args</a>` function, but has some important differences. Its parameters are:
+
+```php
+shortcode_atts( $defaults_array, $atts );
+```
+
+Both parameters are required. `$defaults_array` is an associative array that specifies the recognized attribute names and their default values. `$atts` is the raw attributes array as passed into your shortcode handler. `shortcode_atts()` will return a normalized array containing all of the keys from the `$defaults_array`, filled in with values from the `$atts` array if present. For example:
+
+```php
+$a = shortcode_atts( array(
+	'title' => 'My Title',
+	'foo' => 123,
+), $atts );
+```
+
+If `$atts` were to contain `array( 'foo' => 456, 'bar' => 'something' )`, the resulting `$a` would be `array( 'title' => 'My Title', 'foo' => 456 )`. The value of `$atts['foo']` overrides the default of 123. `$atts['title']` is not set, so the default ‘My Title’ is used. There is no ‘bar’ item in the defaults array, so it is not included in the result.
+
+Attribute names are always converted to lowercase before they are passed into the handler function. Values are untouched.`[myshortcode FOO="BAR"]` produces `$atts = array( 'foo' => 'BAR' )`.
+
+A suggested code idiom for declaring defaults and parsing attributes in a shortcode handler is as follows:
+
+```php
+function wporg_shortcode_handler( $atts, $content = null ) {
+	$a = shortcode_atts( array(
+		'attr_1' => 'attribute 1 default',
+		'attr_2' => 'attribute 2 default',
+		// ...etc
+	), $atts );
+}
+```
+
+This will parse the attributes, set default values, eliminate any unsupported attributes, and store the results in a local array variable named `$a` with the attributes as keys – `$a['attr_1']`, `$a['attr_2']`, and so on. In other words, the array of defaults approximates a list of local variable declarations.
+
+**IMPORTANT – Don’t use camelCase or UPPER-CASE for your `$atts` attribute names**:
+
+`$atts` values are ***lower-cased*** during `shortcode_atts( array( 'attr_1' => 'attr_1 default', // ...etc ), $atts )` processing, so you might want to *just use lower-case*.
+
+**NOTE on confusing regex/callback name reference:**
+
+The zeroeth entry of the attributes array (**`$atts[0]`**) will contain the string that matched the shortcode regex, but ONLY if that differs from the callback name, which otherwise appears as the third argument to the callback function.
+
+```php
+add_shortcode('foo','foo'); // two shortcodes referencing the same callback
+ add_shortcode('bar','foo');
+    produces this behavior:
+ [foo a='b'] ==> callback to: foo(array('a'=>'b'),NULL,"foo");
+ [bar a='c'] ==> callback to: foo(array(0 => 'bar', 'a'=>'c'),NULL,"");
+```
+
+This is confusing and perhaps reflects an underlying bug, but an overloaded callback routine can correctly determine what shortcode was used to call it, by checking BOTH the third argument to the callback and the zeroeth attribute. (It is NOT an error to have two shortcodes reference the same callback routine, which allows for common code.)
+
+### Output
+
+The return value of a shortcode handler function is inserted into the post content output in place of the shortcode macro. **Remember to use return and not echo – anything that is echoed will be output to the browser, but it won’t appear in the correct place on the page**.
+
+Shortcodes are parsed after [wpautop](#reference/functions/wpautop) and [wptexturize](#reference/functions/wptexturize) post formatting has been applied. This means that your shortcode output HTML won’t automatically have curly quotes applied, p and br tags added, and so on. If you do want your shortcode output to be formatted, you should call `wpautop()` or `wptexturize()` directly when you return the output from your shortcode handler.
+
+wpautop recognizes shortcode syntax and will attempt not to wrap p or br tags around shortcodes that stand alone on a line by themselves. Shortcodes intended for use in this manner should ensure that the output is wrapped in an appropriate block tag such as `<p>` or `<div>`.
+
+If the shortcode produces a lot of HTML then `ob_start` can be used to capture output and convert it to a string as follows:
+
+```php
+function wporg_shortcode() {
+	ob_start();
+	?> <HTML> <here> ... <?php
+	return ob_get_clean();
+}
+```
+
+### Enclosing vs self-closing shortcodes
+
+The examples above show self-closing shortcode macros such as `[myshortcode]`. The API also supports enclosing shortcodes such as `[myshortcode]content[/myshortcode]`.
+
+If a shortcode macro is used to enclose content, its handler function will receive a second parameter containing that content. Users might write shortcodes in either form, so it is necessary to allow for either case by providing a default value for the second parameter to your handler function:
+
+```php
+function wporg_shortcode_handler( $atts, $content = null )
+```
+
+`empty( $content )` can be used to distinguish between the self-closing and enclosing cases.
+
+When content is enclosed, the complete shortcode macro including its content will be replaced with the function output. It is the responsibility of the handler function to provide any necessary escaping or encoding of the raw content string, and include it in the output.
+
+Here’s a trivial example of an enclosing shortcode:
+
+```php
+function wporg_caption_shortcode( $atts, $content = null ) {
+	return '<span class="caption">' . $content . '</span>';
+}
+add_shortcode( 'caption', 'wporg_caption_shortcode' );
+```
+
+When used like this:
+
+```php
+My Caption
+```
+
+The output would be:
+
+```php
+<span class="caption">My Caption</span>
+```
+
+Since `$content` is included in the return value without any escaping or encoding, the user can include raw HTML:
+
+```php
+<a href="http://example.com/">My Caption</a>
+```
+
+Which would produce:
+
+```php
+<span class="caption"><a href="http://example.com/">My Caption</a></span>
+```
+
+This may or may not be intended behaviour – if the shortcode should not permit raw HTML in its output, it should use an escaping or filtering function to deal with it before returning the result.
+
+The shortcode parser uses a single pass on the post content. This means that if the `$content` parameter of a shortcode handler contains another shortcode, it won’t be parsed:
+
+```php
+Caption: [myshortcode]
+```
+
+This would produce:
+
+```php
+<span class="caption">Caption: [myshortcode]</span>
+```
+
+If the enclosing shortcode is intended to permit other shortcodes in its output, the handler function can call [do\_shortcode()](#reference/functions/do_shortcode) recursively:
+
+```php
+function wporg_caption_shortcode( $atts, $content = null ) {
+    return '<span class="caption">' . do_shortcode($content) . '</span>';
+}
+```
+
+In the previous example, this would ensure the `[myshortcode]` macro in the enclosed content is parsed, and its output enclosed by the caption span:
+
+```php
+<span class="caption">Caption: The result of myshortcode's handler function</span>
+```
+
+The parser does not handle mixing of enclosing and non-enclosing forms of the same shortcode as you would want it to. For example, if you have:
+
+```php
+[myshortcode example='non-enclosing' /] non-enclosed content [myshortcode] enclosed content [/myshortcode]
+```
+
+Instead of being treated as two shortcodes separated by the text ” non-enclosed content “, the parser treats this as a single shortcode enclosing ” non-enclosed content `[myshortcode]` enclosed content”.
+
+Enclosing shortcodes support attributes in the same way as self-closing shortcodes. Here’s an example of the `caption_shortcode()` improved to support a ‘class’ attribute:
+
+```php
+function wporg_caption_shortcode( $atts, $content = null ) {
+	$a = shortcode_atts( array(
+		'class' => 'caption',
+	), $atts );
+
+	return '<span class="' . esc_attr($a['class']) . '">' . $content . '</span>';
+}
+```
+
+```php
+My Caption
+```
+
+```php
+<span class="headline">My Caption</span>
+```
+
+### Other features in brief
+
+- The parser supports xhtml-style closing shortcodes like `[myshortcode /]`, but this is optional.
+- Shortcode macros may use single or double quotes for attribute values, or omit them entirely if the attribute value does not contain spaces. `[myshortcode foo='123' bar=456]` is equivalent to `[myshortcode foo="123" bar="456"]`. Note the attribute value in the last position may not end with a forward slash because the feature in the paragraph above will consume that slash.
+- For backwards compatibility with older ad-hoc shortcodes, attribute names may be omitted. If an attribute has no name it will be given a positional numeric key in the `$atts` array. For example, `[myshortcode 123]` will produce `$atts = array( 0 => 123 )`. Positional attributes may be mixed with named ones, and quotes may be used if the values contain spaces or other significant characters.
+- The shortcode API has test cases. The tests — which contain a number of examples of error cases and unusual syntax — can be found at <http://svn.automattic.com/wordpress-tests/trunk/tests/shortcode.php>
+
+### Function reference
+
+The following Shortcode API functions are available:
+
+```php
+function add_shortcode( $tag, $func )
+```
+
+Registers a new shortcode handler function. `$tag` is the shortcode string as written by the user (without braces), such as “myshortcode”. $func is the handler function name.
+
+Only one handler function may exist for a given shortcode. Calling `add_shortcode()` again with the same $tag name will overwrite the previous handler.
+
+```php
+function remove_shortcode( $tag )
+```
+
+Deregisters an existing shortcode. `$tag` is the shortcode name as used in `add_shortcode()`.
+
+```php
+function remove_all_shortcodes()
+```
+
+Deregisters all shortcodes.
+
+```php
+function shortcode_atts( $pairs, $atts )
+```
+
+Process a raw array of attributes `$atts` against the set of defaults specified in `$pairs`. Returns an array. The result will contain every key from `$pairs`, merged with values from `$atts`. Any keys in `$atts` that do not exist in $pairs are ignored.
+
+```php
+function do_shortcode( $content )
+```
+
+Parse any known shortcode macros in the `$content` string. Returns a string containing the original content with shortcode macros replaced by their handler functions output.
+
+[do\_shortcode()](#reference/functions/do_shortcode) is registered as a default filter on ‘the\_content’ with a priority of 11.
+
+### Limitations
+
+#### Nested Shortcodes
+
+The shortcode parser correctly deals with nested shortcode macros, provided their handler functions support it by recursively calling [do\_shortcode()](#reference/functions/do_shortcode):
+
+```php
+[tag-a]
+   [tag-b]
+      [tag-c]
+   [/tag-b]
+[/tag-a]
+```
+
+However the parser will fail if a shortcode macro is used to enclose another macro of the same name:
+
+```php
+[tag-a]
+   [tag-a]
+   [/tag-a]
+[/tag-a]
+```
+
+This is a limitation of the context-free regexp parser used by `do_shortcode()` – it is very fast but does not count levels of nesting, so it can’t match each opening tag with its correct closing tag in these cases.
+
+In future versions of WordPress, it may be necessary for plugins having a nested shortcode syntax to ensure that the `wptexturize()` processor does not interfere with the inner codes. It is recommended that for such complex syntax, the [no\_texturize\_shortcodes](#reference/hooks/no_texturize_shortcodes) filter should be used on the outer tags. In the examples used here, tag-a should be added to the list of shortcodes to not texturize. If the contents of tag-a or tag-b still need to be texturized, then you can call `wptexturize()` before calling `do_shortcode()` as described above.
+
+#### Unregistered Names
+
+Some plugin authors have chosen a strategy of not registering shortcode names, for example to disable a nested shortcode until the parent shortcode’s handler function is called. This may have unintended consequences, such as failure to parse shortcode attribute values. For example:
+
+```php
+[tag-a unit="north"]
+   [tag-b size="24"]
+      [tag-c color="red"]
+   [/tag-b]
+[/tag-a]
+```
+
+Starting with version 4.0.1, if a plugin fails to register tag-b and tag-c as valid shortcodes, the `wptexturize()` processor will output the following text prior to any shortcode being parsed:
+
+```php
+[tag-a unit="north"]
+   [tag-b size=”24”]
+      [tag-c color=”red”]
+   [/tag-b]
+[/tag-a]
+```
+
+Unregistered shortcodes should be considered normal plain text that have no special meaning, and the practice of using unregistered shortcodes is discouraged. If you must enclose raw code between shortcode tags, at least consider using the [no\_texturize\_shortcodes](#reference/hooks/no_texturize_shortcodes) filter to prevent texturization of the contents of tag-a:
+
+```php
+add_shortcode( 'tag-a', 'wporg_tag_a_handler' );
+add_filter( 'no_texturize_shortcodes', 'wporg_ignore_tag_a' );
+
+function wporg_ignore_tag_a( $list ) {
+  $list[] = 'tag-a';
+  return $list;
+}
+```
+
+#### Unclosed Shortcodes
+
+In certain cases the shortcode parser cannot correctly deal with the use of both closed and unclosed shortcodes. For instance in this case the parser will only correctly identify the second instance of the shortcode:
+
+```php
+[tag]
+[tag]
+   CONTENT
+[/tag]
+```
+
+However in this case the parser will identify both:
+
+```php
+[tag]
+   CONTENT
+[/tag]
+[tag]
+```
+
+#### Hyphens
+
+Take caution when using hyphens in the name of your shortcodes. In the following instance WordPress may see the second opening shortcode as equivalent to the first (basically WordPress sees the first part before the hyphen):
+
+```php
+[tag]
+[tag-a]
+```
+
+It all depends on which shortcode is defined first. If you are going to use hyphens then define the shortest shortcode first.
+
+To avoid this, use an underscore or simply no separator:
+
+```php
+[tag]
+[tag_a]
+
+[tag]
+[taga]
+```
+
+If the first part of the shortcode is different from one another, you can get away with using hyphens:
+
+```php
+[tag]
+[tagfoo-a]
+```
+
+**Important:** Using hyphens can have implications that you may not be aware of; such as if other installed shortcodes also are use hyphens, the use of generic words with hyphens may cause collisions (if shortcodes are used together within the same request):
+
+```php
+// plugin-A
+[is-logged-in]
+
+// plugin-B
+[is-admin]
+```
+
+#### Square Brackets
+
+The shortcode parser does not accept square brackets within attributes. Thus the following will fail:
+
+```php
+[tag attribute="[Some value]"]
+```
+
+Tags surrounded by cosmetic brackets are not yet fully supported by [wptexturize()](#reference/functions/wptexturize) or its filters. These codes may give unexpected results:
+
+```php
+[I put random text near my captions. ]
+```
+
+**Note:** these limitations may change in future versions of WordPress, you should test to be absolutely sure.
+
+#### HTML
+
+Starting with version 3.9.3, use of HTML is limited inside shortcode attributes. For example, this shortcode will not work correctly because it contains a `>` character:
+
+```php
+[tag value1="35" value2="25" compare=">"]
+```
+
+Version 4.0 is designed to allow validated HTML, so this will work:
+
+```php
+[tag description="<b>Greetings</b>"]
+```
+
+The suggested workaround for HTML limitations is to use HTML encoding for all user input, and then add HTML decoding in the custom shortcode handler. Extra API functions are planned.
+
+Full usage of HTML in shortcode attributes was never officially supported, and this will not be expanded in future versions.
+
+Starting with version 4.2.3, similar limitations were placed on use of shortcodes inside HTML. For example, this shortcode will not work correctly because it is nested inside a scripting attribute:
+
+```php
+<a onclick="[tag]">
+```
+
+The suggested workaround for dynamic attributes is to design a shortcode that outputs all needed HTML rather than just a single value. This will work better:
+
+```php
+[link onclick="tag"]
+```
+
+Also notice the following shortcode is no longer allowed because of incorrect attribute quoting:
+
+```php
+<a title="[tag attr="id"]">
+```
+
+The only way to parse this as valid HTML is to use single quotes and double quotes in a nested manner:
+
+```php
+<a title="[tag attr='id']">
+```
+
+#### Registration Count
+
+The API is known to become unstable when registering hundreds of shortcodes. Plugin authors should create solutions that rely on only a small number of shortcodes names. This limitation might change in future versions.
+
+### Formal Syntax
+
+WordPress shortcodes do not use special characters in the same way as HTML. The square braces may seem magical at first glance, but they are not truly part of any language. For example:
+
+```php
+[gallery]
+```
+
+The gallery shortcode is parsed by the API as a special symbol because it is a registered shortcode. On the other hand, square braces are simply ignored when a shortcode is not registered:
+
+```php
+[randomthing]
+```
+
+The randomthing symbol and its square braces are ignored because they are not part of any registered shortcode.
+
+In a perfect world, any `[*]` symbol could be handled by the API, but we have to consider the following challenges: Square braces are allowed in HTML and are not always shortcodes, angle braces are allowed inside of shortcodes only in limited situations, and all of this code must run through multiple layers of customizeable filters and parsers before output. Because of these language compatibility issues, square braces can’t be magical.
+
+The shortcode syntax uses these general parts:
+
+```php
+[name attributes close]
+```
+
+```php
+[name attributes]Any HTML or shortcode may go here.[/name]
+```
+
+Escaped shortcodes are identical but have exactly two extra braces:
+
+```php
+[[name attributes close]]
+```
+
+```php
+[[name attributes]Any HTML or shortcode may go here.[/name]]
+```
+
+Again, the shortcode name must be registered, otherwise all four examples would be ignored.
+
+#### Names
+
+Shortcode names must never contain the following characters:
+
+- Square braces: `[ ]`
+- Angle braces: `< >`
+- Ampersand: `&`
+- Forward slash: `/`
+- Whitespace: space linefeed tab
+- Non-printing characters: `x00` – `x20`
+
+It is recommended to also avoid quotes in the names of shortcodes.
+
+#### Attributes
+
+Attributes are optional. A space is required between the shortcode name and the shortcode attributes. When more than one attribute is used, each attribute must be separated by at least one space.
+
+Each attribute should conform to one of these formats:
+
+```php
+attribute_name = 'value'
+```
+
+```php
+attribute_name = "value"
+```
+
+```php
+attribute_name = value
+```
+
+```php
+"value"
+```
+
+```php
+value
+```
+
+Attribute names are optional and should contain only the following characters for compatibility across all platforms:
+
+- Upper-case and lower-case letters: `A-Z` `a-z`
+- Digits: `0-9`
+- Underscore: `_`
+- Hyphen: `-`
+
+Spaces are not allowed in attribute names. Optional spaces may be used between the name and the `=` sign. Optional spaces may also be used between the `=` sign and the value.
+
+It should be noted that even though attributes can be used with mixed case in the editor, they will always be lowercase after parsing.
+
+Attribute values must never contain the following characters:
+
+- Square braces: `[ ]`
+- Quotes: `"`, `'`
+
+Unquoted values also must never contain spaces.
+
+HTML characters `<` and `>` have only limited support in attributes.
+
+The recommended method of escaping special characters in shortcode attributes is HTML encoding. Most importantly, any user input appearing in a shortcode attribute must be escaped or stripped of special characters.
+
+Note that double quotes are allowed inside of single-quoted values and vice versa, however this is not recommended when dealing with user input.
+
+The following characters, if they are not escaped within an attribute value, will be automatically stripped and converted to spaces:
+
+- No-break space: `xC2xA0`
+- Zero-width space: `xE2x80x8B`
+
+#### Self-Closing
+
+The self-closing marker, a single forward slash, is optional. Space before the marker is optional. Spaces are not allowed after the marker.
+
+```php
+[example /]
+```
+
+The self-closing marker is purely cosmetic and has no effect except that it will force the shortcode parser to ignore any closing tag that follows it.
+
+The enclosing type shortcodes may not use a self-closing marker.
+
+#### Escaping
+
+WordPress attempts to insert curly quotes between the `[name]` and `[/name]` tags. It will process that content just like any other. As of 4.0.1, unregistered shortcodes are also “texturized” and this may give unexpected curly quotes:
+
+```php
+[randomthing param="test"]
+```
+
+A better example would be:
+
+```php
+[randomthing param="test"]
+```
+
+The `` element is always avoided for the sake of curly quotes.
+
+Registered shortcodes are still processed inside of `` elements. To escape a registered shortcode for display on your website, the syntax becomes:
+
+```php
+[[caption param="test"]]
+```
+
+which will output:
+
+```php
+[caption param="test"]
+```
+
+The `` element is optional in that situation.
+
+For enclosing shortcodes, use the following syntax:
+
+```php
+[[caption]My Caption]
+```
+
+## External Resources
+
+- [WordPress Shortcodes Generator](http://generatewp.com/shortcodes/)
+- [Add Shortcode – WordPress Code Snippet Generator](https://www.nimbusthemes.com/add-shortcode-wordpress-snippet-generator/) – A snippet generator and full documentation about how to add the code to a WordPress website.
+- [Shortcode summary by Aaron D. Campbell](http://ran.ge/2008/04/15/wordpress-25-shortcodes/) – Explains shortcodes and gives examples including how to incorporate shortcodes into a meta box for sending them to the editor using js.
+- [Innovative WordPress Shortcodes In Action](https://wordpress.org/extend/plugins/iblocks/) – a WordPress plugin that shows you how to effectively use shortcodes to change your post content designs.
+- [WordPress Shortcode API Overview](http://planetozh.com/blog/2008/03/wordpress-25-shortcodes-api-overview/) – explanations on usage and example of plugin using shortcodes.
+- [Simple shortcode-powered BBCode plugin](https://wordpress.org/extend/plugins/bbcode/) – a simple plugin that adds support for BBCode via shortcode. A good way to see shortcodes in action.
+
+## Default Shortcodes
+
+- `<a href="#reference/hooks/wp_audio_shortcode">[ audio ]</a>`
+- `[ wp_caption ]`
+- `[ caption ]`
+- `<a href="#reference/classes/wp_embed/shortcode">[ embed ]</a>`
+- `<a href="#reference/functions/gallery_shortcode">[ gallery ]</a>`
+- `<a href="#reference/hooks/wp_video_shortcode">[ video ]</a>`
+- `<a href="#reference/functions/wp_playlist_shortcode">[ playlist ]</a>`
+
+## Shortcode API functions list
+
+- Function: [do\_shortcode()](#reference/functions/do_shortcode)
+- Function: [add\_shortcode()](#reference/functions/add_shortcode)
+- Function: [remove\_shortcode()](#reference/functions/remove_shortcode)
+- Function: [remove\_all\_shortcodes()](#reference/functions/remove_all_shortcodes)
+- Function: [shortcode\_atts()](#reference/functions/shortcode_atts)
+- Function: [strip\_shortcodes()](#reference/functions/strip_shortcodes)
+- Function: [shortcode\_exists()](#reference/functions/shortcode_exists)
+- Function: [has\_shortcode()](#reference/functions/has_shortcode)
+- Function: [get\_shortcode\_regex()](#reference/functions/get_shortcode_regex)
+- Function: [wp\_audio\_shortcode()](#reference/functions/wp_audio_shortcode)
+- Function: [wp\_video\_shortcode()](#reference/functions/wp_video_shortcode)
+- Filter: [no\_texturize\_shortcodes](#reference/hooks/no_texturize_shortcodes)
+
+---
+
+# Site Health <a name="apis/site-health" />
+
+Source: https://developer.wordpress.org/apis/site-health/
+
+Since WordPress 5.8, developers are allowed to extend Site Health screen. This API allows developers to add their own tabs to the Site Health interface.
+
+![](https://i0.wp.com/make.wordpress.org/core/files/2021/06/4-menu-items.png?ssl=1)## Registering a custom tab navigation
+
+Developers need to start by creating a navigation element, so that users may access the new tab. This is done using the `site_health_navigation_tabs` filter, which is an associated array of tab keys, and their label.
+
+```php
+<?php
+function wporg_example_site_health_navigation_tabs( $tabs ) {
+    // translators: Tab heading for Site Health navigation.
+    $tabs['example-site-health-tab'] = esc_html_x( 'My New Tab', 'Site Health', 'text-domain' );
+ 
+    return $tabs;
+}
+add_filter( 'site_health_navigation_tabs', 'wporg_example_site_health_navigation_tabs' );
+```
+
+The above example will add the identifier `example-site-health-tab` with the label `My New Tab` to the header navigation located in Site Health screens.
+
+It is also possible to re-order what tabs are displayed first using this filter, or even remove tabs. By default core has two tabs, the `Status` and `Info` screens. The `Status` screen is the default, and therefore has no slug.
+
+To not overburden the navigation area, if there are more than 4 items added, only the first three will be displayed directly, with the remaining items being wrapped inside a sub-navigation. This is based on usage testing in the Health Check plugin, where 4 items have shown to be enough to cover most use cases, but not so many as to become confusing.
+
+## Displaying the content of a custom tab
+
+When a user visits a Site Health tab, other than the default screen, the `site_health_tab_content` action triggers. This action includes a single argument being the slug, as defined by the tab navigation in the previous filter, to help developers to identify which page is being requested.
+
+The action fires after the header itself has been loaded, but does not include any wrappers. This gives you as a developer the full width of the screen (not counting the admin menu) to work with.
+
+```php
+<?php
+function wporg_example_site_health_tab_content( $tab ) {
+    // Do nothing if this is not our tab.
+    if ( 'example-site-health-tab' !== $tab ) {
+        return;
+    }
+ 
+    // Include the interface, kept in a separate file just to differentiate code from views.
+    include trailingslashit( plugin_dir_path( __FILE__ ) ) . 'views/site-health-tab.php';
+}
+add_action( 'site_health_tab_content', 'wporg_example_site_health_tab_content' );
+```
+
+The above example loads in a file with your tab content from your plugin, but only if the tab matches the tab key (or slug if you will) which was defined in the previous example.
+
+It is possible to provide output on any tab this way, or on another tab not your own, for example if they interact with each other.
+
+Another example might be to extend the default `Info` tab, which has the slug `debug`, and add a button to copy some information specific to only your plugin or theme:
+
+```php
+<?php
+function wporg_add_button_to_site_health_info_tab( $tab ) {
+    // Do nothing if this is not the "debug" tab.
+    if ( 'debug' !== $tab ) {
+        return;
+    }
+    ?>
+    <button class="copy-my-plugin-info">
+        <?php esc_html_e( 'Click to copy plugin info', 'text-domain' ); ?>
+    </button>
+    <?php
+}
+add_action( 'site_health_tab_content', 'wporg_add_button_to_site_health_info_tab' );
+```
+
+---
+
+# Theme <a name="apis/theme" />
+
+Source: https://developer.wordpress.org/apis/theme/
+
+See [Theme Developer Handbook](#themes).
+
+---
+
+# Transients <a name="apis/transients" />
+
+Source: https://developer.wordpress.org/apis/transients/
+
+## Overview
+
+This page contains the technical documentation of **WordPress Transients API**, which offers a simple and standardized way of storing cached data in the database temporarily by giving it a custom name and a timeframe after which it will expire and be deleted.
+
+The Transients API is very similar to the [Options API](#plugins/settings/options-api) but with the added feature of an expiration time, which simplifies the process of using the `wp_options` database table to temporarily store cached information.
+
+Note that the “site\_” functions are essentially the same as their counterparts, but work network wide when using WordPress [Multisite](https://codex.wordpress.org/Glossary#Multisite).
+
+Also of note is that Transients are inherently sped up by caching plugins, where normal Options are not. A *memcached* plugin, for example, would make WordPress store transient values in fast memory instead of in the database. For this reason, transients should be used to store any data that is expected to expire, or which can expire at any time. Transients should also never be assumed to be in the database, since they may not be stored there at all.
+
+Furthermore, it is possible for the transient to not be available before the expiration time. Much like what is done with caching, your code should have a fall back method to re-generate the data if the transient is not available.
+
+Ryan McCue explained it this way on a [ticket](https://core.trac.wordpress.org/ticket/20316#comment:47):
+
+> Everyone seems to misunderstand how transient expiration works, so the long and short of it is: transient expiration times are a maximum time. There is no minimum age. Transients might disappear one second after you set them, or 24 hours, but they will never be around after the expiration time.
+
+The intended audience for this article includes WordPress theme authors, plugin authors and anyone who needs to cache specific data but wants it to be refreshed within a given timeframe. This document assumes a basic understanding of PHP scripting.
+
+## Function Reference
+
+**Set/Get Transient:**
+
+- [set\_transient()](#reference/functions/set_transient)
+- [get\_transient()](#reference/functions/get_transient)
+- [set\_site\_transient()](#reference/functions/set_site_transient)
+- [get\_site\_transient()](#reference/functions/get_site_transient)
+
+**Delete Transient:**
+
+- [delete\_transient()](#reference/functions/delete_transient)
+- [delete\_site\_transient()](#reference/functions/delete_site_transient)
+
+## Using Transients
+
+### Saving Transients
+
+To save a transient you use [set\_transient()](#reference/functions/set_transient):
+
+```php
+set_transient( $transient, $value, $expiration );
+```
+
+- `$transient` (string): Transient name.   
+    Expected to not be SQL-escaped. Must be 172 characters or fewer in length.
+- `$value` (array|object): Data to save, either a regular variable or an array/object.   
+    The API will handle serialization of complex data for you.
+- `$expiration` (integer): The maximum of seconds to keep the data before refreshing.   
+    Transients may expire before the `$expiration` (Due to External Object Caches, or database upgrades) but will never return their value past $expiration.
+
+So for example to save the `$special_query_results` object for 12 hours you would do:
+
+```php
+set_transient( 'special_query_results', $special_query_results, 60*60*12 );
+```
+
+#### Using Time Constants
+
+In [WordPress 3.5](https://codex.wordpress.org/Version_3.5), several constants were introduced to easily express time:
+
+```php
+MINUTE_IN_SECONDS  = 60 (seconds)
+HOUR_IN_SECONDS    = 60 * MINUTE_IN_SECONDS
+DAY_IN_SECONDS     = 24 * HOUR_IN_SECONDS
+WEEK_IN_SECONDS    = 7 * DAY_IN_SECONDS
+MONTH_IN_SECONDS   = 30 * DAY_IN_SECONDS
+YEAR_IN_SECONDS    = 365 * DAY_IN_SECONDS
+```
+
+So for example, the code sample from above can be simplified to:
+
+```php
+set_transient( 'special_query_results', $special_query_results, 12 * HOUR_IN_SECONDS );
+```
+
+### Fetching Transients
+
+To get a saved transient you use [get\_transient()](#reference/functions/get_transient):
+
+```php
+get_transient( $transient );
+```
+
+`$transient`: the unique slug used while saving the transient with `set_transient()`.
+
+In our case we could fetch our special query results with:
+
+```php
+get_transient( 'special_query_results' );
+```
+
+If the transient does not exist, or has expired, then `get_transient()` will return `false`. This should be checked using the identity operator `===` instead of the normal equality operator `==`, because an integer value of zero (or other “empty”/”falsey” data) could be the data you’re wanting to store. Because of this “false” value, transients should not be used to hold plain boolean values (true/false). Put them into an array or convert them to integers instead.
+
+Example usage:
+
+```php
+if ( false === ( $value = get_transient( 'value' ) ) ) {
+	// this code runs when there is no valid transient set
+}
+```
+
+The above code will get the transient and put it into `$value`. The code inside the if block only runs when there’s not a valid transient for it to get. This is typically a method to re-generate the transient value through other means. Keep in mind that it’s possible for a transient to not be available before it’s normal expiration time.
+
+### Removing Saved Transients
+
+Our transient will die naturally of old age once $expiration seconds have passed since we last ran [set\_transient()](#reference/functions/set_transient), but we can force the transient to die early by manually deleting it. This is useful for times when a given activity (saving a post, adding a category etc.) will make the cached data inherently stale and in need of updating.
+
+```php
+delete_transient( $transient );
+```
+
+`$transient`: the unique name used when saving with `set_transient()`.
+
+In our case, obviously, this would be:
+
+```php
+delete_transient( 'special_query_results' );
+```
+
+WordPress infrequently cleans out expired transients. To prevent expired transients from building up in the database, it’s a good practice to always remove your transient once you are done with it and no longer need it.
+
+## Complete Example
+
+Putting it all together here is an example of how to use transients in your code.
+
+```php
+<?php
+// Get any existing copy of our transient data
+if ( false === ( $special_query_results = get_transient( 'special_query_results' ) ) ) {
+	// It wasn't there, so regenerate the data and save the transient
+	$special_query_results = new WP_Query( 'cat=5&order=random&tag=tech&post_meta_key=thumbnail' );
+	set_transient( 'special_query_results', $special_query_results, 12 * HOUR_IN_SECONDS );
+}
+// Use the data like you would have normally...
+?>
+```
+
+And an example of using [delete\_transient()](#reference/functions/delete_transient). In this case we’ll add a function to the `edit_term` action, which will run every time a category or tag is edited (i.e. we’re assuming that the editing of a term invalidates our data and we want to remove the cached version).
+
+```php
+<?php
+// Create a simple function to delete our transient
+function edit_term_delete_transient() {
+	delete_transient( 'special_query_results' );
+}
+// Add the function to the edit_term hook so it runs when categories/tags are edited
+add_action( 'edit_term', 'edit_term_delete_transient' );
+?>
+```
+
+Use transients with [WP\_Query](#reference/classes/wp_query) to retrieve “featured posts”:
+
+```php
+<?php 
+// Check for transient. If none, then execute WP_Query
+if ( false === ( $featured = get_transient( 'foo_featured_posts' ) ) ) {
+	$featured = new WP_Query(
+		array(
+			'category' => 'featured',
+			'posts_per_page' => 5
+		)
+	);
+
+	// Put the results in a transient. Expire after 12 hours.
+	set_transient( 'foo_featured_posts', $featured, 12 * HOUR_IN_SECONDS );
+}
+?>
+ 
+// Run the loop as normal
+
+<?php if ( $featured->have_posts() ) : ?>
+
+	<?php while ( $featured->have_posts() ) : $featured->the_post(); ?>
+		// featured posts found, do stuff
+	<?php endwhile; ?>
+
+<?php else: ?>
+	// no featured posts found
+<?php endif; ?>
+
+<?php wp_reset_postdata(); ?>
+
+```
+
+Using transients in your plugins and themes is simple and only adds a few extra lines of code, but if used in the right situations (long/expensive database queries or complex processed data) it can save seconds off the load times on your site.
+
+---
+
+# XML-RPC <a name="apis/xml-rpc" />
+
+Source: https://developer.wordpress.org/apis/xml-rpc/
+
+XML-RPC API that supersedes the legacy Blogger, MovableType, and metaWeblog APIs. Some clients also exist for different programming languages.
+
+## Components
+
+- Posts (for posts, pages, and custom post types) – Added in [WordPress 3.4](/support/wordpress-version/version-3-4/)
+    - [wp.getPost](#reference/classes/wp_xmlrpc_server/wp_getpost)
+    - [wp.getPosts](#reference/classes/wp_xmlrpc_server/wp_getposts)
+    - [wp.newPost](#reference/classes/wp_xmlrpc_server/wp_newpost)
+    - [wp.editPost](#reference/classes/wp_xmlrpc_server/wp_editpost)
+    - [wp.deletePost](#reference/classes/wp_xmlrpc_server/wp_deletepost)
+    - [wp.getPostType](#reference/classes/wp_xmlrpc_server/wp_getposttype)
+    - [wp.getPostTypes](#reference/classes/wp_xmlrpc_server/wp_getposttypes)
+    - [wp.getPostFormats](#reference/classes/wp_xmlrpc_server/wp_getpostformats)
+    - [wp.getPostStatusList](#reference/classes/wp_xmlrpc_server/wp_getpoststatuslist)
+
+- Taxonomies (for categories, tags, and custom taxonomies) – Added in [WordPress 3.4](#support/wordpress-version/version-3-4)
+    - [wp.getTaxonomy](#reference/classes/wp_xmlrpc_server/wp_gettaxonomy)
+    - [wp.getTaxonomies](#reference/classes/wp_xmlrpc_server/wp_gettaxonomies)
+    - [wp.getTerm](#reference/classes/wp_xmlrpc_server/wp_getterm)
+    - [wp.getTerms](#reference/classes/wp_xmlrpc_server/wp_getterms)
+    - [wp.newTerm](#reference/classes/wp_xmlrpc_server/wp_newterm)
+    - [wp.editTerm](#reference/classes/wp_xmlrpc_server/wp_editterm)
+    - [wp.deleteTerm](#reference/classes/wp_xmlrpc_server/wp_deleteterm)
+- Media – Added in [WordPress 3.1](#support/wordpress-version/version-3-4)
+    - [wp.getMediaItem](#reference/classes/wp_xmlrpc_server/wp_getmediaitem)
+    - [wp.getMediaLibrary](#reference/classes/wp_xmlrpc_server/wp_getmedialibrary)
+    - wp.uploadFile
+- Comments – Added in [WordPress 2.7](#support/wordpress-version/version-3-4)
+    - [wp.getCommentCount](#reference/classes/wp_xmlrpc_server/wp_getcommentcount)
+    - [wp.getComment](#reference/classes/wp_xmlrpc_server/wp_getcomment)
+    - [wp.getComments](#reference/classes/wp_xmlrpc_server/wp_getcomments)
+    - [wp.newComment](#reference/classes/wp_xmlrpc_server/wp_newcomment)
+    - [wp.editComment](#reference/classes/wp_xmlrpc_server/wp_editcomment)
+    - [wp.deleteComment](#reference/classes/wp_xmlrpc_server/wp_deletecomment)
+    - [wp.getCommentStatusList](#reference/classes/wp_xmlrpc_server/wp_getcommentstatuslist)
+- Options – Added in [WordPress 2.6](#support/wordpress-version/version-2-6)
+    - [wp.getOptions](#reference/classes/wp_xmlrpc_server/wp_getoptions)
+    - [wp.setOptions](#reference/classes/wp_xmlrpc_server/wp_setoptions)
+- Users – Added in [WordPress 3.5](#support/wordpress-version/version-3-5)
+    - [wp.getUsersBlogs](#reference/classes/wp_xmlrpc_server/wp_getusersblogs)
+    - [wp.getUser](#reference/classes/wp_xmlrpc_server/wp_getuser)
+    - [wp.getUsers](#reference/classes/wp_xmlrpc_server/wp_getusers)
+    - [wp.getProfile](#reference/classes/wp_xmlrpc_server/wp_getprofile)
+    - [wp.editProfile](#reference/classes/wp_xmlrpc_server/wp_editprofile)
+    - [wp.getAuthors](#reference/classes/wp_xmlrpc_server/wp_getauthors)
+
+## Obsolete Components
+
+- Categories – use Taxonomies instead, with taxonomy=’category’
+    - wp.getCategories
+    - wp.suggestCategories
+    - wp.newCategory
+    - wp.deleteCategory
+- Tags – use Taxonomies instead, with taxonomy=’post\_tag’
+    - wp.getTags
+- Pages – use Posts instead, with post\_type=’page’
+    - wp.getPage
+    - wp.getPages
+    - wp.getPageList
+    - wp.newPage
+    - wp.editPage
+    - wp.deletePage
+    - wp.getPageStatusList
+    - wp.getPageTemplates
+
+## Clients
+
+- [rubypress](https://github.com/zachfeldman/rubypress): WordPress XML-RPC client for Ruby projects. Mirrors this documentation closely, full test suite built in
+- [wordpress-xmlrpc-client](http://letrunghieu.github.io/wordpress-xmlrpc-client/): PHP client with full test suite. This library implement WordPress API closely to this documentation.
+- [WordPressSharp](http://abrudtkuhl.github.io/WordPressSharp/): XML-RPC Client for C#.net
+- [plugins/jetpack](https://wordpress.org/plugins/jetpack): Jetpack by WordPress.com enables a JSON API for sites that run the plugin
+- [plugins/json-api](https://wordpress.org/plugins/json-api/): WordPress JSON api
+
+---
+
+# wp-config.php <a name="apis/wp-config-php" />
+
+Source: https://developer.wordpress.org/apis/wp-config-php/
+
+One of the most important files in your WordPress installation is the `wp-config.php` file. This file is located in the root of your WordPress file directory and contains your website’s base configuration details, such as database connection information.
+
+## Configure Database Settings
+
+**Important:** *Never* use a word processor like Microsoft Word for editing WordPress files!
+
+Locate the file `wp-config-sample.php` in the base directory of your WordPress directory and open in a [text editor](https://wordpress.org/support/article/editing-files/#text-editors).
+
+### Default wp-config-sample.php
+
+Note: This is an example of a default [wp-config-sample.php](https://core.trac.wordpress.org/browser/trunk/wp-config-sample.php). The values here are examples to show you what to do.
+
+```php
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define( 'DB_NAME', 'database_name_here' );
+/** MySQL database username */
+define( 'DB_USER', 'username_here' );
+/** MySQL database password */
+define( 'DB_PASSWORD', 'password_here' );
+/** MySQL hostname */
+define( 'DB_HOST', 'localhost' );
+```
+
+**Note:** Text inside /\* \*/ are *[comments](http://www.php.net/manual/en/language.basic-syntax.comments.php)*, for information purposes only.
+
+#### Set Database Name
+
+Replace ‘database\_name\_here’, with the name of your database, e.g. *MyDatabaseName*.
+
+```php
+define( 'DB_NAME', 'MyDatabaseName' ); // Example MySQL database name
+```
+
+#### Set Database User
+
+Replace ‘username\_here’, with the name of your username e.g. *MyUserName*.
+
+```php
+define( 'DB_USER', 'MyUserName' ); // Example MySQL username
+```
+
+#### Set Database Password
+
+Replace ‘password\_here’, with the your password, e.g. *MyPassWord*.
+
+```php
+define( 'DB_PASSWORD', 'MyPassWord' ); // Example MySQL password
+```
+
+#### Set Database Host
+
+If needed, replace ‘*localhost*‘, with the name of your database host (e.g. *MyDatabaseHost*). A port number or Unix socket file path may be needed as well.
+
+```php
+define( 'DB_HOST', 'MyDatabaseHost' ); // Example MySQL Database host
+```
+
+**Note:** There is a good chance you will **NOT** have to change it. If you are unsure, try installing with the default value of ‘localhost’ and see if it works. If the install fails, contact your web hosting provider.
+
+##### MySQL Alternate Port
+
+If your host uses an alternate port number for your database, you’ll need to change the **DB\_HOST** value in the `wp-config.php` file to reflect the alternate port provided by your host.
+
+For localhost:
+
+```php
+define( 'DB_HOST', '127.0.0.1:3307' );
+or
+define( 'DB_HOST', 'localhost:3307' );
+```
+
+For specified server:
+
+```php
+define( 'DB_HOST', 'mysql.example.com:3307' );
+```
+
+Replace the number **3307** in either of the code examples above with the port number information provided by your host.
+
+##### MySQL Sockets or Pipes
+
+If your host uses Unix sockets or pipes, you’ll need to change the **DB\_HOST** value in the `wp-config.php` file to reflect the socket or pipe information provided by your host.
+
+```php
+define( 'DB_HOST', '127.0.0.1:/var/run/mysqld/mysqld.sock' );
+// or define( 'DB_HOST', 'localhost:/var/run/mysqld/mysqld.sock' );
+// or define( 'DB_HOST', 'example.tld:/var/run/mysqld/mysqld.sock' );
+
+```
+
+Replace the text string `<strong>/var/run/mysqld/mysqld.sock</strong>` above with the socket or pipe information provided by your host.
+
+### Database character set
+
+**DB\_CHARSET** was made available to allow designation of the database [character set](https://codex.wordpress.org/Glossary#Character_Set) (e.g. tis620 for TIS620 Thai) to be used when defining the MySQL database tables.
+
+The default value of **utf8** ([Unicode](http://en.wikipedia.org/wiki/Unicode) [UTF-8](http://en.wikipedia.org/wiki/UTF-8)) is almost always the best option. UTF-8 supports any language, so you typically want to leave DB\_CHARSET at **utf8** and use the [DB\_COLLATE](https://codex.wordpress.org/Editing_wp-config.php#Database_collation) value for your language instead.
+
+This example shows utf8 which is considered the WordPress default value:
+
+```php
+define( 'DB_CHARSET', 'utf8' );
+```
+
+There usually should be no reason to change the default value of DB\_CHARSET. If your blog needs a different character set, please read [Character Sets and Collations MySQL Supports](http://dev.mysql.com/doc/refman/5.6/en/charset-charsets.html) for valid DB\_CHARSET values. **WARNING:** Those performing upgrades.
+
+If DB\_CHARSET and DB\_COLLATE do not exist in your `wp-config.php` file, **DO NOT** add either definition to your `wp-config.php` file unless you read and understand [Converting Database Character Sets](https://codex.wordpress.org/Converting_Database_Character_Sets). Adding DB\_CHARSET and DB\_COLLATE to the `wp-config.php` file, for an existing blog, can cause major problems.
+
+### Database collation
+
+**DB\_COLLATE** was made available to allow designation of the database [collation](https://codex.wordpress.org/Glossary#Collation) (i.e. the sort order of the character set). In most cases, this value should be left blank (null) so the database collation will be automatically assigned by MySQL based on the database character set specified by DB\_CHARSET. An example of when you may need to set ''’DB\_COLLATE''’ to one of the UTF-8 values defined in [UTF-8 character sets](http://dev.mysql.com/doc/refman/5.6/en/charset-unicode-sets.html) for most Western European languages would be when a different language in which the characters that you entered are not the same as what is being displayed. (See also [Unicode Character Sets](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-sets.html#charset-unicode-sets-general-versus-unicode) in SQL Manual)
+
+The WordPress default DB\_COLLATE value:
+
+```php
+define( 'DB_COLLATE', '' );
+```
+
+UTF-8 Unicode General collation
+
+```php
+define( 'DB_COLLATE', 'utf8_general_ci' );
+```
+
+UTF-8 Unicode Turkish collation
+
+```php
+define( 'DB_COLLATE', 'utf8_turkish_ci' );
+```
+
+There usually should be no reason to change the default value of DB\_COLLATE. Leaving the value blank (null) will insure the collation is automatically assigned by MySQL when the database tables are created. **WARNING:** Those performing upgrades
+
+If DB\_COLLATE and DB\_CHARSET do not exist in your `wp-config.php` file, **DO NOT** add either definition to your `wp-config.php` file unless you read and understand [Converting Database Character Sets](https://codex.wordpress.org/Converting_Database_Character_Sets). And you may be in need of a WordPress upgrade.
+
+### Security Keys
+
+You don’t have to remember the keys, just make them long, random and complicated — or better yet, use the [online generator](https://api.wordpress.org/secret-key/1.1/salt/). You can change these at any point in time to invalidate all existing cookies. This does mean that all users will have to login again.
+
+Example (don’t use these!):
+
+```php
+define( 'AUTH_KEY',         't`DK%X:>xy|e-Z(BXb/f(Ur`8#~UzUQG-^_Cs_GHs5U-&Wb?pgn^p8(2@}IcnCa|' );
+define( 'SECURE_AUTH_KEY',  'D&ovlU#|CvJ##uNq}bel+^MFtT&.b9{UvR]g%ixsXhGlRJ7q!h}XWdEC[BOKXssj' );
+define( 'LOGGED_IN_KEY',    'MGKi8Br(&{H*~&0s;{k0<S(O:+f#WM+q|npJ-+P;RDKT:~jrmgj#/-,[hOBk!ry^' );
+define( 'NONCE_KEY',        'FIsAsXJKL5ZlQo)iD-pt??eUbdc{_Cn<4!d~yqz))&B D?AwK%)+)F2aNwI|siOe' );
+define( 'AUTH_SALT',        '7T-!^i!0,w)L#JK@pc2{8XE[DenYI^BVf{L:jvF,hf}zBf883td6D;Vcy8,S)-&G' );
+define( 'SECURE_AUTH_SALT', 'I6`V|mDZq21-J|ihb u^q0F }F_NUcy`l,=obGtq*p#Ybe4a31R,r=|n#=]@]c #' );
+define( 'LOGGED_IN_SALT',   'w<$4c$Hmd%/*]`Oom>(hdXW|0M=X={we6;Mpvtg+V.o<$|#_}qG(GaVDEsn,~*4i' );
+define( 'NONCE_SALT',       'a|#h{c5|P &xWs4IZ20c2&%4!c(/uG}W:mAvy<I44`jAbup]t=]V<`}.py(wTP%%' );
+```
+
+A **secret key** makes your site harder to successfully attack by adding random elements to the password.
+
+In simple terms, a secret key is a password with elements that make it harder to generate enough options to break through your security barriers. A password like “password” or “test” is simple and easily broken. A random, long password which uses no dictionary words, such as “88a7da62429ba6ad3cb3c76a09641fc” would take a brute force attacker millions of hours to crack. A ‘*salt* is used to further enhance the security of the generated result.
+
+The four keys are required for the enhanced security. The four salts are recommended, but are not required, because WordPress will generate salts for you if none are provided. They are included in `wp-config.php` by default for inclusiveness.
+
+For more information on the technical background and breakdown of secret keys and secure passwords, see:
+
+- [Wikipedia’s explanation of Password Cracking](http://en.wikipedia.org/wiki/Password_cracking)
+- [Lorelle VanFossen – Protect Your Blog With a Solid Password](http://www.blogherald.com/2007/05/08/protect-your-blog-with-a-solid-password/)
+- [Instructables – Security Password Tips](http://www.instructables.com/id/How-to-Choose-a-Good-Password-A-few-quick-tips-on/)
+- [Huffington Post – 17 Tips You Can Do Today to Protect Your Online Passwords](http://www.huffingtonpost.com/arkady-bukh/17-tips-you-can-do-today-to-protect-your-online-passwords_b_6812478.html/)
+
+## Advanced Options
+
+The following sections may contain advanced information and some changes might result in unforeseen issues. Please make sure you practice [regular backups](/support/article/wordpress-backups/) and know how to restore them before modifying these settings.
+
+### table\_prefix
+
+The **$table\_prefix** is the value placed in the front of your database tables. Change the value if you want to use something other than **wp\_** for your database prefix. Typically this is changed if you are [installing multiple WordPress blogs](/support/article/installing-multiple-blogs/) in the same database, as is done with the multisite feature.
+
+It is possible to have multiple installations in one database if you give each a unique prefix. Keep security in mind if you choose to do this.
+
+```php
+$table_prefix = 'r235_'; // Only numbers, letters, and underscores please!
+```
+
+### WP\_SITEURL
+
+WP\_SITEURL allows the WordPress address (URL) to be defined. The value defined is the address where your WordPress core files reside. It should include the `http://` part too. Do not put a slash “**/**” at the end. Setting this value in `wp-config.php` overrides the [wp\_options table](https://codex.wordpress.org/Database_Description#Table:_wp_options) value for **siteurl**. Adding this in can reduce the number of database calls when loading your site. **Note:** This will **not** change the database stored value. The URL will revert to the old database value if this line is ever removed from `wp-config`. [Use the **RELOCATE** constant](https://codex.wordpress.org/Changing_The_Site_URL#Relocate_method) to change the **siteurl** value in the database.
+
+If WordPress is installed into a directory called “wordpress” for the [domain](http://en.wikipedia.org/wiki/Domain_name_system) example.com, define WP\_SITEURL like this:
+
+```php
+define( 'WP_SITEURL', 'http://example.com/wordpress' );
+```
+
+Dynamically set WP\_SITEURL based on $\_SERVER\[‘HTTP\_HOST’\]
+
+```php
+define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/path/to/wordpress' );
+```
+
+**Note:** HTTP\_HOST is created dynamically by PHP based on the value of the HTTP HOST Header in the request, thus possibly allowing for [file inclusion vulnerabilities](https://en.wikipedia.org/wiki/File_inclusion_vulnerability). SERVER\_NAME may also be created dynamically. However, when Apache is configured as UseCanonicalName “on”, SERVER\_NAME is set by the server configuration, instead of dynamically. In that case, it is safer to user SERVER\_NAME than HTTP\_HOST.
+
+Dynamically set WP\_SITEURL based on $\_SERVER\[‘SERVER\_NAME’\]
+
+```php
+define( 'WP_SITEURL', 'http://' . $_SERVER['SERVER_NAME'] . '/path/to/wordpress' );
+```
+
+### Blog address (URL)
+
+Similar to WP\_SITEURL, WP\_HOME *overrides the [wp\_options table](https://codex.wordpress.org/Database_Description#Table:_wp_options) value for* home *but does not change it in the database.* **home** is the address you want people to type in their browser to reach your WordPress blog. It should include the `http://` part and should not have a slash “**/**” at the end. Adding this in can reduce the number of database calls when loading your site.
+
+```php
+define( 'WP_HOME', 'http://example.com/wordpress' );
+```
+
+If you are using the technique described in [Giving WordPress Its Own Directory](/support/article/giving-wordpress-its-own-directory/) then follow the example below. Remember, you will also be placing an `index.php` in your web-root directory if you use a setting like this.
+
+```php
+define( 'WP_HOME', 'http://example.com' );
+```
+
+Dynamically set WP\_HOME based on $\_SERVER\[‘HTTP\_HOST’\]
+
+```php
+define( 'WP_HOME', 'http://' . $_SERVER['HTTP_HOST'] . '/path/to/wordpress' );
+```
+
+### Moving wp-content folder
+
+You can move the `wp-content` directory, which holds your themes, plugins, and uploads, outside of the WordPress application directory.
+
+Set WP\_CONTENT\_DIR to the full **local path** of this directory (no trailing slash), e.g.
+
+```php
+define( 'WP_CONTENT_DIR', dirname(__FILE__) . '/blog/wp-content' );
+```
+
+Set WP\_CONTENT\_URL to the full **URL** of this directory (no trailing slash), e.g.
+
+```php
+define( 'WP_CONTENT_URL', 'http://example/blog/wp-content' );
+```
+
+### Moving plugin folder
+
+Set WP\_PLUGIN\_DIR to the full **local path** of this directory (no trailing slash), e.g.
+
+```php
+define( 'WP_PLUGIN_DIR', dirname(__FILE__) . '/blog/wp-content/plugins' );
+```
+
+Set WP\_PLUGIN\_URL to the full **URI** of this directory (no trailing slash), e.g.
+
+```php
+define( 'WP_PLUGIN_URL', 'http://example/blog/wp-content/plugins' );
+```
+
+If you have compability issues with plugins Set PLUGINDIR to the full **local path** of this directory (no trailing slash), e.g.
+
+```php
+define( 'PLUGINDIR', dirname(__FILE__) . '/blog/wp-content/plugins' );
+```
+
+### Moving themes folder
+
+You cannot move the themes folder because its path is hardcoded relative to the `wp-content` folder:
+
+$theme\_root = WP\_CONTENT\_DIR . ‘/themes’;
+
+However, you can register additional theme directories using [register\_theme\_directory](#reference/functions/register_theme_directory).
+
+See how to [move the wp-content](/support/article/editing-wp-config-php/) folder. For more details how the themes folder is determined, see `wp-includes/theme.php`.
+
+### Moving uploads folder
+
+Set UPLOADS to :
+
+```php
+define( 'UPLOADS', 'blog/wp-content/uploads' );
+```
+
+This path can not be absolute. It is always relative to ABSPATH, therefore does not require a leading slash.
+
+### Modify AutoSave Interval
+
+When editing a post, WordPress uses Ajax to auto-save revisions to the post as you edit. You may want to increase this setting for longer delays in between auto-saves, or decrease the setting to make sure you never lose changes. The default is 60 seconds.
+
+```php
+define( 'AUTOSAVE_INTERVAL', 160 ); // Seconds
+```
+
+### Post Revisions
+
+WordPress, by default, will save copies of each edit made to a post or page, allowing the possibility of reverting to a previous version of that post or page. The saving of revisions can be disabled, or a maximum number of revisions per post or page can be specified.
+
+#### Disable Post Revisions
+
+If you do **not** set this value, WordPress defaults WP\_POST\_REVISIONS to *true* (enable post revisions). If you want to disable the awesome revisions feature, use this setting:
+
+```php
+define( 'WP_POST_REVISIONS', false );
+```
+
+Note: Some users could not get this to function until moving the command to the first line under the initial block comment in `wp-config.php`.
+
+#### Specify the Number of Post Revisions
+
+If you want to specify a maximum number of revisions that WordPress stores, change *false* to an integer/number (*e.g.*, 3 or 12).
+
+```php
+define( 'WP_POST_REVISIONS', 3 );
+```
+
+Note: Some users could not get this to function until moving the command to the first line under the initial block comment in `wp-config.php`.
+
+### Set Cookie Domain
+
+The domain set in the cookies for WordPress can be specified for those with unusual domain setups. For example, if subdomains are used to serve static content, you can set the cookie domain to only your non-static domain to prevent WordPress cookies from being sent with each request to static content on your subdomain .
+
+```php
+define( 'COOKIE_DOMAIN', 'www.example.com' );
+```
+
+### Enable Multisite / Network Ability
+
+WP\_ALLOW\_MULTISITE is a feature enable multisite functionality. If this setting is absent from `wp-config.php` it defaults to false.
+
+```php
+define( 'WP_ALLOW_MULTISITE', true );
+```
+
+### Redirect Nonexistent Blogs
+
+NOBLOGREDIRECT can be used to redirect the browser if the visitor tries to access a nonexistent subdomain or a subfolder.
+
+```php
+define( 'NOBLOGREDIRECT', 'http://example.com' );
+```
+
+### Fatal Error Handler
+
+WordPress 5.2 introduced [Recovery Mode](https://make.wordpress.org/core/2019/04/16/fatal-error-recovery-mode-in-5-2/) which displays error message instead of white screen when plugins causes fatal error.
+
+*The site is experiencing technical difficulties. Please check your site admin email inbox for instructions.*
+
+White screens and PHP error messages are not displayed to users any more. But in a development environment, if you want to enable WP\_DEBUG\_DISPLAY, you have to disable recovery mode by set true to WP\_DISABLE\_FATAL\_ERROR\_HANDLER.
+
+```php
+define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true );   // 5.2 and later define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_DISPLAY', true ); 
+```
+
+### WP\_DEBUG
+
+The [WP\_DEBUG](https://codex.wordpress.org/Debugging_in_WordPress) option controls the reporting of some errors and warnings and enables use of the WP\_DEBUG\_DISPLAY and WP\_DEBUG\_LOG settings. The default boolean value is false.
+
+```php
+define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true );   // 5.2 and later
+define( 'WP_DEBUG', true );
+```
+
+[Database errors are printed only if WP\_DEBUG is set to true](https://trac.wordpress.org/ticket/5473). Database errors are handled by the [wpdb](#reference/classes/wpdb) class and are not affected by [PHP’s error settings](http://www.php.net/errorfunc).
+
+Setting WP\_DEBUG to true also raises the [error reporting level](http://www.php.net/error-reporting) to E\_ALL and activates warnings when deprecated functions or files are used; otherwise, WordPress sets the error reporting level to E\_ALL ^ E\_NOTICE ^ E\_USER\_NOTICE.
+
+### WP\_ENVIRONMENT\_TYPE
+
+The WP\_ENVIRONMENT\_TYPE option controls the environment type for a site: `local`, `development`, `staging`, and `production`.
+
+The values of environment types are processed in the following order with each sequential method overriding any previous values: the WP\_ENVIRONMENT\_TYPE [PHP environment variable](https://www.php.net/manual/en/reserved.variables.environment.php) and the WP\_ENVIRONMENT\_TYPE constant.
+
+For both methods, if the value of an environment type provided is not in the list of allowed environment types, the default `production` value will be returned.
+
+The simplest way to set the value is probably through defining the constant:
+
+```php
+define( 'WP_ENVIRONMENT_TYPE', 'staging' );
+```
+
+Note: When `development` is returned by [wp\_get\_environment\_type()](#reference/functions/wp_get_environment_type), WP\_DEBUG will be set to `true` if it is not defined in the `wp-config.php` file of the site.
+
+### SCRIPT\_DEBUG
+
+[SCRIPT\_DEBUG](/support/article/debugging-in-wordpress/) is a related constant that will force WordPress to use the “dev” versions of scripts and stylesheets in `wp-includes/js`, `wp-includes/css`, `wp-admin/js`, and `wp-admin/css` will be loaded instead of the `.min.css` and `.min.js` versions.. If you are planning on modifying some of WordPress’ built-in JavaScript or Cascading Style Sheets, you should add the following code to your config file:
+
+```php
+define( 'SCRIPT_DEBUG', true );
+```
+
+### Disable Javascript Concatenation
+
+To result in faster administration screens, all JavaScript files are [concatenated](http://en.wikipedia.org/wiki/Concatenation) into one URL. If JavaScript is failing to work in an administration screen, you can try disabling this feature:
+
+```php
+define( 'CONCATENATE_SCRIPTS', false );
+```
+
+### Configure Error Logging
+
+Configuring error logging can be a bit tricky. First of all, default PHP error log and display settings are set in the php.ini file, which you may or may not have access to. If you do, they should be set to the desired settings for live PHP pages served to the public. It’s strongly recommended that no error messages are displayed to the public and instead routed to an error log. Further more, error logs should not be located in the publicly accessible portion of your server. Sample recommended php.ini error settings:
+
+```php
+error_reporting = 4339
+display_errors = Off
+display_startup_errors = Off
+log_errors = On
+error_log = /home/example.com/logs/php_error.log
+log_errors_max_len = 1024
+ignore_repeated_errors = On
+ignore_repeated_source = Off
+html_errors = Off
+```
+
+**About Error Reporting 4339**This is a custom value that only logs issues that affect the functioning of your site, and ignores things like notices that may not even be errors. See [PHP Error Constants](http://php.net/manual/en/errorfunc.constants.php) for the meaning of each binary position for 1000011110011, which is the binary number equal to 4339. The far left 1 means report any E\_RECOVERABLE\_ERROR. The next 0 means do not report E\_STRICT, (which is thrown when sloppy but functional coding is used) and so on. Feel free to determine your own custom error reporting number to use in place of 4339.
+
+Obviously, you will want different settings for your development environment. If your staging copy is on the same server, or you don’t have access to `php.ini`, you will need to override the default settings at run time. It’s a matter of personal preference whether you prefer errors to go to a log file, or you prefer to be notified immediately of any error, or perhaps both. Here’s an example that reports all errors immediately that you could insert into your `wp-config.php` file:
+
+```php
+@ini_set( 'log_errors', 'Off' );
+@ini_set( 'display_errors', 'On' );
+define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true );   // 5.2 and later
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', false );
+define( 'WP_DEBUG_DISPLAY', true );
+```
+
+Because `wp-config.php` is loaded for every page view not loaded from a cache file, it is an excellent location to set `php.ini` settings that control your PHP installation. This is useful if you don’t have access to a `php.ini` file, or if you just want to change some settings on the fly. One exception is ‘error\_reporting’. When WP\_DEBUG is defined as true, ‘error\_reporting’ will be set to E\_ALL by WordPress regardless of anything you try to set in wp-config.php. If you really have a need to set ‘error\_reporting’ to something else, it must be done after `wp-settings.php` is loaded, such as in a plugin file.
+
+If you turn on error logging, remember to delete the file afterwards, as it will often be in a publicly accessible location, where anyone could gain access to your log.
+
+Here is an example that turns PHP error\_logging on and logs them to a specific file. If WP\_DEBUG is defined to true, the errors will also be saved to this file. Just place this above any *require\_once* or *include* commands.
+
+```php
+@ini_set( 'log_errors', 'On' );
+@ini_set( 'display_errors', 'Off' );
+@ini_set( 'error_log', '/home/example.com/logs/php_error.log' );
+/* That's all, stop editing! Happy blogging. */
+```
+
+Another example of logging errors, as suggested by Mike Little on the [wp-hackers email list](http://lists.automattic.com/pipermail/wp-hackers/2010-September/034830.html):
+
+```php
+/**
+ * This will log all errors notices and warnings to a file called debug.log in
+ * wp-content (if Apache does not have write permission, you may need to create
+ * the file first and set the appropriate permissions (i.e. use 666) )
+ */
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );
+@ini_set( 'display_errors', 0 );
+```
+
+A refined version from Mike Little on the [Manchester WordPress User Group](http://groups.google.com/group/manchester-wordpress-user-group/msg/dcab0836cabc7f76):
+
+```php
+/**
+ * This will log all errors notices and warnings to a file called debug.log in
+ * wp-content only when WP_DEBUG is true. if Apache does not have write permission,
+ * you may need to create the file first and set the appropriate permissions (i.e. use 666).
+ */
+define( 'WP_DEBUG', true ); // Or false
+if ( WP_DEBUG ) {
+    define( 'WP_DEBUG_LOG', true );
+    define( 'WP_DEBUG_DISPLAY', false );
+    @ini_set( 'display_errors', 0 );
+}
+```
+
+Confusing the issue is that WordPress has three (3) constants that look like they could do the same thing. First off, remember that if WP\_DEBUG is false, it and the other two WordPress DEBUG constants do not do anything. The PHP directives, whatever they are, will prevail. Except for ‘error\_reporting’, WordPress will set this to 4983 if WP\_DEBUG is defined as false. Second, even if WP\_DEBUG is true, the other constants only do something if they too are set to true. If they are set to false, the PHP directives remain unchanged. For example, if your `php.ini` file has the directive (‘display\_errors’ = ‘On’); but you have the statement define( ‘WP\_DEBUG\_DISPLAY’, false ); in your `wp-config.php` file, errors will still be displayed on screen even though you tried to prevent it by setting WP\_DEBUG\_DISPLAY to false because that is the PHP configured behavior. This is why it’s very important to set the PHP directives to what you need in case any of the related WP constants are set to false. To be safe, explicitly set/define both types. More detailed descriptions of the WP constants is available at [Debugging in WordPress](https://codex.wordpress.org/Debugging_in_WordPress).
+
+For your public, production WordPress installation, you might consider placing the following in your `wp-config.php` file, even though it may be partly redundant:
+
+```php
+@ini_set( 'log_errors', 'On' );
+@ini_set( 'display_errors', 'Off' );
+define( 'WP_DISABLE_FATAL_ERROR_HANDLER', false );   // 5.2 and later
+define( 'WP_DEBUG', false );
+define( 'WP_DEBUG_LOG', false );
+define( 'WP_DEBUG_DISPLAY', false );
+```
+
+The default debug log file is` /wp-content/debug.log`. Placing error logs in publicly accessible locations is a security risk. Ideally, your log files should be placed above you site’s public root directory. If you can’t do this, at the very least, set the log file permissions to 600 and add this entry to the `.htaccess` file in the root directory of your WordPress installation:
+
+```php
+<Files debug.log>
+    Order allow,deny
+    Deny from all
+</Files>
+```
+
+This prevents anyone from accessing the file via HTTP. You can always view the log file by retrieving it from your server via FTP.
+
+### Increasing memory allocated to PHP
+
+**WP\_MEMORY\_LIMIT** option allows you to specify the maximum amount of memory that can be consumed by PHP. This setting may be necessary in the event you receive a message such as “Allowed memory size of xxxxxx bytes exhausted”.
+
+This setting increases PHP Memory only for WordPress, not other applications. By default, WordPress will attempt to increase memory allocated to PHP to 40MB (code is at the beginning of `/wp-includes/default-constants.php`) for single site and 64MB for multisite, so the setting in `wp-config.php` should reflect something higher than 40MB or 64MB depending on your setup.
+
+WordPress will automatically check if PHP has been allocated less memory than the entered value before utilizing this function. For example, if PHP has been allocated 64MB, there is no need to set this value to 64M as WordPress will automatically use all 64MB if need be.
+
+Note: Some hosts do not allow for increasing the PHP memory limit automatically. In that event, contact your host to increase the PHP memory limit. Also, many hosts set the PHP limit at 8MB.
+
+Adjusting the WordPress memory limit potentially creates problems as well. You might end up hiding the root of the issue for it to happen later down the line as you add in more plugins or functionalities.
+
+If you are facing Out of Memory issues even with an elevated memory limit, you should properly debug your installation. Chances are you have too many memory intensive functions tied to a specific action and should move these functions to a cronjob.
+
+Increase PHP Memory to 64MB
+
+```php
+define( 'WP_MEMORY_LIMIT', '64M' );
+```
+
+Increase PHP Memory to 96MB
+
+```php
+define( 'WP_MEMORY_LIMIT', '96M' );
+```
+
+Administration tasks require may require memory than usual operation. When in the administration area, the memory can be increased or decreased from the WP\_MEMORY\_LIMIT by defining WP\_MAX\_MEMORY\_LIMIT. The default value for this is 256MB.
+
+```php
+define( 'WP_MAX_MEMORY_LIMIT', '512M' );
+```
+
+Note: this has to be put before wp-settings.php inclusion.
+
+### Cache
+
+The **WP\_CACHE** setting, if true, includes the `wp-content/advanced-cache.php` script, when executing `wp-settings.php`.
+
+```php
+define( 'WP_CACHE', true );
+```
+
+### Custom User and Usermeta Tables
+
+**CUSTOM\_USER\_TABLE** and **CUSTOM\_USER\_META\_TABLE** are used to designate that the user and usermeta tables normally utilized by WordPress are not used, instead these values/tables are used to store your user information.
+
+```php
+define( 'CUSTOM_USER_TABLE', $table_prefix.'my_users' );
+define( 'CUSTOM_USER_META_TABLE', $table_prefix.'my_usermeta' );
+```
+
+Note: Even if ‘CUSTOM\_USER\_META\_TABLE’ is manually set, a usermeta table is still created for each database with the corresponding permissions for each instance. By default, the WordPress installer will add permissions for the first user (ID #1). You also need to manage permissions to each of the site via a plugin or custom function. If this isn’t setup you will experience permission errors and log-in issues.
+
+CUSTOM\_USER\_TABLE is easiest to adopt during initial Setup your first instance of WordPress. The define statements of the `wp-config.php` on the first instance point to where `wp_users` data will be stored by default. After the first site setup, copying the working `wp-config.php` to your next instance will only require a change the `$table_prefix` variable. Do not use an e-mail address that is already in use by your original install. Once you have finished the setup process log in with the auto generated admin account and password. Next, promote your normal account to the administrator level and Log out of admin. Log back in as yourself, delete the admin account and promote the other user accounts as is needed.
+
+### Language and Language Directory
+
+WordPress [Version 4.0](https://codex.wordpress.org/Version_4.0) allows you to change the language in your WordPress [Administration Screens](/support/article/administration-screens/). To change the language in the admin settings screen. Go to [Settings](/support/article/administration-screens/#settings-configuration-settings) &gt; [General](/support/article/settings-general-screen/) and select Site Language.
+
+#### WordPress v3.9.6 and below
+
+**WPLANG** defines the name of the language translation (.mo) file. **WP\_LANG\_DIR** defines what directory the WPLANG .mo file resides. If WP\_LANG\_DIR is not defined WordPress looks first to wp-content/languages and then `wp-includes/languages` for the .mo defined by WPLANG file.
+
+```php
+define( 'WPLANG', 'de_DE' );
+define( 'WP_LANG_DIR', dirname(__FILE__) . 'wordpress/languages' );
+```
+
+To find out the WPLANG language code, please [refer here](https://make.wordpress.org/polyglots/teams/). The code in WP Local column is what you need.
+
+### Save queries for analysis
+
+The **SAVEQUERIES** definition saves the database queries to an array and that array can be displayed to help analyze those queries. The information saves each query, what function called it, and how long that query took to execute. **Note:** This will have a performance impact on your site, so make sure to turn this off when you aren’t debugging.
+
+First, add this to the `wp-config.php` file:
+
+```php
+define( 'SAVEQUERIES', true );
+```
+
+Then in the footer of your theme put this:
+
+```php
+if ( current_user_can( 'administrator' ) ) {
+    global $wpdb;
+    echo "";
+    print_r( $wpdb->queries );
+    echo "";
+}
+?>
+
+```
+
+Alternatively, consider using [Query Monitor](https://wordpress.org/plugins/query-monitor/)
+
+### Override of default file permissions
+
+The **FS\_CHMOD\_DIR** and **FS\_CHMOD\_FILE** define statements allow override of default file permissions. These two variables were developed in response to the problem of the core update function failing with hosts running under [suexec](https://en.wikipedia.org/wiki/SuEXEC). If a host uses restrictive file permissions (e.g. 400) for all user files, and refuses to access files which have group or world permissions set, these definitions could solve the problem.
+
+```php
+define( 'FS_CHMOD_DIR', ( 0755 & ~ umask() ) );
+define( 'FS_CHMOD_FILE', ( 0644 & ~ umask() ) );
+```
+
+Example to provide setgid:
+
+```php
+define( 'FS_CHMOD_DIR', ( 02755 & ~umask() ) );
+```
+
+Note: ‘**0755′** and ‘**02755**‘ are octal values. Octal values must be prefixed with a 0 and are not delineated with single quotes (‘). See Also: [Changing File Permissions](https://codex.wordpress.org/Changing_File_Permissions)
+
+### WordPress Upgrade Constants
+
+**Note: Define as few of the below constants as needed to correct your update issues.**
+
+The most common causes of needing to define these are:
+
+Host running with a special installation setup involving symlinks. You may need to define the path-related constants (FTP\_BASE, FTP\_CONTENT\_DIR, and FTP\_PLUGIN\_DIR). Often defining simply the base will be enough.
+
+Certain PHP installations shipped with a PHP FTP extension which is incompatible with certain FTP servers. Under these rare situations, you may need to define FS\_METHOD to “ftpsockets”.
+
+The following are valid constants for WordPress updates:
+
+- **FS\_METHOD** forces the filesystem method. It should only be “direct”, “ssh2”, “ftpext”, or “ftpsockets”. Generally, you should only change this if you are experiencing update problems. If you change it and it doesn’t help, **change it back/remove it**. Under most circumstances, setting it to ‘ftpsockets’ will work if the automatically chosen method does not. 
+    - **(Primary Preference) “direct”** forces it to use Direct File I/O requests from within PHP, this is fraught with opening up security issues on poorly configured hosts, This is chosen automatically when appropriate.
+    - **(Secondary Preference) “ssh2”** is to force the usage of the SSH PHP Extension if installed
+    - **(3rd Preference) “ftpext”** is to force the usage of the FTP PHP Extension for FTP Access, and finally
+    - **(4th Preference) “ftpsockets”** utilises the PHP Sockets Class for FTP Access.
+- **FTP\_BASE** is the full path to the “base”(ABSPATH) folder of the WordPress installation.
+- **FTP\_CONTENT\_DIR** is the full path to the wp-content folder of the WordPress installation.
+- **FTP\_PLUGIN\_DIR** is the full path to the plugins folder of the WordPress installation.
+- **FTP\_PUBKEY** is the full path to your SSH public key.
+- **FTP\_PRIKEY** is the full path to your SSH private key.
+- **FTP\_USER** is either user FTP or SSH username. Most likely these are the same, but use the appropriate one for the type of update you wish to do.
+- **FTP\_PASS** is the password for the username entered for **FTP\_USER**. If you are using SSH public key authentication this can be omitted.
+- **FTP\_HOST** is the hostname:port combination for your SSH/FTP server. The default FTP port is 21 and the default SSH port is 22. These do not need to be mentioned.
+- **FTP\_SSL** TRUE for SSL-connection *if supported by the underlying transport* (not available on all servers). This is for “Secure FTP” not for SSH SFTP.
+
+```php
+define( 'FS_METHOD', 'ftpext' );
+define( 'FTP_BASE', '/path/to/wordpress/' );
+define( 'FTP_CONTENT_DIR', '/path/to/wordpress/wp-content/' );
+define( 'FTP_PLUGIN_DIR ', '/path/to/wordpress/wp-content/plugins/' );
+define( 'FTP_PUBKEY', '/home/username/.ssh/id_rsa.pub' );
+define( 'FTP_PRIKEY', '/home/username/.ssh/id_rsa' );
+define( 'FTP_USER', 'username' );
+define( 'FTP_PASS', 'password' );
+define( 'FTP_HOST', 'ftp.example.org' );
+define( 'FTP_SSL', false );
+```
+
+Some configurations should set FTP\_HOST to localhost to avoid 503 problems when trying to update plugins or WP itself.
+
+#### Enabling SSH Upgrade Access
+
+There are two ways to upgrade using SSH2.
+
+The first is to use the [SSH SFTP Updater Support plugin](https://wordpress.org/plugins/ssh-sftp-updater-support/). The second is to use the built-in SSH2 upgrader, which requires the pecl SSH2 extension be installed.
+
+To install the pecl SSH2 extension you will need to issue a command similar to the following or talk to your web hosting provider to get this installed:
+
+```php
+pecl install ssh2
+```
+
+After installing the pecl ssh2 extension you will need to modify your PHP configuration to automatically load this extension.
+
+pecl is provided by the pear package in most linux distributions. To install pecl in Redhat/Fedora/CentOS:
+
+```php
+yum -y install php-pear
+```
+
+To install pecl in Debian/Ubuntu:
+
+```php
+apt-get install php-pear
+```
+
+It is recommended to use a private key that is not pass-phrase protected. There have been numerous reports that pass phrase protected private keys do not work properly. If you decide to try a pass phrase protected private key you will need to enter the pass phrase for the private key as FTP\_PASS, or entering it in the “Password” field in the presented credential field when installing updates.
+
+### Alternative Cron
+
+There might be reason to use an alternative Cron with WP. Most commonly this is done if scheduled posts are not getting published as predicted. This alternative method uses a redirection approach. The users’ browser get a redirect when the cron needs to run, so that they come back to the site immediately while cron continues to run in the connection they just dropped. This method has certain risks, since it depends on a non-native WordPress service.
+
+```php
+define( 'ALTERNATE_WP_CRON', true );
+```
+
+### Disable Cron and Cron Timeout
+
+Disable cron entirely by setting DISABLE\_WP\_CRON to true.
+
+```php
+define( 'DISABLE_WP_CRON', true );
+```
+
+Make sure a cron process cannot run more than once every WP\_CRON\_LOCK\_TIMEOUT seconds.
+
+```php
+define( 'WP_CRON_LOCK_TIMEOUT', 60 );
+```
+
+### Additional Defined Constants
+
+Here are additional constants that can be defined. These probably shouldn’t be set unless other methodologies have been attempted first. The Cookie definitions can be particularly useful if you have an unusual domain setup.
+
+```php
+define( 'COOKIEPATH', preg_replace( '|https?://[^/]+|i', '', get_option( 'home' ) . '/' ) );
+define( 'SITECOOKIEPATH', preg_replace( '|https?://[^/]+|i', '', get_option( 'siteurl' ) . '/' ) );
+define( 'ADMIN_COOKIE_PATH', SITECOOKIEPATH . 'wp-admin' );
+define( 'PLUGINS_COOKIE_PATH', preg_replace( '|https?://[^/]+|i', '', WP_PLUGIN_URL ) );
+define( 'TEMPLATEPATH', get_template_directory() );
+define( 'STYLESHEETPATH', get_stylesheet_directory() );
+```
+
+### Empty Trash
+
+This constant controls the number of days before WordPress permanently deletes posts, pages, attachments, and comments, from the trash bin. The default is 30 days:
+
+```php
+define( 'EMPTY_TRASH_DAYS', 30 ); // 30 days
+```
+
+To disable trash set the number of days to zero.
+
+```php
+define( 'EMPTY_TRASH_DAYS', 0 ); // Zero days
+```
+
+**Note:** WordPress will not ask for confirmation when someone clicks on “Delete Permanently” using this setting.
+
+### Automatic Database Optimizing
+
+There is automatic database repair support, which you can enable by adding the following define to your `wp-config.php` file.
+
+Note: This should only be enabled if needed and disabled once the issue is solved. When enabled, a user does not need to be logged in to access the functionality, since its main intent is to repair a corrupted database and users can often not login when the database is corrupt.
+
+```php
+ define( 'WP_ALLOW_REPAIR', true );
+```
+
+The script can be found at `{$your_site}/wp-admin/maint/repair.php`.
+
+### DO\_NOT\_UPGRADE\_GLOBAL\_TABLES
+
+A **DO\_NOT\_UPGRADE\_GLOBAL\_TABLES** define prevents [dbDelta()](#reference/functions/dbdelta) and the upgrade functions from doing expensive queries against global tables.
+
+Sites that have large global tables (particularly users and usermeta), as well as sites that share user tables with bbPress and other WordPress installs, can prevent the upgrade from changing those tables during upgrade by defining **DO\_NOT\_UPGRADE\_GLOBAL\_TABLES** to true. Since an ALTER, or an unbounded DELETE or UPDATE, can take a long time to complete, large sites usually want to avoid these being run as part of the upgrade so they can handle it themselves. Further, if installations are sharing user tables between multiple bbPress and WordPress installs you may to want one site to be the upgrade master.
+
+```php
+define( 'DO_NOT_UPGRADE_GLOBAL_TABLES', true );
+```
+
+### View All Defined Constants
+
+PHP has a function that returns an array of all the currently defined constants with their values.
+
+```php
+ print_r( @get_defined_constants() );
+```
+
+### Disable the Plugin and Theme File Editor
+
+Occasionally you may wish to disable the plugin or theme file editor to prevent overzealous users from being able to edit sensitive files and potentially crash the site. Disabling these also provides an additional layer of security if a hacker gains access to a well-privileged user account.
+
+```php
+define( 'DISALLOW_FILE_EDIT', true );
+```
+
+**Note**: The functionality of some plugins may be affected by the use of `current_user_can('edit_plugins')` in their code. Plugin authors should avoid checking for this capability, or at least check if this constant is set and display an appropriate error message. Be aware that if a plugin is not working this may be the cause.
+
+### Disable Plugin and Theme Update and Installation
+
+This will block users being able to use the plugin and theme installation/update functionality from the WordPress admin area. Setting this constant also disables the Plugin and Theme File editor (i.e. you don’t need to set DISALLOW\_FILE\_MODS and DISALLOW\_FILE\_EDIT, as on its own DISALLOW\_FILE\_MODS will have the same effect).
+
+```php
+define( 'DISALLOW_FILE_MODS', true );
+```
+
+### Require SSL for Admin and Logins
+
+**Note:** WordPress [Version 4.0](https://codex.wordpress.org/Version_4.0) deprecated FORCE\_SSL\_LOGIN. Please use FORCE\_SSL\_ADMIN.
+
+FORCE\_SSL\_ADMIN is for when you want to secure logins and the admin area so that both passwords and cookies are never sent in the clear. See also [Administration\_Over\_SSL](/support/article/administration-over-ssl/) for more details.
+
+```php
+define( 'FORCE_SSL_ADMIN', true );
+```
+
+### Block External URL Requests
+
+Block external URL requests by defining WP\_HTTP\_BLOCK\_EXTERNAL as true and this will only allow localhost and your blog to make requests. The constant WP\_ACCESSIBLE\_HOSTS will allow additional hosts to go through for requests. The format of the WP\_ACCESSIBLE\_HOSTS constant is a comma separated list of hostnames to allow, wildcard domains are supported, eg \*.wordpress.org will allow for all subdomains of wordpress.org to be contacted.
+
+```php
+define( 'WP_HTTP_BLOCK_EXTERNAL', true );
+define( 'WP_ACCESSIBLE_HOSTS', 'api.wordpress.org,*.github.com' );
+```
+
+### Disable WordPress Auto Updates
+
+There might be reason for a site to not auto-update, such as customizations or host supplied updates. It can also be done before a major release to allow time for testing on a development or staging environment before allowing the update on a production site.
+
+```php
+ define( 'AUTOMATIC_UPDATER_DISABLED', true );
+```
+
+### Disable WordPress Core Updates
+
+The easiest way to manipulate core updates is with the WP\_AUTO\_UPDATE\_CORE constant:
+
+```php
+ # Disable all core updates:
+ define( 'WP_AUTO_UPDATE_CORE', false );
+ # Enable all core updates, including minor and major:
+ define( 'WP_AUTO_UPDATE_CORE', true );
+ # Enable core updates for minor releases (default):
+ define( 'WP_AUTO_UPDATE_CORE', 'minor' );
+```
+
+Reference: [Disabling Auto Updates in WordPress 3.7](https://make.wordpress.org/core/2013/10/25/the-definitive-guide-to-disabling-auto-updates-in-wordpress-3-7/)
+
+### Cleanup Image Edits
+
+By default, WordPress creates a new set of images every time you edit an image and when you restore the original, it leaves all the edits on the server. Defining IMAGE\_EDIT\_OVERWRITE as true changes this behaviour. Only one set of image edits are ever created and when you restore the original, the edits are removed from the server.
+
+```php
+ define( 'IMAGE_EDIT_OVERWRITE', true );
+```
+
+## Double Check Before Saving
+
+***Be sure to check for leading and/or trailing spaces around any of the above values you entered, and DON’T delete the single quotes!***
+
+Before you save the file, be sure to **double-check** that you have not accidentally deleted any of the single quotes around the parameter values. Be sure there is nothing after the closing PHP tag in the file. The last thing in the file should be **?&gt;** and nothing else. No spaces.
+
+To save the file, choose **File &gt; Save As &gt; wp-config.php** and save the file in the root of your WordPress install. Upload the file to your web server and you’re ready to install WordPress!

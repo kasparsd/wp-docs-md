@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phpunit 
+	colors="true"
+>
+	<testsuites>
+		<testsuite name="parser">
+			<directory suffix="-test.php">tests</directory>
+		</testsuite>
+	</testsuites>
+	<coverage>
+		<include>
+			<directory>tools/parser</directory>
+		</include>
+  </coverage>
+</phpunit>

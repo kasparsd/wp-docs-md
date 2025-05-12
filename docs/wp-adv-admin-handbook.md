@@ -15,11 +15,13 @@ Table of Contents:
 - [Configuring Wildcard Subdomains](#advanced-administration/server/subdomains-wildcard)
 - [Emptying a Database Table](#advanced-administration/server/empty-database)
 - [Web servers](#advanced-administration/server/web-server)
+- [Apache HTTPD / .htaccess](#advanced-administration/server/web-server/httpd)
 - [Nginx](#advanced-administration/server/web-server/nginx)
 - [Control Panels](#advanced-administration/server/control-panel)
 - [WordPress configuration](#advanced-administration/wordpress)
 - [Editing wp-config.php](#advanced-administration/wordpress/wp-config)
 - [Site Architecture (v1.5)](#advanced-administration/wordpress/site-architecture)
+- [Post Formats](#advanced-administration/wordpress/post-formats)
 - [Cookies](#advanced-administration/wordpress/cookies)
 - [Update Services](#advanced-administration/wordpress/update-services)
 - [Editing Files](#advanced-administration/wordpress/edit-files)
@@ -28,6 +30,7 @@ Table of Contents:
 - [Multilingual WordPress](#advanced-administration/wordpress/multilingual)
 - [oEmbed](#advanced-administration/wordpress/oembed)
 - [Loopbacks](#advanced-administration/wordpress/loopback)
+- [Importing Content](#advanced-administration/wordpress/import)
 - [Common WordPress errors](#advanced-administration/wordpress/common-errors)
 - [Upgrading / Migration](#advanced-administration/upgrade)
 - [Updating WordPress using FTP](#advanced-administration/upgrade/ftp)
@@ -41,38 +44,35 @@ Table of Contents:
 - [WordPress Multisite Domain Mapping](#advanced-administration/multisite/domain-mapping)
 - [Multisite Network Administration](#advanced-administration/multisite/administration)
 - [Network Admin](#advanced-administration/multisite/admin)
+- [Network Admin Settings Screen](#advanced-administration/multisite/admin/settings)
 - [Migrate WordPress sites into WordPress Multisite](#advanced-administration/multisite/sites-multisite)
 - [Plugins](#advanced-administration/plugins)
+- [File Editor Screen](#advanced-administration/plugins/editor-screen)
 - [Must Use Plugins](#advanced-administration/plugins/mu-plugins)
 - [Themes](#advanced-administration/themes)
 - [Security](#advanced-administration/security)
 - [Your password](#advanced-administration/security/logging-in)
 - [Two Step Authentication](#advanced-administration/security/mfa)
 - [Backups](#advanced-administration/security/backup)
+- [Backing Up Your Database](#advanced-administration/security/backup/database)
+- [Backing Up Your WordPress Files](#advanced-administration/security/backup/files)
 - [HTTPS](#advanced-administration/security/https)
 - [Brute Force Attacks](#advanced-administration/security/brute-force)
 - [Hardening WordPress](#advanced-administration/security/hardening)
+- [Display Errors](#advanced-administration/security/hardening/display-errors)
+- [Monitoring](#advanced-administration/security/monitoring)
 - [Performance / Optimization](#advanced-administration/performance)
 - [Cache](#advanced-administration/performance/cache)
 - [Optimization](#advanced-administration/performance/optimization)
+- [PHP Optimization](#advanced-administration/performance/php)
 - [Debugging WordPress](#advanced-administration/debug)
 - [Debugging in WordPress](#advanced-administration/debug/debug-wordpress)
 - [Debugging a WordPress Network](#advanced-administration/debug/debug-network)
 - [Using Your Browser to Diagnose JavaScript Errors](#advanced-administration/debug/debug-javascript)
 - [Test Driving WordPress](#advanced-administration/debug/test-driving)
-- [Resources for Building on WordPress](#advanced-administration/resources)
-- [File Editor Screen](#advanced-administration/plugins/editor-screen)
-- [Apache HTTPD / .htaccess](#advanced-administration/server/web-server/httpd)
-- [Post Formats](#advanced-administration/wordpress/post-formats)
-- [Importing Content](#advanced-administration/wordpress/import)
-- [Network Admin Settings Screen](#advanced-administration/multisite/admin/settings)
-- [Backing Up Your Database](#advanced-administration/security/backup/database)
-- [Backing Up Your WordPress Files](#advanced-administration/security/backup/files)
-- [FAQ Troubleshooting](#advanced-administration/resources/faq)
 - [Version Control](#advanced-administration/debug/version-control)
-- [Monitoring](#advanced-administration/security/monitoring)
-- [PHP Optimization](#advanced-administration/performance/php)
-- [Display Errors](#advanced-administration/security/hardening/display-errors)
+- [Resources for Building on WordPress](#advanced-administration/resources)
+- [FAQ Troubleshooting](#advanced-administration/resources/faq)
 
 # Advanced Administration Handbook <a name="advanced-administration" />
 
@@ -1395,6 +1395,399 @@ See [Nginx](#advanced-administration/server/web-server/nginx).
 ## Changelog
 
 - 2022-09-11: First move from the old handbook.
+
+---
+
+# Apache HTTPD / .htaccess <a name="advanced-administration/server/web-server/httpd" />
+
+Source: https://developer.wordpress.org/advanced-administration/server/web-server/httpd/
+
+## .htaccess
+
+The `.htaccess` is a distributed configuration file, and is how Apache handles configuration changes on a per-directory basis.
+
+WordPress uses this file to manipulate how Apache serves files from its root directory, and subdirectories thereof. Most notably, WP modifies this file to be able to handle pretty permalinks.
+
+This page may be used to restore a corrupted `.htaccess` file (e.g. a misbehaving plugin).
+
+### Basic WP
+
+```
+# BEGIN WordPress
+
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+
+# END WordPress
+
+```
+
+### Multisite
+
+#### WordPress 3.5 and up
+
+If you activated Multisite on WordPress 3.5 or later, use one of these.
+
+##### WordPress &gt;=3.5 Subfolder Example
+
+```
+# BEGIN WordPress Multisite
+# Using subfolder network type: https://wordpress.org/documentation/article/htaccess/#multisite
+
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+
+# add a trailing slash to /wp-admin
+RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^([_0-9a-zA-Z-]+/)?(wp-(content|admin|includes).*) $2 [L]
+RewriteRule ^([_0-9a-zA-Z-]+/)?(.*\.php)$ $2 [L]
+RewriteRule . index.php [L]
+
+# END WordPress Multisite
+
+```
+
+##### WordPress &gt;=3.5 SubDomain Example
+
+```
+# BEGIN WordPress Multisite
+# Using subdomain network type: https://wordpress.org/documentation/article/htaccess/#multisite
+
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+
+# add a trailing slash to /wp-admin
+RewriteRule ^wp-admin$ wp-admin/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^(wp-(content|admin|includes).*) $1 [L]
+RewriteRule ^(.*\.php)$ $1 [L]
+RewriteRule . index.php [L]
+
+# END WordPress Multisite
+
+```
+
+#### WordPress 3.4 and below
+
+If you originally installed WordPress with 3.4 or older and activated Multisite then, you need to use one of these:
+
+##### WordPress &lt;=3.4 SubFolder Example
+
+WordPress 3.0 through 3.4.2
+
+```
+# BEGIN WordPress Multisite
+# Using subfolder network type: https://wordpress.org/documentation/article/htaccess/#multisite
+
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+
+# uploaded files
+RewriteRule ^([_0-9a-zA-Z-]+/)?files/(.+) wp-includes/ms-files.php?file=$2 [L]
+
+# add a trailing slash to /wp-admin
+RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^[_0-9a-zA-Z-]+/(wp-(content|admin|includes).*) $1 [L]
+RewriteRule ^[_0-9a-zA-Z-]+/(.*\.php)$ $1 [L]
+RewriteRule . index.php [L]
+
+# END WordPress Multisite
+
+```
+
+##### WordPress &lt;=3.4 SubDomain Example
+
+```
+# BEGIN WordPress Multisite
+# Using subdomain network type: https://wordpress.org/documentation/article/htaccess/#multisite
+
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+
+# uploaded files
+RewriteRule ^files/(.+) wp-includes/ms-files.php?file=$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule . index.php [L]
+
+# END WordPress Multisite
+
+```
+
+### General Examples
+
+#### Options
+
+Any options preceded by a **+** are added to the options currently in force, and any options preceded by a **–** are removed from the options currently in force.
+
+Possible values for the [Options directive](https://httpd.apache.org/docs/trunk/mod/core.html#options) are any combination of:
+
+**None**
+
+All options are turned off.
+
+**All**
+
+All options except for MultiViews. This is the default setting.
+
+**ExecCGI**
+
+Execution of CGI scripts using mod\_cgi is permitted.
+
+**FollowSymLinks**
+
+The server will follow symbolic links in this directory.
+
+**Includes**
+
+Server-side includes provided by mod\_include are permitted.
+
+**IncludesNOEXEC**
+
+Server-side includes are permitted, but the #exec cmd and #exec cgi are disabled.
+
+**Indexes**
+
+URL maps to a directory, and no DirectoryIndex, a formatted listing of the directory.
+
+**MultiViews**
+
+Content negotiated “MultiViews” are allowed using mod\_negotiation.
+
+**SymLinksIfOwnerMatch**
+
+Only follow symbolic links where target is owned by the same user id as the link.
+
+This will disable all options, and then only enable FollowSymLinks, which is necessary for mod\_rewrite.
+
+```
+Options None
+Options FollowSymLinks
+
+```
+
+#### DirectoryIndex
+
+[DirectoryIndex Directive](https://httpd.apache.org/docs/trunk/mod/mod_dir.html#directoryindex) sets the file that Apache will serve if a directory is requested.
+
+Several URLs may be given, in which case the server will return the first one that it finds.
+
+```
+DirectoryIndex index.php index.html /index.php
+
+```
+
+#### DefaultLanguage
+
+[DefaultLanguage Directive](https://httpd.apache.org/docs/trunk/mod/mod_mime.html#defaultlanguage) will cause all files that do not already have a specific language tag associated with it will use this.
+
+```
+DefaultLanguage en
+
+```
+
+#### Default Charset
+
+Set the default character encoding sent in the HTTP header. See [Setting charset information in .htaccess](https://www.w3.org/International/questions/qa-htaccess-charset)
+
+```
+AddDefaultCharset UTF-8
+
+```
+
+**Set Charset for Specific Files**
+
+```
+AddType 'text/html; charset=UTF-8' .html
+
+```
+
+**Set for specific files**
+
+```
+AddCharset UTF-8 .html
+
+```
+
+#### ServerSignature
+
+The [ServerSignature Directive](https://httpd.apache.org/docs/trunk/mod/core.html#serversignature) allows the configuration of a trailing footer line under server-generated documents. Optionally add a line containing the server version and virtual host name to server-generated pages (internal error documents, FTP directory listings, mod\_status and mod\_info output etc., but not CGI generated documents or custom error documents).
+
+**On**
+
+adds a line with the server version number and ServerName of the serving virtual host
+
+**Off**
+
+suppresses the footer line
+
+**Email**
+
+creates a “mailto:” reference to the ServerAdmin of the referenced document
+
+```
+SetEnv SERVER_ADMIN admin@site.com
+ServerSignature Email
+
+```
+
+#### Force Files to be Downloaded
+
+The below will cause any requests for files ending in the specified extensions to not be displayed in the browser but instead force a “Save As” dialog so the client can download.
+
+```
+AddType application/octet-stream .avi .mpg .mov .pdf .xls .mp4
+
+```
+
+#### HTTP Compression
+
+The [AddOutputFilter Directive](https://httpd.apache.org/docs/trunk/mod/mod_mime.html#addoutputfilter) maps the filename extension extension to the filters which will process responses from the server before they are sent to the client. This is in addition to any filters defined elsewhere, including `SetOutputFilter` and `AddOutputFilterByType`. This mapping is merged over any already in force, overriding any mappings that already exist for the same extension.
+
+See also [Enable Compression](https://developers.google.com/speed/docs/insights/EnableCompression)
+
+```
+AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/javascript text/css application/x-javascript
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4\.0[678] no-gzip
+BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+```
+
+**Force Compression for certain files**
+
+```
+SetOutputFilter DEFLATE
+
+```
+
+#### Send Custom HTTP Headers
+
+The [Header Directive](https://httpd.apache.org/docs/trunk/mod/mod_headers.html#header) lets you send HTTP headers for every request, or just specific files. You can view a sites HTTP Headers using [Firebug](https://getfirebug.com/), [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/), [Wireshark](https://www.wireshark.org/) or [Advanced HTTP Request / Response Headers](https://www.askapache.com/online-tools/http-headers-tool/).
+
+```
+Header set X-Pingback "https://example.com/xmlrpc.php"
+Header set Content-Language "en-US"
+
+```
+
+#### Unset HTTP Headers
+
+This will unset HTTP headers, using **always** will try extra hard to remove them.
+
+```
+Header unset Pragma
+Header always unset WP-Super-Cache
+Header always unset X-Pingback
+
+```
+
+#### Password Protect Login
+
+This is very useful for protecting the `wp-login.php` file. You can use this [Advanced Htpasswd/Htdigest file creator](https://www.askapache.com/online-tools/htpasswd-generator/).
+
+**Basic Authentication**
+
+```
+AuthType Basic
+AuthName "Password Protected"
+AuthUserFile /full/absolute/path/to/.htpasswd
+Require valid-user
+Satisfy All
+
+```
+
+**Digest Authentication**
+
+```
+AuthType Digest
+AuthName "Password Protected"
+AuthDigestDomain /wp-login.php https://example.com/wp-login.php
+AuthUserFile /full/absolute/path/to/.htpasswd
+Require valid-user
+Satisfy All
+
+```
+
+#### Require Specific IP
+
+This is a way to only allow access for IP addresses listed. Note usage of RequireAny instead of RequireAll.
+
+```
+<RequireAny>
+  Require ip 192.0.2.123
+  Require ip 2001:0DB8:1111:2222:3333:4444:5555:6666
+</RequireAny>
+
+```
+
+#### Protect Sensitive Files
+
+This denies all web access to your wp-config file, htaccess/htpasswd and WordPress debug.log. On installed site, consider adding install.php as well.
+
+```
+<FilesMatch "^(wp-config\.php|\.htaccess|\.htpasswd|debug\.log)$">
+  Require all denied
+</FilesMatch>
+
+```
+
+#### Require SSL
+
+This will force SSL, and require the exact hostname or else it will redirect to the SSL version. Useful in a `/wp-admin/.htaccess` file.
+
+```
+SSLOptions +StrictRequire
+SSLRequireSSL
+SSLRequire %{HTTP_HOST} eq "www.example.com"
+ErrorDocument 403 https://www.example.com
+
+```
+
+### External Resources
+
+- [Official Apache HTTP Server Tutorial: .htaccess files](https://httpd.apache.org/docs/trunk/howto/htaccess.html)
+- [Official Htaccess Directive Quick Reference](https://httpd.apache.org/docs/trunk/mod/quickreference.html)
+- [Htaccess Tutorial](https://www.askapache.com/htaccess/)
+- [Google PageSpeed for Developers](https://developers.google.com/speed/docs/insights/rules)
+- [Stupid Htaccess Tricks](https://perishablepress.com/stupid-htaccess-tricks/)
+- [Advanced Mod\_Rewrite](https://www.askapache.com/htaccess/crazy-advanced-mod_rewrite-tutorial/)
+
+### See also
+
+- [htaccess for subdirectories](https://codex.wordpress.org/htaccess%20for%20subdirectories)
+- [Using Permalinks](https://wordpress.org/documentation/article/customize-permalinks/)
+- [Changing File Permissions](https://wordpress.org/documentation/article/changing-file-permissions/)
+- [UNIX Shell Skills](https://codex.wordpress.org/UNIX%20Shell%20Skills)
+- [Rewrite API](https://codex.wordpress.org/Rewrite%20API)
+
+## Changelog
+
+- 2023-04-25: Original content from [htaccess](https://wordpress.org/documentation/article/htaccess/).
 
 ---
 
@@ -3670,6 +4063,184 @@ The Default Theme’s footer is styled by the footer ID and the paragraph tag. W
 
 ---
 
+# Post Formats <a name="advanced-administration/wordpress/post-formats" />
+
+Source: https://developer.wordpress.org/advanced-administration/wordpress/post-formats/
+
+## Intro
+
+**Post Formats** is a [theme feature](https://codex.wordpress.org/Theme_Features) introduced with [Version 3.1](https://wordpress.org/documentation/wordpress-version/version-3-1/). A Post Format is a piece of meta information that can be used by a theme to customize its presentation of a post. The Post Formats feature provides a standardized list of formats that are available to all themes that support the feature. Themes are not required to support every format on the list. New formats cannot be introduced by themes or even plugins. The standardization of this list provides both compatibility between numerous themes and an avenue for external blogging tools to access this feature in a consistent fashion.
+
+In short, with a theme that supports Post Formats, a blogger can change how each post looks by choosing a Post Format from a radio-button list.
+
+Using **Asides** as an example, in the past, a category called Asides was created, and posts were assigned that category, and then displayed differently based on styling rules from [post\_class()](#reference/functions/post_class) or from [in\_category(‘asides’)](#reference/functions/in_category). With **Post Formats**, the new approach allows a theme to add support for a Post Format (e.g. [add\_theme\_support(‘post-formats’, array(‘aside’))](#reference/functions/add_theme_support)), and then the post format can be selected in the Publish meta box when saving the post. A function call of [get\_post\_format($post-&gt;ID)](#reference/functions/get_post_format) can be used to determine the format, and [post\_class()](#reference/functions/post_class) will also create the “format-asides” class, for pure-css styling.
+
+## Supported Formats
+
+The following Post Formats are available for users to choose from, if the theme enables support for them.
+
+Note that while the actual post content entry won’t change, the theme can use this user choice to display the post differently based on the format chosen. For example, a theme could leave off the display of the title for a “Status” post. How things are displayed is entirely up to the theme, but here are some general guidelines.
+
+- **aside**: Typically styled without a title. Similar to a Facebook note update.
+- **gallery**: A gallery of images. Post will likely contain a gallery shortcode and will have image attachments.
+- **link**: A link to another site. Themes may wish to use the first `<a href="">` tag in the post content as the external link for that post. An alternative approach could be if the post consists only of a URL, then that will be the URL and the title (`post_title`) will be the name attached to the anchor for it.
+- **image**: A single image. The first `<img>` tag in the post could be considered the image. Alternatively, if the post consists only of a URL, that will be the image URL and the title of the post (`post_title`) will be the title attribute for the image.
+- **quote**: A quotation. Probably will contain a blockquote holding the quote content. Alternatively, the quote may be just the content, with the source/author being the title.
+- **status**: A short status update, similar to a Twitter status update.
+- **video**: A single video or video playlist. The first `<video>` tag or object/embed in the post content could be considered the video. Alternatively, if the post consists only of a URL, that will be the video URL. May also contain the video as an attachment to the post, if video support is enabled on the blog (like via a plugin).
+- **audio**: An audio file or playlist. Could be used for Podcasting.
+- **chat**: A chat transcript, like so:
+
+```
+John: foo
+Mary: bar
+John: foo 2
+
+```
+
+Note: When writing or editing a Post, Standard is used to designate that no Post Format is specified. Also if a format is specified that is invalid then standard (no format) will be used.
+
+## Function Reference
+
+**Main Functions**: [set\_post\_format()](#reference/functions/set_post_format), [get\_post\_format()](#reference/functions/get_post_format), [has\_post\_format()](#reference/functions/has_post_format).
+
+**Other Functions**: [get\_post\_format\_link()](#reference/functions/get_post_format_link), [get\_post\_format\_string()](#reference/functions/get_post_format_string).
+
+## Adding Theme Support
+
+Themes need to use [add\_theme\_support()](#reference/functions/add_theme_support) in the *functions.php* file to tell WordPress which post formats to support by passing an array of formats like so:
+
+```
+add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
+
+```
+
+Note that you must call this before the [init](#reference/hooks/init) hook gets called! A good hook to use is the [after\_setup\_theme](#reference/hooks/after_setup_theme) hook.
+
+## Adding Post Type Support
+
+Post Types need to use [add\_post\_type\_support()](#reference/functions/add_post_type_support) in the *functions.php* file to tell WordPress which post formats to support:
+
+```
+// add post-formats to post\_type 'page'
+add_post_type_support( 'page', 'post-formats' );
+
+```
+
+Next example registers custom post type `my_custom_post_type`, and add Post Formats.
+
+```
+// register custom post type 'my_custom_post_type'
+add_action( 'init', 'create_my_post_type' );
+function create_my_post_type() {
+  register_post_type( 'my_custom_post_type',
+    array(
+      'labels' => array( 'name' => __( 'Products' ) ),
+      'public' => true
+    )
+  );
+}
+
+//add post-formats to post_type 'my_custom_post_type'
+add_post_type_support( 'my_custom_post_type', 'post-formats' );
+
+```
+
+Or in the function [register\_post\_type()](#reference/functions/register_post_type), add `post-formats`, in `supports` parameter array. Next example is equivalent to above one.
+
+```
+// register custom post type 'my_custom_post_type' with 'supports' parameter
+add_action( 'init', 'create_my_post_type' );
+function create_my_post_type() {
+  register_post_type( 'my_custom_post_type',
+    array(
+      'labels' => array( 'name' => __( 'Products' ) ),
+      'public' => true,
+      'supports' => array('title', 'editor', 'post-formats')
+    )
+  );
+}
+
+```
+
+## Using Formats
+
+In the theme, make use of [get\_post\_format()](#reference/functions/get_post_format) to check the format for a post, and change its presentation accordingly. Note that posts with the default format will return a value of FALSE. Or make use of the [has\_post\_format()](#reference/functions/has_post_format) [conditional tag](https://codex.wordpress.org/Conditional_Tags):
+
+```
+if ( has_post_format( 'video' )) {
+  echo 'this is the video format';
+}
+
+```
+
+An alternate way to use formats is through styling rules. Themes should use the [post\_class()](#reference/functions/post_class) function in the wrapper code that surrounds the post to add dynamic styling classes. Post formats will cause extra classes to be added in this manner, using the “format-foo” name.
+
+For example, one could hide post titles from status format posts by putting this in your theme’s stylesheet:
+
+```
+.format-status .post-title {
+  display:none;
+}
+
+```
+
+### Suggested Styling
+
+Although you can style and design your formats to be displayed any way you see fit, each of the formats lends itself to a certain type of “style”, as dictated by modern usage. It is well to keep in mind the intended usage for each format, as this will lend them towards being easily recognized as a specific type of thing visually by readers.
+
+For example, the aside, link, and status formats will typically be displayed without title or author information. They are simple, short, and minor. The aside could contain perhaps a paragraph or two, while the link would probably be only a sentence with a link to some URL in it. Both the link and aside might have a link to the single post page (using [the\_permalink()](#reference/functions/the_permalink)) and would thus allow comments, but the status format very likely would not have such a link.
+
+An image post, on the other hand, would typically just contain a single image, with or without a caption/text to go along with it. An audio/video post would be the same but with audio/video added in. Any of these three could use either plugins or standard [Embeds](https://wordpress.org/documentation/article/embeds/) to display their content. Titles and authorship might not be displayed for them either, as the content could be self-explanatory.
+
+The quote format is especially well suited to posting a simple quote from a person with no extra information. If you were to put the quote into the post content alone, and put the quoted person’s name into the title of the post, then you could style the post so as to display [the\_content()](#reference/functions/the_content) by itself but restyled into a blockquote format, and use [the\_title()](#reference/functions/the_title) to display the quoted person’s name as the byline.
+
+A chat in particular will probably tend towards a monospaced type display, in many cases. With some styling on the `.format-chat`, you can make it display the content of the post using a monospaced font, perhaps inside a gray background div or similar, thus distinguishing it visually as a chat session.
+
+### Formats in a Child Theme
+
+[Child Themes](#themes/advanced-topics/child-themes) inherit the post formats defined by the parent theme. Calling [add\_theme\_support()](#reference/functions/add_theme_support) for post formats in a child theme must be done at a later priority than that of the parent theme and will **override** the existing list, not add to it.
+
+```
+add_action( 'after_setup_theme', 'childtheme_formats', 11 );
+function childtheme_formats() {
+  add_theme_support( 'post-formats', array( 'aside', 'gallery', 'link' ) );
+}
+
+```
+
+Calling [remove\_theme\_support(‘post-formats’)](#reference/functions/remove_theme_support) will remove it all together.
+
+## Backwards Compatibility
+
+If your plugin or theme needs to be compatible with earlier versions of WordPress, you need to add terms named `post-format-$format` to the `post_format` taxonomy. For example,
+
+```
+wp_insert_term( 'post-format-aside', 'post_format' );
+
+```
+
+You must also register the `post_format` taxonomy with [register\_taxonomy()](#reference/functions/register_taxonomy).
+
+## Source File
+
+- [wp-includes/post-formats.php](https://core.trac.wordpress.org/browser/tags/4.4.2/src/wp-includes/post-formats.php#L0)
+
+## External Resources
+
+- [Styling Chat Transcript with WordPress Custom Post Format](https://www.narga.net/styling-wordpress-chat-transcript/)
+- [Post Types and Formats and Taxonomies, oh my!](http://ottopress.com/2010/post-types-and-formats-and-taxonomies-oh-my/)
+- [On standardized Post Formats](https://nacin.com/2011/01/27/on-standardized-post-formats/)
+- [Post Formats vs. Post Types](https://markjaquith.wordpress.com/2010/11/12/post-formats-vs-custom-post-types/)
+- [Smarter Post Formats?](https://dougal.gunters.org/blog/2010/12/10/smarter-post-formats/)
+- [WordPress Theme Support Generator](https://generatewp.com/theme-support/)
+
+## Changelog
+
+- 2023-04-25: original content from [Post Formats](https://wordpress.org/documentation/article/post-formats/).
+
+---
+
 # Cookies <a name="advanced-administration/wordpress/cookies" />
 
 Source: https://developer.wordpress.org/advanced-administration/wordpress/cookies/
@@ -4371,6 +4942,203 @@ The most common cause of loopback failures is a plugin or theme conflict, you sh
 ## Changelog
 
 - 2023-01-20: Content migrated from [Loopbacks](https://wordpress.org/documentation/article/loopbacks/).
+
+---
+
+# Importing Content <a name="advanced-administration/wordpress/import" />
+
+Source: https://developer.wordpress.org/advanced-administration/wordpress/import/
+
+Using the WordPress Import tool, you can import content into your site from another WordPress site, or from another publishing system.
+
+You can find many of the importers described here under [Tools](https://wordpress.org/documentation/article/administration-screens/#tools-managing-your-blog) -&gt; [Import](https://wordpress.org/documentation/article/tools-import-screen/) in the left nav of the WordPress [Administration Screen](https://wordpress.org/documentation/article/administration-screens/).
+
+You can import content from publishing systems beyond those listed on the Administration Screen. Procedures differ for each system, so use the procedures and plugins listed below as necessary. If you’re new to WordPress, review the [WordPress Features](https://wordpress.org/about/features/) and [Working with WordPress](https://codex.wordpress.org/Working%20with%20WordPress) pages to get started.
+
+If you run into problems, search the [WordPress Support Forum](https://wordpress.org/support/forums/) for a solution, or try the [FAQ](https://wordpress.org/documentation/article/faq-work-with-wordpress/).
+
+## Before Importing
+
+If the file you’re importing is too large, your server may run out of memory when you import it. If this happens, you’ll see an error like “Fatal error: Allowed memory size of 8388608 bytes exhausted.”
+
+If you have sufficient permissions on the server, you can edit the `php.ini` file to increase the available memory. Alternatively, you could ask your hosting provider to do this. Otherwise, you can edit your import file and save it as several smaller files, then import each one.
+
+If your import process fails, it still may create some content. When you resolve the error and try again, you may create duplicate data. Review your site after a failed import and remove records as necessary to avoid this.
+
+## b2evolution
+
+There are two methods of importing b2evolution content into WordPress.
+
+- **Movable Type Export Format**: You can re-skin a b2evolution blog so that when its source is viewed it appears to be in the [Movable Type export format](https://movabletype.org/documentation/appendices/import-export-format.html). You can save the export and import it as Movable Type data. See Movable Type and TypePad.
+- **BIMP Importer script**: You can use the [BIMP Importer script](https://wittyfinch.com/bimp-importer-migrate-b2evolution-to-wordpress/) to import b2evolution blogs, categories, posts, comments, files and users into your WordPress installation (v3 and higher). Note that this requires payment.
+
+## Blogger
+
+You can import posts, comments, categories and authors from Blogger. WordPress includes an import tool designed specifically for importing content from Blogger.
+
+1. Export your Blogger contents as XML.
+2. In your WordPress site, select Tools -&gt; Import on the left nav of the admin screen.
+3. Under “Blogger”, if you haven’t already installed the Blogger importer, click “Install Now”.
+4. Click the “Run Importer” link.
+5. Click “Choose File” and navigate to your Blogger XML file.
+6. Click “Upload file and import”.
+
+## Drupal
+
+Many resources are available to help you migrate content from Drupal to WordPress. A few are highlighted here, and you’re likely to find many others by searching the web.
+
+- [FG Drupal to WordPress](https://wordpress.org/plugins/fg-drupal-to-wp/). This is compatible with Drupal 4, 5, 6, 7, 8 and 9.
+- [Drupal2WordPress Plugin](https://github.com/jpSimkins/Drupal2WordPress-Plugin). Use this plugin to import terms, content, media, comments and users. Any external images included in your Drupal site can be fetched and added to the media library, and added to your pages and posts.
+- [Drupal to WordPress migration SQL queries explained](https://anothercoffee.net/drupal-to-wordpress-migration-sql-queries-explained/) includes workarounds for some migration issues such as duplicate terms, terms exceeding maximum character length and duplicate URL aliases.
+
+## XML and CSV
+
+Here are some resources that can help guide you in importing XML or CSV content into WordPress.
+
+- The [WP All Import](https://wordpress.org/plugins/wp-all-import/) plugin can import any XML or CSV file. It integrates with the [WP All Export](https://wordpress.org/plugins/wp-all-export/) plugin.
+
+## Joomla
+
+For Joomla you can use [FG Joomla to WordPress](https://wordpress.org/plugins/fg-joomla-to-wordpress/). This plugin has been tested with Joomla versions 1.5 through 4.0 on huge databases. It is compatible with multisite installations.
+
+## LiveJournal
+
+WordPress includes an import tool designed specifically for importing content from LiveJournal.
+
+1. In your WordPress site, select Tools -&gt; Import on the left nav of the admin screen.
+2. Under “LiveJournal”, if you haven’t already installed the LiveJournal importer, click “Install Now”.
+3. Click the “Run Importer” link.
+4. Enter your LiveJournal username and password, and click “Connect to LiveJournal and Import”.
+
+## Live Space
+
+See [Live Space Mover](https://b2.broom9.com/?page_id=519) for an article explaining how to use a python script for importing blog entries from live space to WordPress.
+
+## Magento
+
+The [FG Magento to WooCommerce](https://wordpress.org/plugins/fg-magento-to-woocommerce/) plugin migrates your Magento products and CMS pages to WooCommerce.
+
+## Mambo
+
+You can use the plugin [FG Joomla to WordPress](https://wordpress.org/plugins/fg-joomla-to-wordpress/). This WordPress plugin works with Mambo 4.5 and 4.6.
+
+## Movable Type and TypePad
+
+WordPress includes an import tool designed specifically for importing content from Movable Type and TypePad.
+
+1. In your WordPress site, select Tools -&gt; Import on the left nav of the admin screen.
+2. Under “Movable Type and TypePad”, if you haven’t already installed the importer, click “Install Now”.
+3. Click the “Run Importer” link.
+4. Click “Choose File” and navigate to your export file.
+5. Click “Upload file and import”.
+
+These articles provide more information on this process:
+
+- [Importing from Movable Type to WordPress](https://codex.wordpress.org/Importing%20from%20Movable%20Type%20to%20WordPress)
+- [Importing and Exporting Content](https://www.movabletype.org/documentation/administrator/maintenance/import-export.html)
+- [Notes on a Massive WordPress Migration](https://blog.birdhouse.org/2008/02/07/notes-on-a-massive-wordpress-migration/)
+
+## Nucleus CMS
+
+Here are some resources that can help guide you in migrating content from Nucleus CMS to WordPress.
+
+- [A Guide to Importing From Nucleus CMS](https://mamchenkov.net/wordpress/2005/04/26/nucleus2wordpress/)
+- [Script for Importing From Nucleus CMS](http://james.onegoodcookie.com/pub/import-nucleus.phps)
+- [Nucleus to WordPress](https://github.com/AbdussamadA/nucleus-importer)
+
+## PrestaShop
+
+[FG PrestaShop to WooCommerce](https://wordpress.org/plugins/fg-prestashop-to-woocommerce/). This WordPress plugin is compatible with PrestaShop versions 1.0 to 1.7.
+
+## Roller
+
+See [Importing From Roller](https://codex.wordpress.org/Importing%20From%20Roller).
+
+See also [Migrating a Roller Blog to WordPress](https://nullpointer.debashish.com/migrating-a-roller-blog-to-wordpress).
+
+## RSS
+
+WordPress includes an import tool designed specifically for importing content from RSS.
+
+1. In your WordPress site, select Tools -&gt; Import on the left nav of the admin screen.
+2. Under “RSS”, if you haven’t already installed the importer, click “Install Now”.
+3. Click the “Run Importer” link.
+4. Click “Choose File” and navigate to your XML file.
+5. Click “Upload file and import”.
+
+## Serendipity
+
+- [Serendipity to WordPress – Post Import](https://obviate.io/2010/06/11/serendipity-to-wordpress-post-import/).
+
+## SPIP
+
+The plugin [FG SPIP to WordPress](https://wordpress.org/plugins/fg-spip-to-wp/) migrates categories, articles, news and images from SPIP to WordPress. It has been tested with SPIP versions 1.8, 1.9, 2.0, 3.0, 3.1 and 3.2. It is compatible with multisite installations.
+
+## Sunlog
+
+1. Open [phpMyAdmin](#advanced-administration/upgrade/phpmyadmin) to see the database of your Sunlog install. You only need two tables, “blogname\_entries” and “blogname\_comments”.
+2. Use phpMyAdmin to export both tables as XML files.
+3. Install the [WP All Import](https://wordpress.org/plugins/wp-all-import/) plugin to your WordPress site.
+4. Create the following field mappings: 
+    - `headline=title`
+    - `content=entry+more`
+    - `date=timestamp` in Unix format
+    - `categories="cat,"` with each value separated by a semicolon.
+
+## Textpattern
+
+- [Fix Textpattern import](https://wordpress.org/support/topic/fix-textpattern-import/)
+- [Textpattern to WordPress exporter](https://github.com/drewm/textpattern-to-wordpress)
+
+## Tumblr
+
+WordPress includes an import tool designed specifically for importing content from Tumblr.
+
+1. In your WordPress site, select Tools -&gt; Import on the left nav of the admin screen.
+2. Under “Tumblr”, if you haven’t already installed the importer, click “Install Now”.
+3. Click the “Run Importer” link.
+4. Click “Choose File” and navigate to your export file.
+5. Click “Upload file and import”.
+6. Create an app on Tumblr that provides a connection point between your blog and Tumblr’s servers.
+7. Copy and paste the “OAuth Consumer Key” and “Secret Key”.
+8. Click “Connect to Tumblr”.
+
+## Twitter
+
+There are several plugins to import your tweets into WordPress, such as [Get Your Twitter Timeline into WordPress](https://blog.birdhouse.org/2008/08/17/get-your-twitter-timeline-into-wordpress/).
+
+## TypePad
+
+See [Movable Type and TypePad](#movable-type-and-typepad).
+
+## WooCommerce products (CSV)
+
+If you’ve installed the WooCommerce plugin, this importer will already be installed. Click “Run Importer” to upload a CSV file.
+
+## WooCommerce tax rates (CSV)
+
+If you’ve installed the WooCommerce plugin, this importer will already be installed. Click “Run Importer” to upload a CSV file.
+
+## WordPress
+
+WordPress includes an import tool designed specifically for importing content from another WordPress blog.
+
+1. In your WordPress site, select Tools -&gt; Import on the left nav of the admin screen.
+2. Under “WordPress”, if you haven’t already installed the importer, click “Install Now”.
+3. Click the “Run Importer” link.
+4. Click “Choose File” and navigate to the WXR file exported from your source.
+5. Click “Upload file and import”.
+
+You will first be asked to map the authors in this export file to users on the blog. For each author, you may choose to map to an existing user on the blog or to create a new user. WordPress will then import each of the posts, comments and categories contained in the uploaded file into your blog. In addition, you can import attachments by checking the “Download and import file attachments” option.
+
+## Xanga
+
+[xanga.r](https://www.timwylie.com/xword.html) is a program that parses xanga pages to get the post and comments. Then it can output them in the WordPress rss 2.0 xml format for WordPress to import.
+
+## Changelog
+
+- 2024-01-25: Removed HTML and Blogroll sections as they are no longer accurate
+- 2023-04-25: Added content from [Importing Content](https://wordpress.org/documentation/article/importing-content/).
 
 ---
 
@@ -6381,6 +7149,160 @@ If a version update to core has not happened, clicking this button won’t affec
 
 ---
 
+# Network Admin Settings Screen <a name="advanced-administration/multisite/admin/settings" />
+
+Source: https://developer.wordpress.org/advanced-administration/multisite/admin/settings/
+
+The **Network Admin Settings** is where a network admin sets and changes settings for the network as a whole. The first site is the main site in the network and network settings are pulled from that original site’s options.
+
+![](https://i0.wp.com/wordpress.org/documentation/files/2020/02/superadmin-options.png?fit=1024%2C751&ssl=1)
+
+## Operational Settings
+
+**Network Name**
+
+What you would like to call this website.
+
+**Network Admin Email**
+
+Registration and support emails will come from this address. An address such as *support@example.com* is recommended.
+
+## Registration Settings
+
+**Allow new registrations**
+
+Disable or enable registration and who or what can be registered. (Default is disabled.)
+
+- Registration is disabled. (default)
+- User accounts may be registered.
+- Logged in users may register new sites.
+- Both sites and user accounts can be registered.
+
+**Registration notification**
+
+Send the network admin an email notification every time someone registers a site or user account.
+
+**Add New Users**
+
+Allow site administrators to add new users to their site via the “Users -&gt; Add New” page.
+
+**Banned Names**
+
+Users are not allowed to register these sites. Separate names by spaces.
+
+**Limited Email Registrations**
+
+If you want to limit site registrations to certain domains. Enter one domain per line.
+
+**Banned Email Domains**
+
+If you want to ban domains from site registrations. Enter one domain per line.
+
+## New Site Settings
+
+**Welcome Email**
+
+```
+The welcome email sent to new site owners.
+
+Dear User,
+
+Your new SITE_NAME blog has been successfully set up at:
+BLOG_URL
+
+You can log in to the administrator account with the following information:
+Username: USERNAME
+Password: PASSWORD
+Login Here: BLOG_URLwp-login.php
+
+We hope you enjoy your new blog.
+Thanks!
+
+--The Team @ SITE_NAME
+
+```
+
+**Welcome User Email**
+
+```
+The welcome email sent to new users.
+
+Dear User,
+
+Your new account is set up.
+
+You can log in with the following information:
+Username: USERNAME
+Password: PASSWORD
+LOGINLINK
+
+Thanks!
+
+--The Team @ SITE_NAME
+
+```
+
+**First Post**
+
+The first post on a new site.
+
+```
+Welcome to <a href="SITE_URL">SITE_NAME</a>. This is your first post. Edit or delete it, then start blogging!
+
+```
+
+**First Page**
+
+The first page on a new site.
+
+**First Comment**
+
+The first comment on a new site.
+
+**First Comment Author**
+
+The author of the first comment on a new site.
+
+**First Comment URL**
+
+The URL for the first comment on a new site.
+
+## Upload Settings
+
+**Site upload space**
+
+Limit total size of files uploaded to \[ 50 \] MB.
+
+**Upload file types**
+
+Default is `jpg jpeg png gif mp3 mov avi wmv midi mid pdf m2ts`.
+
+Note: Adding arbitrary file types will not work unless a corresponding function is also hooked to [upload\_mimes](#reference/hooks/upload_mimes) filter. See the `wp_get_mime_types` function in [wp-includes/functions.php](https://github.com/WordPress/WordPress/blob/master/wp-includes/functions.php) for the current default set of supported mime-types / file extensions. Adding mime types in the ‘upload file types’ field not listed in the default set will **NOT** work unless you’ve added them using the [upload\_mimes](#reference/hooks/upload_mimes) filter! Uploading files with mime types not supported (without adding them using the filter) will fail with the message “Sorry, this file type is not permitted for security reasons”.
+
+**Max upload file size**
+
+Default is \[ 1500 \] KB.
+
+## Language Settings
+
+**Default Language**
+
+Default is English.
+
+## Menu Settings
+
+**Enable administration menus**
+
+- Plugins
+
+On WordPress Multisite the default setting for plugins is disabled. This means your users won’t have access to the plugin admin panel inside their dashboard unless you first enable access to plugins network wide.
+
+## Changelog
+
+- 2023-04-25: Original content from [Network Admin Settings Screen](https://wordpress.org/documentation/article/network-admin-settings-screen/).
+
+---
+
 # Migrate WordPress sites into WordPress Multisite <a name="advanced-administration/multisite/sites-multisite" />
 
 Source: https://developer.wordpress.org/advanced-administration/multisite/sites-multisite/
@@ -6476,6 +7398,51 @@ Source: https://developer.wordpress.org/advanced-administration/plugins/
 ## Changelog
 
 - 2022-08-16: Nothing here, yet.
+
+---
+
+# File Editor Screen <a name="advanced-administration/plugins/editor-screen" />
+
+Source: https://developer.wordpress.org/advanced-administration/plugins/editor-screen/
+
+Among the many user-editable files in a standard WordPress installation are the [Plugins](https://wordpress.org/plugins/) files. Though it should be rare that you need to change a Plugin code, the **Plugin File Editor Screen** allows you to edit those Plugin files.
+
+You can find this editor in the following places depending on your theme:
+
+- If you are using a [Block theme](https://wordpress.org/documentation/article/block-themes/), this editor will be listed under Tools.
+- If you are using a Classic theme, this editor will be listed under Appearance.
+
+![Edit Plugins Screen](https://i0.wp.com/raw.githubusercontent.com/WordPress/Advanced-administration-handbook/main/assets/edit-plugins.png?ssl=1)
+
+![Edit Plugins warning](https://i0.wp.com/raw.githubusercontent.com/WordPress/Advanced-administration-handbook/main/assets/edit-plugins-warning.png?ssl=1)
+
+## Edit Plugins
+
+The built-in Plugin File Editor allows you to view or change any Plugin PHP code in the large text (or edit) box that dominates this Screen.
+
+If a particular file is writeable you can make changes and save the file from here. If not, you will see the message **You need to make this file writable before you can save your changes**.
+
+The name of the Plugin file being edited shows up at the top of the text box. Since Plugin files are pure text, no images or pictures can be inserted into the text box.
+
+You can select a Plugin to edit from the dropdown menu on the top right. Just find a Plugin name and click “Select”.
+
+### Plugin Files
+
+Below the Plugin Selection Menu is a list of the Plugin files that can be edited. Click on any of the file links to place the text of that file in the text box.
+
+Be very careful editing activated plugin files. The editor does not make backup copies. If you introduce an error that crashes your site, you cannot use the editor to fix the problem. In such a case, use FTP to either upload a functional backup of the problem file or change the folder name of the */plugins/* folder under */wp-content/*, which effectively deactivates all plugins until the folder is renamed correctly.
+
+### Documentation Lookup
+
+Under the editor, there is a dropdown menu listing function names found in the Plugin file you are editing. By selecting a function and clicking the “Lookup” button, you can view its documentation on [Code Reference](#reference) or [PHP](https://www.php.net/).
+
+## Update File
+
+Remember to click this button to save the changes you have made to the Plugin file. After clicking this button you should see a splash message at the top of the screen saying “File edited successfully”. If you don’t see that message, then your changes are not saved! Note that if a file is not writeable the Update File button will not be available.
+
+## Changelog
+
+- 2023-04-10: Original content from [Plugin File Editor Screen](https://wordpress.org/documentation/article/plugins-editor-screen/). Minor additions and copy-editing.
 
 ---
 
@@ -6913,6 +7880,365 @@ Various plugins exist to take automatic scheduled backups of your WordPress data
 
 - 2022-10-25: Original content from [Restoring Your Database From Backup](https://wordpress.org/documentation/article/restoring-your-database-from-backup/).
 - 2022-09-11: Original content from [WordPress Backups](https://wordpress.org/documentation/article/wordpress-backups/).
+
+---
+
+# Backing Up Your Database <a name="advanced-administration/security/backup/database" />
+
+Source: https://developer.wordpress.org/advanced-administration/security/backup/database/
+
+## Backing Up Your Database
+
+> It is strongly recommended that you backup your database at regular intervals and before an upgrade.
+
+[Restoring your database from backup](#advanced-administration/security/backup) is then possible if something goes wrong.
+
+**NOTE:** Below steps backup core WordPress database that include all your posts, pages and comments, but DO NOT backup the files and folders such as images, theme files on the server. For whole WordPress site backup, refer [WordPress Backups](#advanced-administration/security/backup).
+
+### Backup using cPanel X
+
+cPanel is a popular control panel used by many web hosts. The backup feature can be used to backup your MySQL database. Do not generate a full backup, as these are strictly for archival purposes and cannot be restored via cPanel. Look for ‘Download a MySQL Database Backup’ and click the name of the database. A `*.gz` file will be downloaded to your local drive.
+
+There is no need to unzip this file to restore it. Using the same cPanel program, browse to the gz file and upload it. Once the upload is complete, the bottom of the browser will indicate dump complete. If you are uploading to a new host, you will need to recreate the database user along with the matching password. If you change the password, make the corresponding change in the wp-config.php file.
+
+### Using phpMyAdmin
+
+[phpMyAdmin](#advanced-administration/upgrade/phpmyadmin) is the name of the program used to manipulate your database.
+
+Information below has been tried and tested using phpMyAdmin version 4.4.13 connects to MySQL version 5.6.28 running on Linux.
+
+[![phpmyadmin_top](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_top.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_top.jpg?ssl=1)
+
+#### Quick backup process
+
+When you backup all tables in the WordPress database without compression, you can use simple method. To restore this backup, your new database should not have any tables.
+
+1. Log into phpMyAdmin on your server
+2. From the left side window, select your WordPress database. In this example, the name of database is “wp”.
+3. The right side window will show you all the tables inside your WordPress database. Click the ‘Export’ tab on the top set of tabs.
+
+[![](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_dbtop.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_dbtop.jpg?ssl=1)
+
+1. Ensure that the Quick option is selected, and click ‘Go’ and you should be prompted for a file to download. Save the file to your computer. Depending on the database size, this may take a few moments.
+
+[![phpmyadmin_quick_export](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_quick_export.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_quick_export.jpg?ssl=1)
+
+#### Custom backup process
+
+If you want to change default behavior, select Custom backup. In above Step 4, select Custom option. Detailed options are displayed.
+
+[![phpmyadmin_custom_export](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_custom_export.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_custom_export.jpg?ssl=1)
+
+##### The Table section
+
+All the tables in the database are selected. If you have other programs that use the database, then choose only those tables that correspond to your WordPress install. They will be the ones with that start with “wp\_” or whatever ‘table\_prefix’ you specified in your ‘wp-config.php’ file.
+
+If you only have your WordPress blog installed, leave it as is (or click ‘Select All’ if you changed the selection)
+
+##### The Output section
+
+Select ‘zipped’ or ‘gzipped’ from Compression box to compress the data.
+
+[![phpmyadmin_export_output](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_output.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_output.jpg?ssl=1)
+
+##### The Format section
+
+Ensure that the SQL is selected. Unlike CSV or other data formats, this option exports a sequence of SQL commands.
+
+In the Format-specific options section, leave options as they are.
+
+[![phpmyadmin_export_formatspecific](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_formatspecific.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_formatspecific.jpg?ssl=1)
+
+##### The Object creation options section
+
+Select Add DROP TABLE / VIEW / PROCEDURE / FUNCTION / EVENT / TRIGGER statement. Before table creation on target database, it will call DROP statement to delete the old existing table if it exist.
+
+[![phpmyadmin_export_object](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_object.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_object.jpg?ssl=1)
+
+### The Data creation options section
+
+Leave options as they are.
+
+[![phpmyadmin_export_data](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_data.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_data.jpg?ssl=1)
+
+Now click ‘Go’ at the bottom of the window and you should be prompted for a file to download. Save the file to your computer. Depending on the database size, this may take a few moments.
+
+**Remember** – you have NOT backed up the files and folders – such as images – but all your posts and comments are now safe.
+
+### Using Straight MySQL/MariaDB Commands
+
+phpMyAdmin cannot handle large databases so using straight MySQL/MariaDB code will help.
+
+Change your directory to the directory you want to export backup to:
+
+```
+user@linux:~> cd files/blog
+user@linux:~/files/blog>
+
+```
+
+Use the `mysqldump` command with your MySQL server name, user name and database name. It prompts you to input password (For help, try: `man mysqldump`).
+
+**To backup all database tables**
+
+```
+mysqldump --add-drop-table -h mysql_hostserver -u mysql_username -p mysql_databasename﻿
+
+```
+
+**To backup only certain tables from the database**
+
+```
+mysqldump --add-drop-table -h mysql_hostserver -u mysql_username -p mysql_databasename﻿
+
+```
+
+Example:
+
+```
+user@linux:~/files/blog> mysqldump --add-drop-table -h db01.example.net -u dbocodex -p wp > blog.bak.sql
+Enter password: (type password)
+
+```
+
+**Use bzip2 to compress the backup file**
+
+```
+user@linux:~/files/blog> bzip2 blog.bak.sql
+
+```
+
+You can do the same thing that above two commands do in one line:
+
+```
+user@linux:~/files/blog> mysqldump --add-drop-table -h db01.example.net -u dbocodex -p wp | bzip2 -c > blog.bak.sql.bz2
+Enter password: (type password)
+
+```
+
+The `bzip2 -c` after the `|` (pipe) means the backup is compressed on the fly, and the `> blog.bak.sql.bz2` sends the bzip output to a file named `blog.bak.sql.bz2`.
+
+Despite bzip2 being able to compress most files more effectively than the older compression algorithms (.Z, .zip, .gz), it is [considerably slower](https://en.wikipedia.org/wiki/Bzip2) (compression and decompression). If you have a large database to backup, gzip is a faster option to use.
+
+```
+user@linux:~/files/blog> mysqldump --add-drop-table -h db01.example.net -u dbocodex -p wp | gzip > blog.bak.sql.gz
+
+```
+
+### Using MySQL Workbench
+
+[MySQL Workbench](https://dev.mysql.com/downloads/workbench/) (formerly known as My SQL Administrator) is a program for performing administrative operations, such as configuring your MySQL server, monitoring its status and performance, starting and stopping it, managing users and connections, performing backups, restoring backups and a number of other administrative tasks.
+
+You can perform most of those tasks using a command line interface such as that provided by [mysqladmin](https://dev.mysql.com/doc/refman/8.0/en/mysqladmin.html) or [mysql](https://dev.mysql.com/doc/refman/8.0/en/mysql.html), but MySQL Workbench is advantageous in the following respects:
+
+- Its graphical user interface makes it more intuitive to use.
+- It provides a better overview of the settings that are crucial for the performance, reliability, and security of your MySQL servers.
+- It displays performance indicators graphically, thus making it easier to determine and tune server settings.
+- It is available for Linux, Windows and MacOS X, and allows a remote client to backup the database across platforms. As long as you have access to the MySQL databases on the remote server, you can backup your data to wherever you have write access.
+- There is no limit to the size of the database to be backed up as there is with phpMyAdmin.
+
+Information below has been tried and tested using MySQL Workbench version 6.3.6 connects to MySQL version 5.6.28 running on Linux.
+
+[![mysql_workbench_top](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_top.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_top.jpg?ssl=1)
+
+#### Backing Up the Database
+
+This assumes you have already installed MySQL Workbench and set it up so that you can login to the MySQL Database Server either locally or remotely. Refer to the documentation that comes with the installation package of MySQL Workbench for your platform for installation instructions or [online document](https://dev.mysql.com/doc/workbench/en/).
+
+1. Launch the MySQL Workbench
+2. Click your database instance if it is displayed on the top page. Or, Click Database -&gt; Connect Database from top menu, enter required information and Click OK.
+3. Click Data Export in left side window.
+
+[![mysql_workbench_export](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_export.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_export.jpg?ssl=1)
+
+1. Select your WordPress databases that you want to backup.
+2. Specify target directory on Export Options. You need write permissions in the directory to which you are writing the backup.
+3. Click Start Export on the lower right of the window.
+
+[![mysql_workbench_export2](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_export2.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_export2.jpg?ssl=1)
+
+#### Restoring From a Backup
+
+1. Launch the MySQL Workbench
+2. Click your database instance if it is displayed on the top page. Or, Click Database -&gt; Connect Database, and Click OK.
+3. Click Data Import/Restore in left side window.
+4. Specify folder where you have backup files. Click “…” at the right of Import from Dump Project Folder, select backup folder, and click Open.
+5. Click Start Import on the lower right of the window. The database restore will commence.
+
+[![mysql_workbench_import](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_import.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_import.jpg?ssl=1)
+
+### MySQL GUI Tools
+
+In addition to MySQL Workbench, there are many GUI tools that let you backup (export) your database.
+
+| Name | OS (Paid edition) | OS (Free edition) |  |
+|---|---|---|---|
+| [MySQL Workbench](https://www.mysql.com/products/workbench/) | Windows/Mac/Linux | Windows/Mac/Linux | See [above](#advanced-administration/security/backupdatabase/#Using_MySQL_Workbench) |
+| [EMS SQL Management Studio for MySQL](https://www.sqlmanager.net/products/mysql/studio) | Windows |  |  |
+| [Aqua Data Studio](https://www.aquafold.com/) | Windows/Mac/Linux | Windows/Mac/Linux (14 days trial) | Available in 9 languages |
+| [Navicat for MySQL](https://www.navicat.com/en/products/navicat-for-mysql) | Windows/Mac/Linux | Windows/Mac/Linux (14 days trial) | Available in 8 languages |
+| [SQLyog](https://webyog.com/en/) | Windows |  |  |
+| [Toad for MySQL](https://www.toadworld.com/) |  | Windows |  |
+| [HeidiSQL](https://www.heidisql.com/) |  | Windows |  |
+| [Sequel Pro](https://sequelpro.com/) | Mac | CocoaMySQL successor |  |
+| [Querious](https://www.araelium.com/querious/) |  | Mac |  |
+
+### Using WordPress Database Backup Plugin
+
+You can find plugins that can help you back up your database in the [WordPress Plugin Directory](https://wordpress.org/plugins/search/database+backup/).
+
+The instructions below are for the plugin called [WP-DB-Backup:](https://wordpress.org/plugins/wp-db-backup/)
+
+#### Installation
+
+1. Search for “WP-DB-Backup” on [Administration](https://wordpress.org/documentation/article/administration-screens/) &gt; [Plugins](https://wordpress.org/documentation/article/administration-screens/#plugins-add-functionality-to-your-blog) &gt; [Add New](https://wordpress.org/documentation/article/administration-screens/#add-new-plugins).
+2. Click Install Now.
+3. Activate the plugin.
+
+#### Backing up
+
+1. Navigate to [Administration](https://wordpress.org/documentation/article/administration-screens/) &gt; [Tools](https://wordpress.org/documentation/article/administration-screens/#tools-managing-your-blog) &gt; Backup
+2. Core WordPress tables will always be backed up. Select some options from Tables section.
+
+[![wp-db-backup_table](https://i0.wp.com/wordpress.org/documentation/files/2018/11/wp-db-backup_table.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/wp-db-backup_table.jpg?ssl=1)
+
+1. Select the Backup Options; the backup can be downloaded, or emailed.
+2. Finally, click on the Backup Now! button to actually perform the backup. You can also schedule regular backups.
+
+[![wp-db-backup_settings](https://i0.wp.com/wordpress.org/documentation/files/2018/11/wp-db-backup_settings.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/wp-db-backup_settings.jpg?ssl=1)
+
+#### Restoring the Data
+
+The file created is a standard SQL file. If you want information about how to upload that file, look at [Restoring Your Database From Backup](#advanced-administration/security/backup).
+
+### More Resources
+
+- [Backup Plugins on the official WordPress.org repository](https://wordpress.org/plugins/search.php?q=backup)
+- [WordPress Backups](#advanced-administration/security/backup)
+
+### External Resources
+
+- [How to Schedule Daily Backup of WordPress Database](https://www.narga.net/schedule-backup-wordpress-database/)
+
+## Restoring Your Database From Backup
+
+### Using phpMyAdmin
+
+[phpMyAdmin](#advanced-administration/upgrade/phpmyadmin) is a program used to manipulate databases remotely through a web interface. A good hosting package will have this included. For information on backing up your WordPress database, see [Backing Up Your Database](#advanced-administration/security/backupdatabase/).
+
+Information here has been tested using [phpMyAdmin](#advanced-administration/upgrade/phpmyadmin) 4.0.5 running on Unix.
+
+The following instructions will **replace** your current database with the backup, **reverting** your database to the state it was in when you backed up.
+
+#### Restore Process
+
+Using phpMyAdmin, follow the steps below to restore a MySQL/MariaDB database.
+
+1. Login to [phpMyAdmin](#advanced-administration/upgrade/phpmyadmin).
+2. Click “Databases” and select the database that you will be importing your data into.
+3. You will then see either a list of tables already inside that database or a screen that says no tables exist. This depends on your setup.
+4. Across the top of the screen will be a row of tabs. Click the **Import** tab.
+5. On the next screen will be a location of text file box, and next to that a button named **Browse**.
+6. Click **Browse**. Locate the backup file stored on your computer.
+7. Make sure **SQL** is selected in the **Format** drop-down menu.
+8. Click the **Go** button.
+
+Now grab a coffee. This bit takes a while. Eventually you will see a success screen.
+
+If you get an error message, your best bet is to post to the [WordPress support forums](https://wordpress.org/documentation/) to get help.
+
+### Using MySQL/MariaDB Commands
+
+The restore process consists of unarchiving your archived database dump, and importing it into your MySQL/MariaDB database.
+
+Assuming your backup is a `.bz2` file, created using instructions similar to those given for [Backing up your database using MySQL/MariaDB commands](#advanced-administration/security/backupdatabase/#using-straight-mysqlmariadb-commands), the following steps will guide you through restoring your database:
+
+1. Unzip your `.bz2` file:
+
+```
+user@linux:~/files/blog> bzip2 -d blog.bak.sql.bz2
+
+```
+
+**Note:** If your database backup was a `.tar.gz` file called `blog.bak.sql.tar.gz`, then
+
+```
+tar -zxvf blog.bak.sql.tar.gz
+
+```
+
+is the command that should be used instead of the above.
+
+1. Put the backed-up SQL back into MySQL/MariaDB:
+
+```
+user@linux:~/files/blog> mysql -h mysqlhostserver -u mysqlusername -p databasename < blog.bak.sql  
+Enter password: (enter your mysql password)   
+user@linux:~/files/blog>
+
+```
+
+## Changelog
+
+- 2022-10-25: Original content from [Backing Up Your Database](#advanced-administration/security/backupdatabase/).
+
+---
+
+# Backing Up Your WordPress Files <a name="advanced-administration/security/backup/files" />
+
+Source: https://developer.wordpress.org/advanced-administration/security/backup/files/
+
+## Backing Up Your WordPress Files
+
+There are two parts to backing up your WordPress site: **Database** and **Files**.
+
+This page talks about **Files** only; if you need to back up your WordPress database, see the [Backing Up Your Database](#advanced-administration/security/backup/database).
+
+Your WordPress site consists of the following files:
+
+- WordPress Core Installation
+- WordPress Plugins
+- WordPress Themes
+- Images and Files
+- Javascripts, PHP scripts, and other code files
+- Additional Files and Static Web Pages
+
+Everything that has anything to do with the look and feel of your site is in a file somewhere and needs to be backed up. Additionally, you must back up all of your files in your WordPress directory (including subdirectories) and your [`.htaccess`](https://wordpress.org/documentation/article/wordpress-glossary/#.htaccess) file.
+
+While most hosts back up the entire server, including your site, it is better that you back up your own files. The easiest method is to use an [FTP program](#advanced-administration/upgrade/ftp) to download all of your WordPress files from your host to your local computer.
+
+By default, the files in the directory called wp-content are your own user-generated content, such as edited themes, new plugins, and uploaded files. Pay particular attention to backing up this area, along with your `wp-config.php`, which contains your connection details.
+
+The remaining files are mostly the WordPress Core files, which are supplied by the [WordPress download zip file](https://wordpress.org/download/).
+
+Please read [Backing Up Your WordPress Site](#advanced-administration/security/backup) for further information.
+
+Other ways to backup your files include:
+
+**Website Host Provided Backup Software**
+
+Most website hosts provide software to back up your site. Check with your host to find out what services and programs they provide.
+
+**Create Synchs With Your Site**
+
+[WinSCP](https://winscp.net/eng/index.php) and other programs allow you to synchronize with your website to keep a mirror copy of the content on your server and hard drive updated. It saves time and makes sure you have the latest files in both places.
+
+#### Synchronize your files in WinScp
+
+1. Log in to your ftp server normally using WinScp.
+2. Press the “Synchronize” button. Remote directory will automatically be set to the current ftp directory (often your root directory). Local directory would be set to the local directory as it was when you pressed Synchronize. You may want to change this to some other directory on your computer. Direction should be set to “local” to copy files FROM your web host TO your machine. Synchronization Mode would be set to Synchronize files.
+3. Click “OK” to show a summary of actions.
+4. Click “OK” again to complete the synchronization.
+
+**Copy Your Files to Your Desktop**
+
+Using [FTP Clients](#advanced-administration/upgrade/ftp) or [UNIX Shell Skills](https://codex.wordpress.org/UNIX_Shell_Skills) you can copy the files to a folder on your computer. Once there, you can zip or compress them into a zip file to save space, allowing you to keep several versions.
+
+Normally, there would be no need to copy the WordPress core files, as you can replace them from a fresh download of the WordPress zip file. The important files to back up would be your wp-config.php file, which contains your settings and your wp-content directory (plus its contents) which contains all your theme and plugin files.
+
+## Changelog
+
+- 2022-10-25: Original content from [Backing Up Your WordPress Files](https://wordpress.org/documentation/article/backing-up-your-wordpress-files/).
 
 ---
 
@@ -7904,6 +9230,67 @@ If the attacker tries to deface your site or add malware, you can also detect th
 
 ---
 
+# Display Errors <a name="advanced-administration/security/hardening/display-errors" />
+
+Source: https://developer.wordpress.org/advanced-administration/security/hardening/display-errors/
+
+## What is display\_errors?
+
+`display_errors` is a directive found in PHP, found in the php.ini file. With this option, PHP determines whether or not errors should be printed directly on the page.
+
+## Why does display\_errors need to be disabled?
+
+According to [PHP documentation](https://www.php.net/manual/en/errorfunc.configuration.php#ini.display-errors), it should never be enabled on production environments or live sites.
+
+While `display_errors` may provide useful information in debugging scenarios, there are potential security issues that need to be taken into account if it is activated. [See OWASP article about improper error handling.](https://owasp.org/www-community/Improper_Error_Handling)
+
+However, some hosting companies have `display_errors` enabled by default. This may be due to a misconfiguration, such as trying to disable it by using a configuration that does not work in hosting environments where for example PHP is not running as a module, but with PHP FastCGI Process Manager (PHP-FPM).
+
+## How to disable display\_errors
+
+Check your hosting control panel to disable `display_errors` or reach out to your hosting provider.
+
+If your PHP is running as Apache module, you may be able to disable display\_errors with the following .htaccess configuration:
+
+`<IfModule mod_php8.c> php_flag display_errors off </IfModule>`
+
+If your server uses FastCGI/PHP-FPM, it may be possible disable the display\_errors by ensuring that a .user.ini file with the following content:
+
+`display_errors = 0`
+
+If these examples do not work for you, or if you need more instructions, please reach out to your hosting provider.
+
+## Changelog
+
+- 2023-09-14: Setup, and Adding text.
+
+---
+
+# Monitoring <a name="advanced-administration/security/monitoring" />
+
+Source: https://developer.wordpress.org/advanced-administration/security/monitoring/
+
+Site monitoring systems and services can notify you when your site isn’t working properly. They can often correct any minor issues, or help you to do so before they become major issues.
+
+## Uptime Monitoring
+
+Uptime monitoring is traditionally done at the server level or by checking one or more URLs on the site at regular intervals to make sure they are responding properly. A combination of internal and external uptime monitoring is ideal for users, and there exist a variety of software and services to handle this for you.
+
+## Performance Monitoring
+
+While a site’s services may be responding, to a user, a site being “up” means more than this to them. Performance monitoring is similar to uptime monitoring, but also takes note of certain metrics that could indicate trouble. Metrics like “page load time” and “slowest average transactions” should be monitored and reported regularly to help keep you ahead of performance issues. Monitoring slow logs for problematic queries or requests can also help keep user sites stable. MySQL, PHP-FPM, and others provide options to capture these for monitoring.
+
+## Performance Profiling
+
+It is best practice to use performance profiling tools, such as New Relic, AppDynamics or Tideways, to diagnose the performance bottlenecks of your website and infrastructure. These tools will give you insight such as slow performing functions, external HTTP requests, slow database queries and more that are causing poor performance.
+
+## Changelog
+
+- 2023-05-29: Updated from [Hosting Handbook](https://make.wordpress.org/hosting/handbook/reliability/#monitoring)
+- 2023-03-04: Add new file.
+
+---
+
 # Performance / Optimization <a name="advanced-administration/performance" />
 
 Source: https://developer.wordpress.org/advanced-administration/performance/
@@ -8207,6 +9594,96 @@ If you use a Persistent Object Cache, options (whether autoloaded or not) load f
 
 - 2023-05-03: Revised content to comply with [External Linking Policy](https://make.wordpress.org/docs/handbook/documentation-team-handbook/external-linking-policy/).
 - 2022-09-11: Original content from [Optimization](https://wordpress.org/documentation/article/optimization/).
+
+---
+
+# PHP Optimization <a name="advanced-administration/performance/php" />
+
+Source: https://developer.wordpress.org/advanced-administration/performance/php/
+
+## PHP
+
+PHP (PHP: Hypertext Preprocessor) is a popular programming language on the Internet. PHP turns dynamic content, like that in WordPress, into HTML, CSS, and JavaScript that web browsers can read. WordPress is written primarily in PHP, and a server must have PHP in order for WordPress to be able to run.
+
+As PHP is an interpreted language, its version and configuration has a large impact on how well and whether WordPress will run.
+
+### Version
+
+When possible, PHP 7.4 or greater should be used to run WordPress. As of the writing of this document, PHP 7.4 is the officially supported version for WordPress while PHP 8.0 and 8.1 are “compatible with exceptions”, and PHP 8.2 is on “beta support”. PHP 8 is the only major version of PHP still receiving active development and support. The PHP group regularly retires support for older versions of PHP, and older versions are not guaranteed to be updated for security concerns.
+
+At the same time, newer versions of PHP contain both security and performance improvements, while being accompanied by new features and bug fixes, which are not guaranteed to be backwards compatible. However, extreme care must be taken when upgrading the version of PHP. While WordPress is compatible with the latest releases of PHP, sites built to use older versions of PHP may not be compatible due to their included plugins and themes.
+
+If upgrading to PHP 8 is not immediately possible, upgrading to PHP 7.4 should be done as soon as possible. While WordPress *may* work with older versions of PHP, these versions have reached official End Of Life, and running outdated PHP installations **may expose your site to security vulnerabilities**.
+
+You can find which PHP version is compatible with your WordPress version in the [PHP Compatibility and WordPress Versions](https://make.wordpress.org/core/handbook/references/php-compatibility-and-wordpress-versions/) page.
+
+More information about the support versions of PHP can always be found [on PHP’s supported versions page](https://www.php.net/supported-versions.php).
+
+When upgrading PHP, it’s a good practice to test sites for compatibility before upgrading. If you offer multiple environments, such as a staging and a production environment, PHP version should be configurable separately for each environments. This will allow users to test newer version of PHP in their non-production environment and resolve any issues before upgrading PHP version in the production environment.
+
+There’s a useful [WP-CLI command](https://github.com/danielbachhuber/php-compat-command) for performing a general compatibility check, but be aware that it is not 100% accurate.
+
+### Configuration
+
+PHP is primarily configured using a configuration file, `php.ini`, from which PHP reads all of its settings and configuration at runtime. This usually happens through CGI/FastCGI, or a process manager like PHP-FPM.
+
+Some server environment may allow PHP configurations to be customized with other files like the `.htaccess` or `.user.ini` file.
+
+You can see detailed information about each of these directives [in the official PHP documentation](https://www.php.net/manual/en/ini.core.php).
+
+#### Timeouts
+
+There are several timeout settings on a system that limit different aspects of a request. When configuring your timeouts, it’s important to select values that work well together. For example, it doesn’t make sense to have a very high script execution timeout on your PHP service, if the web server (e.g. Apache) timeout is lower than that – in such case, if the request takes longer, it will be killed by the web server no matter your PHP timeout setting is.
+
+Note that processes take different amount of time, depending on the server load, and those limitations are placed to ensure that your server functions properly. If you have high server load, processes may take longer to complete thus causing a cascade effect leading to even more server load. That’s why it’s a matter of balance between giving enough time for your scripts to be compiled and ensuring that you’re within normal server loads.
+
+The primary PHP timeout can be set with the [`max_execution_time`](https://www.php.net/manual/en/info.configuration.php#ini.max-execution-time) `php.ini` directive. This limits code execution, and not system library calls or MySQL queries, [except on Windows](https://www.php.net/manual/en/function.set-time-limit.php), where it does.
+
+The maximum time allowed for data transfer from the web server to PHP is specified with the [`max_input_time`](https://www.php.net/manual/en/info.configuration.php#ini.max-input-time) `php.ini` directive. It is usually used to limit the amount of time allowed to upload files. It’s important to note that the amount of time is separate from `max_execution_time`, and defines the amount of time between when the web server calls PHP and execution starts.
+
+Note that these timeouts are often configured per server and you won’t be able to modify them if you’re on a shared hosting account. The best approach would be to contact your hosting company tech support and see if they can be modified to suit your needs.
+
+#### Memory Limits
+
+The maximum amount of memory that PHP is allowed to use per page render is specified with the [`memory limit`](https://www.php.net/manual/en/ini.core.php#ini.memory-limit) `php.ini` directive.
+
+In addition to setting memory limits within PHP, WordPress has two memory configuration constants that can be changed in the **wp-config.php** file. WordPress will raise the PHP `memory_limit` to these values if it has permission to do so, but if the `php.ini` specifies higher amounts, WordPress will not lower the amount allowed.
+
+The option `WP_MEMORY_LIMIT` declares the amount of memory WordPress should request for rendering the frontend of the website. WordPress default is 40 MB and WordPress MultiSite default is 64 MB.
+
+```
+define( 'WP_MEMORY_LIMIT', '128M' );
+
+```
+
+The option `WP_MAX_MEMORY_LIMIT` declares the amount of memory WordPress should request for rendering the backend of the website. WordPress default is 256 MB.
+
+```
+define( 'WP_MAX_MEMORY_LIMIT', '256M' );
+
+```
+
+Since the WordPress backend usually requires more memory, there’s a separate setting for the amount, that can be set for logged in users. This is mainly required for media uploads. You can have it set higher than the front end limit to ensure your backend has all the resources it needs. Usually, `WP_MEMORY_LIMIT <= WP_MAX_MEMORY_LIMIT`.
+
+#### File Upload Sizes
+
+When uploading media files and other content to WordPress using the WordPress admin dashboard, WordPress uses PHP to process the uploads. PHP’s configuration includes limits on the size of files that can be uploaded through PHP and on the size of requests that can be sent to the web server for processing. These will need to align with the server’s timeouts, discussed above.
+
+The limit on the size of individual file uploads can be configured using the [`upload_max_filesize`](https://www.php.net/manual/en/ini.core.php#ini.upload-max-filesize) `php.ini` directive.
+
+The limit on the entire size of a request that can be sent from the web server to PHP for processing can be configured using the [`post_max_size`](https://www.php.net/manual/en/ini.core.php#ini.post-max-size) `php.ini` directive. The value for `post_max_size` must be greater than or equal to the value for `upload_max_filesize`. PHP will not process requests larger in size than the value for `post_max_size`.
+
+Note that `post_max_size` applies to every PHP request and not only uploads, so it may become important to address separately if a site processes a large amount of other data included with the request.
+
+Bear in mind that on shared hosting accounts, those limits are usually set on a server level and you may not be able to modify them or increase them above a certain value. In addition to that, different setups have different ways to modify the above mentioned values. Contact your hosting company tech support for additional assistance on that matter.
+
+#### Replacing WordPress’ Cron Triggers
+
+The `wp-cron.php` script is responsible for causing certain tasks to be scheduled and executed automatically. Every time someone visits your website, `wp-cron.php` checks whether it is time to execute a job or not. Even though these checks are small and fast they consume time and produce load. For this reason, it’s worth considering setting the [`DISABLE_WP_CRON` constant](#advanced-administration/wordpress/wp-config) and using an alternative method to trigger WordPress’ cron system. Note, however, that the WordPress cron system is designed with performance in mind and requires minimal resources to operate so it’s not mandatory to replace it unless you really need to do so.
+
+## Changelog
+
+- 2023-06-08: New page created.
 
 ---
 
@@ -8905,6 +10382,21 @@ Coming soon – how to move your test site from your computer back live onto you
 
 ---
 
+# Version Control <a name="advanced-administration/debug/version-control" />
+
+Source: https://developer.wordpress.org/advanced-administration/debug/version-control/
+
+Version control is a way of tracking the changes made to files over time by different people, such as the code for a website or another application. It allows people to track the revision history of code and to revert or apply changes easily via the command line. It is also a good way to debug your website if something goes wrong, as you can quickly restore to a previous state of the site’s code without restoring from a full backup.
+
+A lot of WordPress hosts offer version control but there are third-party services and self hosted options as well.
+
+## Changelog
+
+- 2023-05-29: Synced with [Hosting Handbook](https://make.wordpress.org/hosting/handbook/reliability/#version-control)
+- 2023-03-03: Created a new page for *Version control*
+
+---
+
 # Resources for Building on WordPress <a name="advanced-administration/resources" />
 
 Source: https://developer.wordpress.org/advanced-administration/resources/
@@ -8984,1332 +10476,6 @@ Other than that, these are some solid resources for you to review:
 ## Changelog
 
 - 2022-09-04: Original content from [Know Your Sources](https://codex.wordpress.org/Know_Your_Sources), based on ticket [Github](https://github.com/WordPress/Documentation-Issue-Tracker/issues/328#issuecomment-1144870008).
-
----
-
-# File Editor Screen <a name="advanced-administration/plugins/editor-screen" />
-
-Source: https://developer.wordpress.org/advanced-administration/plugins/editor-screen/
-
-Among the many user-editable files in a standard WordPress installation are the [Plugins](https://wordpress.org/plugins/) files. Though it should be rare that you need to change a Plugin code, the **Plugin File Editor Screen** allows you to edit those Plugin files.
-
-You can find this editor in the following places depending on your theme:
-
-- If you are using a [Block theme](https://wordpress.org/documentation/article/block-themes/), this editor will be listed under Tools.
-- If you are using a Classic theme, this editor will be listed under Appearance.
-
-![Edit Plugins Screen](https://i0.wp.com/raw.githubusercontent.com/WordPress/Advanced-administration-handbook/main/assets/edit-plugins.png?ssl=1)
-
-![Edit Plugins warning](https://i0.wp.com/raw.githubusercontent.com/WordPress/Advanced-administration-handbook/main/assets/edit-plugins-warning.png?ssl=1)
-
-## Edit Plugins
-
-The built-in Plugin File Editor allows you to view or change any Plugin PHP code in the large text (or edit) box that dominates this Screen.
-
-If a particular file is writeable you can make changes and save the file from here. If not, you will see the message **You need to make this file writable before you can save your changes**.
-
-The name of the Plugin file being edited shows up at the top of the text box. Since Plugin files are pure text, no images or pictures can be inserted into the text box.
-
-You can select a Plugin to edit from the dropdown menu on the top right. Just find a Plugin name and click “Select”.
-
-### Plugin Files
-
-Below the Plugin Selection Menu is a list of the Plugin files that can be edited. Click on any of the file links to place the text of that file in the text box.
-
-Be very careful editing activated plugin files. The editor does not make backup copies. If you introduce an error that crashes your site, you cannot use the editor to fix the problem. In such a case, use FTP to either upload a functional backup of the problem file or change the folder name of the */plugins/* folder under */wp-content/*, which effectively deactivates all plugins until the folder is renamed correctly.
-
-### Documentation Lookup
-
-Under the editor, there is a dropdown menu listing function names found in the Plugin file you are editing. By selecting a function and clicking the “Lookup” button, you can view its documentation on [Code Reference](#reference) or [PHP](https://www.php.net/).
-
-## Update File
-
-Remember to click this button to save the changes you have made to the Plugin file. After clicking this button you should see a splash message at the top of the screen saying “File edited successfully”. If you don’t see that message, then your changes are not saved! Note that if a file is not writeable the Update File button will not be available.
-
-## Changelog
-
-- 2023-04-10: Original content from [Plugin File Editor Screen](https://wordpress.org/documentation/article/plugins-editor-screen/). Minor additions and copy-editing.
-
----
-
-# Apache HTTPD / .htaccess <a name="advanced-administration/server/web-server/httpd" />
-
-Source: https://developer.wordpress.org/advanced-administration/server/web-server/httpd/
-
-## .htaccess
-
-The `.htaccess` is a distributed configuration file, and is how Apache handles configuration changes on a per-directory basis.
-
-WordPress uses this file to manipulate how Apache serves files from its root directory, and subdirectories thereof. Most notably, WP modifies this file to be able to handle pretty permalinks.
-
-This page may be used to restore a corrupted `.htaccess` file (e.g. a misbehaving plugin).
-
-### Basic WP
-
-```
-# BEGIN WordPress
-
-RewriteEngine On
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /
-RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
-
-# END WordPress
-
-```
-
-### Multisite
-
-#### WordPress 3.5 and up
-
-If you activated Multisite on WordPress 3.5 or later, use one of these.
-
-##### WordPress &gt;=3.5 Subfolder Example
-
-```
-# BEGIN WordPress Multisite
-# Using subfolder network type: https://wordpress.org/documentation/article/htaccess/#multisite
-
-RewriteEngine On
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /
-RewriteRule ^index\.php$ - [L]
-
-# add a trailing slash to /wp-admin
-RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=301,L]
-
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-RewriteRule ^([_0-9a-zA-Z-]+/)?(wp-(content|admin|includes).*) $2 [L]
-RewriteRule ^([_0-9a-zA-Z-]+/)?(.*\.php)$ $2 [L]
-RewriteRule . index.php [L]
-
-# END WordPress Multisite
-
-```
-
-##### WordPress &gt;=3.5 SubDomain Example
-
-```
-# BEGIN WordPress Multisite
-# Using subdomain network type: https://wordpress.org/documentation/article/htaccess/#multisite
-
-RewriteEngine On
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /
-RewriteRule ^index\.php$ - [L]
-
-# add a trailing slash to /wp-admin
-RewriteRule ^wp-admin$ wp-admin/ [R=301,L]
-
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-RewriteRule ^(wp-(content|admin|includes).*) $1 [L]
-RewriteRule ^(.*\.php)$ $1 [L]
-RewriteRule . index.php [L]
-
-# END WordPress Multisite
-
-```
-
-#### WordPress 3.4 and below
-
-If you originally installed WordPress with 3.4 or older and activated Multisite then, you need to use one of these:
-
-##### WordPress &lt;=3.4 SubFolder Example
-
-WordPress 3.0 through 3.4.2
-
-```
-# BEGIN WordPress Multisite
-# Using subfolder network type: https://wordpress.org/documentation/article/htaccess/#multisite
-
-RewriteEngine On
-RewriteBase /
-RewriteRule ^index\.php$ - [L]
-
-# uploaded files
-RewriteRule ^([_0-9a-zA-Z-]+/)?files/(.+) wp-includes/ms-files.php?file=$2 [L]
-
-# add a trailing slash to /wp-admin
-RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=301,L]
-
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-RewriteRule ^[_0-9a-zA-Z-]+/(wp-(content|admin|includes).*) $1 [L]
-RewriteRule ^[_0-9a-zA-Z-]+/(.*\.php)$ $1 [L]
-RewriteRule . index.php [L]
-
-# END WordPress Multisite
-
-```
-
-##### WordPress &lt;=3.4 SubDomain Example
-
-```
-# BEGIN WordPress Multisite
-# Using subdomain network type: https://wordpress.org/documentation/article/htaccess/#multisite
-
-RewriteEngine On
-RewriteBase /
-RewriteRule ^index\.php$ - [L]
-
-# uploaded files
-RewriteRule ^files/(.+) wp-includes/ms-files.php?file=$1 [L]
-
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-RewriteRule . index.php [L]
-
-# END WordPress Multisite
-
-```
-
-### General Examples
-
-#### Options
-
-Any options preceded by a **+** are added to the options currently in force, and any options preceded by a **–** are removed from the options currently in force.
-
-Possible values for the [Options directive](https://httpd.apache.org/docs/trunk/mod/core.html#options) are any combination of:
-
-**None**
-
-All options are turned off.
-
-**All**
-
-All options except for MultiViews. This is the default setting.
-
-**ExecCGI**
-
-Execution of CGI scripts using mod\_cgi is permitted.
-
-**FollowSymLinks**
-
-The server will follow symbolic links in this directory.
-
-**Includes**
-
-Server-side includes provided by mod\_include are permitted.
-
-**IncludesNOEXEC**
-
-Server-side includes are permitted, but the #exec cmd and #exec cgi are disabled.
-
-**Indexes**
-
-URL maps to a directory, and no DirectoryIndex, a formatted listing of the directory.
-
-**MultiViews**
-
-Content negotiated “MultiViews” are allowed using mod\_negotiation.
-
-**SymLinksIfOwnerMatch**
-
-Only follow symbolic links where target is owned by the same user id as the link.
-
-This will disable all options, and then only enable FollowSymLinks, which is necessary for mod\_rewrite.
-
-```
-Options None
-Options FollowSymLinks
-
-```
-
-#### DirectoryIndex
-
-[DirectoryIndex Directive](https://httpd.apache.org/docs/trunk/mod/mod_dir.html#directoryindex) sets the file that Apache will serve if a directory is requested.
-
-Several URLs may be given, in which case the server will return the first one that it finds.
-
-```
-DirectoryIndex index.php index.html /index.php
-
-```
-
-#### DefaultLanguage
-
-[DefaultLanguage Directive](https://httpd.apache.org/docs/trunk/mod/mod_mime.html#defaultlanguage) will cause all files that do not already have a specific language tag associated with it will use this.
-
-```
-DefaultLanguage en
-
-```
-
-#### Default Charset
-
-Set the default character encoding sent in the HTTP header. See [Setting charset information in .htaccess](https://www.w3.org/International/questions/qa-htaccess-charset)
-
-```
-AddDefaultCharset UTF-8
-
-```
-
-**Set Charset for Specific Files**
-
-```
-AddType 'text/html; charset=UTF-8' .html
-
-```
-
-**Set for specific files**
-
-```
-AddCharset UTF-8 .html
-
-```
-
-#### ServerSignature
-
-The [ServerSignature Directive](https://httpd.apache.org/docs/trunk/mod/core.html#serversignature) allows the configuration of a trailing footer line under server-generated documents. Optionally add a line containing the server version and virtual host name to server-generated pages (internal error documents, FTP directory listings, mod\_status and mod\_info output etc., but not CGI generated documents or custom error documents).
-
-**On**
-
-adds a line with the server version number and ServerName of the serving virtual host
-
-**Off**
-
-suppresses the footer line
-
-**Email**
-
-creates a “mailto:” reference to the ServerAdmin of the referenced document
-
-```
-SetEnv SERVER_ADMIN admin@site.com
-ServerSignature Email
-
-```
-
-#### Force Files to be Downloaded
-
-The below will cause any requests for files ending in the specified extensions to not be displayed in the browser but instead force a “Save As” dialog so the client can download.
-
-```
-AddType application/octet-stream .avi .mpg .mov .pdf .xls .mp4
-
-```
-
-#### HTTP Compression
-
-The [AddOutputFilter Directive](https://httpd.apache.org/docs/trunk/mod/mod_mime.html#addoutputfilter) maps the filename extension extension to the filters which will process responses from the server before they are sent to the client. This is in addition to any filters defined elsewhere, including `SetOutputFilter` and `AddOutputFilterByType`. This mapping is merged over any already in force, overriding any mappings that already exist for the same extension.
-
-See also [Enable Compression](https://developers.google.com/speed/docs/insights/EnableCompression)
-
-```
-AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/javascript text/css application/x-javascript
-BrowserMatch ^Mozilla/4 gzip-only-text/html
-BrowserMatch ^Mozilla/4\.0[678] no-gzip
-BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-
-```
-
-**Force Compression for certain files**
-
-```
-SetOutputFilter DEFLATE
-
-```
-
-#### Send Custom HTTP Headers
-
-The [Header Directive](https://httpd.apache.org/docs/trunk/mod/mod_headers.html#header) lets you send HTTP headers for every request, or just specific files. You can view a sites HTTP Headers using [Firebug](https://getfirebug.com/), [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/), [Wireshark](https://www.wireshark.org/) or [Advanced HTTP Request / Response Headers](https://www.askapache.com/online-tools/http-headers-tool/).
-
-```
-Header set X-Pingback "https://example.com/xmlrpc.php"
-Header set Content-Language "en-US"
-
-```
-
-#### Unset HTTP Headers
-
-This will unset HTTP headers, using **always** will try extra hard to remove them.
-
-```
-Header unset Pragma
-Header always unset WP-Super-Cache
-Header always unset X-Pingback
-
-```
-
-#### Password Protect Login
-
-This is very useful for protecting the `wp-login.php` file. You can use this [Advanced Htpasswd/Htdigest file creator](https://www.askapache.com/online-tools/htpasswd-generator/).
-
-**Basic Authentication**
-
-```
-AuthType Basic
-AuthName "Password Protected"
-AuthUserFile /full/absolute/path/to/.htpasswd
-Require valid-user
-Satisfy All
-
-```
-
-**Digest Authentication**
-
-```
-AuthType Digest
-AuthName "Password Protected"
-AuthDigestDomain /wp-login.php https://example.com/wp-login.php
-AuthUserFile /full/absolute/path/to/.htpasswd
-Require valid-user
-Satisfy All
-
-```
-
-#### Require Specific IP
-
-This is a way to only allow access for IP addresses listed. Note usage of RequireAny instead of RequireAll.
-
-```
-<RequireAny>
-  Require ip 192.0.2.123
-  Require ip 2001:0DB8:1111:2222:3333:4444:5555:6666
-</RequireAny>
-
-```
-
-#### Protect Sensitive Files
-
-This denies all web access to your wp-config file, htaccess/htpasswd and WordPress debug.log. On installed site, consider adding install.php as well.
-
-```
-<FilesMatch "^(wp-config\.php|\.htaccess|\.htpasswd|debug\.log)$">
-  Require all denied
-</FilesMatch>
-
-```
-
-#### Require SSL
-
-This will force SSL, and require the exact hostname or else it will redirect to the SSL version. Useful in a `/wp-admin/.htaccess` file.
-
-```
-SSLOptions +StrictRequire
-SSLRequireSSL
-SSLRequire %{HTTP_HOST} eq "www.example.com"
-ErrorDocument 403 https://www.example.com
-
-```
-
-### External Resources
-
-- [Official Apache HTTP Server Tutorial: .htaccess files](https://httpd.apache.org/docs/trunk/howto/htaccess.html)
-- [Official Htaccess Directive Quick Reference](https://httpd.apache.org/docs/trunk/mod/quickreference.html)
-- [Htaccess Tutorial](https://www.askapache.com/htaccess/)
-- [Google PageSpeed for Developers](https://developers.google.com/speed/docs/insights/rules)
-- [Stupid Htaccess Tricks](https://perishablepress.com/stupid-htaccess-tricks/)
-- [Advanced Mod\_Rewrite](https://www.askapache.com/htaccess/crazy-advanced-mod_rewrite-tutorial/)
-
-### See also
-
-- [htaccess for subdirectories](https://codex.wordpress.org/htaccess%20for%20subdirectories)
-- [Using Permalinks](https://wordpress.org/documentation/article/customize-permalinks/)
-- [Changing File Permissions](https://wordpress.org/documentation/article/changing-file-permissions/)
-- [UNIX Shell Skills](https://codex.wordpress.org/UNIX%20Shell%20Skills)
-- [Rewrite API](https://codex.wordpress.org/Rewrite%20API)
-
-## Changelog
-
-- 2023-04-25: Original content from [htaccess](https://wordpress.org/documentation/article/htaccess/).
-
----
-
-# Post Formats <a name="advanced-administration/wordpress/post-formats" />
-
-Source: https://developer.wordpress.org/advanced-administration/wordpress/post-formats/
-
-## Intro
-
-**Post Formats** is a [theme feature](https://codex.wordpress.org/Theme_Features) introduced with [Version 3.1](https://wordpress.org/documentation/wordpress-version/version-3-1/). A Post Format is a piece of meta information that can be used by a theme to customize its presentation of a post. The Post Formats feature provides a standardized list of formats that are available to all themes that support the feature. Themes are not required to support every format on the list. New formats cannot be introduced by themes or even plugins. The standardization of this list provides both compatibility between numerous themes and an avenue for external blogging tools to access this feature in a consistent fashion.
-
-In short, with a theme that supports Post Formats, a blogger can change how each post looks by choosing a Post Format from a radio-button list.
-
-Using **Asides** as an example, in the past, a category called Asides was created, and posts were assigned that category, and then displayed differently based on styling rules from [post\_class()](#reference/functions/post_class) or from [in\_category(‘asides’)](#reference/functions/in_category). With **Post Formats**, the new approach allows a theme to add support for a Post Format (e.g. [add\_theme\_support(‘post-formats’, array(‘aside’))](#reference/functions/add_theme_support)), and then the post format can be selected in the Publish meta box when saving the post. A function call of [get\_post\_format($post-&gt;ID)](#reference/functions/get_post_format) can be used to determine the format, and [post\_class()](#reference/functions/post_class) will also create the “format-asides” class, for pure-css styling.
-
-## Supported Formats
-
-The following Post Formats are available for users to choose from, if the theme enables support for them.
-
-Note that while the actual post content entry won’t change, the theme can use this user choice to display the post differently based on the format chosen. For example, a theme could leave off the display of the title for a “Status” post. How things are displayed is entirely up to the theme, but here are some general guidelines.
-
-- **aside**: Typically styled without a title. Similar to a Facebook note update.
-- **gallery**: A gallery of images. Post will likely contain a gallery shortcode and will have image attachments.
-- **link**: A link to another site. Themes may wish to use the first `<a href="">` tag in the post content as the external link for that post. An alternative approach could be if the post consists only of a URL, then that will be the URL and the title (`post_title`) will be the name attached to the anchor for it.
-- **image**: A single image. The first `<img>` tag in the post could be considered the image. Alternatively, if the post consists only of a URL, that will be the image URL and the title of the post (`post_title`) will be the title attribute for the image.
-- **quote**: A quotation. Probably will contain a blockquote holding the quote content. Alternatively, the quote may be just the content, with the source/author being the title.
-- **status**: A short status update, similar to a Twitter status update.
-- **video**: A single video or video playlist. The first `<video>` tag or object/embed in the post content could be considered the video. Alternatively, if the post consists only of a URL, that will be the video URL. May also contain the video as an attachment to the post, if video support is enabled on the blog (like via a plugin).
-- **audio**: An audio file or playlist. Could be used for Podcasting.
-- **chat**: A chat transcript, like so:
-
-```
-John: foo
-Mary: bar
-John: foo 2
-
-```
-
-Note: When writing or editing a Post, Standard is used to designate that no Post Format is specified. Also if a format is specified that is invalid then standard (no format) will be used.
-
-## Function Reference
-
-**Main Functions**: [set\_post\_format()](#reference/functions/set_post_format), [get\_post\_format()](#reference/functions/get_post_format), [has\_post\_format()](#reference/functions/has_post_format).
-
-**Other Functions**: [get\_post\_format\_link()](#reference/functions/get_post_format_link), [get\_post\_format\_string()](#reference/functions/get_post_format_string).
-
-## Adding Theme Support
-
-Themes need to use [add\_theme\_support()](#reference/functions/add_theme_support) in the *functions.php* file to tell WordPress which post formats to support by passing an array of formats like so:
-
-```
-add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
-
-```
-
-Note that you must call this before the [init](#reference/hooks/init) hook gets called! A good hook to use is the [after\_setup\_theme](#reference/hooks/after_setup_theme) hook.
-
-## Adding Post Type Support
-
-Post Types need to use [add\_post\_type\_support()](#reference/functions/add_post_type_support) in the *functions.php* file to tell WordPress which post formats to support:
-
-```
-// add post-formats to post\_type 'page'
-add_post_type_support( 'page', 'post-formats' );
-
-```
-
-Next example registers custom post type `my_custom_post_type`, and add Post Formats.
-
-```
-// register custom post type 'my_custom_post_type'
-add_action( 'init', 'create_my_post_type' );
-function create_my_post_type() {
-  register_post_type( 'my_custom_post_type',
-    array(
-      'labels' => array( 'name' => __( 'Products' ) ),
-      'public' => true
-    )
-  );
-}
-
-//add post-formats to post_type 'my_custom_post_type'
-add_post_type_support( 'my_custom_post_type', 'post-formats' );
-
-```
-
-Or in the function [register\_post\_type()](#reference/functions/register_post_type), add `post-formats`, in `supports` parameter array. Next example is equivalent to above one.
-
-```
-// register custom post type 'my_custom_post_type' with 'supports' parameter
-add_action( 'init', 'create_my_post_type' );
-function create_my_post_type() {
-  register_post_type( 'my_custom_post_type',
-    array(
-      'labels' => array( 'name' => __( 'Products' ) ),
-      'public' => true,
-      'supports' => array('title', 'editor', 'post-formats')
-    )
-  );
-}
-
-```
-
-## Using Formats
-
-In the theme, make use of [get\_post\_format()](#reference/functions/get_post_format) to check the format for a post, and change its presentation accordingly. Note that posts with the default format will return a value of FALSE. Or make use of the [has\_post\_format()](#reference/functions/has_post_format) [conditional tag](https://codex.wordpress.org/Conditional_Tags):
-
-```
-if ( has_post_format( 'video' )) {
-  echo 'this is the video format';
-}
-
-```
-
-An alternate way to use formats is through styling rules. Themes should use the [post\_class()](#reference/functions/post_class) function in the wrapper code that surrounds the post to add dynamic styling classes. Post formats will cause extra classes to be added in this manner, using the “format-foo” name.
-
-For example, one could hide post titles from status format posts by putting this in your theme’s stylesheet:
-
-```
-.format-status .post-title {
-  display:none;
-}
-
-```
-
-### Suggested Styling
-
-Although you can style and design your formats to be displayed any way you see fit, each of the formats lends itself to a certain type of “style”, as dictated by modern usage. It is well to keep in mind the intended usage for each format, as this will lend them towards being easily recognized as a specific type of thing visually by readers.
-
-For example, the aside, link, and status formats will typically be displayed without title or author information. They are simple, short, and minor. The aside could contain perhaps a paragraph or two, while the link would probably be only a sentence with a link to some URL in it. Both the link and aside might have a link to the single post page (using [the\_permalink()](#reference/functions/the_permalink)) and would thus allow comments, but the status format very likely would not have such a link.
-
-An image post, on the other hand, would typically just contain a single image, with or without a caption/text to go along with it. An audio/video post would be the same but with audio/video added in. Any of these three could use either plugins or standard [Embeds](https://wordpress.org/documentation/article/embeds/) to display their content. Titles and authorship might not be displayed for them either, as the content could be self-explanatory.
-
-The quote format is especially well suited to posting a simple quote from a person with no extra information. If you were to put the quote into the post content alone, and put the quoted person’s name into the title of the post, then you could style the post so as to display [the\_content()](#reference/functions/the_content) by itself but restyled into a blockquote format, and use [the\_title()](#reference/functions/the_title) to display the quoted person’s name as the byline.
-
-A chat in particular will probably tend towards a monospaced type display, in many cases. With some styling on the `.format-chat`, you can make it display the content of the post using a monospaced font, perhaps inside a gray background div or similar, thus distinguishing it visually as a chat session.
-
-### Formats in a Child Theme
-
-[Child Themes](#themes/advanced-topics/child-themes) inherit the post formats defined by the parent theme. Calling [add\_theme\_support()](#reference/functions/add_theme_support) for post formats in a child theme must be done at a later priority than that of the parent theme and will **override** the existing list, not add to it.
-
-```
-add_action( 'after_setup_theme', 'childtheme_formats', 11 );
-function childtheme_formats() {
-  add_theme_support( 'post-formats', array( 'aside', 'gallery', 'link' ) );
-}
-
-```
-
-Calling [remove\_theme\_support(‘post-formats’)](#reference/functions/remove_theme_support) will remove it all together.
-
-## Backwards Compatibility
-
-If your plugin or theme needs to be compatible with earlier versions of WordPress, you need to add terms named `post-format-$format` to the `post_format` taxonomy. For example,
-
-```
-wp_insert_term( 'post-format-aside', 'post_format' );
-
-```
-
-You must also register the `post_format` taxonomy with [register\_taxonomy()](#reference/functions/register_taxonomy).
-
-## Source File
-
-- [wp-includes/post-formats.php](https://core.trac.wordpress.org/browser/tags/4.4.2/src/wp-includes/post-formats.php#L0)
-
-## External Resources
-
-- [Styling Chat Transcript with WordPress Custom Post Format](https://www.narga.net/styling-wordpress-chat-transcript/)
-- [Post Types and Formats and Taxonomies, oh my!](http://ottopress.com/2010/post-types-and-formats-and-taxonomies-oh-my/)
-- [On standardized Post Formats](https://nacin.com/2011/01/27/on-standardized-post-formats/)
-- [Post Formats vs. Post Types](https://markjaquith.wordpress.com/2010/11/12/post-formats-vs-custom-post-types/)
-- [Smarter Post Formats?](https://dougal.gunters.org/blog/2010/12/10/smarter-post-formats/)
-- [WordPress Theme Support Generator](https://generatewp.com/theme-support/)
-
-## Changelog
-
-- 2023-04-25: original content from [Post Formats](https://wordpress.org/documentation/article/post-formats/).
-
----
-
-# Importing Content <a name="advanced-administration/wordpress/import" />
-
-Source: https://developer.wordpress.org/advanced-administration/wordpress/import/
-
-Using the WordPress Import tool, you can import content into your site from another WordPress site, or from another publishing system.
-
-You can find many of the importers described here under [Tools](https://wordpress.org/documentation/article/administration-screens/#tools-managing-your-blog) -&gt; [Import](https://wordpress.org/documentation/article/tools-import-screen/) in the left nav of the WordPress [Administration Screen](https://wordpress.org/documentation/article/administration-screens/).
-
-You can import content from publishing systems beyond those listed on the Administration Screen. Procedures differ for each system, so use the procedures and plugins listed below as necessary. If you’re new to WordPress, review the [WordPress Features](https://wordpress.org/about/features/) and [Working with WordPress](https://codex.wordpress.org/Working%20with%20WordPress) pages to get started.
-
-If you run into problems, search the [WordPress Support Forum](https://wordpress.org/support/forums/) for a solution, or try the [FAQ](https://wordpress.org/documentation/article/faq-work-with-wordpress/).
-
-## Before Importing
-
-If the file you’re importing is too large, your server may run out of memory when you import it. If this happens, you’ll see an error like “Fatal error: Allowed memory size of 8388608 bytes exhausted.”
-
-If you have sufficient permissions on the server, you can edit the `php.ini` file to increase the available memory. Alternatively, you could ask your hosting provider to do this. Otherwise, you can edit your import file and save it as several smaller files, then import each one.
-
-If your import process fails, it still may create some content. When you resolve the error and try again, you may create duplicate data. Review your site after a failed import and remove records as necessary to avoid this.
-
-## b2evolution
-
-There are two methods of importing b2evolution content into WordPress.
-
-- **Movable Type Export Format**: You can re-skin a b2evolution blog so that when its source is viewed it appears to be in the [Movable Type export format](https://movabletype.org/documentation/appendices/import-export-format.html). You can save the export and import it as Movable Type data. See Movable Type and TypePad.
-- **BIMP Importer script**: You can use the [BIMP Importer script](https://wittyfinch.com/bimp-importer-migrate-b2evolution-to-wordpress/) to import b2evolution blogs, categories, posts, comments, files and users into your WordPress installation (v3 and higher). Note that this requires payment.
-
-## Blogger
-
-You can import posts, comments, categories and authors from Blogger. WordPress includes an import tool designed specifically for importing content from Blogger.
-
-1. Export your Blogger contents as XML.
-2. In your WordPress site, select Tools -&gt; Import on the left nav of the admin screen.
-3. Under “Blogger”, if you haven’t already installed the Blogger importer, click “Install Now”.
-4. Click the “Run Importer” link.
-5. Click “Choose File” and navigate to your Blogger XML file.
-6. Click “Upload file and import”.
-
-## Drupal
-
-Many resources are available to help you migrate content from Drupal to WordPress. A few are highlighted here, and you’re likely to find many others by searching the web.
-
-- [FG Drupal to WordPress](https://wordpress.org/plugins/fg-drupal-to-wp/). This is compatible with Drupal 4, 5, 6, 7, 8 and 9.
-- [Drupal2WordPress Plugin](https://github.com/jpSimkins/Drupal2WordPress-Plugin). Use this plugin to import terms, content, media, comments and users. Any external images included in your Drupal site can be fetched and added to the media library, and added to your pages and posts.
-- [Drupal to WordPress migration SQL queries explained](https://anothercoffee.net/drupal-to-wordpress-migration-sql-queries-explained/) includes workarounds for some migration issues such as duplicate terms, terms exceeding maximum character length and duplicate URL aliases.
-
-## XML and CSV
-
-Here are some resources that can help guide you in importing XML or CSV content into WordPress.
-
-- The [WP All Import](https://wordpress.org/plugins/wp-all-import/) plugin can import any XML or CSV file. It integrates with the [WP All Export](https://wordpress.org/plugins/wp-all-export/) plugin.
-
-## Joomla
-
-For Joomla you can use [FG Joomla to WordPress](https://wordpress.org/plugins/fg-joomla-to-wordpress/). This plugin has been tested with Joomla versions 1.5 through 4.0 on huge databases. It is compatible with multisite installations.
-
-## LiveJournal
-
-WordPress includes an import tool designed specifically for importing content from LiveJournal.
-
-1. In your WordPress site, select Tools -&gt; Import on the left nav of the admin screen.
-2. Under “LiveJournal”, if you haven’t already installed the LiveJournal importer, click “Install Now”.
-3. Click the “Run Importer” link.
-4. Enter your LiveJournal username and password, and click “Connect to LiveJournal and Import”.
-
-## Live Space
-
-See [Live Space Mover](https://b2.broom9.com/?page_id=519) for an article explaining how to use a python script for importing blog entries from live space to WordPress.
-
-## Magento
-
-The [FG Magento to WooCommerce](https://wordpress.org/plugins/fg-magento-to-woocommerce/) plugin migrates your Magento products and CMS pages to WooCommerce.
-
-## Mambo
-
-You can use the plugin [FG Joomla to WordPress](https://wordpress.org/plugins/fg-joomla-to-wordpress/). This WordPress plugin works with Mambo 4.5 and 4.6.
-
-## Movable Type and TypePad
-
-WordPress includes an import tool designed specifically for importing content from Movable Type and TypePad.
-
-1. In your WordPress site, select Tools -&gt; Import on the left nav of the admin screen.
-2. Under “Movable Type and TypePad”, if you haven’t already installed the importer, click “Install Now”.
-3. Click the “Run Importer” link.
-4. Click “Choose File” and navigate to your export file.
-5. Click “Upload file and import”.
-
-These articles provide more information on this process:
-
-- [Importing from Movable Type to WordPress](https://codex.wordpress.org/Importing%20from%20Movable%20Type%20to%20WordPress)
-- [Importing and Exporting Content](https://www.movabletype.org/documentation/administrator/maintenance/import-export.html)
-- [Notes on a Massive WordPress Migration](https://blog.birdhouse.org/2008/02/07/notes-on-a-massive-wordpress-migration/)
-
-## Nucleus CMS
-
-Here are some resources that can help guide you in migrating content from Nucleus CMS to WordPress.
-
-- [A Guide to Importing From Nucleus CMS](https://mamchenkov.net/wordpress/2005/04/26/nucleus2wordpress/)
-- [Script for Importing From Nucleus CMS](http://james.onegoodcookie.com/pub/import-nucleus.phps)
-- [Nucleus to WordPress](https://github.com/AbdussamadA/nucleus-importer)
-
-## PrestaShop
-
-[FG PrestaShop to WooCommerce](https://wordpress.org/plugins/fg-prestashop-to-woocommerce/). This WordPress plugin is compatible with PrestaShop versions 1.0 to 1.7.
-
-## Roller
-
-See [Importing From Roller](https://codex.wordpress.org/Importing%20From%20Roller).
-
-See also [Migrating a Roller Blog to WordPress](https://nullpointer.debashish.com/migrating-a-roller-blog-to-wordpress).
-
-## RSS
-
-WordPress includes an import tool designed specifically for importing content from RSS.
-
-1. In your WordPress site, select Tools -&gt; Import on the left nav of the admin screen.
-2. Under “RSS”, if you haven’t already installed the importer, click “Install Now”.
-3. Click the “Run Importer” link.
-4. Click “Choose File” and navigate to your XML file.
-5. Click “Upload file and import”.
-
-## Serendipity
-
-- [Serendipity to WordPress – Post Import](https://obviate.io/2010/06/11/serendipity-to-wordpress-post-import/).
-
-## SPIP
-
-The plugin [FG SPIP to WordPress](https://wordpress.org/plugins/fg-spip-to-wp/) migrates categories, articles, news and images from SPIP to WordPress. It has been tested with SPIP versions 1.8, 1.9, 2.0, 3.0, 3.1 and 3.2. It is compatible with multisite installations.
-
-## Sunlog
-
-1. Open [phpMyAdmin](#advanced-administration/upgrade/phpmyadmin) to see the database of your Sunlog install. You only need two tables, “blogname\_entries” and “blogname\_comments”.
-2. Use phpMyAdmin to export both tables as XML files.
-3. Install the [WP All Import](https://wordpress.org/plugins/wp-all-import/) plugin to your WordPress site.
-4. Create the following field mappings: 
-    - `headline=title`
-    - `content=entry+more`
-    - `date=timestamp` in Unix format
-    - `categories="cat,"` with each value separated by a semicolon.
-
-## Textpattern
-
-- [Fix Textpattern import](https://wordpress.org/support/topic/fix-textpattern-import/)
-- [Textpattern to WordPress exporter](https://github.com/drewm/textpattern-to-wordpress)
-
-## Tumblr
-
-WordPress includes an import tool designed specifically for importing content from Tumblr.
-
-1. In your WordPress site, select Tools -&gt; Import on the left nav of the admin screen.
-2. Under “Tumblr”, if you haven’t already installed the importer, click “Install Now”.
-3. Click the “Run Importer” link.
-4. Click “Choose File” and navigate to your export file.
-5. Click “Upload file and import”.
-6. Create an app on Tumblr that provides a connection point between your blog and Tumblr’s servers.
-7. Copy and paste the “OAuth Consumer Key” and “Secret Key”.
-8. Click “Connect to Tumblr”.
-
-## Twitter
-
-There are several plugins to import your tweets into WordPress, such as [Get Your Twitter Timeline into WordPress](https://blog.birdhouse.org/2008/08/17/get-your-twitter-timeline-into-wordpress/).
-
-## TypePad
-
-See [Movable Type and TypePad](#movable-type-and-typepad).
-
-## WooCommerce products (CSV)
-
-If you’ve installed the WooCommerce plugin, this importer will already be installed. Click “Run Importer” to upload a CSV file.
-
-## WooCommerce tax rates (CSV)
-
-If you’ve installed the WooCommerce plugin, this importer will already be installed. Click “Run Importer” to upload a CSV file.
-
-## WordPress
-
-WordPress includes an import tool designed specifically for importing content from another WordPress blog.
-
-1. In your WordPress site, select Tools -&gt; Import on the left nav of the admin screen.
-2. Under “WordPress”, if you haven’t already installed the importer, click “Install Now”.
-3. Click the “Run Importer” link.
-4. Click “Choose File” and navigate to the WXR file exported from your source.
-5. Click “Upload file and import”.
-
-You will first be asked to map the authors in this export file to users on the blog. For each author, you may choose to map to an existing user on the blog or to create a new user. WordPress will then import each of the posts, comments and categories contained in the uploaded file into your blog. In addition, you can import attachments by checking the “Download and import file attachments” option.
-
-## Xanga
-
-[xanga.r](https://www.timwylie.com/xword.html) is a program that parses xanga pages to get the post and comments. Then it can output them in the WordPress rss 2.0 xml format for WordPress to import.
-
-## Changelog
-
-- 2024-01-25: Removed HTML and Blogroll sections as they are no longer accurate
-- 2023-04-25: Added content from [Importing Content](https://wordpress.org/documentation/article/importing-content/).
-
----
-
-# Network Admin Settings Screen <a name="advanced-administration/multisite/admin/settings" />
-
-Source: https://developer.wordpress.org/advanced-administration/multisite/admin/settings/
-
-The **Network Admin Settings** is where a network admin sets and changes settings for the network as a whole. The first site is the main site in the network and network settings are pulled from that original site’s options.
-
-![](https://i0.wp.com/wordpress.org/documentation/files/2020/02/superadmin-options.png?fit=1024%2C751&ssl=1)
-
-## Operational Settings
-
-**Network Name**
-
-What you would like to call this website.
-
-**Network Admin Email**
-
-Registration and support emails will come from this address. An address such as *support@example.com* is recommended.
-
-## Registration Settings
-
-**Allow new registrations**
-
-Disable or enable registration and who or what can be registered. (Default is disabled.)
-
-- Registration is disabled. (default)
-- User accounts may be registered.
-- Logged in users may register new sites.
-- Both sites and user accounts can be registered.
-
-**Registration notification**
-
-Send the network admin an email notification every time someone registers a site or user account.
-
-**Add New Users**
-
-Allow site administrators to add new users to their site via the “Users -&gt; Add New” page.
-
-**Banned Names**
-
-Users are not allowed to register these sites. Separate names by spaces.
-
-**Limited Email Registrations**
-
-If you want to limit site registrations to certain domains. Enter one domain per line.
-
-**Banned Email Domains**
-
-If you want to ban domains from site registrations. Enter one domain per line.
-
-## New Site Settings
-
-**Welcome Email**
-
-```
-The welcome email sent to new site owners.
-
-Dear User,
-
-Your new SITE_NAME blog has been successfully set up at:
-BLOG_URL
-
-You can log in to the administrator account with the following information:
-Username: USERNAME
-Password: PASSWORD
-Login Here: BLOG_URLwp-login.php
-
-We hope you enjoy your new blog.
-Thanks!
-
---The Team @ SITE_NAME
-
-```
-
-**Welcome User Email**
-
-```
-The welcome email sent to new users.
-
-Dear User,
-
-Your new account is set up.
-
-You can log in with the following information:
-Username: USERNAME
-Password: PASSWORD
-LOGINLINK
-
-Thanks!
-
---The Team @ SITE_NAME
-
-```
-
-**First Post**
-
-The first post on a new site.
-
-```
-Welcome to <a href="SITE_URL">SITE_NAME</a>. This is your first post. Edit or delete it, then start blogging!
-
-```
-
-**First Page**
-
-The first page on a new site.
-
-**First Comment**
-
-The first comment on a new site.
-
-**First Comment Author**
-
-The author of the first comment on a new site.
-
-**First Comment URL**
-
-The URL for the first comment on a new site.
-
-## Upload Settings
-
-**Site upload space**
-
-Limit total size of files uploaded to \[ 50 \] MB.
-
-**Upload file types**
-
-Default is `jpg jpeg png gif mp3 mov avi wmv midi mid pdf m2ts`.
-
-Note: Adding arbitrary file types will not work unless a corresponding function is also hooked to [upload\_mimes](#reference/hooks/upload_mimes) filter. See the `wp_get_mime_types` function in [wp-includes/functions.php](https://github.com/WordPress/WordPress/blob/master/wp-includes/functions.php) for the current default set of supported mime-types / file extensions. Adding mime types in the ‘upload file types’ field not listed in the default set will **NOT** work unless you’ve added them using the [upload\_mimes](#reference/hooks/upload_mimes) filter! Uploading files with mime types not supported (without adding them using the filter) will fail with the message “Sorry, this file type is not permitted for security reasons”.
-
-**Max upload file size**
-
-Default is \[ 1500 \] KB.
-
-## Language Settings
-
-**Default Language**
-
-Default is English.
-
-## Menu Settings
-
-**Enable administration menus**
-
-- Plugins
-
-On WordPress Multisite the default setting for plugins is disabled. This means your users won’t have access to the plugin admin panel inside their dashboard unless you first enable access to plugins network wide.
-
-## Changelog
-
-- 2023-04-25: Original content from [Network Admin Settings Screen](https://wordpress.org/documentation/article/network-admin-settings-screen/).
-
----
-
-# Backing Up Your Database <a name="advanced-administration/security/backup/database" />
-
-Source: https://developer.wordpress.org/advanced-administration/security/backup/database/
-
-## Backing Up Your Database
-
-> It is strongly recommended that you backup your database at regular intervals and before an upgrade.
-
-[Restoring your database from backup](#advanced-administration/security/backup) is then possible if something goes wrong.
-
-**NOTE:** Below steps backup core WordPress database that include all your posts, pages and comments, but DO NOT backup the files and folders such as images, theme files on the server. For whole WordPress site backup, refer [WordPress Backups](#advanced-administration/security/backup).
-
-### Backup using cPanel X
-
-cPanel is a popular control panel used by many web hosts. The backup feature can be used to backup your MySQL database. Do not generate a full backup, as these are strictly for archival purposes and cannot be restored via cPanel. Look for ‘Download a MySQL Database Backup’ and click the name of the database. A `*.gz` file will be downloaded to your local drive.
-
-There is no need to unzip this file to restore it. Using the same cPanel program, browse to the gz file and upload it. Once the upload is complete, the bottom of the browser will indicate dump complete. If you are uploading to a new host, you will need to recreate the database user along with the matching password. If you change the password, make the corresponding change in the wp-config.php file.
-
-### Using phpMyAdmin
-
-[phpMyAdmin](#advanced-administration/upgrade/phpmyadmin) is the name of the program used to manipulate your database.
-
-Information below has been tried and tested using phpMyAdmin version 4.4.13 connects to MySQL version 5.6.28 running on Linux.
-
-[![phpmyadmin_top](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_top.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_top.jpg?ssl=1)
-
-#### Quick backup process
-
-When you backup all tables in the WordPress database without compression, you can use simple method. To restore this backup, your new database should not have any tables.
-
-1. Log into phpMyAdmin on your server
-2. From the left side window, select your WordPress database. In this example, the name of database is “wp”.
-3. The right side window will show you all the tables inside your WordPress database. Click the ‘Export’ tab on the top set of tabs.
-
-[![](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_dbtop.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_dbtop.jpg?ssl=1)
-
-1. Ensure that the Quick option is selected, and click ‘Go’ and you should be prompted for a file to download. Save the file to your computer. Depending on the database size, this may take a few moments.
-
-[![phpmyadmin_quick_export](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_quick_export.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_quick_export.jpg?ssl=1)
-
-#### Custom backup process
-
-If you want to change default behavior, select Custom backup. In above Step 4, select Custom option. Detailed options are displayed.
-
-[![phpmyadmin_custom_export](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_custom_export.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_custom_export.jpg?ssl=1)
-
-##### The Table section
-
-All the tables in the database are selected. If you have other programs that use the database, then choose only those tables that correspond to your WordPress install. They will be the ones with that start with “wp\_” or whatever ‘table\_prefix’ you specified in your ‘wp-config.php’ file.
-
-If you only have your WordPress blog installed, leave it as is (or click ‘Select All’ if you changed the selection)
-
-##### The Output section
-
-Select ‘zipped’ or ‘gzipped’ from Compression box to compress the data.
-
-[![phpmyadmin_export_output](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_output.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_output.jpg?ssl=1)
-
-##### The Format section
-
-Ensure that the SQL is selected. Unlike CSV or other data formats, this option exports a sequence of SQL commands.
-
-In the Format-specific options section, leave options as they are.
-
-[![phpmyadmin_export_formatspecific](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_formatspecific.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_formatspecific.jpg?ssl=1)
-
-##### The Object creation options section
-
-Select Add DROP TABLE / VIEW / PROCEDURE / FUNCTION / EVENT / TRIGGER statement. Before table creation on target database, it will call DROP statement to delete the old existing table if it exist.
-
-[![phpmyadmin_export_object](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_object.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_object.jpg?ssl=1)
-
-### The Data creation options section
-
-Leave options as they are.
-
-[![phpmyadmin_export_data](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_data.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/phpmyadmin_export_data.jpg?ssl=1)
-
-Now click ‘Go’ at the bottom of the window and you should be prompted for a file to download. Save the file to your computer. Depending on the database size, this may take a few moments.
-
-**Remember** – you have NOT backed up the files and folders – such as images – but all your posts and comments are now safe.
-
-### Using Straight MySQL/MariaDB Commands
-
-phpMyAdmin cannot handle large databases so using straight MySQL/MariaDB code will help.
-
-Change your directory to the directory you want to export backup to:
-
-```
-user@linux:~> cd files/blog
-user@linux:~/files/blog>
-
-```
-
-Use the `mysqldump` command with your MySQL server name, user name and database name. It prompts you to input password (For help, try: `man mysqldump`).
-
-**To backup all database tables**
-
-```
-mysqldump --add-drop-table -h mysql_hostserver -u mysql_username -p mysql_databasename﻿
-
-```
-
-**To backup only certain tables from the database**
-
-```
-mysqldump --add-drop-table -h mysql_hostserver -u mysql_username -p mysql_databasename﻿
-
-```
-
-Example:
-
-```
-user@linux:~/files/blog> mysqldump --add-drop-table -h db01.example.net -u dbocodex -p wp > blog.bak.sql
-Enter password: (type password)
-
-```
-
-**Use bzip2 to compress the backup file**
-
-```
-user@linux:~/files/blog> bzip2 blog.bak.sql
-
-```
-
-You can do the same thing that above two commands do in one line:
-
-```
-user@linux:~/files/blog> mysqldump --add-drop-table -h db01.example.net -u dbocodex -p wp | bzip2 -c > blog.bak.sql.bz2
-Enter password: (type password)
-
-```
-
-The `bzip2 -c` after the `|` (pipe) means the backup is compressed on the fly, and the `> blog.bak.sql.bz2` sends the bzip output to a file named `blog.bak.sql.bz2`.
-
-Despite bzip2 being able to compress most files more effectively than the older compression algorithms (.Z, .zip, .gz), it is [considerably slower](https://en.wikipedia.org/wiki/Bzip2) (compression and decompression). If you have a large database to backup, gzip is a faster option to use.
-
-```
-user@linux:~/files/blog> mysqldump --add-drop-table -h db01.example.net -u dbocodex -p wp | gzip > blog.bak.sql.gz
-
-```
-
-### Using MySQL Workbench
-
-[MySQL Workbench](https://dev.mysql.com/downloads/workbench/) (formerly known as My SQL Administrator) is a program for performing administrative operations, such as configuring your MySQL server, monitoring its status and performance, starting and stopping it, managing users and connections, performing backups, restoring backups and a number of other administrative tasks.
-
-You can perform most of those tasks using a command line interface such as that provided by [mysqladmin](https://dev.mysql.com/doc/refman/8.0/en/mysqladmin.html) or [mysql](https://dev.mysql.com/doc/refman/8.0/en/mysql.html), but MySQL Workbench is advantageous in the following respects:
-
-- Its graphical user interface makes it more intuitive to use.
-- It provides a better overview of the settings that are crucial for the performance, reliability, and security of your MySQL servers.
-- It displays performance indicators graphically, thus making it easier to determine and tune server settings.
-- It is available for Linux, Windows and MacOS X, and allows a remote client to backup the database across platforms. As long as you have access to the MySQL databases on the remote server, you can backup your data to wherever you have write access.
-- There is no limit to the size of the database to be backed up as there is with phpMyAdmin.
-
-Information below has been tried and tested using MySQL Workbench version 6.3.6 connects to MySQL version 5.6.28 running on Linux.
-
-[![mysql_workbench_top](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_top.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_top.jpg?ssl=1)
-
-#### Backing Up the Database
-
-This assumes you have already installed MySQL Workbench and set it up so that you can login to the MySQL Database Server either locally or remotely. Refer to the documentation that comes with the installation package of MySQL Workbench for your platform for installation instructions or [online document](https://dev.mysql.com/doc/workbench/en/).
-
-1. Launch the MySQL Workbench
-2. Click your database instance if it is displayed on the top page. Or, Click Database -&gt; Connect Database from top menu, enter required information and Click OK.
-3. Click Data Export in left side window.
-
-[![mysql_workbench_export](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_export.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_export.jpg?ssl=1)
-
-1. Select your WordPress databases that you want to backup.
-2. Specify target directory on Export Options. You need write permissions in the directory to which you are writing the backup.
-3. Click Start Export on the lower right of the window.
-
-[![mysql_workbench_export2](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_export2.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_export2.jpg?ssl=1)
-
-#### Restoring From a Backup
-
-1. Launch the MySQL Workbench
-2. Click your database instance if it is displayed on the top page. Or, Click Database -&gt; Connect Database, and Click OK.
-3. Click Data Import/Restore in left side window.
-4. Specify folder where you have backup files. Click “…” at the right of Import from Dump Project Folder, select backup folder, and click Open.
-5. Click Start Import on the lower right of the window. The database restore will commence.
-
-[![mysql_workbench_import](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_import.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/mysql_workbench_import.jpg?ssl=1)
-
-### MySQL GUI Tools
-
-In addition to MySQL Workbench, there are many GUI tools that let you backup (export) your database.
-
-| Name | OS (Paid edition) | OS (Free edition) |  |
-|---|---|---|---|
-| [MySQL Workbench](https://www.mysql.com/products/workbench/) | Windows/Mac/Linux | Windows/Mac/Linux | See [above](#advanced-administration/security/backupdatabase/#Using_MySQL_Workbench) |
-| [EMS SQL Management Studio for MySQL](https://www.sqlmanager.net/products/mysql/studio) | Windows |  |  |
-| [Aqua Data Studio](https://www.aquafold.com/) | Windows/Mac/Linux | Windows/Mac/Linux (14 days trial) | Available in 9 languages |
-| [Navicat for MySQL](https://www.navicat.com/en/products/navicat-for-mysql) | Windows/Mac/Linux | Windows/Mac/Linux (14 days trial) | Available in 8 languages |
-| [SQLyog](https://webyog.com/en/) | Windows |  |  |
-| [Toad for MySQL](https://www.toadworld.com/) |  | Windows |  |
-| [HeidiSQL](https://www.heidisql.com/) |  | Windows |  |
-| [Sequel Pro](https://sequelpro.com/) | Mac | CocoaMySQL successor |  |
-| [Querious](https://www.araelium.com/querious/) |  | Mac |  |
-
-### Using WordPress Database Backup Plugin
-
-You can find plugins that can help you back up your database in the [WordPress Plugin Directory](https://wordpress.org/plugins/search/database+backup/).
-
-The instructions below are for the plugin called [WP-DB-Backup:](https://wordpress.org/plugins/wp-db-backup/)
-
-#### Installation
-
-1. Search for “WP-DB-Backup” on [Administration](https://wordpress.org/documentation/article/administration-screens/) &gt; [Plugins](https://wordpress.org/documentation/article/administration-screens/#plugins-add-functionality-to-your-blog) &gt; [Add New](https://wordpress.org/documentation/article/administration-screens/#add-new-plugins).
-2. Click Install Now.
-3. Activate the plugin.
-
-#### Backing up
-
-1. Navigate to [Administration](https://wordpress.org/documentation/article/administration-screens/) &gt; [Tools](https://wordpress.org/documentation/article/administration-screens/#tools-managing-your-blog) &gt; Backup
-2. Core WordPress tables will always be backed up. Select some options from Tables section.
-
-[![wp-db-backup_table](https://i0.wp.com/wordpress.org/documentation/files/2018/11/wp-db-backup_table.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/wp-db-backup_table.jpg?ssl=1)
-
-1. Select the Backup Options; the backup can be downloaded, or emailed.
-2. Finally, click on the Backup Now! button to actually perform the backup. You can also schedule regular backups.
-
-[![wp-db-backup_settings](https://i0.wp.com/wordpress.org/documentation/files/2018/11/wp-db-backup_settings.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/wp-db-backup_settings.jpg?ssl=1)
-
-#### Restoring the Data
-
-The file created is a standard SQL file. If you want information about how to upload that file, look at [Restoring Your Database From Backup](#advanced-administration/security/backup).
-
-### More Resources
-
-- [Backup Plugins on the official WordPress.org repository](https://wordpress.org/plugins/search.php?q=backup)
-- [WordPress Backups](#advanced-administration/security/backup)
-
-### External Resources
-
-- [How to Schedule Daily Backup of WordPress Database](https://www.narga.net/schedule-backup-wordpress-database/)
-
-## Restoring Your Database From Backup
-
-### Using phpMyAdmin
-
-[phpMyAdmin](#advanced-administration/upgrade/phpmyadmin) is a program used to manipulate databases remotely through a web interface. A good hosting package will have this included. For information on backing up your WordPress database, see [Backing Up Your Database](#advanced-administration/security/backupdatabase/).
-
-Information here has been tested using [phpMyAdmin](#advanced-administration/upgrade/phpmyadmin) 4.0.5 running on Unix.
-
-The following instructions will **replace** your current database with the backup, **reverting** your database to the state it was in when you backed up.
-
-#### Restore Process
-
-Using phpMyAdmin, follow the steps below to restore a MySQL/MariaDB database.
-
-1. Login to [phpMyAdmin](#advanced-administration/upgrade/phpmyadmin).
-2. Click “Databases” and select the database that you will be importing your data into.
-3. You will then see either a list of tables already inside that database or a screen that says no tables exist. This depends on your setup.
-4. Across the top of the screen will be a row of tabs. Click the **Import** tab.
-5. On the next screen will be a location of text file box, and next to that a button named **Browse**.
-6. Click **Browse**. Locate the backup file stored on your computer.
-7. Make sure **SQL** is selected in the **Format** drop-down menu.
-8. Click the **Go** button.
-
-Now grab a coffee. This bit takes a while. Eventually you will see a success screen.
-
-If you get an error message, your best bet is to post to the [WordPress support forums](https://wordpress.org/documentation/) to get help.
-
-### Using MySQL/MariaDB Commands
-
-The restore process consists of unarchiving your archived database dump, and importing it into your MySQL/MariaDB database.
-
-Assuming your backup is a `.bz2` file, created using instructions similar to those given for [Backing up your database using MySQL/MariaDB commands](#advanced-administration/security/backupdatabase/#using-straight-mysqlmariadb-commands), the following steps will guide you through restoring your database:
-
-1. Unzip your `.bz2` file:
-
-```
-user@linux:~/files/blog> bzip2 -d blog.bak.sql.bz2
-
-```
-
-**Note:** If your database backup was a `.tar.gz` file called `blog.bak.sql.tar.gz`, then
-
-```
-tar -zxvf blog.bak.sql.tar.gz
-
-```
-
-is the command that should be used instead of the above.
-
-1. Put the backed-up SQL back into MySQL/MariaDB:
-
-```
-user@linux:~/files/blog> mysql -h mysqlhostserver -u mysqlusername -p databasename < blog.bak.sql  
-Enter password: (enter your mysql password)   
-user@linux:~/files/blog>
-
-```
-
-## Changelog
-
-- 2022-10-25: Original content from [Backing Up Your Database](#advanced-administration/security/backupdatabase/).
-
----
-
-# Backing Up Your WordPress Files <a name="advanced-administration/security/backup/files" />
-
-Source: https://developer.wordpress.org/advanced-administration/security/backup/files/
-
-## Backing Up Your WordPress Files
-
-There are two parts to backing up your WordPress site: **Database** and **Files**.
-
-This page talks about **Files** only; if you need to back up your WordPress database, see the [Backing Up Your Database](#advanced-administration/security/backup/database).
-
-Your WordPress site consists of the following files:
-
-- WordPress Core Installation
-- WordPress Plugins
-- WordPress Themes
-- Images and Files
-- Javascripts, PHP scripts, and other code files
-- Additional Files and Static Web Pages
-
-Everything that has anything to do with the look and feel of your site is in a file somewhere and needs to be backed up. Additionally, you must back up all of your files in your WordPress directory (including subdirectories) and your [`.htaccess`](https://wordpress.org/documentation/article/wordpress-glossary/#.htaccess) file.
-
-While most hosts back up the entire server, including your site, it is better that you back up your own files. The easiest method is to use an [FTP program](#advanced-administration/upgrade/ftp) to download all of your WordPress files from your host to your local computer.
-
-By default, the files in the directory called wp-content are your own user-generated content, such as edited themes, new plugins, and uploaded files. Pay particular attention to backing up this area, along with your `wp-config.php`, which contains your connection details.
-
-The remaining files are mostly the WordPress Core files, which are supplied by the [WordPress download zip file](https://wordpress.org/download/).
-
-Please read [Backing Up Your WordPress Site](#advanced-administration/security/backup) for further information.
-
-Other ways to backup your files include:
-
-**Website Host Provided Backup Software**
-
-Most website hosts provide software to back up your site. Check with your host to find out what services and programs they provide.
-
-**Create Synchs With Your Site**
-
-[WinSCP](https://winscp.net/eng/index.php) and other programs allow you to synchronize with your website to keep a mirror copy of the content on your server and hard drive updated. It saves time and makes sure you have the latest files in both places.
-
-#### Synchronize your files in WinScp
-
-1. Log in to your ftp server normally using WinScp.
-2. Press the “Synchronize” button. Remote directory will automatically be set to the current ftp directory (often your root directory). Local directory would be set to the local directory as it was when you pressed Synchronize. You may want to change this to some other directory on your computer. Direction should be set to “local” to copy files FROM your web host TO your machine. Synchronization Mode would be set to Synchronize files.
-3. Click “OK” to show a summary of actions.
-4. Click “OK” again to complete the synchronization.
-
-**Copy Your Files to Your Desktop**
-
-Using [FTP Clients](#advanced-administration/upgrade/ftp) or [UNIX Shell Skills](https://codex.wordpress.org/UNIX_Shell_Skills) you can copy the files to a folder on your computer. Once there, you can zip or compress them into a zip file to save space, allowing you to keep several versions.
-
-Normally, there would be no need to copy the WordPress core files, as you can replace them from a fresh download of the WordPress zip file. The important files to back up would be your wp-config.php file, which contains your settings and your wp-content directory (plus its contents) which contains all your theme and plugin files.
-
-## Changelog
-
-- 2022-10-25: Original content from [Backing Up Your WordPress Files](https://wordpress.org/documentation/article/backing-up-your-wordpress-files/).
 
 ---
 
@@ -10643,169 +10809,3 @@ See also:
 
 - 2023-02-17: Links updated, and some fixes for deprecated content.
 - 2023-01-31: Original content from [FAQ Troubleshooting](https://wordpress.org/documentation/article/faq-troubleshooting-2/).
-
----
-
-# Version Control <a name="advanced-administration/debug/version-control" />
-
-Source: https://developer.wordpress.org/advanced-administration/debug/version-control/
-
-Version control is a way of tracking the changes made to files over time by different people, such as the code for a website or another application. It allows people to track the revision history of code and to revert or apply changes easily via the command line. It is also a good way to debug your website if something goes wrong, as you can quickly restore to a previous state of the site’s code without restoring from a full backup.
-
-A lot of WordPress hosts offer version control but there are third-party services and self hosted options as well.
-
-## Changelog
-
-- 2023-05-29: Synced with [Hosting Handbook](https://make.wordpress.org/hosting/handbook/reliability/#version-control)
-- 2023-03-03: Created a new page for *Version control*
-
----
-
-# Monitoring <a name="advanced-administration/security/monitoring" />
-
-Source: https://developer.wordpress.org/advanced-administration/security/monitoring/
-
-Site monitoring systems and services can notify you when your site isn’t working properly. They can often correct any minor issues, or help you to do so before they become major issues.
-
-## Uptime Monitoring
-
-Uptime monitoring is traditionally done at the server level or by checking one or more URLs on the site at regular intervals to make sure they are responding properly. A combination of internal and external uptime monitoring is ideal for users, and there exist a variety of software and services to handle this for you.
-
-## Performance Monitoring
-
-While a site’s services may be responding, to a user, a site being “up” means more than this to them. Performance monitoring is similar to uptime monitoring, but also takes note of certain metrics that could indicate trouble. Metrics like “page load time” and “slowest average transactions” should be monitored and reported regularly to help keep you ahead of performance issues. Monitoring slow logs for problematic queries or requests can also help keep user sites stable. MySQL, PHP-FPM, and others provide options to capture these for monitoring.
-
-## Performance Profiling
-
-It is best practice to use performance profiling tools, such as New Relic, AppDynamics or Tideways, to diagnose the performance bottlenecks of your website and infrastructure. These tools will give you insight such as slow performing functions, external HTTP requests, slow database queries and more that are causing poor performance.
-
-## Changelog
-
-- 2023-05-29: Updated from [Hosting Handbook](https://make.wordpress.org/hosting/handbook/reliability/#monitoring)
-- 2023-03-04: Add new file.
-
----
-
-# PHP Optimization <a name="advanced-administration/performance/php" />
-
-Source: https://developer.wordpress.org/advanced-administration/performance/php/
-
-## PHP
-
-PHP (PHP: Hypertext Preprocessor) is a popular programming language on the Internet. PHP turns dynamic content, like that in WordPress, into HTML, CSS, and JavaScript that web browsers can read. WordPress is written primarily in PHP, and a server must have PHP in order for WordPress to be able to run.
-
-As PHP is an interpreted language, its version and configuration has a large impact on how well and whether WordPress will run.
-
-### Version
-
-When possible, PHP 7.4 or greater should be used to run WordPress. As of the writing of this document, PHP 7.4 is the officially supported version for WordPress while PHP 8.0 and 8.1 are “compatible with exceptions”, and PHP 8.2 is on “beta support”. PHP 8 is the only major version of PHP still receiving active development and support. The PHP group regularly retires support for older versions of PHP, and older versions are not guaranteed to be updated for security concerns.
-
-At the same time, newer versions of PHP contain both security and performance improvements, while being accompanied by new features and bug fixes, which are not guaranteed to be backwards compatible. However, extreme care must be taken when upgrading the version of PHP. While WordPress is compatible with the latest releases of PHP, sites built to use older versions of PHP may not be compatible due to their included plugins and themes.
-
-If upgrading to PHP 8 is not immediately possible, upgrading to PHP 7.4 should be done as soon as possible. While WordPress *may* work with older versions of PHP, these versions have reached official End Of Life, and running outdated PHP installations **may expose your site to security vulnerabilities**.
-
-You can find which PHP version is compatible with your WordPress version in the [PHP Compatibility and WordPress Versions](https://make.wordpress.org/core/handbook/references/php-compatibility-and-wordpress-versions/) page.
-
-More information about the support versions of PHP can always be found [on PHP’s supported versions page](https://www.php.net/supported-versions.php).
-
-When upgrading PHP, it’s a good practice to test sites for compatibility before upgrading. If you offer multiple environments, such as a staging and a production environment, PHP version should be configurable separately for each environments. This will allow users to test newer version of PHP in their non-production environment and resolve any issues before upgrading PHP version in the production environment.
-
-There’s a useful [WP-CLI command](https://github.com/danielbachhuber/php-compat-command) for performing a general compatibility check, but be aware that it is not 100% accurate.
-
-### Configuration
-
-PHP is primarily configured using a configuration file, `php.ini`, from which PHP reads all of its settings and configuration at runtime. This usually happens through CGI/FastCGI, or a process manager like PHP-FPM.
-
-Some server environment may allow PHP configurations to be customized with other files like the `.htaccess` or `.user.ini` file.
-
-You can see detailed information about each of these directives [in the official PHP documentation](https://www.php.net/manual/en/ini.core.php).
-
-#### Timeouts
-
-There are several timeout settings on a system that limit different aspects of a request. When configuring your timeouts, it’s important to select values that work well together. For example, it doesn’t make sense to have a very high script execution timeout on your PHP service, if the web server (e.g. Apache) timeout is lower than that – in such case, if the request takes longer, it will be killed by the web server no matter your PHP timeout setting is.
-
-Note that processes take different amount of time, depending on the server load, and those limitations are placed to ensure that your server functions properly. If you have high server load, processes may take longer to complete thus causing a cascade effect leading to even more server load. That’s why it’s a matter of balance between giving enough time for your scripts to be compiled and ensuring that you’re within normal server loads.
-
-The primary PHP timeout can be set with the [`max_execution_time`](https://www.php.net/manual/en/info.configuration.php#ini.max-execution-time) `php.ini` directive. This limits code execution, and not system library calls or MySQL queries, [except on Windows](https://www.php.net/manual/en/function.set-time-limit.php), where it does.
-
-The maximum time allowed for data transfer from the web server to PHP is specified with the [`max_input_time`](https://www.php.net/manual/en/info.configuration.php#ini.max-input-time) `php.ini` directive. It is usually used to limit the amount of time allowed to upload files. It’s important to note that the amount of time is separate from `max_execution_time`, and defines the amount of time between when the web server calls PHP and execution starts.
-
-Note that these timeouts are often configured per server and you won’t be able to modify them if you’re on a shared hosting account. The best approach would be to contact your hosting company tech support and see if they can be modified to suit your needs.
-
-#### Memory Limits
-
-The maximum amount of memory that PHP is allowed to use per page render is specified with the [`memory limit`](https://www.php.net/manual/en/ini.core.php#ini.memory-limit) `php.ini` directive.
-
-In addition to setting memory limits within PHP, WordPress has two memory configuration constants that can be changed in the **wp-config.php** file. WordPress will raise the PHP `memory_limit` to these values if it has permission to do so, but if the `php.ini` specifies higher amounts, WordPress will not lower the amount allowed.
-
-The option `WP_MEMORY_LIMIT` declares the amount of memory WordPress should request for rendering the frontend of the website. WordPress default is 40 MB and WordPress MultiSite default is 64 MB.
-
-```
-define( 'WP_MEMORY_LIMIT', '128M' );
-
-```
-
-The option `WP_MAX_MEMORY_LIMIT` declares the amount of memory WordPress should request for rendering the backend of the website. WordPress default is 256 MB.
-
-```
-define( 'WP_MAX_MEMORY_LIMIT', '256M' );
-
-```
-
-Since the WordPress backend usually requires more memory, there’s a separate setting for the amount, that can be set for logged in users. This is mainly required for media uploads. You can have it set higher than the front end limit to ensure your backend has all the resources it needs. Usually, `WP_MEMORY_LIMIT <= WP_MAX_MEMORY_LIMIT`.
-
-#### File Upload Sizes
-
-When uploading media files and other content to WordPress using the WordPress admin dashboard, WordPress uses PHP to process the uploads. PHP’s configuration includes limits on the size of files that can be uploaded through PHP and on the size of requests that can be sent to the web server for processing. These will need to align with the server’s timeouts, discussed above.
-
-The limit on the size of individual file uploads can be configured using the [`upload_max_filesize`](https://www.php.net/manual/en/ini.core.php#ini.upload-max-filesize) `php.ini` directive.
-
-The limit on the entire size of a request that can be sent from the web server to PHP for processing can be configured using the [`post_max_size`](https://www.php.net/manual/en/ini.core.php#ini.post-max-size) `php.ini` directive. The value for `post_max_size` must be greater than or equal to the value for `upload_max_filesize`. PHP will not process requests larger in size than the value for `post_max_size`.
-
-Note that `post_max_size` applies to every PHP request and not only uploads, so it may become important to address separately if a site processes a large amount of other data included with the request.
-
-Bear in mind that on shared hosting accounts, those limits are usually set on a server level and you may not be able to modify them or increase them above a certain value. In addition to that, different setups have different ways to modify the above mentioned values. Contact your hosting company tech support for additional assistance on that matter.
-
-#### Replacing WordPress’ Cron Triggers
-
-The `wp-cron.php` script is responsible for causing certain tasks to be scheduled and executed automatically. Every time someone visits your website, `wp-cron.php` checks whether it is time to execute a job or not. Even though these checks are small and fast they consume time and produce load. For this reason, it’s worth considering setting the [`DISABLE_WP_CRON` constant](#advanced-administration/wordpress/wp-config) and using an alternative method to trigger WordPress’ cron system. Note, however, that the WordPress cron system is designed with performance in mind and requires minimal resources to operate so it’s not mandatory to replace it unless you really need to do so.
-
-## Changelog
-
-- 2023-06-08: New page created.
-
----
-
-# Display Errors <a name="advanced-administration/security/hardening/display-errors" />
-
-Source: https://developer.wordpress.org/advanced-administration/security/hardening/display-errors/
-
-## What is display\_errors?
-
-`display_errors` is a directive found in PHP, found in the php.ini file. With this option, PHP determines whether or not errors should be printed directly on the page.
-
-## Why does display\_errors need to be disabled?
-
-According to [PHP documentation](https://www.php.net/manual/en/errorfunc.configuration.php#ini.display-errors), it should never be enabled on production environments or live sites.
-
-While `display_errors` may provide useful information in debugging scenarios, there are potential security issues that need to be taken into account if it is activated. [See OWASP article about improper error handling.](https://owasp.org/www-community/Improper_Error_Handling)
-
-However, some hosting companies have `display_errors` enabled by default. This may be due to a misconfiguration, such as trying to disable it by using a configuration that does not work in hosting environments where for example PHP is not running as a module, but with PHP FastCGI Process Manager (PHP-FPM).
-
-## How to disable display\_errors
-
-Check your hosting control panel to disable `display_errors` or reach out to your hosting provider.
-
-If your PHP is running as Apache module, you may be able to disable display\_errors with the following .htaccess configuration:
-
-`<IfModule mod_php8.c> php_flag display_errors off </IfModule>`
-
-If your server uses FastCGI/PHP-FPM, it may be possible disable the display\_errors by ensuring that a .user.ini file with the following content:
-
-`display_errors = 0`
-
-If these examples do not work for you, or if you need more instructions, please reach out to your hosting provider.
-
-## Changelog
-
-- 2023-09-14: Setup, and Adding text.

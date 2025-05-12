@@ -30,6 +30,10 @@ Run `php parser.php --update` to fetch updated content over WP REST API (sorted 
 
 - [ ] Consider including the `wp-parser-(function|class|hook|method)` content types.
 
+## Notes
+
+- We're using PHPUnit 9 because test case filenames must match the class names [in later versions](https://github.com/sebastianbergmann/phpunit/issues/4621) (don't support `class-` prefixed used by WP).
+
 ## Credits
 
 - Tooling created by [Kaspars](https://kaspars.net) ([@konstruktors](https://x.com/konstruktors)) and [contributors](https://github.com/kasparsd/wp-docs-md/graphs/contributors).
