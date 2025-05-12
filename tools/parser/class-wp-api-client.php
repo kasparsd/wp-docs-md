@@ -426,4 +426,44 @@ class WP_API_Client {
 	
 		return $responses;
 	}
+
+	public function sort_posts( array $posts_by_id, array $parent_ids, array $post_order ): array {
+		$sort_fn = function( $a_id, $b_id ) use ( $parent_ids, $post_order ) {			
+			$a_parent = $parent_ids[ $a_id ] ?? 0;
+			$b_parent = $parent_ids[ $b_id ] ?? 0;
+			
+			// If one is a parent (0) and other isn't, parent goes first.
+			if ( $a_parent === 0 && $b_parent !== 0 ) {
+				return -1;
+			} elseif ( $a_parent !== 0 && $b_parent === 0 ) {
+				return 1;
+			}
+			
+			// If they have different parents, sort by parent.
+			if ( $a_parent !== $b_parent ) {
+				// Check if either is child of the other.
+				if ( $a_parent === $b_id ) {
+					return 1; // B is parent of A.
+				} elseif ( $b_parent === $a_id ) {
+					return -1; // A is parent of B.
+				}
+				
+				// Sort by parent weights
+				$a_parent_weight = $post_order[ $a_parent ] ?? 0;
+				$b_parent_weight = $post_order[ $b_parent ] ?? 0;
+
+				return $a_parent_weight <=> $b_parent_weight;
+			}
+			
+			// If same parent (including both being top-level), sort by weights
+			$a_weight = $post_order[ $a_id ] ?? 0;
+			$b_weight = $post_order[ $b_id ] ?? 0;
+
+			return $a_weight <=> $b_weight;
+		};
+		
+		uksort( $posts_by_id, $sort_fn );
+		
+		return $posts_by_id;
+	}
 }
