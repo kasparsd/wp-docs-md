@@ -1,18 +1,31 @@
 Table of Contents:
 
-- [Credits](#plugins/credits)
+- [Plugin Handbook](#plugins)
+- [Introduction to Plugin Development](#plugins/intro)
+- [What is a Plugin?](#plugins/intro/what-is-a-plugin)
 - [Plugin Basics](#plugins/plugin-basics)
 - [Header Requirements](#plugins/plugin-basics/header-requirements)
-- [Including a Software License](#plugins/plugin-basics/including-a-software-license)
 - [Activation / Deactivation Hooks](#plugins/plugin-basics/activation-deactivation-hooks)
-- [Uninstall Methods](#plugins/plugin-basics/uninstall-methods)
 - [Best Practices](#plugins/plugin-basics/best-practices)
+- [Determining Plugin and Content Directories](#plugins/plugin-basics/determining-plugin-and-content-directories)
+- [Including a Software License](#plugins/plugin-basics/including-a-software-license)
+- [Uninstall Methods](#plugins/plugin-basics/uninstall-methods)
 - [Plugin Security](#plugins/security)
+- [Checking User Capabilities](#plugins/security/checking-user-capabilities)
+- [Data Validation](#plugins/security/data-validation)
+- [Securing (sanitizing) Input](#plugins/security/securing-input)
+- [Nonces](#plugins/security/nonces)
+- [Securing (escaping) Output](#plugins/security/securing-output)
 - [Hooks](#plugins/hooks)
 - [Actions](#plugins/hooks/actions)
 - [Filters](#plugins/hooks/filters)
 - [Custom Hooks](#plugins/hooks/custom-hooks)
 - [Advanced Topics](#plugins/hooks/advanced-topics)
+- [Privacy](#plugins/privacy)
+- [Suggesting text for the site privacy policy](#plugins/privacy/suggesting-text-for-the-site-privacy-policy)
+- [Adding the Personal Data Exporter to Your Plugin](#plugins/privacy/adding-the-personal-data-exporter-to-your-plugin)
+- [Adding the Personal Data Eraser to Your Plugin](#plugins/privacy/adding-the-personal-data-eraser-to-your-plugin)
+- [Privacy Related Options, Hooks and Capabilities](#plugins/privacy/privacy-related-options-hooks-and-capabilities)
 - [Administration Menus](#plugins/administration-menus)
 - [Top-Level Menus](#plugins/administration-menus/top-level-menus)
 - [Sub-Menus](#plugins/administration-menus/sub-menus)
@@ -33,54 +46,14 @@ Table of Contents:
 - [Custom Post Types](#plugins/post-types)
 - [Registering Custom Post Types](#plugins/post-types/registering-custom-post-types)
 - [Working with Custom Post Types](#plugins/post-types/working-with-custom-post-types)
+- [Taxonomies](#plugins/taxonomies)
 - [Working with Custom Taxonomies](#plugins/taxonomies/working-with-custom-taxonomies)
+- [Term Splitting (WordPress 4.2)](#plugins/taxonomies/split-terms-wp-4-2)
 - [Users](#plugins/users)
 - [Working with Users](#plugins/users/working-with-users)
 - [Working with User Metadata](#plugins/users/working-with-user-metadata)
 - [Roles and Capabilities](#plugins/users/roles-and-capabilities)
 - [HTTP API](#plugins/http-api)
-- [JavaScript](#plugins/javascript)
-- [Server Side PHP and Enqueuing](#plugins/javascript/enqueuing)
-- [Cron](#plugins/cron)
-- [Understanding WP-Cron Scheduling](#plugins/cron/understanding-wp-cron-scheduling)
-- [Scheduling WP Cron Events](#plugins/cron/scheduling-wp-cron-events)
-- [Hooking WP-Cron Into the System Task Scheduler](#plugins/cron/hooking-wp-cron-into-the-system-task-scheduler)
-- [Testing of WP-Cron](#plugins/cron/simple-testing)
-- [Internationalization](#plugins/internationalization)
-- [How to Internationalize Your Plugin](#plugins/internationalization/how-to-internationalize-your-plugin)
-- [Localization](#plugins/internationalization/localization)
-- [The WordPress.org Plugin Directory](#plugins/wordpress-org)
-- [Planning, Submitting, and Maintaining Plugins](#plugins/wordpress-org/planning-submitting-and-maintaining-plugins)
-- [Developer Tools](#plugins/developer-tools)
-- [Debug Bar and Add-Ons](#plugins/developer-tools/debug-bar-and-add-ons)
-- [Helper Plugins](#plugins/developer-tools/helper-plugins)
-- [Checking User Capabilities](#plugins/security/checking-user-capabilities)
-- [Data Validation](#plugins/security/data-validation)
-- [Securing (sanitizing) Input](#plugins/security/securing-input)
-- [Nonces](#plugins/security/nonces)
-- [Securing (escaping) Output](#plugins/security/securing-output)
-- [AJAX](#plugins/javascript/ajax)
-- [jQuery](#plugins/javascript/jquery)
-- [Summary](#plugins/javascript/summary)
-- [Block Specific Plugin Guidelines](#plugins/wordpress-org/block-specific-plugin-guidelines)
-- [Add Your Plugin to the Block Directory](#plugins/wordpress-org/add-your-plugin-to-the-block-directory)
-- [Release Confirmation Emails](#plugins/wordpress-org/release-confirmation-emails)
-- [Transferring Your Plugin to a New Owner](#plugins/wordpress-org/transferring-your-plugin-to-a-new-owner)
-- [Preventing WordPress from Updating Your External Plugin](#plugins/wordpress-org/preventing-wordpress-from-updating-your-external-plugin)
-- [Term Splitting (WordPress 4.2)](#plugins/taxonomies/split-terms-wp-4-2)
-- [Taxonomies](#plugins/taxonomies)
-- [Creating Tables with Plugins](#plugins/creating-tables-with-plugins)
-- [Detailed Plugin Guidelines](#plugins/wordpress-org/detailed-plugin-guidelines)
-- [Using Subversion](#plugins/wordpress-org/how-to-use-subversion)
-- [Previews and Blueprints](#plugins/wordpress-org/previews-and-blueprints)
-- [Plugin Developer FAQ](#plugins/wordpress-org/plugin-developer-faq)
-- [Internationalization Security](#plugins/internationalization/security)
-- [Common issues](#plugins/wordpress-org/common-issues)
-- [How Your Plugin Assets Work](#plugins/wordpress-org/plugin-assets)
-- [Plugin Readmes](#plugins/wordpress-org/how-your-readme-txt-works)
-- [Take Over an Existing Plugin](#plugins/wordpress-org/take-over-an-existing-plugin)
-- [Reporting Plugin Security Issues](#plugins/wordpress-org/plugin-security/reporting-plugin-security-issues)
-- [Managing Your Plugin&#8217;s Security](#plugins/wordpress-org/plugin-security)
 - [REST API](#plugins/rest-api)
 - [REST API Overview](#plugins/rest-api/rest-api-overview)
 - [Routes &amp; Endpoints](#plugins/rest-api/routes-endpoints)
@@ -88,64 +61,105 @@ Table of Contents:
 - [Responses](#plugins/rest-api/responses-2)
 - [Schema](#plugins/rest-api/schema)
 - [Controller Classes](#plugins/rest-api/controller-classes)
-- [Special User Roles and Capabilities](#plugins/wordpress-org/special-user-roles-capabilities)
+- [JavaScript](#plugins/javascript)
 - [Heartbeat API](#plugins/javascript/heartbeat-api)
+- [jQuery](#plugins/javascript/jquery)
+- [AJAX](#plugins/javascript/ajax)
+- [Server Side PHP and Enqueuing](#plugins/javascript/enqueuing)
+- [Summary](#plugins/javascript/summary)
+- [Cron](#plugins/cron)
+- [Understanding WP-Cron Scheduling](#plugins/cron/understanding-wp-cron-scheduling)
+- [Scheduling WP Cron Events](#plugins/cron/scheduling-wp-cron-events)
+- [Testing of WP-Cron](#plugins/cron/simple-testing)
+- [Hooking WP-Cron Into the System Task Scheduler](#plugins/cron/hooking-wp-cron-into-the-system-task-scheduler)
+- [Internationalization](#plugins/internationalization)
+- [How to Internationalize Your Plugin](#plugins/internationalization/how-to-internationalize-your-plugin)
+- [Localization](#plugins/internationalization/localization)
+- [Internationalization Security](#plugins/internationalization/security)
+- [The WordPress.org Plugin Directory](#plugins/wordpress-org)
+- [Planning, Submitting, and Maintaining Plugins](#plugins/wordpress-org/planning-submitting-and-maintaining-plugins)
+- [Block Specific Plugin Guidelines](#plugins/wordpress-org/block-specific-plugin-guidelines)
+- [Add Your Plugin to the Block Directory](#plugins/wordpress-org/add-your-plugin-to-the-block-directory)
+- [Release Confirmation Emails](#plugins/wordpress-org/release-confirmation-emails)
+- [Transferring Your Plugin to a New Owner](#plugins/wordpress-org/transferring-your-plugin-to-a-new-owner)
+- [Preventing WordPress from Updating Your External Plugin](#plugins/wordpress-org/preventing-wordpress-from-updating-your-external-plugin)
+- [Detailed Plugin Guidelines](#plugins/wordpress-org/detailed-plugin-guidelines)
+- [Using Subversion](#plugins/wordpress-org/how-to-use-subversion)
+- [Previews and Blueprints](#plugins/wordpress-org/previews-and-blueprints)
+- [Plugin Developer FAQ](#plugins/wordpress-org/plugin-developer-faq)
+- [Common issues](#plugins/wordpress-org/common-issues)
+- [How Your Plugin Assets Work](#plugins/wordpress-org/plugin-assets)
+- [Plugin Readmes](#plugins/wordpress-org/how-your-readme-txt-works)
+- [Take Over an Existing Plugin](#plugins/wordpress-org/take-over-an-existing-plugin)
+- [Managing Your Plugin&#8217;s Security](#plugins/wordpress-org/plugin-security)
+- [Reporting Plugin Security Issues](#plugins/wordpress-org/plugin-security/reporting-plugin-security-issues)
+- [Special User Roles and Capabilities](#plugins/wordpress-org/special-user-roles-capabilities)
 - [Alerts and Warnings](#plugins/wordpress-org/alerts-and-warnings)
 - [Compliance Disclaimers](#plugins/wordpress-org/compliance-disclaimers)
-- [Privacy](#plugins/privacy)
-- [Suggesting text for the site privacy policy](#plugins/privacy/suggesting-text-for-the-site-privacy-policy)
-- [Adding the Personal Data Exporter to Your Plugin](#plugins/privacy/adding-the-personal-data-exporter-to-your-plugin)
-- [Adding the Personal Data Eraser to Your Plugin](#plugins/privacy/adding-the-personal-data-eraser-to-your-plugin)
-- [Privacy Related Options, Hooks and Capabilities](#plugins/privacy/privacy-related-options-hooks-and-capabilities)
 - [Using the Forums](#plugins/wordpress-org/using-the-forums)
-- [Determining Plugin and Content Directories](#plugins/plugin-basics/determining-plugin-and-content-directories)
-- [Plugin Handbook](#plugins)
-- [Introduction to Plugin Development](#plugins/intro)
-- [What is a Plugin?](#plugins/intro/what-is-a-plugin)
+- [Developer Tools](#plugins/developer-tools)
+- [Debug Bar and Add-Ons](#plugins/developer-tools/debug-bar-and-add-ons)
+- [Helper Plugins](#plugins/developer-tools/helper-plugins)
+- [Creating Tables with Plugins](#plugins/creating-tables-with-plugins)
+- [Credits](#plugins/credits)
 
-# Credits <a name="plugins/credits" />
+# Plugin Handbook <a name="plugins" />
 
-Source: https://developer.wordpress.org/plugins/credits/
+Source: https://developer.wordpress.org/plugins/
 
-List of credits brought over manually.
+*Welcome to the WordPress Plugin Developer Handbook; are you ready to jump right in to the world of WordPress plugins?*
 
-- @2Neil
-- @aternus
-- @awoods
-- @blobaugh
-- @code\_poet
-- @cyrijones
-- @danielbachhuber
-- @dawnmschaffer
-- @drewapicture
-- @endeavorm
-- @grapplerulrich
-- @hanni
-- @hlashbrooke
-- @iandunn
-- @jasonm4563
-- @jazzs3quence
-- @joedolson
-- @johnregan3
-- @kimparsell
-- @krogsgard
-- @Marella
-- @metripaldi9
-- @mordauk
-- @NemesisVex
-- @netweb
-- @NikV
-- @nlarnold1
-- @Otto42
-- @pjackson1972
-- @pollyplumber
-- @ramiy
-- @roccotripaldi
-- @sewmyheadon
-- @skippywp
-- @theMikeD
-- @tmoorewp
-- @topher1kenobe
+The Plugin Developer Handbook is a resource for all things WordPress plugins. Whether you’re new to WordPress plugin development, or you’re an experienced plugin developer, you should be able to find the answer to many of your plugin-related questions right here.
+
+- If you’re new to plugin development, start by reading the [introduction](#plugin/intro) and then move on to [the basics](#plugins/plugin-basics).
+- The info in [plugin security](#plugin/security) will introduce best practices for security related stuff.
+- [Hooks](#plugin/hooks) are what make your plugin interact with WordPress, and how you can let other developers interact with your plugin.
+- [Privacy](#plugins/privacy) will help you understand about handling sensitive data.
+- To find out more about WordPress’ built-in functionality that you can use in your plugin, check out [Administration Menus](#plugin/administration-menus), [Shortcodes](#plugin/shortcodes), [Settings](#plugin/settings), [Metadata](#plugin/metadata), [Custom Post Types](#plugins/post-types), [Taxonomies](#plugins/taxonomies), and [Users](#plugin/users).
+- Learn about getting data using the [HTTP API](#plugin/http-api).
+- If you’re using [JavaScript, jQuery or Ajax](#plugin/javascript) in your plugin, you’ll find the information you need in that section.
+- To learn about time-based WordPress tasks, check out the [Cron](#plugin/cron) chapter.
+- [Internationalization](#plugin/internationalization) is how you get your plugin ready for use in locales other than your own.
+- When all that is done, you can prepare your plugin for inclusion in the [Plugin Directory](#plugin/wordpress-org)
+- Finally: some [developer tools](#plugin/developer-tools) you might find useful.
+
+The WordPress Plugin Developer Handbook is created by the WordPress community, for the WordPress community. We are always looking for more contributors; if you’re interested, stop by the [docs team blog](https://make.wordpress.org/docs) to find out more about getting involved.
+
+---
+
+# Introduction to Plugin Development <a name="plugins/intro" />
+
+Source: https://developer.wordpress.org/plugins/intro/
+
+Welcome to the Plugin Developer Handbook. Whether you’re writing your first plugin or your fiftieth, we hope this resource helps you write the best plugin possible.
+
+The Plugin Developer Handbook covers a variety of topics — everything from what should be in the plugin header, to security best practices, to tools you can use to build your plugin. It’s also a work in progress — if you find something missing or incomplete, please notify the documentation team in slack and we’ll make it better together.
+
+## Why We Make Plugins
+
+If there’s one cardinal rule in WordPress development, it’s this: **Don’t touch WordPress core**. This means that you don’t edit core WordPress files to add functionality to your site. This is because WordPress overwrites core files with each update. Any functionality you want to add or modify should be done using plugins.
+
+WordPress plugins can be as simple or as complicated as you need them to be, depending on what you want to do. The simplest plugin is a single PHP file. The [Hello Dolly](https://wordpress.org/plugins/hello-dolly/ "Hello Dolly Plugin") plugin is an example of such a plugin. The plugin PHP file just needs a [Plugin Header](#plugins/the-basics/header-requirements), a couple of PHP functions, and some [hooks](#plugins/hooks) to attach your functions to.
+
+Plugins allow you to greatly extend the functionality of WordPress without touching WordPress core itself.
+
+---
+
+# What is a Plugin? <a name="plugins/intro/what-is-a-plugin" />
+
+Source: https://developer.wordpress.org/plugins/intro/what-is-a-plugin/
+
+Plugins are packages of code that extend the core functionality of WordPress. WordPress plugins are made up of PHP code and can include other assets such as images, CSS, and JavaScript.
+
+By making your own plugin you are *extending* WordPress, i.e. building additional functionality on top of what WordPress already offers. For example, you could write a plugin that displays links to the ten most recent posts on your site.
+
+Or, using WordPress’ custom post types, you could write a plugin that creates a full-featured support ticketing system with email notifications, custom ticket statuses, and a client-facing portal. The possibilities are *endles*s*!*
+
+Most WordPress plugins are composed of many files, but a plugin really only *needs* one main file with a specifically formatted [DocBlock](http://en.wikipedia.org/wiki/PHPDoc#DocBlock) in the header.
+
+[Hello Dolly](https://wordpress.org/plugins/hello-dolly/ "Hello Dolly"), one of the first plugins, is only [100 lines](https://plugins.trac.wordpress.org/browser/hello-dolly/trunk/hello.php) long. Hello Dolly shows lyrics from [the famous song](http://en.wikipedia.org/wiki/Hello,_Dolly!_(song)) in the WordPress admin. Some CSS is used in the PHP file to control how the lyric is styled.
+
+As a WordPress.org plugin author, you have an amazing opportunity to create a plugin that will be installed, tinkered with, and loved by millions of WordPress users. All **you** need to do is turn your great idea into code. The Plugin Handbook is here to help you with that.
 
 ---
 
@@ -322,35 +336,6 @@ When assigning a version number to your project, keep in mind that WordPress use
 
 ---
 
-# Including a Software License <a name="plugins/plugin-basics/including-a-software-license" />
-
-Source: https://developer.wordpress.org/plugins/plugin-basics/including-a-software-license/
-
-Most WordPress plugins are released under the [GPL](http://www.gnu.org/licenses/gpl.html), which is the same license that [WordPress itself uses](https://wordpress.org/about/license/). However, there are other compatible options available. It is always best to clearly indicate the license your plugin uses.
-
-In the [Header Requirements](#plugins/the-basics/header-requirements) section, we briefly mentioned how you can indicate your plugin’s license within the plugin header comment. Another common, and encouraged, practice is to place a license block comment near the top of your main plugin file (the same one that has the plugin header comment).
-
-This license block comment usually looks something like this:
-
-```php
-/*
-{Plugin Name} is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-any later version.
-
-{Plugin Name} is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with {Plugin Name}. If not, see {URI to Plugin License}.
-*/
-```
-
----
-
 # Activation / Deactivation Hooks <a name="plugins/plugin-basics/activation-deactivation-hooks" />
 
 Source: https://developer.wordpress.org/plugins/plugin-basics/activation-deactivation-hooks/
@@ -435,74 +420,6 @@ For further information regarding activation and deactivation hooks, here are so
 
 - [register\_activation\_hook()](#reference/functions/register_activation_hook) in the WordPress function reference.
 - [register\_deactivation\_hook()](#reference/functions/register_deactivation_hook) in the WordPress function reference.
-
----
-
-# Uninstall Methods <a name="plugins/plugin-basics/uninstall-methods" />
-
-Source: https://developer.wordpress.org/plugins/plugin-basics/uninstall-methods/
-
-Your plugin may need to do some clean-up when it is uninstalled from a site.
-
-A plugin is considered uninstalled if a user has deactivated the plugin, and then clicks the delete link within the WordPress Admin.
-
-When your plugin is uninstalled, you’ll want to clear out any plugin options and/or settings specific to the plugin, and/or other database entities such as tables.
-
-Less experienced developers sometimes make the mistake of using the deactivation hook for this purpose.
-
-This table illustrates the differences between deactivation and uninstall.
-
-| Scenario | Deactivation Hook | Uninstall Hook |
-|---|---|---|
-| Flush Cache/Temp | Yes | No |
-| Flush Permalinks | Yes | No |
-| Remove Options from {$[wpdb](#reference/classes/wpdb)-&gt;prefix}\_options | No | Yes |
-| Remove Tables from [wpdb](#reference/classes/wpdb) | No | Yes |
-
-## Method 1: `register_uninstall_hook`
-
-To set up an uninstall hook, use the [register\_uninstall\_hook()](#reference/functions/register_uninstall_hook) function:
-
-```php
-register_uninstall_hook(
-	__FILE__,
-	'pluginprefix_function_to_run'
-);
-```
-
-## Method 2: `uninstall.php`
-
-To use this method you need to create an `uninstall.php` file inside the root folder of your plugin. This magic file is run automatically when the users deletes the plugin.
-
-For example: `/plugin-name/uninstall.php`
-
-  
-Always check for the constant `WP_UNINSTALL_PLUGIN` in `uninstall.php` before doing anything. This protects against direct access. The constant will be defined by WordPress during the `uninstall.php` invocation.
-
-The constant is **NOT** defined when uninstall is performed by [register\_uninstall\_hook()](#reference/functions/register_uninstall_hook) .
-
-Here is an example deleting option entries and dropping a database table:
-
-```php
-// if uninstall.php is not called by WordPress, die
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-    die;
-}
-
-$option_name = 'wporg_option';
-
-delete_option( $option_name );
-
-// for site options in Multisite
-delete_site_option( $option_name );
-
-// drop a custom database table
-global $wpdb;
-$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}mytable" );
-```
-
-  
-In Multisite, looping through all blogs to delete options can be very resource intensive.
 
 ---
 
@@ -697,11 +614,428 @@ Of course, you could take different aspects of these and others to create your o
 
 ---
 
+# Determining Plugin and Content Directories <a name="plugins/plugin-basics/determining-plugin-and-content-directories" />
+
+Source: https://developer.wordpress.org/plugins/plugin-basics/determining-plugin-and-content-directories/
+
+When coding WordPress plugins you often need to reference various files and folders throughout the WordPress installation and within your plugin or theme.
+
+WordPress provides several functions for easily determining where a given file or directory lives. Always use these functions in your plugins instead of hard-coding references to the wp-content directory or using the WordPress internal constants.
+
+WordPress allows users to place their wp-content directory anywhere they want and rename it whatever they want. Never assume that plugins will be in wp-content/plugins, uploads will be in wp-content/uploads, or that themes will be in wp-content/themes.
+
+PHP’s `__FILE__` magic-constant resolves symlinks automatically, so if the `wp-content` or `wp-content/plugins` or even the individual plugin directory is symlinked, hardcoded paths will not work correctly.
+
+## Common Usage
+
+If your plugin includes JavaScript files, CSS files or other external files, then it’s likely you’ll need the URL to these files so you can load them into the page. To do this you should use the [plugins\_url()](#reference/functions/plugins_url) function like so:
+
+```php
+plugins_url( 'myscript.js', __FILE__ );
+```
+
+This will return the full URL to myscript.js, such as `example.com/wp-content/plugins/myplugin/myscript.js`.
+
+To load your plugins’ JavaScript or CSS into the page you should use [`wp_enqueue_script()`](#reference/functions/wp_enqueue_script) or [`wp_enqueue_style()`](#reference/functions/wp_enqueue_style) respectively, passing the result of `plugins_url()` as the file URL.
+
+## Available Functions
+
+WordPress includes many other functions for determining paths and URLs to files or directories within plugins, themes, and WordPress itself. See the individual DevHub pages for each function for complete information on their use.
+
+### Plugins
+
+```php
+plugins_url()
+plugin_dir_url()
+plugin_dir_path()
+plugin_basename()
+```
+
+### Themes
+
+```php
+get_template_directory_uri()
+get_stylesheet_directory_uri()
+get_stylesheet_uri()
+get_theme_root_uri()
+get_theme_root()
+get_theme_roots()
+get_stylesheet_directory()
+get_template_directory()
+```
+
+### Site Home
+
+```php
+home_url()
+get_home_path()
+```
+
+### WordPress
+
+```php
+admin_url()
+site_url()
+content_url()
+includes_url()
+wp_upload_dir()
+```
+
+### Multisite
+
+```php
+get_admin_url()
+get_home_url()
+get_site_url()
+network_admin_url()
+network_site_url()
+network_home_url()
+```
+
+## Constants
+
+WordPress makes use of the following constants when determining the path to the content and plugin directories. These should not be used directly by plugins or themes, but are listed here for completeness.
+
+```php
+WP_CONTENT_DIR  // no trailing slash, full paths only
+WP_CONTENT_URL  // full url 
+WP_PLUGIN_DIR  // full path, no trailing slash
+WP_PLUGIN_URL  // full url, no trailing slash
+
+// Available per default in MS, not set in single site install
+// Can be used in single site installs (as usual: at your own risk)
+UPLOADS // (If set, uploads folder, relative to ABSPATH) (for e.g.: /wp-content/uploads)
+```
+
+## Related
+
+****WordPress Directories****:
+
+| [home\_url()](#reference/functions/home_url) | Home URL | <http://www.example.com> |
+|---|---|---|
+| [site\_url()](#reference/functions/site_url) | Site directory URL | <http://www.example.com> or <http://www.example.com/wordpress> |
+| [admin\_url()](#reference/functions/admin_url) | Admin directory URL | <http://www.example.com/wp-admin> |
+| [includes\_url()](#reference/functions/includes_url) | Includes directory URL | <http://www.example.com/wp-includes> |
+| [content\_url()](#reference/functions/content_url) | Content directory URL | <http://www.example.com/wp-content> |
+| [plugins\_url()](#reference/functions/plugins_url) | Plugins directory URL | <http://www.example.com/wp-content/plugins> |
+| [wp\_upload\_dir()](#reference/functions/wp_upload_dir) | Upload directory URL (returns an array) | <http://www.example.com/wp-content/uploads> |
+
+---
+
+# Including a Software License <a name="plugins/plugin-basics/including-a-software-license" />
+
+Source: https://developer.wordpress.org/plugins/plugin-basics/including-a-software-license/
+
+Most WordPress plugins are released under the [GPL](http://www.gnu.org/licenses/gpl.html), which is the same license that [WordPress itself uses](https://wordpress.org/about/license/). However, there are other compatible options available. It is always best to clearly indicate the license your plugin uses.
+
+In the [Header Requirements](#plugins/the-basics/header-requirements) section, we briefly mentioned how you can indicate your plugin’s license within the plugin header comment. Another common, and encouraged, practice is to place a license block comment near the top of your main plugin file (the same one that has the plugin header comment).
+
+This license block comment usually looks something like this:
+
+```php
+/*
+{Plugin Name} is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+any later version.
+
+{Plugin Name} is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with {Plugin Name}. If not, see {URI to Plugin License}.
+*/
+```
+
+---
+
+# Uninstall Methods <a name="plugins/plugin-basics/uninstall-methods" />
+
+Source: https://developer.wordpress.org/plugins/plugin-basics/uninstall-methods/
+
+Your plugin may need to do some clean-up when it is uninstalled from a site.
+
+A plugin is considered uninstalled if a user has deactivated the plugin, and then clicks the delete link within the WordPress Admin.
+
+When your plugin is uninstalled, you’ll want to clear out any plugin options and/or settings specific to the plugin, and/or other database entities such as tables.
+
+Less experienced developers sometimes make the mistake of using the deactivation hook for this purpose.
+
+This table illustrates the differences between deactivation and uninstall.
+
+| Scenario | Deactivation Hook | Uninstall Hook |
+|---|---|---|
+| Flush Cache/Temp | Yes | No |
+| Flush Permalinks | Yes | No |
+| Remove Options from {$[wpdb](#reference/classes/wpdb)-&gt;prefix}\_options | No | Yes |
+| Remove Tables from [wpdb](#reference/classes/wpdb) | No | Yes |
+
+## Method 1: `register_uninstall_hook`
+
+To set up an uninstall hook, use the [register\_uninstall\_hook()](#reference/functions/register_uninstall_hook) function:
+
+```php
+register_uninstall_hook(
+	__FILE__,
+	'pluginprefix_function_to_run'
+);
+```
+
+## Method 2: `uninstall.php`
+
+To use this method you need to create an `uninstall.php` file inside the root folder of your plugin. This magic file is run automatically when the users deletes the plugin.
+
+For example: `/plugin-name/uninstall.php`
+
+  
+Always check for the constant `WP_UNINSTALL_PLUGIN` in `uninstall.php` before doing anything. This protects against direct access. The constant will be defined by WordPress during the `uninstall.php` invocation.
+
+The constant is **NOT** defined when uninstall is performed by [register\_uninstall\_hook()](#reference/functions/register_uninstall_hook) .
+
+Here is an example deleting option entries and dropping a database table:
+
+```php
+// if uninstall.php is not called by WordPress, die
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+    die;
+}
+
+$option_name = 'wporg_option';
+
+delete_option( $option_name );
+
+// for site options in Multisite
+delete_site_option( $option_name );
+
+// drop a custom database table
+global $wpdb;
+$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}mytable" );
+```
+
+  
+In Multisite, looping through all blogs to delete options can be very resource intensive.
+
+---
+
 # Plugin Security <a name="plugins/security" />
 
 Source: https://developer.wordpress.org/plugins/security/
 
 This content has been moved to the [Security page](#apis/security) in the Common APIs Handbook.
+
+---
+
+# Checking User Capabilities <a name="plugins/security/checking-user-capabilities" />
+
+Source: https://developer.wordpress.org/plugins/security/checking-user-capabilities/
+
+If your plugin allows users to submit data—be it on the Admin or the Public side—it should check for User Capabilities.
+
+## User Roles and Capabilities
+
+The most important step in creating an efficient security layer is having a user permission system in place. WordPress provides this in the form of [User Roles and Capabilities](#plugins/users/roles-and-capabilities).
+
+Every user logged into WordPress is automatically assigned specific User capabilities depending on their User role.
+
+**User roles** is just a fancy way of saying which group the user belongs to. Each group has a specific set of predefined capabilities.
+
+For example, the main user of your website will have the User role of an Administrator while other users might have roles like Editor or Author. You could have more than one user assigned to a role, i.e. there might be two Administrators for a website.
+
+**User capabilities** are the specific permissions that you assign to each user or to a User role.
+
+For example, Administrators have the “manage\_options” capability which allows them to view, edit and save options for the website. Editors on the other hand lack this capability which will prevent them from interacting with options.
+
+These capabilities are then checked at various points within the Admin. Depending on the capabilities assigned to a role; menus, functionality, and other aspects of the WordPress experience may be added or removed.
+
+**As you build a plugin, make sure to run your code only when the current user has the necessary capabilities.**
+
+### Hierarchy
+
+The higher the user role, the more capabilities the user has. Each user role inherits the previous roles in the hierarchy.
+
+For example, the “Administrator”, which is the highest user role on a single site installation, inherits the following roles and their capabilities: “Subscriber”, “Contributor”, “Author” and “Editor”.
+
+## Examples
+
+### No Restrictions
+
+The example below creates a link on the frontend which gives the ability to trash posts. Because this code does not check user capabilities, **it allows any visitor to the site to trash posts!**
+
+```php
+/**
+ * Generate a Delete link based on the homepage url.
+ *
+ * @param string $content   Existing content.
+ *
+ * @return string|null
+ */
+function wporg_generate_delete_link( $content ) {
+	// Run only for single post page.
+	if ( is_single() && in_the_loop() && is_main_query() ) {
+		// Add query arguments: action, post.
+		$url = add_query_arg(
+			[
+				'action' => 'wporg_frontend_delete',
+				'post'   => get_the_ID(),
+			], home_url()
+		);
+
+		return $content . ' <a href="' . esc_url( $url ) . '">' . esc_html__( 'Delete Post', 'wporg' ) . '</a>';
+	}
+
+	return null;
+}
+
+/**
+ * Request handler
+ */
+function wporg_delete_post() {
+	if ( isset( $_GET['action'] ) && 'wporg_frontend_delete' === $_GET['action'] ) {
+
+		// Verify we have a post id.
+		$post_id = ( isset( $_GET['post'] ) ) ? ( $_GET['post'] ) : ( null );
+
+		// Verify there is a post with such a number.
+		$post = get_post( (int) $post_id );
+		if ( empty( $post ) ) {
+			return;
+		}
+
+		// Delete the post.
+		wp_trash_post( $post_id );
+
+		// Redirect to admin page.
+		$redirect = admin_url( 'edit.php' );
+		wp_safe_redirect( $redirect );
+
+		// We are done.
+		die;
+	}
+}
+
+/**
+ * Add the delete link to the end of the post content.
+ */
+add_filter( 'the_content', 'wporg_generate_delete_link' );
+
+/**
+ * Register our request handler with the init hook.
+ */
+add_action( 'init', 'wporg_delete_post' );
+
+```
+
+### Restricted to a Specific Capability
+
+The example above allows any visitor to the site to click on the “Delete” link and trash the post. However, we only want Editors and above to be able to click on the “Delete” link.
+
+To accomplish this, we will check that the current user has the capability `edit_others_posts`, which only Editors or above would have:
+
+```php
+/**
+ * Generate a Delete link based on the homepage url.
+ *
+ * @param string $content   Existing content.
+ *
+ * @return string|null
+ */
+function wporg_generate_delete_link( $content ) {
+	// Run only for single post page.
+	if ( is_single() && in_the_loop() && is_main_query() ) {
+		// Add query arguments: action, post.
+		$url = add_query_arg(
+			[
+				'action' => 'wporg_frontend_delete',
+				'post'   => get_the_ID(),
+			], home_url()
+		);
+
+		return $content . ' <a href="' . esc_url( $url ) . '">' . esc_html__( 'Delete Post', 'wporg' ) . '</a>';
+	}
+
+	return null;
+}
+
+/**
+ * Request handler
+ */
+function wporg_delete_post() {
+	if ( isset( $_GET['action'] ) && 'wporg_frontend_delete' === $_GET['action'] ) {
+
+		// Verify we have a post id.
+		$post_id = ( isset( $_GET['post'] ) ) ? ( $_GET['post'] ) : ( null );
+
+		// Verify there is a post with such a number.
+		$post = get_post( (int) $post_id );
+		if ( empty( $post ) ) {
+			return;
+		}
+
+		// Delete the post.
+		wp_trash_post( $post_id );
+
+		// Redirect to admin page.
+		$redirect = admin_url( 'edit.php' );
+		wp_safe_redirect( $redirect );
+
+		// We are done.
+		die;
+	}
+}
+
+/**
+ * Add delete post ability
+ */
+add_action('plugins_loaded', 'wporg_add_delete_post_ability');
+ 
+function wporg_add_delete_post_ability() {    
+    if ( current_user_can( 'edit_others_posts' ) ) {
+        /**
+         * Add the delete link to the end of the post content.
+         */
+        add_filter( 'the_content', 'wporg_generate_delete_link' );
+      
+        /**
+         * Register our request handler with the init hook.
+         */
+        add_action( 'init', 'wporg_delete_post' );
+    }
+}
+```
+
+---
+
+# Data Validation <a name="plugins/security/data-validation" />
+
+Source: https://developer.wordpress.org/plugins/security/data-validation/
+
+This content has been moved to the [Data Validation page](#apis/security/data-validation) in the Common APIs Handbook.
+
+---
+
+# Securing (sanitizing) Input <a name="plugins/security/securing-input" />
+
+Source: https://developer.wordpress.org/plugins/security/securing-input/
+
+This content has been moved to the [Sanitizing Data](#apis/security/sanitizing) page in the Common APIs Handbook.
+
+---
+
+# Nonces <a name="plugins/security/nonces" />
+
+Source: https://developer.wordpress.org/plugins/security/nonces/
+
+This content has been moved to the [Nonces page](#apis/security/nonces) in the Common APIs Handbook.
+
+---
+
+# Securing (escaping) Output <a name="plugins/security/securing-output" />
+
+Source: https://developer.wordpress.org/plugins/security/securing-output/
+
+This content has been moved to the [Escaping Data](#apis/security/escaping) page in the Common APIs Handbook.
 
 ---
 
@@ -1071,6 +1405,474 @@ function wporg_debug() {
 }
 add_action( 'all', 'wporg_debug' );
 ```
+
+---
+
+# Privacy <a name="plugins/privacy" />
+
+Source: https://developer.wordpress.org/plugins/privacy/
+
+Are you writing a plugin that handles personal data – things like names, addresses, and other things that can be used to identify a person? You’ll want to take care with that data and protect the privacy of your users and visitors.
+
+## What is Privacy?
+
+WordPress.org made several enhancements ahead of Europe’s General Data Protection Regulation. Following the launch of this work, we have made Privacy a permanent focus in core trac development, which will allow us to continue making enhancements on privacy and data protection outside specific legislation.
+
+But what kind of issues might fall under the definition of “privacy”, and how do we define it? Although privacy requirements vary widely across countries, cultures, and legal systems, there are several general principles applicable across any situation:
+
+- **Consent and choice:** giving users (and site visitors) choices and options over the uses of their data, and requiring clear, specific, and informed opt-in;
+- **Purpose legitimacy and specification:** only collect and use the personal data for the purpose it was intended for, and for which the user was clearly informed of in advance;
+- **Collection limitation:** only collect the user data which is needed; don’t make extra copies of data or combine your data with data from other plugins if you can avoid it
+- **Data minimization:** restrict the processing of data, as well as the number of people who have access to it, to the minimum uses and people necessary;
+- **Use, retention and disclosure limitation:** delete data which is no longer needed, both in active use and in archives, by both the recipient and any third parties;
+- **Accuracy and quality:** ensure that the data collected and used is correct, relevant, and up-to-date, especially if inaccurate or poor data could adversely impact the user;
+- **Openness, transparency and notice:** inform users how their data is being collected, used, and shared, as well as any rights they have over those uses;
+- **Individual participation and access:** give users a means to access or download their data;
+- **Accountability:** documenting the uses of data, protecting it in transit and in use by third parties, and preventing misuse and breaches as much as is possible;
+- **Information security:** protecting data through appropriate technical and security measures;
+- **Privacy compliance:** ensuring that the work meets the privacy regulations of the location where it will be used to collect and process people’s data.
+
+(Source: [ISO 29100/Privacy Framework standard](https://www.iso.org/standard/45123.html))
+
+While not all of these principles will be applicable across all situations and uses, using them in the development process can help to ensure user trust.
+
+## Privacy By Design
+
+Many of these principles are espoused in the Privacy by Design framework, which states that:
+
+- Privacy should be proactive, not reactive, and must anticipate privacy issues before they reach the user. Privacy must also be preventative, not remedial.
+- Privacy should be the default setting. The user should not have to take actions to secure their privacy, and consent for data sharing should not be assumed.
+- Privacy should be built into design as a core function, not an add-on.
+- Privacy should be positive sum: there should be no trade-off between privacy and security, privacy and safety, or privacy and service provision.
+- Privacy should offer end-to-end lifecycle protection through data minimization, minimal data retention, and regular deletion of data which is no longer required.
+- The privacy standards used on your plugin (and service, if applicable) should be visible, transparent, open, documented and independently verifiable.
+- Privacy should be user-centric. People should be given options such as granular privacy choices, maximized privacy defaults, detailed privacy information notices, user-friendly options, and clear notification of changes.
+
+## Food for Thought for Your Plugin
+
+To help your plugin be ready, we recommend going through the following list of questions for every plugin that you make:
+
+1. How does your plugin handle personal data? Use wp\_add\_privacy\_policy\_content (link) to disclose to your users any of the following: 
+    - Does the plugin share personal data with third parties (e.g. to outside APIs/servers). If so, what data does it share with which third parties and do they have a published privacy policy you can provide a link to?
+    - Does the plugin collect personal data? If so, what data and where is it stored? Think about places like user data/meta, options, post meta, custom tables, files, etc.
+    - Does the plugin use personal data collected by others? If so, what data? Does the plugin pass personal data to a SDK? What does that SDK do with the data?
+    - Does the plugin collect telemetry data, directly or indirectly? Loading an image from a third-party source on every install, for example, could indirectly log and track the usage data of all of your plugin installs.
+    - Does the plugin enqueue Javascript, tracking pixels or embed iframes from a third party (third party JS, tracking pixels and iframes can collect visitor’s data/actions, leave cookies, etc.)?
+    - Does the plugin store things in the browser? If so, where and what? Think about things like cookies, local storage, etc.
+2. If your plugin collects personal data… 
+    - Does it provide a personal data exporter?
+    - Does it provide a personal data eraser callback?
+    - For what reasons (if any) does the plugin refuse to erase personal data? (e.g. order not yet completed, etc) – those should be disclosed as well.
+3. Does the plugin use error logging? Does it avoid logging personal data if possible? Could you use things like wp\_privacy\_anonymize\_data to minimize the personal data logged? How long are log entries kept? Who has access to them?
+4. In wp-admin, what role/capabilities are required to access/see personal data? Are they sufficient?
+5. What personal data is exposed on the front end of the site by the plugin? Does it appear to logged-in and logged-out users? Should it?
+6. What personal data is exposed in REST API endpoints by the plugin? Does it appear to logged-in and logged-out users? What roles/capabilities are required to see it? Are those appropriate?
+7. Does the plugin properly remove/clean-up data, including especially personal data: 
+    - During uninstall of the plugin?
+    - When a related item is deleted (e.g. from the post meta or any post-referencing rows in another table)?
+    - When a user is deleted (e.g. from any user referencing rows in a table)?
+8. Does the plugin provide controls to reduce the amount of personal data required?
+9. Does the plugin share personal data with SDKs or APIs only when the SDK or API requires it, or is the plugin also sharing personal data that is optional?
+10. Does the amount of personal data collected or shared by this plugin change when certain other plugins are also installed?
+
+## External Resources
+
+- Privacy Blog <https://privacy.blog>
+- WordPress.org Privacy Policy <https://wordpress.org/about/privacy/>
+
+---
+
+# Suggesting text for the site privacy policy <a name="plugins/privacy/suggesting-text-for-the-site-privacy-policy" />
+
+Source: https://developer.wordpress.org/plugins/privacy/suggesting-text-for-the-site-privacy-policy/
+
+Every plugin that collects, uses, or stores user data, or passes it to an external source or third party, should add a section of suggested text to the privacy policy postbox. This is best done with` wp_add_privacy_policy_content( $plugin_name, $policy_text )`. This will allow site administrators to pull that information into their site’s privacy policy.
+
+To make this simpler for the users, the text should address the questions provided in the default privacy policy:
+
+- What personal data we collect and why we collect it
+    - Their own manually input information
+    - WP: Contact forms
+    - WP: Comments
+    - WP: Cookies
+    - WP: Third party embeds
+    - Analytics
+- Who we share your data with
+- How long we retain your data
+- What rights you have over your data
+- Where we send your data
+- Your contact information
+- How we protect your data
+- What data breach procedures we have in place
+- What third parties we receive data from
+- What automated decision making and/or profiling we do with user data
+- Any industry regulatory disclosure requirements
+
+While not all of these questions will be applicable to all plugins, we recommend taking care with the sections on data sharing.
+
+## Code Example
+
+It is recommended to call wp_add_privacy_policy_content during the admin_init action. Calling it outside of an action hook can lead to problems, see ticket #44142 for details.
+
+Supplemental information can be provided through the use of the specialized `.privacy-policy-tutorial` CSS class. Any content contained within HTML elements that have this CSS class applied will be omitted from the clipboard when the section content is copied.
+
+```php
+/**
+ * Adds a privacy policy statement.
+ */
+function wporg_add_privacy_policy_content() {
+	if ( ! function_exists( 'wp_add_privacy_policy_content' ) ) {
+		return;
+	}
+	$content = '<p class="privacy-policy-tutorial">' . __( 'Some introductory content for the suggested text.', 'text-domain' ) . '</p>'
+			. '<strong class="privacy-policy-tutorial">' . __( 'Suggested Text:', 'my_plugin_textdomain' ) . '</strong> '
+			. sprintf(
+				__( 'When you leave a comment on this site, we send your name, email address, IP address and comment text to example.com. Example.com does not retain your personal data. The example.com privacy policy is <a href="%1$s" target="_blank">here</a>.', 'text-domain' ),
+				'https://example.com/privacy-policy'
+			);
+	wp_add_privacy_policy_content( 'Example Plugin', wp_kses_post( wpautop( $content, false ) ) );
+}
+
+add_action( 'admin_init', 'wporg_add_privacy_policy_content' );
+```
+
+---
+
+# Adding the Personal Data Exporter to Your Plugin <a name="plugins/privacy/adding-the-personal-data-exporter-to-your-plugin" />
+
+Source: https://developer.wordpress.org/plugins/privacy/adding-the-personal-data-exporter-to-your-plugin/
+
+In WordPress 4.9.6, new tools were added to make compliance easier with laws like the European Union’s General Data Protection Regulation, or GDPR for short. Among the tools added is a Personal Data Export tool which supports exporting all the personal data for a given user in a ZIP file. In addition to the personal data stored in things like WordPress comments, plugins can also hook into the exporter feature to export the personal data they collect, whether it be in something like postmeta or even an entirely new Custom Post Type (CPT).
+
+The “key” for all the exports is the user’s email address – this was chosen because it supports exporting personal data for both full-fledged registered users and also unregistered users (e.g. like a logged out commenter).
+
+However, since assembling a personal data export could be an intensive process and will likely contain sensitive data, we don’t want to just generate it and email it to the requestor without confirming the request, so the admin-facing user interface starts all requests by having the admin enter the username or email address making the request and then sends then a link to click to confirm their request.
+
+Once a request has been confirmed, the admin can generate and download or directly email the personal data export ZIP file for the user, or do the export anyways if the need arises. Inside the ZIP file the user receives, they will find a “mini website” with an index HTML page containing their personal data organized in groups (e.g. a group for comments, etc. )
+
+Whether the admin downloads the personal data export ZIP file or sends it directly to the requestor, the way the personal data export is assembled is identical – and relies on hooking “exporter” callbacks to do the dirty work of collecting all the data for the export. When the admin clicks on the download or email link, an AJAX loop begins that iterates over all the exporters registered in the system, one at a time. In addition to exporters built into core, plugins can register their own exporter callbacks.
+
+The exporter callback interface is designed to be as simple as possible. A exporter callback receives the email address we are working with and a page parameter as well. The page parameter (which starts at 1) is used to avoid plugins potentially causing timeouts by attempting to export all the personal data they’ve collected at once. A well behaved plugin will limit the amount of data it attempts to erase per page (e.g. 100 posts, 200 comments, etc.)
+
+The exporter callback replies with whatever data it has for that email address and page and whether it is done or not. If a exporter callback reports that it is not done, it will be called again (in a separate request) with the page parameter incremented by 1. Exporter callbacks are expected to return an array of items for the export. Each item contains an a group identifier for the group of which  
+the item is a part (e.g. comments, posts, orders, etc.), an optional group label (translated), an item identifier (e.g. comment-133) and then an array of name, value pairs containing the data to be exported for that item.
+
+It is noteworthy that the value could be a media path, in which case a link to the media file will be added to the index HTML page in the export.
+
+When all the exporters have been called to completion, WordPress first assembles an “index” HTML document that serves as the heart of the export report. If a plugin reports additional data for an item that WordPress or another plugin has already added, all the data for that item will be presented together.
+
+Exports are cached on the server for 3 days and then deleted.
+
+A plugin can register one or more exporters, but most plugins will only need one. Let’s work on a hypothetical plugin which adds location data for the commenter to comments.
+
+First, let’s assume the plugin has used `add\_comment\_meta` to add location data using `meta\_key`s of `latitude` and `longitude`
+
+The first thing the plugin needs to do is to create an exporter function that accepts an email address and a page, e.g.:
+
+```php
+/**
+ * Export user meta for a user using the supplied email.
+ *
+ * @param string $email_address   email address to manipulate
+ * @param int    $page            pagination
+ *
+ * @return array
+ */
+function wporg_export_user_data_by_email( $email_address, $page = 1 ) {
+	$number = 500; // Limit us to avoid timing out
+	$page   = (int) $page;
+
+	$export_items = array();
+
+	$comments = get_comments(
+		array(
+			'author_email' => $email_address,
+			'number'       => $number,
+			'paged'        => $page,
+			'order_by'     => 'comment_ID',
+			'order'        => 'ASC',
+		)
+	);
+
+	foreach ( (array) $comments as $comment ) {
+		$latitude  = get_comment_meta( $comment->comment_ID, 'latitude', true );
+		$longitude = get_comment_meta( $comment->comment_ID, 'longitude', true );
+
+		// Only add location data to the export if it is not empty.
+		if ( ! empty( $latitude ) ) {
+			// Most item IDs should look like postType-postID. If you don't have a post, comment or other ID to work with,
+			// use a unique value to avoid having this item's export combined in the final report with other items
+			// of the same id.
+			$item_id = "comment-{$comment->comment_ID}";
+
+			// Core group IDs include 'comments', 'posts', etc. But you can add your own group IDs as needed
+			$group_id = 'comments';
+
+			// Optional group label. Core provides these for core groups. If you define your own group, the first
+			// exporter to include a label will be used as the group label in the final exported report.
+			$group_label = __( 'Comments', 'text-domain' );
+
+			// Plugins can add as many items in the item data array as they want.
+			$data = array(
+				array(
+					'name'  => __( 'Commenter Latitude', 'text-domain' ),
+					'value' => $latitude,
+				),
+				array(
+					'name'  => __( 'Commenter Longitude', 'text-domain' ),
+					'value' => $longitude,
+				),
+			);
+
+			$export_items[] = array(
+				'group_id'    => $group_id,
+				'group_label' => $group_label,
+				'item_id'     => $item_id,
+				'data'        => $data,
+			);
+		}
+	}
+
+	// Tell core if we have more comments to work on still.
+	$done = count( $comments ) > $number;
+	return array(
+		'data' => $export_items,
+		'done' => $done,
+	);
+}
+```
+
+The next thing the plugin needs to do is to register the callback by filtering the exporter array using the `wp\_privacy\_personal\_data\_exporters` filter.
+
+When registering you provide a friendly name for the export (to aid in debugging – this friendly name is not shown to anyone at this time) and the callback, e.g.
+
+```php
+/**
+ * Registers all data exporters.
+ *
+ * @param array $exporters
+ *
+ * @return mixed
+ */
+function wporg_register_user_data_exporters( $exporters ) {
+	$exporters['my-plugin-slug'] = array(
+		'exporter_friendly_name' => __( 'Comment Location Plugin', 'text-domain' ),
+		'callback'               => 'my_plugin_exporter',
+	);
+	return $exporters;
+}
+
+add_filter( 'wp_privacy_personal_data_exporters', 'wporg_register_user_data_exporters' );
+```
+
+And that’s all there is to it! Your plugin will now provide data for the export!
+
+---
+
+# Adding the Personal Data Eraser to Your Plugin <a name="plugins/privacy/adding-the-personal-data-eraser-to-your-plugin" />
+
+Source: https://developer.wordpress.org/plugins/privacy/adding-the-personal-data-eraser-to-your-plugin/
+
+In WordPress 4.9.6, new tools were added to make compliance easier with laws like the European Union’s General Data Protection Regulation, or GDPR for short. Among the tools added is a Personal Data Removal tool which supports erasing/anonymizing personal data for a given user. It does NOT delete registered user accounts – that is still a separate step the admin can choose whether or not to do.
+
+In addition to the personal data stored in things like WordPress comments, plugins can also hook into the eraser feature to erase the personal data they collect, whether it be in something like postmeta or even an entirely new Custom Post Type (CPT).
+
+Like the exporters, the “key” for all the erasers is the user’s email address – this was chosen because it supports erasing personal data for both full-fledged registered users and also unregistered users (e.g. like a logged out commenter).
+
+However, since performing a personal data erase is a destructive process, we don’t want to just do it without confirming the request, so the admin-facing user interface starts all requests by having the admin enter the username or email address making the request and then sends then a link to click to confirm their request. Once a request has been confirmed, the admin can kick off personal data erasure for the user, or force one if the need arises.
+
+The way the personal data export is erased is similar to how the personal data exporters – and relies on hooking “eraser” callbacks to do the dirty work of erasing the data. When the admin clicks on the remove personal data link, an AJAX loop begins that iterates over all the erasers registered in the system, one at a time. In addition to erasers built into core, plugins can register their own eraser callbacks.
+
+The eraser callback interface is designed to be as simple as possible. An eraser callback receives the email address we are working with, and a page parameter as well. The page parameter (which starts at 1) is used to avoid plugins potentially causing timeouts by attempting to erase all the personal data they’ve collected at once. A well behaved plugin will limit the amount of data it attempts to erase per page (e.g. 100 posts, 200 comments, etc.)
+
+The eraser callback replies whether items containing personal data were erased, whether any items containing personal data were retained, an array of messages to present to the admin (explaining why items that were retained were retained) and whether it is done or not. If an eraser callback reports that it is not done, it will be called again (in a separate request) with the page parameter incremented by 1.
+
+When all the exporters have been called to completion, the admin user interface is updated to show whether or not all personal data found was erased, and any messages explaining why personal data was retained.
+
+Let’s work on a hypothetical plugin which adds commenter location data to comments. Let’s assume the plugin has used `add_comment_meta` to add location data using `meta_ke`ys of `latitude` and `longitude`
+
+The first thing the plugin needs to do is to create an eraser function that accepts an email address and a page, e.g.:
+
+```php
+/**
+ * Removes any stored location data from a user's comment meta for the supplied email address.
+ *
+ * @param string $email_address   email address to manipulate
+ * @param int    $page            pagination
+ *
+ * @return array
+ */
+function wporg_remove_location_meta_from_comments_for_email( $email_address, $page = 1 ) {
+	$number = 500; // Limit us to avoid timing out
+	$page   = (int) $page;
+
+	$comments = get_comments(
+		array(
+			'author_email' => $email_address,
+			'number'       => $number,
+			'paged'        => $page,
+			'order_by'     => 'comment_ID',
+			'order'        => 'ASC',
+		)
+	);
+
+	$items_removed = false;
+
+	foreach ( (array) $comments as $comment ) {
+		$latitude  = get_comment_meta( $comment->comment_ID, 'latitude', true );
+		$longitude = get_comment_meta( $comment->comment_ID, 'longitude', true );
+
+		if ( ! empty( $latitude ) ) {
+			delete_comment_meta( $comment->comment_ID, 'latitude' );
+			$items_removed = true;
+		}
+
+		if ( ! empty( $longitude ) ) {
+			delete_comment_meta( $comment->comment_ID, 'longitude' );
+			$items_removed = true;
+		}
+	}
+
+	// Tell core if we have more comments to work on still
+	$done = count( $comments ) < $number;
+	return array(
+		'items_removed'  => $items_removed,
+		'items_retained' => false, // always false in this example
+		'messages'       => array(), // no messages in this example
+		'done'           => $done,
+	);
+}
+```
+
+The next thing the plugin needs to do is to register the callback by filtering the eraser array using the `wp\_privacy\_personal\_data\_erasers`  
+filter.
+
+When registering you provide a friendly name for the eraser (to aid in debugging – this friendly name is not shown to anyone at this time) and the callback, e.g.
+
+```php
+/**
+ * Registers all data erasers.
+ *
+ * @param array $exporters
+ *
+ * @return mixed
+ */
+function wporg_register_privacy_erasers( $erasers ) {
+	$erasers['my-plugin-slug'] = array(
+		'eraser_friendly_name' => __( 'Comment Location Plugin', 'text-domain' ),
+		'callback'             => 'wporg_remove_location_meta_from_comments_for_email',
+	);
+	return $erasers;
+}
+
+add_filter( 'wp_privacy_personal_data_erasers', 'wporg_register_privacy_erasers' );
+```
+
+And that’s all there is to it! Your plugin will now clean up its personal data!
+
+---
+
+# Privacy Related Options, Hooks and Capabilities <a name="plugins/privacy/privacy-related-options-hooks-and-capabilities" />
+
+Source: https://developer.wordpress.org/plugins/privacy/privacy-related-options-hooks-and-capabilities/
+
+The privacy tools were originally introduced in WordPress 4.9.6. These tools are designed to allow (and encourage) developers to use them as part of the Privacy Exporter, Privacy Eraser and the Privacy Policy Guide.
+
+Since then, several newer hooks have been introduced to expand on the available capabilities. These hooks allow developers to include additional personal data in export and erasure requests, and introduce suggested content for the privacy policy guide.
+
+Along with the ability to control these tools, there are several new filters for use with the request and confirmation emails, enabling finer-grained controls over these notifications.
+
+## Options
+
+`wp_page_for_privacy_policy` – contains the page ID of a site’s privacy page
+
+## Actions
+
+`user_request_action_confirmed` – fired when a user confirms a privacy request
+
+`wp_privacy_delete_old_export_files` – a scheduled action used to prune old exports from the personal data exports folder
+
+`wp_privacy_personal_data_erased` – fired after the last page of the last eraser is complete
+
+`wp_privacy_personal_data_export_file` – used to create a personal data export file as part of the export flow
+
+`wp_privacy_personal_data_export_file_created` – fires after a personal data export file has been created
+
+## Filters
+
+`privacy_policy_url` – filters the URL of the privacy policy page.
+
+`the_privacy_policy_link` – filters the privacy policy page link HTML.
+
+`wp_get_default_privacy_policy_content` – filters the default content suggested for inclusion through the privacy policy guide.
+
+`user_request_action_confirmed_message` – allows modifying the action confirmation message displayed to the user
+
+`user_request_action_description` – filters the user action description.
+
+`user_request_action_email_content` – filters the text of the email sent when an account action is attempted.
+
+`user_request_action_email_headers` – filters the headers of the email sent when an account action is attempted.
+
+`user_request_action_email_subject` – filters the subject of the email sent when an account action is attempted.
+
+`user_request_confirmed_email_content` – filters the body of the user request confirmation email.
+
+`user_request_confirmed_email_headers` – filters the headers of the user request confirmation email.
+
+`user_request_confirmed_email_subject` – filters the subject of the user request confirmation email.
+
+`user_request_confirmed_email_to` – filters the recipient of the data request confirmation notification.
+
+`user_request_key_expiration` – filters the expiration time of confirmation keys for user requests.
+
+`wp_privacy_additional_user_profile_data` – filter to extend the user’s profile data for the privacy exporter.
+
+`wp_privacy_export_expiration` – controls how old export files are allowed to get, default is 3 days
+
+`wp_privacy_personal_data_email_content` – allows modifying the email message send to users with their personal data export file link
+
+`wp_privacy_personal_data_email_headers` – filters the headers of the email sent with a personal data export file.
+
+`wp_privacy_personal_data_email_subject` – filters the subject of the email sent when an export request is completed.
+
+`wp_privacy_personal_data_email_to` – filters the recipient of the personal data export email notification.
+
+ `wp_privacy_personal_data_email_to` should be used with great caution to avoid sending the data export link to the wrong recipient email address(es).
+
+`wp_privacy_personal_data_erasers` – supports registration of core and plugin personal data erasers
+
+`wp_privacy_personal_data_erasure_page` – Filters a page of personal data eraser data. Allows the erasure response to be consumed by destinations in addition to Ajax.
+
+`wp_privacy_personal_data_exporters` – supports registration of core and plugin personal data exporters
+
+`wp_privacy_personal_data_export_page` – filters a page of personal data exporter data. Used to build the export report. Allows the export response to be consumed by destinations in addition to Ajax.
+
+`wp_privacy_anonymize_data` – filters the anonymous data for each type.
+
+`wp_privacy_exports_dir` – filters the directory used to store personal data export files.
+
+`wp_privacy_exports_url` – filters the URL of the directory used to store personal data export files.
+
+`user_confirmed_action_email_content` – Filters the body of the user request confirmation email. The email is sent to an administrator when an user request is confirmed.
+
+`user_erasure_fulfillment_email_to` – Filters the recipient of the data erasure fulfillment notification.
+
+`user_erasure_complete_email_subject` – Filters the subject of the email sent when an erasure request is completed.
+
+`user_confirmed_action_email_content` – Filters the body of the data erasure fulfillment notification. The email is sent to a user when a their data erasure request is fulfilled by an administrator.
+
+`user_erasure_complete_email_headers` – Filters the headers of the data erasure fulfillment notification.
+
+## Capabilities
+
+Access to the privacy tools is controlled by a few new capabilities. Administrators (on non-multisite installations) have these capabilities by default. These capabilities are:
+
+`erase_others_personal_data` – determines if the Erase Personal Data sub-menu is available under Tools
+
+`export_others_personal_data` – determines if the Export Personal Data sub-menu is available under Tools
+
+`manage_privacy_options` – determines if the Privacy sub-menu is available under Settings
 
 ---
 
@@ -2694,6 +3496,25 @@ add_action('pre_get_posts', 'wporg_add_custom_post_types');
 
 ---
 
+# Taxonomies <a name="plugins/taxonomies" />
+
+Source: https://developer.wordpress.org/plugins/taxonomies/
+
+A **Taxonomy** is a fancy word for the classification/grouping of things. Taxonomies can be hierarchical (with parents/children) or flat.
+
+WordPress stores the Taxonomies in the `term_taxonomy` database table allowing developers to register Custom Taxonomies along the ones that already exist.
+
+Taxonomies have **Terms** which serve as the topic by which you classify/group things. They are stored inside the `terms` table.
+
+For example: a Taxonomy named “Art” can have multiple Terms, such as “Modern” and “18th Century”.
+
+This chapter will show you how to register Custom Taxonomies, how to retrieve their content from the database, and how to render them to the public.
+
+  
+WordPress 3.4 and earlier had a Taxonomy named “Links” which was deprecated in WordPress 3.5.
+
+---
+
 # Working with Custom Taxonomies <a name="plugins/taxonomies/working-with-custom-taxonomies" />
 
 Source: https://developer.wordpress.org/plugins/taxonomies/working-with-custom-taxonomies/
@@ -2818,6 +3639,143 @@ Here are some examples:
 - `the_terms`: Takes a Taxonomy argument and renders the terms in a list.
 - `wp_tag_cloud`: Takes a Taxonomy argument and renders a tag cloud of the terms.
 - `is_taxonomy`: Allows you to determine if a given taxonomy exists.
+
+---
+
+# Term Splitting (WordPress 4.2) <a name="plugins/taxonomies/split-terms-wp-4-2" />
+
+Source: https://developer.wordpress.org/plugins/taxonomies/split-terms-wp-4-2/
+
+This information is here for historical purposes. If you’re not interested in how terms worked prior to 2015, you can skip this section.
+
+## Prior to WordPress 4.2
+
+Terms in different taxonomies with the same slug shared a single term ID. For instance, a tag and a category with the slug “news” had the same term ID.
+
+## WordPress 4.2+
+
+Beginning with 4.2, when one of these shared terms is updated, it will be split: the updated term will be assigned a new term ID.
+
+## What does it mean for you?
+
+In the vast majority of situations, this update was seamless and uneventful. However, some plugins and themes who store term IDs in options, post meta, user meta, or elsewhere might have been affected.
+
+## Handling the Split
+
+WordPress 4.2 includes two different tools to help authors of plugins and themes with the transition.
+
+### The `split_shared_term` hook
+
+When a shared term is assigned a new term ID, a new `split_shared_term` action is fired.
+
+Here are a few examples of how plugin and theme authors can leverage this hook to ensure that stored term IDs are updated.
+
+#### Term ID stored in an option
+
+Let’s say your plugin stores an option called `featured_tags` that contains an array of term IDs (`[4, 6, 10]`) that serve as the query parameter for your homepage featured posts section.
+
+In this example, you’ll hook to `split_shared_term` action, check whether the updated term ID is in the array, and update if necessary.
+
+```php
+/**
+ * Update featured_tags option when a shared term gets split.
+ *
+ * @param int    $term_id          ID of the formerly shared term.
+ * @param int    $new_term_id      ID of the new term created for the $term_taxonomy_id.
+ * @param int    $term_taxonomy_id ID for the term_taxonomy row affected by the split.
+ * @param string $taxonomy         Taxonomy for the split term.
+ */
+function wporg_featured_tags_split( int $term_id, int $new_term_id, int $term_taxonomy_id, string $taxonomy ): void {
+	// we only care about tags, so we'll first verify that the taxonomy is post_tag.
+	if ( 'post_tag' === $taxonomy ) {
+
+		// get the currently featured tags.
+		$featured_tags = get_option( 'featured_tags' );
+
+		// if the updated term is in the array, note the array key.
+		$found_term = array_search( $term_id, $featured_tags, true );
+		if ( false !== $found_term ) {
+
+			// the updated term is a featured tag! replace it in the array, save the new array.
+			$featured_tags[ $found_term ] = $new_term_id;
+			update_option( 'featured_tags', $featured_tags );
+		}
+	}
+}
+add_action( 'split_shared_term', 'wporg_featured_tags_split', 10, 4 );
+```
+
+#### Term ID stored in post meta
+
+Let’s say your plugin stores a term ID in post meta for pages so that you can show related posts for a certain page.
+
+In this case, you need to use the `get_posts()` function to get the pages with your `meta_key` and update the `meta_value` matching the split term ID.
+
+```php
+/**
+ * Update related posts term ID for pages
+ *
+ * @param int    $term_id          ID of the formerly shared term.
+ * @param int    $new_term_id      ID of the new term created for the $term_taxonomy_id.
+ * @param int    $term_taxonomy_id ID for the term_taxonomy row affected by the split.
+ * @param string $taxonomy         Taxonomy for the split term.
+ */
+function wporg_page_related_posts_split( int $term_id, int $new_term_id, int $term_taxonomy_id, string $taxonomy ): void {
+	// find all the pages where meta_value matches the old term ID.
+	$page_ids = get_posts(
+		array(
+			'post_type'  => 'page',
+			'fields'     => 'ids',
+			'meta_key'   => 'meta_key',
+			'meta_value' => $term_id,
+		)
+	);
+
+	// if such pages exist, update the term ID for each page.
+	if ( $page_ids ) {
+		foreach ( $page_ids as $id ) {
+			update_post_meta( $id, 'meta_key', $new_term_id, $term_id );
+		}
+	}
+}
+add_action( 'split_shared_term', 'wporg_page_related_posts_split', 10, 4 );
+```
+
+### The `wp_get_split_term` function
+
+  
+Using the `split_shared_term` hook is the preferred method for processing Term ID changes. However, there may be cases where Terms are split without your plugin having a chance to hook to the `split_shared_term` action.
+
+WordPress 4.2 stores information about taxonomy terms that have been split, and provides the `wp_get_split_term()` utility function to help developers retrieve this information.
+
+Consider the case above, where your plugin stores term IDs in an option named `featured_tags`. You may want to build a function that validates these tag IDs (perhaps to be run on plugin update), to be sure that none of the featured tags has been split:
+
+```php
+/**
+ * Retrieve information about split terms and udpates the featured_tags option with the new term IDs.
+ *
+ * @return void
+ */
+function wporg_featured_tags_check_split() {
+	$featured_tag_ids = get_option( 'featured_tags', array() );
+
+	// check to see whether any IDs correspond to post_tag terms that have been split.
+	foreach ( $featured_tag_ids as $index => $featured_tag_id ) {
+		$new_term_id = wp_get_split_term( $featured_tag_id, 'post_tag' );
+
+		if ( $new_term_id ) {
+			$featured_tag_ids[ $index ] = $new_term_id;
+		}
+	}
+
+	// save
+	update_option( 'featured_tags', $featured_tag_ids );
+}
+```
+
+Note that `wp_get_split_term()` takes two parameters, `$old_term_id` and `$taxonomy` and returns an integer.
+
+If you need to retrieve a list of all split terms associated with an old Term ID, regardless of taxonomy, use `wp_get_split_terms()`.
 
 ---
 
@@ -3676,4824 +4634,6 @@ delete_transient( 'blobaugh_github_userinfo' );
 ```
 
 More information on transients can be found [here](#apis/handbook/transients).
-
----
-
-# JavaScript <a name="plugins/javascript" />
-
-Source: https://developer.wordpress.org/plugins/javascript/
-
-JavaScript is an important component in many WordPress plugins. WordPress comes with a [variety of JavaScript libraries bundled with core](#theme/basics/including-css-javascript). One of the most commonly-used libraries in WordPress is jQuery because it is lightweight and easy to use. jQuery can be used in your plugin to manipulate the DOM object or to perform Ajax actions.
-
----
-
-# Server Side PHP and Enqueuing <a name="plugins/javascript/enqueuing" />
-
-Source: https://developer.wordpress.org/plugins/javascript/enqueuing/
-
-There are two parts to the server side PHP script that are needed to implement AJAX communication. First we need to enqueue the jQuery script on the web page and localize any PHP values that the jQuery script needs. Second is the actual handling of the AJAX request.
-
-## Enqueue Script
-
-This section covers the two major quirks of AJAX in WordPress that trip up experienced coders new to WordPress. One is the need to enqueue scripts in order to get meta links to appear correctly in the page’s head section. The other is that **all** AJAX requests need to be sent through `wp-admin/admin-ajax.php`. Never send requests directly to your plugin pages.
-
-### Enqueue
-
-Use the function `<a href="#reference/functions/wp_enqueue_script">wp_enqueue_script()</a>` to get WordPress to insert a meta link to your script in the page’s section. Never hardcode such links in the header template. As a plugin developer, you do not have ready access to the header template, but this rule bears mentioning anyway.
-
-The enqueue function accepts five parameters as follows:
-
-- **$handle** is the name for the script.
-- **$src** defines where the script is located. For portability, use `plugins_url()` to build the proper URL. If you are enqueuing the script for something besides a plugin, use some related function to create a proper URL – never hardcode it
-- **$deps** is an array that can handle any script that your new script depends on, such as jQuery. Since we are using jQuery to send an AJAX request, you will at least need to list `'jquery'` in the array.
-- **$ver** lets you list a version number.
-- **$args** an array of arguments that define footer printing (via an `in_footer` key) and script loading strategies (via a `strategy` key) such as `defer` or `async`. This replaces/overloads the `$in_footer` parameter as of WordPress version 6.3.
-
-```php
-wp_enqueue_script(
-	'ajax-script',
-	plugins_url( '/js/myjquery.js', __FILE__ ),
-	array( 'jquery' ),
-	'1.0.,0',
-	array(
-	   'in_footer' => true,
-	)
-);
-```
-
-You cannot enqueue scripts directly from your plugin code page when it is loaded. Scripts must be enqueued from one of a few action hooks – which one depends on what sort of page the script needs to be linked to. For administration pages, use `admin_enqueue_scripts`. For front-end pages use `wp_enqueue_scripts`, except for the login page, in which case use `login_enqueue_scripts`.
-
-The `admin_enqueue_scripts` hook passes the current page filename to your callback. Use this information to only enqueue your script on pages where it is needed. The front-end version does not pass anything. In that case, use template tags such as `is_home()`, `is_single()`, etc. to ensure that you only enqueue your script where it is needed. This is the complete enqueue code for our example:
-
-```php
-add_action( 'admin_enqueue_scripts', 'my_enqueue' );
-function my_enqueue( $hook ) {
-	if ( 'myplugin_settings.php' !== $hook ) {
-		return;
-	}
-	wp_enqueue_script(
-		'ajax-script',
-		plugins_url( '/js/myjquery.js', __FILE__ ),
-		array( 'jquery' ),
-		'1.0.0',
-		array(
-		   'in_footer' => true,
-		)
-	);
-}
-```
-
-Why do we use a named function here but use anonymous functions with jQuery? Because closures are only recently supported by PHP. jQuery has supported them for quite some time. Since some people may still be running older versions of PHP, we always use named functions for maximum compatibility. If you have a recent PHP version and are developing only for your own installation, go ahead and use closures if you like.
-
-#### Register vs. Enqueue
-
-You will see examples in other tutorials that religiously use `<a href="#reference/functions/wp_register_script">wp_register_script()</a>`. This is fine, but its use is optional. What is not optional is `wp_enqueue_script()`. This function must be called in order for your script file to be properly linked on the web page. So why register scripts? It creates a useful tag or handle with which you can easily reference the script in various parts of your code as needed. If you just need your script loaded and are not referencing it elsewhere in your code, there is no need to register it.
-
-#### Delayed Script Loading
-
-WordPress provides support for specifying a script loading strategy via the `wp_register_script()` and `wp_enqueue_script()` functions, by way of the `strategy` key within the new `$args` array parameter introduced in WordPress 6.3.
-
-Supported strategies are as follows:
-
-- **defer**
-    - Added by specifying an array key value pair of `'strategy' => 'defer'` to the $args parameter.
-    - Scripts marked for deferred execution — via the defer script attribute — are only executed once the DOM tree has fully loaded (but before the `DOMContentLoaded` and window load events). Deferred scripts are executed in the same order they were printed/added in the DOM, unlike asynchronous scripts.
-- **async**
-    - Added by specifying an array key value pair of `'strategy' => 'async'` to the `$args` parameter.
-    - Scripts marked for asynchronous execution — via the `async` script attribute — are executed as soon as they are loaded by the browser. Asynchronous scripts do not have a guaranteed execution order, as script B (although added to the DOM after script A) may execute first given that it may complete loading prior to script A. Such scripts may execute either before the DOM has been fully constructed or after the `DOMContentLoaded` event.
-
-Following is an example of specifying a loading strategy for an additional script enqueue within our plugin:
-
-```php
-wp_register_script(
-    'ajax-script-two',
-    plugins_url( '/js/myscript.js', __FILE__ ),
-    array( ajax-script ),
-    '1.0.,0',
-    array(
-          'strategy' => 'defer',
-     )
-);
-```
-
-The same approach applies when using `wp_enqueue_script()`. In the example above, we indicate that we intend to load the `'ajax-script-two'` script in a deferred manner.
-
-When specifying a delayed script loading strategy, consideration of the script’s dependency tree (its dependencies and/or dependents) is taken into account when deciding on an “eligible strategy” so as not to result in application of a strategy that is valid for one script but detrimental to others in the tree by causing an unintended out of order of execution. As a result of such logic, the intended loading strategy that you pass via the `$args` parameter may not be the final (chosen) strategy, but it will never be detrimental to (or stricter than) the intended strategy.
-
-### Nonce
-
-You need to create a nonce so that the jQuery AJAX request can be validated as a legitimate request instead of a potentially nefarious request from some unknown bad actor. Only your PHP script and your jQuery script will know this value. When the request is received, you can verify it is the same value created here. This is how to create a nonce for our example:
-
-```php
-$title_nonce = wp_create_nonce( 'title_example' );
-```
-
-The parameter `title_example` can be any arbitrary string. It’s suggested the string be related to what the nonce is used for, but it can really be anything that suits you.
-
-### Localize
-
-If you recall from the [jQuery Section](#plugins/javascript/jquery), data created by PHP for use by jQuery was passed in a global object named `my_ajax_obj`. In our example, this data was a nonce and the complete URL to `admin-ajax.php`. The process of assigning object properties and creating the global jQuery object is called **localizing**. This is the localizing code used in our example which uses `<a href="#reference/functions/wp_localize_script">wp_localize_script()</a>`.
-
-```php
-wp_localize_script(
-	'ajax-script',
-	'my_ajax_obj',
-	array(
-		'ajax_url' => admin_url( 'admin-ajax.php' ),
-		'nonce'    => $title_nonce,
-	)
-);
-```
-
-Note how our script handle `ajax-script` is used so that the global object is assigned to the right script. The object is global to our script, not to all scripts. Localization can also be called from the same hook that is used to enqueue scripts. The same goes for creating a nonce, though that particular function can be called virtually anywhere. All of that combined together in a single hook callback looks like this:
-
-```php
-add_action( 'admin_enqueue_scripts', 'my_enqueue' );
-
-/**
- * Enqueue my scripts and assets.
- *
- * @param $hook
- */
-function my_enqueue( $hook ) {
-	if ( 'myplugin_settings.php' !== $hook ) {
-		return;
-	}
-	wp_enqueue_script(
-		'ajax-script',
-		plugins_url( '/js/myjquery.js', __FILE__ ),
-		array( 'jquery' ),
-		'1.0.0',
-		true
-	);
-
-	wp_localize_script(
-		'ajax-script',
-		'my_ajax_obj',
-		array(
-			'ajax_url' => admin_url( 'admin-ajax.php' ),
-			'nonce'    => wp_create_nonce( 'title_example' ),
-		)
-	);
-}
-```
-
- Remember to only add this nonce localization to the needed pages, do not display a nonce to someone who should not use it. And remember to use `current_user_can()` with a capability or role to complete the security.
-
-## AJAX Action
-
-The other major part of the server side PHP code is the actual AJAX handler that receives the POSTed data, does something with it, then sends an appropriate response back to the browser. This takes on the form of a WordPress [action hook](#plugins/hooks/actions). Which hook tag you use depends on whether the user is logged in or not and what value your jQuery script passed as the *action:* value.
-
- **$\_GET , $\_POST and $\_COOKIE vs $\_REQUEST**You’ve probably used one or more of the PHP super globals such as `$_GET` or `$_POST` to retrieve values from forms or cookies (using `$_COOKIE`). Maybe you prefer `$_REQUEST` instead, or at least have seen it used. It’s kind of cool – regardless of the request method, `POST` or `GET`, it will have the form values. Works great for pages that use both methods. On top of that, it has cookie values as well. One stop shopping! Therein lies its tragic flaw. In the case of a name conflict, the cookie value will override any form values. Thus it is ridiculously easy for a bad actor to craft a counterfeit cookie on their browser, which will overwrite any form value you might be expecting from the request. `$_REQUEST` is an easy route for hackers to inject arbitrary data into your form values. To be extra safe, stick to the specific variables and avoid the one size fits all.
-
-Since our AJAX exchange is for the plugin’s settings page, the user must be logged in. If you recall from the [jQuery section](#plugins/javascript/jquery), the `action:` value is `"my_tag_count"`. This means our action hook tag will be `wp_ajax_my_tag_count`. If our AJAX exchange were to be utilized by users who were not currently logged in, the action hook tag would be `wp_ajax_nopriv_my_tag_count` The basic code used to hook the action looks like this:
-
-```php
-add_action( 'wp_ajax_my_tag_count', 'my_ajax_handler' );
-
-/**
- * Handles my AJAX request.
- */
-function my_ajax_handler() {
-	// Handle the ajax request here
-
-	wp_die(); // All ajax handlers die when finished
-}
-```
-
-The first thing your AJAX handler should do is verify the nonce sent by jQuery with `<a href="#reference/functions/check_ajax_referer">check_ajax_referer()</a>`, which should be the same value that was localized when the script was enqueued.
-
-```php
-check_ajax_referer( 'title_example' );
-```
-
-The provided parameter must be identical to the parameter provided [earlier](#php-nonce) to `wp_create_nonce()`. The function simply dies if the nonce does not check out. If this were a true nonce, now that it was used, the value is no longer any good. You would then generate a new one and send it to the callback script so that it can be used for the next request. But since WordPress nonces are good for twenty-four hours, you needn’t do anything but check it.
-
-### Data
-
-With the nonce out of the way, our handler can deal with the data sent by the jQuery script contained in `$_POST['title']`. First we assign the value to a new variable, after running it through [wp\_unslash()](#reference/functions/wp_unslash) to remove any unexpected quotes.
-
-```php
-$title = wp_unslash( $_POST['title'] );
-```
-
-We can save the user’s selection in user meta by using [update\_user\_meta()](#reference/functions/update_user_meta).
-
-```php
-update_user_meta( get_current_user_id(), 'title_preference', sanitize_post_title( $title ) );
-```
-
-Then we build a query in order to get the post count for the selected title tag.
-
-```php
-$args      = array(
-	'tag' => $title,
-);
-$the_query = new WP_Query( $args );
-```
-
-Finally we can send the response back to the jQuery script. There’s several ways to transmit data. Let’s look at some of the options before we deal with the specifics of our example.
-
-#### XML
-
-PHP support for XML leaves something to be desired. Fortunately, WordPress provides the `<a href="#reference/classes/wp_ajax_response">WP_Ajax_Response</a>` class to make the task easier. The [WP\_Ajax\_Response](#reference/classes/wp_ajax_response) class will generate an XML-formatted response, set the correct content type for the header, output the response xml, then die — ensuring a proper XML response.
-
-#### JSON
-
-This format is lightweight and easy to use, and WordPress provides the `<a href="#reference/functions/wp_send_json">wp_send_json</a>` function to json-encode your response, print it, and die — effectively replacing [WP\_Ajax\_Response](#reference/classes/wp_ajax_response). WordPress also provides the `<a href="#reference/functions/wp_send_json_success">wp_send_json_success</a>` and `<a href="#reference/functions/wp_send_json_error">wp_send_json_error</a>` functions, which allow the appropriate done() or fail() callbacks to fire in JS.
-
-#### Other
-
-You can transfer data any way you like, as long as the sender and receiver are coordinated. Text formats like comma delimited or tab delimited are one of many possibilities. For small amounts of data, sending the raw stream may be adequate. That is what we will do with our example – we will send the actual replacement HTML, nothing else.
-
-```php
-echo esc_html( $title ) . ' (' . $the_query->post_count . ') ';
-```
-
-In a real world application, you must account for the possibility that the action could fail for some reason–for instance, maybe the database server is down. The response should allow for this contingency, and the jQuery script receiving the response should act accordingly, perhaps telling the user to try again later.
-
-### Die
-
-When the handler has finished all of its tasks, it needs to die. If you are using the [WP\_Ajax\_Response](#reference/classes/wp_ajax_response) or wp\_send\_json\* functions, this is automatically handled for you. If not, simply use the WordPress `<a href="#reference/functions/wp_die">wp_die()</a> `function.
-
-### AJAX Handler Summary
-
-The complete AJAX handler for our example looks like this:
-
-```php
-/**
- * AJAX handler using JSON
- */
-function my_ajax_handler__json() {
-	check_ajax_referer( 'title_example' );
-	$title = wp_unslash( $_POST['title'] );
-
-	update_user_meta( get_current_user_id(), 'title_preference', sanitize_post_title( $title ) );
-
-	$args      = array(
-		'tag' => $title,
-	);
-	$the_query = new WP_Query( $args );
-	wp_send_json( esc_html( $title ) . ' (' . $the_query->post_count . ') ' );
-}
-```
-
-```php
-/**
- * AJAX handler not using JSON.
- */
-function my_ajax_handler() {
-	check_ajax_referer( 'title_example' );
-	$title = wp_unslash( $_POST['title'] );
-
-	update_user_meta( get_current_user_id(), 'title_preference', sanitize_post_title( $title ) );
-
-	$args      = array(
-		'tag' => $title,
-	);
-	$the_query = new WP_Query( $args );
-	echo esc_html( $title ) . ' (' . $the_query->post_count . ') ';
-	wp_die(); // All ajax handlers should die when finished
-}
-```
-
----
-
-# Cron <a name="plugins/cron" />
-
-Source: https://developer.wordpress.org/plugins/cron/
-
-## What is WP-Cron
-
-WP-Cron is how WordPress handles scheduling time-based tasks in WordPress. Several WordPress core features, such as checking for updates and publishing scheduled post, utilize WP-Cron. The “Cron” part of the name comes from the cron time-based task scheduling system that is available on UNIX systems.
-
-WP-Cron works by checking, on every page load, a list of scheduled tasks to see what needs to be run. Any tasks due to run will be called during that page load.
-
-WP-Cron does not run constantly as the system cron does; it is only triggered on page load.
-
-Scheduling errors could occur if you schedule a task for 2:00PM and no page loads occur until 5:00PM.
-
-## Why use WP-Cron
-
-- WordPress core and many plugins need a scheduling system to perform time-based tasks. However, many hosting services are shared and do not provide access to the system scheduler.
-- Using the WordPress API is a simpler method for setting scheduled tasks than going outside of WordPress to the system scheduler.
-- With the system scheduler, if the time passes and the task did not run, it will not be re-attempted. With WP-Cron, all scheduled tasks are put into a queue and will run at the next opportunity (meaning the next page load). So while you can’t be 100% sure *when* your task will run, you can be 100% sure that it will run *eventually*.
-
----
-
-# Understanding WP-Cron Scheduling <a name="plugins/cron/understanding-wp-cron-scheduling" />
-
-Source: https://developer.wordpress.org/plugins/cron/understanding-wp-cron-scheduling/
-
-Unlike a traditional system cron that schedules tasks for specific times (e.g. “every hour at 5 minutes past the hour”), WP-Cron uses intervals to simulate a system cron.
-
-WP-Cron is given two arguments: the time for the first task, and an interval (in seconds) after which the task should be repeated. For example, if you schedule a task to begin at 2:00PM with an interval of 300 seconds (five minutes), the task would first run at 2:00PM and then again at 2:05PM, then again at 2:10PM, and so on, every five minutes.
-
-To simplify scheduling tasks, WordPress provides some default intervals and an easy method for adding custom intervals.
-
-The default intervals provided by WordPress are:
-
-- hourly
-- twicedaily
-- daily
-- weekly (since WP 5.4)
-
-## Custom Intervals
-
-To add a custom interval, you can create a filter, such as:
-
-```php
-add_filter( 'cron_schedules', 'example_add_cron_interval' );
-function example_add_cron_interval( $schedules ) { 
-    $schedules['five_seconds'] = array(
-        'interval' => 5,
-        'display'  => esc_html__( 'Every Five Seconds' ), );
-    return $schedules;
-}
-```
-
-This filter function creates a new interval that will allow us to run a cron task every five seconds.
-
-**Note:** All intervals are in seconds.
-
----
-
-# Scheduling WP Cron Events <a name="plugins/cron/scheduling-wp-cron-events" />
-
-Source: https://developer.wordpress.org/plugins/cron/scheduling-wp-cron-events/
-
-The WP Cron system uses hooks to add new scheduled tasks.
-
-## Adding the Hook
-
-In order to get your task to run you must create your own custom hook and give that hook the name of a function to execute. This is a very important step. Forget it and your task will never run.
-
-The following example will create a hook. The first parameter is the name of the hook you are creating, and the second is the name of the function to call.
-
-```php
-add_action( 'bl_cron_hook', 'bl_cron_exec' );
-```
-
-Remember, the “bl_” part of the function name is a *function prefix*. You can learn why prefixes are important [here](#plugins/plugin-basics/best-practices). 
-
-You can read more about actions [here](#plugins/hooks/actions).
-
-## Scheduling the Task
-
-An important note is that WP-Cron is a simple task scheduler. As we know, tasks are added by the hook created to call the function that runs the desired task. However if you call `wp_schedule_event()` multiple times, even with the same hook name, the event will be scheduled multiple times. If your code adds the task on each page load this could result in the task being scheduled several thousand times. This is not what you want.
-
-WordPress provides a convenient function called [wp\_next\_scheduled()](#reference/functions/wp_next_scheduled) to check if a particular hook is already scheduled. `wp_next_scheduled()` takes one parameter, the hook name. It will return either a string containing the timestamp of the next execution or false, signifying the task is not scheduled. It is used like so:
-
-```php
-wp_next_scheduled( 'bl_cron_hook' )
-```
-
-Scheduling a recurring task is accomplished with [wp\_schedule\_event()](#reference/functions/wp_schedule_event) . This function takes three required parameters, and one additional parameter that is an array that can be passed to the function executing the wp-cron task. We will focus on the first three parameters. The parameters are as follows:
-
-1. `$timestamp` – The UNIX timestamp of the first time this task should execute
-2. `$recurrence` – The name of the interval in which the task will recur in seconds
-3. `$hook` – The name of our custom hook to call
-
-We will use the 5 second interval we created [here](#plugins/cron/understanding-wp-cron-scheduling) and the hook we created above, like so:
-
-```php
-wp_schedule_event( time(), 'five_seconds', 'bl_cron_hook' );
-```
-
-Remember, we need to first ensure the task is not already scheduled. So we wrap the scheduling code in a check like this:
-
-```php
-if ( ! wp_next_scheduled( 'bl_cron_hook' ) ) {
-    wp_schedule_event( time(), 'five_seconds', 'bl_cron_hook' );
-}
-```
-
-## Unscheduling tasks
-
-When you no longer need a task scheduled you can unschedule tasks with [wp\_unschedule\_event()](#reference/functions/wp_unschedule_event) . This function takes the following two parameters:
-
-1. `$timestamp` – Timestamp of the next occurrence of the task
-2. `$hook` – Name of the custom hook to be called
-
-This function will not only unschedule the task indicated by the timestamp, it will also unschedule all future occurrences of the task. Since you probably will not know the timestamp for the next task, there is another handy function, [wp\_next\_scheduled()](#reference/functions/wp_next_scheduled) that will find it for you. `wp_next_scheduled()` takes one parameter (that we care about):
-
-1. `$hook` – The name of the hook that is called to execute the task
-
-Put it all together and the code looks like:
-
-```php
-$timestamp = wp_next_scheduled( 'bl_cron_hook' );
-wp_unschedule_event( $timestamp, 'bl_cron_hook' );
-```
-
-It is very important to unschedule tasks when you no longer need them because WordPress will continue to attempt to execute the tasks, even though they are no longer in use (or even after your plugin has been deactivated or removed). An important place to remember to unschedule your tasks is upon plugin deactivation.
-
-Unfortunately there are many plugins in the WordPress.org Plugin Directory that do not clean up after themselves. If you find one of these plugins please let the author know to update their code. WordPress provides a function called [register\_deactivation\_hook()](#reference/functions/register_deactivation_hook) that allows developers to run a function when their plugin is deactivated. It is very simple to setup and looks like:
-
-```php
-register_deactivation_hook( __FILE__, 'bl_deactivate' ); 
-
-function bl_deactivate() {
-    $timestamp = wp_next_scheduled( 'bl_cron_hook' );
-    wp_unschedule_event( $timestamp, 'bl_cron_hook' );
-}
-```
-
-You can read more about activation and deactivation hooks [here](#plugins/plugin-basics/activation-deactivation-hooks).
-
----
-
-# Hooking WP-Cron Into the System Task Scheduler <a name="plugins/cron/hooking-wp-cron-into-the-system-task-scheduler" />
-
-Source: https://developer.wordpress.org/plugins/cron/hooking-wp-cron-into-the-system-task-scheduler/
-
-As previously mentioned, WP-Cron does not run continuously, which can be an issue if there are critical tasks that must run on time. There is an easy solution for this. Simply set up your system’s task scheduler to run on the intervals you desire (or at the specific time needed). The easiest solution is to use a tool to make a web request to the `wp-cron.php` file.
-
-After scheduling the task on your system, there is one more step to complete. WordPress will continue to run WP-Cron on each page load. This is no longer necessary and will contribute to extra resource usage on your server. WP-Cron can be disabled in the `wp-config.php` file. Open the `wp-config.php` file for editing and add the following line:
-
-```php
-define( 'DISABLE_WP_CRON', true );
-```
-
-## Windows
-
-Windows calls their time based scheduling system the Task Scheduler. It can be accessed via the **Administrative Tools** in the control panel.
-
-How you setup the task varies with server setup. One method is to use PowerShell and a Basic Task. After creating a Basic Task the following command can be used to call the WordPress Cron script.
-
-```powershell
-powershell "Invoke-WebRequest http://YOUR_SITE_URL/wp-cron.php"
-```
-
-## MacOS and Linux
-
-Mac OS X and Linux both use cron as their time based scheduling system. It is typically access from the terminal with the `crontab -e` command. It should be noted that tasks will be run as a regular user or as root depending on the system user running the command.
-
-Cron has a specific syntax that needs to be followed and contains the following parts:
-
-- Minute
-- Hour
-- Day of month
-- Month
-- Day of week
-- Command to execute
-
-![](https://i0.wp.com/developer.wordpress.org/files/2014/10/plugin-wp-cron-cron-scheduling.png?resize=500%2C250&ssl=1)If a command should be run regardless of one of the time sections an asterisk (\*) should be used. For example if you wanted to run a command every 15 minutes regardless of the hour, day, or month it would look like:
-
-```bash
-*/15 * * * * command
-```
-
-Many servers have `wget` installed and this is an easy tool to call the WordPress Cron script.
-
-```bash
-wget --delete-after http://YOUR_SITE_URL/wp-cron.php
-```
-
-Note: without –delete-after option, wget would save the output of the HTTP GET request.
-
-A daily call to your site’s WordPress Cron that triggers at midnight every night could look similar to:
-
-```bash
-0 0 * * * wget --delete-after http://YOUR_SITE_URL/wp-cron.php
-```
-
----
-
-# Testing of WP-Cron <a name="plugins/cron/simple-testing" />
-
-Source: https://developer.wordpress.org/plugins/cron/simple-testing/
-
-## WP-CLI
-
-Cron jobs can be tested using [WP-CLI](https://wp-cli.org/). It offers commands like `wp cron event list` and `wp cron event run {job name}`. [Check the documentation](#cli/commands/cron) for more details.
-
-## WP-Cron Management Plugins
-
-[Several plugins are available on the WordPress.org Plugin Directory for viewing, editing, and controlling the scheduled cron events and available schedules on your site.](https://wordpress.org/plugins/tags/cron/)
-
-## `_get_cron_array()`
-
-[The `_get_cron_array()` function](#reference/functions/_get_cron_array) returns an array of all currently scheduled cron events. Use this function if you need to inspect the raw list of events.
-
-## `wp_get_schedules()`
-
-[The `wp_get_schedules()` function](#reference/functions/wp_get_schedules) returns an array of available event recurrence schedules. Use this function if you need to inspect the raw list of available schedules.
-
----
-
-# Internationalization <a name="plugins/internationalization" />
-
-Source: https://developer.wordpress.org/plugins/internationalization/
-
-## What is Internationalization?
-
-Internationalization is the process of developing a plugin so it can easily be translated into other languages. Internationalization is often abbreviated as `i18n` (because there are 18 letters between the letters i and n).
-
-## Why is Internationalization Important?
-
-WordPress is used all over the world, in countries where English is not the main language. The strings in the WordPress plugins need to be coded in a special way so that can be easily translated into other languages. As a developer, you may not be able to provide *localizations* (meaning, changes required to the text and other things like number formats specific to a given *locale* (location))for all your users; however, a translator can successfully localize the theme without needing to modify the source code itself.
-
-Read further on “[How to Internationalize your Plugin](#plugins/internationalization/how-to-internationalize-your-plugin "How to internationalize your plugin")“.
-
-## Resources
-
-- [Video: i18n: Preparing Your WordPress Theme for the World](http://www.youtube.com/watch?v=fJfqgrzjEis)
-- [Video: On Internationalization: Plugins and themes for the whole world](http://wordpress.tv/2014/02/26/samuel-otto-wood-on-internationalization-plugins-and-themes-for-the-whole-world/) [Slides](http://wceu2013.ottopress.com/)
-- [Video: Big in Japan: A Guide for Themes and Internationalization](http://wordpress.tv/2013/08/03/shannon-smith-big-in-japan-a-guide-for-themes-and-internationalization/)
-- [Video: Lost in Translation—i18n and WordPress](http://wordpress.tv/2009/11/14/ze-fontainhas-i18n-nyc09/)
-- [Internationalizing And Localizing Your WordPress Theme](http://wp.smashingmagazine.com/2011/12/29/internationalizing-localizing-wordpress-theme/)
-- [Internationalization: You’re probably doing it wrong](http://ottopress.com/2012/internationalization-youre-probably-doing-it-wrong/)
-- [More Internationalization Fun](http://ottopress.com/2012/more-internationalization-fun/)
-- [Use wp\_localize\_script, It Is Awesome](http://pippinsplugins.com/use-wp_localize_script-it-is-awesome/)
-- [Understanding \_n\_noop()](http://kovshenin.com/2013/_n_noop/)
-- [Language Packs 101 – Prepwork](http://ottopress.com/2013/language-packs-101-prepwork/)
-- [Translating WordPress Plugins and Themes: Don’t Get Clever](http://markjaquith.wordpress.com/2011/10/06/translating-wordpress-plugins-and-themes-dont-get-clever/)
-- [How to load theme and plugin translations](http://ulrich.pogson.ch/load-theme-plugin-translations)
-- [Polyglots Handbook: Plugin/Theme Authors Guide](https://make.wordpress.org/polyglots/handbook/plugin-theme-authors-guide/)
-
----
-
-# How to Internationalize Your Plugin <a name="plugins/internationalization/how-to-internationalize-your-plugin" />
-
-Source: https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/
-
-In order to make a string translatable in your application you have to wrap the original string in a call to one of a set of special functions. These functions collectively are known as “gettext.”
-
-## Introduction to Gettext 
-
-WordPress uses the [gettext](http://www.gnu.org/software/gettext/) libraries and tools for i18n, but not directly: there are a set of special functions created just for the purpose of enabling string translation. These functions are listed below. These are the functions you should use within your plugin.
-
-For a deeper dive into gettext, read the [gettext online manual](http://www.gnu.org/software/gettext/manual/html_node/)
-
-## Text Domains 
-
-Use a *text domain* to denote all text belonging to your plugin. The text domain is a unique identifier to ensure WordPress can distinguish between all loaded translations. This increases portability and plays better with already existing WordPress tools.
-
-The text domain must match the `slug` of the plugin. If your plugin is a single file called `my-plugin.php` or it is contained in a folder called `my-plugin` the domain name must be `my-plugin`. If your plugin is hosted on wordpress.org it must be the slug portion of your plugin URL (`wordpress.org/plugins/`**`<slug>`**).
-
-The text domain name must use dashes and not underscores, be lower case, and have no spaces.
-
-The text domain also needs to be added to the plugin header. WordPress uses it to internationalize your plugin metadata even when the plugin is disabled. The text domain should be same as the one used when [loading the text domain](#loading-text-domain).
-
- **Header example:**
-
-```php
-/* 
- * Plugin Name: My Plugin
- * Author: Plugin Author
- * Text Domain: my-plugin
- */
-```
-
-Again, change “my-plugin” to the slug of your plugin.
-
-Since WordPress 4.6 the `Text Domain` header is optional because it must be the same as the plugin slug. There is no harm in including it, but it is not required.
-
-## Domain Path 
-
-The domain path defines the location for a plugin’s translation. This has a few uses, notably so that WordPress knows where to find the translation even when the plugin is disabled. This defaults to the folder in which your plugin is found.
-
-For example, if the translation is located in a folder called `languages` within your plugin, then the Domain Path is `/languages` and must be written with the first slash:
-
- **Header example:**
-
-```php
-/*
- * Plugin Name: My Plugin
- * Author: Plugin Author
- * Text Domain: my-plugin
- * Domain Path: /languages
- */
-```
-
- The `Domain Path` header can be omitted if the plugin is in the official WordPress Plugin Directory. 
-
-## Basic strings 
-
-For basic strings (meaning strings without placeholders or plurals) use `<a href="#reference/functions/__">__()</a>`. It returns the translation of its argument:
-
-```php
-__( 'Blog Options', 'my-plugin' );
-```
-
-Do not use variable names or constants for the text domain portion of a gettext function. For example: Do not do this as a shortcut: ```
-__( 'Translate me.' , $text_domain );
-```
-
-To echo a retrieved translation, use `<a href="#reference/functions/_e">_e()</a>`. So instead of writing:
-
-```php
-echo __( 'WordPress is the best!', 'my-plugin' );
-```
-
-you can use:
-
-```php
-_e( 'WordPress is the best!', 'my-plugin' );
-```
-
-## Variables 
-
-What if you have a string like the following:
-
-```php
-echo 'Your city is $city.'
-```
-
-In this case, the `$city` is a variable and should not be part of the translation. The solution is to use placeholders for the variable, along with the `printf` family of functions. Especially helpful are `<a href="http://php.net/printf">printf</a>` and `<a href="http://php.net/sprintf">sprintf</a>`. Here is what the right solution looks like:
-
-```php
-printf(
-	/* translators: %s: Name of a city */
-	__( 'Your city is %s.', 'my-plugin' ),
-	$city
-);
-```
-
-Notice that here the string for translation is just the template `"Your city is %s."`, which is the same both in the source and at run-time.
-
-Also note that there is a hint for translators so that they know the context of the placeholder.
-
-If you have more than one placeholder in a string, it is recommended that you use [argument swapping](http://www.php.net/manual/en/function.sprintf.php#example-4829). In this case, single quotes `(')` around the string are mandatory because double quotes `(")` will tell php to interpret the `$s` as the `s` variable, which is not what we want.
-
-```php
-printf(
-	/* translators: 1: Name of a city 2: ZIP code */
-	__( 'Your city is %1$s, and your zip code is %2$s.', 'my-plugin' ),
-	$city,
-	$zipcode
-);
-```
-
-Here the zip code is being displayed after the city name. In some languages displaying the zip code and city in opposite order would be more appropriate. Using %s prefix in the above example, allows for such a case. A translation can thereby be written:
-
-```php
-printf(
-	/* translators: 1: Name of a city 2: ZIP code */
-	__( 'Your zip code is %2$s, and your city is %1$s.', 'my-plugin' ),
-	$city,
-	$zipcode
-);
-```
-
-**Important!** The following code is incorrect:
-
-```php
-// This is incorrect do not use.
-_e( "Your city is $city.", 'my-plugin' );
-```
-
-The strings for translation are extracted from the sources, so the translators will get this phrase to translate: `"Your city is $city."`.
-
-However in the application `_e` will be called with an argument like `"Your city is London."` and `gettext` won’t find a suitable translation of this one and will return its argument: `"Your city is London."`. Unfortunately, it isn’t translated correctly.
-
-## Plurals 
-
-### Basic Pluralization 
-
-If you have string that changes when the number of items changes, you’ll need a way to reflect this in your translations. For example, in English you have `"One comment"` and `"Two comments"`. In other languages you can have multiple plural forms. To handle this in WordPress use the `<a href="#reference/functions/_n">_n()</a>` function.
-
-```php
-printf(
-	_n(
-		'%s comment',
-		'%s comments',
-		get_comments_number(),
-		'my-plugin'
-	),
-	number_format_i18n( get_comments_number() )
-);
-```
-
- `_n()` accepts 4 arguments:
-
-- singular – the singular form of the string (note that it can be used for numbers other than one in some languages, so `'%s item'` should be used instead of `'One item'`)
-- plural – the plural form of the string
-- count – the number of objects, which will determine whether the singular or the plural form should be returned (there are languages, which have far more than 2 forms)
-- text domain – the plugins text domain
-
-The return value of the functions is the correct translated form, corresponding to the given count.
-
-Note that some languages use the singular form for other numbers (e.g. 21, 31 and so on, much like ’21st’, ’31st’ in English). If you would like to special case the singular, check for it specifically:
-
-```php
-if ( 1 === $count ) {
-	printf( esc_html__( 'Last thing!', 'my-text-domain' ), $count );
-} else {
-	printf( esc_html( _n( '%d thing.', '%d things.', $count, 'my-text-domain' ) ), $count );
-}
-```
-
-Also note that the `$count` parameter is often used twice. First `$count` is passed to `_n()` to determine which translated string to use, and then `$count` is passed to `printf()` to substitute the number into the translated string.
-
-### Pluralization done later 
-
-You first set the plural strings with `<a href="#reference/functions/_n_noop">_n_noop()</a>` or `<a href="#reference/functions/_nx_noop">_nx_noop()</a>`.
-
-```php
-$comments_plural = _n_noop(
-	'%s comment.',
-	'%s comments.'
-);
-```
-
-Then at a later point in the code you can use `<a href="#reference/functions/translate_nooped_plural">translate_nooped_plural()</a>` to load the strings.
-
-```php
-printf(
-	translate_nooped_plural(
-		$comments_plural,
-		get_comments_number(),
-		'my-plugin'
-	),
-	number_format_i18n( get_comments_number() )
-);
-```
-
-## Disambiguation by context 
-
-Sometimes one term is used in several contexts and although it is one and the same word in English it has to be translated differently in other languages. For example the word `Post` can be used both as a verb `"Click here to post your comment"` and as a noun `"Edit this post"`. In such cases the `_x()` or `_ex()` function should be used. It is similar to `__()` and `_e()`, but it has an additional argument — the context:
-
-```php
-_x( 'Post', 'noun', 'my-plugin' );
-_x( 'Post', 'verb', 'my-plugin' );
-```
-
-Using this method in both cases we will get the string Comment for the original version, but the translators will see two Comment strings for translation, each in the different contexts.
-
-Note that similarly to `__()`, `_x()` has an `echo` version: `_ex()`. The previous example could be written as:
-
-```php
-_ex( 'Post', 'noun', 'my-plugin' );
-_ex( 'Post', 'verb', 'my-plugin' );
-```
-
- Use whichever you feel enhances legibility and ease-of-coding.
-
-## Descriptions 
-
-So that translators know how to translate a string like `__( 'g:i:s a' )` you can add a clarifying comment in the source code. It has to start with the words `translators:` and to be the last PHP comment before the gettext call. Here is an example:
-
-```php
-/* translators: draft saved date format, see http://php.net/date */
-$saved_date_format = __( 'g:i:s a' );
-```
-
-It’s also used to explain placeholders in a string like `_n_noop( '<strong>Version %1$s</strong> addressed %2$s bug.','<strong>Version %1$s</strong> addressed %2$s bugs.' )`.
-
-```php
-/* translators: 1: WordPress version number, 2: plural number of bugs. */
-_n_noop( '<strong>Version %1$s</strong> addressed %2$s bug.','<strong>Version %1$s</strong>strong> addressed %2$s bugs.' );
-```
-
-## Newline characters 
-
-Gettext doesn’t like `r` (ASCII code: 13) in translatable strings, so please avoid it and use `n` instead.
-
-## Empty strings 
-
-The empty string is reserved for internal Gettext usage and you must not try to internationalize the empty string. It also doesn’t make any sense, because the translators won’t see any context.
-
- If you have a valid use-case to internationalize an empty string, add context to both help translators and be in peace with the Gettext system.
-
-## Escaping strings 
-
-It is good to escape all of your strings, this way the translators cannot run malicious code. There are a few escape functions that are integrated with internationalization functions.
-
-## Localization functions 
-
-### Basic functions 
-
-- [\_\_()](#reference/functions/__)
-- [\_e()](#reference/functions/_e)
-- [\_x()](#reference/functions/_x)
-- [\_ex()](#reference/functions/_ex)
-- [\_n()](#reference/functions/_n)
-- [\_nx()](#reference/functions/_nx)
-- [\_n\_noop()](#reference/functions/_n_noop)
-- [\_nx\_noop()](#reference/functions/_nx_noop)
-- [translate\_nooped\_plural()](#reference/functions/translate_nooped_plural())
-
-### Translate &amp; Escape functions 
-
-Strings that require translation and is used in attributes of html tags must be escaped.
-
-- [esc\_html\_\_()](#reference/functions/esc_html__)
-- [esc\_html\_e()](#reference/functions/esc_html_e)
-- [esc\_html\_x()](#reference/functions/esc_html_x)
-- [esc\_attr\_\_()](#reference/functions/esc_attr__)
-- [esc\_attr\_e()](#reference/functions/esc_attr_e)
-- [esc\_attr\_x()](#reference/functions/esc_attr_x)
-
-### Date and number functions 
-
-- [number\_format\_i18n()](#reference/functions/number_format_i18n)
-- [date\_i18n()](#reference/functions/date_i18n)
-
-## Best Practices for writing strings 
-
-Here are the best practices for writing strings
-
-- Use decent English style – minimize slang and abbreviations.
-- Use entire sentences – in most languages word order is different than that in English.
-- Split at paragraphs – merge related sentences, but do not include a whole page of text in one string.
-- Do not leave leading or trailing whitespace in a translatable phrase.
-- Assume strings can double in length when translated
-- Avoid unusual markup and unusual control characters – do not include tags that surround your text
-- Do not put unnecessary HTML markup into the translated string
-- Do not leave URLs for translation, unless they could have a version in another language.
-- Add the variables as placeholders to the string as in some languages the placeholders change position.
-
-```php
-printf(
-	__( 'Search results for: %s', 'my-plugin' ),
-	get_search_query()
-);
-```
-
-- Use format strings instead of string concatenation – translate phrases and not words – `printf( __( 'Your city is %1$s, and your zip code is %2$s.', 'my-plugin' ), $city, $zipcode ); ` is always better than: ` __( 'Your city is ', 'my-plugin' ) . $city . __( ', and your zip code is ', 'my-plugin' ) . $zipcode; `
-- Try to use the same words and same symbols so not multiple strings needs to be translated e.g.`__( 'Posts:', 'my-plugin' );` and `__( 'Posts', 'my-plugin' );`
-
-### Add Text Domain to strings 
-
- You must add your Text domain as an argument to every `__()`, `_e()` and `__n()` gettext call, or your translations won’t work.
-
-Examples:
-
-- `__( 'Post' )` should become `__( 'Post', 'my-theme' )`
-- `_e( 'Post' )` should become `_e( 'Post', 'my-theme' )`
-- `_n( '%s post', '%s posts', $count )` should become `_n( '%s post', '%s posts', $count, 'my-theme' )`
-
-If there are strings in your plugin that are also used in WordPress core (e.g. ‘Settings’), you should still add your own text domain to them, otherwise they’ll become untranslated if the core string changes (which happens).
-
-Adding the text domain by hand can be a burden if not done continuously when writing code and that’s why you can do it automatically:
-
-- Download the `<a href="https://develop.svn.wordpress.org/branches/5.2/tools/i18n/add-textdomain.php">add-textdomain.php</a>` script to the folder where the file is you want to add the text domain
-- In command line move to the directory where the file is
-- Run this command to create a new file with the text domain added:
-
-```bash
-php add-textdomain.php my-plugin my-plugin.php > new-my-plugin.php
-```
-
-If you wish to have the `add-textdomain.php` in a different folder you just need to define the location in the command.
-
-```bash
-php /path/to/add-textdomain.php my-plugin my-plugin.php > new-my-plugin.php
-```
-
-Use this command if you don’t want a new file outputted:
-
-```php
-php add-textdomain.php -i my-plugin my-plugin.php
-```
-
-If you want to change multiple files in a directory you can also pass a directory to the script:
-
-```php
-php add-textdomain.php -i my-plugin my-plugin-directory
-```
-
-After it’s done, the text domain will be added to the end of all gettext calls in the file. If there is an existing text domain it will not be replaced.
-
-## Loading Text Domain
-
-Translations can be loaded using `load_plugin_textdomain`, for example:
-
-```php
-add_action( 'init', 'wpdocs_load_textdomain' );
-
-function wpdocs_load_textdomain() {
-	load_plugin_textdomain( 'wpdocs_textdomain', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
-}
-```
-
-### Plugins on WordPress.org
-
-Since WordPress 4.6 translations now take [translate.wordpress.org](https://translate.wordpress.org/) as priority and so plugins that are translated via translate.wordpress.org do not necessary require `load_plugin_textdomain()` anymore. If you don’t want to add a `load_plugin_textdomain()` call to your plugin you have to set the `Requires at least:` field in your readme.txt to 4.6 or more. 
-
-If you still want to load your own translations and not the ones from translate, you will have to use a hook filter named `load_textdomain_mofile`.   
-**Example** with a .mo file in the `/languages/` directory of your plugin, with this code inserted in the main plugin file:
-
-```php
-function my_plugin_load_my_own_textdomain( $mofile, $domain ) {
-	if ( 'my-domain' === $domain && false !== strpos( $mofile, WP_LANG_DIR . '/plugins/' ) ) {
-		$locale = apply_filters( 'plugin_locale', determine_locale(), $domain );
-		$mofile = WP_PLUGIN_DIR . '/' . dirname( plugin_basename( __FILE__ ) ) . '/languages/' . $domain . '-' . $locale . '.mo';
-	}
-	return $mofile;
-}
-add_filter( 'load_textdomain_mofile', 'my_plugin_load_my_own_textdomain', 10, 2 );
-```
-
-## Handling JavaScript files 
-
-Check the [Internationalizing javascript](#apis/handbook/internationalization) section of the [Common APIs Handbook](#apis) to see how to properly load your translation files. There is also the [Gutenburg plugin docs page](https://github.com/WordPress/gutenberg/blob/trunk/docs/how-to-guides/internationalization.md).
-
-## Language Packs 
-
-If you’re interested in language packs and how the import to [translate.wordpress.org](http://translate.wordpress.org) is working, please read the [Meta Handbook page about Translations](https://make.wordpress.org/meta/handbook/documentation/translations/).
-
-Also refer [Plugin/Theme Authors Guide in Polyglots Handbooks](https://make.wordpress.org/polyglots/handbook/plugin-theme-authors-guide/) for getting your project translated.
-
----
-
-# Localization <a name="plugins/internationalization/localization" />
-
-Source: https://developer.wordpress.org/plugins/internationalization/localization/
-
-## What is localization?
-
-Localization describes the subsequent process of translating an internationalized plugin. Localization is often abbreviated as `l10n` (because there are 10 letters between the l and the n.)
-
-## Localization files
-
-### `POT` (Portable Object Template) files
-
-This file contains the original strings (in English) in your plugin.
-
-### `PO` (Portable Object) files
-
-Every translator will take the `POT` file and translate the `msgstr` sections into their own language. The result is a `PO` file with the same format as a `POT`, but with translations and some specific headers. There is one `PO` file per language.
-
-### `MO` (Machine Object) files
-
-From every translated `PO` file a `MO` file is built. These are machine-readable, binary files that the gettext functions actually use (they don’t care about `.POT` or `.PO` files), and are a “compiled” version of the `PO` file. The conversion is done using the `msgfmt` command line tool. In general, an application may use more than one large logical translatable module and a different `MO` file accordingly. A text domain is a handle of each module, which has a different `MO` file.
-
-## Generating the `POT` file
-
-The `POT` file is the one you need to hand to translators, so that they can do their work. The `POT` and` PO` files can easily be interchangeably renamed to change file types without issues.
-
-It is a good idea to offer the POT file along with your plugin, so that translators won’t have to ask you specifically about it.
-
- There are a couple of ways to generate a `POT` file for your plugin:
-
-### WP-CLI
-
-Install [WP-CLI](https://make.wordpress.org/cli/handbook/installing/) and use the `wp i18n make-pot` command according to the [documentation](#cli/commands/i18n/make-pot).
-
-### Poedit
-
-You can also use [Poedit](http://www.poedit.net/ "http://www.poedit.net/") locally when translating. This is an open source tool for all major OSs. The free Poedit default version supports manual scanning of all source code with Gettext functions. A pro version of it also features one-click scanning for WordPress plugins. After generating the `PO` file you can rename the file to `POT`. If a `MO` was generated then you can delete that file as it is not needed. If you don’t have the pro version you can easily get the [Blank POT](https://github.com/fxbenard/Blank-WordPress-Pot) and use that as the base of your `POT file`. Once you have placed the blank `POT` in the languages folder you can click “Update” in Poedit to update the `POT` file with your strings.
-
-### Grunt Tasks
-
-There are even some grunt tasks that you can use to create the POTs. [grunt-wp-i18n](https://github.com/blazersix/grunt-wp-i18n) &amp; [grunt-pot](https://www.npmjs.org/package/grunt-pot). Steps on setting up grunt are beyond the scope of this documentation, but just be aware that it is possible. Here is an [example Grunt.js and package.json](https://gist.github.com/grappler/10187003) that you can place in the root of your plugin.
-
-## Translate the `PO` file
-
-Save the translated file as `my-plugin-{locale}.mo`. The locale is the language code and/or country code. For example, the locale for German is `de_DE`. From the code example above the text domain is ‘my-plugin’ therefore the German MO and PO files should be named `my-plugin-de_DE.mo` and `my-plugin-de_DE.po`. For more information about language and country codes, see [Installing WordPress in Your Language](https://codex.wordpress.org/Installing_WordPress_in_Your_Language).
-
-There are multiple ways to translate a `PO` file.
-
-### Manually
-
-You can use a text editor to enter the translation. In a text editor it will look like this.
-
-```
-#: plugin-name.php:123
-msgid "Page Title"
-msgstr ""
-```
-
-You enter the translation between the quotation marks. For the German translation it would look like this.
-
-```
-#: plugin-name.php:123
-msgid "Page Title"
-msgstr "Seitentitel"
-```
-
-### Poedit
-
-You can also use [Poedit](http://www.poedit.net/ "http://www.poedit.net/") when translating. The free Poedit default version supports manual scanning of all source code with Gettext functions. A pro version of it also features one-click scanning for WordPress plugins and themes.
-
-### Online Services
-
-A third option is to use an online translation service. The general idea is that you upload the `POT` file and then you can give permission to users or translators to translate your plugin. This allows you to track the changes, always have the latest translation and reduce the translation being done twice.
-
-Here are a few tools that can be used to translate PO files online:
-
-- [Transifex](https://www.transifex.com/ "https://www.transifex.com/")
-- [WebTranslateIt](https://webtranslateit.com/en "https://webtranslateit.com/")
-- [Poeditor](https://poeditor.com/)
-- [Google Translator Toolkit](http://translate.google.com/toolkit/ "http://translate.google.com/toolkit/")
-- [GlotPress](http://blog.glotpress.org/ "http://blog.glotpress.org/")
-
-## Generate MO file
-
-### Command line
-
-`msgfmt` is used to create the MO file. `msgfmt` is part of Gettext package. Otherwise command line can be used. A typical `msgfmt` command looks like this:
-
-**Unix Operating Systems**
-
-```bash
-msgfmt -o filename.mo filename.po
-```
-
-**Windows Operating Systems**
-
-```bash
-msgfmt -o filename.mo filename.po
-```
-
-If you have a lot of `PO` files to convert at once, you can run it as a batch. For example, using a `bash` command:
-
-**Unix Operating Systems**
-
-```bash
-# Find PO files, process each with msgfmt and rename the result to MO
-for file in `find . -name "*.po"` ; do msgfmt -o ${file/.po/.mo} $file ; done
-```
-
-**Windows Operating Systems**  
-For Windows you need to install [Cygwin](http://www.cygwin.com/) first.
-
-Create a file called `potomo.sh` and put the following into it:
-
-```bash
-#! /bin/sh
-# Find PO files, process each with msgfmt and rename the result to MO
-for file in `/usr/bin/find . -name '*.po'` ; do /usr/bin/msgfmt -o ${file/.po/.mo} $file ; done
-```
-
-You can run this command in the command line.
-
-```bash
-cd C:/path/to/language/folder/my-plugin/languages & C:/cygwin/bin/bash -c /cygdrive/c/path/to/script/directory/potomo.sh
-```
-
-### Poedit
-
-`msgfmt` is also integrated in [Poedit](http://www.poedit.net/ "http://www.poedit.net/") allowing you to use it to generate the MO file. There is a setting in the preferences where you can enable or disable it.
-
-![internationalization-localization-04](https://i0.wp.com/developer.wordpress.org/files/2014/10/internationalization-localization-04.jpg?resize=436%2C448&ssl=1)### Grunt task
-
-There is [grunt-po2mo](https://www.npmjs.org/package/grunt-po2mo) that will convert all of the files.
-
-## Tips for Good Translations
-
-### Don’t translate literally, translate organically
-
-Being bi- or multi-lingual, you undoubtedly know that the languages you speak have different structures, rhythms, tones, and inflections. Translated messages don’t need to be structured the same way as the English ones: take the ideas that are presented and come up with a message that expresses the same thing in a natural way for the target language. It’s the difference between creating an equal message and an equivalent message: don’t replicate, replace. Even with more structural items in messages, you have creative license to adapt and change if you feel it will be more logical for, or better adapted to, your target audience.
-
-### Try to keep the same level of formality (or informality)
-
-Each message has a different level of formality or informality. Exactly what level of formality or informality to use for each message in your target language is something you’ll have to figure out on your own (or with your team), but WordPress messages (informational messages in particular) tend to have a politely informal tone in English. Try to accomplish the equivalent in the target language, within your cultural context.
-
-### Don’t use slang or audience-specific terms
-
-Some amount of terminology is to be expected in a blog, but refrain from using colloquialisms that only the “in” crowd will get. If the uninitiated blogger were to install WordPress in your language, would they know what the term means? Words like pingback, trackback, and feed are exceptions to this rule; they’re terminology that are typically difficult to translate, and many translators choose to leave in English.
-
-### Read other software’s localizations in your language
-
-If you get stuck or need direction, try reading through the translations of other popular software tools to get a feel for what terms are commonly used, how formality is addressed, etc. Of course, WordPress has its own tone and feel, so keep that in mind when you’re reading other localizations, but feel free to dig up UI terms and the like to maintain consistency with other software in your language.
-
-## Using Localizations
-
-Place the localization files in the language folder, either in the plugin `languages` folder or as of WordPress 3.7 in the plugin `languages` folder normally under `wp-content`. The full path would be `wp-content/languages/plugins/my-plugin-fr_FR.mo`.
-
-You can change the language in the “General Settings”. If you do not see this option, or the language into which you want to switch i snot listed, do it manually:
-
-- Define `WPLANG` inside of `wp-config.php` to your chosen language. For example, if you wanted to use French, you would have: `define ('WPLANG', 'fr_FR');`
-- Go to `wp-admin/options-general.php` or “Settings” -&gt; “General”
-- Select your language in “Site Language” dropdown
-- Go to `wp-admin/update-core.php`
-- Click “Update translations”, when available
-- Core translations files are downloaded, when available
-
-## Resources
-
-- [Creating .pot file for your theme or plugin](https://foxland.fi/creating-pot-file-for-your-theme-or-plugin/)
-- [How To Internationalize WordPress Plugins](http://tommcfarlin.com/internationalize-wordpress-plugins/)
-- [Translating Your Theme](http://wp.tutsplus.com/tutorials/theme-development/translating-your-theme/)
-- [Blank WordPress POT](https://github.com/fxbenard/Blank-WordPress-Pot)
-- [Improved i18n WordPress tools](https://github.com/grappler/i18n)
-- [How to update translations quickly](http://ulrich.pogson.ch/update-translations-quickly)
-- [Workflow between GitHub/Transifex](http://wp-translations.org/workflow-using-github/)
-- [Gist: Complete Localization Grunt task](https://gist.github.com/grappler/10187003)
-- [WordPress.tv](http://wordpress.tv/) tags: [i18n](http://wordpress.tv/tag/i18n/), [internationalization](http://wordpress.tv/tag/internationalization/) and [translation](http://wordpress.tv/tag/translation/)
-
----
-
-# The WordPress.org Plugin Directory <a name="plugins/wordpress-org" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/
-
-WordPress.org offers free hosting to anyone who wishes to develop a plugin in our directory.
-
-All plugins hosted here have access to:
-
-- Monitor statistics (see also the [WordPress.org Plugin API](https://codex.wordpress.org/WordPress.org_API#Plugins))
-- Receive feedback and reviews from users
-- Provide support via a free forum
-
-Make sure you review the [Developer FAQ](#plugins/wordpress-org/plugin-developer-faq)!
-
-And make sure that you’ve reviewed the [common issues](#plugins/wordpress-org/common-issues) that the Plugin Review Team typically encounters when reviewing plugins.
-
-If you require assistance with your hosting on WordPress.org, you can contact the plugin team via Slack in `#pluginreview`.
-
-## Requirements
-
-A brief overview:
-
-- Plugins must be compatible with the [GNU General Public License v2](http://www.gnu.org/licenses/license-list.html#GPLCompatibleLicenses) or later. If a license is not specified, code will be considered “GPLv2 or later.”
-- The provided [Subversion](http://subversion.tigris.org/) repository must be used for functional WordPress plugins only.
-- Copyright and Trademark law must be respected.
-- The plugin and developer must not do anything illegal, dishonest, or morally offensive. This includes spamming or harassment.
-
-All plugins and developers must comply with our [Detailed Plugin Guidelines](#plugins/wordpress-org/detailed-plugin-guidelines).
-
-## How to …
-
-If you’re just getting started, it helps to know how to submit your plugin, use SVN, and so on.
-
-- [… plan, submit, and maintain your plugin](#plugins/wordpress-org/planning-submitting-and-maintaining-plugins)
-- [… use SVN (aka Subversion)](#plugins/wordpress-org/how-to-use-subversion)
-- [… manage your readme.txt](#plugins/wordpress-org/how-your-readme-txt-works)
-- [… write proper plugin headers](#plugins/the-basics/header-requirements)
-- [… use plugin assets (header images and icons)](#plugins/wordpress-org/plugin-assets)
-- [… take over an existing plugin](#plugins/wordpress-org/take-over-an-existing-plugin)
-- [… use the support forums](#plugins/wordpress-org/using-the-forums)
-- [… grant users special roles (contributor, supporter, committer, etc)](#plugins/wordpress-org/special-user-roles-capabilities)
-- [… transfer your plugin to a new owner](#plugins/wordpress-org/transferring-your-plugin-to-a-new-owner)
-- [… add your plugin to the block directory](#plugins/wordpress-org/add-your-plugin-to-the-block-directory)
-- .[.. manage your plugin’s security](#plugins/wordpress-org/plugin-security)
-- [… report an insecure plugin](#plugins/wordpress-org/plugin-securityreporting-plugin-security-issues/)
-
----
-
-# Planning, Submitting, and Maintaining Plugins <a name="plugins/wordpress-org/planning-submitting-and-maintaining-plugins" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/planning-submitting-and-maintaining-plugins/
-
-You’ve written the next [Hello Dolly](https://wordpress.org/plugins/hello-dolly/) and you want the world to use it. What should you do?
-
-## 1. Test once and test again
-
-With any luck, your plugin will be used by lots of people in many different situations and hosting environments. You’ll want to make sure you’ve tested your plugin to make sure it works in any situation and doesn’t frustrate your users.
-
-## 2. Pick a good name
-
-A plugin name should reflect the uniqueness of you and your work. When you pick a name, make sure you’re not violating trademarks or stomping on someone else’s product names. If you’re not working for FaceRange (a fake company), you shouldn’t name your plugin ‘FaceRange’s Dancing Squirrels’ after all. A much better name would be ‘Dancing Squirrels for FaceRange’ for example. It can be hard to come up with a good name, so take your time. Your plugin URL cannot be changed after you submit it, but the display name can change a thousand times.
-
-Display names are generated from the headers in the main plugin file so mind your Ps and Qs.
-
-## 3. Write great documentation
-
-A [README.txt](https://wordpress.org/plugins/developers/#readme) file is the best place to start, as it’s a standard reference point for all plugins. You’ll want to make sure you include:
-
-- A concise description of what your plugin actually does. If it does a lot, it might be better as two plugins.
-- Installation instructions, especially if there’s special configuration to be done. If a user needs to register with your service, make sure you link to it.
-- Directions on how to get support, and what you do and do not support.
-
-## 4. Submit your plugin
-
-In order to submit a plugin, there are three steps:
-
-1. Register on WordPress.org with a valid, regularly checked email address. If you are submitting a plugin on behalf of a company, use an **official** company email for verification.
-2. Whitelist `plugins@wordpress.org` in your email client to ensure you receive email communications.
-3. [Submit your plugin](https://wordpress.org/plugins/developers/add/) with a brief overview of what it does and a complete, ready to go, zip of the plugin. The zip must be the complete version of your plugin, just like you would use to manually upload via the plugin installer.
-
-Once a plugin is queued for review, we will review the code for any issues within 14 business days. Most of the issues can be avoided by following the guidelines. If we do find issues, we will contact the developer(s), and work towards a resolution. Once approved, you’ll receive an email with details as to how to access to a [Subversion Repository](#plugins/wordpress-org/how-to-use-subversion) where you’ll store your plugin.
-
-After you upload your plugin (and a [readme file](https://wordpress.org/plugins/developers/#readme)) in that repository via SVN, it will appear on the [plugin directory](https://wordpress.org/plugins/).
-
-## 5. Push out the first version
-
-The WordPress.org plugins directory is the easiest way for potential users to download and install your plugin. WordPress’ integration with the plugin directory means your plugin can be updated by the user in a couple of clicks.
-
-When you’re ready to release your first version, you’ll want to [sign up](https://wordpress.org/plugins/add/). After a review process is completed successfully, you’ll be granted a Subversion Repository for your code. We have documentation about [using SVN on WordPress.org](#plugins/wordpress-org/how-to-use-subversion), which is a slightly different workflow than you may be familiar with if you use GIT.
-
-## 6. Embrace open source
-
-Open source is one of the most powerful ideas of our time because it empowers collaboration across borders. By encouraging contributions, you’re allowing others to love your code as much as you do. There are several options to open source your code:
-
-- [Github](http://github.com) makes it simple to get others involved with your project. Other developers and users can submit bug fixes or reports, feature requests, or brand new contributions easily. Github has a [great documentation portal](https://help.github.com/) and even an [interactive demo](http://try.github.com/) if you’ve never used Git before.
-    - [Bitbucket](https://bitbucket.org/) and [Gitlab](https://about.gitlab.com/) are alternatives with similar features.
-- The WordPress.org Plugin Directory provides and requires you to use a [Subversion repository](#plugins/wordpress-org/how-to-use-subversion).
-
-## 7. Listen to your users
-
-You’ll often find that your users put your code through many more test cases than you could’ve imagined. This can be tremendously valuable feedback.
-
-Releasing your code through WordPress.org means your plugin automatically has a support forum. Use it! You can subscribe to receive new posts by email and respond to your users in a timely manner. They just want to love your plugin as much as you do.
-
-Jetpack has a post you can point to about [writing great bug reports](http://jetpack.me/2011/11/18/how-to-write-a-great-bug-report/).
-
-## 8. Regularly push new versions
-
-The best plugins are the ones that keep iterating over time, pushing small changes along the way. Don’t let your hard work go stale by waiting too long to update. Keep in mind, constant upgrades can cause ‘Update Fatigue’ and users will stop upgrading. Keeping a balance between too few updates and too many updates is important.
-
-## 9. Rinse and repeat
-
-Like in other parts of life, the best things come from patience and hard work.
-
----
-
-# Developer Tools <a name="plugins/developer-tools" />
-
-Source: https://developer.wordpress.org/plugins/developer-tools/
-
-There are a wide variety of tools available to help with plugin development. Some of them are run in your development environment ([xdebug](http://xdebug.org/), [PHPCS](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards), etc), but there are also some excellent tools that can run right inside WordPress to help you build things properly and diagnose problems. This chapter deals with the in-browser tools.
-
----
-
-# Debug Bar and Add-Ons <a name="plugins/developer-tools/debug-bar-and-add-ons" />
-
-Source: https://developer.wordpress.org/plugins/developer-tools/debug-bar-and-add-ons/
-
-The Debug Bar is a plugin that adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
-
-## Debug Bar
-
-This is the main plugin, adding the base functionality that is extended by the remaining plugins listed on this page.
-
-When WP\_DEBUG is enabled it also tracks PHP Warnings and Notices to make them easier to find.
-
-When SAVEQUERIES is enabled the mysql queries are tracked and displayed.
-
-[Visit Debug Bar](https://wordpress.org/plugins/debug-bar/)
-
-## Debug Bar Console
-
-This plugin adds a console in which you can run arbitrary PHP. This is excellent for testing the contents of variables, among many other uses.
-
-[Visit Debug Bar Console](https://wordpress.org/plugins/debug-bar-console/)
-
-## Debug Bar Shortcodes
-
-This plugin adds a new panel to the Debug Bar that displays the registered shortcodes for the current request.
-
-Additionally it will show you:
-
-- Which function/method is called by the shortcode.
-- Whether the shortcode is used on the current post/page/post type and how (only when on singular).
-- Any additional information available about the shortcode, such as a description, which parameters it takes, whether or not it is self-closing.
-- Find out all pages/posts/etc on which a shortcode is used.
-
-[Visit Debug Bar Shortcodes](https://wordpress.org/plugins/debug-bar-shortcodes/)
-
-## Debug Bar Constants
-
-This plugin adds three new panels to the Debug Bar that display the defined constants available to you as a developer for the current request:
-
-- WP Constants
-- WP Class Constants
-- PHP Constants
-
-[Visit Debug Bar Constants](https://wordpress.org/plugins/debug-bar-constants/)
-
-## Debug Bar Post Types
-
-This plugin adds a new panel to the Debug Bar that displays detailed information about the registered post types for your site.
-
-[Visit Debug Bar Post Types](https://wordpress.org/plugins/debug-bar-post-types/)
-
-## Debug Bar Cron
-
-This plugin adds a new panel in the Debug Bar displaying information about WordPress’ scheduled events.
-
-Once installed, you will have access to the following information:
-
-- Number of scheduled events
-- If cron is currently running
-- Time of next event
-- Current time
-- List of custom scheduled events
-- List of core scheduled events
-- List of schedules
-
-[Visit Debug Bar Cron](https://wordpress.org/plugins/debug-bar-cron/)
-
-## Debug Bar Actions and Filters Addon
-
-This plugin adds two more tabs in the Debug Bar to display hooks (Actions and Filters) attached to the current request. Actions tab displays the actions hooked to current request. Filters tab displays the filter tags along with the functions attached to it with respective priority.
-
-[Visit Debug Bar Actions and Filters Addon](https://wordpress.org/plugins/debug-bar-actions-and-filters-addon/)
-
-## Debug Bar Transients
-
-This plugin adds information about WordPress transients to a new panel in the Debug Bar.
-
-Once installed, you will have access to the following information:
-
-- Number of existing transients
-- List of custom transients
-- List of core transients
-- List of custom site transients
-- List of core site transients
-- An option to delete a transient
-
-[Visit Debug Bar Transients](https://wordpress.org/plugins/debug-bar-transients/)
-
-## Debug Bar List Script &amp; Style Dependencies
-
-This plugin lists scripts and styles that are loaded, in which order they’re loaded, and what dependencies exist.
-
-[Visit Debug Bar List Script &amp; Style Dependencies](https://wordpress.org/plugins/debug-bar-list-dependencies/)
-
-## Debug Bar Remote Requests
-
-This plugin will add a new panel to Debug Bar that will display and profile remote requests made through the HTTP API.
-
-Once installed, you will have access to the following information:
-
-- Request method (GET, POST, etc)
-- URL
-- Time per request
-- Total time for all requests
-- Total number of requests
-
-Optionally, you can add `?dbrr_full=1` to your URL to get additional information, including all request parameters and a full dump of the response with headers.
-
-[Visit Debug Bar Remote Requests](https://wordpress.org/plugins/debug-bar-remote-requests/)
-
----
-
-# Helper Plugins <a name="plugins/developer-tools/helper-plugins" />
-
-Source: https://developer.wordpress.org/plugins/developer-tools/helper-plugins/
-
-## Plugin Check
-
-Plugin Check is a tool for testing whether your plugin meets the required standards for the WordPress.org plugin directory. With this plugin you will be able to run most of the checks used for new submissions, and check if your plugin meets the requirements.
-
-Additionally, the tool flags violations or concerns around plugin development best practices, from basic requirements like correct usage of internationalization functions to accessibility, performance, and security best practices.
-
-[Visit Plugin Check](https://wordpress.org/plugins/plugin-check/)
-
-## Query Monitor
-
-Query Monitor is a debugging plugin for anyone developing with WordPress. You can view debugging and performance information on database queries, hooks, conditionals, HTTP requests, redirects and more. It has some advanced features not available in other debugging plugins, including automatic AJAX debugging and the ability to narrow down things by plugin or theme.
-
-[Visit Query Monitor](https://wordpress.org/plugins/query-monitor/)
-
----
-
-# Checking User Capabilities <a name="plugins/security/checking-user-capabilities" />
-
-Source: https://developer.wordpress.org/plugins/security/checking-user-capabilities/
-
-If your plugin allows users to submit data—be it on the Admin or the Public side—it should check for User Capabilities.
-
-## User Roles and Capabilities
-
-The most important step in creating an efficient security layer is having a user permission system in place. WordPress provides this in the form of [User Roles and Capabilities](#plugins/users/roles-and-capabilities).
-
-Every user logged into WordPress is automatically assigned specific User capabilities depending on their User role.
-
-**User roles** is just a fancy way of saying which group the user belongs to. Each group has a specific set of predefined capabilities.
-
-For example, the main user of your website will have the User role of an Administrator while other users might have roles like Editor or Author. You could have more than one user assigned to a role, i.e. there might be two Administrators for a website.
-
-**User capabilities** are the specific permissions that you assign to each user or to a User role.
-
-For example, Administrators have the “manage\_options” capability which allows them to view, edit and save options for the website. Editors on the other hand lack this capability which will prevent them from interacting with options.
-
-These capabilities are then checked at various points within the Admin. Depending on the capabilities assigned to a role; menus, functionality, and other aspects of the WordPress experience may be added or removed.
-
-**As you build a plugin, make sure to run your code only when the current user has the necessary capabilities.**
-
-### Hierarchy
-
-The higher the user role, the more capabilities the user has. Each user role inherits the previous roles in the hierarchy.
-
-For example, the “Administrator”, which is the highest user role on a single site installation, inherits the following roles and their capabilities: “Subscriber”, “Contributor”, “Author” and “Editor”.
-
-## Examples
-
-### No Restrictions
-
-The example below creates a link on the frontend which gives the ability to trash posts. Because this code does not check user capabilities, **it allows any visitor to the site to trash posts!**
-
-```php
-/**
- * Generate a Delete link based on the homepage url.
- *
- * @param string $content   Existing content.
- *
- * @return string|null
- */
-function wporg_generate_delete_link( $content ) {
-	// Run only for single post page.
-	if ( is_single() && in_the_loop() && is_main_query() ) {
-		// Add query arguments: action, post.
-		$url = add_query_arg(
-			[
-				'action' => 'wporg_frontend_delete',
-				'post'   => get_the_ID(),
-			], home_url()
-		);
-
-		return $content . ' <a href="' . esc_url( $url ) . '">' . esc_html__( 'Delete Post', 'wporg' ) . '</a>';
-	}
-
-	return null;
-}
-
-/**
- * Request handler
- */
-function wporg_delete_post() {
-	if ( isset( $_GET['action'] ) && 'wporg_frontend_delete' === $_GET['action'] ) {
-
-		// Verify we have a post id.
-		$post_id = ( isset( $_GET['post'] ) ) ? ( $_GET['post'] ) : ( null );
-
-		// Verify there is a post with such a number.
-		$post = get_post( (int) $post_id );
-		if ( empty( $post ) ) {
-			return;
-		}
-
-		// Delete the post.
-		wp_trash_post( $post_id );
-
-		// Redirect to admin page.
-		$redirect = admin_url( 'edit.php' );
-		wp_safe_redirect( $redirect );
-
-		// We are done.
-		die;
-	}
-}
-
-/**
- * Add the delete link to the end of the post content.
- */
-add_filter( 'the_content', 'wporg_generate_delete_link' );
-
-/**
- * Register our request handler with the init hook.
- */
-add_action( 'init', 'wporg_delete_post' );
-
-```
-
-### Restricted to a Specific Capability
-
-The example above allows any visitor to the site to click on the “Delete” link and trash the post. However, we only want Editors and above to be able to click on the “Delete” link.
-
-To accomplish this, we will check that the current user has the capability `edit_others_posts`, which only Editors or above would have:
-
-```php
-/**
- * Generate a Delete link based on the homepage url.
- *
- * @param string $content   Existing content.
- *
- * @return string|null
- */
-function wporg_generate_delete_link( $content ) {
-	// Run only for single post page.
-	if ( is_single() && in_the_loop() && is_main_query() ) {
-		// Add query arguments: action, post.
-		$url = add_query_arg(
-			[
-				'action' => 'wporg_frontend_delete',
-				'post'   => get_the_ID(),
-			], home_url()
-		);
-
-		return $content . ' <a href="' . esc_url( $url ) . '">' . esc_html__( 'Delete Post', 'wporg' ) . '</a>';
-	}
-
-	return null;
-}
-
-/**
- * Request handler
- */
-function wporg_delete_post() {
-	if ( isset( $_GET['action'] ) && 'wporg_frontend_delete' === $_GET['action'] ) {
-
-		// Verify we have a post id.
-		$post_id = ( isset( $_GET['post'] ) ) ? ( $_GET['post'] ) : ( null );
-
-		// Verify there is a post with such a number.
-		$post = get_post( (int) $post_id );
-		if ( empty( $post ) ) {
-			return;
-		}
-
-		// Delete the post.
-		wp_trash_post( $post_id );
-
-		// Redirect to admin page.
-		$redirect = admin_url( 'edit.php' );
-		wp_safe_redirect( $redirect );
-
-		// We are done.
-		die;
-	}
-}
-
-/**
- * Add delete post ability
- */
-add_action('plugins_loaded', 'wporg_add_delete_post_ability');
- 
-function wporg_add_delete_post_ability() {    
-    if ( current_user_can( 'edit_others_posts' ) ) {
-        /**
-         * Add the delete link to the end of the post content.
-         */
-        add_filter( 'the_content', 'wporg_generate_delete_link' );
-      
-        /**
-         * Register our request handler with the init hook.
-         */
-        add_action( 'init', 'wporg_delete_post' );
-    }
-}
-```
-
----
-
-# Data Validation <a name="plugins/security/data-validation" />
-
-Source: https://developer.wordpress.org/plugins/security/data-validation/
-
-This content has been moved to the [Data Validation page](#apis/security/data-validation) in the Common APIs Handbook.
-
----
-
-# Securing (sanitizing) Input <a name="plugins/security/securing-input" />
-
-Source: https://developer.wordpress.org/plugins/security/securing-input/
-
-This content has been moved to the [Sanitizing Data](#apis/security/sanitizing) page in the Common APIs Handbook.
-
----
-
-# Nonces <a name="plugins/security/nonces" />
-
-Source: https://developer.wordpress.org/plugins/security/nonces/
-
-This content has been moved to the [Nonces page](#apis/security/nonces) in the Common APIs Handbook.
-
----
-
-# Securing (escaping) Output <a name="plugins/security/securing-output" />
-
-Source: https://developer.wordpress.org/plugins/security/securing-output/
-
-This content has been moved to the [Escaping Data](#apis/security/escaping) page in the Common APIs Handbook.
-
----
-
-# AJAX <a name="plugins/javascript/ajax" />
-
-Source: https://developer.wordpress.org/plugins/javascript/ajax/
-
-## What is AJAX?
-
-AJAX is the acronym for Asynchronous JavaScript And XML. XML is a data exchange format and UX is software developer shorthand for User Experience. Ajax is an Internet communications technique that allows a web page displayed in a user’s browser to request specific information from a server and display this new information on the same page without the need to reload the entire page. You can already imagine how this improves the user experience.
-
-While XML is the traditional data exchange format used, the exchange can actually be any convenient format. When working with PHP code, many developers favor JSON because the internal data structure created from the transmitted data stream is easier to interface with.
-
-To see AJAX in action, go to your WordPress administration area and add a category or tag. Pay close attention when you click the Add New button, notice the page changes but does not actually reload. Not convinced? Check your browser’s back history, if the page had reloaded, you would see two entries for the page.
-
-AJAX does not even require a user action to work. Google Docs automatically saves your document every few minutes with AJAX without you needing to initiate a save action.
-
-## Why use AJAX?
-
-Obviously, it improves the user experience. Instead of presenting a boring, static page, AJAX allows you to present a dynamic, responsive, user friendly experience. Users can get immediate feedback that some action they took was right or wrong. No need to submit an entire form before finding out there is a mistake in one field. Important fields can be validated as soon as the data is entered. Or suggestions could be made as the user types.
-
-AJAX can dramatically decrease the amount of data flowing back and forth. Only the pertinent data needs to be exchanged instead of all of the page content, which is what happens when the page reloads.
-
-Specifically related to WordPress plugins, AJAX is by far the best way to initiate a process independent of WordPress content. If you’ve programmed PHP before, you would likely do this by simply linking to a new PHP page. The user following the link initiates the process. The problem with this is that you cannot access any WordPress functions when you link to a new external PHP page. In the past, developers accessed WordPress functions by including the core file `wp-load.php` on their new PHP page. The problem with doing that is you cannot possibly know the correct path to this file anymore. The WordPress architecture is now flexible enough that the `/wp-content/` and your plugin files can be moved from its usual location to one level from the installation root. You cannot know where `wp-load.php` is relative to your plugin files, and you cannot know the absolute path to the installation folder either.
-
-What you can know is where to send an AJAX request, because it is defined in a global JavaScript variable. Your PHP AJAX handler script is actually an action hook, so all WordPress functions are automatically available to it, unlike an external PHP file.
-
-## How Do I Use AJAX?
-
-If you are new to WordPress but have experience using AJAX in other environments, you will need to relearn a few things. The way WordPress implements AJAX is most likely different than what you are used to. If everything is new to you, no problem. You will learn the basics here. Once you’ve developed a basic AJAX exchange, it’s a cinch to expand on that base and develop that killer app with an awesome user interface!
-
-There are two major components of any AJAX exchange in WordPress. The client side JavaScript or jQuery and the server side PHP. All AJAX exchanges follow the following sequence of events.
-
-1. Some sort of page event initiates a JavaScript or jQuery function. That function gathers some data from the page and sends it via a HTTP request to the server. Because handling HTTP requests with JavaScript is awkward and jQuery is bundled into WordPress anyway, we are going to focus only on jQuery code from here on out. AJAX with straight JavaScript is possible, but it’s not worth doing it when jQuery is available.
-2. The server receives the request and does something with the data. It may assemble related data and send it back to the client browser in the form of an HTTP response. This is not a requirement, but since keeping the user informed about what’s going on is desirable, it’s very rare not to send some kind of response.
-3. The jQuery function that sent the initial AJAX request receives the server response and does something with it. It may update something on the page and/or present a message to the user by some means.
-
-## Using AJAX with jQuery
-
-Now we will define the “do stuff” portion from the [snippet in the article on jQuery](#plugin/javascript/jquery). We will use the [$.post()](http://api.jquery.com/jQuery.post/ "jQuery Reference") method, which takes 3 parameters: the URL to send the POST request to, the data to send, and a callback function to handle the server response. Before we do that though, we have a bit of advance planning to get out of the way. We do the following assignment for use later in the callback function. The purpose will be more evident in the [Callback section](#callback "Page section").
-
-```javascript
-var this2 = this;
-```
-
-### URL
-
-All WordPress AJAX requests must be sent to `wp-admin/admin-ajax.php`. The correct, complete URL needs to come from PHP, jQuery cannot determine this value on its own, and you cannot hardcode the URL in your jQuery code and expect anyone else to use your plugin on their site. If the page is from the administration area, WordPress sets the correct URL in the global JavaScript variable ajaxurl. For a page from the public area, you will need to establish the correct URL yourself and pass it to jQuery using [wp\_localize\_script()](#reference/functions/wp_localize_script) . This will be covered in more detail in the [PHP section](#plugin/javascript/enqueuing "Server Side PHP and Enqueuing"). For now just know that the URL that will work for both the front and back end is available as a property of a global object that you will define in the PHP segment. In jQuery it is referenced like so:
-
-```javascript
-my_ajax_obj.ajax_url
-```
-
-### Data
-
-All data that needs to be sent to the server is included in the data array. Besides any data needed by your app, you must send an action parameter. For requests that could result in a change to the database you need to send a nonce so the server knows the request came from a legitimate source. Our example data array provided to the .post() method looks like this:
-
-```json
-{
-  _ajax_nonce: my_ajax_obj.nonce, // nonce
-  action: "my_tag_count", // action
-  title: this.value // data
-}
-```
-
-Each component is explained below.
-
-### Nonce
-
-[Nonce](https://codex.wordpress.org/WordPress_Nonces "Codex reference") is a portmanteau of “Number used ONCE”. It is essentially a unique serial number assigned to each instance of any form served. The nonce is established with PHP script and passed to jQuery the same way the URL was, as a property in a global object. In this case it is referenced as my\_ajax\_obj.nonce.
-
-**Note**
-
-A true nonce needs to be refreshed every time it is used so the next AJAX call has a new, unused nonce to send as verification. As it happens, the WordPress nonce implementation is not a true nonce. The same nonce can be used as many times as necessary in a 24 hour period, unless you logout. Generating a nonce with the same seed phrase will always yield the same number for a 12 hour period after which a new number will finally be generated.
-
-If your app needs serious security, implement a true nonce system where the server sends a new, fresh nonce in response to an Ajax request for the script to use to verify the next request.
-
-It’s easiest if you key this nonce value to \_ajax\_nonce. You can use a different key if it’s coordinated with the PHP code verifying the nonce, but it’s easier to just use the default value and not worry about coordination. Here is the way the declaration of this key-value pair appears:
-
-```javascript
-_ajax_nonce: my_ajax_obj.nonce
-```
-
-### Action
-
-All WordPress AJAX requests must include an action argument in the data. This value is an arbitrary string that is used in part to construct an action tag you use to hook your AJAX handler code. It’s useful for this value to be a very brief description of the AJAX call’s purpose. Unsurprisingly, the key for this value is *‘action’*. In this example, we will use "my\_tag\_count" as our action value. The declaration of this key-value pair looks like this:
-
-```javascript
-action: "my_tag_count"
-```
-
-Any other data the server needs to do its task is also included in this array. If there are a lot of fields to transmit, there are two common formats to combine data fields into a single string for more convenient transmission, XML and JSON. Using these formats is optional, but whatever you do does need to be coordinated with the PHP script on the server side. More information on these formats is available in the following Callback section. It is more common to receive data in this format than to send it, but it can work both ways.
-
-In our example, the server only needs one value, a single string for the selected book title, so we will use the key *‘title’*. In jQuery, the object that fired the event is always contained in the variable this. Accordingly, the value of the selected element is this.value. Our declaration of this key-value pair appears like so:
-
-```javascript
-title: this.value
-```
-
-### Callback
-
-The callback handler is the function to execute when a response comes back from the server after the request is made. Once again, we usually see an anonymous function here. The function is passed one parameter, the server response. The response could be anything from a yes or no to a huge XML database. JSON formatted data is also a useful format for data. The response is not even required. If there is none, then no callback need be specified. In the interest of UX, it’s always a good idea to let the user know what happened to any request, so it is recommended to always respond and provide some indication that something happened.
-
-In our example, we replace the current text following the radio input with the server response, which includes the number of posts tagged by the book title. Here is our anonymous callback function:
-
-```javascript
-function( data ) {
-  this2.nextSibling.remove();
-  $( this2 ).after( data );
-}
-```
-
-data contains the entire server response. Earlier we assigned to this2 the object that triggered the change event (referenced as this) with the line var this2 = this;. This is because variable scope in closures only extends one level. By assigning this2 in the event handler (the part that initially just contained *“/\* do stuff \*/”*), we are able to use it in the callback where this would be out of scope.
-
-The server response can take on any form. Significant quantities of data should be encoded into a data stream for easier handling. XML and JSON are two common encoding schemes.
-
-#### XML
-
-XML is the old data exchange format for AJAX. It is after all the ‘X’ in AJAX. It continues to be a viable exchange format even though it can be difficult to work with using native PHP functions. Many PHP programmers prefer the JSON exchange format for that reason. If you do use XML, the parsing method depends on the browser being used. Use Microsoft.XMLDOM ActiveX for Internet Explorer and use DOMParser for everything else. Note that [Internet Explorer is no longer supported by WordPress](https://make.wordpress.org/core/2021/04/22/ie-11-support-phase-out-plan/) since 5.8 release.
-
-#### JSON
-
-JSON is often favored for its light weight and ease of use. You can actually parse JSON using eval(), but don’t do that! The use of eval() carries significant security risks. Instead, use a dedicated parser, which is also faster. Use the global instance of the parser object JSON. There are [specific functions to provide an easy way to give a response in JSON format](#plugins/javascript/enqueuing) to your AJAX call.
-
-#### Other
-
-As long as the data format is coordinated with the PHP handler, it can be any format you like, such as comma delimited, tab delimited, or any kind of structure that works for you.
-
-#### Client Side Summary
-
-Now that we’ve added our callback as the final parameter for the $.post() function, we’ve completed our sample jQuery Ajax script. All the pieces put together look like this:
-
-```javascript
-jQuery(document).ready(function($) {         //wrapper
-	$(".pref").change(function() {          //event
-		var this2 = this;                  //use in callback
-		$.post(my_ajax_obj.ajax_url, {      //POST request
-			_ajax_nonce: my_ajax_obj.nonce, //nonce
-			action: "my_tag_count",         //action
-			title: this.value               //data
-			}, function(data) {            //callback
-				this2.nextSibling.remove(); //remove current title
-				$(this2).after(data);       //insert server response
-			}
-		);
-	} );
-} );
-```
-
-This script can either be output into a block on the web page or contained in its own file. This file can reside anywhere on the Internet, but most plugin developers place it in a `/js/` subfolder of the plugin’s main folder. Unless you have reason to do otherwise, you may as well follow convention. For this example we will name our file `myjquery.js`
-
----
-
-# jQuery <a name="plugins/javascript/jquery" />
-
-Source: https://developer.wordpress.org/plugins/javascript/jquery/
-
-## Using jQuery
-
-Your jQuery script runs on the user’s browser after your WordPress webpage is received. A basic jQuery statement has two parts: a selector that determines which HTML elements the code applies to, and an action or event, which determines what the code does or what it reacts to. The basic event statement looks like this:
-
-```javascript
-jQuery.(selector).event(function);
-```
-
-When an event, such as a mouse click, occurs in an HTML element selected by the selector, the function that is defined inside the final set of parentheses is executed.
-
-All the following code examples are based on this HTML page content. Assume it appears on your plugin’s admin settings screen, defined by the file `myplugin_settings.php`. It is a simple table with radio buttons next to each title.
-
-```markup
-<form id="radioform">
-	<table>
-		<tbody>
-		<tr>
-			<td><input class="pref" checked="checked" name="book" type="radio" value="Sycamore Row" />Sycamore Row</td>
-			<td>John Grisham</td>
-		</tr>
-		<tr>
-			<td><input class="pref" name="book" type="radio" value="Dark Witch" />Dark Witch</td>
-			<td>Nora Roberts</td>
-		</tr>
-		</tbody>
-	</table>
-</form>
-```
-
-The output could look something like this on your settings page.
-
-![sample table](https://i0.wp.com/make.wordpress.org/docs/files/2013/11/pdh-ajax-example.png?ssl=1)In the [article on AJAX](#plugin/javascript/ajax "AJAX"), we will build an AJAX exchange that saves the user selection in usermeta and adds the number of posts tagged with the selected title. Not a very practical application, but it illustrates all the important steps. jQuery code can either reside in an external file or be output to the page inside a &lt;script&gt; block. We will focus on the external file variation because passing values from PHP requires special attention. The same code can be output to the page if that seems more expedient to you.
-
-#### Selector and Event
-
-The selector is the same form as CSS selectors: ".class" or "#id". There’s many [more forms](http://api.jquery.com/category/selectors/ "jQuery Reference"), but these are the two you will frequently use. In our example, we will use class ".pref". There’s also a slew of possible [events](http://api.jquery.com/category/events/ "jQuery Reference"), one you will likely use a lot is *‘click’*. In our example we will use *‘change’* to capture a radio button selection. Be aware that jQuery events are often named somewhat differently than those with JavaScript. So far, after we add in an empty anonymous function, our example statement looks like this:
-
-```javascript
-$.(".pref").change(function(){
-	/*do stuff*/
-});
-```
-
-This code will “do stuff” when any element of the “pref” class changes.
-
-**Note:** This code snippet, and all examples on this page, are for illustrating the use of AJAX. The code is not suitable for production environments because related operations such as [sanitization](../../plugin-security/securing-input/ "Handbook Chapter"), [security](../../plugin-security/user-capabilities-nonces/#nonces "Handbook Chapter"), [error handling](http://www.sitepoint.com/error-handling-in-php/ "External Site"), and [internationalization](../internationalization/ "Handbook Chapter") have been intentionally omitted. Be sure to always address these important operations in your production code.
-
----
-
-# Summary <a name="plugins/javascript/summary" />
-
-Source: https://developer.wordpress.org/plugins/javascript/summary/
-
-Here are all the example code snippets from the preceding discussion, assembled into two complete code pages: one for jQuery and the other for PHP.
-
-## PHP
-
-This code resides on one of your plugin pages.
-
-```php
-add_action( 'admin_enqueue_scripts', 'my_enqueue' );
-function my_enqueue( $hook ) {
-   if ( 'myplugin_settings.php' !== $hook ) {
-      return;
-   }
-
-   wp_enqueue_script(
-      'ajax-script',
-      plugins_url( '/js/myjquery.js', __FILE__ ),
-      array( 'jquery' ),
-      '1.0.0',
-      true
-   );
-
-   $title_nonce = wp_create_nonce( 'title_example' );
-   wp_localize_script(
-      'ajax-script',
-      'my_ajax_obj',
-      array(
-         'ajax_url' => admin_url( 'admin-ajax.php' ),
-         'nonce'    => $title_nonce,
-      )
-   );
-}
-
-add_action( 'wp_ajax_my_tag_count', 'my_ajax_handler' );
-function my_ajax_handler() {
-   check_ajax_referer( 'title_example' );
-
-   $title = wp_unslash( $_POST['title'] );
-
-   update_user_meta( get_current_user_id(), 'title_preference', $title );
-
-   $args = array(
-      'tag' => $title,
-   );
-
-   $the_query = new WP_Query( $args );
-
-   echo esc_html( $title ) . ' (' . $the_query->post_count . ') ';
-
-   wp_die(); // all ajax handlers should die when finished
-}
-```
-
-## jQuery
-
-This code is in the file `js/myjquery.js` below your plugin folder.
-
-```javascript
-jQuery(document).ready(function($) { 	   //wrapper
-	$(".pref").change(function() { 		   //event
-		var this2 = this; 		           //use in callback
-		$.post(my_ajax_obj.ajax_url, { 	   //POST request
-	       _ajax_nonce: my_ajax_obj.nonce, //nonce
-			action: "my_tag_count",        //action
-	  		title: this.value 	           //data
-  		}, function(data) {		           //callback
-			this2.nextSibling.remove();    //remove the current title
-			$(this2).after(data); 	       //insert server response
-		});
-	});
-});
-```
-
-And after storing the preference, the resulting post count is added to the selected title.
-
-## More Information
-
-- [How To Use AJAX In WordPress](http://wp.smashingmagazine.com/2011/10/18/how-to-use-ajax-in-wordpress/ "External Site")
-- [AJAX for WordPress](http://www.glennmessersmith.com/pages/wpajax.html "External Site")
-
----
-
-# Block Specific Plugin Guidelines <a name="plugins/wordpress-org/block-specific-plugin-guidelines" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/block-specific-plugin-guidelines/
-
-All Block Specific plugins must also comply with the [overall plugin guidelines](#plugins/wordpress-org/detailed-plugin-guidelines). These additional guidelines are unique to block specific plugins.
-
-## Guide to submitting plugins to the Block Directory
-
-The goal of the [Block Directory](https://wordpress.org/plugins/browse/block/) is to provide a safe place for WordPress users to find and install new blocks.
-
-### User Expectations
-
-- Users will have a place they can go, both within their WordPress admin and on WordPress.org, where they can download and install blocks that have been pre-vetted for major security issues.
-- Users will be able to one-click install blocks from their admin, one at a time.
-- Blocks will appear in their block library after installation and activation.
-- Blocks will work seamlessly and immediately without intrusive advertisements or upselling.
-
-### Developer Expectations
-
-- Developers will have a concrete set of requirements and guidelines to follow when writing blocks for the Block Directory.
-- Following these guidelines will help ensure that the blocks they develop can be seamlessly installed in the editor.
-- Blocks submitted to the Block Directory are held to stricter technical and policy rules than WordPress plugins in general.
-- Plugins with blocks that do not meet the Block Directory Guidelines may still be submitted to the Plugin Directory.
-
-### Definitions
-
-For the purposes of the Block Directory, we distinguish between two types of plugins:
-
-1. Plugins that exist solely to distribute a block.
-2. All other plugins, including those that bundle many independent blocks, plugins that contain blocks in addition to other functionality, and plugins with no blocks at all.
-
-These guidelines apply specifically to the first type of plugin, which is called a Block Plugin. If a plugin is of the second type, then the further guidelines and restrictions do not apply. All plugins, be they block-only or not, are required to comply with the [Detailed Plugin Guidelines](#plugins/wordpress-org/detailed-plugin-guidelines).
-
-### Block Plugins and the Block Directory
-
-The Block Directory contains only Block Plugins, that is to say plugins that contain only a single, independent, top-level block and a minimum of supporting code. Block plugins have the following characteristics:
-
-1. A specific type of WordPress plugin, with the same structure including a `readme.txt` file.
-2. Containing only blocks (typically a single top-level block).
-3. Contain a minimum of server-side (i.e. PHP) code.
-4. Self-contained with no UI outside of the post editor.
-
-In addition to the guidelines that apply to all WordPress plugins, Block Plugins that are submitted to the Block Directory must adhere to these guidelines:
-
-### Guidelines
-
-#### 1. Block Plugins are for the Block Editor.
-
-A Block Plugin must contain a block, and a minimum of other supporting code. It may not contain any UX outside of the editor, such as WordPress options or `wp-admin` menus. Server-side code should be kept to a minimum.
-
-Plugins that only extend or provide styles for other, pre-existing blocks are currently not eligible for inclusion in the Block Directory. At this time, they are not supported by the Block Editor’s seamless install process. Only Block Plugins that register a new block are currently supported.
-
-#### 2. Block Plugins are separate blocks.
-
-Block plugins are intended to be single purpose, separate, independent blocks, not bundles or compendiums of many blocks. In most cases, a Block Plugin should contain only one single top-level block. The Block Directory will not include collections of blocks that could be reasonably split up into separate, independent, blocks.
-
-Block plugins may contain more than one block where a clearly necessary parent/child or container/content dependency exists; for example a list block that contains list item blocks.
-
-#### 3. Plugin and block names should reflect the block’s purpose.
-
-Plugin titles and block titles should describe what the block does in a way that helps users easily understand its purpose. In most cases the plugin title and the block title should be identical or very similar. Some examples of good plugin and block names include:
-
-`Rainbow Block`  
-`Sepia Image Grid`  
-`Business Hours Block`
-
-Please avoid plugin and block titles unrelated to the block itself, or that cannot be easily distinguished from core blocks. Some examples of unhelpful plugin and block names are things such as:
-
-`PluginCo Inc Block`  
-`Widget`  
-`Image Block`
-
-The same trademark restrictions for plugin titles exist for block titles and names. This means that a block may not be named “Facerange Block” unless developed by a legal representative of Facerange.
-
-#### 3a. Block names should be unique and properly namespaced.
-
-The block name (meaning the [`name` parameter to `registerBlockType()`](#block-editor/developers/block-api/block-registration) and [`name` in `block.json`](https://github.com/WordPress/gutenberg/blob/master/docs/rfc/block-registration.md#name)) must be unique to the block. As with titles, please respect trademarks and other projects’ commonly used names, so as not to conflict with them.
-
-The namespace prefix to the block name should reflect either the plugin author, or the plugin slug. For example:
-
-`name: "my-rainbow-block-plugin/rainbow"`, or  
-`name: "john-doe/rainbow"`, or  
-`name: "pluginco/rainbow"`.
-
-The namespace may not be a reserved one such as `core` or `wordpress`.
-
-#### 4. Block Plugins must include a `block.json` file.
-
-The Block Registration RFC outlines the format of a `block.json` file: <https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md>
-
-Block Plugins must include a valid `block.json` file. In addition to the requirements specified in the RFC, the `block.json` must include the following attributes:
-
-- `name`
-- `title`
-- At least one of: `script`, `editorScript`
-- At least one of: `style`, `editorStyle`
-
-#### 5. Block Plugins must work independently.
-
-Block Plugins must function by themselves without requiring any external dependencies such as another WordPress plugin or theme.
-
-A Block Plugin may make use of code or hooks in another WordPress plugin or theme, provided the Block Plugin is still usable without that plugin or theme installed. For example, a Recipe Block Plugin is permitted to apply a filter implemented in a slider plugin to improve its image display, as long as the Recipe Block Plugin is still usable without the slider plugin.
-
-#### 6. Block Plugins should work seamlessly.
-
-Block Plugins are intended to work seamlessly and instantly when installed from the editor. That means they should not encumber the user with additional steps or prerequisites such as installing another plugin or theme, signing up for an account, or logging in or manually connecting to an external service.
-
-No form of payment is permitted for the use of a Block Plugin. While it is allowed to use the donation link feature in the plugin’s readme, or to link from the full plugin listing, the Block Plugin itself must be free to use. Block plugins that do require a paid service or include upselling and premium features are still permitted in the main WordPress Plugin Directory, subject to its guidelines.
-
-Block Plugins may use an external/cloud API where necessary, provided it can be done seamlessly without requiring a login or activation key.
-
-They should not rely on an external API or cloud service for functions that could be performed locally.
-
-#### 7. Server-side code should be kept to a minimum.
-
-Since Block Plugins are WordPress plugins, they necessarily contain PHP code for metadata and initialization. As much as possible, they should avoid including additional PHP code or server-side libraries. The WordPress REST API should be the preferred interface to WordPress, rather than custom server-side code.
-
-There are limits to the REST API, and situations where server-side PHP is the only performant way to implement a feature. In those situations, PHP code may be included, provided it is clearly written, used as little as possible, and well documented.
-
-#### 8. Must not include advertisements or promotional notices.
-
-Block Plugins must not include code that displays alerts, dashboard notifications, or similar obtrusive messages unrelated to the purpose of the block.
-
----
-
-# Add Your Plugin to the Block Directory <a name="plugins/wordpress-org/add-your-plugin-to-the-block-directory" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/add-your-plugin-to-the-block-directory/
-
-There are two main directory listings of block related plugins.
-
-- Plugins that are **only** blocks
-- Plugins that contain blocks
-
-A plugin can be listed in both, however there will be no benefit to your plugin SEO or ranking due to either. The only benefit to being a plugin that is only a block is that you gain the ability to be added to the Block Directory in the Block Editor itself, for immediate installation.
-
-## Block Only Plugins
-
-Block Only plugins are plugins that **only** contain blocks.
-
-Block Plugins are required to be much smaller and more minimalist than a regular WordPress plugin in order to be safely installed with a single click. That means as well as keeping to the regular [plugin guidelines](#plugins/wordpress-org/detailed-plugin-guidelines) you’ll also need to follow some additional rules. In particular, you should stick to mostly JavaScript code and keep PHP to the bare minimum; and not add any UI or other code outside of the Gutenberg editor.
-
-If you’re a committer of a block plugin that does meet the criteria for adding it to the [Block Directory](https://wordpress.org/plugins/browse/block/) as confirmed by the Checker tool, you can then add it yourself [using the Block Checker tool](https://wordpress.org/plugins/developers/block-plugin-validator/):
-
-![Block checker tool interface with a "Add Plugin Name to the Block Directory" button](https://i0.wp.com/developer.wordpress.org/files/2020/08/Screen-Shot-2020-07-10-at-1.29.25-pm.png?resize=1024%2C308&ssl=1)Likewise you can remove it at any time using that same tool if you notice problems or would prefer it wasn’t included.
-
-**Helpful tools:**
-
-- [Block Creation tutorial](https://github.com/WordPress/gutenberg/pull/22831/files?short_path=c4d2c28#diff-c4d2c286eac33acdc7571032a984e0ca) – how to write a block plugin
-- [Block Submission tutorial](https://github.com/WordPress/gutenberg/pull/23545/files?short_path=555f1c3#diff-555f1c31856d86ed5ff0d492b5a127c1) – tips and suggestions for ensuring your block is ready for the Block Directory
-- [Block Checker tool](https://make.wordpress.org/plugins/2020/07/11/you-can-now-add-your-own-plugins-to-the-block-directory/) – validate plugin for inclusion
-
-## Plugins Containing Blocks
-
-Many older plugins, as well as larger and more complex plugins, may contain blocks. They also will contain other features, like widgets. An example of this sort of plugin would be Jetpack or Yoast SEO. While they have a large number of features, they also contain some blocks.
-
-If you’ve written a plugin that introduces or improves blocks, or know of a plugin that does, **email us at <plugins@wordpress.org>** and request your plugin be added. At that time, your plugin will be reviewed to confirm this request, but also to ensure you meet all current guideline standards.
-
-Before you email, please make certain your plugin is compatible with the latest version of WordPress and that it is free from all security issues. If there are security or guideline issues in your plugin, it may be closed pending your corrections.
-
----
-
-# Release Confirmation Emails <a name="plugins/wordpress-org/release-confirmation-emails" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/release-confirmation-emails/
-
-In order to better protect plugins from inadvertent releases, we’ve added a new **opt-in** feature for plugins: Release Confirmation.
-
-When enabled on a plugin, to release a new version of a plugin you’ll need to tag a new release in SVN as normal, and then confirm on the [Release Management](https://wordpress.org/plugins/developers/releases/) dashboard.
-
-Access to the Release Management dashboard is limited to plugin committers, and all actions require confirmation via a tokenised link which is emailed to you as needed.
-
-When WordPress.org detects a new version has been tagged in SVN, all committers are automatically sent an email notifying them that a new release is pending, who made it, and a link to the dashboard to confirm the release.  
-Plugin committers will also see a banner on the top of your WordPress.org plugins page directing you to the Release Management dashboard.
-
-Once confirmed, the release will proceed as usual and should update within a few minutes.
-
-## Requirements
-
-- Plugins are required to use tags for new versions, you cannot release your plugin from trunk.
-- You must still update the `Stable Tag:` header in your trunk/readme.txt file.
-- Once released, alterations cannot be made to the tagged version. This includes changing the readme (for tested up to).
-- Committers must be able to receive emails directly, and not have it go to a shared inbox or support ticket system.
-
-## Requiring double approval
-
-Release Confirmations are opt-in, but only requires a singular committer to confirm the release.  
-If a group would like to require multiple committers to approve a release, please contact the Plugins team with your request.
-
----
-
-# Transferring Your Plugin to a New Owner <a name="plugins/wordpress-org/transferring-your-plugin-to-a-new-owner" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/transferring-your-plugin-to-a-new-owner/
-
-While any plugin can have an unlimited number of committers and support reps, there is only one official owner of a plugin at any time. This is akin to how a post on WordPress can only have one official post author.
-
-## For Plugins With Under 10,000 Users
-
-If you’re transferring your plugin to a new owner, there are two steps that must take place.
-
-First, add the new user as a **committer** to the plugin:
-
-- go to `https://wordpress.org/plugins/YOURPLUGIN/advanced` and add their username in as a committer
-- update the `readme.txt` to add their userID as an author
-
-Next, go to the Advanced tab and scroll down to the Danger Zone. There you will see a section for **Transfer Your Plugin**. Pick someone from the dropdown and click the button.
-
-If there are no other committers, the plugin will not be available to be transferred, so you must do that first.
-
-[![Transfer this plugin interface with a selector for the new owner and a "Please transfer -Plugin Name-" button](https://i0.wp.com/developer.wordpress.org/files/2020/04/transfer.jpeg?resize=1024%2C558&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2020/04/transfer.jpeg?ssl=1)## For Plugins with OVER 10,000 Users (or are beta/featured)
-
-In order to prevent abuse, larger plugins and those officially recognized as featured/beta are restricted from these changes.
-
-To transfer a plugin in this case, you will need to email `plugins@wordpress.org` from the **CURRENT** owner’s email the following information:
-
-1. A *brief* explanation of the reason for the transfer
-2. The user ID of the new owner
-3. If applicable, any changes to the status of being a featured/beta plugin
-
-Most requests are processed without issue, however should a plugin be determined to be critical to the WordPress.org project, or should there be reason to believe the request was invalid (i.e. not sent from the current owner’s email, or an email address positively connected back to them), it may be denied or delayed.
-
----
-
-# Preventing WordPress from Updating Your External Plugin <a name="plugins/wordpress-org/preventing-wordpress-from-updating-your-external-plugin" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/preventing-wordpress-from-updating-your-external-plugin/
-
-The information on this page is meant for use only on plugins **not** hosted on WordPress.org. Do not attempt to use this on your code hosted in the directory.
-
-If you host your plugin on WordPress.org, we handle all updates for you. As such, the steps in this document are **prohibited** in all plugins submitted to the directory. Any plugin hosted here that is found to include this plugin will be closed and the developer required to remove it in order for their plugin to be restored.
-
-We have chosen to document it here for the education of developers, as well as to ensure the global WordPress community can be safer.
-
-## Always Use Good Folder Names
-
-Before we get into the code, we must stress the absolute best way to ensure your plugin won’t get overwritten by an update from WordPress.org is to use a good name. If you’re making a plugin for your company, give it a folder name like `companyname-function-plugin` — for example, if you work for FaceRange and you’re making a status plugin, you could name it `facerange-status-plugin`
-
-Not only would we not accept it for using the prohibited term ‘plugin’, the plugin team would validate that the plugin owner **legally** represents FaceRange.
-
-## Update URI
-
-As of WordPress 5.8, we have added in a feature to how the WordPress.org API checks for updates, and allowed it to be blocked by the use of a new header: Update URI.
-
-Let’s say you have a plugin you made for your own site, and you gave it the folder name of `my-plugin`. That is a generic folder name, and has a high probability that someone else may use it. It’s also not a name we would allow you to block in our system, due to it’s generic nature.
-
-The Update URI header can be added to the plugin headers. Look in your main plugin file for this section:
-
-```php
-/**
- * Plugin Name: My Cool Plugin
- * Plugin URI: https://example.com/my-plugin/
- * Description: My Plugin does cool things.
- * Version: 1.0
- * Author: the team
- * Author URI: https://example.com/
- * Text Domain: my-plugin
- * License: GPLv2
- * License URI: https://opensource.org/licenses/gpl-2.0.php
- */
-```
-
-To apply it, add a new header for **Update URI** and put a **non** WordPress.org URI in the value:
-
-```php
- * Update URI: https://example.com/my-updater/
-```
-
-You can also set it to `Update URI: false` if you want. As long as it does not include `worpress.org/plugins` or `w.org/plugins` it will be protected.
-
-## Filtering Updates
-
-Another method, which is supported on older versions of WordPress, is to filter external API requests and discard any for your plugin.
-
-This code, which was written by [Mark Jaquith](https://markjaquith.wordpress.com/2009/12/14/excluding-your-plugin-or-theme-from-update-checks/), can be added to your own plugin:
-
-```php
-function example_hidden_plugin_12345( $r, $url ) {
-    if ( 0 !== strpos( $url, 'https://api.wordpress.org/plugins/update-check' ) )
-        return $r; // Not a plugin update request. Bail immediately.
-  
-    $plugins = unserialize( $r['body']['plugins'] );
-    unset( $plugins->plugins[ plugin_basename( __FILE__ ) ] );
-    unset( $plugins->active[ array_search( plugin_basename( __FILE__ ), $plugins->active ) ] );
-    $r['body']['plugins'] = serialize( $plugins );
-    return $r;
-}
- 
-add_filter( 'http_request_args', 'example_hidden_plugin_12345', 5, 2 );
-```
-
-What that does is check if the update request is from the WordPress.org api, and if it matches the plugin folder and file name of *this* plugin. If it does, the plugin is removed from the list of plugins to check for updates.
-
----
-
-# Term Splitting (WordPress 4.2) <a name="plugins/taxonomies/split-terms-wp-4-2" />
-
-Source: https://developer.wordpress.org/plugins/taxonomies/split-terms-wp-4-2/
-
-This information is here for historical purposes. If you’re not interested in how terms worked prior to 2015, you can skip this section.
-
-## Prior to WordPress 4.2
-
-Terms in different taxonomies with the same slug shared a single term ID. For instance, a tag and a category with the slug “news” had the same term ID.
-
-## WordPress 4.2+
-
-Beginning with 4.2, when one of these shared terms is updated, it will be split: the updated term will be assigned a new term ID.
-
-## What does it mean for you?
-
-In the vast majority of situations, this update was seamless and uneventful. However, some plugins and themes who store term IDs in options, post meta, user meta, or elsewhere might have been affected.
-
-## Handling the Split
-
-WordPress 4.2 includes two different tools to help authors of plugins and themes with the transition.
-
-### The `split_shared_term` hook
-
-When a shared term is assigned a new term ID, a new `split_shared_term` action is fired.
-
-Here are a few examples of how plugin and theme authors can leverage this hook to ensure that stored term IDs are updated.
-
-#### Term ID stored in an option
-
-Let’s say your plugin stores an option called `featured_tags` that contains an array of term IDs (`[4, 6, 10]`) that serve as the query parameter for your homepage featured posts section.
-
-In this example, you’ll hook to `split_shared_term` action, check whether the updated term ID is in the array, and update if necessary.
-
-```php
-/**
- * Update featured_tags option when a shared term gets split.
- *
- * @param int    $term_id          ID of the formerly shared term.
- * @param int    $new_term_id      ID of the new term created for the $term_taxonomy_id.
- * @param int    $term_taxonomy_id ID for the term_taxonomy row affected by the split.
- * @param string $taxonomy         Taxonomy for the split term.
- */
-function wporg_featured_tags_split( int $term_id, int $new_term_id, int $term_taxonomy_id, string $taxonomy ): void {
-	// we only care about tags, so we'll first verify that the taxonomy is post_tag.
-	if ( 'post_tag' === $taxonomy ) {
-
-		// get the currently featured tags.
-		$featured_tags = get_option( 'featured_tags' );
-
-		// if the updated term is in the array, note the array key.
-		$found_term = array_search( $term_id, $featured_tags, true );
-		if ( false !== $found_term ) {
-
-			// the updated term is a featured tag! replace it in the array, save the new array.
-			$featured_tags[ $found_term ] = $new_term_id;
-			update_option( 'featured_tags', $featured_tags );
-		}
-	}
-}
-add_action( 'split_shared_term', 'wporg_featured_tags_split', 10, 4 );
-```
-
-#### Term ID stored in post meta
-
-Let’s say your plugin stores a term ID in post meta for pages so that you can show related posts for a certain page.
-
-In this case, you need to use the `get_posts()` function to get the pages with your `meta_key` and update the `meta_value` matching the split term ID.
-
-```php
-/**
- * Update related posts term ID for pages
- *
- * @param int    $term_id          ID of the formerly shared term.
- * @param int    $new_term_id      ID of the new term created for the $term_taxonomy_id.
- * @param int    $term_taxonomy_id ID for the term_taxonomy row affected by the split.
- * @param string $taxonomy         Taxonomy for the split term.
- */
-function wporg_page_related_posts_split( int $term_id, int $new_term_id, int $term_taxonomy_id, string $taxonomy ): void {
-	// find all the pages where meta_value matches the old term ID.
-	$page_ids = get_posts(
-		array(
-			'post_type'  => 'page',
-			'fields'     => 'ids',
-			'meta_key'   => 'meta_key',
-			'meta_value' => $term_id,
-		)
-	);
-
-	// if such pages exist, update the term ID for each page.
-	if ( $page_ids ) {
-		foreach ( $page_ids as $id ) {
-			update_post_meta( $id, 'meta_key', $new_term_id, $term_id );
-		}
-	}
-}
-add_action( 'split_shared_term', 'wporg_page_related_posts_split', 10, 4 );
-```
-
-### The `wp_get_split_term` function
-
-  
-Using the `split_shared_term` hook is the preferred method for processing Term ID changes. However, there may be cases where Terms are split without your plugin having a chance to hook to the `split_shared_term` action.
-
-WordPress 4.2 stores information about taxonomy terms that have been split, and provides the `wp_get_split_term()` utility function to help developers retrieve this information.
-
-Consider the case above, where your plugin stores term IDs in an option named `featured_tags`. You may want to build a function that validates these tag IDs (perhaps to be run on plugin update), to be sure that none of the featured tags has been split:
-
-```php
-/**
- * Retrieve information about split terms and udpates the featured_tags option with the new term IDs.
- *
- * @return void
- */
-function wporg_featured_tags_check_split() {
-	$featured_tag_ids = get_option( 'featured_tags', array() );
-
-	// check to see whether any IDs correspond to post_tag terms that have been split.
-	foreach ( $featured_tag_ids as $index => $featured_tag_id ) {
-		$new_term_id = wp_get_split_term( $featured_tag_id, 'post_tag' );
-
-		if ( $new_term_id ) {
-			$featured_tag_ids[ $index ] = $new_term_id;
-		}
-	}
-
-	// save
-	update_option( 'featured_tags', $featured_tag_ids );
-}
-```
-
-Note that `wp_get_split_term()` takes two parameters, `$old_term_id` and `$taxonomy` and returns an integer.
-
-If you need to retrieve a list of all split terms associated with an old Term ID, regardless of taxonomy, use `wp_get_split_terms()`.
-
----
-
-# Taxonomies <a name="plugins/taxonomies" />
-
-Source: https://developer.wordpress.org/plugins/taxonomies/
-
-A **Taxonomy** is a fancy word for the classification/grouping of things. Taxonomies can be hierarchical (with parents/children) or flat.
-
-WordPress stores the Taxonomies in the `term_taxonomy` database table allowing developers to register Custom Taxonomies along the ones that already exist.
-
-Taxonomies have **Terms** which serve as the topic by which you classify/group things. They are stored inside the `terms` table.
-
-For example: a Taxonomy named “Art” can have multiple Terms, such as “Modern” and “18th Century”.
-
-This chapter will show you how to register Custom Taxonomies, how to retrieve their content from the database, and how to render them to the public.
-
-  
-WordPress 3.4 and earlier had a Taxonomy named “Links” which was deprecated in WordPress 3.5.
-
----
-
-# Creating Tables with Plugins <a name="plugins/creating-tables-with-plugins" />
-
-Source: https://developer.wordpress.org/plugins/creating-tables-with-plugins/
-
-If you are [writing a plugin](#plugins) for WordPress, you will almost certainly find that you need to store some information in the WordPress database. There are two types of information you could store:
-
-- **Setup information** — user choices that are entered when the user first sets up your plugin, and don’t tend to grow much beyond that (for example, in a tag-related plugin, the user’s choices regarding the format of the tag cloud in the sidebar).  
-    Setup information will generally be stored using the [WordPress *options* mechanism](#pluginssettings/options-api/).
-- **Data** — information that is added as the user continues to use your plugin, which is generally expanded information related to posts, categories, uploads, and other WordPress components (for example, in a statistics-related plugin, the various page views, referrers, and other statistics associated with each post on your site).  
-    Data can be stored in a separate MySQL/MariaDB table, which will have to be created. Before jumping in with a whole new table, however, consider if storing your plugin’s data in [WordPress’ Post Meta](#pluginsmetadata/) (a.k.a. Custom Fields) would work. Post Meta is the preferred method; use it when possible/practical.
-
-This article describes how to have your plugin automatically create a MySQL/MariaDB table to store its data. Note that as an alternative to following the steps here, you could have the plugin user run an install script when they install your plugin. Another approach would be to have the user execute an SQL query on their own, using something like [phpMyAdmin](#advanced-administration/upgrade/phpmyadmin). But neither of those options is very satisfactory, since a user could easily forget to run the install script or mess up the query (and they might not have phpMyAdmin available).
-
-So, it is recommended that you follow the steps below to have your plugin automatically create its database tables:
-
-1. Write a PHP function that creates the table.
-2. Ensure that WordPress calls the function when the plugin is activated.
-3. Create an upgrade function, if a new version of your plugin needs to have a different table structure.
-
-## Create Database Tables
-
-The first step in making your plugin create database tables automatically is to create a PHP function within your plugin that adds a table or tables to the WordPress MySQL/MariaDB database. For purposes of this article, we’ll assume you want to call this function jal\_install.
-
-### Database Table Prefix
-
-In the wp-config.php file, a WordPress site owner can define a database table prefix. By default, the prefix is “wp\_”, but you’ll need to check on the actual value and use it to define your database table name. This value is found in the $[wpdb](#reference/classes/wpdb)-&gt;prefix variable. (If you’re developing for a version of WordPress older than 2.0, you’ll need to use the $table\_prefix global variable, which is deprecated in version 2.1).
-
-So, if you want to create a table called (prefix)liveshoutbox, the first few lines of your table-creation function will be:
-
-```php
-function jal_install () {
-   global $wpdb;
-
-   $table_name = $wpdb->prefix . "liveshoutbox"; 
-}
-
-```
-
-### Creating or Updating the Table
-
-The next step is to actually create the database table. Rather than executing an SQL query directly, we’ll use the dbDelta function in wp-admin/includes/upgrade.php (we’ll have to load this file, as it is not loaded by default). The dbDelta function examines the current table structure, compares it to the desired table structure, and either adds or modifies the table as necessary, so it can be very handy for updates (see wp-admin/upgrade-schema.php for more examples of how to use dbDelta). Note that the dbDelta function is rather picky, however. For instance:
-
-- You must put each field on its own line in your SQL statement.
-- You must have two spaces between the words PRIMARY KEY and the definition of your primary key.
-- You must use the key word KEY rather than its synonym INDEX and you must include at least one KEY.
-- KEY must be followed by a SINGLE SPACE then the key name then a space then open parenthesis with the field name then a closed parenthesis.
-- You must not use any apostrophes or backticks around field names.
-- Field types must be all lowercase.
-- SQL keywords, like CREATE TABLE and UPDATE, must be uppercase.
-- You must specify the length of all fields that accept a length parameter. int(11), for example.
-
-With those caveats, here are the next lines in our function, which will actually create or update the table. You’ll need to substitute your own table structure in the $sql variable:
-
-```php
-global $wpdb;
-
-$charset_collate = $wpdb->get_charset_collate();
-
-$sql = "CREATE TABLE $table_name (
-  id mediumint(9) NOT NULL AUTO_INCREMENT,
-  time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-  name tinytext NOT NULL,
-  text text NOT NULL,
-  url varchar(55) DEFAULT '' NOT NULL,
-  PRIMARY KEY  (id)
-) $charset_collate;";
-
-require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-dbDelta( $sql );
-
-```
-
-**Note:** Above we set the default character set and collation for the table. If we don’t do this, some characters could end up being converted to just ?’s when saved in our table. In this example we use $[wpdb::get\_charset\_collate()](#reference/classes/wpdbget_charset_collate/) to get the character set and collation. That function was introduced in WordPress 3.5, and if you need to support versions before that you will need create the charset/collate string yourself (you could copy the source of that function).
-
-### Adding Initial Data
-
-Finally, you may want to add some data to the table you just created. Here is an example of how to do that:
-
-```php
-$welcome_name = 'Mr. WordPress';
-$welcome_text = 'Congratulations, you just completed the installation!';
-
-$table_name = $wpdb->prefix . 'liveshoutbox';
-
-$wpdb->insert( 
-	$table_name, 
-	array( 
-		'time' => current_time( 'mysql' ), 
-		'name' => $welcome_name, 
-		'text' => $welcome_text, 
-	) 
-);
-
-```
-
-**NOTE:** **For more on using WPDB, see [wpdb](#reference/classes/wpdb) class.** In this case, we’re using $[wpdb](#reference/classes/wpdb)-&gt;insert, so our data will automatically be escaped. If you need to use another method like $[wpdb](#reference/classes/wpdb)-&gt;query instead, it’s a good idea to run the variables through the $[wpdb](#reference/classes/wpdb)-&gt;prepare function before passing the query to the database to prevent security problems, even though we defined $welcome\_name and $welcome\_text in this function and know that there are no SQL special characters in them.
-
-### A Version Option
-
-Another excellent idea is to add an option to record a version number for your database table structure, so you can use that information later if you need to update the table:
-
-```php
-add_option( "jal_db_version", "1.0" );
-
-```
-
-### The Whole Function
-
-This function is done. Let’s see it all in one piece. Note that the version number is now stored in a global variable.
-
-```php
-<?php
-
-global $jal_db_version;
-$jal_db_version = '1.0';
-
-function jal_install() {
-	global $wpdb;
-	global $jal_db_version;
-
-	$table_name = $wpdb->prefix . 'liveshoutbox';
-	
-	$charset_collate = $wpdb->get_charset_collate();
-
-	$sql = "CREATE TABLE $table_name (
-		id mediumint(9) NOT NULL AUTO_INCREMENT,
-		time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		name tinytext NOT NULL,
-		text text NOT NULL,
-		url varchar(55) DEFAULT '' NOT NULL,
-		PRIMARY KEY  (id)
-	) $charset_collate;";
-
-	require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-	dbDelta( $sql );
-
-	add_option( 'jal_db_version', $jal_db_version );
-}
-
-function jal_install_data() {
-	global $wpdb;
-	
-	$welcome_name = 'Mr. WordPress';
-	$welcome_text = 'Congratulations, you just completed the installation!';
-	
-	$table_name = $wpdb->prefix . 'liveshoutbox';
-	
-	$wpdb->insert( 
-		$table_name, 
-		array( 
-			'time' => current_time( 'mysql' ), 
-			'name' => $welcome_name, 
-			'text' => $welcome_text, 
-		) 
-	);
-}
-
-```
-
-## Calling the functions
-
-Now that we have the initialization function defined, we want to make sure that WordPress calls this function when the plugin is activated by a WordPress administrator. To do that, we will use the activate\_ action hook. If your plugin file is wp-content/plugins/plugindir/pluginfile.php, you’ll add the following line to the main body of your plugin:
-
-```php
-register_activation_hook( __FILE__, 'jal_install' );
-register_activation_hook( __FILE__, 'jal_install_data' );
-
-```
-
-See [Function\_Reference/register\_activation\_hook](#reference/functions/register_activation_hook) for more details.
-
-## Adding an Upgrade Function
-
-Over the lifetime of your plugin, you may find that you need to change the plugin’s database structure in an upgraded version. To do that, you will need to create update code within your plugin that will detect that a new version has been installed, and upgrade the database structure. The easiest thing to do is to add the code to the jal\_install function we just created.
-
-So, let’s assume that the function above was used to create database version 1.0 of your plugin, and you are now upgrading to version 1.1 so that the URL field can be wider (100 characters instead of 55). You will need to add the following lines to the end of your jal\_install function, to check the version and upgrade if necessary:
-
-```php
-<?php
-
-global $wpdb;
-$installed_ver = get_option( "jal_db_version" );
-
-if ( $installed_ver != $jal_db_version ) {
-
-	$table_name = $wpdb->prefix . 'liveshoutbox';
-
-	$sql = "CREATE TABLE $table_name (
-		id mediumint(9) NOT NULL AUTO_INCREMENT,
-		time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		name tinytext NOT NULL,
-		text text NOT NULL,
-		url varchar(100) DEFAULT '' NOT NULL,
-		PRIMARY KEY  (id)
-	);";
-
-	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-	dbDelta( $sql );
-
-	update_option( "jal_db_version", $jal_db_version );
-}
-
-```
-
-You’ll also need to change the global $jal\_db\_version variable at the top of the file, and of course you’ll want to change the initialization section created above to use the new table structure.
-
-Since 3.1 the activation function registered with [register\_activation\_hook()](#reference/functions/register_activation_hook) is not called when a plugin is updated. So to run the above code after the plugin is upgraded, you need to check the plugin db version on another hook, and call the function manually if the the database version is old. Like this:
-
-```php
-function myplugin_update_db_check() {
-    global $jal_db_version;
-    if ( get_site_option( 'jal_db_version' ) != $jal_db_version ) {
-        jal_install();
-    }
-}
-add_action( 'plugins_loaded', 'myplugin_update_db_check' );
-
-```
-
-## Resources
-
-For further reading on plugin development, check out [Plugin Handbook](#plugins), a comprehensive list of plugin resources. You may also find this post from the [wp-hackers mailing list](https://codex.wordpress.org/Mailing_Lists#Hackers) to be helpful: [WordPress Hackers Mailing List: Answer to Plugin Requires Additional Tables](http://lists.automattic.com/pipermail/wp-hackers/2005-May/000940.html). Also see: [Post meta vs separate database tables](http://wordpress.stackexchange.com/questions/4852/post-meta-vs-seperate-database-tables).
-
----
-
-# Detailed Plugin Guidelines <a name="plugins/wordpress-org/detailed-plugin-guidelines" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/
-
-Last Updated: March 15, 2024
-
-Adding a Block Only plugin? Please read the [Block Specific Guidelines](#plugins/wordpress-org/block-specific-plugin-guidelines)
-
-## The Plugin Directory
-
-The goal of the WordPress Plugin Directory is to provide a safe place for all WordPress users – from the non-technical to the developer – to download plugins that are consistent with the goals of the WordPress project.
-
-To that end, we want to ensure a simple and transparent process for developers to submit plugins for the directory. As part of our ongoing efforts to make the plugin directory inclusion process more transparent, we have created a list of developer guidelines. We strive to create a level playing field for all developers.
-
-If you have suggestions to improve the guidelines, or questions about them, please email `plugins@wordpress.org` and let us know.
-
-## Developer Expectations
-
-Developers, all users with commit access, and all users who officially support a plugin are expected to abide by the following guidelines:
-
-- Plugin Directory Guidelines (this document)
-- [Community Guidelines](https://make.wordpress.org/handbook/community-code-of-conduct/)
-- [Forums Guidelines](https://wordpress.org/support/guidelines/) (should they use the forums/reviews)
-
-Violations may result in plugins or plugin data (for previously approved plugins) being removed from the directory until the issues are resolved. Plugin data, such as user reviews and code, may not be restored depending on the nature of the violation and the results of a peer-review of the situation. Repeat violations may result in all the author’s plugins being removed and the developer being banned from hosting plugins on WordPress.org.
-
-It is the responsibility of the plugin developer to ensure their contact information on WordPress.org is up to date and accurate, in order that they receive all notifications from the plugins team. Auto-replies and emails that route to a support system are not permitted as they historically prevent humans from addressing emails in a timely fashion.
-
-All code in the directory should be made as secure as possible. Security is the ultimate responsibility of the plugin developer, and the Plugin Directory enforces this to the best of our ability. Should a plugin be found to have security issues, it will be closed until the situation is resolved. In extreme cases the plugin may be updated by the WordPress Security team and propagated for the safety of the general public.
-
-While we attempt to account for as many relevant interpretations of the guidelines as possible, it is unreasonable to expect that every circumstance will be explicitly covered. If you are uncertain whether a plugin might violate the guidelines, please contact `plugins@wordpress.org` and ask.
-
-## The Guidelines
-
-### 1. Plugins must be compatible with the GNU General Public License
-
-Although any GPL-compatible license is acceptable, using the same license as WordPress — “GPLv2 or later” — is strongly recommended. All code, data, and images — anything stored in the plugin directory hosted on WordPress.org — must comply with the GPL or a GPL-Compatible license. Included third-party libraries, code, images, or otherwise, must be compatible. For a specific list of compatible licenses, please read the [GPL-Compatible license list](https://www.gnu.org/philosophy/license-list.html#GPLCompatibleLicenses) on gnu.org.
-
-### 2. Developers are responsible for the contents and actions of their plugins.
-
-It is the sole responsibility of plugin developers to ensure all files within their plugins comply with the guidelines. Intentionally writing code to circumvent guidelines, or restoring code they were asked to remove, is prohibited (see #9 illegal/dishonest actions).
-
-Developers are expected to confirm, before uploading to SVN, the licensing of all included files, from original source code to images and libraries. In addition, they must comply to the terms of use for all third party services and APIs utilized by their plugins. If there is no way to validate the licensing of a library or the terms of an API, then they cannot be used.
-
-### 3. A stable version of a plugin must be available from its WordPress Plugin Directory page.
-
-The only version of the plugin that WordPress.org distributes is the one in the directory. Though people may develop their code somewhere else, users will be downloading from the directory, not the development environment.
-
-Distributing code via alternate methods, while not keeping the code hosted here up to date, may result in a plugin being removed.
-
-### 4. Code must be (mostly) human readable.
-
-Obscuring code by hiding it with techniques or systems similar to `p,a,c,k,e,r`‘s obfuscate feature, uglify’s mangle, or unclear naming conventions such as `$z12sdf813d`, is not permitted in the directory. Making code non-human readable forces future developers to face an unnecessary hurdle, as well as being a common vector for hidden, malicious code.
-
-We require developers to provide public, maintained access to their source code and any build tools in one of the following ways:
-
-- Include the source code in the deployed plugin
-- A link in the readme to the development location
-
-We strongly recommend you document how any development tools are to be used.
-
-### 5. Trialware is not permitted.
-
-Plugins may not contain functionality that is restricted or locked, only to be made available by payment or upgrade. Functionality may not be disabled after a trial period or quota is met. In addition, plugins that provide sandbox only access to APIs and services are also trial, or test, plugins and not permitted.
-
-Paid functionality in services *is* permitted (see guideline 6: serviceware), provided all the code inside a plugin is fully available. We recommend the use of add-on plugins, hosted outside of WordPress.org, in order to exclude the premium code. Situations where a plugin is intended as a developer tool only will be reviewed on a case by case basis.
-
-Attempting to upsell the user on ad-hoc products and features *is* acceptable, provided it falls within bounds of guideline 11 (hijacking the admin experience).
-
-### 6. Software as a Service is permitted.
-
-Plugins that act as an interface to some external third party service (e.g. a video hosting site) are allowed, even for paid services. The service itself must provide functionality of substance and be clearly documented in the readme file submitted with the plugin, preferably with a link to the service’s Terms of Use.
-
-Services and functionality *not* allowed include:
-
-- A service that exists for the sole purpose of validating licenses or keys while all functional aspects of the plugin are included locally is not permitted.
-- Creation of a service by moving arbitrary code out of the plugin so that the service may falsely appear to provide supplemented functionality is prohibited.
-- Storefronts that are not services. A plugin that acts only as a front-end for products to be purchased from external systems will not be accepted.
-
-### 7. Plugins may not track users without their consent.
-
-In the interest of protecting user privacy, plugins may not contact external servers without *explicit* and authorized consent. This is commonly done via an ‘opt in’ method, requiring registration with a service or a checkbox within the plugin settings. Documentation on how any user data is collected, and used, should be included in the plugin’s readme, preferably with a clearly stated privacy policy.
-
-Some examples of prohibited tracking include:
-
-- Automated collection of user data without explicit confirmation from the user.
-- Intentionally misleading users into submitting information as a requirement for use of the plugin itself.
-- Offloading assets (including images and scripts) that are unrelated to a service.
-- Undocumented (or poorly documented) use of external data (such as blocklists).
-- Third-party advertisement mechanisms which track usage and/or views.
-
-An exception to this policy is Software as a Service, such as Twitter, an Amazon CDN plugin, or Akismet. By installing, activating, registering, and configuring plugins that utilize those services, consent is granted for those systems.
-
-### 8. Plugins may not send executable code via third-party systems.
-
-Externally loading code from documented services is permitted, however all communication must be made as securely as possible. Executing outside code within a plugin when not acting as a service is not allowed, for example:
-
-- Serving updates or otherwise installing plugins, themes, or add-ons from servers other than WordPress.org’s
-- Installing premium versions of the same plugin
-- Calling third party CDNs for reasons other than font inclusions; all non-service related JavaScript and CSS must be included locally
-- Using third party services to manage regularly updated lists of data, when not explicitly permitted in the service’s terms of use
-- Using iframes to connect admin pages; APIs should be used to minimize security risks
-
-Management services that interact with and push software down to a site *are* permitted, provided the service handles the interaction on it’s own domain and not within the WordPress dashboard.
-
-### 9. Developers and their plugins must not do anything illegal, dishonest, or morally offensive.
-
-While this is subjective and rather broad, the intent is to prevent plugins, developers, and companies from abusing the freedoms and rights of end users as well as other plugin developers.
-
-This includes (but is not restricted to) the following examples:
-
-- Artificially manipulating search results via keyword stuffing, black hat SEO, or otherwise
-- Offering to drive more traffic to sites that use the plugin
-- Compensating, misleading, pressuring, extorting, or blackmailing others for reviews or support
-- Implying users must pay to unlock included features
-- Creating accounts to generate fake reviews or support tickets (i.e. sockpuppeting)
-- Taking other developers’ plugins and presenting them as original work
-- implying that a plugin can create, provide, automate, or guarantee legal compliance
-- Utilizing the user’s server or resources without permission, such as part of a botnet or crypto-mining
-- Violations of the [WordPress.org Community Code of Conduct](https://make.wordpress.org/handbook/community-code-of-conduct/)
-- Violations of the [WordCamp code of conduct](https://make.wordpress.org/community/handbook/wordcamp-organizer/planning-details/code-of-conduct/)
-- Violations of the [Forum Guidelines](https://wordpress.org/support/guidelines/)
-- Harassment, threats, or abuse directed at any other member of the WordPress community
-- Falsifying personal information to intentionally disguise identities and avoid sanctions for previous infractions
-- Intentionally attempting to exploit loopholes in the guidelines
-
-### 10. Plugins may not embed external links or credits on the public site without explicitly asking the user’s permission.
-
-All “Powered By” or credit displays and links included in the plugin code must be optional and default to *not* show on users’ front-facing websites. Users must opt-in to displaying any and all credits and links via clearly stated and understandable choices, not buried in the terms of use or documentation. Plugins may not require credit or links be displayed in order to function. Services *are* permitted to brand their output as they see fit, provided the code is handled in the service and not the plugin.
-
-### 11. Plugins should not hijack the admin dashboard.
-
-Users prefer and expect plugins to feel like part of WordPress. Constant nags and overwhelming the admin dashboard with unnecessary alerts detract from this experience.
-
-Upgrade prompts, notices, alerts, and the like must be limited in scope and used sparingly, be that contextually or only on the plugin’s setting page. Site wide notices or embedded dashboard widgets *must* be dismissible or self-dismiss when resolved. Error messages and alerts must include information on how to resolve the situation, and remove themselves when completed.
-
-Advertising within the WordPress dashboard should be avoided, as it is generally ineffective. Users normally only visit settings pages when they’re trying to solve a problem. Making it harder to use a plugin does not generally encourage a good review, and we recommend limiting any ads placed therein. Remember: tracking referrals via those ads is not permitted (see guideline 7) and most third-party systems do not permit back-end advertisements. Abusing the guidelines of an advertising system will result in developers being reported upstream.
-
-Developers are welcome and encouraged to include links to their own sites or social networks, as well as locally (within the plugin) including images to enhance that experience.
-
-### 12. Public facing pages on WordPress.org (readmes) must not spam.
-
-Public facing pages, including readmes and translation files, may not be used to spam. Spammy behavior includes (but is not limited to) unnecessary affiliate links, tags to competitors plugins, use of over 5 tags total, blackhat SEO, and keyword stuffing.
-
-Links to directly required products, such as themes or other plugins required for the plugin’s use, are permitted within moderation. Similarly, related products may be used in tags but not competitors. If a plugin is a WooCommerce extension, it may use the tag ‘woocommerce.’ However if the plugin is an alternative to Akismet, it may not use that term as a tag. Repetitive use of a tag or specific term is considered to be keyword stuffing, and is not permitted.
-
-Readmes are to be written for people, not bots.
-
-In all cases, affiliate links must be disclosed and must directly link to the affiliate service, not a redirect or cloaked URL.
-
-### 13. Plugins must use WordPress’ default libraries.
-
-WordPress includes a number of useful libraries, such as jQuery, Atom Lib, SimplePie, PHPMailer, PHPass, and more. For security and stability reasons plugins may not include those libraries in their own code. Instead plugins must use the versions of those libraries packaged with WordPress.
-
-For a list of all javascript libraries included in WordPress, please review [Default Scripts Included and Registered by WordPress](#reference/functions/wp_enqueue_script).
-
-### 14. Frequent commits to a plugin should be avoided.
-
-The SVN repository is a release repository, not a development one. All commits, code or readme files, will trigger a regeneration of the zip files associated with the plugin, so only code that is ready for deployment (be that a stable release, beta, or RC) should be pushed to SVN. Including a descriptive and informative message with each commit is strongly recommended. Frequent ‘trash’ commit messages like ‘update’ or ‘cleanup’ makes it hard for others to follow changes. Multiple, rapid-fire commits that only tweak minor aspects of the plugin (including the readme) cause undue strain on the system and can be seen as gaming Recently Updated lists.
-
-An exception to this is when readme files are updated solely to indicate support of the latest release of WordPress.
-
-### 15. Plugin version numbers must be incremented for each new release.
-
-Users are only alerted to updates when the plugin version is increased. The trunk readme.txt must always reflect the current version of the plugin. For more information on tagging, please read our [SVN directions on tagging](#plugins/wordpress-org/how-to-use-subversion) and [how the readme.txt works](#plugins/wordpress-org/how-your-readme-txt-works).
-
-### 16. A complete plugin must be available at the time of submission.
-
-All plugins are examined prior to approval, which is why a zip file is required. Names cannot be “reserved” for future use or to protect brands (see #17: respect brands). Directory names for approved plugins that are not used may be given to other developers.
-
-### 17. Plugins must respect trademarks, copyrights, and project names.
-
-The use of trademarks or other projects as the sole or initial term of a plugin slug is prohibited unless proof of legal ownership/representation can be confirmed. For example, the [WordPress Foundation has trademarked the term “WordPress”](http://wordpressfoundation.org/trademark-policy/) and it is a violation to use “wordpress” in a domain name. This policy extends to plugin slugs, and we will not permit a slug to begin with another product’s term.
-
-For example only employees of Super Sandbox should use the slug “super-sandbox,” or their brand in a context such as “Super Sandbox Dancing Sloths.” Non-employees should use a format such as “Dancing Sloths for Superbox” instead to avoid potentially misleading users into believing the plugin was developed by Super Sandbox. Similarly, if you don’t represent the “MellowYellowSandbox.js” project, it’s inappropriate to use that as the name of your plugin.
-
-Original branding is recommended as it not only helps to avoid confusion, but is more memorable to the user.
-
-### 18. We reserve the right to maintain the Plugin Directory to the best of our ability.
-
-Our intent is to enforce these guidelines with as much fairness as humanly possible. We do this to ensure overall plugin quality and the safety of their users. To that end, we reserve the following rights:
-
-- … to update these guidelines at any time.
-- … to disable or remove any plugin from the directory, even for reasons not explicitly covered by the guidelines.
-- … to grant exceptions and allow developers time to address issues, even security related.
-- … to remove developer access to a plugin in lieu of a new, active, developer.
-- … to make changes to a plugin, without developer consent, in the interest of public safety.
-
-In return, we promise to use those rights sparingly and with as much respect as possible for both end users and developers.
-
----
-
-# Using Subversion <a name="plugins/wordpress-org/how-to-use-subversion" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/how-to-use-subversion/
-
-SVN, or Subversion, is a version control system similar to Git. It can be used via command line, or one of numerous GUI applications, such as [Tortoise SVN](https://tortoisesvn.net/), [SmartSVN](https://www.smartsvn.com/), and more. If you’re new to SVN, we recommend reviewing a [comparison of SVN clients](https://en.wikipedia.org/wiki/Comparison_of_Subversion_clients) before deciding which is best for you.
-
-This document is *not* a complete and robust explanation for using SVN, but more a quick primer to get started with plugins on WordPress.org. For more comprehensive documentation, see [The SVN Book](http://svnbook.red-bean.com/).
-
-We’ll describe here some of the basics about using SVN as it relates to WordPress.org hosting. The basic concepts of SVN, and nearly all code repository services, remain the same.
-
-For additional information, please see these documents:
-
-- [How the readme.txt works](#plugins/wordpress-org/how-your-readme-txt-works)
-- [How plugin assets (header images and icons) work](#plugins/wordpress-org/plugin-assets)
-
-SVN and the Plugin Directory are a *release* repository. Unlike Git, you shouldn’t commit every small change, as doing so can degrade performance. Please only push **finished** changes to your SVN repository.
-
-## Overview
-
-All your files will be centrally stored in the **svn repository** on our servers. From that repository, anyone can **check out** a copy of your plugin files onto their local machine, but, as a plugin author, only you have the authority to **check in**. That means you can make changes to the files, add new files, and delete files on your local machine and upload those changes back to the central server. It’s this process of checking in that updates both the files in the repository and also the information displayed in the WordPress.org Plugin Directory.
-
-Subversion keeps track of all these changes so that you can go back and look at old versions or **revisions** later if you ever need to. In addition to remembering each individual revision, you can tell subversion to **tag** certain revisions of the repository for easy reference. Tags are great for [labeling different releases of your plugin](#task-3) and are the only fully supported method of ensuring the correct versions are seen on WordPress.org and updated for users.
-
-## Your Account
-
-Your account for SVN will be the same username (not the email) of the account you used when you submitted the plugin. This is the username you use for the WordPress forums as well.
-
-WordPress.org allows setting a SVN-specific password for your account, this can be done in [your Account Settings](https://profiles.wordpress.org/me/profile/edit/group/3/?screen=svn-password). For more information on why and how to use it, please see [this Meta Guide](https://make.wordpress.org/meta/handbook/tutorials-guides/svn-access/).
-
-Remember, *capitalization matters* — if your username is JaneDoe, then you must use the capital J and D or else SVN will fail. You can see the specific capitalization of your name in your account settings: <https://profiles.wordpress.org/me/profile/edit/group/3/?screen=svn-password>
-
-## SVN Folders
-
-There are three directories created by default in all SVN repositories.
-
-```bash
-/assets/
-/tags/
-/trunk/
-```
-
-- Use `assets` for [screenshots, plugin headers, and plugin icons](#plugins/wordpress-org/plugin-assets).
-- Development work belongs in `trunk`.
-- Releases go in `tags`.
-
-*The /branches/ directory is no longer created by default, as it was often unused.*
-
-### Trunk
-
-Do not put your *main* plugin file in a subfolder of trunk, like `/trunk/my-plugin/my-plugin.php` as that will break downloads. You may use subfolders for included files.
-
-The `/trunk` directory is where your plugin code should live. The trunk can be considered to be the latest and greatest code, however this is not necessarily the latest *stable* code. Trunk is for the development version. Hopefully, the code in trunk should always be working code, but it may be buggy from time to time because it’s not necessarily the “stable” version. For simple plugins, the trunk may be the only version of the code that exists, and that’s fine as well.
-
-Even if you do your development work elsewhere (like a git repository), we recommend you keep the trunk folder up to date with your code for easy SVN compares.
-
-### Tags
-
-The `/tags` directory is where you put versions of the plugin. You will use the same version numbers for the sub-directories here as you do for your plugin versioning. It is important that you always use tag folders and proper versioning to ensure your users get the correct code.
-
-Version 1.0 of the plugin will be in `/tags/1.0`, version 1.1 would be in `/tags/1.1`, and so forth.
-
-We **strongly** encourage the use of [semantic software versioning](https://en.wikipedia.org/wiki/Software_versioning).
-
-### Assets
-
-See also: [How Your Plugin Assets Work](#plugins/wordpress-org/plugin-assets)
-
-Assets is where your screenshots, header images, and plugin icons reside. Some older plugins in the directory may have screenshot files in /trunk instead, however this is not recommended. All new plugins should put their screenshots in /assets. This keeps the filesizes of plugins small, as it is not necessary to send screenshots to WordPress installations along with the plugin itself.
-
-### Branches
-
-*The /branches/ directory is no longer created by default, as it was largely unused. This section can be considered deprecated and is available only for informational purposes.*
-
-The `/branches` directory is a place that you can use to store branches of the plugin. Perhaps versions that are in development, or test code, etc.
-
-The WordPress.org system **does not** use the branches directory for anything at all, it’s considered to be strictly for developers to use as they need it. As it is no longer created by default, you can ignore it as you do not need it any longer.
-
-## Best Practices
-
-In order to make your code the most accessible for other developers, the following practices are considered to be optimum.
-
-### Don’t use SVN for development
-
-This is often confusing. Unlike GitHub, SVN is meant to be a *release* system, not a development system. You don’t need to commit and push every small change, and in fact doing so is detrimental to the system. Every time you push code to SVN, it rebuilds *all* your zip files for all versions in SVN. This is why sometimes your plugin updates don’t show for up to 6 hours. Instead, you should push one time, when you’re ready to go.
-
-### Use the trunk folder for code
-
-Many people use `trunk` as a placeholder. While it’s possible to simply update the `readme.txt` file in trunk and put everything in tag folders, doing so makes it more difficult to compare any changes in your code. Instead, trunk should contain the latest version of your code, even if that version is a beta.
-
-### Always Tag Releases
-
-While it’s possible to use trunk as a stable tag for plugins, this feature is not actually supported nor recommended. Instead, releases should be properly tagged and iterated. This will ensure full compatibility with any automatic updater, as well as allow for rollbacks should there be an issue with your code.
-
-### Create tags from trunk
-
-Instead of pushing your code directly to a tag folder, you should edit the code in trunk, complete with the stable version in the readme, and *then* copy the code from trunk to the new tag.
-
-Not only will this make it easier see any changes, you will be making smaller commits as SVN will only update the changed code. This will save you time and reduce potential errors (such as updating to the wrong stable tag and pushing bad code to users).
-
-Don’t worry about the tag folder not existing for a short while. You can use `svn cp` to copy trunk to the tag and then push them up to SVN at the same time.
-
-If you are operating locally, then you can update trunk and create tags from it all in one go. Checkout the root of your repository, update the files in /trunk, then `svn copy /trunk /tags/1.2.3` (or whatever the version number is) and then commit the whole thing in one go. SVN is a system based on differences, and as long as you use svn to do the copy operation, then it preserves history and makes everything easy for others to follow along with.
-
-## Examples
-
-### Starting a New Plugin
-
-To start your plugin, you need to add the files you already have to your new SVN repository.
-
-First create a local directory on your machine to house a copy of the SVN repository:
-
-```bash
-$ mkdir my-local-dir
-```
-
-Next, check out the pre-built repository
-
-```bash
-$ svn co https://plugins.svn.wordpress.org/your-plugin-name my-local-dir
-> A my-local-dir/trunk
-> A my-local-dir/branches
-> A my-local-dir/tags
-> Checked out revision 11325.
-```
-
-In our example, subversion has added ( “A” for “add” ) all of the directories from the central SVN repository to your local copy.
-
-To add your code, navigate into the `my-local-dir` folder: `$ cd my-local-dir`
-
-Now you can add your files to the `trunk/` directory of your local copy of the repository using copy/paste commands via command line, or dragging and dropping. Whatever you’re comfortable with.
-
-Do not put your *main* plugin file in a subfolder of trunk, like `/trunk/my-plugin/my-plugin.php` as that will break downloads. You may use subfolders for included files.
-
-Once your files are in the trunk folder, you must let subversion know you want to add those new files back into the central repository.
-
-```bash
-$ cd my-local-dir
-my-local-dir/ $ svn add trunk/*
-> A trunk/my-plugin.php
-> A trunk/readme.txt
-```
-
-After you add all your files, you’ll check in the changes back to the central repository.
-
-```bash
-my-local-dir/ $ svn ci -m 'Adding first version of my plugin'
-> Adding trunk/my-plugin.php
-> Adding trunk/readme.txt
-> Transmitting file data .
-> Committed revision 11326.
-```
-
-It’s required to include a commit message for all checkins.
-
-If the commit fails because of ‘Access forbidden’ and you **know** you have commit access, add your username and password to the check-in command.
-
-```bash
-my-local-dir/ $ svn ci -m 'Adding first version of my plugin' --username your_username --password your_password
-```
-
-Remember your username is *case sensitive*.
-
-### Editing Existing Files
-
-Once your plugin is in the directory, you will likely need to edit the code at some point.
-
-First go into your local copy of the repository and make sure it’s up to date.
-
-```bash
-$ cd my-local-dir/
-my-local-dir/ $ svn up
-> At revision 11326.
-```
-
-In the above example, we’re all up to date. If there had been changes in the central repository, they would have been downloaded and merged into your local copy.
-
-Now you can edit the file that needs changing using whatever editor you prefer.
-
-If you’re not using an SVN GUI tool (like SubVersion or Coda) you can still check and see what’s different between your local copy and the central repository after you make changes. First we check the status of the local copy:
-
-```bash
-my-local-dir/ $ svn stat
-> M trunk/my-plugin.php
-```
-
-This tells us that our local `trunk/my-plugin.php` is different from the copy we downloaded from the central repository ( “M” for “modified” ).
-
-Let’s see what exactly has changed in that file, so we can check it over and make sure things look right.
-
-```bash
-my-local-dir/ $ svn diff
-> * What comes out is essentially the result of a
-  * standard `diff -u` between your local copy and the
-  * original copy you downloaded.
-```
-
-If it all looks good then it’s time to check in those changes to the central repository.
-
-```bash
-my-local-dir/ $ svn ci -m "fancy new feature: now you can foo *and* bar at the same time"
-> Sending trunk/my-plugin.php
-> Transmitting file data .
-> Committed revision 11327.
-```
-
-And now you’ve successfully updated trunk.
-
-### “Tagging” New Versions
-
-Each time you make a formal release of your plugin, you should tag a copy of that release’s code. This lets your users easily grab the latest (or an older) version, it lets you keep track of changes more easily, and lets the WordPress.org Plugin Directory know what version of your plugin it should tell people to download.
-
-First copy your code to a subdirectory in the `tags/` directory. For the sake of the WordPress.org plugin browser, the new subdirectory should always look like a version number. `2.0.1.3` is good. `Cool hotness tag` is **bad**.
-
-We want to use `svn cp` instead of the regular `cp` in order to take advantage of SVN’s features.
-
-```bash
-my-local-dir/ $ svn cp trunk tags/2.0
-> A tags/2.0
-```
-
-As always, check in the changes.
-
-```bash
-my-local-dir/ $ svn ci -m "tagging version 2.0"
-> Adding         tags/2.0
-> Adding         tags/2.0/my-plugin.php
-> Adding         tags/2.0/readme.txt
-> Committed revision 11328.
-```
-
-When tagging a new version, **remember to update** the `Stable Tag` field in [`trunk/readme.txt`](https://wordpress.org/plugins/developers/#readme) to the new version.
-
-Congratulations! You’ve updated your code!
-
-## Notes
-
-Don’t put anything in SVN that you’re not willing and prepared to have deployed to everyone who uses your plugin. This *includes* vendor files, `.gitignore` and everything else.
-
-You also should never upload zip files. Like most code repository systems, SVN expects you to upload individual files.
-
-### See Also
-
-- [How the readme.txt works](#plugins/wordpress-org/how-your-readme-txt-works)
-- [How plugin assets (header images and icons) work](#plugins/wordpress-org/plugin-assets)
-- [The SVN Book](http://svnbook.red-bean.com/)
-
----
-
-# Previews and Blueprints <a name="plugins/wordpress-org/previews-and-blueprints" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/previews-and-blueprints/
-
-If you haven’t noticed it yet, the WordPress Playground is an amazing feature that lets anyone safely run a temporary WordPress install within their browser. It uses WASM to run a complete WordPress install – PHP, database, and all – entirely from within your web browser. No server needed, nothing to install.
-
-For a while now Playground has supported loading any plugin or theme from the plugin directory; here’s how.
-
-## The Plugin Preview Button[](https://github.com/WordPress/developer-plugins-handbook/blob/main/wordpress-org/previews-and-blueprints/index.md#the-plugin-preview-button)
-
-The Plugin Preview feature adds a convenient button to plugins in the plugin directory, when enabled by a plugin’s developers. The button takes the user to Playground with that plugin installed. It’s right beside the Download button.
-
-The Preview button is not shown by default; it must be explicitly enabled. Developers can use blueprint files in order to configure the preview environment and install dependencies (such as other plugins and themes).
-
-## Enabling Plugin Previews[](https://github.com/WordPress/developer-plugins-handbook/blob/main/wordpress-org/previews-and-blueprints/index.md#enabling-plugin-previews)
-
-There are two things required for a plugin preview button to appear to all users:
-
-1. A valid `blueprint.json` file must be provided in a blueprints sub-directory of the plugin’s assets folder.
-2. The plugin preview must be set to “public” from the plugin’s Advanced view by a committer.
-
-If a valid `blueprint.json` file is present, then the Preview button will be present for plugin committers only. In which case it will look like this:
-
-[![The Test Preview button allows plugin authors to showcase what their plugin does with one click.](https://i0.wp.com/developer.wordpress.org/files/2024/03/live-preview.png?resize=554%2C140&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2024/03/live-preview.png?ssl=1)It’s called Test Preview because that’s why it’s there: to allow plugin committers to test their plugin in the Playground environment and decide whether or not to make it easily available to the public.
-
-## Blueprints[](https://github.com/WordPress/developer-plugins-handbook/blob/main/wordpress-org/previews-and-blueprints/index.md#blueprints)
-
-Blueprints are json files used to set up a WordPress Playground instance.
-
-They can be used to specify things like PHP and WP versions, the landing page, and (most importantly) a series of automated steps such as logging in, and installing and activating plugins and themes.
-
-The blueprint for your plugin should be committed to the assets folder with subversion as `assets/blueprints/blueprint.json`. Initially only the one blueprint file is supported, but we expect to allow multiple in future.
-
-Here’s an example of a simple blueprint.json file that you could use as a starting point:
-
-```json
-{
-    "landingPage": "/wp-admin/edit.php",
-    "preferredVersions": {
-        "php": "7.4",
-        "wp": "5.9"
-    },
-    "phpExtensionBundles": [
-        "kitchen-sink"
-    ],
-    "steps": [
-        {
-            "step": "login",
-            "username": "admin",
-            "password": "password"
-        }
-    ]
-}
-```
-
-The features used here are:
-
-- `landingPage`, which specifies the URL of the page that the user will land on when the preview loads.
-- `preferredVersions`, which specifies versions of PHP and WordPress.
-- `phpExtensionBundles`, which in this case specifies that we want most common PHP extensions to be available (kitchen-sink).
-- `steps`, which tells Playground what to do before displaying the landing page. In this case, it will simply log the user in to wp-admin.
-
-Here’s an example of a more advanced blueprint.json that demonstrates some more features you could use to create a rich demo environment for users:
-
-```json
-{
-    "landingPage": "/wp-admin/post.php?post=5&action=edit",
-    "preferredVersions": {
-        "php": "7.4",
-        "wp": "5.9"
-    },
-    "phpExtensionBundles": [
-        "kitchen-sink"
-    ],
-    "steps": [
-        {
-            "step": "login",
-            "username": "admin",
-            "password": "password"
-        },
-        {
-            "step": "installPlugin",
-            "pluginZipFile": {
-                "resource": "wordpress.org\/plugins",
-                "slug": "my-imaginary-plugin-dependency"
-            },
-            "options": {
-                "activate": true
-            }
-        },
-        {
-            "step": "installPlugin",
-            "pluginZipFile": {
-                "resource": "wordpress.org\/plugins",
-                "slug": "my-imaginary-plugin"
-            },
-            "options": {
-                "activate": true
-            }
-        },
-        {
-            "step": "installTheme",
-            "themeZipFile": {
-                "resource": "wordpress.org\/themes",
-                "slug": "my-imaginary-theme"
-            }
-        },
-        {
-            "step": "setSiteOptions",
-            "options": {
-                "some_required_option_1": "your_favorite_values",
-                "some_required_option_2": "your_favorite_values"
-            }
-        },
-        {
-            "step": "runPHP",
-            "code": "<?php require_once 'wordpress/wp-load.php'; wp_insert_post(array('post_title' => 'wp-load.php required for WP functionality', 'post_status' => 'publish')); ?>"
-        }
-    ]
-}
-```
-
-## Using a generated Blueprint file[](https://github.com/WordPress/developer-plugins-handbook/blob/main/wordpress-org/previews-and-blueprints/index.md#using-a-generated-blueprint-file)
-
-You might see a notice similar to this on your plugin’s page:
-
-```
-Your plugin does not yet have a blueprint file for user previews. If you'd like to enable previews, please follow these steps to create a blueprint.
-
-1. Test your plugin in Playground.
-2. Fix any bugs in your plugin that prevent it from working in Playground.
-3. Download blueprint.json
-4. Commit your blueprint to svn.
-
-```
-
-The **Test** link will use an auto-generated Blueprint file to load your plugin in Playground, with some default configuration values and steps. The **Download blueprint.json** link will let you download that auto-generated `blueprint.json` file, which you can then modify as needed and commit to Subversion when your plugin is ready for Playground previews.
-
-## Committing a Blueprint to Subversion[](https://github.com/WordPress/developer-plugins-handbook/blob/main/wordpress-org/previews-and-blueprints/index.md#committing-a-blueprint-to-subversion)
-
-You must commit your blueprint.json file to your plugin’s assets folder, named like this:
-
-`/`assets/blueprints/`blueprint.json`
-
----
-
-# Plugin Developer FAQ <a name="plugins/wordpress-org/plugin-developer-faq" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/plugin-developer-faq/
-
-There are lot of ins and outs to hosting WordPress plugins. Please take a minute to see if your question is answered here before reaching out for assistance.
-
-Last Updated: 12 October 2024
-
-## The Plugin Review Team
-
-### How do I contact the Plugin Review team?
-
-You can contact us by email at `plugins@wordpress.org` – we reply to all emails within 7 business days.
-
-### Can I join the team?
-
-Please take a look at [this handbook page](https://make.wordpress.org/plugins/handbook/apply/).
-
-## Submissions and Reviews
-
-### Where do I submit my plugin?
-
-Go to the [Add](https://wordpress.org/plugins/developers/add/) page and upload your file. You should make sure that:
-
-- It’s a .zip file and under 10Mb.
-- It’s in the common WordPress plugin format so that it can be installed using the ‘Upload Plugin’ feature in WordPress.
-- It’s production-ready: complete, without errors, without unnecessary logs, without development tools, and that all necessary files are properly compiled or generated.
-
-We do not accept placeholders or plugins that aren’t ready to be used.
-
-### What if my plugin is over 10 megs?
-
-Double check that you aren’t including unused files (like test folders, documentation, and full node/vendor folders). The majority of plugins who face this issue have included all sorts of development content that has no place in the final code.
-
-### What happens after submission?
-
-You will get an automated email telling you about the submission immediately. It will be queued, and as soon as we get to it, we will manually download and review your code. If we find no issues with the security, documentation, or presentation, your plugin will be approved. If we determine there are issues, you will receive a second email with details explaining what needs to be fixed.
-
-### What will my plugin permalink (slug) be?
-
-When you submit a plugin, you get an automated email telling you what the slug will be. This is populated based on the value of your Plugin Name in your main plugin file (the one with the plugin headers).
-
-For example:
-
-- Plugin name: `Boaty McBoatface`
-- Autogenerated Slug: `boaty-mcboatface`
-
-If there is an existing plugin with your name or slug, then [you’ll get a warning on the submission](#why-is-my-submission-failing-saying-my-plugin-name-already-exists).
-
-The slug will also determine the following:
-
-- The URL of your plugin’s WordPress.org public page: `wordpress.org/plugins/boaty-mcboatface`
-- The folder name of your plugin in the WordPress plugins directory: `<wp-content-folder>/plugins/boaty-mcboatface`
-- The address of your plugin’s SVN repository and trac: `plugins.svn.wordpress.org/boaty-mcboatface` and `plugins.trac.wordpress.org/browser/boaty-mcboatface `
-- Your plugin’s text-domain for internationalization functions: `esc_html__('Hello', 'boaty-mcboatface');`
-
-Once your plugin is approved, this name **cannot** be renamed. Please chose wisely.
-
-### Why did I get a different slug than I was told?
-
-If we have to change your permalink (slug) we will always email you to explain why. In general, we change your permalink when you have obvious typos or mistakes (*foundre* instead of *founder*, for example) or if there are conflicts with existing trademarks or other plugins. Please make sure you read your review email carefully, as we do explain why we do things.
-
-### Why is my submission failing saying my plugin name already exists?
-
-There are two reasons this happens:
-
-1. You’re trying to use a plugin with a permalink that already exists on WordPress.org
-2. You’re trying to use a plugin with a permalink that exists **outside** WordPress.org and has a significant user base.
-
-The first one is obvious. You can’t have two plugins with the same permalink so you need to pick a new one.
-
-The second one is confusing because it’s telling you that somewhere, not on WordPress.org, that permalink is in use. It’s important to understand that the way the plugin update API works is that it compares the plugin folder name (i.e. the permalink) to every plugin it has hosted on WordPress.org. If there’s a match, then it checks for updates and users are prompted to upgrade.
-
-When that happens, users of the ‘original’ plugin (the one we don’t host) would upgrade to the one from WordPress.org and, if that isn’t what you actually wanted to do, you could break their sites.
-
-Sometimes this situation develops when a company or person releases their plugin privately (via Github for example) and decides they want to re-release it on WordPress.org. In those cases, we recommend you email us and we’ll walk you through how to get past the error.
-
-### Why am I getting an error that says I cannot begin my plugin name with a term?
-
-That error is to inform you that you may not begin your Display Name with someone else’s trademarked term. This is to protect you and the directory from legal issues regarding trademark abuse. To correct the issue, you must change the Display Name in your plugin’s readme and main PHP files.
-
-Please do not try to ‘work around’ this by cleverly renaming your plugin (WuuCommerce for example). All that does is make us worry you’re not going to be able to follow guidelines in the future.
-
-### Why am I getting an error that says I cannot use a term *entirely* in my plugin name?
-
-Some trademark owners have requested we no longer permit the use of specific terms in plugin names entirely. If you see this error, then you must remove the term from your plugin name.
-
-> To proceed with this submission you must remove “\[TERM\]” from the Plugin Name: line in both your main plugin file and readme entirely.
-
-If you attempt to get around this by changing your term from ‘Facerange’ to ‘Face-Range’, we will pend your submission and reiterate that you cannot use the term. Please don’t try to be sneaky or clever to get past this restriction.
-
-### How do I submit an official plugin?
-
-Log in as the official organization user account and submit with that account *only*.
-
-How we will know that you are the official organization? Because of your email address mostly.
-
-We cannot accept plugins that act in name of an organization submitted by individual developer accounts, unless they’re clearly company ones as well. For example, submitting your official plugin with a user that has a gmail address is likely to be flagged for trademark infringement.
-
-### What if I submitted the plugin with the wrong user ID?
-
-Just reply to the email right away and let us know. We can transfer ownership for you. If you forget to do this, you can fix it yourself by [adding the correct account as a committer](#how-do-i-give-someone-else-access-to-my-plugin) and then having that account remove your own.
-
-**DO NOT** resubmit your plugin. Just tell us right away and we’ll fix it.
-
-### How long does it take to get a plugin approved?
-
-There’s no official average, as no two plugins are the same. If your plugin is small and all the code is correct, it should be approved within **fourteen** days of *initial review*.
-
-If your plugin has any code issues, it will take as long as it takes for you to correct the issues. Either way, you *will* get an email from `plugins@wordpress.org` with the status, so please add that to your email whitelist and patiently wait for our response.
-
-### I sent in the fixes but no one replied. How long should I wait?
-
-We aim to reply to all reviews within ten (10) business days. If it’s been less than that, it just means we’ve been really busy. If it’s been two days, like over a weekend or a holiday, then you should not **reasonably** expect a reply.
-
-Remember the review team is made up of 100% volunteers, all of whom have full time day jobs, and other volunteer duties. We do reply promptly, but we also have lives outside of WordPress.
-
-### If my plugin has a problem, how long do I have to fix it?
-
-There’s no timeline and as long as we know you’re working on it and we feel you’re making progress, we’ll leave the review open. Your plugin will be rejected after 3 months, but the review will remain open.
-
-### Why was my plugin rejected after three months?
-
-If your plugin review is not complete after three (3) months, we will reject your submission in order to keep the queue maintainable. At any point in time, we have more than 500 people mid-review, and we figure that 3 months is a pretty reasonable time frame.
-
-### I finally fixed my plugin. Should I resubmit?
-
-If your plugin was rejected after three months, submit it again and reply to the email so we are aware that you wanna continue a previous unfinished review. Even if it’s been 18 months. The longest time to date has been 3 years. We don’t mind if it takes a while.
-
-**DO NOT** resubmit your plugin if it was rejected for any other reason, just reply to the email.
-
-### How many plugins can I submit for review at a time?
-
-Generally, just one. If you’re a plugin author with more than one million active plugin installations, we understand that you have more ongoing projects, so you would have a different limit of up to 10 plugin submissions at the same time.
-
-### Why can’t I submit more than one plugin at a time?
-
-Allowing people to have multiple submissions at once was proven to be detrimental to the review process. Errors were regularly found in all the plugins, resulting in the same emails being sent multiple times. In addition, people often got confused as to which review they were working on, muddying the waters about what needed to be solved. By changing this to one-at-a-time, confusion in those matters dropped significantly.
-
-In addition, many new users don’t know how to use SVN, and wound up submitting multiple plugins and never using any. That can be a drain on our resources, so we do limit people.
-
-Since all plugins get an initial review within four weeks, this should not be a hardship.
-
-### Can I submit multiple plugins with multiple accounts?
-
-No. And if you do so, we will suspend all your secondary accounts. Don’t try to get around the one-at-a-time rule please.
-
-### I need my plugin approved by a specific date, what should I do?
-
-Submit it as early as possible. Unless the plugin is meant to address a security or legal issue, we don’t permit queue jumping. If it *is* related to one of those, please email `plugins@wordpress.org` and explain the situation.
-
-### Are there specific things that I should avoid doing?
-
-We look for some pretty obvious things, all of which are listed [in our guidelines](#plugins/wordpress-org/detailed-plugin-guidelines). Most can be summed up as “Don’t be a spammer,” but to touch on the ones people do the most:
-
-- Not including a `readme.txt` file when acting as a service
-- Not testing the plugin with `WP_DEBUG`
-- Including custom versions of packaged JavaScript libraries
-- Calling external files unnecessarily
-- “Powered By” links
-- Phoning home
-
-Again, this is a brief overview. Please read the guidelines, as the full list is quite detailed.
-
-### Are there plugins you don’t accept?
-
-We don’t accept plugins that do ‘nothing,’ are illegal, or encourage bad behavior. This includes black hat SEO spamming, content spinners, hate-plugins, and so on.
-
-Similarly we do not accept framework plugins or library plugins. If your plugin has to require other plugins or themes to edit themselves in order to use your plugin, it’s a library. If your plugin is a template from which more code can be built by customizing the files directly, it’s a framework or boilerplate. Frameworks and libraries should be packaged with each plugin (hopefully in a way that doesn’t conflict with other plugins using the framework or libraries). At least until core supports plugin dependencies.
-
-We also don’t accept 100% copies of other people’s work or plugins that duplicate functionality found in WordPress Core. Basically, your plugin should do something new, or in a new way, or solve a specific issue.
-
-### I want to redo, upgrade, or rebrand my existing plugin. I just submit again, right?
-
-No, you should rewrite and upgrade the existing plugin. Make it a major version release. We can’t rename plugins or transfer users, so a new one wouldn’t carry over any existing users, reviews, support topics, ratings, downloads, favorites, etc. Basically you’d leave *all* your current users out in the cold, and that’s mean.
-
-### I made a mistake with my submission. How can I fix it?
-
-You can update your plugin files from the submission page at any time.
-
-You can update your slug once after submitting it.
-
-Every submission gets an automated email with directions. If you have a different issue, please reply to that or email `plugins@wordpress.org` and explain the situation.
-
-Regarding slugs if you need further changes, you’ll need to contact us. We also try to catch typos in names before we approve anything, but we make mistakes too.
-
-### Are there things I can’t do in a plugin name?
-
-We have the following restrictions:
-
-- Plugins may not use vulgarities in the name or slug
-- Plugins may not use ‘WordPress’ or ‘Plugin’ in their slugs except under extreme situations
-- Plugins may not use version numbers in plugin slugs
-- Due to system limitations, only English letters and Arabic numbers are permitted in the slug
-- Plugins may not **start** or contain in a way that may be confusing a trademarked term or name of a specific project/library/tool *unless* submitted by an official representative
-
-We encourage everyone to be creative and come up with unique slugs. We automatically correct any plugin that has an unacceptable slug. If there’s a question as to the best choice, we will contact you to be sure.
-
-## Using The SVN Repository
-
-### Where do I put my files?
-
-Put your code files directly in the `trunk/` directory of your repository. Whenever you release a new version, [tag that release](#plugins/wordpress-org/how-to-use-subversion) by copying the current trunk revision to a new subdirectory of the `tags/` directory.
-
-Make sure you update [`trunk/readme.txt`](https://wordpress.org/plugins/developers/#readme) to reflect the **new** stable tag.
-
-Images for the readme (such as [screenshots, plugin headers, and plugin icons](#plugins/wordpress-org/plugin-assets)), belong in the `assets/` directory (which you may need to create) in the root of your SVN checkout. This will be on the same level as `tags/` and `trunk/`, for example.
-
-### Can I put my files in a subdirectory of `trunk/`?
-
-No. Doing that will cause the zip generator to break.
-
-If you have complicated plugin with lots of files, you can of course organize them into subdirectories, but the [readme.txt file](https://wordpress.org/plugins/developers/#readme) and the root plugin file should go straight into `trunk/`.
-
-### How should I name my tags (a.k.a. releases)?
-
-Your Subversion tags should look like version numbers. Specifically, they should only contain **numbers and periods**. `2.8.4` is a good lookin’ tag, `my neato releaso` is a bad lookin’ tag. We recommend you use [Semantic Versioning](http://semver.org) to keep track of releases, but we do not enforce this.
-
-Note that we’re talking about *Subversion* tags here, not `readme.txt` search type tags.
-
-### How many old releases should I keep in SVN?
-
-As few as possible. Very rarely does anyone need your old code in the release repository. Remember, SVN is **not** meant for your code versioning. You can use Github for stuff like that. SVN should have your current release versions, but you don’t need all the minor releases to all the previous versions. Just the last one or two for them is good.
-
-### Can I include SVN externals in my plugin?
-
-No. You can add [svn externals](https://svnbook.red-bean.com/en/1.0/ch07s03.html) to your repository, but they won’t get added to the downloadable zip file.
-
-### Can I put zips and other compressed files in my plugin?
-
-No.
-
-### Can I include minified JS?
-
-Yes! However you either have to keep the non-minified in your plugin *or* direct people via your readme as to where they can get the non-minified files.
-
-It’s fine to minify, but it’s not okay to hide it. All code must be human readable for inclusion in this directory.
-
-## Your WordPress.Org Page
-
-### When does my plugin go ‘live’?
-
-As soon as you push code to the SVN folders, your plugin will be live. **DO NOT** push code if you’re not ready, as there’s no ‘off’ switch except to [close the plugin](#closed-plugins). As closing a plugin is permanent, we recommend you not push code until you’re ready to go live.
-
-### Where does the WordPress.org Plugin Directory get its data?
-
-From the information you specify in the plugin file and in the [readme.txt file](https://wordpress.org/plugins/developers/#readme), and from the Subversion repository itself. Read [about how the readme.txt works](#plugins/wordpress-org/how-your-readme-txt-works) for more information.
-
-You should also make full use of the [Plugin Headers](#plugins/the-basics/header-requirements) in your main plugin file. Those will define how your username shows up on the WordPress.org hosting page, as well as in the WordPress Admin. We recommend using all those headers to fully document your plugin.
-
-### Can I specify what version of my plugin the WordPress.org Plugin Directory should use?
-
-Yes, by specifying the `Stable Tag` field in your trunk directory’s [readme.txt file](https://wordpress.org/plugins/developers/#readme).
-
-We ask you **not** use ‘trunk’ as your stable tag, as that makes rollbacks more complicated than they need to be.
-
-### What version of WordPress should the “Tested Up To” value be?
-
-Logically, whatever version you tested up to. However, never go above the current release candidate. If there is none, don’t go above the active version. So if WordPress’ stable release is 6.0.9, you can use 6.0 to 6.0.9 and everything will be fine. If there is a release of 6.1-RC then you may use 6.1, however you can go no higher.
-
-Do not attempt to be clever and use 6.5 or 7. This will result in errors on your page.
-
-### Do I need to release a new version of my plugin every time I update the readme?
-
-No. If you’re only making cosmetic changes to the readme or your icons/headers, you *do not* need to release a new version. Just make sure you update the trunk and tag folders.
-
-### Do I need to release a new version of my plugin every time I update the code?
-
-Yes. Otherwise no one gets updated.
-
-### What should be in my changelog?
-
-A changelog is a log or record of all or all notable changes made to your plugin, including records of changes such as bug fixes, new features, etc. If you need help formatting your changelogs, we recommend [Keep A Changelog](https://keepachangelog.com/en/1.1.0/) as that’s the format used by many products out there.
-
-### How many versions should I keep in my changelog?
-
-Always keep the current major release in your change log. For example, if your current version is 3.9.1, you’ll want that and 3.9 in the change log. Older versions should be removed and migrated to a `changelog.txt` file. That will allow them to be accessible to users, while keeping your readme shorter and more pertinent. At most, keep the most recent version of your plugin and one major version back in your readme’s changelog. Your `changelog.txt` will **not** be visible within the WordPress.org Plugin Directory, but that’s okay. Most users just want to know what’s new.
-
-### How do I include videos on plugin description pages?
-
-For YouTube and Vimeo videos, simply paste the video link on a line by itself in your description. Note that the video must be set to allow embedding for the embed process to work. For videos hosted by the WordPress.com VideoPress service, use the `` shortcode. Shortcodes can also be used for YouTube and Vimeo, if needed, just like in WordPress.
-
-### Why does my plugin say it’s not been tested with the most recent WordPress versions?
-
-That happens when you neglected to use a proper ‘Tested Up To’ value in your headers in your readme. That value should be the latest version of WordPress that you’ve tested your plugin against. If the latest **major** WordPress version is 4.9, then you should have the value `4.9` to indicate compatibility. You do not need to update for minor releases (if your readme is compatible to 4.9 then that will cover 4.9 through 4.9.1000).
-
-Keep in mind, if you put in non-released versions of WordPress (like 6.0) you’ll see the same message.
-
-### How long does it take for the Plugin Directory to reflect my changes?
-
-The WordPress.org Plugin Directory updates every few minutes. However, it may take longer for your changes to appear depending on the size of the update queue. Please give it at least **6 hours** before contacting us.
-
-### How do I make one of those cool banners for my plugin page?
-
-You can make your own [plugin headers](#plugins/wordpress-org/plugin-assets#plugin-headers) by uploading the correctly named files into the `assets` folder. Read [about plugin headers](#plugins/wordpress-org/plugin-assets#plugin-headers) for more information.
-
-### How do I make a plugin icon?
-
-You can make your own [plugin icons](#plugins/wordpress-org/plugin-assets#plugin-icons) by uploading the correctly named files into the `assets` folder. Read [about plugin icons](#plugins/wordpress-org/plugin-assets#plugin-icons) for more information.
-
-### Can I use official logos in my plugin banner/icons?
-
-Usually no.
-
-Your plugin icon should *never* be the unaltered, official logo of, say, Facerange. That would be infringing on their property. You may not use official logos for your branding in your banners or icons. Even if you have permission to do so on your site, *we* don’t have that permission here.
-
-Much like your plugin name, we recommend your icons and headers be something unique to you. They tend to be more memorable that way.
-
-### How many tags can I use in my readme?
-
-Per the guidelines, [plugins are limited to 12 tags in their readme](#plugins/wordpress-org/detailed-plugin-guidelines#12-public-facing-pages-on-wordpress-org-readmes-must-not-spam). This is to control spam. That said, only the first **FIVE** tags will display on WordPress.org, much for the same reason. The first 12 tags are used for searches, and the rest are ignored, so tag-stuffing won’t help you at all.
-
-In addition, any tags where you are the only one who uses them won’t show, because they’re not going to help anyone find another, similar, plugin.
-
-## Plugin Names
-
-### Can I change my plugin’s name after it’s approved?
-
-Yes and no. You can change the display name, but the *slug* — that part of the plugin URL that is yours — cannot be changed once a plugin is approved. That’s why we warn you, multiple times, upon submission.
-
-To change the display name, edit your main plugin file and change the value of “Plugin Name:” to the new name. You also will want to edit your header in your readme.txt to match.
-
-### Why can’t I use someone’s trademark/brand as my plugin name?
-
-Simply put, because you’re not them.
-
-If you have written an add-on plugin for BooCommerce, you may not name it “BooCommerce Improved Product Search” as that would generate the slug `boocommerce-improved-product-search` and that would conflict with the trademark of ‘BooCommerce.’ That said, it would be acceptable to submit the name “Boo Improved Product Search” which would use the slug `bc-improved-product-search` (“bc” not being trademarked you see).
-
-As another example, if you have a plugin that integrates a service with a a popular cloud hosting company named Amazorn, you may call it “My Service Integration for Amazorn”, but you may **not** use “Amazorn – My Service Integration”.
-
-Consider the real life example of Keurig. If you made an eco-friendly brew cup, you could market it “EcoBrew Pod for Keurig” but you could NOT attempt to market it as “Keurig EcoBrew Pod.” The latter implies a direct relationship to Keurig and is actually against the law in some countries. In order to protect you, we need you to tread lightly with recognized brand names and trademarks. Always err on the side of caution; if they come and tell us to close your plugin because you used their term as the *first* word in the display name, we have to do it.
-
-*Note: We no longer have permission to permit new plugins to use `woo` as the start of their permalink, and are required to enforce the use of `wc` instead.*
-
-### Can a company give me permission to use their trademark in my permalink?
-
-No.
-
-While we understand that companies can and do grant usage permissions, we do not accept them for permalinks for a really important reason: we ***cannot*** change your permalink once the plugin is approved. This means if, later on, the company changes their mind and rescinds approval, the plugin will be closed and all of it’s users abandoned.
-
-In order to be forward thinking and proactive about a plugin’s long-term life in the directory, we do not accept ‘permission.’ A permalink may not begin with a trademark (or commonly known brand/term) unless it is by the official owners.
-
-### Can I change my plugin’s URL/slug?
-
-It’s impossible to change a plugin’s URL once it’s approved and we warn you about that in multiple places through the process.
-
-Due to that, we deny most requests for ‘new’ plugins to replace old ones just to get a better slug.
-
-This is because we cannot migrate users between plugins nor can we redirect traffic. This means that submitted a new plugin to change a slug is incredibly detrimental to the plugin’s SEO and reputation, as users will be abandoned. The majority of plugins don’t actually need a new URL, and instead just want to edit their display name.
-
-Unless there’s an egregious typo, language, or legal issue related to your slug, we are **unlikely** to approve a new slug. If we do, we will flag your account to note that future rename requests are to be denied.
-
-### How do I change my plugin’s display name?
-
-You’ll need to change it in the readme *and* the plugin main file.
-
-### Can I make my display name anything?
-
-Don’t use vulgarities or slurs or other intentionally abusive language. You cannot claim, or appear to claim, to be an official source if you’re not. For example, if you’ve made a plugin that connects to the Frozbaz Service, you should call your plugin “Connector to Frozbaz Service” – in this way, you have made it clear you are making a plugin for a service, rather than being the service.
-
-If you’re combining multiple services (a payment gateway to a popular ecommerce plugin, for example), we strongly recommend you come up with an original, unique, display name.
-
-### Can I use WordPress or Plugin in my display name?
-
-Currently yes, but you shouldn’t. It’s incredibly redundant and doesn’t actually help your SEO in any way, shape, or form. We already put WordPress *and* Plugin in your page title.
-
-### Should I use the trademark or registered symbol in my plugin name?
-
-Assuming you actually did apply for trademarks, you certainly *can* but it’s not commonly done. Not even Google or Facebook do that. Simply by using your trademark term and having a log of it (like your SVN log), you have usually done the needed legal action required to protect your brand. Consult a lawyer for details.
-
-## Search
-
-### How long will it take for my plugin to show up in search?
-
-Usually 6 to 14 days after a plugin is committed to SVN. This is because we have to add your data, parse it, and share it to all of our *heavily* cached servers. It’s not instantaneous. Also as a new plugin, we have no data on usage, so you may need to wait a bit.
-
-### How do I rank higher?
-
-Write a good readme for the language, answer support posts promptly, get good reviews.
-
-### What’s weighted more, my URL or my display name?
-
-Neither. Make your display name memorable and descriptive, while keeping it under 5 words, for maximum benefit.
-
-## The Support Forums
-
-### How do I get notified for forums posts?
-
-Go to `https://wordpress.org/support/plugin/YOURPLUGIN` and look at the sidebar on the right. Click the Subscribe to this Plugin button for email alerts.
-
-### How do I get notified for all my plugins?
-
-Every plugin support forum page has a “Subscribe” button at the top of it. Click that and you will be emailed. You can see which plugin forums sets you are subscribed to at `https://wordpress.org/support/users/YOURID/subscriptions`
-
-For RSS, visit `https://wordpress.org/support/view/plugin-committer/YOURID` will list all of the support requests and reviews for any plugin you have commit access. Not a committer, just someone listed as an author? Use `https://wordpress.org/support/view/plugin-contributor/YOURID`
-
-You can also go to `https://profiles.wordpress.org/YOURID/profile/notifications/` and put in any terms you want to be emailed for. Be careful, this can escalate if you use generic terms.
-
-### How do I give a support account access to my plugin?
-
-You can add Support Representatives to your plugin. Support representatives can mark forum topics as resolved or sticky (same as plugin authors and contributors), but don’t have commit access to the plugin.
-
-The UI for managing plugin support reps can be found in Advanced View on the plugin page, next to managing committers. Once someone is added as a support rep, they will get a Plugin Support badge when replying to the plugin support topics or reviews.
-
-### Will you delete bad reviews or comments on my plugin?
-
-Generally no. A review is a reflection of an individual’s experience with your product. If they didn’t like it, that’s not for us to change. If you feel that a review is invalid (such as for a different plugin), use the `modlook` button on the post. A member of the **forums** team will investigate.
-
-Abuse of the modlook feature may result in suspension of your plugins. Please, use it wisely.
-
-### What is ‘Sockpuppeting’?
-
-That’s what happens when someone makes multiple accounts on the forums, usually to give themselves a number of 5-star reviews, or create fake support tickets to appear more responsive. Sockpuppeting is against our guidelines and will result in the reviews and posts being removed, but also may result in your account and all plugins being removed. Don’t do it and don’t flagrantly accuse others of doing it.
-
-## Closed Plugins
-
-### How do I close my plugin?
-
-As of April 2020, you can close your own plugins at any time. To do so, go to the **advanced** tab on your plugin page (i.e. `https://wordpress.org/plugins/myplugin/advanced/`) and scroll down to the **CLOSE THIS PLUGIN** section. There you will see a warning message and a button.
-
-![Image of the "Close this plugin" feature, with the note "WARNING: Closing your plugin is intended to be a permanent action. You will not be able to reopen it without contacting the plugins team." Below that is a button saying "I understand."](https://i0.wp.com/developer.wordpress.org/files/2020/04/HowtoClose.png?resize=1024%2C275&ssl=1)If you agree to the warning, and want to close your plugin, press the button.
-
-Keep in mind, you *will not* get your plugin restored unless you can justify your situation. Closing a plugin by request is intended to be **permanent**.
-
-### What if I accidentally closed my plugin?
-
-Email `plugins@wordpress.org` and ask to please have your plugin reopened. However you will be asked how you managed to do that so that we can improve the functionality of the feature.
-
-### Why won’t it let me close my own plugin?
-
-Assuming you’re logged in as the correct account, it’s probably because you have too many users. If your plugin has more than 10,000 users, you will need to email `plugins@wordpress.org` and request for us to close it.
-
-### Can I temporarily close my plugin?
-
-No.
-
-We do not permit this as it creates a poor experience for users. Hiding plugins makes users think the plugin has been pulled for security or guideline issues, which causes them not to trust you anymore. We cannot prevent what they think, so instead we prohibit ‘temporary’ closures.
-
-Generally people want to do this when their plugin has a bug that is being fixed, or when they’re unable to support it. We recommend you instead just fix the bug as soon as possible, or if you cannot support the plugin, update the readme to say it’s currently unsupported and why.
-
-If this is for a brand new plugin, you should just call it a ‘public beta’ so people are aware of the status.
-
-### What happens when a plugin is closed?
-
-When a plugin is closed, the page shows as closed and the zips are no longer generated. No one will be able to download the plugin via the website, nor will they be able to install it via the WordPress admin. The SVN repository will remain accessible to allow others to download and fork the code if desired, per the tenets of the directory.
-
-After 60 days, the closure message will change to alert people as to *why* it was closed but only in the broadest terms (Guideline Violation, Security, etc) and not with explicit details.
-
-### Why was my plugin closed?
-
-Plugins are closed for guideline violations, security issues, or by author requests. In the case of active issues (such as copyright infringement, abuse, and security), all accounts with commit access to a plugin are notified.
-
-If a plugin has never been used within 6 months (i.e. no code has been pushed to SVN), SVN is broken for upwards of 12 months, or a plugin’s readme indicates it’s deprecated, we *may* close without notification.
-
-### Why was someone else’s plugin closed?
-
-As of 2017, plugin closure reasons are tracked in the plugin database. Sixty days after a plugin is closed, the reason for the closure will be made public:
-
-![Example of a closed plugin with the reason 'Author Request'](https://i0.wp.com/developer.wordpress.org/files/2015/04/not-hello-dolly.jpg?resize=1058%2C526&ssl=1)Please note: We do not publicly disclose the details on exactly why a plugin has been closed.
-
-### Can I get someone else’s plugin closed?
-
-If you report an [security issue](#plugins/wordpress-org/plugin-security/reporting-plugin-security-issues) or a [guideline violation](#plugins/wordpress-org/detailed-plugin-guidelines) in a plugin to `plugins@wordpress.org`, we will review and take appropriate action. Most of the time, this involves closing a plugin. Your name will not be disclosed unless you ask for it to be so, in order to protect you from backlash.
-
-### Someone posted a copy of my plugin! What do I do?
-
-Email `plugins@wordpress.org` with a link to the stolen plugin. Include either a link to where we can download yours or attach the zip. We will compare the two files, as well as all the coding history we have, to determine if the plugin is, indeed, theft, or just an uncredited fork.
-
-Keep in mind, if you licensed your plugin as GPLv2 or later, then it’s perfectly permissible to fork your work, as long as copyright remains intact and you’re credited.
-
-### What do I do if someone copied some of my code and didn’t credit me?
-
-Email `plugins@wordpress.org` right away! **Especially** if your code was non-GPL. While we do permit people to fork other plugins and include that code in their own plugins, it must be credited at all times. Copyright and credits are a requirement.
-
-### Will you close another plugin for violating a brand/trademark?
-
-We do our best to uphold copyright and trademark requirements, as well as prevent brand confusion. Before plugin are approved, we often require them to make some of the more obvious changes. That said, there is a limit to how ‘different’ a URL or name can be when we have 60,000 plugins in the directory, and when some terms are quite common (like ‘popup’ or ‘all-in-one’). Because of that, we require developers to change the plugin’s **display name** to no longer cause conflict or confusion.
-
-If someone is clearly infringing on your copyright or trademark or existing brand, be it by display name or use of trademarked images, please email us at `plugins@wordpress.org` with some proof and we will contact the developer and require changes.
-
-We do expect these to be *reasonable* requests. That is, if you send us a complaint and list 12 plugins that all use the term ‘best contact form’ because that’s your plugin name, we will review the plugins and only close them if they’re using the phrase excessively. If they use it once (i.e. “This is the best contact form plugin in the Faroe Islands”) then it’s acceptable. If they’re keyword stuffing the phrase, we’re more likely to close them for keyword stuffing. Simply, if your plugin name is super generic, this is going to happen, and it’s usually **not** an infringement case.
-
-Also note that if it’s not **your** trademark, we cannot accept your report. It is the responsibility of the trademark owners, not it’s users, to manage and maintain that.
-
-### How can I send a security report?
-
-Email `plugins@wordpress.org` a clear and concise description of the issue. [Please read our document on reporting security issues for details](#plugins/wordpress-org/plugin-security/reporting-plugin-security-issues).
-
-### Do you provide bounties for finding bugs in a plugin?
-
-No. We have no relationship with any bug bounty programs, so we don’t file your reports etc to them. The only one with which we work is [hackerone.com/automattic](https://hackerone.com/automattic) and that’s for bugs related to Automattic properties. Everything else is on your own, don’t ask us to submit things.
-
-### Do you help file or provide CVEs?
-
-No. We do not have the ability to assist with CVEs.
-
-### My plugin was closed, can I reopen it?
-
-Maybe. If it was closed for a security reason, fix the issue, reply to the email, and most of the time we’ll reopen the plugin unless it has more security issues or severe guideline issues. If it was closed for guideline violations, it depends on the severity and nature of the violation. Repeat offenders are less likely to have a plugin reopened, for example, than first-timers.
-
-If you asked for the plugin to be closed, you will be expected to explain why the change of heart. Plugins are intended to remain closed when a developer requests it, and not reopened again a month later.
-
-*All* plugins must pass a current standards and security review in order to be restored. This is not optional. Users will lose more faith in you for having your plugin closed multiple times than they would for one longer closure where you address all the potential issues.
-
-### Why was my plugin closed when it was my employee/co-worker who violated guidelines?
-
-Everyone who represents a plugin, from support tech to developer, is the responsibility of the plugin owner. If they violate the guidelines egregiously, then the owners are expected to accept those consequences and correct course. When that doesn’t happen, plugins get closed. We notify the plugin owners in these cases and explain why and do our best to keep plugins open.
-
-### *All* my plugins were closed! How can I get them back?
-
-It’s exceptionally rare that we close all of a developer’s plugins. In general it happens because of the following:
-
-1. You asked us to close all your plugins
-2. Email issues 
-    1. The email bounced and we were unable to get in touch
-    2. The email sent us auto-replies and warnings were sent at least twice to fix that
-3. Guideline issues 
-    1. Previous censuring for behaviour and/or a final warning was issued
-    2. Delivering legal threats to the directory and/or the volunteers
-    3. The violation was deemed ‘egregious’ (death threats, hundreds of sock puppets, harassment, etc)
-
-If you asked us to close them, you have to explain *why* the change of heart.
-
-If you’re having email issues, you have to resolve them and you’ll be required to bring all your plugins up to current standards of security and guidelines.
-
-As for that last one … Generally you don’t get to come back from that. If we deliver you a final warning for your behaviour and, within less than a year, you start up again with the issues (or fail to resolve all the issues we mentioned), we’re not going to reopen your plugins.
-
-### I just got a final warning. What do I do?
-
-First and foremost, *take it seriously*. The email will list exactly what the problems have been and why we’ve chosen to escalate to a final warning. Plugin Owners are expected to resolve all the issues, to cease causing new guideline violations, and to closely monitor the actions of any coworkers. In short, stop breaking the guidelines, stop making excuses, apologize for any misbehaviour, and correct course.
-
-The last thing we want to do is ban someone and disable all their plugins. It’s not healthy for the community. At the same time, if a developer is unable or unwilling to play by the same rules as everyone else, it’s detrimental to keep then in the directory and disrespectful to everyone else.
-
-## Plugin Ownership
-
-### How do I give someone else access to my plugin?
-
-To add users as committers, that is give them access to update code, go to `https://wordpress.org/plugins/YOURPLUGIN/advanced` and add their username in as a committer.
-
-To have them show up as an author, add their username to the `readme.txt` file.
-
-*Do not add regular users as authors.* It’s meant for people who help with development only. This means if someone ‘inspired’ you, you should not add them as an author.
-
-### What happens to a plugin if the plugin owner gets blocked?
-
-The leadership of the WordPress project and the Plugin Review team will review each case individually.
-
-Not having a new owner for a plugin can have a lot of security implications, as users would no longer be able to receive new updates.
-
-In most cases, the plugin will be:
-
-- **Closed for new updates:** When the plugin doesn’t have a lot of active installations or is only necessary for specific use cases, the team will likely just close it.
-- **Transferred to the WP community:** Whenever we have a plugin that is relevant enough to become a community/canonical project, it could be transferred to the `wordpressdotorg` user.
-- **[Adopted by a new user](#plugins/wordpress-org/take-over-an-existing-plugin):** In an application process managed by the team, it could be possibly donated to a different user if approved by the WordPress project leadership.
-
-### How do I remove someone’s access from my plugin?
-
-Anyone with commit access can do this. Go to `https://wordpress.org/plugins/YOURPLUGIN/advanced` and hover over their ID. A delete link will appear. Click on it.
-
-Please don’t delete yourself.
-
-### How do I change the plugin owner?
-
-Go to the Advanced tab and scroll down to the Danger Zone. There you will see a section for **Transfer Your Plugin**. Pick someone from the dropdown and click the button.
-
-For more details, please read the [documentation on transferring plugins](#plugins/wordpress-org/transferring-your-plugin-to-a-new-owner).
-
-### I tried to transfer my plugin but it says I can’t. Why not?
-
-Plugins with a large number of users (over 10,000) or ones that are deemed critical to the WordPress project (such as featured or beta plugins) can only be transfered via written request to the plugins team. [Please read the documentation on transfering plugins for details](#plugins/wordpress-org/transferring-your-plugin-to-a-new-owner).
-
-### How can I take over an abandoned plugin?
-
-[We permit users to adopt existing plugins that are no longer currently developed](#plugins/wordpress-org/take-over-an-existing-plugin).
-
-We ask you try to connect with the original developers first, so they can add you. In some case, that’s not possible and you should start with fixing the plugin. Make sure it meets coding standards, is secure, and update the copyright information to include yourself. Then you can contact us regarding [plugin adoption](#plugins/wordpress-org/take-over-an-existing-plugin).
-
-We offer **no** guarantee that you will be given anyone’s plugin, even following a successful review.
-
-### Are these offers to buy my plugin legit?
-
-Short answer: Probably not.
-
-Many developers receive unsolicited emails or offers to purchase their plugin. We have found the vast majority of these to be fraudulent and do *not* recommend you follow up with them.
-
-While legitimate offers do come, they’re usually from the official company to whom a plugin is related, or from a well established plugin company. The ones that start “We’re reaching out to the WordPress community …” or “We are looking to acquire existing WordPress plugins …” should not be trusted. Such purchases have often destroyed the reputation of the plugin (and the original developer) by engaging in sleazy tactics such as tracking users or other serious guideline violations.
-
-If you do choose to sell your plugin (or give it away to someone else), please make sure the new owners understand all the [guidelines of the repository](#plugins/wordpress-org/detailed-plugin-guidelines). Should they violate our terms the plugin will be removed, and we may not give it back depending on the level of the violation. Whomever has commit access to a plugin has the ownership and responsibility of it’s behavior for users. Spamming, inserting tracking data, and adding junk features are the fastest way to ruin your plugin.
-
-We advocate only giving your plugin to people you *personally* have vetted, and that you trust with being responsible with your code and your users.
-
-### What happens when a plugin developer dies?
-
-When a developer is determined to have died, they are removed from their own plugins in order to prevent the unethical from gaining access and harming users. If they are the only developer, the plugin may be closed. All attempts are made to find their friends and coworkers, to offer them a chance to adopt the code first, but if no one reliable or willing can be found the plugin is closed.
-
----
-
-# Internationalization Security <a name="plugins/internationalization/security" />
-
-Source: https://developer.wordpress.org/plugins/internationalization/security/
-
-Security is often overlooked when talking about internationalization, but there are a few important things to keep in mind.
-
-### Check for Spam and Other Malicious Strings
-
-When a translator submits a localization to you, always check to make sure they didn’t include spam or other malicious words in their translation. You can use [Google Translate](https://translate.google.com/) to translate their translation back into your native language so that you can easily compare the original and translated strings.
-
-### Escape Internationalized Strings
-
-You can’t trust that a translator will only add benign text to their localization; if they want to, they could add malicious JavaScript or other code instead. To protect against that, it’s important to treat internationalized strings like you would any other untrusted input.
-
-If you’re outputting the strings, then they should be escaped.
-
-Insecure:
-
-```php
-_e( 'The REST API content endpoints were added in WordPress 4.7.', 'your-text-domain' ); 
-```
-
-Secure:
-
-```php
-esc_html_e( 'The REST API content endpoints were added in WordPress 4.7.', 'your-text-domain' );
-```
-
-Alternatively, some people choose to rely on a translation verification mechanism, rather than adding escaping to their code. One example of a verification mechanism is [the editor roles](https://make.wordpress.org/polyglots/handbook/glossary/#project-translation-editor) that the WordPress Polyglots team uses for [translate.wordpress.org](https://translate.wordpress.org). This ensures that any translation submitted by an untrusted contributor has been verified by a trusted editor before being accepted.
-
-### Use Placeholders for URLs
-
-Don’t include URLs in internationalized strings, because a malicious translator could change them to point to a different URL. Instead, use placeholders for [printf()](http://php.net/manual/en/function.printf.php) or [sprintf()](http://us3.php.net/manual/en/function.sprintf.php).
-
-Insecure:
-
-```php
-_e(
-	'Please <a href="https://login.wordpress.org/register"> register for a WordPress.org account</a>.',
-	'your-text-domain'
-);
-```
-
-Secure:
-
-```php
-printf(
-	esc_html__( 'Please %1$s register for a WordPress.org account %2$s.', 'your-text-domain' ),
-	'<a href="https://login.wordpress.org/register">',
-	'</a>'
-);
-```
-
-### Compile Your Own .mo Binaries
-
-Often translators will send the compiled .mo file along with the plaintext .po file, but you should discard their .mo file and compile your own, because you have no way of knowing whether or not it was compiled from the corresponding .po file, or a different one. If it was compiled against a different one, then it could contain spam and other malicious strings without your knowledge.
-
-Using PoEdit to generate the binary will override the headers in the .po file, so instead it’s better to compile it from the command line:
-
-```bash
-msgfmt -cv -o /path/to/output.mo /path/to/input.po
-```
-
----
-
-# Common issues <a name="plugins/wordpress-org/common-issues" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/common-issues/
-
-This is a compilation of some of the most common issues the Plugin Review Team encounters when reviewing plugins.
-
-This list contains excerpts from the team’s email messages, and should not be considered a complete or exhaustive list; the outcome of the reviews depends on the manual review performed by the team.
-
-## Security
-
-### Sanitize
-
-**Input data must be Sanitized, Validated, and Escaped on output**
-
-When you include POST/GET/REQUEST/FILE calls in your plugin, it’s important to sanitize, validate, and escape them. The goal here is to prevent a user from accidentally sending trash data through the system, as well as protecting them from potential security issues.
-
-SANITIZE: Data that is input (either by a user or automatically) must be sanitized as soon as possible. This lessens the possibility of XSS vulnerabilities and MITM attacks where posted data is subverted.
-
-VALIDATE: All data should be validated, no matter what. Even when you sanitize, remember that you don’t want someone putting in ‘dog’ when the only valid values are numbers.
-
-ESCAPE: Data that is output must be escaped properly when it is echo’d, so it can’t hijack admin screens. There are many esc\_\*() functions you can use to make sure you don’t show people the wrong data.
-
-To help you with this, WordPress comes with a number of sanitization and escaping functions. You can read about those here:
-
-[\#apis/security/sanitizing](#apis/security/sanitizing) [\#apis/security/escaping](#apis/security/escaping)
-
-Remember: You must use the most appropriate functions for the context. If you’re sanitizing email, use [sanitize\_email()](#reference/functions/sanitize_email) , if you’re outputting HTML, use [wp\_kses\_post()](#reference/functions/wp_kses_post) , and so on.
-
-An easy mantra here is this:
-
-Sanitize early  
-Escape Late  
-Always Validate
-
-Clean everything, check everything, escape everything, and never trust the users to always have input sane data. After all, users come from all walks of life.
-
-#### Sanitize: Confusion about escape and sanitize functions
-
-**Note**: escape functions cannot be used to sanitize. They serve different purposes. Even if they seem to be perfect for this purpose, most of the functions are filterable and people expect to use them to escape. Therefore, another plugin may change what they do and make yours at risk and exploitable.
-
-If you are trying to echo the variable, you have to first sanitize it and then escape it, as for example:
-
-```
-echo esc_html(sanitize_text_field($_POST['example']));
-
-```
-
-#### Sanitize: Using filter functions to sanitize
-
-**Note**: When using functions like `filter_var`, `filter_var_array`, `filter_input` and/or `filter_input_array` you will need to [set the FILTER parameter to any kind of filter that sanitizes the input](https://www.php.net/manual/en/filter.filters.php).
-
-Leaving the filter parameter empty, PHP by default will apply the filter “FILTER\_DEFAULT” **which is not sanitizing at all**.
-
-```
-$post_id = filter_input(INPUT_GET, 'post_id', FILTER_SANITIZE_NUMBER_INT);
-
-```
-
-#### Sanitize: Nonces
-
-**Note**: When checking a nonce using `wp_verify_nonce` you will need to sanitize the input using `wp_unslash` AND `sanitize_text_field`, [this is because this function is pluggable, and extenders should not trust its input values](#news/2023/08/understand-and-use-wordpress-nonces-properly).
-
-Example:
-
-```
-if ( ! isset( $_POST['prefix_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash ( $_POST['prefix_nonce'] ) ) , 'prefix_nonce' ) )
-
-```
-
-### Processing the whole input
-
-We strongly recommend you **never** attempt to process the whole $\_POST/$\_REQUEST/$\_GET stack. This makes your plugin slower as you’re needlessly cycling through data you don’t need. Instead, you should only be attempting to process the items within that are required for your plugin to function.
-
-### Escape
-
-**Variables and options must be escaped when echo’d**
-
-Much related to sanitizing everything, all variables that are echoed need to be escaped when they’re echoed, so it can’t hijack users or (worse) admin screens. There are many esc\_\*() functions you can use to make sure you don’t show people the wrong data, as well as some that will allow you to echo HTML safely.
-
-At this time, we ask you escape **all $-variables, options, and any sort of generated data when it is being echoed**. That means you should not be escaping when you build a variable, but when you output it at the end. We call this ‘escaping late.’
-
-Besides protecting yourself from a possible XSS vulnerability, escaping late makes sure that you’re keeping the future you safe. While today your code may be only outputted hardcoded content, that may not be true in the future. By taking the time to properly escape **when** you echo, you prevent a mistake in the future from becoming a critical security issue.
-
-This remains true of options you’ve saved to the database. Even if you’ve properly sanitized when you saved, the tools for sanitizing and escaping aren’t interchangeable. Sanitizing makes sure it’s safe for processing and storing in the database. Escaping makes it safe to output.
-
-Also keep in mind that sometimes a function is echoing when it should really be returning content instead. This is a common mistake when it comes to returning JSON encoded content. Very rarely is that actually something you should be echoing at all. Echoing is because it needs to be on the screen, read by a human. Returning (which is what you would do with an API) can be json encoded, though remember to **sanitize** when you save to that json object!
-
-There are a number of options to secure all types of content (html, email, etc). Yes, even HTML needs to be properly escaped.
-
-> [Escaping Data](#apis/security/escaping)
-
-Remember: You must use the most appropriate functions for the context. There is pretty much an option for everything you could echo. Even echoing HTML safely.
-
-#### Escape: Use of esc\_url\_raw
-
-We know this is confusing, the `esc_url_raw` function is not an escaping function, but a sanitizing function similar to `sanitize_url`. Specifically it is used to sanitize a URL for use in a database or a redirection.
-
-The appropriate function to escape a URL is `esc_url`.
-
-#### Escape: Use of \_\_
-
-The function `__` retrieves the translation without escaping, please either:
-
-- Use an alternative function that escapes the resulting value such as `esc_html__` or `esc_attr__`.
-- Or wrap the `__` function with a proper escaping function such as `esc_html`, `esc_attr`, `wp_kses_post`, etc.
-
-Examples:
-
-```
-<h2><?php echo esc_html__('Settings page', 'plugin-slug'); ?></h2>
-<h2><?php echo esc_html(__('Settings page', 'plugin-slug')); ?></h2>
-
-```
-
-#### Escape: Use of \_e and \_ex
-
-The functions `_e` and `_ex` output the translation without escaping, please use an alternative function that escapes the output.
-
-- An alternative to `_e` would be `esc_html_e`, `esc_attr_e` or simply using `__` wrapped by an escaping function and inside an `echo`.
-- An alternative to `_ex` would be using `_x` wrapped by an escaping function and inside an `echo`.
-
-Examples:
-
-```
-<h2><?php esc_html_e('Settings page', 'plugin-slug'); ?></h2>
-<h2><?php echo esc_html(__('Settings page', 'plugin-slug')); ?></h2>
-<h2><?php echo esc_html(_x('Settings page', 'Settings page title', 'plugin-slug')); ?></h2>
-
-```
-
-#### Escape: Use json\_encode
-
-When you need to echo a JSON, it’s better to make use of the function `wp_json_encode`, also, make sure you are not avoiding escaping with the options passed on the second parameter.
-
-```
-echo wp_json_encode($array_or_object);
-
-```
-
-#### Escape: HTML
-
-When escaping, there are cases where your plugin will need to output HTML. This can be done using the functions `wp_kses_post` or `wp_kses`. The function `wp_kses_post` will allow any common HTML that can go inside a post content, `wp_kses` will allow any HTML that you set up using its second and third parameters, please [refer to its documentation](#reference/functions/wp_kses).
-
-A common mistake is to use `esc_html` to escape HTML. This function is not intended for that, it’s intended to escape the output that will go **inside** an HTML tag, therefore it will strip any HTML tags.
-
-Examples:
-
-```
-echo wp_kses_post($html_content);
-echo wp_kses($html_content, array( 'a', 'div', 'span' ));
-
-```
-
-#### Escape: Using sanitizing functions
-
-Sanitize functions cannot be used to escape. They serve different purposes. Even if they seem to be perfect for this purpose, most of the functions are filterable and people expect to use them to sanitize. Therefore, another plugin may change what they do and make yours at risk and exploitable.
-
-If you are trying to echo the variable, you have to first sanitize it and then escape it, as for example:
-
-```
-echo esc_html(sanitize_text_field($_POST['example']));
-```
-
-### Files
-
-#### Files: Use the WordPress file uploader
-
-**Please use WordPress’ file uploader**
-
-When plugins use `move_uploaded_file()`, they exclude their uploads from the built-in checks and balances with WordPress’s functions. Instead of that, you should use the built in function:
-
-> [wp\_handle\_upload](#reference/functions/wp_handle_upload)
-
-#### Files: Unfiltered uploads
-
-**ALLOW\_UNFILTERED\_UPLOADS is not allowed.**
-
-Setting this constant to true will allow the user to upload any type of file (including PHP and other executables), creating serious potential security risks. As developers, we should not use or allow the use of this constant in any kind of logic, not even in a conditional.
-
-WordPress includes a list of safe files, as you can see in the function [wp\_get\_mime\_types](#reference/functions/wp_get_mime_types).
-
-If you need to add a specific file that is not in the list and that won’t represent a security risk, you can do so using the [upload\_mimes](#reference/hooks/upload_mimes) filter.
-
-#### Files: Calling files remotely
-
-Offloading images, js, css, and other scripts to your servers or any remote service (like Google, MaxCDN, jQuery.com etc) is disallowed. When you call remote data you introduce an unnecessary dependency on another site. If the file you’re calling isn’t a part of WordPress Core, then you should include it -locally- in your plugin, not remotely. If the file IS included in WordPress core, please call that instead.
-
-An exception to this rule is if your plugin is performing a service. We will permit this on a case by case basis. Since this can be confusing we have some examples of what are not permitted:
-
-- Offloading jquery CSS files to Google – You should include the CSS in your plugin.
-- Inserting an iframe with a help doc – A link, or including the docs in your plugin is preferred.
-- Calling images from your own domain – They should be included in your plugin.
-
-Here are some examples of what we would permit:
-
-- Calling font families from Google or their approved CDN (if GPL compatible)
-- API calls back to your server to process possible spam comments (like Akismet)
-- Offloading comments to your own servers (like Disqus)
-- oEmbed calls to a service provider (like Twitter or YouTube)
-
-Please remove external dependencies from your plugin and, if possible, include all files within the plugin (that is not called remotely). If instead you feel you are providing a service, please re-write your readme.txt in a manner that explains the service, the servers being called, and if any account is needed to connect.
-
-### Libraries
-
-#### Libraries: Using development versions
-
-**Using Beta / Alpha / Development versions of libraries**
-
-We do not recommend you use the beta version of a library unless it has features required by your plugin. Instead, you should be using the most stable release of the library.
-
-If there is a technical reason you must use the beta version, please explain why. Otherwise, please change your library to the stable release.
-
-#### Libraries: Not maintained
-
-**Libraries that are no longer maintained are not permitted**
-
-We no longer accept using any library that is no longer supported or maintained by their developers, as they pose a significant security risk. Please consider other options.
-
-#### Libraries: Out of Date
-
-At least one of the 3rd party libraries you’re using is out of date. Please upgrade to the latest stable version for better support and security. We do not recommend you use beta releases.
-
-### WPDB: Unsafe SQL calls
-
-When making database calls, it’s highly important to protect your code from SQL injection vulnerabilities. You need to update your code to use [wpdb](#reference/classes/wpdb) calls and prepare() with your queries to protect them.
-
-Please review the following:
-
-- [\#reference/classes/wpdb#protect-queries-against-sql-injection-attacks](#reference/classes/wpdb#protect-queries-against-sql-injection-attacks)
-- [https://codex.wordpress.org/Data\\\_Validation#Database](https://codex.wordpress.org/Data_Validation#Database)
-- <https://make.wordpress.org/core/2012/12/12/php-warning-missing-argument-2-for-wpdb-prepare/>
-- <https://ottopress.com/2013/better-know-a-vulnerability-sql-injection/>
-
-#### WPDB: Arrays of placeholders
-
-**Note**: Passing individual values to [wpdb::prepare()](#reference/classes/wpdbprepare/) using placeholders is fairly straightforward, but what if we need to pass an array of values instead?
-
-You’ll need to create a placeholder for each item of the array and pass all the corresponding values to those placeholders, this seems tricky, but here is a snippet to do so.
-
-```
-$wordcamp_id_placeholders = implode( ', ', array_fill( 0, count( $wordcamp_ids ), '%d' ) );
-$prepare_values = array_merge( array( $new_status ), $wordcamp_ids );
-$wpdb->query( $wpdb->prepare( "
-    UPDATE `$table_name`
-    SET `post_status` = %s
-    WHERE ID IN ( $wordcamp_id_placeholders )",
-    $prepare_values
-) );
-```
-
-There is a core ticket that could make this easier in the future: <https://core.trac.wordpress.org/ticket/54042>
-
-### Not use HEREDOC-NOWDOC
-
-**Do not use HEREDOC or NOWDOC syntax in your plugins**
-
-While both are totally valid, and in many ways desirable features of PHP that allow you to output content, it comes with a cost that is too high for most plugins.
-
-The primary issue is that most (if not all) codesniffers won’t detect lack of escaping in code when you use HEREDOC or NOWDOC. While there are ways around this they have the end result of dashing all that readability to the rubbish pile and leaving you with a jumbled mess that won’t properly be scanned.
-
-We feel the risk here is much higher than the benefits, which is why we don’t permit their use.
-
-### Direct file access
-
-**Allowing Direct File Access to plugin files**
-
-Direct file access occurs when someone directly queries a PHP file. This can be done by entering the complete path to the file in the browser’s URL bar or by sending a POST request directly to the file.
-
-For files that only contain class or function definitions, the risk of something funky happening when accessed directly is minimal. However, for files that contain executable code (e.g., function calls, class instance creation, class method calls, or inclusion of other PHP files), the risk of security issues is hard to predict because it depends on the specific case, but it can exist and it can be high.
-
-You can easily prevent this by adding the following code at the top of all PHP files that could potentially execute code if accessed directly:
-
-```
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-```
-
-## Compatibility
-
-### Prefixing
-
-**Generic function/class/define/namespace/option names**
-
-All plugins must have unique function names, namespaces, defines, class and option names. This prevents your plugin from conflicting with other plugins or themes. We need you to update your plugin to use more unique and distinct names.
-
-A good way to do this is with a prefix. For example, if your plugin is called “Easy Custom Post Types” then you could use names like these:
-
-- function ecpt\_save\_post()
-- class ECPT\_Admin{}
-- namespace ECPT;
-- update\_option( ‘ecpt\_settings’, $settings );
-- define( ‘ECPT\_LICENSE’, true );
-- global $ecpt\_options;
-
-Don’t try to use two (2) or three (3) letter prefixes anymore. We host nearly 100-thousand plugins on WordPress.org alone. There are tens of thousands more outside our servers. Believe us, you’re going to run into conflicts.
-
-You also need to avoid the use of \_\_ (double underscores), wp\_ , or \_ (single underscore) as a prefix. Those are reserved for WordPress itself. You can use them inside your classes, but not as stand-alone function.
-
-Please remember, if you’re using [\_n()](#reference/functions/_n) or [\_\_()](#reference/functions/__) for translation, that’s fine. We’re **only** talking about functions you’ve created for your plugin, not the core functions from WordPress. In fact, those core features are why you need to not use those prefixes in your own plugin! You don’t want to break WordPress for your users.
-
-Related to this, using if (!function\_exists(‘NAME’)) { around all your functions and classes sounds like a great idea until you realize the fatal flaw. If something else has a function with the same name and their code loads first, your plugin will break. Using if-exists should be reserved for shared libraries only.
-
-Remember: Good prefix names are unique and distinct to your plugin. This will help you and the next person in debugging, as well as prevent conflicts.
-
-### PHP
-
-#### PHP: Do not use Short Tags
-
-The primary issue with PHP’s short tags is that PHP managed to choose a tag (`<?`) that was used by another syntax: XML. This is a big issue when you consider how common XML parsing and management is.
-
-We know as of PHP 5.4, `<?= ... ?>` tags are supported everywhere, regardless of short tags settings. This should mean they’re safe to use in portable code but in reality that has proven not to be the case. Add on to that the fact that many codesniffers won’t detect lack of escaping in code when you use short-tags, and it becomes not worth the headache for anyone.
-
-Basically the risk here is way higher than the benefits, which is why we don’t permit their use.
-
-#### PHP: Changing Settings globally
-
-**Don’t Force Set PHP Settings Globally**
-
-While many plugins can need optimal settings for PHP, we ask you please not set them as global defaults.
-
-Having defines like ini\_set(‘memory\_limit’, ‘-1’); run globally (like on init or in the \_\_construct() part of your code) means you’ll be running that for everything on the site, which may cause your users to fall out of compliance with any limits or restrictions on their host.
-
-If you must use those, you need to limit them specifically to only the exact functions that require them.
-
-#### PHP: Setting a default timezone
-
-This is rarely a good idea. People should be able to define their own timezones in WordPress.
-
-Also WordPress explicitly sets and expects the default timezone to be UTC (in settings.php) and the date/time functions sometimes rely on the fact that the default timezone is UTC. For instance if you do date\_default\_timezone\_set(get\_option(‘timezone\_string’)) and then later try to get a GMT timestamp from [get\_post\_time()](#reference/functions/get_post_time) or [get\_post\_modified\_time()](#reference/functions/get_post_modified_time) , it will fail to give you the right date.
-
-#### PHP: Error reporting
-
-**Don’t Use Error Reporting in Production Code**
-
-While error\_reporting() is a great tool in PHP ( <https://www.php.net/manual/en/function.error-reporting.php> ) but if you set it permanently in your plugin, you mess things up for everyone who uses your code. Should they have a reason to try to debug their site which happens to use your code, they won’t be able to get a clean test because you’re messing with the output. It has no place in the day to day function of your plugin.
-
-### Plugin standards
-
-#### Main file convention
-
-**The main file of the plugin has a name that does not follow the convention.**
-
-We expect the main plugin file (the file containing the plugin headers) to have the same name as the plugin folder, which is also the same name as the slug / permalink of the plugin.
-
-For example, if your plugin slug is `ecpt-social-manager` we expect your main plugin filename to be `ecpt-social-manager.php`.
-
-Note that using some common names as the filename for the main plugin file can lead to issues in some configurations.
-
-Please check out our tips on how to [structure files and folders in a plugin](#plugins/plugin-basics/best-practices).
-
-#### Incomplete Headers
-
-Your headers are either missing or incomplete.
-
-Please review [Header Requirements](#plugins/the-basics/header-requirements) and update your plugin accordingly, putting the headers in only the main file.
-
-#### Incomplete Readme
-
-Your readme is either missing or incomplete.
-
-In some cases, such as for first plugins, ones with dependencies, or plugins that call external services, we require you to provide a complete readme. This means your readme has to have headers as well as a proper description and documentation as to how it works and how one can use it.
-
-Our goal with this is to make sure everyone knows what they’re installing and what they need to do before they install it. No surprises. This is especially important if your plugin is making calls to other servers. You are expected to provide users with all the information they need before they install your plugin.
-
-Your readme also must validate per [Validator](https://wordpress.org/plugins/about/validator/) or we will reject it. Keep in mind, we don’t want to see a readme.MD. While they can work, a readme.txt file will always be given priority, and not all of the markdown will work as expected.
-
-We ask you please create your readme one based on this: <https://wordpress.org/plugins/readme.txt>
-
-#### No GPL-compatible license declared
-
-It is necessary to declare the license of this plugin. You can do this using the fields available both in the plugin readme and in the plugin headers.
-
-Remember that all code, data, and images — anything stored in the plugin directory hosted on WordPress.org — must comply with the GPL or a GPL-Compatible license. Included third-party libraries, code, images, or otherwise, must be also compatible.
-
-For a specific list of compatible licenses, [please read the GPL-Compatible license list on gnu.org](https://www.gnu.org/licenses/license-list.html#GPLCompatibleLicenses).
-
-#### Incorrect Stable Tag
-
-In your readme, your ‘Stable Tag’ does not match the Plugin Version as indicated in your main plugin file.
-
-Your Stable Tag is meant to be the stable version of your plugin, not of WordPress. For your plugin to be properly downloaded from WordPress.org, those values need to be the same. If they’re out of sync, your users won’t get the right version of your code.
-
-We recommend you use Semantic Versioning (aka SemVer) for managing versions:
-
-- [Software Versioning](https://en.wikipedia.org/wiki/Software_versioning)
-- [SemVer](https://semver.org/)
-
-Please note: While currently using the stable tag of trunk currently works in the Plugin Directory, it’s not actually a supported or recommended method to indicate new versions and has been known to cause issues with automatic updates.
-
-We ask you please properly use tags and increment them when you release new versions of your plugin, just like you update the plugin version in the main file. Having them match is the best way to be fully forward supporting.
-
-#### Declared license mismatched
-
-When declaring the license for this plugin, it has to be the same.
-
-Please make sure that you are declaring the same license in both the readme file and the plugin headers.
-
-It is fine for this plugin to contain code from other sources under other licenses as long those are well documented and are under GPL or GPL-Compatible license, but we need a sole license declared for your code.
-
-### Use HTTP API
-
-**Using CURL Instead of HTTP API**
-
-WordPress comes with an extensive HTTP API that should be used instead of creating your own curl calls. It’s both faster and more extensive. It’ll fall back to curl if it has to, but it’ll use a lot of WordPress’ native functionality first.
-
-> [HTTP API](#plugins/http-api)
-
-In case you need, you can use setopt with [\#reference/hooks/http\_api\_curl](#reference/hooks/http_api_curl)
-
-Please note: If you’re using CURL in 3rd party vendor libraries, that’s permitted. It’s in your own code unique to this plugin (or any dedicated WordPress libraries) that we need it corrected.
-
-### Use wp\_enqueue commands
-
-Your plugin is not correctly including JS and/or CSS. You should be using the built in functions for this:
-
-When including **JavaScript code** you can use:
-
-- [wp\_register\_script()](#reference/functions/wp_register_script) and [wp\_enqueue\_script()](#reference/functions/wp_enqueue_script) to add JavaScript code from a file.
-- [wp\_add\_inline\_script()](#reference/functions/wp_add_inline_script) to add inline JavaScript code to previous declared scripts.
-
-When including **CSS** you can use:
-
-- [wp\_register\_style()](#reference/functions/wp_register_style) and [wp\_enqueue\_style()](#reference/functions/wp_enqueue_style) to add CSS from a file.
-- [wp\_add\_inline\_style()](#reference/functions/wp_add_inline_style) to add inline CSS to previously declared CSS.
-
-Note that as of WordPress 5.7, you can pass attributes like async, nonce, and type by using new functions and filters: [Script Attributes Related Functions in WordPress 5.7](https://make.wordpress.org/core/2021/02/23/introducing-script-attributes-related-functions-in-wordpress-5-7/)
-
-If you’re trying to enqueue on the admin pages you’ll want to use the admin enqueues.
-
-- [admin\_enqueue\_scripts](#reference/hooks/admin_enqueue_scripts)
-- [admin\_print\_scripts](#reference/hooks/admin_print_scripts)
-- [admin\_print\_styles](#reference/hooks/admin_print_styles)
-
-### Including Libraries Already In Core
-
-Your plugin has included a copy of a library that WordPress already includes.
-
-WordPress includes a number of useful libraries, such as jQuery, Atom Lib, SimplePie, PHPMailer, PHPass, and more. For security and stability reasons, plugins may not include those libraries in their own code, but instead must use the versions of those libraries packaged with WordPress.
-
-You can see the list of JS Libraries here:
-
-[Default Scripts and JS Libraries included and registered by WordPress](#reference/functions/wp_enqueue_script#default-scripts-and-js-libraries-included-and-registered-by-wordpress)
-
-While we do not YET have a decent public facing page to list all these libraries, we do have a list here:
-
-[Core Credits](https://meta.trac.wordpress.org/browser/sites/trunk/api.wordpress.org/public_html/core/credits/wp-59.php#L739)
-
-It’s fine to locally include add-ons not in core, but please ONLY add those additional files. For example, you do not need the entire jQuery UI library for one file. If your code doesn’t work with the built-in versions of jQuery, it’s most likely a noConflict issue.
-
-### Internationalization
-
-#### Internationalization: Using variables
-
-**Internationalization: Don’t use variables or defines as text, context or text domain parameters.**
-
-In order to make a string translatable in your plugin you are using a set of special functions. These functions collectively are known as “gettext”.
-
-There is a [dedicated team in the WordPress community](https://make.wordpress.org/polyglots/) to translate and help other translating strings of WordPress core, plugins and themes to other languages.
-
-To make them be able to translate this plugin, please **do not use variables or function calls** for the text, context or text domain parameters of any gettext function, all of them **NEED to be strings**. Note that the translation parser reads the code without executing it, so it won’t be able to read anything that is not a string within these functions.
-
-For example, if your gettext function looks like this…
-
-`esc_html__( $greetings , 'plugin-slug' );`
-
-…the translator won’t be able to see anything to be translated as `$greetings` is not a string, it is not something that can be translated. You need to give them the string to be translated, so they can see it in the translation system and can translate it, the correct would be as follows…
-
-`esc_html__( 'Hello, how are you?' , 'plugin-slug' );`
-
-This also applies to the translation domain, this is a bad call:
-
-`esc_html__( 'Hello, how are you?' , $plugin_slug );`
-
-The fix here would be like this:
-
-`esc_html__( 'Hello, how are you?' , 'plugin-slug' );`
-
-Also note that the translation domain needs to be the same as your plugin slug.
-
-What if we want to include a dynamic value inside the translation? Easy, you need to add a placeholder which will be part of the string and change it after the gettext function does its magic, you can use `printf` to do so, like this:
-
-```
-printf(
-    /* translators: %s: First name of the user */
-    esc_html__( 'Hello %s, how are you?', 'plugin-slug' ),
-    esc_html( $user_firstname )
-);
-
-```
-
-You can read [more information here](#plugins/internationalization/how-to-internationalize-your-plugin).
-
-## Compliance
-
-### Changing Active Plugins
-
-It is not allowed for plugins to change the activation status of other plugins, this is an action that must be performed by the user.
-
-It is also not allowed to interfere with the user’s actions when activating or deactivating a plugin, unless that’s done to prevent errors (For example: When your plugin depends on another plugin, deactivate your own plugin when that other plugin is not active).
-
-WordPress 6.5 introduces [Plugin Dependencies](https://make.wordpress.org/core/2024/03/05/introducing-plugin-dependencies-in-wordpress-6-5/), you can use it to manage dependencies (although it’s fine if you use this as a fallback).
-
-### Update checker
-
-**Including An Update Checker / Changing Updates functionality**
-
-Please remove the checks you have in your plugin to provide for updates.
-
-We do not permit plugins to phone home to other servers for updates, as we are providing that service for you with WordPress.org hosting. One of our guidelines is that you actually use our hosting, so we need you to remove that code.
-
-We also ask that plugins not interfere with the built-in updater as it will cause users to have unexpected results with WordPress 5.5 and up.
-
-### Undocumented 3rd party
-
-**Undocumented use of a 3rd Party or external service**
-
-We permit plugins to require the use of 3rd party (i.e. external) services, provided they are properly documented in a clear manner.
-
-We require plugins that reach out to other services to disclose this, in clear and plain language, so users are aware of where data is being sent. This allows them to ensure that any legal issues with data transmissions are covered. This is true even if you are the 3rd party service.
-
-In order to do so, you must update your readme to do the following:
-
-- Clearly explain that your plugin is relying on a 3rd party as a service and under what circumstances
-- Provide a link to the service.
-- Provide a link to the service terms of use and/or privacy policies.
-
-Remember, this is for your own legal protection. Use of services must be upfront and well documented.
-
-### Included Unneeded Folders
-
-This plugin includes folders and files that looks like are not required for the running of your plugin. Some examples are:
-
-- development tools
-- unneeded vendor folders for production (bower, node, grunt, etc)
-- demos
-- unit tests
-
-If you’re trying to include the human-readable version of your own code (in order to comply with our guidelines) that’s fine, remember that we also permit you to put links to them in your readme.
-
-You should also keep and/or link configuration files, as for example, the `composer.json` file in order to allow others to review, study, and yes, fork this code.
-
-[Detailed Plugin Guidelines](#plugins/wordpress-org/detailed-plugin-guidelines)
-
-But you can, and should, safely remove those other unneeded folders from your plugins.
-
-### Not permitted files
-
-A plugin typically consists of files related to the plugin functionality (php, js, css, txt, md) and maybe some multimedia files (png, svg, jpg) and / or data files (json, xml).
-
-We have detected files that are not among of the files normally found in a plugin, are they necessary? If not, then those won’t be allowed.
-
-#### Including code from a “premium” source
-
-Some premium libraries are specifically not permitted to be included in free (WordPress.org hosted) plugins. Those must be removed.
-
-### GPL
-
-#### GPL: Non-GPL compatible Code Included
-
-It’s required that all code be compatible with the GPLv2 (or later) license in order to be included in our directory.
-
-You must remove the code and alter the plugin so it is not required. We suggest you find code that is GPL compatible and use that instead. For more information on what types of licenses are compatible with GPL, please review the following links:
-
-- [GNU Licenses – License List](https://www.gnu.org/licenses/license-list.html)
-- [GPL FAQ – All Compatibility](https://www.gnu.org/licenses/gpl-faq.html#AllCompatibility)
-
-#### GPL: No publicly documented resource
-
-**No publicly documented resource for your compressed content**
-
-In reviewing your plugin, we cannot find a non-compiled version of your javascript and/or css related source code.
-
-In order to comply with our guidelines of human-readable code, we require you to include the source code and/or a link to the non-compressed, developer libraries you’ve included in your plugin. If you include a link, this may be in your source code, however we require you to also have it in your readme.
-
-[Detailed Plugin Guidelines](#plugins/wordpress-org/detailed-plugin-guidelines)
-
-We strongly feel that one of the strengths of open source is the ability to review, observe, and adapt code. By maintaining a public directory of freely available code, we encourage and welcome future developers to engage with WordPress and push it forward.
-
-That said, with the advent of larger and larger plugins using more complex libraries, people are making good use of build tools (such as composer or npm) to generate their distributed production code. In order to balance the need to keep plugin sizes smaller while still encouraging open source development, we require plugins to make the source code to any compressed files available to the public in an easy to find location, by documenting it in the readme.
-
-For example, if you’ve made a Gutenberg plugin and used npm and webpack to compress and minify it, you must either include the source code within the published plugin or provide access to a public maintained source that can be reviewed, studied, and yes, forked.
-
-We strongly recommend you include directions on the use of any build tools to encourage future developers.
-
-#### GPL: Using composer but no composer.json file
-
-We noticed that your plugin is using Composer to handle library dependencies, that’s great as it will help maintaining and updating your plugin in the future while avoiding collisions with other plugins that are using same libraries.
-
-The `composer.json` file describes the dependencies of your project and may contain other metadata as well. It’s a small file that typically can be found in the top-most directory of your plugin.
-
-As one of the strengths of open source is the ability to review, observe, and adapt code, **we would like to ask you to include that file in your plugin**, even if it is only used for development purposes. This will allow others to exercise the open source freedoms from which we all benefit.
-
----
-
-# How Your Plugin Assets Work <a name="plugins/wordpress-org/plugin-assets" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/plugin-assets/
-
-The `assets` folder in your plugin is where you can store images (like plugin headers, icons, and screenshots) used on your plugin’s display page.
-
-All files should be placed into the `assets` directory of your SVN directory and will work for all versions of your plugin. This is a top level directory, just like `trunk`. You would **not** place the screenshots into `trunk/assets` or `tags/1.0/assets`.
-
-All images are served through a CDN and cached heavily, so it may take a some time to update when changed or added. Please give the proxy some time to retrieve your images and cache them before reporting it’s not working. It should only take a few minutes, but 6 hours is not unheard of when the servers are under high load (like the week before and during a release of a major version of WordPress).
-
-## Default Image Sizes
-
-Image sizes should be the same as implied by the names. That is, `banner-772x250.png` should be 772 pixels wide by 250 pixels high. Similarly, `icon-256x256.png` should be a 256×256 square.
-
-We have **not** defined any new banner sizes so please don’t try to be clever and rename yours thinking they’ll work. They simply won’t show. Similarly, don’t make your images larger (or smaller) and use the existing names. Things will look terrible.
-
-## Plugin Headers
-
-Plugin headers are those images you see at the top of a plugin page:
-
-[![](https://i0.wp.com/developer.wordpress.org/files/2015/05/Screenshot-2024-07-02-at-12.50.04%E2%80%AFPM.png?resize=1024%2C472&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2015/05/Screenshot-2024-07-02-at-12.50.04%E2%80%AFPM.png?ssl=1)When designing your header image, keep in mind the use of international plugin directories. Some of these, like [Hebrew](https://he.wordpress.org/plugins/) and [Arabic](https://ar.wordpress.org/plugins/), use Right-To-Left (RTL) languages. Ideally, design your banner such that the elements included in the image can be positioned from right to left or from left to right. You can create a different image for RTL pages, with `-rtl` in the name.
-
-### Filenames
-
-- Normal Banner: `banner-772x250.(jpg|png)`
-- Normal Banner (Localized): `banner-772x250-(rtl|es|es_ES).(jpg|png)`
-- High-DPI (Retina): `banner-1544x500.(jpg|png)`
-- High-DPI (Retina Localized): `banner-1544x500-(rtl|es|es_ES).(jpg|png)`
-
-Images can be localised to a specific language, or for all RTL languages.  
-The locale can be specified as a full locale (`es_ES`) or as a partial locale (`es`), if the language is RTL and a locale-specific image isn’t provided, the `rtl` image will be checked for.  
-Do not duplicate English images into RTL and locale-specific files without making alterations, the English variant will be used instead.
-
-For example of an RTL image, look at bbPress [in English](https://wordpress.org/plugins/bbpress/) and then [in Arabic](https://ar.wordpress.org/plugins/bbpress/).
-
-For an example of Retina images, [check out Hello Dolly](https://wordpress.org/extend/plugins/hello-dolly/) or [Pluginception](https://wordpress.org/plugins/pluginception/). You *cannot* use the retina image alone, it only works as an “add-on” to the 772×250 image. The larger ‘retina’ image is only used on displays that can show the higher detail.
-
-4MB is the maximum size for headers images, but smaller is better.
-
-## Plugin Icons
-
-Plugin icons are square images that show on the side of the plugin in searches on WordPress.org but also on the back-end of WordPress.org.
-
-[![Akismet with it's Plugin Icon](https://i0.wp.com/developer.wordpress.org/files/2015/05/akismet1.png?resize=651%2C235&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2015/05/akismet1.png?ssl=1)In addition to JPG and PNG formats, you can also use **SVG**. Vectors are perfect for icons, as they can be scaled to any size and the file itself is small. If you chose to use SVGs, you *must* also use a PNG icon as a fallback, otherwise your plugin icon will not display properly in older browsers or on Facebook.
-
-If you do not use an icon, an auto-generated one will be made for you. Some examples are the circled icons below:
-
-[![Example of auto-generated icons](https://i0.wp.com/developer.wordpress.org/files/2015/05/auto-generated-icons.jpg?resize=798%2C332&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2015/05/auto-generated-icons.jpg?ssl=1)1MB is the maximum file size for icons, but as with headers, the smaller the better.
-
-### Filenames
-
-- Normal: `icon-128x128.(png|jpg|gif)`
-- High-DPI (Retina): `icon-256x256.(png|jpg|gif)`
-- SVG: `icon.svg`
-
-There are no plans to change these sizes.
-
-## Screenshots
-
-Screenshots show on the main page of your plugin, and are used to illustrate aspects of the plugin admin dashboard or live examples. There should be **one** screenshot for every line in your `readme.txt` file. The content of the lines will become the captions of the screenshots on your plugin’s page.
-
-For example: `1. This is a monkey`
-
-That would show the caption ‘This is a monkey’ under the first screenshot. Presumably of a monkey.
-
-Screenshots *must* be local to display. Links to external files won’t work.
-
-10MB is maximum file size for screenshots, but as always, the smaller the better.
-
-### Filenames
-
-- `screenshot-1.(png|jpg)`
-- `screenshot-2.(png|jpg)`
-
-All filenames should be lowercase; uppercase names won’t work.
-
-Screenshots can be localized [similar to banners](#banner-filenames), the following filenames would take priority over the above English names when the plugin is viewed in German:
-
-- `screenshot-1<strong>-de</strong>.(png|jpg)`
-- `screenshot-2<strong>-de</strong>.(png|jpg)`
-
-## Issues
-
-If you find your images are downloading when people click on them from your WordPress.org Plugin Directory page, you’ll need to make a change in how you upload them via SVN. It’s due to how some images are sent with the `Content-Type application/octet-stream`.
-
-To fix it, run this command:
-
-```
-svn propset svn:mime-type image/png *.png
-svn propset svn:mime-type image/jpeg *.jpg
-```
-
-Alternatively, plugin authors can set this in their ~/.subversion/config file:
-
-```
-*.png = svn:mime-type=image/png
-*.jpg = svn:mime-type=image/jpeg
-```
-
-That’ll apply to only new files though. Fixing already-committed files will require the command above.
-
----
-
-# Plugin Readmes <a name="plugins/wordpress-org/how-your-readme-txt-works" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/how-your-readme-txt-works/
-
-This page will explain some aspects of the plugin directory, and explain of the more obvious aspects which a lot of people miss.
-
-To make your entry in the plugin browser most useful, each plugin should have a readme file named `readme.txt` that adheres to the [WordPress plugin readme file standard](https://wordpress.org/plugins/readme.txt). This file controls the output on the front-facing part of the directory. Writing a description in the readme determines exactly what will be displayed on `wordpress.org/plugins/Your-Plugin`
-
-You can use the [plugin readme generator](https://generatewp.com/plugin-readme/) and put your completed result through the [official readme validator](https://wordpress.org/plugins/developers/readme-validator/) to check it. If you need more visual assistance you can use the tool [wpreadme.com](https://wpreadme.com/)
-
-Since WordPress 5.8 plugin [readme files are not parsed for requirements](https://core.trac.wordpress.org/ticket/48520). This means that headers `Requires PHP` and `Requires at least` are going to be parsed from plugin’s main PHP file.
-
-## Section Details
-
-All plugins contain a main PHP file, and almost all plugins have a `readme.txt` file as well. The `readme.txt` file is intended to be written using a subset of markdown.
-
-### Readme Header Information
-
-The Plugin readme header consists of this information:
-
-```adoc
-=== Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: https://example.com/
-Tags: tag1, tag2
-Requires at least: 4.7
-Tested up to: 5.4
-Stable tag: 4.3
-Requires PHP: 7.0
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
-```
-
-- **Contributors** – a case sensitive, comma separated list of all WordPress.org usernames who have contributed to the code. It is generally considered respectful to include the names of people who worked on forked projects. Some developers will ask to be removed from the list, as they don’t want other plugins showing up on their profile page. It’s best to honor those requests. Remember to *only* use the WordPress.org username – anything else will show up sans profile link and gravatar. To change someone’s display name (which shows on the front facing pages for the plugin), edit the profile `https://wordpress.org/support/users/YOURID/edit/` and change the display name.
-- **Donate link** – (OPTIONAL) Makes a “Donate to this plugin” link in the sidebar. If there is no link, nothing shows up.
-- **Tags** – 1 to 5 comma separated terms that describe the plugin. Plugins must refrain from using competitors plugin names as tags. Plugins should not use tags which are unique to that plugin, as these will not be shown.
-- **Tested up to** – The version of WordPress that the plugin has been tested against. This field *ignores* minor versions, as plugins shouldn’t break with a minor update. This means a plugin only need to define the major version it is tested against and the WordPress.org plugin directory will automatically add the minor version. This should be numbers *only*, so ‘4.9’ and not ‘WP 4.9’
-- **Requires PHP** – (OPTIONAL) The required *minimum* version of PHP needed for use with this plugin. This should be numbers *only*, so ‘7.0’ and not ‘PHP 7.0’
-- **Stable Tag** – The stable version of the plugin. This is *not* the version of WordPress, but the version of the plugin itself. Only use numbers and periods, and [SemVer formatting](https://semver.org/) is recommended.
-- **License** – The GPLV2 (or later) compatible license used for the plugin.
-- **License URI** – (OPTIONAL) A link to the license. This is optional, but if a plugin uses a more rare license, strongly recommended.
-
-At the end of the header section is a place for a *short* description of a plugin. The example recommends no more than 150 characters and to not use markup. That line of text is the single line description of the plugin which shows up right under the plugin name. If it’s longer than 150 characters, it gets cut off, so keep it short.
-
-### Installation
-
-If your plugin has no custom install settings, it’s okay to omit this section. If your plugin has custom configuration notes post install, this is a great place to put that information.
-
-### Custom Sections
-
-While custom sections are permitted and supported, please use them in moderation. People get used to seeing how every other plugin looks, and when yours is weird, they’ll miss important information.
-
-## Technical Details
-
-While most of the readme details are self evident, there are a few sections that trip people up.
-
-### How The Readme Is Parsed
-
-While using the stable tag of trunk currently works in the Plugin Directory, it’s not a supported or recommended method to indicate new versions and has been known to cause issues with automatic updates. At this time, we are actively discouraging and (in the case of new plugins) prohibiting it’s use 
-
-WordPress.org’s Plugin Directory works based on the information found in the field **Stable Tag** in the readme. When WordPress.org parses the `readme.txt`, the very first thing it does is to look at the `readme.txt` in the `/trunk` directory, where it reads the “Stable Tag” line.
-
-When the Stable Tag is properly set, WordPress.org will go and look in `/tags/` for the referenced version. So a Stable Tag of “1.2.3” will make it look for `/tags/1.2.3/`.
-
-The readme.txt in the tag folder must also be properly updated to have the correct “Stable Tag” — failing to do so may cause your plugin to not be updatable.
-
-If the Stable Tag is 1.2.3 and `/tags/1.2.3/` exists, then nothing in trunk will be read any further for parsing by any part of the system. If you try to change the description of the plugin in `/trunk/readme.txt` then your changes won’t do anything on your plugin page. Everything comes from the `readme.txt` in the file being pointed to by the Stable Tag.
-
-The WordPress.org Plugin Directory reads the main plugin PHP file to get things like the Name of the plugin, the Plugin URI, and most importantly, the version number. On the plugin page, you’ll see the download button which reads “Download Version 1.2.3” or similar. That version number comes from the plugin’s main PHP file, *not* the readme!
-
-The Stable Tag points to a subdirectory in the `/tags` directory. But the version of the plugin is not actually set by that folder name. Instead, it’s the version that is listed in the plugin’s PHP file itself which determines the name. If you have changed Stable Tag to 1.4 and the plugin still says 1.3 in the PHP file, then the version listed will be 1.3.
-
-### Videos
-
-You can embed videos from YouTube, Vimeo, and anywhere else [WordPress supports by default](https://wordpress.org/support/article/embeds/). All you have to do is paste the video URL onto it’s own line in your readme.
-
-We recommend you NOT have the video as the final line in a FAQ section, as sometimes formatting gets weird.
-
-### Markdown
-
-The readmes use a customized version of [Markdown](https://daringfireball.net/projects/markdown/). Most Markdown calls work as expected.
-
-Markdown allows for easy linking in your readme.txt as well. Just write like this to link a word to a URL:
-
-```
-[WordPress](http://wordpress.org)
-```
-
-Videos can be put into your readme.txt too. A YouTube or Vimeo link on a line by itself will be auto-embedded. It’s also possible to embed videos hosted on VideoPress using the wpvideo shortcode.
-
-### Field Details
-
-For those who want to know exactly what gets parsed into what:
-
-- **Authors**  
-    Author field from the plugin header and Contributors field from the readme file.
-- **Version**  
-    Version field from the plugin header.
-- **Tags** (as in categories)  
-    Tags field from the readme file.
-- **Plugin Name**  
-    The Plugin Name from the readme file falling back on the Plugin Name specified in the plugin header.
-- **Author and Plugin Homepages**  
-    The Author URI and Plugin URI fields of the plugin header. The Plugin URI should be *unique* to each plugin. Do **not** use the same URI for your free and pro plugin. It ends badly.
-- **Last updated time**  
-    Time of last check in to the appropriate directory after a version number change.
-- **Creation time**  
-    Time of *first* check in.
-
-### File Size
-
-While readmes are simple text files, having a file larger than 10k may result in errors. Your readme should be brief and to the point. The description should not be a sales pitch as much as a description of the plugin, what it does, and how to use it. Your install directions should be direct. Your FAQ should actually address issues.
-
-As for your changelog, we recommend keeping the current release in the readme and splitting the rest out out into it’s own file — `changelog.txt` for example. By storing all the older changelog data there, you keep your readme small and allow the people who get really into long changelogs to read things on their own.
-
-Similarly, if you need in-depth documentation with inline images and so on, direct people to your own website.
-
-## See Also
-
-- [Plugin Headers](#plugins/plugin-basics/header-requirements) (found in the main file of the plugin)
-
----
-
-# Take Over an Existing Plugin <a name="plugins/wordpress-org/take-over-an-existing-plugin" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/take-over-an-existing-plugin/
-
-People cease development on their plugins for a variety of reasons. Instead of letting those plugins stagnate, we encourage people to instead list them for adoption by another, more active, developer.
-
-In adopting a plugin, you are promising to be responsible for all future development, and to ensure the plugin (and you) comply with all [plugin guidelines](#plugins/wordpress-org/detailed-plugin-guidelines).
-
-Not all requests will be approved, even following a successful review.
-
-## The Adoption Process
-
-There are two ways a plugin can be adopted.
-
-1. You ask the developer directly, they say yes and add you
-2. You ask the Plugin Review team to assist you
-
-Since you’re reading this, you likely are working on the second method, so keep reading. You will be expected to have followed **all** the steps herein.
-
-In some specific situations, the Plugin Review team might also consider donating the plugin to a different user if the original plugin author gets blocked.
-
-### 1. Check the Plugin Status
-
-If the plugin is open and active, give it a full review on your own before you go any further. Make sure you feel comfortable and capable of maintaining the code long term.
-
-If a plugin is closed because it was **unused**, you can skip the rest of this and email `plugins@wordpress.org` right away and attach your version of the proposed plugin.
-
-If the plugin was closed for security issues, we require **all** those issues to be resolved, so put your best foot forward and demonstrate you have the impetus to find and fix those issues.
-
-Closed plugins are *less* likely to be able to be adopted, as the nature of their closures may be more complex and intricate. If a plugin was closed for license issues, for example, we may not be permitted to reopen it for anyone except the license holders.
-
-Larger plugins (100k users or more) are also less likely to be adopted, as that is a not-insignificant userbase, and we need to be sure you really are capable of managing a plugin of that size.
-
-### 2. Contact the Original Developer
-
-You *must* attempt to contact the original developer, as they can [give you access to the plugin](#plugins/wordpress-org/plugin-developer-faq). We recommend trying:
-
-- email
-- leaving a comment on the plugin support page
-- opening a GitHub issue
-
-We expect you to make all reasonable efforts to reach out to them. If the plugin page says the plugin has no active developer, then you’re fine.
-
-If you *do* get in touch with the developer, ask them to [transfer ownership to you](#plugins/wordpress-org/plugin-developer-faq). They can do this on their own and, once it’s done, you may manage the plugin. If they have issues, have them contact the plugin team via email and we will assist them.
-
-If there’s no way to get in touch, or they don’t reply, move to step 3.
-
-### 3. Update The Code
-
-Even if the plugin has been given to you by the developer, you must review the code from the top down to make sure it’s safe, secure, and meets our current [guidelines](#plugins/wordpress-org/detailed-plugin-guidelines).
-
-Your update must include editing the readme to ensure it documents the new ownership (and preferably when it takes place), removing all links to their site/support resources, as well as updating the copyright information to include you. Remember, copyright is additive. You keep the old and add yours on.
-
-If your plugin is a major upgrade, you *must* provide an upgrade path. Just wanting a name-slug is not sufficient reason to take over a plugin. We care deeply about our users, and violating their trust in us by breaking their existing sites with your upgrades is to be avoided at all costs.
-
-Remember you need to *increase* the version number so people are prompted to upgrade to your new version.
-
-### 4. Submit Your Code for Review
-
-If you still can’t get in touch with the original developer, you’ll need to ask the Plugin Review Team for help.
-
-Once you’ve finished updating the code, email `plugins@wordpress.org` explaining how you tried to contact the original developer and with your code attached as a zip. If you can’t email zips, then upload it to some file service (Google Drive, Dropbox, etc) or provide a link to your code repository (Github, Bitbucket, etc). Make sure the link is public!
-
-After we receive your version of the code as a zip, we will review it and test it. At this point, you will go through a *normal* review process. That is, we will treat you like any new plugin and we will check the whole plugin for security and guidelines. Even if those issues are found in the original plugin, you will be required to fix them.
-
-At this stage, some plugins are determined to have existing security flaws. We may close those plugins, depending on the nature of the issues, and you will be trusted to not publicly disclose those issues.
-
-### 5. We Contact the Original Developer
-
-Once we feel the code is acceptable, and that you are capable of sustaining that specific plugin in a secure manner that adheres to our guidelines, we will contact the original developer on your behalf and give them your information, explaining that you want to take over development.
-
-We’ll do everything we can to ensure the original plugin author has been notified, but sometimes that’s just not possible.
-
-### 6. Wait Patiently
-
-We give the original developer 30 days (1 month) to reply to our inquiry. Should they reply and deny the request, we will honour their decision and ask you to convert the plugin into a forked version. We do our best to respect them as much as we respect you as a developer, and honor their wishes with their work.
-
-If they approve it, we will assist in transitioning the plugin to your account.
-
-If they don’t reply, and you’ve made it this far, we will likely transfer the plugin to you.
-
-### 7. Update the Plugin
-
-In order to *safely* update the plugin, we will close it before we add you. You will then be required to update via SVN. Once that’s done, we’ll double check everything is correct and reopen it. The plugin will now be yours.
-
-## Frequently Asked Questions
-
-### Will old reviews/support posts be removed?
-
-No. You inherit the good and the bad.
-
-### Do I have to keep the original developer on?
-
-No. You can (and in fact should) remove commit access from anyone who is not actively maintaining the plugin. However. Per copyright restrictions, you must retain their credit in the code. We recommend you also leave them listed as a contributor.
-
-### The original developer is dead. Does that change anything?
-
-Yes, but not how you’re thinking. You (obviously) can skip asking them for permissions first, but we actually reach out to the developers’ coworkers and teams to see if they want to continue maintaining the plugin. In some cases, a developer will ask us to permanently close their plugins in the event of their death. We respect their wishes.
-
-### Why was my request denied?
-
-In cases where we deny an adoption, it’s usually for the following reasons.
-
-- The requesting developer does not have the experience we feel the plugin requires
-- The requested plugin is deemed high-risk
-- The existing developer is a company or legal entity who owns the trademark
-- The plugin has legal issues preventing us from from any transfers
-- The requesting developer has had multiple guideline infractions
-- The original developer asked us not to
-
-If we don’t feel comfortable handing over a plugin, we will inform you as soon as possible.
-
-There are rare cases where the plugin has already been given to new owners, but they have not yet deployed code. In general, if you’re told that a specific plugin is not available, there is a long history concerning the plugin preventing us from permitting takeover. In those cases, we recommend you submit your plugin as a fork.
-
----
-
-# Reporting Plugin Security Issues <a name="plugins/wordpress-org/plugin-security/reporting-plugin-security-issues" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/plugin-security/reporting-plugin-security-issues/
-
-Please do not report security issues with WordPress Core to the plugin team. To report an issue with WordPress itself, [follow the directions for reporting security vulnerabilities.](https://make.wordpress.org/core/handbook/testing/reporting-security-vulnerabilities/)
-
-If you find a plugin with a security issue, please **do not** post about it publicly anywhere. Even if there’s a report filed on one of the official security tracking sites, bringing more awareness to the security issue tends to increase people being hacked, and rarely speeds up the fixing.
-
-To report a plugin, please email `plugins@wordpress.org` with the following:
-
-- a clear and concise description of the issue
-- a link to the specific plugin
-- whether or not you have validated the security issue yourself
-- **optional** – links to any public disclosures on 3rd party sites
-
-In the case of serious exploits, please keep in mind responsible and reasonable disclosure. Every attempt to contact the developer directly should be made *before* you reported the plugin to us (though we understand this can be difficult – check in the source code of the plugin first, many developers list their emails). If you cannot contact them privately, please contact us directly and we’ll help out.
-
-Most plugins are closed to prevent new downloads until the issue is resolved. As such, you may *not* be alerted of a fix until the plugin is updated. We also **do not** provide assistance with filing CVEs at this time, due to a lack of resources. You’re welcome to do so on your own, but we cannot help you.
-
-If you’ve already posted the vulnerability in public and provided a link to your report, please do not delete it! We will pass it on directly to the developers of the plugin.
-
----
-
-# Managing Your Plugin&#8217;s Security <a name="plugins/wordpress-org/plugin-security" />
-
-Source: https://developer.wordpress.org/plugins/wordpress-org/plugin-security/
-
-The security of code in WordPress plugins is taken [very seriously](https://wordpress.org/about/security/).
-
-If you have found a plugin with a security issue, please read [Reporting Plugin Security Issues](#plugins/wordpress-org/plugin-security/reporting-plugin-security-issues)
-
-When a plugin vulnerability is verified by the WordPress Security Team, they contact the plugin author and direct them as to how to fix and release a secure version of the plugin. If there is a lack of response from the plugin author or if the vulnerability is severe, the plugin/theme is pulled from the public directory, and in some cases, fixed and updated directly by the Security Team.
-
-## Fixing Security Issues
-
-When you receive a report of security issues in your plugins, it can be terrifying. First, don’t panic. Everyone makes mistakes. What matters most is fixing it safely and promptly.
-
-1. Make sure you understand the report. If you’re not sure what it means, ask for details. Even third-party reporters are usually willing to take the time to explain what’s wrong and direct you where to research a proper fix.
-2. Keep your changes as small as possible. This will make it much easier for you to review later on.
-3. Test your plugin. Make sure the security fix doesn’t break anything else. Make sure upgrading doesn’t cause weird errors. Keep `WP_DEBUG` on and log any errors.
-4. Document the issue in your change log. You don’t need to include details on exactly what happened, but do document that a security issue was resolved.
-5. Credit the reporter in your readme. This is just nice, and makes people more inclined to help you for free later on.
-6. Bump your version number. We recommend [SemVer](https://semver.org), so a security release for version 3.9 of your plugin would change the version to 3.9.1 and so on.
-
-## Automatic Plugin Security Updates
-
-Since WordPress 3.7, we have had the ability to push automatic security updates for plugins to fix critical vulnerabilities in plugins. Many sites have made use of the plugin automatic updates functionality, either by opting in directly through filters, or by using one of the many remote management services for WordPress that are available.
-
-In extreme situations, the Plugin Review Team and the WordPress Security Team may determine a plugin issue is great enough that it must be updated for all users. This is exceptionally rare, as the potential for conflicts is high.
-
-The process of approving a plugin for an automatic update, and rolling it out to WordPress users, is highly manual. The security team reviews all code changes in the release, verifies the issue and the fix, and confirms the plugin is safe to trigger an update. Rolling out an automatic update requires modification and deployment of the API code. This is the same standard and process for a core security release.
-
-### Criteria
-
-The current criteria we take into consideration for a security push is a simple list:
-
-1. Has the security team been made aware of the issue?
-2. How severe is the issue? What impact would it have on the security of a WordPress install, and the greater internet?
-3. Is the fix for the issue self-contained or does it add significant extra superfluous code?
-4. If multiple branches of the plugin are affected, has a release per branch been prepared?
-5. Can the update be *safely* installed automatically?
-
-These requirements are defined in a way that anyone should be able to tick each box.
-
-The first criterion — making the security team aware of the issue — is critical. Since it’s a tightly controlled process, the WordPress security team needs to be notified as early as possible. Letting us know is as simple as emailing us at `plugins@wordpress.org` with the details.
-
-The plugin and security teams will work with the plugin author (and the reporter, if different) to study the vulnerability and its exact exposure, verify the proposed fix, and determine what versions will be released and when.
-
-## FAQ
-
-### How do I request my plugin be automatically updated?
-
-If you feel your plugin has a large enough user base or the issue is of great significance, email `plugin@wordpress.org` **before** you push the code. Include a patch of the changes for review in the email, and explain why you feel this should be automated.
-
-### Can I include changes besides the security related ones for automated updates?
-
-With few exceptions, no. A security push should *only* be security related. We prefer (and many times require) plugin releases which fix **only** the security issue, with minimal code changes and with no unrelated changes.
-
-This allows everyone to review the changes quickly and to be far more confident in them. Also it means there is a minimal amount of disruption on the part of the users.
-
-### Why did plugin A get a automatic update, but plugin B didn’t?
-
-It’s not bias from WordPress.org, it’s just a throwback to the manual process we’ve been using. If we’re alerted to an issue, we’ll work to handle it. If we find out several days later, the window of opportunity to get the fix rolled out has usually passed and it won’t be as effective.
-
-### How can I disable automatic updates?
-
-There are several options to disable this functionality. The article for [disabling core automatic updates](https://make.wordpress.org/core/2013/10/25/the-definitive-guide-to-disabling-auto-updates-in-wordpress-3-7/) applies here. Anything that disables all automatic update functionality will prevent plugin updates. If you only wish to disable plugin updates, whether for all plugins or a single plugin, you can do so with a single filter call.
-
-### What if I can’t (or don’t want to) fix my code?
-
-You don’t have to. Your plugin will remain closed and, after 2 or 3 months, the plugin page will report that it was closed for security issues. If you want to push a fix but keep the plugin closed, we can do that too. Just reply to the email and talk to us.
-
-### Do I only have to fix the reported issue?
-
-Yes and no. You *do* have to fix the issues reported, but when you’re done, the *entire* plugin is re-reviewed, and if more issues are found, you’ll be required to fix those as well. The ultimate goal is to make sure the reopened plugin is safe.
-
-### What if I have guideline issues?
-
-This comes up when people are breaking other guidelines like including their own copy of jQuery or making undocumented external service calls. It depends on the severity of the other issues. If it’s just your own jQuery, we’ll likely let it be reopened and allow you to fix that at your own pace. If you’re logging all installs of your plugins, you’ll be required to correct that before we reopen the plugin.
 
 ---
 
@@ -10703,59 +6843,11 @@ Currently, “core endpoints” supporting posts, post types, post statuses, rev
 
 ---
 
-# Special User Roles and Capabilities <a name="plugins/wordpress-org/special-user-roles-capabilities" />
+# JavaScript <a name="plugins/javascript" />
 
-Source: https://developer.wordpress.org/plugins/wordpress-org/special-user-roles-capabilities/
+Source: https://developer.wordpress.org/plugins/javascript/
 
-Every person who pushes code for, or aids in support for, a plugin is required to have their **OWN** individual account. These accounts do not have to be personally identifying (that is, you can name them PluginNameSupport1 if you wanted), however all accounts must be used by a single human for your own protection.
-
-There are four roles a user can have with regards to plugins. All can be managed from the **advanced view** section of a plugin page:
-
-![Interface of the plugin page, the link ''Advanced View'' is highlighted.](https://i0.wp.com/developer.wordpress.org/files/2020/08/advanced-view.jpg?resize=300%2C260&ssl=1)There are fields to add Support Reps and Committers as needed.
-
-## Owner
-
-A plugin owner is automatically set by the person who submits the plugin. On plugin approval, they are added as a Committer (see below) and flagged as the owner. Should this need to be changed, scroll down to the **Danger Zone** section and select the new owner from the dropdown:
-
-![Transfer this plugin interface with a selector for the new owner and a "Please transfer -Plugin Name-" button](https://i0.wp.com/developer.wordpress.org/files/2020/08/can-transger.jpg?resize=1024%2C548&ssl=1)If there are no other users with commit access, you will need to grant them access before you can transfer the plugin. Remember, plugin owners should **always** have commit access to the plugins they own.
-
-If you see this message, then you are not the current owner, and need to contact them to have ownership transferred:
-
-![Message: This plugin is currently owned by -user- the can choose to transfer ownership rights of the plugin to you](https://i0.wp.com/developer.wordpress.org/files/2020/08/Owner.jpg?resize=1024%2C249&ssl=1)If the original owner is no longer available, you may contact the plugins team for assistance.
-
-## Committer
-
-Someone with commit access has the ability to push code via SVN and make official requests concerning a plugin to the Plugin Directory Team.
-
-Anyone with commit access has the right to request a plugin be closed, and has the ability to add and remove anyone from commit access. This is done from the **Advanced Page** on the sidebar:
-
-[![Interface to add a committer, an input with an "Add" button next to it](https://i0.wp.com/developer.wordpress.org/files/2021/02/Commit.jpg?resize=604%2C266&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2021/02/Commit.jpg?ssl=1)In the forums, these people are labeled as a “Plugin Author” and have the ability to mark posts regarding their plugin as resolved.
-
-Other than the “Plugin Author” label in the forum for replies to plugin support topics, having commit access is not outwardly displayed. In order to be listed in the plugin’s “Contributors &amp; Developers” section, and to have the plugin included in a WordPress.org profile, the user must be listed as a contributor (see the subsequent section).
-
-Adding and removing commit access can only be done by an existing committer.
-
-## Support Rep
-
-A support rep has **no** extra ability to directly manage the plugin itself. They cannot request changes be made to a plugin’s status in the directory. However, they will be labeled in the forums as being official support and this can help people understand who is helping them.
-
-[![Interface to add a support rep, an input with an "Add" button next to it](https://i0.wp.com/developer.wordpress.org/files/2021/02/Support.jpg?resize=634%2C280&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2021/02/Support.jpg?ssl=1)In the forums, they are labeled as a “Plugin Support” and have the ability to mark posts regarding their plugin as resolved.
-
-They are displayed on the plugin page, and the plugin appears on their profile page as a Support Representative.
-
-Adding and removing this status can only be done by an existing committer.
-
-## Contributor
-
-A contributor has no extra ability to directly manage the plugin itself. They *cannot* request changes be made to a plugin’s status in the directory.
-
-In the forums, they are labeled as a “Plugin Contributor” and have the ability to mark posts regarding their plugin as resolved.
-
-A contributor is publicly listed in the plugin’s “Contributors &amp; Developers” section and the plugin is listed as one of the user’s plugins in their WordPress.org profile.
-
-To be added as a contributor, a user must be listed within *Contributors* in the plugin’s `readme.txt`.
-
-While it is common to add people who helped with a plugin’s conceptualization or was an original contributor, you do not need to add anyone to your plugin with more access than you’re comfortable with.
+JavaScript is an important component in many WordPress plugins. WordPress comes with a [variety of JavaScript libraries bundled with core](#theme/basics/including-css-javascript). One of the most commonly-used libraries in WordPress is jQuery because it is lightweight and easy to use. jQuery can be used in your plugin to manipulate the DOM object or to perform Ajax actions.
 
 ---
 
@@ -10839,6 +6931,4139 @@ jQuery( document ).on( 'heartbeat-tick', function ( event, data ) {
 
   
 Not every feature will need all three of these steps. For example, if you don’t need to send any data to the server, you can use just the latter two steps.
+
+---
+
+# jQuery <a name="plugins/javascript/jquery" />
+
+Source: https://developer.wordpress.org/plugins/javascript/jquery/
+
+## Using jQuery
+
+Your jQuery script runs on the user’s browser after your WordPress webpage is received. A basic jQuery statement has two parts: a selector that determines which HTML elements the code applies to, and an action or event, which determines what the code does or what it reacts to. The basic event statement looks like this:
+
+```javascript
+jQuery.(selector).event(function);
+```
+
+When an event, such as a mouse click, occurs in an HTML element selected by the selector, the function that is defined inside the final set of parentheses is executed.
+
+All the following code examples are based on this HTML page content. Assume it appears on your plugin’s admin settings screen, defined by the file `myplugin_settings.php`. It is a simple table with radio buttons next to each title.
+
+```markup
+<form id="radioform">
+	<table>
+		<tbody>
+		<tr>
+			<td><input class="pref" checked="checked" name="book" type="radio" value="Sycamore Row" />Sycamore Row</td>
+			<td>John Grisham</td>
+		</tr>
+		<tr>
+			<td><input class="pref" name="book" type="radio" value="Dark Witch" />Dark Witch</td>
+			<td>Nora Roberts</td>
+		</tr>
+		</tbody>
+	</table>
+</form>
+```
+
+The output could look something like this on your settings page.
+
+![sample table](https://i0.wp.com/make.wordpress.org/docs/files/2013/11/pdh-ajax-example.png?ssl=1)In the [article on AJAX](#plugin/javascript/ajax "AJAX"), we will build an AJAX exchange that saves the user selection in usermeta and adds the number of posts tagged with the selected title. Not a very practical application, but it illustrates all the important steps. jQuery code can either reside in an external file or be output to the page inside a &lt;script&gt; block. We will focus on the external file variation because passing values from PHP requires special attention. The same code can be output to the page if that seems more expedient to you.
+
+#### Selector and Event
+
+The selector is the same form as CSS selectors: ".class" or "#id". There’s many [more forms](http://api.jquery.com/category/selectors/ "jQuery Reference"), but these are the two you will frequently use. In our example, we will use class ".pref". There’s also a slew of possible [events](http://api.jquery.com/category/events/ "jQuery Reference"), one you will likely use a lot is *‘click’*. In our example we will use *‘change’* to capture a radio button selection. Be aware that jQuery events are often named somewhat differently than those with JavaScript. So far, after we add in an empty anonymous function, our example statement looks like this:
+
+```javascript
+$.(".pref").change(function(){
+	/*do stuff*/
+});
+```
+
+This code will “do stuff” when any element of the “pref” class changes.
+
+**Note:** This code snippet, and all examples on this page, are for illustrating the use of AJAX. The code is not suitable for production environments because related operations such as [sanitization](../../plugin-security/securing-input/ "Handbook Chapter"), [security](../../plugin-security/user-capabilities-nonces/#nonces "Handbook Chapter"), [error handling](http://www.sitepoint.com/error-handling-in-php/ "External Site"), and [internationalization](../internationalization/ "Handbook Chapter") have been intentionally omitted. Be sure to always address these important operations in your production code.
+
+---
+
+# AJAX <a name="plugins/javascript/ajax" />
+
+Source: https://developer.wordpress.org/plugins/javascript/ajax/
+
+## What is AJAX?
+
+AJAX is the acronym for Asynchronous JavaScript And XML. XML is a data exchange format and UX is software developer shorthand for User Experience. Ajax is an Internet communications technique that allows a web page displayed in a user’s browser to request specific information from a server and display this new information on the same page without the need to reload the entire page. You can already imagine how this improves the user experience.
+
+While XML is the traditional data exchange format used, the exchange can actually be any convenient format. When working with PHP code, many developers favor JSON because the internal data structure created from the transmitted data stream is easier to interface with.
+
+To see AJAX in action, go to your WordPress administration area and add a category or tag. Pay close attention when you click the Add New button, notice the page changes but does not actually reload. Not convinced? Check your browser’s back history, if the page had reloaded, you would see two entries for the page.
+
+AJAX does not even require a user action to work. Google Docs automatically saves your document every few minutes with AJAX without you needing to initiate a save action.
+
+## Why use AJAX?
+
+Obviously, it improves the user experience. Instead of presenting a boring, static page, AJAX allows you to present a dynamic, responsive, user friendly experience. Users can get immediate feedback that some action they took was right or wrong. No need to submit an entire form before finding out there is a mistake in one field. Important fields can be validated as soon as the data is entered. Or suggestions could be made as the user types.
+
+AJAX can dramatically decrease the amount of data flowing back and forth. Only the pertinent data needs to be exchanged instead of all of the page content, which is what happens when the page reloads.
+
+Specifically related to WordPress plugins, AJAX is by far the best way to initiate a process independent of WordPress content. If you’ve programmed PHP before, you would likely do this by simply linking to a new PHP page. The user following the link initiates the process. The problem with this is that you cannot access any WordPress functions when you link to a new external PHP page. In the past, developers accessed WordPress functions by including the core file `wp-load.php` on their new PHP page. The problem with doing that is you cannot possibly know the correct path to this file anymore. The WordPress architecture is now flexible enough that the `/wp-content/` and your plugin files can be moved from its usual location to one level from the installation root. You cannot know where `wp-load.php` is relative to your plugin files, and you cannot know the absolute path to the installation folder either.
+
+What you can know is where to send an AJAX request, because it is defined in a global JavaScript variable. Your PHP AJAX handler script is actually an action hook, so all WordPress functions are automatically available to it, unlike an external PHP file.
+
+## How Do I Use AJAX?
+
+If you are new to WordPress but have experience using AJAX in other environments, you will need to relearn a few things. The way WordPress implements AJAX is most likely different than what you are used to. If everything is new to you, no problem. You will learn the basics here. Once you’ve developed a basic AJAX exchange, it’s a cinch to expand on that base and develop that killer app with an awesome user interface!
+
+There are two major components of any AJAX exchange in WordPress. The client side JavaScript or jQuery and the server side PHP. All AJAX exchanges follow the following sequence of events.
+
+1. Some sort of page event initiates a JavaScript or jQuery function. That function gathers some data from the page and sends it via a HTTP request to the server. Because handling HTTP requests with JavaScript is awkward and jQuery is bundled into WordPress anyway, we are going to focus only on jQuery code from here on out. AJAX with straight JavaScript is possible, but it’s not worth doing it when jQuery is available.
+2. The server receives the request and does something with the data. It may assemble related data and send it back to the client browser in the form of an HTTP response. This is not a requirement, but since keeping the user informed about what’s going on is desirable, it’s very rare not to send some kind of response.
+3. The jQuery function that sent the initial AJAX request receives the server response and does something with it. It may update something on the page and/or present a message to the user by some means.
+
+## Using AJAX with jQuery
+
+Now we will define the “do stuff” portion from the [snippet in the article on jQuery](#plugin/javascript/jquery). We will use the [$.post()](http://api.jquery.com/jQuery.post/ "jQuery Reference") method, which takes 3 parameters: the URL to send the POST request to, the data to send, and a callback function to handle the server response. Before we do that though, we have a bit of advance planning to get out of the way. We do the following assignment for use later in the callback function. The purpose will be more evident in the [Callback section](#callback "Page section").
+
+```javascript
+var this2 = this;
+```
+
+### URL
+
+All WordPress AJAX requests must be sent to `wp-admin/admin-ajax.php`. The correct, complete URL needs to come from PHP, jQuery cannot determine this value on its own, and you cannot hardcode the URL in your jQuery code and expect anyone else to use your plugin on their site. If the page is from the administration area, WordPress sets the correct URL in the global JavaScript variable ajaxurl. For a page from the public area, you will need to establish the correct URL yourself and pass it to jQuery using [wp\_localize\_script()](#reference/functions/wp_localize_script) . This will be covered in more detail in the [PHP section](#plugin/javascript/enqueuing "Server Side PHP and Enqueuing"). For now just know that the URL that will work for both the front and back end is available as a property of a global object that you will define in the PHP segment. In jQuery it is referenced like so:
+
+```javascript
+my_ajax_obj.ajax_url
+```
+
+### Data
+
+All data that needs to be sent to the server is included in the data array. Besides any data needed by your app, you must send an action parameter. For requests that could result in a change to the database you need to send a nonce so the server knows the request came from a legitimate source. Our example data array provided to the .post() method looks like this:
+
+```json
+{
+  _ajax_nonce: my_ajax_obj.nonce, // nonce
+  action: "my_tag_count", // action
+  title: this.value // data
+}
+```
+
+Each component is explained below.
+
+### Nonce
+
+[Nonce](https://codex.wordpress.org/WordPress_Nonces "Codex reference") is a portmanteau of “Number used ONCE”. It is essentially a unique serial number assigned to each instance of any form served. The nonce is established with PHP script and passed to jQuery the same way the URL was, as a property in a global object. In this case it is referenced as my\_ajax\_obj.nonce.
+
+**Note**
+
+A true nonce needs to be refreshed every time it is used so the next AJAX call has a new, unused nonce to send as verification. As it happens, the WordPress nonce implementation is not a true nonce. The same nonce can be used as many times as necessary in a 24 hour period, unless you logout. Generating a nonce with the same seed phrase will always yield the same number for a 12 hour period after which a new number will finally be generated.
+
+If your app needs serious security, implement a true nonce system where the server sends a new, fresh nonce in response to an Ajax request for the script to use to verify the next request.
+
+It’s easiest if you key this nonce value to \_ajax\_nonce. You can use a different key if it’s coordinated with the PHP code verifying the nonce, but it’s easier to just use the default value and not worry about coordination. Here is the way the declaration of this key-value pair appears:
+
+```javascript
+_ajax_nonce: my_ajax_obj.nonce
+```
+
+### Action
+
+All WordPress AJAX requests must include an action argument in the data. This value is an arbitrary string that is used in part to construct an action tag you use to hook your AJAX handler code. It’s useful for this value to be a very brief description of the AJAX call’s purpose. Unsurprisingly, the key for this value is *‘action’*. In this example, we will use "my\_tag\_count" as our action value. The declaration of this key-value pair looks like this:
+
+```javascript
+action: "my_tag_count"
+```
+
+Any other data the server needs to do its task is also included in this array. If there are a lot of fields to transmit, there are two common formats to combine data fields into a single string for more convenient transmission, XML and JSON. Using these formats is optional, but whatever you do does need to be coordinated with the PHP script on the server side. More information on these formats is available in the following Callback section. It is more common to receive data in this format than to send it, but it can work both ways.
+
+In our example, the server only needs one value, a single string for the selected book title, so we will use the key *‘title’*. In jQuery, the object that fired the event is always contained in the variable this. Accordingly, the value of the selected element is this.value. Our declaration of this key-value pair appears like so:
+
+```javascript
+title: this.value
+```
+
+### Callback
+
+The callback handler is the function to execute when a response comes back from the server after the request is made. Once again, we usually see an anonymous function here. The function is passed one parameter, the server response. The response could be anything from a yes or no to a huge XML database. JSON formatted data is also a useful format for data. The response is not even required. If there is none, then no callback need be specified. In the interest of UX, it’s always a good idea to let the user know what happened to any request, so it is recommended to always respond and provide some indication that something happened.
+
+In our example, we replace the current text following the radio input with the server response, which includes the number of posts tagged by the book title. Here is our anonymous callback function:
+
+```javascript
+function( data ) {
+  this2.nextSibling.remove();
+  $( this2 ).after( data );
+}
+```
+
+data contains the entire server response. Earlier we assigned to this2 the object that triggered the change event (referenced as this) with the line var this2 = this;. This is because variable scope in closures only extends one level. By assigning this2 in the event handler (the part that initially just contained *“/\* do stuff \*/”*), we are able to use it in the callback where this would be out of scope.
+
+The server response can take on any form. Significant quantities of data should be encoded into a data stream for easier handling. XML and JSON are two common encoding schemes.
+
+#### XML
+
+XML is the old data exchange format for AJAX. It is after all the ‘X’ in AJAX. It continues to be a viable exchange format even though it can be difficult to work with using native PHP functions. Many PHP programmers prefer the JSON exchange format for that reason. If you do use XML, the parsing method depends on the browser being used. Use Microsoft.XMLDOM ActiveX for Internet Explorer and use DOMParser for everything else. Note that [Internet Explorer is no longer supported by WordPress](https://make.wordpress.org/core/2021/04/22/ie-11-support-phase-out-plan/) since 5.8 release.
+
+#### JSON
+
+JSON is often favored for its light weight and ease of use. You can actually parse JSON using eval(), but don’t do that! The use of eval() carries significant security risks. Instead, use a dedicated parser, which is also faster. Use the global instance of the parser object JSON. There are [specific functions to provide an easy way to give a response in JSON format](#plugins/javascript/enqueuing) to your AJAX call.
+
+#### Other
+
+As long as the data format is coordinated with the PHP handler, it can be any format you like, such as comma delimited, tab delimited, or any kind of structure that works for you.
+
+#### Client Side Summary
+
+Now that we’ve added our callback as the final parameter for the $.post() function, we’ve completed our sample jQuery Ajax script. All the pieces put together look like this:
+
+```javascript
+jQuery(document).ready(function($) {         //wrapper
+	$(".pref").change(function() {          //event
+		var this2 = this;                  //use in callback
+		$.post(my_ajax_obj.ajax_url, {      //POST request
+			_ajax_nonce: my_ajax_obj.nonce, //nonce
+			action: "my_tag_count",         //action
+			title: this.value               //data
+			}, function(data) {            //callback
+				this2.nextSibling.remove(); //remove current title
+				$(this2).after(data);       //insert server response
+			}
+		);
+	} );
+} );
+```
+
+This script can either be output into a block on the web page or contained in its own file. This file can reside anywhere on the Internet, but most plugin developers place it in a `/js/` subfolder of the plugin’s main folder. Unless you have reason to do otherwise, you may as well follow convention. For this example we will name our file `myjquery.js`
+
+---
+
+# Server Side PHP and Enqueuing <a name="plugins/javascript/enqueuing" />
+
+Source: https://developer.wordpress.org/plugins/javascript/enqueuing/
+
+There are two parts to the server side PHP script that are needed to implement AJAX communication. First we need to enqueue the jQuery script on the web page and localize any PHP values that the jQuery script needs. Second is the actual handling of the AJAX request.
+
+## Enqueue Script
+
+This section covers the two major quirks of AJAX in WordPress that trip up experienced coders new to WordPress. One is the need to enqueue scripts in order to get meta links to appear correctly in the page’s head section. The other is that **all** AJAX requests need to be sent through `wp-admin/admin-ajax.php`. Never send requests directly to your plugin pages.
+
+### Enqueue
+
+Use the function `<a href="#reference/functions/wp_enqueue_script">wp_enqueue_script()</a>` to get WordPress to insert a meta link to your script in the page’s section. Never hardcode such links in the header template. As a plugin developer, you do not have ready access to the header template, but this rule bears mentioning anyway.
+
+The enqueue function accepts five parameters as follows:
+
+- **$handle** is the name for the script.
+- **$src** defines where the script is located. For portability, use `plugins_url()` to build the proper URL. If you are enqueuing the script for something besides a plugin, use some related function to create a proper URL – never hardcode it
+- **$deps** is an array that can handle any script that your new script depends on, such as jQuery. Since we are using jQuery to send an AJAX request, you will at least need to list `'jquery'` in the array.
+- **$ver** lets you list a version number.
+- **$args** an array of arguments that define footer printing (via an `in_footer` key) and script loading strategies (via a `strategy` key) such as `defer` or `async`. This replaces/overloads the `$in_footer` parameter as of WordPress version 6.3.
+
+```php
+wp_enqueue_script(
+	'ajax-script',
+	plugins_url( '/js/myjquery.js', __FILE__ ),
+	array( 'jquery' ),
+	'1.0.,0',
+	array(
+	   'in_footer' => true,
+	)
+);
+```
+
+You cannot enqueue scripts directly from your plugin code page when it is loaded. Scripts must be enqueued from one of a few action hooks – which one depends on what sort of page the script needs to be linked to. For administration pages, use `admin_enqueue_scripts`. For front-end pages use `wp_enqueue_scripts`, except for the login page, in which case use `login_enqueue_scripts`.
+
+The `admin_enqueue_scripts` hook passes the current page filename to your callback. Use this information to only enqueue your script on pages where it is needed. The front-end version does not pass anything. In that case, use template tags such as `is_home()`, `is_single()`, etc. to ensure that you only enqueue your script where it is needed. This is the complete enqueue code for our example:
+
+```php
+add_action( 'admin_enqueue_scripts', 'my_enqueue' );
+function my_enqueue( $hook ) {
+	if ( 'myplugin_settings.php' !== $hook ) {
+		return;
+	}
+	wp_enqueue_script(
+		'ajax-script',
+		plugins_url( '/js/myjquery.js', __FILE__ ),
+		array( 'jquery' ),
+		'1.0.0',
+		array(
+		   'in_footer' => true,
+		)
+	);
+}
+```
+
+Why do we use a named function here but use anonymous functions with jQuery? Because closures are only recently supported by PHP. jQuery has supported them for quite some time. Since some people may still be running older versions of PHP, we always use named functions for maximum compatibility. If you have a recent PHP version and are developing only for your own installation, go ahead and use closures if you like.
+
+#### Register vs. Enqueue
+
+You will see examples in other tutorials that religiously use `<a href="#reference/functions/wp_register_script">wp_register_script()</a>`. This is fine, but its use is optional. What is not optional is `wp_enqueue_script()`. This function must be called in order for your script file to be properly linked on the web page. So why register scripts? It creates a useful tag or handle with which you can easily reference the script in various parts of your code as needed. If you just need your script loaded and are not referencing it elsewhere in your code, there is no need to register it.
+
+#### Delayed Script Loading
+
+WordPress provides support for specifying a script loading strategy via the `wp_register_script()` and `wp_enqueue_script()` functions, by way of the `strategy` key within the new `$args` array parameter introduced in WordPress 6.3.
+
+Supported strategies are as follows:
+
+- **defer**
+    - Added by specifying an array key value pair of `'strategy' => 'defer'` to the $args parameter.
+    - Scripts marked for deferred execution — via the defer script attribute — are only executed once the DOM tree has fully loaded (but before the `DOMContentLoaded` and window load events). Deferred scripts are executed in the same order they were printed/added in the DOM, unlike asynchronous scripts.
+- **async**
+    - Added by specifying an array key value pair of `'strategy' => 'async'` to the `$args` parameter.
+    - Scripts marked for asynchronous execution — via the `async` script attribute — are executed as soon as they are loaded by the browser. Asynchronous scripts do not have a guaranteed execution order, as script B (although added to the DOM after script A) may execute first given that it may complete loading prior to script A. Such scripts may execute either before the DOM has been fully constructed or after the `DOMContentLoaded` event.
+
+Following is an example of specifying a loading strategy for an additional script enqueue within our plugin:
+
+```php
+wp_register_script(
+    'ajax-script-two',
+    plugins_url( '/js/myscript.js', __FILE__ ),
+    array( ajax-script ),
+    '1.0.,0',
+    array(
+          'strategy' => 'defer',
+     )
+);
+```
+
+The same approach applies when using `wp_enqueue_script()`. In the example above, we indicate that we intend to load the `'ajax-script-two'` script in a deferred manner.
+
+When specifying a delayed script loading strategy, consideration of the script’s dependency tree (its dependencies and/or dependents) is taken into account when deciding on an “eligible strategy” so as not to result in application of a strategy that is valid for one script but detrimental to others in the tree by causing an unintended out of order of execution. As a result of such logic, the intended loading strategy that you pass via the `$args` parameter may not be the final (chosen) strategy, but it will never be detrimental to (or stricter than) the intended strategy.
+
+### Nonce
+
+You need to create a nonce so that the jQuery AJAX request can be validated as a legitimate request instead of a potentially nefarious request from some unknown bad actor. Only your PHP script and your jQuery script will know this value. When the request is received, you can verify it is the same value created here. This is how to create a nonce for our example:
+
+```php
+$title_nonce = wp_create_nonce( 'title_example' );
+```
+
+The parameter `title_example` can be any arbitrary string. It’s suggested the string be related to what the nonce is used for, but it can really be anything that suits you.
+
+### Localize
+
+If you recall from the [jQuery Section](#plugins/javascript/jquery), data created by PHP for use by jQuery was passed in a global object named `my_ajax_obj`. In our example, this data was a nonce and the complete URL to `admin-ajax.php`. The process of assigning object properties and creating the global jQuery object is called **localizing**. This is the localizing code used in our example which uses `<a href="#reference/functions/wp_localize_script">wp_localize_script()</a>`.
+
+```php
+wp_localize_script(
+	'ajax-script',
+	'my_ajax_obj',
+	array(
+		'ajax_url' => admin_url( 'admin-ajax.php' ),
+		'nonce'    => $title_nonce,
+	)
+);
+```
+
+Note how our script handle `ajax-script` is used so that the global object is assigned to the right script. The object is global to our script, not to all scripts. Localization can also be called from the same hook that is used to enqueue scripts. The same goes for creating a nonce, though that particular function can be called virtually anywhere. All of that combined together in a single hook callback looks like this:
+
+```php
+add_action( 'admin_enqueue_scripts', 'my_enqueue' );
+
+/**
+ * Enqueue my scripts and assets.
+ *
+ * @param $hook
+ */
+function my_enqueue( $hook ) {
+	if ( 'myplugin_settings.php' !== $hook ) {
+		return;
+	}
+	wp_enqueue_script(
+		'ajax-script',
+		plugins_url( '/js/myjquery.js', __FILE__ ),
+		array( 'jquery' ),
+		'1.0.0',
+		true
+	);
+
+	wp_localize_script(
+		'ajax-script',
+		'my_ajax_obj',
+		array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'nonce'    => wp_create_nonce( 'title_example' ),
+		)
+	);
+}
+```
+
+ Remember to only add this nonce localization to the needed pages, do not display a nonce to someone who should not use it. And remember to use `current_user_can()` with a capability or role to complete the security.
+
+## AJAX Action
+
+The other major part of the server side PHP code is the actual AJAX handler that receives the POSTed data, does something with it, then sends an appropriate response back to the browser. This takes on the form of a WordPress [action hook](#plugins/hooks/actions). Which hook tag you use depends on whether the user is logged in or not and what value your jQuery script passed as the *action:* value.
+
+ **$\_GET , $\_POST and $\_COOKIE vs $\_REQUEST**You’ve probably used one or more of the PHP super globals such as `$_GET` or `$_POST` to retrieve values from forms or cookies (using `$_COOKIE`). Maybe you prefer `$_REQUEST` instead, or at least have seen it used. It’s kind of cool – regardless of the request method, `POST` or `GET`, it will have the form values. Works great for pages that use both methods. On top of that, it has cookie values as well. One stop shopping! Therein lies its tragic flaw. In the case of a name conflict, the cookie value will override any form values. Thus it is ridiculously easy for a bad actor to craft a counterfeit cookie on their browser, which will overwrite any form value you might be expecting from the request. `$_REQUEST` is an easy route for hackers to inject arbitrary data into your form values. To be extra safe, stick to the specific variables and avoid the one size fits all.
+
+Since our AJAX exchange is for the plugin’s settings page, the user must be logged in. If you recall from the [jQuery section](#plugins/javascript/jquery), the `action:` value is `"my_tag_count"`. This means our action hook tag will be `wp_ajax_my_tag_count`. If our AJAX exchange were to be utilized by users who were not currently logged in, the action hook tag would be `wp_ajax_nopriv_my_tag_count` The basic code used to hook the action looks like this:
+
+```php
+add_action( 'wp_ajax_my_tag_count', 'my_ajax_handler' );
+
+/**
+ * Handles my AJAX request.
+ */
+function my_ajax_handler() {
+	// Handle the ajax request here
+
+	wp_die(); // All ajax handlers die when finished
+}
+```
+
+The first thing your AJAX handler should do is verify the nonce sent by jQuery with `<a href="#reference/functions/check_ajax_referer">check_ajax_referer()</a>`, which should be the same value that was localized when the script was enqueued.
+
+```php
+check_ajax_referer( 'title_example' );
+```
+
+The provided parameter must be identical to the parameter provided [earlier](#php-nonce) to `wp_create_nonce()`. The function simply dies if the nonce does not check out. If this were a true nonce, now that it was used, the value is no longer any good. You would then generate a new one and send it to the callback script so that it can be used for the next request. But since WordPress nonces are good for twenty-four hours, you needn’t do anything but check it.
+
+### Data
+
+With the nonce out of the way, our handler can deal with the data sent by the jQuery script contained in `$_POST['title']`. First we assign the value to a new variable, after running it through [wp\_unslash()](#reference/functions/wp_unslash) to remove any unexpected quotes.
+
+```php
+$title = wp_unslash( $_POST['title'] );
+```
+
+We can save the user’s selection in user meta by using [update\_user\_meta()](#reference/functions/update_user_meta).
+
+```php
+update_user_meta( get_current_user_id(), 'title_preference', sanitize_post_title( $title ) );
+```
+
+Then we build a query in order to get the post count for the selected title tag.
+
+```php
+$args      = array(
+	'tag' => $title,
+);
+$the_query = new WP_Query( $args );
+```
+
+Finally we can send the response back to the jQuery script. There’s several ways to transmit data. Let’s look at some of the options before we deal with the specifics of our example.
+
+#### XML
+
+PHP support for XML leaves something to be desired. Fortunately, WordPress provides the `<a href="#reference/classes/wp_ajax_response">WP_Ajax_Response</a>` class to make the task easier. The [WP\_Ajax\_Response](#reference/classes/wp_ajax_response) class will generate an XML-formatted response, set the correct content type for the header, output the response xml, then die — ensuring a proper XML response.
+
+#### JSON
+
+This format is lightweight and easy to use, and WordPress provides the `<a href="#reference/functions/wp_send_json">wp_send_json</a>` function to json-encode your response, print it, and die — effectively replacing [WP\_Ajax\_Response](#reference/classes/wp_ajax_response). WordPress also provides the `<a href="#reference/functions/wp_send_json_success">wp_send_json_success</a>` and `<a href="#reference/functions/wp_send_json_error">wp_send_json_error</a>` functions, which allow the appropriate done() or fail() callbacks to fire in JS.
+
+#### Other
+
+You can transfer data any way you like, as long as the sender and receiver are coordinated. Text formats like comma delimited or tab delimited are one of many possibilities. For small amounts of data, sending the raw stream may be adequate. That is what we will do with our example – we will send the actual replacement HTML, nothing else.
+
+```php
+echo esc_html( $title ) . ' (' . $the_query->post_count . ') ';
+```
+
+In a real world application, you must account for the possibility that the action could fail for some reason–for instance, maybe the database server is down. The response should allow for this contingency, and the jQuery script receiving the response should act accordingly, perhaps telling the user to try again later.
+
+### Die
+
+When the handler has finished all of its tasks, it needs to die. If you are using the [WP\_Ajax\_Response](#reference/classes/wp_ajax_response) or wp\_send\_json\* functions, this is automatically handled for you. If not, simply use the WordPress `<a href="#reference/functions/wp_die">wp_die()</a> `function.
+
+### AJAX Handler Summary
+
+The complete AJAX handler for our example looks like this:
+
+```php
+/**
+ * AJAX handler using JSON
+ */
+function my_ajax_handler__json() {
+	check_ajax_referer( 'title_example' );
+	$title = wp_unslash( $_POST['title'] );
+
+	update_user_meta( get_current_user_id(), 'title_preference', sanitize_post_title( $title ) );
+
+	$args      = array(
+		'tag' => $title,
+	);
+	$the_query = new WP_Query( $args );
+	wp_send_json( esc_html( $title ) . ' (' . $the_query->post_count . ') ' );
+}
+```
+
+```php
+/**
+ * AJAX handler not using JSON.
+ */
+function my_ajax_handler() {
+	check_ajax_referer( 'title_example' );
+	$title = wp_unslash( $_POST['title'] );
+
+	update_user_meta( get_current_user_id(), 'title_preference', sanitize_post_title( $title ) );
+
+	$args      = array(
+		'tag' => $title,
+	);
+	$the_query = new WP_Query( $args );
+	echo esc_html( $title ) . ' (' . $the_query->post_count . ') ';
+	wp_die(); // All ajax handlers should die when finished
+}
+```
+
+---
+
+# Summary <a name="plugins/javascript/summary" />
+
+Source: https://developer.wordpress.org/plugins/javascript/summary/
+
+Here are all the example code snippets from the preceding discussion, assembled into two complete code pages: one for jQuery and the other for PHP.
+
+## PHP
+
+This code resides on one of your plugin pages.
+
+```php
+add_action( 'admin_enqueue_scripts', 'my_enqueue' );
+function my_enqueue( $hook ) {
+   if ( 'myplugin_settings.php' !== $hook ) {
+      return;
+   }
+
+   wp_enqueue_script(
+      'ajax-script',
+      plugins_url( '/js/myjquery.js', __FILE__ ),
+      array( 'jquery' ),
+      '1.0.0',
+      true
+   );
+
+   $title_nonce = wp_create_nonce( 'title_example' );
+   wp_localize_script(
+      'ajax-script',
+      'my_ajax_obj',
+      array(
+         'ajax_url' => admin_url( 'admin-ajax.php' ),
+         'nonce'    => $title_nonce,
+      )
+   );
+}
+
+add_action( 'wp_ajax_my_tag_count', 'my_ajax_handler' );
+function my_ajax_handler() {
+   check_ajax_referer( 'title_example' );
+
+   $title = wp_unslash( $_POST['title'] );
+
+   update_user_meta( get_current_user_id(), 'title_preference', $title );
+
+   $args = array(
+      'tag' => $title,
+   );
+
+   $the_query = new WP_Query( $args );
+
+   echo esc_html( $title ) . ' (' . $the_query->post_count . ') ';
+
+   wp_die(); // all ajax handlers should die when finished
+}
+```
+
+## jQuery
+
+This code is in the file `js/myjquery.js` below your plugin folder.
+
+```javascript
+jQuery(document).ready(function($) { 	   //wrapper
+	$(".pref").change(function() { 		   //event
+		var this2 = this; 		           //use in callback
+		$.post(my_ajax_obj.ajax_url, { 	   //POST request
+	       _ajax_nonce: my_ajax_obj.nonce, //nonce
+			action: "my_tag_count",        //action
+	  		title: this.value 	           //data
+  		}, function(data) {		           //callback
+			this2.nextSibling.remove();    //remove the current title
+			$(this2).after(data); 	       //insert server response
+		});
+	});
+});
+```
+
+And after storing the preference, the resulting post count is added to the selected title.
+
+## More Information
+
+- [How To Use AJAX In WordPress](http://wp.smashingmagazine.com/2011/10/18/how-to-use-ajax-in-wordpress/ "External Site")
+- [AJAX for WordPress](http://www.glennmessersmith.com/pages/wpajax.html "External Site")
+
+---
+
+# Cron <a name="plugins/cron" />
+
+Source: https://developer.wordpress.org/plugins/cron/
+
+## What is WP-Cron
+
+WP-Cron is how WordPress handles scheduling time-based tasks in WordPress. Several WordPress core features, such as checking for updates and publishing scheduled post, utilize WP-Cron. The “Cron” part of the name comes from the cron time-based task scheduling system that is available on UNIX systems.
+
+WP-Cron works by checking, on every page load, a list of scheduled tasks to see what needs to be run. Any tasks due to run will be called during that page load.
+
+WP-Cron does not run constantly as the system cron does; it is only triggered on page load.
+
+Scheduling errors could occur if you schedule a task for 2:00PM and no page loads occur until 5:00PM.
+
+## Why use WP-Cron
+
+- WordPress core and many plugins need a scheduling system to perform time-based tasks. However, many hosting services are shared and do not provide access to the system scheduler.
+- Using the WordPress API is a simpler method for setting scheduled tasks than going outside of WordPress to the system scheduler.
+- With the system scheduler, if the time passes and the task did not run, it will not be re-attempted. With WP-Cron, all scheduled tasks are put into a queue and will run at the next opportunity (meaning the next page load). So while you can’t be 100% sure *when* your task will run, you can be 100% sure that it will run *eventually*.
+
+---
+
+# Understanding WP-Cron Scheduling <a name="plugins/cron/understanding-wp-cron-scheduling" />
+
+Source: https://developer.wordpress.org/plugins/cron/understanding-wp-cron-scheduling/
+
+Unlike a traditional system cron that schedules tasks for specific times (e.g. “every hour at 5 minutes past the hour”), WP-Cron uses intervals to simulate a system cron.
+
+WP-Cron is given two arguments: the time for the first task, and an interval (in seconds) after which the task should be repeated. For example, if you schedule a task to begin at 2:00PM with an interval of 300 seconds (five minutes), the task would first run at 2:00PM and then again at 2:05PM, then again at 2:10PM, and so on, every five minutes.
+
+To simplify scheduling tasks, WordPress provides some default intervals and an easy method for adding custom intervals.
+
+The default intervals provided by WordPress are:
+
+- hourly
+- twicedaily
+- daily
+- weekly (since WP 5.4)
+
+## Custom Intervals
+
+To add a custom interval, you can create a filter, such as:
+
+```php
+add_filter( 'cron_schedules', 'example_add_cron_interval' );
+function example_add_cron_interval( $schedules ) { 
+    $schedules['five_seconds'] = array(
+        'interval' => 5,
+        'display'  => esc_html__( 'Every Five Seconds' ), );
+    return $schedules;
+}
+```
+
+This filter function creates a new interval that will allow us to run a cron task every five seconds.
+
+**Note:** All intervals are in seconds.
+
+---
+
+# Scheduling WP Cron Events <a name="plugins/cron/scheduling-wp-cron-events" />
+
+Source: https://developer.wordpress.org/plugins/cron/scheduling-wp-cron-events/
+
+The WP Cron system uses hooks to add new scheduled tasks.
+
+## Adding the Hook
+
+In order to get your task to run you must create your own custom hook and give that hook the name of a function to execute. This is a very important step. Forget it and your task will never run.
+
+The following example will create a hook. The first parameter is the name of the hook you are creating, and the second is the name of the function to call.
+
+```php
+add_action( 'bl_cron_hook', 'bl_cron_exec' );
+```
+
+Remember, the “bl_” part of the function name is a *function prefix*. You can learn why prefixes are important [here](#plugins/plugin-basics/best-practices). 
+
+You can read more about actions [here](#plugins/hooks/actions).
+
+## Scheduling the Task
+
+An important note is that WP-Cron is a simple task scheduler. As we know, tasks are added by the hook created to call the function that runs the desired task. However if you call `wp_schedule_event()` multiple times, even with the same hook name, the event will be scheduled multiple times. If your code adds the task on each page load this could result in the task being scheduled several thousand times. This is not what you want.
+
+WordPress provides a convenient function called [wp\_next\_scheduled()](#reference/functions/wp_next_scheduled) to check if a particular hook is already scheduled. `wp_next_scheduled()` takes one parameter, the hook name. It will return either a string containing the timestamp of the next execution or false, signifying the task is not scheduled. It is used like so:
+
+```php
+wp_next_scheduled( 'bl_cron_hook' )
+```
+
+Scheduling a recurring task is accomplished with [wp\_schedule\_event()](#reference/functions/wp_schedule_event) . This function takes three required parameters, and one additional parameter that is an array that can be passed to the function executing the wp-cron task. We will focus on the first three parameters. The parameters are as follows:
+
+1. `$timestamp` – The UNIX timestamp of the first time this task should execute
+2. `$recurrence` – The name of the interval in which the task will recur in seconds
+3. `$hook` – The name of our custom hook to call
+
+We will use the 5 second interval we created [here](#plugins/cron/understanding-wp-cron-scheduling) and the hook we created above, like so:
+
+```php
+wp_schedule_event( time(), 'five_seconds', 'bl_cron_hook' );
+```
+
+Remember, we need to first ensure the task is not already scheduled. So we wrap the scheduling code in a check like this:
+
+```php
+if ( ! wp_next_scheduled( 'bl_cron_hook' ) ) {
+    wp_schedule_event( time(), 'five_seconds', 'bl_cron_hook' );
+}
+```
+
+## Unscheduling tasks
+
+When you no longer need a task scheduled you can unschedule tasks with [wp\_unschedule\_event()](#reference/functions/wp_unschedule_event) . This function takes the following two parameters:
+
+1. `$timestamp` – Timestamp of the next occurrence of the task
+2. `$hook` – Name of the custom hook to be called
+
+This function will not only unschedule the task indicated by the timestamp, it will also unschedule all future occurrences of the task. Since you probably will not know the timestamp for the next task, there is another handy function, [wp\_next\_scheduled()](#reference/functions/wp_next_scheduled) that will find it for you. `wp_next_scheduled()` takes one parameter (that we care about):
+
+1. `$hook` – The name of the hook that is called to execute the task
+
+Put it all together and the code looks like:
+
+```php
+$timestamp = wp_next_scheduled( 'bl_cron_hook' );
+wp_unschedule_event( $timestamp, 'bl_cron_hook' );
+```
+
+It is very important to unschedule tasks when you no longer need them because WordPress will continue to attempt to execute the tasks, even though they are no longer in use (or even after your plugin has been deactivated or removed). An important place to remember to unschedule your tasks is upon plugin deactivation.
+
+Unfortunately there are many plugins in the WordPress.org Plugin Directory that do not clean up after themselves. If you find one of these plugins please let the author know to update their code. WordPress provides a function called [register\_deactivation\_hook()](#reference/functions/register_deactivation_hook) that allows developers to run a function when their plugin is deactivated. It is very simple to setup and looks like:
+
+```php
+register_deactivation_hook( __FILE__, 'bl_deactivate' ); 
+
+function bl_deactivate() {
+    $timestamp = wp_next_scheduled( 'bl_cron_hook' );
+    wp_unschedule_event( $timestamp, 'bl_cron_hook' );
+}
+```
+
+You can read more about activation and deactivation hooks [here](#plugins/plugin-basics/activation-deactivation-hooks).
+
+---
+
+# Testing of WP-Cron <a name="plugins/cron/simple-testing" />
+
+Source: https://developer.wordpress.org/plugins/cron/simple-testing/
+
+## WP-CLI
+
+Cron jobs can be tested using [WP-CLI](https://wp-cli.org/). It offers commands like `wp cron event list` and `wp cron event run {job name}`. [Check the documentation](#cli/commands/cron) for more details.
+
+## WP-Cron Management Plugins
+
+[Several plugins are available on the WordPress.org Plugin Directory for viewing, editing, and controlling the scheduled cron events and available schedules on your site.](https://wordpress.org/plugins/tags/cron/)
+
+## `_get_cron_array()`
+
+[The `_get_cron_array()` function](#reference/functions/_get_cron_array) returns an array of all currently scheduled cron events. Use this function if you need to inspect the raw list of events.
+
+## `wp_get_schedules()`
+
+[The `wp_get_schedules()` function](#reference/functions/wp_get_schedules) returns an array of available event recurrence schedules. Use this function if you need to inspect the raw list of available schedules.
+
+---
+
+# Hooking WP-Cron Into the System Task Scheduler <a name="plugins/cron/hooking-wp-cron-into-the-system-task-scheduler" />
+
+Source: https://developer.wordpress.org/plugins/cron/hooking-wp-cron-into-the-system-task-scheduler/
+
+As previously mentioned, WP-Cron does not run continuously, which can be an issue if there are critical tasks that must run on time. There is an easy solution for this. Simply set up your system’s task scheduler to run on the intervals you desire (or at the specific time needed). The easiest solution is to use a tool to make a web request to the `wp-cron.php` file.
+
+After scheduling the task on your system, there is one more step to complete. WordPress will continue to run WP-Cron on each page load. This is no longer necessary and will contribute to extra resource usage on your server. WP-Cron can be disabled in the `wp-config.php` file. Open the `wp-config.php` file for editing and add the following line:
+
+```php
+define( 'DISABLE_WP_CRON', true );
+```
+
+## Windows
+
+Windows calls their time based scheduling system the Task Scheduler. It can be accessed via the **Administrative Tools** in the control panel.
+
+How you setup the task varies with server setup. One method is to use PowerShell and a Basic Task. After creating a Basic Task the following command can be used to call the WordPress Cron script.
+
+```powershell
+powershell "Invoke-WebRequest http://YOUR_SITE_URL/wp-cron.php"
+```
+
+## MacOS and Linux
+
+Mac OS X and Linux both use cron as their time based scheduling system. It is typically access from the terminal with the `crontab -e` command. It should be noted that tasks will be run as a regular user or as root depending on the system user running the command.
+
+Cron has a specific syntax that needs to be followed and contains the following parts:
+
+- Minute
+- Hour
+- Day of month
+- Month
+- Day of week
+- Command to execute
+
+![](https://i0.wp.com/developer.wordpress.org/files/2014/10/plugin-wp-cron-cron-scheduling.png?resize=500%2C250&ssl=1)If a command should be run regardless of one of the time sections an asterisk (\*) should be used. For example if you wanted to run a command every 15 minutes regardless of the hour, day, or month it would look like:
+
+```bash
+*/15 * * * * command
+```
+
+Many servers have `wget` installed and this is an easy tool to call the WordPress Cron script.
+
+```bash
+wget --delete-after http://YOUR_SITE_URL/wp-cron.php
+```
+
+Note: without –delete-after option, wget would save the output of the HTTP GET request.
+
+A daily call to your site’s WordPress Cron that triggers at midnight every night could look similar to:
+
+```bash
+0 0 * * * wget --delete-after http://YOUR_SITE_URL/wp-cron.php
+```
+
+---
+
+# Internationalization <a name="plugins/internationalization" />
+
+Source: https://developer.wordpress.org/plugins/internationalization/
+
+## What is Internationalization?
+
+Internationalization is the process of developing a plugin so it can easily be translated into other languages. Internationalization is often abbreviated as `i18n` (because there are 18 letters between the letters i and n).
+
+## Why is Internationalization Important?
+
+WordPress is used all over the world, in countries where English is not the main language. The strings in the WordPress plugins need to be coded in a special way so that can be easily translated into other languages. As a developer, you may not be able to provide *localizations* (meaning, changes required to the text and other things like number formats specific to a given *locale* (location))for all your users; however, a translator can successfully localize the theme without needing to modify the source code itself.
+
+Read further on “[How to Internationalize your Plugin](#plugins/internationalization/how-to-internationalize-your-plugin "How to internationalize your plugin")“.
+
+## Resources
+
+- [Video: i18n: Preparing Your WordPress Theme for the World](http://www.youtube.com/watch?v=fJfqgrzjEis)
+- [Video: On Internationalization: Plugins and themes for the whole world](http://wordpress.tv/2014/02/26/samuel-otto-wood-on-internationalization-plugins-and-themes-for-the-whole-world/) [Slides](http://wceu2013.ottopress.com/)
+- [Video: Big in Japan: A Guide for Themes and Internationalization](http://wordpress.tv/2013/08/03/shannon-smith-big-in-japan-a-guide-for-themes-and-internationalization/)
+- [Video: Lost in Translation—i18n and WordPress](http://wordpress.tv/2009/11/14/ze-fontainhas-i18n-nyc09/)
+- [Internationalizing And Localizing Your WordPress Theme](http://wp.smashingmagazine.com/2011/12/29/internationalizing-localizing-wordpress-theme/)
+- [Internationalization: You’re probably doing it wrong](http://ottopress.com/2012/internationalization-youre-probably-doing-it-wrong/)
+- [More Internationalization Fun](http://ottopress.com/2012/more-internationalization-fun/)
+- [Use wp\_localize\_script, It Is Awesome](http://pippinsplugins.com/use-wp_localize_script-it-is-awesome/)
+- [Understanding \_n\_noop()](http://kovshenin.com/2013/_n_noop/)
+- [Language Packs 101 – Prepwork](http://ottopress.com/2013/language-packs-101-prepwork/)
+- [Translating WordPress Plugins and Themes: Don’t Get Clever](http://markjaquith.wordpress.com/2011/10/06/translating-wordpress-plugins-and-themes-dont-get-clever/)
+- [How to load theme and plugin translations](http://ulrich.pogson.ch/load-theme-plugin-translations)
+- [Polyglots Handbook: Plugin/Theme Authors Guide](https://make.wordpress.org/polyglots/handbook/plugin-theme-authors-guide/)
+
+---
+
+# How to Internationalize Your Plugin <a name="plugins/internationalization/how-to-internationalize-your-plugin" />
+
+Source: https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/
+
+In order to make a string translatable in your application you have to wrap the original string in a call to one of a set of special functions. These functions collectively are known as “gettext.”
+
+## Introduction to Gettext 
+
+WordPress uses the [gettext](http://www.gnu.org/software/gettext/) libraries and tools for i18n, but not directly: there are a set of special functions created just for the purpose of enabling string translation. These functions are listed below. These are the functions you should use within your plugin.
+
+For a deeper dive into gettext, read the [gettext online manual](http://www.gnu.org/software/gettext/manual/html_node/)
+
+## Text Domains 
+
+Use a *text domain* to denote all text belonging to your plugin. The text domain is a unique identifier to ensure WordPress can distinguish between all loaded translations. This increases portability and plays better with already existing WordPress tools.
+
+The text domain must match the `slug` of the plugin. If your plugin is a single file called `my-plugin.php` or it is contained in a folder called `my-plugin` the domain name must be `my-plugin`. If your plugin is hosted on wordpress.org it must be the slug portion of your plugin URL (`wordpress.org/plugins/`**`<slug>`**).
+
+The text domain name must use dashes and not underscores, be lower case, and have no spaces.
+
+The text domain also needs to be added to the plugin header. WordPress uses it to internationalize your plugin metadata even when the plugin is disabled. The text domain should be same as the one used when [loading the text domain](#loading-text-domain).
+
+ **Header example:**
+
+```php
+/* 
+ * Plugin Name: My Plugin
+ * Author: Plugin Author
+ * Text Domain: my-plugin
+ */
+```
+
+Again, change “my-plugin” to the slug of your plugin.
+
+Since WordPress 4.6 the `Text Domain` header is optional because it must be the same as the plugin slug. There is no harm in including it, but it is not required.
+
+## Domain Path 
+
+The domain path defines the location for a plugin’s translation. This has a few uses, notably so that WordPress knows where to find the translation even when the plugin is disabled. This defaults to the folder in which your plugin is found.
+
+For example, if the translation is located in a folder called `languages` within your plugin, then the Domain Path is `/languages` and must be written with the first slash:
+
+ **Header example:**
+
+```php
+/*
+ * Plugin Name: My Plugin
+ * Author: Plugin Author
+ * Text Domain: my-plugin
+ * Domain Path: /languages
+ */
+```
+
+ The `Domain Path` header can be omitted if the plugin is in the official WordPress Plugin Directory. 
+
+## Basic strings 
+
+For basic strings (meaning strings without placeholders or plurals) use `<a href="#reference/functions/__">__()</a>`. It returns the translation of its argument:
+
+```php
+__( 'Blog Options', 'my-plugin' );
+```
+
+Do not use variable names or constants for the text domain portion of a gettext function. For example: Do not do this as a shortcut: ```
+__( 'Translate me.' , $text_domain );
+```
+
+To echo a retrieved translation, use `<a href="#reference/functions/_e">_e()</a>`. So instead of writing:
+
+```php
+echo __( 'WordPress is the best!', 'my-plugin' );
+```
+
+you can use:
+
+```php
+_e( 'WordPress is the best!', 'my-plugin' );
+```
+
+## Variables 
+
+What if you have a string like the following:
+
+```php
+echo 'Your city is $city.'
+```
+
+In this case, the `$city` is a variable and should not be part of the translation. The solution is to use placeholders for the variable, along with the `printf` family of functions. Especially helpful are `<a href="http://php.net/printf">printf</a>` and `<a href="http://php.net/sprintf">sprintf</a>`. Here is what the right solution looks like:
+
+```php
+printf(
+	/* translators: %s: Name of a city */
+	__( 'Your city is %s.', 'my-plugin' ),
+	$city
+);
+```
+
+Notice that here the string for translation is just the template `"Your city is %s."`, which is the same both in the source and at run-time.
+
+Also note that there is a hint for translators so that they know the context of the placeholder.
+
+If you have more than one placeholder in a string, it is recommended that you use [argument swapping](http://www.php.net/manual/en/function.sprintf.php#example-4829). In this case, single quotes `(')` around the string are mandatory because double quotes `(")` will tell php to interpret the `$s` as the `s` variable, which is not what we want.
+
+```php
+printf(
+	/* translators: 1: Name of a city 2: ZIP code */
+	__( 'Your city is %1$s, and your zip code is %2$s.', 'my-plugin' ),
+	$city,
+	$zipcode
+);
+```
+
+Here the zip code is being displayed after the city name. In some languages displaying the zip code and city in opposite order would be more appropriate. Using %s prefix in the above example, allows for such a case. A translation can thereby be written:
+
+```php
+printf(
+	/* translators: 1: Name of a city 2: ZIP code */
+	__( 'Your zip code is %2$s, and your city is %1$s.', 'my-plugin' ),
+	$city,
+	$zipcode
+);
+```
+
+**Important!** The following code is incorrect:
+
+```php
+// This is incorrect do not use.
+_e( "Your city is $city.", 'my-plugin' );
+```
+
+The strings for translation are extracted from the sources, so the translators will get this phrase to translate: `"Your city is $city."`.
+
+However in the application `_e` will be called with an argument like `"Your city is London."` and `gettext` won’t find a suitable translation of this one and will return its argument: `"Your city is London."`. Unfortunately, it isn’t translated correctly.
+
+## Plurals 
+
+### Basic Pluralization 
+
+If you have string that changes when the number of items changes, you’ll need a way to reflect this in your translations. For example, in English you have `"One comment"` and `"Two comments"`. In other languages you can have multiple plural forms. To handle this in WordPress use the `<a href="#reference/functions/_n">_n()</a>` function.
+
+```php
+printf(
+	_n(
+		'%s comment',
+		'%s comments',
+		get_comments_number(),
+		'my-plugin'
+	),
+	number_format_i18n( get_comments_number() )
+);
+```
+
+ `_n()` accepts 4 arguments:
+
+- singular – the singular form of the string (note that it can be used for numbers other than one in some languages, so `'%s item'` should be used instead of `'One item'`)
+- plural – the plural form of the string
+- count – the number of objects, which will determine whether the singular or the plural form should be returned (there are languages, which have far more than 2 forms)
+- text domain – the plugins text domain
+
+The return value of the functions is the correct translated form, corresponding to the given count.
+
+Note that some languages use the singular form for other numbers (e.g. 21, 31 and so on, much like ’21st’, ’31st’ in English). If you would like to special case the singular, check for it specifically:
+
+```php
+if ( 1 === $count ) {
+	printf( esc_html__( 'Last thing!', 'my-text-domain' ), $count );
+} else {
+	printf( esc_html( _n( '%d thing.', '%d things.', $count, 'my-text-domain' ) ), $count );
+}
+```
+
+Also note that the `$count` parameter is often used twice. First `$count` is passed to `_n()` to determine which translated string to use, and then `$count` is passed to `printf()` to substitute the number into the translated string.
+
+### Pluralization done later 
+
+You first set the plural strings with `<a href="#reference/functions/_n_noop">_n_noop()</a>` or `<a href="#reference/functions/_nx_noop">_nx_noop()</a>`.
+
+```php
+$comments_plural = _n_noop(
+	'%s comment.',
+	'%s comments.'
+);
+```
+
+Then at a later point in the code you can use `<a href="#reference/functions/translate_nooped_plural">translate_nooped_plural()</a>` to load the strings.
+
+```php
+printf(
+	translate_nooped_plural(
+		$comments_plural,
+		get_comments_number(),
+		'my-plugin'
+	),
+	number_format_i18n( get_comments_number() )
+);
+```
+
+## Disambiguation by context 
+
+Sometimes one term is used in several contexts and although it is one and the same word in English it has to be translated differently in other languages. For example the word `Post` can be used both as a verb `"Click here to post your comment"` and as a noun `"Edit this post"`. In such cases the `_x()` or `_ex()` function should be used. It is similar to `__()` and `_e()`, but it has an additional argument — the context:
+
+```php
+_x( 'Post', 'noun', 'my-plugin' );
+_x( 'Post', 'verb', 'my-plugin' );
+```
+
+Using this method in both cases we will get the string Comment for the original version, but the translators will see two Comment strings for translation, each in the different contexts.
+
+Note that similarly to `__()`, `_x()` has an `echo` version: `_ex()`. The previous example could be written as:
+
+```php
+_ex( 'Post', 'noun', 'my-plugin' );
+_ex( 'Post', 'verb', 'my-plugin' );
+```
+
+ Use whichever you feel enhances legibility and ease-of-coding.
+
+## Descriptions 
+
+So that translators know how to translate a string like `__( 'g:i:s a' )` you can add a clarifying comment in the source code. It has to start with the words `translators:` and to be the last PHP comment before the gettext call. Here is an example:
+
+```php
+/* translators: draft saved date format, see http://php.net/date */
+$saved_date_format = __( 'g:i:s a' );
+```
+
+It’s also used to explain placeholders in a string like `_n_noop( '<strong>Version %1$s</strong> addressed %2$s bug.','<strong>Version %1$s</strong> addressed %2$s bugs.' )`.
+
+```php
+/* translators: 1: WordPress version number, 2: plural number of bugs. */
+_n_noop( '<strong>Version %1$s</strong> addressed %2$s bug.','<strong>Version %1$s</strong>strong> addressed %2$s bugs.' );
+```
+
+## Newline characters 
+
+Gettext doesn’t like `r` (ASCII code: 13) in translatable strings, so please avoid it and use `n` instead.
+
+## Empty strings 
+
+The empty string is reserved for internal Gettext usage and you must not try to internationalize the empty string. It also doesn’t make any sense, because the translators won’t see any context.
+
+ If you have a valid use-case to internationalize an empty string, add context to both help translators and be in peace with the Gettext system.
+
+## Escaping strings 
+
+It is good to escape all of your strings, this way the translators cannot run malicious code. There are a few escape functions that are integrated with internationalization functions.
+
+## Localization functions 
+
+### Basic functions 
+
+- [\_\_()](#reference/functions/__)
+- [\_e()](#reference/functions/_e)
+- [\_x()](#reference/functions/_x)
+- [\_ex()](#reference/functions/_ex)
+- [\_n()](#reference/functions/_n)
+- [\_nx()](#reference/functions/_nx)
+- [\_n\_noop()](#reference/functions/_n_noop)
+- [\_nx\_noop()](#reference/functions/_nx_noop)
+- [translate\_nooped\_plural()](#reference/functions/translate_nooped_plural())
+
+### Translate &amp; Escape functions 
+
+Strings that require translation and is used in attributes of html tags must be escaped.
+
+- [esc\_html\_\_()](#reference/functions/esc_html__)
+- [esc\_html\_e()](#reference/functions/esc_html_e)
+- [esc\_html\_x()](#reference/functions/esc_html_x)
+- [esc\_attr\_\_()](#reference/functions/esc_attr__)
+- [esc\_attr\_e()](#reference/functions/esc_attr_e)
+- [esc\_attr\_x()](#reference/functions/esc_attr_x)
+
+### Date and number functions 
+
+- [number\_format\_i18n()](#reference/functions/number_format_i18n)
+- [date\_i18n()](#reference/functions/date_i18n)
+
+## Best Practices for writing strings 
+
+Here are the best practices for writing strings
+
+- Use decent English style – minimize slang and abbreviations.
+- Use entire sentences – in most languages word order is different than that in English.
+- Split at paragraphs – merge related sentences, but do not include a whole page of text in one string.
+- Do not leave leading or trailing whitespace in a translatable phrase.
+- Assume strings can double in length when translated
+- Avoid unusual markup and unusual control characters – do not include tags that surround your text
+- Do not put unnecessary HTML markup into the translated string
+- Do not leave URLs for translation, unless they could have a version in another language.
+- Add the variables as placeholders to the string as in some languages the placeholders change position.
+
+```php
+printf(
+	__( 'Search results for: %s', 'my-plugin' ),
+	get_search_query()
+);
+```
+
+- Use format strings instead of string concatenation – translate phrases and not words – `printf( __( 'Your city is %1$s, and your zip code is %2$s.', 'my-plugin' ), $city, $zipcode ); ` is always better than: ` __( 'Your city is ', 'my-plugin' ) . $city . __( ', and your zip code is ', 'my-plugin' ) . $zipcode; `
+- Try to use the same words and same symbols so not multiple strings needs to be translated e.g.`__( 'Posts:', 'my-plugin' );` and `__( 'Posts', 'my-plugin' );`
+
+### Add Text Domain to strings 
+
+ You must add your Text domain as an argument to every `__()`, `_e()` and `__n()` gettext call, or your translations won’t work.
+
+Examples:
+
+- `__( 'Post' )` should become `__( 'Post', 'my-theme' )`
+- `_e( 'Post' )` should become `_e( 'Post', 'my-theme' )`
+- `_n( '%s post', '%s posts', $count )` should become `_n( '%s post', '%s posts', $count, 'my-theme' )`
+
+If there are strings in your plugin that are also used in WordPress core (e.g. ‘Settings’), you should still add your own text domain to them, otherwise they’ll become untranslated if the core string changes (which happens).
+
+Adding the text domain by hand can be a burden if not done continuously when writing code and that’s why you can do it automatically:
+
+- Download the `<a href="https://develop.svn.wordpress.org/branches/5.2/tools/i18n/add-textdomain.php">add-textdomain.php</a>` script to the folder where the file is you want to add the text domain
+- In command line move to the directory where the file is
+- Run this command to create a new file with the text domain added:
+
+```bash
+php add-textdomain.php my-plugin my-plugin.php > new-my-plugin.php
+```
+
+If you wish to have the `add-textdomain.php` in a different folder you just need to define the location in the command.
+
+```bash
+php /path/to/add-textdomain.php my-plugin my-plugin.php > new-my-plugin.php
+```
+
+Use this command if you don’t want a new file outputted:
+
+```php
+php add-textdomain.php -i my-plugin my-plugin.php
+```
+
+If you want to change multiple files in a directory you can also pass a directory to the script:
+
+```php
+php add-textdomain.php -i my-plugin my-plugin-directory
+```
+
+After it’s done, the text domain will be added to the end of all gettext calls in the file. If there is an existing text domain it will not be replaced.
+
+## Loading Text Domain
+
+Translations can be loaded using `load_plugin_textdomain`, for example:
+
+```php
+add_action( 'init', 'wpdocs_load_textdomain' );
+
+function wpdocs_load_textdomain() {
+	load_plugin_textdomain( 'wpdocs_textdomain', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
+}
+```
+
+### Plugins on WordPress.org
+
+Since WordPress 4.6 translations now take [translate.wordpress.org](https://translate.wordpress.org/) as priority and so plugins that are translated via translate.wordpress.org do not necessary require `load_plugin_textdomain()` anymore. If you don’t want to add a `load_plugin_textdomain()` call to your plugin you have to set the `Requires at least:` field in your readme.txt to 4.6 or more. 
+
+If you still want to load your own translations and not the ones from translate, you will have to use a hook filter named `load_textdomain_mofile`.   
+**Example** with a .mo file in the `/languages/` directory of your plugin, with this code inserted in the main plugin file:
+
+```php
+function my_plugin_load_my_own_textdomain( $mofile, $domain ) {
+	if ( 'my-domain' === $domain && false !== strpos( $mofile, WP_LANG_DIR . '/plugins/' ) ) {
+		$locale = apply_filters( 'plugin_locale', determine_locale(), $domain );
+		$mofile = WP_PLUGIN_DIR . '/' . dirname( plugin_basename( __FILE__ ) ) . '/languages/' . $domain . '-' . $locale . '.mo';
+	}
+	return $mofile;
+}
+add_filter( 'load_textdomain_mofile', 'my_plugin_load_my_own_textdomain', 10, 2 );
+```
+
+## Handling JavaScript files 
+
+Check the [Internationalizing javascript](#apis/handbook/internationalization) section of the [Common APIs Handbook](#apis) to see how to properly load your translation files. There is also the [Gutenburg plugin docs page](https://github.com/WordPress/gutenberg/blob/trunk/docs/how-to-guides/internationalization.md).
+
+## Language Packs 
+
+If you’re interested in language packs and how the import to [translate.wordpress.org](http://translate.wordpress.org) is working, please read the [Meta Handbook page about Translations](https://make.wordpress.org/meta/handbook/documentation/translations/).
+
+Also refer [Plugin/Theme Authors Guide in Polyglots Handbooks](https://make.wordpress.org/polyglots/handbook/plugin-theme-authors-guide/) for getting your project translated.
+
+---
+
+# Localization <a name="plugins/internationalization/localization" />
+
+Source: https://developer.wordpress.org/plugins/internationalization/localization/
+
+## What is localization?
+
+Localization describes the subsequent process of translating an internationalized plugin. Localization is often abbreviated as `l10n` (because there are 10 letters between the l and the n.)
+
+## Localization files
+
+### `POT` (Portable Object Template) files
+
+This file contains the original strings (in English) in your plugin.
+
+### `PO` (Portable Object) files
+
+Every translator will take the `POT` file and translate the `msgstr` sections into their own language. The result is a `PO` file with the same format as a `POT`, but with translations and some specific headers. There is one `PO` file per language.
+
+### `MO` (Machine Object) files
+
+From every translated `PO` file a `MO` file is built. These are machine-readable, binary files that the gettext functions actually use (they don’t care about `.POT` or `.PO` files), and are a “compiled” version of the `PO` file. The conversion is done using the `msgfmt` command line tool. In general, an application may use more than one large logical translatable module and a different `MO` file accordingly. A text domain is a handle of each module, which has a different `MO` file.
+
+## Generating the `POT` file
+
+The `POT` file is the one you need to hand to translators, so that they can do their work. The `POT` and` PO` files can easily be interchangeably renamed to change file types without issues.
+
+It is a good idea to offer the POT file along with your plugin, so that translators won’t have to ask you specifically about it.
+
+ There are a couple of ways to generate a `POT` file for your plugin:
+
+### WP-CLI
+
+Install [WP-CLI](https://make.wordpress.org/cli/handbook/installing/) and use the `wp i18n make-pot` command according to the [documentation](#cli/commands/i18n/make-pot).
+
+### Poedit
+
+You can also use [Poedit](http://www.poedit.net/ "http://www.poedit.net/") locally when translating. This is an open source tool for all major OSs. The free Poedit default version supports manual scanning of all source code with Gettext functions. A pro version of it also features one-click scanning for WordPress plugins. After generating the `PO` file you can rename the file to `POT`. If a `MO` was generated then you can delete that file as it is not needed. If you don’t have the pro version you can easily get the [Blank POT](https://github.com/fxbenard/Blank-WordPress-Pot) and use that as the base of your `POT file`. Once you have placed the blank `POT` in the languages folder you can click “Update” in Poedit to update the `POT` file with your strings.
+
+### Grunt Tasks
+
+There are even some grunt tasks that you can use to create the POTs. [grunt-wp-i18n](https://github.com/blazersix/grunt-wp-i18n) &amp; [grunt-pot](https://www.npmjs.org/package/grunt-pot). Steps on setting up grunt are beyond the scope of this documentation, but just be aware that it is possible. Here is an [example Grunt.js and package.json](https://gist.github.com/grappler/10187003) that you can place in the root of your plugin.
+
+## Translate the `PO` file
+
+Save the translated file as `my-plugin-{locale}.mo`. The locale is the language code and/or country code. For example, the locale for German is `de_DE`. From the code example above the text domain is ‘my-plugin’ therefore the German MO and PO files should be named `my-plugin-de_DE.mo` and `my-plugin-de_DE.po`. For more information about language and country codes, see [Installing WordPress in Your Language](https://codex.wordpress.org/Installing_WordPress_in_Your_Language).
+
+There are multiple ways to translate a `PO` file.
+
+### Manually
+
+You can use a text editor to enter the translation. In a text editor it will look like this.
+
+```
+#: plugin-name.php:123
+msgid "Page Title"
+msgstr ""
+```
+
+You enter the translation between the quotation marks. For the German translation it would look like this.
+
+```
+#: plugin-name.php:123
+msgid "Page Title"
+msgstr "Seitentitel"
+```
+
+### Poedit
+
+You can also use [Poedit](http://www.poedit.net/ "http://www.poedit.net/") when translating. The free Poedit default version supports manual scanning of all source code with Gettext functions. A pro version of it also features one-click scanning for WordPress plugins and themes.
+
+### Online Services
+
+A third option is to use an online translation service. The general idea is that you upload the `POT` file and then you can give permission to users or translators to translate your plugin. This allows you to track the changes, always have the latest translation and reduce the translation being done twice.
+
+Here are a few tools that can be used to translate PO files online:
+
+- [Transifex](https://www.transifex.com/ "https://www.transifex.com/")
+- [WebTranslateIt](https://webtranslateit.com/en "https://webtranslateit.com/")
+- [Poeditor](https://poeditor.com/)
+- [Google Translator Toolkit](http://translate.google.com/toolkit/ "http://translate.google.com/toolkit/")
+- [GlotPress](http://blog.glotpress.org/ "http://blog.glotpress.org/")
+
+## Generate MO file
+
+### Command line
+
+`msgfmt` is used to create the MO file. `msgfmt` is part of Gettext package. Otherwise command line can be used. A typical `msgfmt` command looks like this:
+
+**Unix Operating Systems**
+
+```bash
+msgfmt -o filename.mo filename.po
+```
+
+**Windows Operating Systems**
+
+```bash
+msgfmt -o filename.mo filename.po
+```
+
+If you have a lot of `PO` files to convert at once, you can run it as a batch. For example, using a `bash` command:
+
+**Unix Operating Systems**
+
+```bash
+# Find PO files, process each with msgfmt and rename the result to MO
+for file in `find . -name "*.po"` ; do msgfmt -o ${file/.po/.mo} $file ; done
+```
+
+**Windows Operating Systems**  
+For Windows you need to install [Cygwin](http://www.cygwin.com/) first.
+
+Create a file called `potomo.sh` and put the following into it:
+
+```bash
+#! /bin/sh
+# Find PO files, process each with msgfmt and rename the result to MO
+for file in `/usr/bin/find . -name '*.po'` ; do /usr/bin/msgfmt -o ${file/.po/.mo} $file ; done
+```
+
+You can run this command in the command line.
+
+```bash
+cd C:/path/to/language/folder/my-plugin/languages & C:/cygwin/bin/bash -c /cygdrive/c/path/to/script/directory/potomo.sh
+```
+
+### Poedit
+
+`msgfmt` is also integrated in [Poedit](http://www.poedit.net/ "http://www.poedit.net/") allowing you to use it to generate the MO file. There is a setting in the preferences where you can enable or disable it.
+
+![internationalization-localization-04](https://i0.wp.com/developer.wordpress.org/files/2014/10/internationalization-localization-04.jpg?resize=436%2C448&ssl=1)### Grunt task
+
+There is [grunt-po2mo](https://www.npmjs.org/package/grunt-po2mo) that will convert all of the files.
+
+## Tips for Good Translations
+
+### Don’t translate literally, translate organically
+
+Being bi- or multi-lingual, you undoubtedly know that the languages you speak have different structures, rhythms, tones, and inflections. Translated messages don’t need to be structured the same way as the English ones: take the ideas that are presented and come up with a message that expresses the same thing in a natural way for the target language. It’s the difference between creating an equal message and an equivalent message: don’t replicate, replace. Even with more structural items in messages, you have creative license to adapt and change if you feel it will be more logical for, or better adapted to, your target audience.
+
+### Try to keep the same level of formality (or informality)
+
+Each message has a different level of formality or informality. Exactly what level of formality or informality to use for each message in your target language is something you’ll have to figure out on your own (or with your team), but WordPress messages (informational messages in particular) tend to have a politely informal tone in English. Try to accomplish the equivalent in the target language, within your cultural context.
+
+### Don’t use slang or audience-specific terms
+
+Some amount of terminology is to be expected in a blog, but refrain from using colloquialisms that only the “in” crowd will get. If the uninitiated blogger were to install WordPress in your language, would they know what the term means? Words like pingback, trackback, and feed are exceptions to this rule; they’re terminology that are typically difficult to translate, and many translators choose to leave in English.
+
+### Read other software’s localizations in your language
+
+If you get stuck or need direction, try reading through the translations of other popular software tools to get a feel for what terms are commonly used, how formality is addressed, etc. Of course, WordPress has its own tone and feel, so keep that in mind when you’re reading other localizations, but feel free to dig up UI terms and the like to maintain consistency with other software in your language.
+
+## Using Localizations
+
+Place the localization files in the language folder, either in the plugin `languages` folder or as of WordPress 3.7 in the plugin `languages` folder normally under `wp-content`. The full path would be `wp-content/languages/plugins/my-plugin-fr_FR.mo`.
+
+You can change the language in the “General Settings”. If you do not see this option, or the language into which you want to switch i snot listed, do it manually:
+
+- Define `WPLANG` inside of `wp-config.php` to your chosen language. For example, if you wanted to use French, you would have: `define ('WPLANG', 'fr_FR');`
+- Go to `wp-admin/options-general.php` or “Settings” -&gt; “General”
+- Select your language in “Site Language” dropdown
+- Go to `wp-admin/update-core.php`
+- Click “Update translations”, when available
+- Core translations files are downloaded, when available
+
+## Resources
+
+- [Creating .pot file for your theme or plugin](https://foxland.fi/creating-pot-file-for-your-theme-or-plugin/)
+- [How To Internationalize WordPress Plugins](http://tommcfarlin.com/internationalize-wordpress-plugins/)
+- [Translating Your Theme](http://wp.tutsplus.com/tutorials/theme-development/translating-your-theme/)
+- [Blank WordPress POT](https://github.com/fxbenard/Blank-WordPress-Pot)
+- [Improved i18n WordPress tools](https://github.com/grappler/i18n)
+- [How to update translations quickly](http://ulrich.pogson.ch/update-translations-quickly)
+- [Workflow between GitHub/Transifex](http://wp-translations.org/workflow-using-github/)
+- [Gist: Complete Localization Grunt task](https://gist.github.com/grappler/10187003)
+- [WordPress.tv](http://wordpress.tv/) tags: [i18n](http://wordpress.tv/tag/i18n/), [internationalization](http://wordpress.tv/tag/internationalization/) and [translation](http://wordpress.tv/tag/translation/)
+
+---
+
+# Internationalization Security <a name="plugins/internationalization/security" />
+
+Source: https://developer.wordpress.org/plugins/internationalization/security/
+
+Security is often overlooked when talking about internationalization, but there are a few important things to keep in mind.
+
+### Check for Spam and Other Malicious Strings
+
+When a translator submits a localization to you, always check to make sure they didn’t include spam or other malicious words in their translation. You can use [Google Translate](https://translate.google.com/) to translate their translation back into your native language so that you can easily compare the original and translated strings.
+
+### Escape Internationalized Strings
+
+You can’t trust that a translator will only add benign text to their localization; if they want to, they could add malicious JavaScript or other code instead. To protect against that, it’s important to treat internationalized strings like you would any other untrusted input.
+
+If you’re outputting the strings, then they should be escaped.
+
+Insecure:
+
+```php
+_e( 'The REST API content endpoints were added in WordPress 4.7.', 'your-text-domain' ); 
+```
+
+Secure:
+
+```php
+esc_html_e( 'The REST API content endpoints were added in WordPress 4.7.', 'your-text-domain' );
+```
+
+Alternatively, some people choose to rely on a translation verification mechanism, rather than adding escaping to their code. One example of a verification mechanism is [the editor roles](https://make.wordpress.org/polyglots/handbook/glossary/#project-translation-editor) that the WordPress Polyglots team uses for [translate.wordpress.org](https://translate.wordpress.org). This ensures that any translation submitted by an untrusted contributor has been verified by a trusted editor before being accepted.
+
+### Use Placeholders for URLs
+
+Don’t include URLs in internationalized strings, because a malicious translator could change them to point to a different URL. Instead, use placeholders for [printf()](http://php.net/manual/en/function.printf.php) or [sprintf()](http://us3.php.net/manual/en/function.sprintf.php).
+
+Insecure:
+
+```php
+_e(
+	'Please <a href="https://login.wordpress.org/register"> register for a WordPress.org account</a>.',
+	'your-text-domain'
+);
+```
+
+Secure:
+
+```php
+printf(
+	esc_html__( 'Please %1$s register for a WordPress.org account %2$s.', 'your-text-domain' ),
+	'<a href="https://login.wordpress.org/register">',
+	'</a>'
+);
+```
+
+### Compile Your Own .mo Binaries
+
+Often translators will send the compiled .mo file along with the plaintext .po file, but you should discard their .mo file and compile your own, because you have no way of knowing whether or not it was compiled from the corresponding .po file, or a different one. If it was compiled against a different one, then it could contain spam and other malicious strings without your knowledge.
+
+Using PoEdit to generate the binary will override the headers in the .po file, so instead it’s better to compile it from the command line:
+
+```bash
+msgfmt -cv -o /path/to/output.mo /path/to/input.po
+```
+
+---
+
+# The WordPress.org Plugin Directory <a name="plugins/wordpress-org" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/
+
+WordPress.org offers free hosting to anyone who wishes to develop a plugin in our directory.
+
+All plugins hosted here have access to:
+
+- Monitor statistics (see also the [WordPress.org Plugin API](https://codex.wordpress.org/WordPress.org_API#Plugins))
+- Receive feedback and reviews from users
+- Provide support via a free forum
+
+Make sure you review the [Developer FAQ](#plugins/wordpress-org/plugin-developer-faq)!
+
+And make sure that you’ve reviewed the [common issues](#plugins/wordpress-org/common-issues) that the Plugin Review Team typically encounters when reviewing plugins.
+
+If you require assistance with your hosting on WordPress.org, you can contact the plugin team via Slack in `#pluginreview`.
+
+## Requirements
+
+A brief overview:
+
+- Plugins must be compatible with the [GNU General Public License v2](http://www.gnu.org/licenses/license-list.html#GPLCompatibleLicenses) or later. If a license is not specified, code will be considered “GPLv2 or later.”
+- The provided [Subversion](http://subversion.tigris.org/) repository must be used for functional WordPress plugins only.
+- Copyright and Trademark law must be respected.
+- The plugin and developer must not do anything illegal, dishonest, or morally offensive. This includes spamming or harassment.
+
+All plugins and developers must comply with our [Detailed Plugin Guidelines](#plugins/wordpress-org/detailed-plugin-guidelines).
+
+## How to …
+
+If you’re just getting started, it helps to know how to submit your plugin, use SVN, and so on.
+
+- [… plan, submit, and maintain your plugin](#plugins/wordpress-org/planning-submitting-and-maintaining-plugins)
+- [… use SVN (aka Subversion)](#plugins/wordpress-org/how-to-use-subversion)
+- [… manage your readme.txt](#plugins/wordpress-org/how-your-readme-txt-works)
+- [… write proper plugin headers](#plugins/the-basics/header-requirements)
+- [… use plugin assets (header images and icons)](#plugins/wordpress-org/plugin-assets)
+- [… take over an existing plugin](#plugins/wordpress-org/take-over-an-existing-plugin)
+- [… use the support forums](#plugins/wordpress-org/using-the-forums)
+- [… grant users special roles (contributor, supporter, committer, etc)](#plugins/wordpress-org/special-user-roles-capabilities)
+- [… transfer your plugin to a new owner](#plugins/wordpress-org/transferring-your-plugin-to-a-new-owner)
+- [… add your plugin to the block directory](#plugins/wordpress-org/add-your-plugin-to-the-block-directory)
+- .[.. manage your plugin’s security](#plugins/wordpress-org/plugin-security)
+- [… report an insecure plugin](#plugins/wordpress-org/plugin-securityreporting-plugin-security-issues/)
+
+---
+
+# Planning, Submitting, and Maintaining Plugins <a name="plugins/wordpress-org/planning-submitting-and-maintaining-plugins" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/planning-submitting-and-maintaining-plugins/
+
+You’ve written the next [Hello Dolly](https://wordpress.org/plugins/hello-dolly/) and you want the world to use it. What should you do?
+
+## 1. Test once and test again
+
+With any luck, your plugin will be used by lots of people in many different situations and hosting environments. You’ll want to make sure you’ve tested your plugin to make sure it works in any situation and doesn’t frustrate your users.
+
+## 2. Pick a good name
+
+A plugin name should reflect the uniqueness of you and your work. When you pick a name, make sure you’re not violating trademarks or stomping on someone else’s product names. If you’re not working for FaceRange (a fake company), you shouldn’t name your plugin ‘FaceRange’s Dancing Squirrels’ after all. A much better name would be ‘Dancing Squirrels for FaceRange’ for example. It can be hard to come up with a good name, so take your time. Your plugin URL cannot be changed after you submit it, but the display name can change a thousand times.
+
+Display names are generated from the headers in the main plugin file so mind your Ps and Qs.
+
+## 3. Write great documentation
+
+A [README.txt](https://wordpress.org/plugins/developers/#readme) file is the best place to start, as it’s a standard reference point for all plugins. You’ll want to make sure you include:
+
+- A concise description of what your plugin actually does. If it does a lot, it might be better as two plugins.
+- Installation instructions, especially if there’s special configuration to be done. If a user needs to register with your service, make sure you link to it.
+- Directions on how to get support, and what you do and do not support.
+
+## 4. Submit your plugin
+
+In order to submit a plugin, there are three steps:
+
+1. Register on WordPress.org with a valid, regularly checked email address. If you are submitting a plugin on behalf of a company, use an **official** company email for verification.
+2. Whitelist `plugins@wordpress.org` in your email client to ensure you receive email communications.
+3. [Submit your plugin](https://wordpress.org/plugins/developers/add/) with a brief overview of what it does and a complete, ready to go, zip of the plugin. The zip must be the complete version of your plugin, just like you would use to manually upload via the plugin installer.
+
+Once a plugin is queued for review, we will review the code for any issues within 14 business days. Most of the issues can be avoided by following the guidelines. If we do find issues, we will contact the developer(s), and work towards a resolution. Once approved, you’ll receive an email with details as to how to access to a [Subversion Repository](#plugins/wordpress-org/how-to-use-subversion) where you’ll store your plugin.
+
+After you upload your plugin (and a [readme file](https://wordpress.org/plugins/developers/#readme)) in that repository via SVN, it will appear on the [plugin directory](https://wordpress.org/plugins/).
+
+## 5. Push out the first version
+
+The WordPress.org plugins directory is the easiest way for potential users to download and install your plugin. WordPress’ integration with the plugin directory means your plugin can be updated by the user in a couple of clicks.
+
+When you’re ready to release your first version, you’ll want to [sign up](https://wordpress.org/plugins/add/). After a review process is completed successfully, you’ll be granted a Subversion Repository for your code. We have documentation about [using SVN on WordPress.org](#plugins/wordpress-org/how-to-use-subversion), which is a slightly different workflow than you may be familiar with if you use GIT.
+
+## 6. Embrace open source
+
+Open source is one of the most powerful ideas of our time because it empowers collaboration across borders. By encouraging contributions, you’re allowing others to love your code as much as you do. There are several options to open source your code:
+
+- [Github](http://github.com) makes it simple to get others involved with your project. Other developers and users can submit bug fixes or reports, feature requests, or brand new contributions easily. Github has a [great documentation portal](https://help.github.com/) and even an [interactive demo](http://try.github.com/) if you’ve never used Git before.
+    - [Bitbucket](https://bitbucket.org/) and [Gitlab](https://about.gitlab.com/) are alternatives with similar features.
+- The WordPress.org Plugin Directory provides and requires you to use a [Subversion repository](#plugins/wordpress-org/how-to-use-subversion).
+
+## 7. Listen to your users
+
+You’ll often find that your users put your code through many more test cases than you could’ve imagined. This can be tremendously valuable feedback.
+
+Releasing your code through WordPress.org means your plugin automatically has a support forum. Use it! You can subscribe to receive new posts by email and respond to your users in a timely manner. They just want to love your plugin as much as you do.
+
+Jetpack has a post you can point to about [writing great bug reports](http://jetpack.me/2011/11/18/how-to-write-a-great-bug-report/).
+
+## 8. Regularly push new versions
+
+The best plugins are the ones that keep iterating over time, pushing small changes along the way. Don’t let your hard work go stale by waiting too long to update. Keep in mind, constant upgrades can cause ‘Update Fatigue’ and users will stop upgrading. Keeping a balance between too few updates and too many updates is important.
+
+## 9. Rinse and repeat
+
+Like in other parts of life, the best things come from patience and hard work.
+
+---
+
+# Block Specific Plugin Guidelines <a name="plugins/wordpress-org/block-specific-plugin-guidelines" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/block-specific-plugin-guidelines/
+
+All Block Specific plugins must also comply with the [overall plugin guidelines](#plugins/wordpress-org/detailed-plugin-guidelines). These additional guidelines are unique to block specific plugins.
+
+## Guide to submitting plugins to the Block Directory
+
+The goal of the [Block Directory](https://wordpress.org/plugins/browse/block/) is to provide a safe place for WordPress users to find and install new blocks.
+
+### User Expectations
+
+- Users will have a place they can go, both within their WordPress admin and on WordPress.org, where they can download and install blocks that have been pre-vetted for major security issues.
+- Users will be able to one-click install blocks from their admin, one at a time.
+- Blocks will appear in their block library after installation and activation.
+- Blocks will work seamlessly and immediately without intrusive advertisements or upselling.
+
+### Developer Expectations
+
+- Developers will have a concrete set of requirements and guidelines to follow when writing blocks for the Block Directory.
+- Following these guidelines will help ensure that the blocks they develop can be seamlessly installed in the editor.
+- Blocks submitted to the Block Directory are held to stricter technical and policy rules than WordPress plugins in general.
+- Plugins with blocks that do not meet the Block Directory Guidelines may still be submitted to the Plugin Directory.
+
+### Definitions
+
+For the purposes of the Block Directory, we distinguish between two types of plugins:
+
+1. Plugins that exist solely to distribute a block.
+2. All other plugins, including those that bundle many independent blocks, plugins that contain blocks in addition to other functionality, and plugins with no blocks at all.
+
+These guidelines apply specifically to the first type of plugin, which is called a Block Plugin. If a plugin is of the second type, then the further guidelines and restrictions do not apply. All plugins, be they block-only or not, are required to comply with the [Detailed Plugin Guidelines](#plugins/wordpress-org/detailed-plugin-guidelines).
+
+### Block Plugins and the Block Directory
+
+The Block Directory contains only Block Plugins, that is to say plugins that contain only a single, independent, top-level block and a minimum of supporting code. Block plugins have the following characteristics:
+
+1. A specific type of WordPress plugin, with the same structure including a `readme.txt` file.
+2. Containing only blocks (typically a single top-level block).
+3. Contain a minimum of server-side (i.e. PHP) code.
+4. Self-contained with no UI outside of the post editor.
+
+In addition to the guidelines that apply to all WordPress plugins, Block Plugins that are submitted to the Block Directory must adhere to these guidelines:
+
+### Guidelines
+
+#### 1. Block Plugins are for the Block Editor.
+
+A Block Plugin must contain a block, and a minimum of other supporting code. It may not contain any UX outside of the editor, such as WordPress options or `wp-admin` menus. Server-side code should be kept to a minimum.
+
+Plugins that only extend or provide styles for other, pre-existing blocks are currently not eligible for inclusion in the Block Directory. At this time, they are not supported by the Block Editor’s seamless install process. Only Block Plugins that register a new block are currently supported.
+
+#### 2. Block Plugins are separate blocks.
+
+Block plugins are intended to be single purpose, separate, independent blocks, not bundles or compendiums of many blocks. In most cases, a Block Plugin should contain only one single top-level block. The Block Directory will not include collections of blocks that could be reasonably split up into separate, independent, blocks.
+
+Block plugins may contain more than one block where a clearly necessary parent/child or container/content dependency exists; for example a list block that contains list item blocks.
+
+#### 3. Plugin and block names should reflect the block’s purpose.
+
+Plugin titles and block titles should describe what the block does in a way that helps users easily understand its purpose. In most cases the plugin title and the block title should be identical or very similar. Some examples of good plugin and block names include:
+
+`Rainbow Block`  
+`Sepia Image Grid`  
+`Business Hours Block`
+
+Please avoid plugin and block titles unrelated to the block itself, or that cannot be easily distinguished from core blocks. Some examples of unhelpful plugin and block names are things such as:
+
+`PluginCo Inc Block`  
+`Widget`  
+`Image Block`
+
+The same trademark restrictions for plugin titles exist for block titles and names. This means that a block may not be named “Facerange Block” unless developed by a legal representative of Facerange.
+
+#### 3a. Block names should be unique and properly namespaced.
+
+The block name (meaning the [`name` parameter to `registerBlockType()`](#block-editor/developers/block-api/block-registration) and [`name` in `block.json`](https://github.com/WordPress/gutenberg/blob/master/docs/rfc/block-registration.md#name)) must be unique to the block. As with titles, please respect trademarks and other projects’ commonly used names, so as not to conflict with them.
+
+The namespace prefix to the block name should reflect either the plugin author, or the plugin slug. For example:
+
+`name: "my-rainbow-block-plugin/rainbow"`, or  
+`name: "john-doe/rainbow"`, or  
+`name: "pluginco/rainbow"`.
+
+The namespace may not be a reserved one such as `core` or `wordpress`.
+
+#### 4. Block Plugins must include a `block.json` file.
+
+The Block Registration RFC outlines the format of a `block.json` file: <https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md>
+
+Block Plugins must include a valid `block.json` file. In addition to the requirements specified in the RFC, the `block.json` must include the following attributes:
+
+- `name`
+- `title`
+- At least one of: `script`, `editorScript`
+- At least one of: `style`, `editorStyle`
+
+#### 5. Block Plugins must work independently.
+
+Block Plugins must function by themselves without requiring any external dependencies such as another WordPress plugin or theme.
+
+A Block Plugin may make use of code or hooks in another WordPress plugin or theme, provided the Block Plugin is still usable without that plugin or theme installed. For example, a Recipe Block Plugin is permitted to apply a filter implemented in a slider plugin to improve its image display, as long as the Recipe Block Plugin is still usable without the slider plugin.
+
+#### 6. Block Plugins should work seamlessly.
+
+Block Plugins are intended to work seamlessly and instantly when installed from the editor. That means they should not encumber the user with additional steps or prerequisites such as installing another plugin or theme, signing up for an account, or logging in or manually connecting to an external service.
+
+No form of payment is permitted for the use of a Block Plugin. While it is allowed to use the donation link feature in the plugin’s readme, or to link from the full plugin listing, the Block Plugin itself must be free to use. Block plugins that do require a paid service or include upselling and premium features are still permitted in the main WordPress Plugin Directory, subject to its guidelines.
+
+Block Plugins may use an external/cloud API where necessary, provided it can be done seamlessly without requiring a login or activation key.
+
+They should not rely on an external API or cloud service for functions that could be performed locally.
+
+#### 7. Server-side code should be kept to a minimum.
+
+Since Block Plugins are WordPress plugins, they necessarily contain PHP code for metadata and initialization. As much as possible, they should avoid including additional PHP code or server-side libraries. The WordPress REST API should be the preferred interface to WordPress, rather than custom server-side code.
+
+There are limits to the REST API, and situations where server-side PHP is the only performant way to implement a feature. In those situations, PHP code may be included, provided it is clearly written, used as little as possible, and well documented.
+
+#### 8. Must not include advertisements or promotional notices.
+
+Block Plugins must not include code that displays alerts, dashboard notifications, or similar obtrusive messages unrelated to the purpose of the block.
+
+---
+
+# Add Your Plugin to the Block Directory <a name="plugins/wordpress-org/add-your-plugin-to-the-block-directory" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/add-your-plugin-to-the-block-directory/
+
+There are two main directory listings of block related plugins.
+
+- Plugins that are **only** blocks
+- Plugins that contain blocks
+
+A plugin can be listed in both, however there will be no benefit to your plugin SEO or ranking due to either. The only benefit to being a plugin that is only a block is that you gain the ability to be added to the Block Directory in the Block Editor itself, for immediate installation.
+
+## Block Only Plugins
+
+Block Only plugins are plugins that **only** contain blocks.
+
+Block Plugins are required to be much smaller and more minimalist than a regular WordPress plugin in order to be safely installed with a single click. That means as well as keeping to the regular [plugin guidelines](#plugins/wordpress-org/detailed-plugin-guidelines) you’ll also need to follow some additional rules. In particular, you should stick to mostly JavaScript code and keep PHP to the bare minimum; and not add any UI or other code outside of the Gutenberg editor.
+
+If you’re a committer of a block plugin that does meet the criteria for adding it to the [Block Directory](https://wordpress.org/plugins/browse/block/) as confirmed by the Checker tool, you can then add it yourself [using the Block Checker tool](https://wordpress.org/plugins/developers/block-plugin-validator/):
+
+![Block checker tool interface with a "Add Plugin Name to the Block Directory" button](https://i0.wp.com/developer.wordpress.org/files/2020/08/Screen-Shot-2020-07-10-at-1.29.25-pm.png?resize=1024%2C308&ssl=1)Likewise you can remove it at any time using that same tool if you notice problems or would prefer it wasn’t included.
+
+**Helpful tools:**
+
+- [Block Creation tutorial](https://github.com/WordPress/gutenberg/pull/22831/files?short_path=c4d2c28#diff-c4d2c286eac33acdc7571032a984e0ca) – how to write a block plugin
+- [Block Submission tutorial](https://github.com/WordPress/gutenberg/pull/23545/files?short_path=555f1c3#diff-555f1c31856d86ed5ff0d492b5a127c1) – tips and suggestions for ensuring your block is ready for the Block Directory
+- [Block Checker tool](https://make.wordpress.org/plugins/2020/07/11/you-can-now-add-your-own-plugins-to-the-block-directory/) – validate plugin for inclusion
+
+## Plugins Containing Blocks
+
+Many older plugins, as well as larger and more complex plugins, may contain blocks. They also will contain other features, like widgets. An example of this sort of plugin would be Jetpack or Yoast SEO. While they have a large number of features, they also contain some blocks.
+
+If you’ve written a plugin that introduces or improves blocks, or know of a plugin that does, **email us at <plugins@wordpress.org>** and request your plugin be added. At that time, your plugin will be reviewed to confirm this request, but also to ensure you meet all current guideline standards.
+
+Before you email, please make certain your plugin is compatible with the latest version of WordPress and that it is free from all security issues. If there are security or guideline issues in your plugin, it may be closed pending your corrections.
+
+---
+
+# Release Confirmation Emails <a name="plugins/wordpress-org/release-confirmation-emails" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/release-confirmation-emails/
+
+In order to better protect plugins from inadvertent releases, we’ve added a new **opt-in** feature for plugins: Release Confirmation.
+
+When enabled on a plugin, to release a new version of a plugin you’ll need to tag a new release in SVN as normal, and then confirm on the [Release Management](https://wordpress.org/plugins/developers/releases/) dashboard.
+
+Access to the Release Management dashboard is limited to plugin committers, and all actions require confirmation via a tokenised link which is emailed to you as needed.
+
+When WordPress.org detects a new version has been tagged in SVN, all committers are automatically sent an email notifying them that a new release is pending, who made it, and a link to the dashboard to confirm the release.  
+Plugin committers will also see a banner on the top of your WordPress.org plugins page directing you to the Release Management dashboard.
+
+Once confirmed, the release will proceed as usual and should update within a few minutes.
+
+## Requirements
+
+- Plugins are required to use tags for new versions, you cannot release your plugin from trunk.
+- You must still update the `Stable Tag:` header in your trunk/readme.txt file.
+- Once released, alterations cannot be made to the tagged version. This includes changing the readme (for tested up to).
+- Committers must be able to receive emails directly, and not have it go to a shared inbox or support ticket system.
+
+## Requiring double approval
+
+Release Confirmations are opt-in, but only requires a singular committer to confirm the release.  
+If a group would like to require multiple committers to approve a release, please contact the Plugins team with your request.
+
+---
+
+# Transferring Your Plugin to a New Owner <a name="plugins/wordpress-org/transferring-your-plugin-to-a-new-owner" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/transferring-your-plugin-to-a-new-owner/
+
+While any plugin can have an unlimited number of committers and support reps, there is only one official owner of a plugin at any time. This is akin to how a post on WordPress can only have one official post author.
+
+## For Plugins With Under 10,000 Users
+
+If you’re transferring your plugin to a new owner, there are two steps that must take place.
+
+First, add the new user as a **committer** to the plugin:
+
+- go to `https://wordpress.org/plugins/YOURPLUGIN/advanced` and add their username in as a committer
+- update the `readme.txt` to add their userID as an author
+
+Next, go to the Advanced tab and scroll down to the Danger Zone. There you will see a section for **Transfer Your Plugin**. Pick someone from the dropdown and click the button.
+
+If there are no other committers, the plugin will not be available to be transferred, so you must do that first.
+
+[![Transfer this plugin interface with a selector for the new owner and a "Please transfer -Plugin Name-" button](https://i0.wp.com/developer.wordpress.org/files/2020/04/transfer.jpeg?resize=1024%2C558&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2020/04/transfer.jpeg?ssl=1)## For Plugins with OVER 10,000 Users (or are beta/featured)
+
+In order to prevent abuse, larger plugins and those officially recognized as featured/beta are restricted from these changes.
+
+To transfer a plugin in this case, you will need to email `plugins@wordpress.org` from the **CURRENT** owner’s email the following information:
+
+1. A *brief* explanation of the reason for the transfer
+2. The user ID of the new owner
+3. If applicable, any changes to the status of being a featured/beta plugin
+
+Most requests are processed without issue, however should a plugin be determined to be critical to the WordPress.org project, or should there be reason to believe the request was invalid (i.e. not sent from the current owner’s email, or an email address positively connected back to them), it may be denied or delayed.
+
+---
+
+# Preventing WordPress from Updating Your External Plugin <a name="plugins/wordpress-org/preventing-wordpress-from-updating-your-external-plugin" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/preventing-wordpress-from-updating-your-external-plugin/
+
+The information on this page is meant for use only on plugins **not** hosted on WordPress.org. Do not attempt to use this on your code hosted in the directory.
+
+If you host your plugin on WordPress.org, we handle all updates for you. As such, the steps in this document are **prohibited** in all plugins submitted to the directory. Any plugin hosted here that is found to include this plugin will be closed and the developer required to remove it in order for their plugin to be restored.
+
+We have chosen to document it here for the education of developers, as well as to ensure the global WordPress community can be safer.
+
+## Always Use Good Folder Names
+
+Before we get into the code, we must stress the absolute best way to ensure your plugin won’t get overwritten by an update from WordPress.org is to use a good name. If you’re making a plugin for your company, give it a folder name like `companyname-function-plugin` — for example, if you work for FaceRange and you’re making a status plugin, you could name it `facerange-status-plugin`
+
+Not only would we not accept it for using the prohibited term ‘plugin’, the plugin team would validate that the plugin owner **legally** represents FaceRange.
+
+## Update URI
+
+As of WordPress 5.8, we have added in a feature to how the WordPress.org API checks for updates, and allowed it to be blocked by the use of a new header: Update URI.
+
+Let’s say you have a plugin you made for your own site, and you gave it the folder name of `my-plugin`. That is a generic folder name, and has a high probability that someone else may use it. It’s also not a name we would allow you to block in our system, due to it’s generic nature.
+
+The Update URI header can be added to the plugin headers. Look in your main plugin file for this section:
+
+```php
+/**
+ * Plugin Name: My Cool Plugin
+ * Plugin URI: https://example.com/my-plugin/
+ * Description: My Plugin does cool things.
+ * Version: 1.0
+ * Author: the team
+ * Author URI: https://example.com/
+ * Text Domain: my-plugin
+ * License: GPLv2
+ * License URI: https://opensource.org/licenses/gpl-2.0.php
+ */
+```
+
+To apply it, add a new header for **Update URI** and put a **non** WordPress.org URI in the value:
+
+```php
+ * Update URI: https://example.com/my-updater/
+```
+
+You can also set it to `Update URI: false` if you want. As long as it does not include `worpress.org/plugins` or `w.org/plugins` it will be protected.
+
+## Filtering Updates
+
+Another method, which is supported on older versions of WordPress, is to filter external API requests and discard any for your plugin.
+
+This code, which was written by [Mark Jaquith](https://markjaquith.wordpress.com/2009/12/14/excluding-your-plugin-or-theme-from-update-checks/), can be added to your own plugin:
+
+```php
+function example_hidden_plugin_12345( $r, $url ) {
+    if ( 0 !== strpos( $url, 'https://api.wordpress.org/plugins/update-check' ) )
+        return $r; // Not a plugin update request. Bail immediately.
+  
+    $plugins = unserialize( $r['body']['plugins'] );
+    unset( $plugins->plugins[ plugin_basename( __FILE__ ) ] );
+    unset( $plugins->active[ array_search( plugin_basename( __FILE__ ), $plugins->active ) ] );
+    $r['body']['plugins'] = serialize( $plugins );
+    return $r;
+}
+ 
+add_filter( 'http_request_args', 'example_hidden_plugin_12345', 5, 2 );
+```
+
+What that does is check if the update request is from the WordPress.org api, and if it matches the plugin folder and file name of *this* plugin. If it does, the plugin is removed from the list of plugins to check for updates.
+
+---
+
+# Detailed Plugin Guidelines <a name="plugins/wordpress-org/detailed-plugin-guidelines" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/
+
+Last Updated: March 15, 2024
+
+Adding a Block Only plugin? Please read the [Block Specific Guidelines](#plugins/wordpress-org/block-specific-plugin-guidelines)
+
+## The Plugin Directory
+
+The goal of the WordPress Plugin Directory is to provide a safe place for all WordPress users – from the non-technical to the developer – to download plugins that are consistent with the goals of the WordPress project.
+
+To that end, we want to ensure a simple and transparent process for developers to submit plugins for the directory. As part of our ongoing efforts to make the plugin directory inclusion process more transparent, we have created a list of developer guidelines. We strive to create a level playing field for all developers.
+
+If you have suggestions to improve the guidelines, or questions about them, please email `plugins@wordpress.org` and let us know.
+
+## Developer Expectations
+
+Developers, all users with commit access, and all users who officially support a plugin are expected to abide by the following guidelines:
+
+- Plugin Directory Guidelines (this document)
+- [Community Guidelines](https://make.wordpress.org/handbook/community-code-of-conduct/)
+- [Forums Guidelines](https://wordpress.org/support/guidelines/) (should they use the forums/reviews)
+
+Violations may result in plugins or plugin data (for previously approved plugins) being removed from the directory until the issues are resolved. Plugin data, such as user reviews and code, may not be restored depending on the nature of the violation and the results of a peer-review of the situation. Repeat violations may result in all the author’s plugins being removed and the developer being banned from hosting plugins on WordPress.org.
+
+It is the responsibility of the plugin developer to ensure their contact information on WordPress.org is up to date and accurate, in order that they receive all notifications from the plugins team. Auto-replies and emails that route to a support system are not permitted as they historically prevent humans from addressing emails in a timely fashion.
+
+All code in the directory should be made as secure as possible. Security is the ultimate responsibility of the plugin developer, and the Plugin Directory enforces this to the best of our ability. Should a plugin be found to have security issues, it will be closed until the situation is resolved. In extreme cases the plugin may be updated by the WordPress Security team and propagated for the safety of the general public.
+
+While we attempt to account for as many relevant interpretations of the guidelines as possible, it is unreasonable to expect that every circumstance will be explicitly covered. If you are uncertain whether a plugin might violate the guidelines, please contact `plugins@wordpress.org` and ask.
+
+## The Guidelines
+
+### 1. Plugins must be compatible with the GNU General Public License
+
+Although any GPL-compatible license is acceptable, using the same license as WordPress — “GPLv2 or later” — is strongly recommended. All code, data, and images — anything stored in the plugin directory hosted on WordPress.org — must comply with the GPL or a GPL-Compatible license. Included third-party libraries, code, images, or otherwise, must be compatible. For a specific list of compatible licenses, please read the [GPL-Compatible license list](https://www.gnu.org/philosophy/license-list.html#GPLCompatibleLicenses) on gnu.org.
+
+### 2. Developers are responsible for the contents and actions of their plugins.
+
+It is the sole responsibility of plugin developers to ensure all files within their plugins comply with the guidelines. Intentionally writing code to circumvent guidelines, or restoring code they were asked to remove, is prohibited (see #9 illegal/dishonest actions).
+
+Developers are expected to confirm, before uploading to SVN, the licensing of all included files, from original source code to images and libraries. In addition, they must comply to the terms of use for all third party services and APIs utilized by their plugins. If there is no way to validate the licensing of a library or the terms of an API, then they cannot be used.
+
+### 3. A stable version of a plugin must be available from its WordPress Plugin Directory page.
+
+The only version of the plugin that WordPress.org distributes is the one in the directory. Though people may develop their code somewhere else, users will be downloading from the directory, not the development environment.
+
+Distributing code via alternate methods, while not keeping the code hosted here up to date, may result in a plugin being removed.
+
+### 4. Code must be (mostly) human readable.
+
+Obscuring code by hiding it with techniques or systems similar to `p,a,c,k,e,r`‘s obfuscate feature, uglify’s mangle, or unclear naming conventions such as `$z12sdf813d`, is not permitted in the directory. Making code non-human readable forces future developers to face an unnecessary hurdle, as well as being a common vector for hidden, malicious code.
+
+We require developers to provide public, maintained access to their source code and any build tools in one of the following ways:
+
+- Include the source code in the deployed plugin
+- A link in the readme to the development location
+
+We strongly recommend you document how any development tools are to be used.
+
+### 5. Trialware is not permitted.
+
+Plugins may not contain functionality that is restricted or locked, only to be made available by payment or upgrade. Functionality may not be disabled after a trial period or quota is met. In addition, plugins that provide sandbox only access to APIs and services are also trial, or test, plugins and not permitted.
+
+Paid functionality in services *is* permitted (see guideline 6: serviceware), provided all the code inside a plugin is fully available. We recommend the use of add-on plugins, hosted outside of WordPress.org, in order to exclude the premium code. Situations where a plugin is intended as a developer tool only will be reviewed on a case by case basis.
+
+Attempting to upsell the user on ad-hoc products and features *is* acceptable, provided it falls within bounds of guideline 11 (hijacking the admin experience).
+
+### 6. Software as a Service is permitted.
+
+Plugins that act as an interface to some external third party service (e.g. a video hosting site) are allowed, even for paid services. The service itself must provide functionality of substance and be clearly documented in the readme file submitted with the plugin, preferably with a link to the service’s Terms of Use.
+
+Services and functionality *not* allowed include:
+
+- A service that exists for the sole purpose of validating licenses or keys while all functional aspects of the plugin are included locally is not permitted.
+- Creation of a service by moving arbitrary code out of the plugin so that the service may falsely appear to provide supplemented functionality is prohibited.
+- Storefronts that are not services. A plugin that acts only as a front-end for products to be purchased from external systems will not be accepted.
+
+### 7. Plugins may not track users without their consent.
+
+In the interest of protecting user privacy, plugins may not contact external servers without *explicit* and authorized consent. This is commonly done via an ‘opt in’ method, requiring registration with a service or a checkbox within the plugin settings. Documentation on how any user data is collected, and used, should be included in the plugin’s readme, preferably with a clearly stated privacy policy.
+
+Some examples of prohibited tracking include:
+
+- Automated collection of user data without explicit confirmation from the user.
+- Intentionally misleading users into submitting information as a requirement for use of the plugin itself.
+- Offloading assets (including images and scripts) that are unrelated to a service.
+- Undocumented (or poorly documented) use of external data (such as blocklists).
+- Third-party advertisement mechanisms which track usage and/or views.
+
+An exception to this policy is Software as a Service, such as Twitter, an Amazon CDN plugin, or Akismet. By installing, activating, registering, and configuring plugins that utilize those services, consent is granted for those systems.
+
+### 8. Plugins may not send executable code via third-party systems.
+
+Externally loading code from documented services is permitted, however all communication must be made as securely as possible. Executing outside code within a plugin when not acting as a service is not allowed, for example:
+
+- Serving updates or otherwise installing plugins, themes, or add-ons from servers other than WordPress.org’s
+- Installing premium versions of the same plugin
+- Calling third party CDNs for reasons other than font inclusions; all non-service related JavaScript and CSS must be included locally
+- Using third party services to manage regularly updated lists of data, when not explicitly permitted in the service’s terms of use
+- Using iframes to connect admin pages; APIs should be used to minimize security risks
+
+Management services that interact with and push software down to a site *are* permitted, provided the service handles the interaction on it’s own domain and not within the WordPress dashboard.
+
+### 9. Developers and their plugins must not do anything illegal, dishonest, or morally offensive.
+
+While this is subjective and rather broad, the intent is to prevent plugins, developers, and companies from abusing the freedoms and rights of end users as well as other plugin developers.
+
+This includes (but is not restricted to) the following examples:
+
+- Artificially manipulating search results via keyword stuffing, black hat SEO, or otherwise
+- Offering to drive more traffic to sites that use the plugin
+- Compensating, misleading, pressuring, extorting, or blackmailing others for reviews or support
+- Implying users must pay to unlock included features
+- Creating accounts to generate fake reviews or support tickets (i.e. sockpuppeting)
+- Taking other developers’ plugins and presenting them as original work
+- implying that a plugin can create, provide, automate, or guarantee legal compliance
+- Utilizing the user’s server or resources without permission, such as part of a botnet or crypto-mining
+- Violations of the [WordPress.org Community Code of Conduct](https://make.wordpress.org/handbook/community-code-of-conduct/)
+- Violations of the [WordCamp code of conduct](https://make.wordpress.org/community/handbook/wordcamp-organizer/planning-details/code-of-conduct/)
+- Violations of the [Forum Guidelines](https://wordpress.org/support/guidelines/)
+- Harassment, threats, or abuse directed at any other member of the WordPress community
+- Falsifying personal information to intentionally disguise identities and avoid sanctions for previous infractions
+- Intentionally attempting to exploit loopholes in the guidelines
+
+### 10. Plugins may not embed external links or credits on the public site without explicitly asking the user’s permission.
+
+All “Powered By” or credit displays and links included in the plugin code must be optional and default to *not* show on users’ front-facing websites. Users must opt-in to displaying any and all credits and links via clearly stated and understandable choices, not buried in the terms of use or documentation. Plugins may not require credit or links be displayed in order to function. Services *are* permitted to brand their output as they see fit, provided the code is handled in the service and not the plugin.
+
+### 11. Plugins should not hijack the admin dashboard.
+
+Users prefer and expect plugins to feel like part of WordPress. Constant nags and overwhelming the admin dashboard with unnecessary alerts detract from this experience.
+
+Upgrade prompts, notices, alerts, and the like must be limited in scope and used sparingly, be that contextually or only on the plugin’s setting page. Site wide notices or embedded dashboard widgets *must* be dismissible or self-dismiss when resolved. Error messages and alerts must include information on how to resolve the situation, and remove themselves when completed.
+
+Advertising within the WordPress dashboard should be avoided, as it is generally ineffective. Users normally only visit settings pages when they’re trying to solve a problem. Making it harder to use a plugin does not generally encourage a good review, and we recommend limiting any ads placed therein. Remember: tracking referrals via those ads is not permitted (see guideline 7) and most third-party systems do not permit back-end advertisements. Abusing the guidelines of an advertising system will result in developers being reported upstream.
+
+Developers are welcome and encouraged to include links to their own sites or social networks, as well as locally (within the plugin) including images to enhance that experience.
+
+### 12. Public facing pages on WordPress.org (readmes) must not spam.
+
+Public facing pages, including readmes and translation files, may not be used to spam. Spammy behavior includes (but is not limited to) unnecessary affiliate links, tags to competitors plugins, use of over 5 tags total, blackhat SEO, and keyword stuffing.
+
+Links to directly required products, such as themes or other plugins required for the plugin’s use, are permitted within moderation. Similarly, related products may be used in tags but not competitors. If a plugin is a WooCommerce extension, it may use the tag ‘woocommerce.’ However if the plugin is an alternative to Akismet, it may not use that term as a tag. Repetitive use of a tag or specific term is considered to be keyword stuffing, and is not permitted.
+
+Readmes are to be written for people, not bots.
+
+In all cases, affiliate links must be disclosed and must directly link to the affiliate service, not a redirect or cloaked URL.
+
+### 13. Plugins must use WordPress’ default libraries.
+
+WordPress includes a number of useful libraries, such as jQuery, Atom Lib, SimplePie, PHPMailer, PHPass, and more. For security and stability reasons plugins may not include those libraries in their own code. Instead plugins must use the versions of those libraries packaged with WordPress.
+
+For a list of all javascript libraries included in WordPress, please review [Default Scripts Included and Registered by WordPress](#reference/functions/wp_enqueue_script).
+
+### 14. Frequent commits to a plugin should be avoided.
+
+The SVN repository is a release repository, not a development one. All commits, code or readme files, will trigger a regeneration of the zip files associated with the plugin, so only code that is ready for deployment (be that a stable release, beta, or RC) should be pushed to SVN. Including a descriptive and informative message with each commit is strongly recommended. Frequent ‘trash’ commit messages like ‘update’ or ‘cleanup’ makes it hard for others to follow changes. Multiple, rapid-fire commits that only tweak minor aspects of the plugin (including the readme) cause undue strain on the system and can be seen as gaming Recently Updated lists.
+
+An exception to this is when readme files are updated solely to indicate support of the latest release of WordPress.
+
+### 15. Plugin version numbers must be incremented for each new release.
+
+Users are only alerted to updates when the plugin version is increased. The trunk readme.txt must always reflect the current version of the plugin. For more information on tagging, please read our [SVN directions on tagging](#plugins/wordpress-org/how-to-use-subversion) and [how the readme.txt works](#plugins/wordpress-org/how-your-readme-txt-works).
+
+### 16. A complete plugin must be available at the time of submission.
+
+All plugins are examined prior to approval, which is why a zip file is required. Names cannot be “reserved” for future use or to protect brands (see #17: respect brands). Directory names for approved plugins that are not used may be given to other developers.
+
+### 17. Plugins must respect trademarks, copyrights, and project names.
+
+The use of trademarks or other projects as the sole or initial term of a plugin slug is prohibited unless proof of legal ownership/representation can be confirmed. For example, the [WordPress Foundation has trademarked the term “WordPress”](http://wordpressfoundation.org/trademark-policy/) and it is a violation to use “wordpress” in a domain name. This policy extends to plugin slugs, and we will not permit a slug to begin with another product’s term.
+
+For example only employees of Super Sandbox should use the slug “super-sandbox,” or their brand in a context such as “Super Sandbox Dancing Sloths.” Non-employees should use a format such as “Dancing Sloths for Superbox” instead to avoid potentially misleading users into believing the plugin was developed by Super Sandbox. Similarly, if you don’t represent the “MellowYellowSandbox.js” project, it’s inappropriate to use that as the name of your plugin.
+
+Original branding is recommended as it not only helps to avoid confusion, but is more memorable to the user.
+
+### 18. We reserve the right to maintain the Plugin Directory to the best of our ability.
+
+Our intent is to enforce these guidelines with as much fairness as humanly possible. We do this to ensure overall plugin quality and the safety of their users. To that end, we reserve the following rights:
+
+- … to update these guidelines at any time.
+- … to disable or remove any plugin from the directory, even for reasons not explicitly covered by the guidelines.
+- … to grant exceptions and allow developers time to address issues, even security related.
+- … to remove developer access to a plugin in lieu of a new, active, developer.
+- … to make changes to a plugin, without developer consent, in the interest of public safety.
+
+In return, we promise to use those rights sparingly and with as much respect as possible for both end users and developers.
+
+---
+
+# Using Subversion <a name="plugins/wordpress-org/how-to-use-subversion" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/how-to-use-subversion/
+
+SVN, or Subversion, is a version control system similar to Git. It can be used via command line, or one of numerous GUI applications, such as [Tortoise SVN](https://tortoisesvn.net/), [SmartSVN](https://www.smartsvn.com/), and more. If you’re new to SVN, we recommend reviewing a [comparison of SVN clients](https://en.wikipedia.org/wiki/Comparison_of_Subversion_clients) before deciding which is best for you.
+
+This document is *not* a complete and robust explanation for using SVN, but more a quick primer to get started with plugins on WordPress.org. For more comprehensive documentation, see [The SVN Book](http://svnbook.red-bean.com/).
+
+We’ll describe here some of the basics about using SVN as it relates to WordPress.org hosting. The basic concepts of SVN, and nearly all code repository services, remain the same.
+
+For additional information, please see these documents:
+
+- [How the readme.txt works](#plugins/wordpress-org/how-your-readme-txt-works)
+- [How plugin assets (header images and icons) work](#plugins/wordpress-org/plugin-assets)
+
+SVN and the Plugin Directory are a *release* repository. Unlike Git, you shouldn’t commit every small change, as doing so can degrade performance. Please only push **finished** changes to your SVN repository.
+
+## Overview
+
+All your files will be centrally stored in the **svn repository** on our servers. From that repository, anyone can **check out** a copy of your plugin files onto their local machine, but, as a plugin author, only you have the authority to **check in**. That means you can make changes to the files, add new files, and delete files on your local machine and upload those changes back to the central server. It’s this process of checking in that updates both the files in the repository and also the information displayed in the WordPress.org Plugin Directory.
+
+Subversion keeps track of all these changes so that you can go back and look at old versions or **revisions** later if you ever need to. In addition to remembering each individual revision, you can tell subversion to **tag** certain revisions of the repository for easy reference. Tags are great for [labeling different releases of your plugin](#task-3) and are the only fully supported method of ensuring the correct versions are seen on WordPress.org and updated for users.
+
+## Your Account
+
+Your account for SVN will be the same username (not the email) of the account you used when you submitted the plugin. This is the username you use for the WordPress forums as well.
+
+WordPress.org allows setting a SVN-specific password for your account, this can be done in [your Account Settings](https://profiles.wordpress.org/me/profile/edit/group/3/?screen=svn-password). For more information on why and how to use it, please see [this Meta Guide](https://make.wordpress.org/meta/handbook/tutorials-guides/svn-access/).
+
+Remember, *capitalization matters* — if your username is JaneDoe, then you must use the capital J and D or else SVN will fail. You can see the specific capitalization of your name in your account settings: <https://profiles.wordpress.org/me/profile/edit/group/3/?screen=svn-password>
+
+## SVN Folders
+
+There are three directories created by default in all SVN repositories.
+
+```bash
+/assets/
+/tags/
+/trunk/
+```
+
+- Use `assets` for [screenshots, plugin headers, and plugin icons](#plugins/wordpress-org/plugin-assets).
+- Development work belongs in `trunk`.
+- Releases go in `tags`.
+
+*The /branches/ directory is no longer created by default, as it was often unused.*
+
+### Trunk
+
+Do not put your *main* plugin file in a subfolder of trunk, like `/trunk/my-plugin/my-plugin.php` as that will break downloads. You may use subfolders for included files.
+
+The `/trunk` directory is where your plugin code should live. The trunk can be considered to be the latest and greatest code, however this is not necessarily the latest *stable* code. Trunk is for the development version. Hopefully, the code in trunk should always be working code, but it may be buggy from time to time because it’s not necessarily the “stable” version. For simple plugins, the trunk may be the only version of the code that exists, and that’s fine as well.
+
+Even if you do your development work elsewhere (like a git repository), we recommend you keep the trunk folder up to date with your code for easy SVN compares.
+
+### Tags
+
+The `/tags` directory is where you put versions of the plugin. You will use the same version numbers for the sub-directories here as you do for your plugin versioning. It is important that you always use tag folders and proper versioning to ensure your users get the correct code.
+
+Version 1.0 of the plugin will be in `/tags/1.0`, version 1.1 would be in `/tags/1.1`, and so forth.
+
+We **strongly** encourage the use of [semantic software versioning](https://en.wikipedia.org/wiki/Software_versioning).
+
+### Assets
+
+See also: [How Your Plugin Assets Work](#plugins/wordpress-org/plugin-assets)
+
+Assets is where your screenshots, header images, and plugin icons reside. Some older plugins in the directory may have screenshot files in /trunk instead, however this is not recommended. All new plugins should put their screenshots in /assets. This keeps the filesizes of plugins small, as it is not necessary to send screenshots to WordPress installations along with the plugin itself.
+
+### Branches
+
+*The /branches/ directory is no longer created by default, as it was largely unused. This section can be considered deprecated and is available only for informational purposes.*
+
+The `/branches` directory is a place that you can use to store branches of the plugin. Perhaps versions that are in development, or test code, etc.
+
+The WordPress.org system **does not** use the branches directory for anything at all, it’s considered to be strictly for developers to use as they need it. As it is no longer created by default, you can ignore it as you do not need it any longer.
+
+## Best Practices
+
+In order to make your code the most accessible for other developers, the following practices are considered to be optimum.
+
+### Don’t use SVN for development
+
+This is often confusing. Unlike GitHub, SVN is meant to be a *release* system, not a development system. You don’t need to commit and push every small change, and in fact doing so is detrimental to the system. Every time you push code to SVN, it rebuilds *all* your zip files for all versions in SVN. This is why sometimes your plugin updates don’t show for up to 6 hours. Instead, you should push one time, when you’re ready to go.
+
+### Use the trunk folder for code
+
+Many people use `trunk` as a placeholder. While it’s possible to simply update the `readme.txt` file in trunk and put everything in tag folders, doing so makes it more difficult to compare any changes in your code. Instead, trunk should contain the latest version of your code, even if that version is a beta.
+
+### Always Tag Releases
+
+While it’s possible to use trunk as a stable tag for plugins, this feature is not actually supported nor recommended. Instead, releases should be properly tagged and iterated. This will ensure full compatibility with any automatic updater, as well as allow for rollbacks should there be an issue with your code.
+
+### Create tags from trunk
+
+Instead of pushing your code directly to a tag folder, you should edit the code in trunk, complete with the stable version in the readme, and *then* copy the code from trunk to the new tag.
+
+Not only will this make it easier see any changes, you will be making smaller commits as SVN will only update the changed code. This will save you time and reduce potential errors (such as updating to the wrong stable tag and pushing bad code to users).
+
+Don’t worry about the tag folder not existing for a short while. You can use `svn cp` to copy trunk to the tag and then push them up to SVN at the same time.
+
+If you are operating locally, then you can update trunk and create tags from it all in one go. Checkout the root of your repository, update the files in /trunk, then `svn copy /trunk /tags/1.2.3` (or whatever the version number is) and then commit the whole thing in one go. SVN is a system based on differences, and as long as you use svn to do the copy operation, then it preserves history and makes everything easy for others to follow along with.
+
+## Examples
+
+### Starting a New Plugin
+
+To start your plugin, you need to add the files you already have to your new SVN repository.
+
+First create a local directory on your machine to house a copy of the SVN repository:
+
+```bash
+$ mkdir my-local-dir
+```
+
+Next, check out the pre-built repository
+
+```bash
+$ svn co https://plugins.svn.wordpress.org/your-plugin-name my-local-dir
+> A my-local-dir/trunk
+> A my-local-dir/branches
+> A my-local-dir/tags
+> Checked out revision 11325.
+```
+
+In our example, subversion has added ( “A” for “add” ) all of the directories from the central SVN repository to your local copy.
+
+To add your code, navigate into the `my-local-dir` folder: `$ cd my-local-dir`
+
+Now you can add your files to the `trunk/` directory of your local copy of the repository using copy/paste commands via command line, or dragging and dropping. Whatever you’re comfortable with.
+
+Do not put your *main* plugin file in a subfolder of trunk, like `/trunk/my-plugin/my-plugin.php` as that will break downloads. You may use subfolders for included files.
+
+Once your files are in the trunk folder, you must let subversion know you want to add those new files back into the central repository.
+
+```bash
+$ cd my-local-dir
+my-local-dir/ $ svn add trunk/*
+> A trunk/my-plugin.php
+> A trunk/readme.txt
+```
+
+After you add all your files, you’ll check in the changes back to the central repository.
+
+```bash
+my-local-dir/ $ svn ci -m 'Adding first version of my plugin'
+> Adding trunk/my-plugin.php
+> Adding trunk/readme.txt
+> Transmitting file data .
+> Committed revision 11326.
+```
+
+It’s required to include a commit message for all checkins.
+
+If the commit fails because of ‘Access forbidden’ and you **know** you have commit access, add your username and password to the check-in command.
+
+```bash
+my-local-dir/ $ svn ci -m 'Adding first version of my plugin' --username your_username --password your_password
+```
+
+Remember your username is *case sensitive*.
+
+### Editing Existing Files
+
+Once your plugin is in the directory, you will likely need to edit the code at some point.
+
+First go into your local copy of the repository and make sure it’s up to date.
+
+```bash
+$ cd my-local-dir/
+my-local-dir/ $ svn up
+> At revision 11326.
+```
+
+In the above example, we’re all up to date. If there had been changes in the central repository, they would have been downloaded and merged into your local copy.
+
+Now you can edit the file that needs changing using whatever editor you prefer.
+
+If you’re not using an SVN GUI tool (like SubVersion or Coda) you can still check and see what’s different between your local copy and the central repository after you make changes. First we check the status of the local copy:
+
+```bash
+my-local-dir/ $ svn stat
+> M trunk/my-plugin.php
+```
+
+This tells us that our local `trunk/my-plugin.php` is different from the copy we downloaded from the central repository ( “M” for “modified” ).
+
+Let’s see what exactly has changed in that file, so we can check it over and make sure things look right.
+
+```bash
+my-local-dir/ $ svn diff
+> * What comes out is essentially the result of a
+  * standard `diff -u` between your local copy and the
+  * original copy you downloaded.
+```
+
+If it all looks good then it’s time to check in those changes to the central repository.
+
+```bash
+my-local-dir/ $ svn ci -m "fancy new feature: now you can foo *and* bar at the same time"
+> Sending trunk/my-plugin.php
+> Transmitting file data .
+> Committed revision 11327.
+```
+
+And now you’ve successfully updated trunk.
+
+### “Tagging” New Versions
+
+Each time you make a formal release of your plugin, you should tag a copy of that release’s code. This lets your users easily grab the latest (or an older) version, it lets you keep track of changes more easily, and lets the WordPress.org Plugin Directory know what version of your plugin it should tell people to download.
+
+First copy your code to a subdirectory in the `tags/` directory. For the sake of the WordPress.org plugin browser, the new subdirectory should always look like a version number. `2.0.1.3` is good. `Cool hotness tag` is **bad**.
+
+We want to use `svn cp` instead of the regular `cp` in order to take advantage of SVN’s features.
+
+```bash
+my-local-dir/ $ svn cp trunk tags/2.0
+> A tags/2.0
+```
+
+As always, check in the changes.
+
+```bash
+my-local-dir/ $ svn ci -m "tagging version 2.0"
+> Adding         tags/2.0
+> Adding         tags/2.0/my-plugin.php
+> Adding         tags/2.0/readme.txt
+> Committed revision 11328.
+```
+
+When tagging a new version, **remember to update** the `Stable Tag` field in [`trunk/readme.txt`](https://wordpress.org/plugins/developers/#readme) to the new version.
+
+Congratulations! You’ve updated your code!
+
+## Notes
+
+Don’t put anything in SVN that you’re not willing and prepared to have deployed to everyone who uses your plugin. This *includes* vendor files, `.gitignore` and everything else.
+
+You also should never upload zip files. Like most code repository systems, SVN expects you to upload individual files.
+
+### See Also
+
+- [How the readme.txt works](#plugins/wordpress-org/how-your-readme-txt-works)
+- [How plugin assets (header images and icons) work](#plugins/wordpress-org/plugin-assets)
+- [The SVN Book](http://svnbook.red-bean.com/)
+
+---
+
+# Previews and Blueprints <a name="plugins/wordpress-org/previews-and-blueprints" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/previews-and-blueprints/
+
+If you haven’t noticed it yet, the WordPress Playground is an amazing feature that lets anyone safely run a temporary WordPress install within their browser. It uses WASM to run a complete WordPress install – PHP, database, and all – entirely from within your web browser. No server needed, nothing to install.
+
+For a while now Playground has supported loading any plugin or theme from the plugin directory; here’s how.
+
+## The Plugin Preview Button[](https://github.com/WordPress/developer-plugins-handbook/blob/main/wordpress-org/previews-and-blueprints/index.md#the-plugin-preview-button)
+
+The Plugin Preview feature adds a convenient button to plugins in the plugin directory, when enabled by a plugin’s developers. The button takes the user to Playground with that plugin installed. It’s right beside the Download button.
+
+The Preview button is not shown by default; it must be explicitly enabled. Developers can use blueprint files in order to configure the preview environment and install dependencies (such as other plugins and themes).
+
+## Enabling Plugin Previews[](https://github.com/WordPress/developer-plugins-handbook/blob/main/wordpress-org/previews-and-blueprints/index.md#enabling-plugin-previews)
+
+There are two things required for a plugin preview button to appear to all users:
+
+1. A valid `blueprint.json` file must be provided in a blueprints sub-directory of the plugin’s assets folder.
+2. The plugin preview must be set to “public” from the plugin’s Advanced view by a committer.
+
+If a valid `blueprint.json` file is present, then the Preview button will be present for plugin committers only. In which case it will look like this:
+
+[![The Test Preview button allows plugin authors to showcase what their plugin does with one click.](https://i0.wp.com/developer.wordpress.org/files/2024/03/live-preview.png?resize=554%2C140&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2024/03/live-preview.png?ssl=1)It’s called Test Preview because that’s why it’s there: to allow plugin committers to test their plugin in the Playground environment and decide whether or not to make it easily available to the public.
+
+## Blueprints[](https://github.com/WordPress/developer-plugins-handbook/blob/main/wordpress-org/previews-and-blueprints/index.md#blueprints)
+
+Blueprints are json files used to set up a WordPress Playground instance.
+
+They can be used to specify things like PHP and WP versions, the landing page, and (most importantly) a series of automated steps such as logging in, and installing and activating plugins and themes.
+
+The blueprint for your plugin should be committed to the assets folder with subversion as `assets/blueprints/blueprint.json`. Initially only the one blueprint file is supported, but we expect to allow multiple in future.
+
+Here’s an example of a simple blueprint.json file that you could use as a starting point:
+
+```json
+{
+    "landingPage": "/wp-admin/edit.php",
+    "preferredVersions": {
+        "php": "7.4",
+        "wp": "5.9"
+    },
+    "phpExtensionBundles": [
+        "kitchen-sink"
+    ],
+    "steps": [
+        {
+            "step": "login",
+            "username": "admin",
+            "password": "password"
+        }
+    ]
+}
+```
+
+The features used here are:
+
+- `landingPage`, which specifies the URL of the page that the user will land on when the preview loads.
+- `preferredVersions`, which specifies versions of PHP and WordPress.
+- `phpExtensionBundles`, which in this case specifies that we want most common PHP extensions to be available (kitchen-sink).
+- `steps`, which tells Playground what to do before displaying the landing page. In this case, it will simply log the user in to wp-admin.
+
+Here’s an example of a more advanced blueprint.json that demonstrates some more features you could use to create a rich demo environment for users:
+
+```json
+{
+    "landingPage": "/wp-admin/post.php?post=5&action=edit",
+    "preferredVersions": {
+        "php": "7.4",
+        "wp": "5.9"
+    },
+    "phpExtensionBundles": [
+        "kitchen-sink"
+    ],
+    "steps": [
+        {
+            "step": "login",
+            "username": "admin",
+            "password": "password"
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org\/plugins",
+                "slug": "my-imaginary-plugin-dependency"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org\/plugins",
+                "slug": "my-imaginary-plugin"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installTheme",
+            "themeZipFile": {
+                "resource": "wordpress.org\/themes",
+                "slug": "my-imaginary-theme"
+            }
+        },
+        {
+            "step": "setSiteOptions",
+            "options": {
+                "some_required_option_1": "your_favorite_values",
+                "some_required_option_2": "your_favorite_values"
+            }
+        },
+        {
+            "step": "runPHP",
+            "code": "<?php require_once 'wordpress/wp-load.php'; wp_insert_post(array('post_title' => 'wp-load.php required for WP functionality', 'post_status' => 'publish')); ?>"
+        }
+    ]
+}
+```
+
+## Using a generated Blueprint file[](https://github.com/WordPress/developer-plugins-handbook/blob/main/wordpress-org/previews-and-blueprints/index.md#using-a-generated-blueprint-file)
+
+You might see a notice similar to this on your plugin’s page:
+
+```
+Your plugin does not yet have a blueprint file for user previews. If you'd like to enable previews, please follow these steps to create a blueprint.
+
+1. Test your plugin in Playground.
+2. Fix any bugs in your plugin that prevent it from working in Playground.
+3. Download blueprint.json
+4. Commit your blueprint to svn.
+
+```
+
+The **Test** link will use an auto-generated Blueprint file to load your plugin in Playground, with some default configuration values and steps. The **Download blueprint.json** link will let you download that auto-generated `blueprint.json` file, which you can then modify as needed and commit to Subversion when your plugin is ready for Playground previews.
+
+## Committing a Blueprint to Subversion[](https://github.com/WordPress/developer-plugins-handbook/blob/main/wordpress-org/previews-and-blueprints/index.md#committing-a-blueprint-to-subversion)
+
+You must commit your blueprint.json file to your plugin’s assets folder, named like this:
+
+`/`assets/blueprints/`blueprint.json`
+
+---
+
+# Plugin Developer FAQ <a name="plugins/wordpress-org/plugin-developer-faq" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/plugin-developer-faq/
+
+There are lot of ins and outs to hosting WordPress plugins. Please take a minute to see if your question is answered here before reaching out for assistance.
+
+Last Updated: 12 October 2024
+
+## The Plugin Review Team
+
+### How do I contact the Plugin Review team?
+
+You can contact us by email at `plugins@wordpress.org` – we reply to all emails within 7 business days.
+
+### Can I join the team?
+
+Please take a look at [this handbook page](https://make.wordpress.org/plugins/handbook/apply/).
+
+## Submissions and Reviews
+
+### Where do I submit my plugin?
+
+Go to the [Add](https://wordpress.org/plugins/developers/add/) page and upload your file. You should make sure that:
+
+- It’s a .zip file and under 10Mb.
+- It’s in the common WordPress plugin format so that it can be installed using the ‘Upload Plugin’ feature in WordPress.
+- It’s production-ready: complete, without errors, without unnecessary logs, without development tools, and that all necessary files are properly compiled or generated.
+
+We do not accept placeholders or plugins that aren’t ready to be used.
+
+### What if my plugin is over 10 megs?
+
+Double check that you aren’t including unused files (like test folders, documentation, and full node/vendor folders). The majority of plugins who face this issue have included all sorts of development content that has no place in the final code.
+
+### What happens after submission?
+
+You will get an automated email telling you about the submission immediately. It will be queued, and as soon as we get to it, we will manually download and review your code. If we find no issues with the security, documentation, or presentation, your plugin will be approved. If we determine there are issues, you will receive a second email with details explaining what needs to be fixed.
+
+### What will my plugin permalink (slug) be?
+
+When you submit a plugin, you get an automated email telling you what the slug will be. This is populated based on the value of your Plugin Name in your main plugin file (the one with the plugin headers).
+
+For example:
+
+- Plugin name: `Boaty McBoatface`
+- Autogenerated Slug: `boaty-mcboatface`
+
+If there is an existing plugin with your name or slug, then [you’ll get a warning on the submission](#why-is-my-submission-failing-saying-my-plugin-name-already-exists).
+
+The slug will also determine the following:
+
+- The URL of your plugin’s WordPress.org public page: `wordpress.org/plugins/boaty-mcboatface`
+- The folder name of your plugin in the WordPress plugins directory: `<wp-content-folder>/plugins/boaty-mcboatface`
+- The address of your plugin’s SVN repository and trac: `plugins.svn.wordpress.org/boaty-mcboatface` and `plugins.trac.wordpress.org/browser/boaty-mcboatface `
+- Your plugin’s text-domain for internationalization functions: `esc_html__('Hello', 'boaty-mcboatface');`
+
+Once your plugin is approved, this name **cannot** be renamed. Please chose wisely.
+
+### Why did I get a different slug than I was told?
+
+If we have to change your permalink (slug) we will always email you to explain why. In general, we change your permalink when you have obvious typos or mistakes (*foundre* instead of *founder*, for example) or if there are conflicts with existing trademarks or other plugins. Please make sure you read your review email carefully, as we do explain why we do things.
+
+### Why is my submission failing saying my plugin name already exists?
+
+There are two reasons this happens:
+
+1. You’re trying to use a plugin with a permalink that already exists on WordPress.org
+2. You’re trying to use a plugin with a permalink that exists **outside** WordPress.org and has a significant user base.
+
+The first one is obvious. You can’t have two plugins with the same permalink so you need to pick a new one.
+
+The second one is confusing because it’s telling you that somewhere, not on WordPress.org, that permalink is in use. It’s important to understand that the way the plugin update API works is that it compares the plugin folder name (i.e. the permalink) to every plugin it has hosted on WordPress.org. If there’s a match, then it checks for updates and users are prompted to upgrade.
+
+When that happens, users of the ‘original’ plugin (the one we don’t host) would upgrade to the one from WordPress.org and, if that isn’t what you actually wanted to do, you could break their sites.
+
+Sometimes this situation develops when a company or person releases their plugin privately (via Github for example) and decides they want to re-release it on WordPress.org. In those cases, we recommend you email us and we’ll walk you through how to get past the error.
+
+### Why am I getting an error that says I cannot begin my plugin name with a term?
+
+That error is to inform you that you may not begin your Display Name with someone else’s trademarked term. This is to protect you and the directory from legal issues regarding trademark abuse. To correct the issue, you must change the Display Name in your plugin’s readme and main PHP files.
+
+Please do not try to ‘work around’ this by cleverly renaming your plugin (WuuCommerce for example). All that does is make us worry you’re not going to be able to follow guidelines in the future.
+
+### Why am I getting an error that says I cannot use a term *entirely* in my plugin name?
+
+Some trademark owners have requested we no longer permit the use of specific terms in plugin names entirely. If you see this error, then you must remove the term from your plugin name.
+
+> To proceed with this submission you must remove “\[TERM\]” from the Plugin Name: line in both your main plugin file and readme entirely.
+
+If you attempt to get around this by changing your term from ‘Facerange’ to ‘Face-Range’, we will pend your submission and reiterate that you cannot use the term. Please don’t try to be sneaky or clever to get past this restriction.
+
+### How do I submit an official plugin?
+
+Log in as the official organization user account and submit with that account *only*.
+
+How we will know that you are the official organization? Because of your email address mostly.
+
+We cannot accept plugins that act in name of an organization submitted by individual developer accounts, unless they’re clearly company ones as well. For example, submitting your official plugin with a user that has a gmail address is likely to be flagged for trademark infringement.
+
+### What if I submitted the plugin with the wrong user ID?
+
+Just reply to the email right away and let us know. We can transfer ownership for you. If you forget to do this, you can fix it yourself by [adding the correct account as a committer](#how-do-i-give-someone-else-access-to-my-plugin) and then having that account remove your own.
+
+**DO NOT** resubmit your plugin. Just tell us right away and we’ll fix it.
+
+### How long does it take to get a plugin approved?
+
+There’s no official average, as no two plugins are the same. If your plugin is small and all the code is correct, it should be approved within **fourteen** days of *initial review*.
+
+If your plugin has any code issues, it will take as long as it takes for you to correct the issues. Either way, you *will* get an email from `plugins@wordpress.org` with the status, so please add that to your email whitelist and patiently wait for our response.
+
+### I sent in the fixes but no one replied. How long should I wait?
+
+We aim to reply to all reviews within ten (10) business days. If it’s been less than that, it just means we’ve been really busy. If it’s been two days, like over a weekend or a holiday, then you should not **reasonably** expect a reply.
+
+Remember the review team is made up of 100% volunteers, all of whom have full time day jobs, and other volunteer duties. We do reply promptly, but we also have lives outside of WordPress.
+
+### If my plugin has a problem, how long do I have to fix it?
+
+There’s no timeline and as long as we know you’re working on it and we feel you’re making progress, we’ll leave the review open. Your plugin will be rejected after 3 months, but the review will remain open.
+
+### Why was my plugin rejected after three months?
+
+If your plugin review is not complete after three (3) months, we will reject your submission in order to keep the queue maintainable. At any point in time, we have more than 500 people mid-review, and we figure that 3 months is a pretty reasonable time frame.
+
+### I finally fixed my plugin. Should I resubmit?
+
+If your plugin was rejected after three months, submit it again and reply to the email so we are aware that you wanna continue a previous unfinished review. Even if it’s been 18 months. The longest time to date has been 3 years. We don’t mind if it takes a while.
+
+**DO NOT** resubmit your plugin if it was rejected for any other reason, just reply to the email.
+
+### How many plugins can I submit for review at a time?
+
+Generally, just one. If you’re a plugin author with more than one million active plugin installations, we understand that you have more ongoing projects, so you would have a different limit of up to 10 plugin submissions at the same time.
+
+### Why can’t I submit more than one plugin at a time?
+
+Allowing people to have multiple submissions at once was proven to be detrimental to the review process. Errors were regularly found in all the plugins, resulting in the same emails being sent multiple times. In addition, people often got confused as to which review they were working on, muddying the waters about what needed to be solved. By changing this to one-at-a-time, confusion in those matters dropped significantly.
+
+In addition, many new users don’t know how to use SVN, and wound up submitting multiple plugins and never using any. That can be a drain on our resources, so we do limit people.
+
+Since all plugins get an initial review within four weeks, this should not be a hardship.
+
+### Can I submit multiple plugins with multiple accounts?
+
+No. And if you do so, we will suspend all your secondary accounts. Don’t try to get around the one-at-a-time rule please.
+
+### I need my plugin approved by a specific date, what should I do?
+
+Submit it as early as possible. Unless the plugin is meant to address a security or legal issue, we don’t permit queue jumping. If it *is* related to one of those, please email `plugins@wordpress.org` and explain the situation.
+
+### Are there specific things that I should avoid doing?
+
+We look for some pretty obvious things, all of which are listed [in our guidelines](#plugins/wordpress-org/detailed-plugin-guidelines). Most can be summed up as “Don’t be a spammer,” but to touch on the ones people do the most:
+
+- Not including a `readme.txt` file when acting as a service
+- Not testing the plugin with `WP_DEBUG`
+- Including custom versions of packaged JavaScript libraries
+- Calling external files unnecessarily
+- “Powered By” links
+- Phoning home
+
+Again, this is a brief overview. Please read the guidelines, as the full list is quite detailed.
+
+### Are there plugins you don’t accept?
+
+We don’t accept plugins that do ‘nothing,’ are illegal, or encourage bad behavior. This includes black hat SEO spamming, content spinners, hate-plugins, and so on.
+
+Similarly we do not accept framework plugins or library plugins. If your plugin has to require other plugins or themes to edit themselves in order to use your plugin, it’s a library. If your plugin is a template from which more code can be built by customizing the files directly, it’s a framework or boilerplate. Frameworks and libraries should be packaged with each plugin (hopefully in a way that doesn’t conflict with other plugins using the framework or libraries). At least until core supports plugin dependencies.
+
+We also don’t accept 100% copies of other people’s work or plugins that duplicate functionality found in WordPress Core. Basically, your plugin should do something new, or in a new way, or solve a specific issue.
+
+### I want to redo, upgrade, or rebrand my existing plugin. I just submit again, right?
+
+No, you should rewrite and upgrade the existing plugin. Make it a major version release. We can’t rename plugins or transfer users, so a new one wouldn’t carry over any existing users, reviews, support topics, ratings, downloads, favorites, etc. Basically you’d leave *all* your current users out in the cold, and that’s mean.
+
+### I made a mistake with my submission. How can I fix it?
+
+You can update your plugin files from the submission page at any time.
+
+You can update your slug once after submitting it.
+
+Every submission gets an automated email with directions. If you have a different issue, please reply to that or email `plugins@wordpress.org` and explain the situation.
+
+Regarding slugs if you need further changes, you’ll need to contact us. We also try to catch typos in names before we approve anything, but we make mistakes too.
+
+### Are there things I can’t do in a plugin name?
+
+We have the following restrictions:
+
+- Plugins may not use vulgarities in the name or slug
+- Plugins may not use ‘WordPress’ or ‘Plugin’ in their slugs except under extreme situations
+- Plugins may not use version numbers in plugin slugs
+- Due to system limitations, only English letters and Arabic numbers are permitted in the slug
+- Plugins may not **start** or contain in a way that may be confusing a trademarked term or name of a specific project/library/tool *unless* submitted by an official representative
+
+We encourage everyone to be creative and come up with unique slugs. We automatically correct any plugin that has an unacceptable slug. If there’s a question as to the best choice, we will contact you to be sure.
+
+## Using The SVN Repository
+
+### Where do I put my files?
+
+Put your code files directly in the `trunk/` directory of your repository. Whenever you release a new version, [tag that release](#plugins/wordpress-org/how-to-use-subversion) by copying the current trunk revision to a new subdirectory of the `tags/` directory.
+
+Make sure you update [`trunk/readme.txt`](https://wordpress.org/plugins/developers/#readme) to reflect the **new** stable tag.
+
+Images for the readme (such as [screenshots, plugin headers, and plugin icons](#plugins/wordpress-org/plugin-assets)), belong in the `assets/` directory (which you may need to create) in the root of your SVN checkout. This will be on the same level as `tags/` and `trunk/`, for example.
+
+### Can I put my files in a subdirectory of `trunk/`?
+
+No. Doing that will cause the zip generator to break.
+
+If you have complicated plugin with lots of files, you can of course organize them into subdirectories, but the [readme.txt file](https://wordpress.org/plugins/developers/#readme) and the root plugin file should go straight into `trunk/`.
+
+### How should I name my tags (a.k.a. releases)?
+
+Your Subversion tags should look like version numbers. Specifically, they should only contain **numbers and periods**. `2.8.4` is a good lookin’ tag, `my neato releaso` is a bad lookin’ tag. We recommend you use [Semantic Versioning](http://semver.org) to keep track of releases, but we do not enforce this.
+
+Note that we’re talking about *Subversion* tags here, not `readme.txt` search type tags.
+
+### How many old releases should I keep in SVN?
+
+As few as possible. Very rarely does anyone need your old code in the release repository. Remember, SVN is **not** meant for your code versioning. You can use Github for stuff like that. SVN should have your current release versions, but you don’t need all the minor releases to all the previous versions. Just the last one or two for them is good.
+
+### Can I include SVN externals in my plugin?
+
+No. You can add [svn externals](https://svnbook.red-bean.com/en/1.0/ch07s03.html) to your repository, but they won’t get added to the downloadable zip file.
+
+### Can I put zips and other compressed files in my plugin?
+
+No.
+
+### Can I include minified JS?
+
+Yes! However you either have to keep the non-minified in your plugin *or* direct people via your readme as to where they can get the non-minified files.
+
+It’s fine to minify, but it’s not okay to hide it. All code must be human readable for inclusion in this directory.
+
+## Your WordPress.Org Page
+
+### When does my plugin go ‘live’?
+
+As soon as you push code to the SVN folders, your plugin will be live. **DO NOT** push code if you’re not ready, as there’s no ‘off’ switch except to [close the plugin](#closed-plugins). As closing a plugin is permanent, we recommend you not push code until you’re ready to go live.
+
+### Where does the WordPress.org Plugin Directory get its data?
+
+From the information you specify in the plugin file and in the [readme.txt file](https://wordpress.org/plugins/developers/#readme), and from the Subversion repository itself. Read [about how the readme.txt works](#plugins/wordpress-org/how-your-readme-txt-works) for more information.
+
+You should also make full use of the [Plugin Headers](#plugins/the-basics/header-requirements) in your main plugin file. Those will define how your username shows up on the WordPress.org hosting page, as well as in the WordPress Admin. We recommend using all those headers to fully document your plugin.
+
+### Can I specify what version of my plugin the WordPress.org Plugin Directory should use?
+
+Yes, by specifying the `Stable Tag` field in your trunk directory’s [readme.txt file](https://wordpress.org/plugins/developers/#readme).
+
+We ask you **not** use ‘trunk’ as your stable tag, as that makes rollbacks more complicated than they need to be.
+
+### What version of WordPress should the “Tested Up To” value be?
+
+Logically, whatever version you tested up to. However, never go above the current release candidate. If there is none, don’t go above the active version. So if WordPress’ stable release is 6.0.9, you can use 6.0 to 6.0.9 and everything will be fine. If there is a release of 6.1-RC then you may use 6.1, however you can go no higher.
+
+Do not attempt to be clever and use 6.5 or 7. This will result in errors on your page.
+
+### Do I need to release a new version of my plugin every time I update the readme?
+
+No. If you’re only making cosmetic changes to the readme or your icons/headers, you *do not* need to release a new version. Just make sure you update the trunk and tag folders.
+
+### Do I need to release a new version of my plugin every time I update the code?
+
+Yes. Otherwise no one gets updated.
+
+### What should be in my changelog?
+
+A changelog is a log or record of all or all notable changes made to your plugin, including records of changes such as bug fixes, new features, etc. If you need help formatting your changelogs, we recommend [Keep A Changelog](https://keepachangelog.com/en/1.1.0/) as that’s the format used by many products out there.
+
+### How many versions should I keep in my changelog?
+
+Always keep the current major release in your change log. For example, if your current version is 3.9.1, you’ll want that and 3.9 in the change log. Older versions should be removed and migrated to a `changelog.txt` file. That will allow them to be accessible to users, while keeping your readme shorter and more pertinent. At most, keep the most recent version of your plugin and one major version back in your readme’s changelog. Your `changelog.txt` will **not** be visible within the WordPress.org Plugin Directory, but that’s okay. Most users just want to know what’s new.
+
+### How do I include videos on plugin description pages?
+
+For YouTube and Vimeo videos, simply paste the video link on a line by itself in your description. Note that the video must be set to allow embedding for the embed process to work. For videos hosted by the WordPress.com VideoPress service, use the `` shortcode. Shortcodes can also be used for YouTube and Vimeo, if needed, just like in WordPress.
+
+### Why does my plugin say it’s not been tested with the most recent WordPress versions?
+
+That happens when you neglected to use a proper ‘Tested Up To’ value in your headers in your readme. That value should be the latest version of WordPress that you’ve tested your plugin against. If the latest **major** WordPress version is 4.9, then you should have the value `4.9` to indicate compatibility. You do not need to update for minor releases (if your readme is compatible to 4.9 then that will cover 4.9 through 4.9.1000).
+
+Keep in mind, if you put in non-released versions of WordPress (like 6.0) you’ll see the same message.
+
+### How long does it take for the Plugin Directory to reflect my changes?
+
+The WordPress.org Plugin Directory updates every few minutes. However, it may take longer for your changes to appear depending on the size of the update queue. Please give it at least **6 hours** before contacting us.
+
+### How do I make one of those cool banners for my plugin page?
+
+You can make your own [plugin headers](#plugins/wordpress-org/plugin-assets#plugin-headers) by uploading the correctly named files into the `assets` folder. Read [about plugin headers](#plugins/wordpress-org/plugin-assets#plugin-headers) for more information.
+
+### How do I make a plugin icon?
+
+You can make your own [plugin icons](#plugins/wordpress-org/plugin-assets#plugin-icons) by uploading the correctly named files into the `assets` folder. Read [about plugin icons](#plugins/wordpress-org/plugin-assets#plugin-icons) for more information.
+
+### Can I use official logos in my plugin banner/icons?
+
+Usually no.
+
+Your plugin icon should *never* be the unaltered, official logo of, say, Facerange. That would be infringing on their property. You may not use official logos for your branding in your banners or icons. Even if you have permission to do so on your site, *we* don’t have that permission here.
+
+Much like your plugin name, we recommend your icons and headers be something unique to you. They tend to be more memorable that way.
+
+### How many tags can I use in my readme?
+
+Per the guidelines, [plugins are limited to 12 tags in their readme](#plugins/wordpress-org/detailed-plugin-guidelines#12-public-facing-pages-on-wordpress-org-readmes-must-not-spam). This is to control spam. That said, only the first **FIVE** tags will display on WordPress.org, much for the same reason. The first 12 tags are used for searches, and the rest are ignored, so tag-stuffing won’t help you at all.
+
+In addition, any tags where you are the only one who uses them won’t show, because they’re not going to help anyone find another, similar, plugin.
+
+## Plugin Names
+
+### Can I change my plugin’s name after it’s approved?
+
+Yes and no. You can change the display name, but the *slug* — that part of the plugin URL that is yours — cannot be changed once a plugin is approved. That’s why we warn you, multiple times, upon submission.
+
+To change the display name, edit your main plugin file and change the value of “Plugin Name:” to the new name. You also will want to edit your header in your readme.txt to match.
+
+### Why can’t I use someone’s trademark/brand as my plugin name?
+
+Simply put, because you’re not them.
+
+If you have written an add-on plugin for BooCommerce, you may not name it “BooCommerce Improved Product Search” as that would generate the slug `boocommerce-improved-product-search` and that would conflict with the trademark of ‘BooCommerce.’ That said, it would be acceptable to submit the name “Boo Improved Product Search” which would use the slug `bc-improved-product-search` (“bc” not being trademarked you see).
+
+As another example, if you have a plugin that integrates a service with a a popular cloud hosting company named Amazorn, you may call it “My Service Integration for Amazorn”, but you may **not** use “Amazorn – My Service Integration”.
+
+Consider the real life example of Keurig. If you made an eco-friendly brew cup, you could market it “EcoBrew Pod for Keurig” but you could NOT attempt to market it as “Keurig EcoBrew Pod.” The latter implies a direct relationship to Keurig and is actually against the law in some countries. In order to protect you, we need you to tread lightly with recognized brand names and trademarks. Always err on the side of caution; if they come and tell us to close your plugin because you used their term as the *first* word in the display name, we have to do it.
+
+*Note: We no longer have permission to permit new plugins to use `woo` as the start of their permalink, and are required to enforce the use of `wc` instead.*
+
+### Can a company give me permission to use their trademark in my permalink?
+
+No.
+
+While we understand that companies can and do grant usage permissions, we do not accept them for permalinks for a really important reason: we ***cannot*** change your permalink once the plugin is approved. This means if, later on, the company changes their mind and rescinds approval, the plugin will be closed and all of it’s users abandoned.
+
+In order to be forward thinking and proactive about a plugin’s long-term life in the directory, we do not accept ‘permission.’ A permalink may not begin with a trademark (or commonly known brand/term) unless it is by the official owners.
+
+### Can I change my plugin’s URL/slug?
+
+It’s impossible to change a plugin’s URL once it’s approved and we warn you about that in multiple places through the process.
+
+Due to that, we deny most requests for ‘new’ plugins to replace old ones just to get a better slug.
+
+This is because we cannot migrate users between plugins nor can we redirect traffic. This means that submitted a new plugin to change a slug is incredibly detrimental to the plugin’s SEO and reputation, as users will be abandoned. The majority of plugins don’t actually need a new URL, and instead just want to edit their display name.
+
+Unless there’s an egregious typo, language, or legal issue related to your slug, we are **unlikely** to approve a new slug. If we do, we will flag your account to note that future rename requests are to be denied.
+
+### How do I change my plugin’s display name?
+
+You’ll need to change it in the readme *and* the plugin main file.
+
+### Can I make my display name anything?
+
+Don’t use vulgarities or slurs or other intentionally abusive language. You cannot claim, or appear to claim, to be an official source if you’re not. For example, if you’ve made a plugin that connects to the Frozbaz Service, you should call your plugin “Connector to Frozbaz Service” – in this way, you have made it clear you are making a plugin for a service, rather than being the service.
+
+If you’re combining multiple services (a payment gateway to a popular ecommerce plugin, for example), we strongly recommend you come up with an original, unique, display name.
+
+### Can I use WordPress or Plugin in my display name?
+
+Currently yes, but you shouldn’t. It’s incredibly redundant and doesn’t actually help your SEO in any way, shape, or form. We already put WordPress *and* Plugin in your page title.
+
+### Should I use the trademark or registered symbol in my plugin name?
+
+Assuming you actually did apply for trademarks, you certainly *can* but it’s not commonly done. Not even Google or Facebook do that. Simply by using your trademark term and having a log of it (like your SVN log), you have usually done the needed legal action required to protect your brand. Consult a lawyer for details.
+
+## Search
+
+### How long will it take for my plugin to show up in search?
+
+Usually 6 to 14 days after a plugin is committed to SVN. This is because we have to add your data, parse it, and share it to all of our *heavily* cached servers. It’s not instantaneous. Also as a new plugin, we have no data on usage, so you may need to wait a bit.
+
+### How do I rank higher?
+
+Write a good readme for the language, answer support posts promptly, get good reviews.
+
+### What’s weighted more, my URL or my display name?
+
+Neither. Make your display name memorable and descriptive, while keeping it under 5 words, for maximum benefit.
+
+## The Support Forums
+
+### How do I get notified for forums posts?
+
+Go to `https://wordpress.org/support/plugin/YOURPLUGIN` and look at the sidebar on the right. Click the Subscribe to this Plugin button for email alerts.
+
+### How do I get notified for all my plugins?
+
+Every plugin support forum page has a “Subscribe” button at the top of it. Click that and you will be emailed. You can see which plugin forums sets you are subscribed to at `https://wordpress.org/support/users/YOURID/subscriptions`
+
+For RSS, visit `https://wordpress.org/support/view/plugin-committer/YOURID` will list all of the support requests and reviews for any plugin you have commit access. Not a committer, just someone listed as an author? Use `https://wordpress.org/support/view/plugin-contributor/YOURID`
+
+You can also go to `https://profiles.wordpress.org/YOURID/profile/notifications/` and put in any terms you want to be emailed for. Be careful, this can escalate if you use generic terms.
+
+### How do I give a support account access to my plugin?
+
+You can add Support Representatives to your plugin. Support representatives can mark forum topics as resolved or sticky (same as plugin authors and contributors), but don’t have commit access to the plugin.
+
+The UI for managing plugin support reps can be found in Advanced View on the plugin page, next to managing committers. Once someone is added as a support rep, they will get a Plugin Support badge when replying to the plugin support topics or reviews.
+
+### Will you delete bad reviews or comments on my plugin?
+
+Generally no. A review is a reflection of an individual’s experience with your product. If they didn’t like it, that’s not for us to change. If you feel that a review is invalid (such as for a different plugin), use the `modlook` button on the post. A member of the **forums** team will investigate.
+
+Abuse of the modlook feature may result in suspension of your plugins. Please, use it wisely.
+
+### What is ‘Sockpuppeting’?
+
+That’s what happens when someone makes multiple accounts on the forums, usually to give themselves a number of 5-star reviews, or create fake support tickets to appear more responsive. Sockpuppeting is against our guidelines and will result in the reviews and posts being removed, but also may result in your account and all plugins being removed. Don’t do it and don’t flagrantly accuse others of doing it.
+
+## Closed Plugins
+
+### How do I close my plugin?
+
+As of April 2020, you can close your own plugins at any time. To do so, go to the **advanced** tab on your plugin page (i.e. `https://wordpress.org/plugins/myplugin/advanced/`) and scroll down to the **CLOSE THIS PLUGIN** section. There you will see a warning message and a button.
+
+![Image of the "Close this plugin" feature, with the note "WARNING: Closing your plugin is intended to be a permanent action. You will not be able to reopen it without contacting the plugins team." Below that is a button saying "I understand."](https://i0.wp.com/developer.wordpress.org/files/2020/04/HowtoClose.png?resize=1024%2C275&ssl=1)If you agree to the warning, and want to close your plugin, press the button.
+
+Keep in mind, you *will not* get your plugin restored unless you can justify your situation. Closing a plugin by request is intended to be **permanent**.
+
+### What if I accidentally closed my plugin?
+
+Email `plugins@wordpress.org` and ask to please have your plugin reopened. However you will be asked how you managed to do that so that we can improve the functionality of the feature.
+
+### Why won’t it let me close my own plugin?
+
+Assuming you’re logged in as the correct account, it’s probably because you have too many users. If your plugin has more than 10,000 users, you will need to email `plugins@wordpress.org` and request for us to close it.
+
+### Can I temporarily close my plugin?
+
+No.
+
+We do not permit this as it creates a poor experience for users. Hiding plugins makes users think the plugin has been pulled for security or guideline issues, which causes them not to trust you anymore. We cannot prevent what they think, so instead we prohibit ‘temporary’ closures.
+
+Generally people want to do this when their plugin has a bug that is being fixed, or when they’re unable to support it. We recommend you instead just fix the bug as soon as possible, or if you cannot support the plugin, update the readme to say it’s currently unsupported and why.
+
+If this is for a brand new plugin, you should just call it a ‘public beta’ so people are aware of the status.
+
+### What happens when a plugin is closed?
+
+When a plugin is closed, the page shows as closed and the zips are no longer generated. No one will be able to download the plugin via the website, nor will they be able to install it via the WordPress admin. The SVN repository will remain accessible to allow others to download and fork the code if desired, per the tenets of the directory.
+
+After 60 days, the closure message will change to alert people as to *why* it was closed but only in the broadest terms (Guideline Violation, Security, etc) and not with explicit details.
+
+### Why was my plugin closed?
+
+Plugins are closed for guideline violations, security issues, or by author requests. In the case of active issues (such as copyright infringement, abuse, and security), all accounts with commit access to a plugin are notified.
+
+If a plugin has never been used within 6 months (i.e. no code has been pushed to SVN), SVN is broken for upwards of 12 months, or a plugin’s readme indicates it’s deprecated, we *may* close without notification.
+
+### Why was someone else’s plugin closed?
+
+As of 2017, plugin closure reasons are tracked in the plugin database. Sixty days after a plugin is closed, the reason for the closure will be made public:
+
+![Example of a closed plugin with the reason 'Author Request'](https://i0.wp.com/developer.wordpress.org/files/2015/04/not-hello-dolly.jpg?resize=1058%2C526&ssl=1)Please note: We do not publicly disclose the details on exactly why a plugin has been closed.
+
+### Can I get someone else’s plugin closed?
+
+If you report an [security issue](#plugins/wordpress-org/plugin-security/reporting-plugin-security-issues) or a [guideline violation](#plugins/wordpress-org/detailed-plugin-guidelines) in a plugin to `plugins@wordpress.org`, we will review and take appropriate action. Most of the time, this involves closing a plugin. Your name will not be disclosed unless you ask for it to be so, in order to protect you from backlash.
+
+### Someone posted a copy of my plugin! What do I do?
+
+Email `plugins@wordpress.org` with a link to the stolen plugin. Include either a link to where we can download yours or attach the zip. We will compare the two files, as well as all the coding history we have, to determine if the plugin is, indeed, theft, or just an uncredited fork.
+
+Keep in mind, if you licensed your plugin as GPLv2 or later, then it’s perfectly permissible to fork your work, as long as copyright remains intact and you’re credited.
+
+### What do I do if someone copied some of my code and didn’t credit me?
+
+Email `plugins@wordpress.org` right away! **Especially** if your code was non-GPL. While we do permit people to fork other plugins and include that code in their own plugins, it must be credited at all times. Copyright and credits are a requirement.
+
+### Will you close another plugin for violating a brand/trademark?
+
+We do our best to uphold copyright and trademark requirements, as well as prevent brand confusion. Before plugin are approved, we often require them to make some of the more obvious changes. That said, there is a limit to how ‘different’ a URL or name can be when we have 60,000 plugins in the directory, and when some terms are quite common (like ‘popup’ or ‘all-in-one’). Because of that, we require developers to change the plugin’s **display name** to no longer cause conflict or confusion.
+
+If someone is clearly infringing on your copyright or trademark or existing brand, be it by display name or use of trademarked images, please email us at `plugins@wordpress.org` with some proof and we will contact the developer and require changes.
+
+We do expect these to be *reasonable* requests. That is, if you send us a complaint and list 12 plugins that all use the term ‘best contact form’ because that’s your plugin name, we will review the plugins and only close them if they’re using the phrase excessively. If they use it once (i.e. “This is the best contact form plugin in the Faroe Islands”) then it’s acceptable. If they’re keyword stuffing the phrase, we’re more likely to close them for keyword stuffing. Simply, if your plugin name is super generic, this is going to happen, and it’s usually **not** an infringement case.
+
+Also note that if it’s not **your** trademark, we cannot accept your report. It is the responsibility of the trademark owners, not it’s users, to manage and maintain that.
+
+### How can I send a security report?
+
+Email `plugins@wordpress.org` a clear and concise description of the issue. [Please read our document on reporting security issues for details](#plugins/wordpress-org/plugin-security/reporting-plugin-security-issues).
+
+### Do you provide bounties for finding bugs in a plugin?
+
+No. We have no relationship with any bug bounty programs, so we don’t file your reports etc to them. The only one with which we work is [hackerone.com/automattic](https://hackerone.com/automattic) and that’s for bugs related to Automattic properties. Everything else is on your own, don’t ask us to submit things.
+
+### Do you help file or provide CVEs?
+
+No. We do not have the ability to assist with CVEs.
+
+### My plugin was closed, can I reopen it?
+
+Maybe. If it was closed for a security reason, fix the issue, reply to the email, and most of the time we’ll reopen the plugin unless it has more security issues or severe guideline issues. If it was closed for guideline violations, it depends on the severity and nature of the violation. Repeat offenders are less likely to have a plugin reopened, for example, than first-timers.
+
+If you asked for the plugin to be closed, you will be expected to explain why the change of heart. Plugins are intended to remain closed when a developer requests it, and not reopened again a month later.
+
+*All* plugins must pass a current standards and security review in order to be restored. This is not optional. Users will lose more faith in you for having your plugin closed multiple times than they would for one longer closure where you address all the potential issues.
+
+### Why was my plugin closed when it was my employee/co-worker who violated guidelines?
+
+Everyone who represents a plugin, from support tech to developer, is the responsibility of the plugin owner. If they violate the guidelines egregiously, then the owners are expected to accept those consequences and correct course. When that doesn’t happen, plugins get closed. We notify the plugin owners in these cases and explain why and do our best to keep plugins open.
+
+### *All* my plugins were closed! How can I get them back?
+
+It’s exceptionally rare that we close all of a developer’s plugins. In general it happens because of the following:
+
+1. You asked us to close all your plugins
+2. Email issues 
+    1. The email bounced and we were unable to get in touch
+    2. The email sent us auto-replies and warnings were sent at least twice to fix that
+3. Guideline issues 
+    1. Previous censuring for behaviour and/or a final warning was issued
+    2. Delivering legal threats to the directory and/or the volunteers
+    3. The violation was deemed ‘egregious’ (death threats, hundreds of sock puppets, harassment, etc)
+
+If you asked us to close them, you have to explain *why* the change of heart.
+
+If you’re having email issues, you have to resolve them and you’ll be required to bring all your plugins up to current standards of security and guidelines.
+
+As for that last one … Generally you don’t get to come back from that. If we deliver you a final warning for your behaviour and, within less than a year, you start up again with the issues (or fail to resolve all the issues we mentioned), we’re not going to reopen your plugins.
+
+### I just got a final warning. What do I do?
+
+First and foremost, *take it seriously*. The email will list exactly what the problems have been and why we’ve chosen to escalate to a final warning. Plugin Owners are expected to resolve all the issues, to cease causing new guideline violations, and to closely monitor the actions of any coworkers. In short, stop breaking the guidelines, stop making excuses, apologize for any misbehaviour, and correct course.
+
+The last thing we want to do is ban someone and disable all their plugins. It’s not healthy for the community. At the same time, if a developer is unable or unwilling to play by the same rules as everyone else, it’s detrimental to keep then in the directory and disrespectful to everyone else.
+
+## Plugin Ownership
+
+### How do I give someone else access to my plugin?
+
+To add users as committers, that is give them access to update code, go to `https://wordpress.org/plugins/YOURPLUGIN/advanced` and add their username in as a committer.
+
+To have them show up as an author, add their username to the `readme.txt` file.
+
+*Do not add regular users as authors.* It’s meant for people who help with development only. This means if someone ‘inspired’ you, you should not add them as an author.
+
+### What happens to a plugin if the plugin owner gets blocked?
+
+The leadership of the WordPress project and the Plugin Review team will review each case individually.
+
+Not having a new owner for a plugin can have a lot of security implications, as users would no longer be able to receive new updates.
+
+In most cases, the plugin will be:
+
+- **Closed for new updates:** When the plugin doesn’t have a lot of active installations or is only necessary for specific use cases, the team will likely just close it.
+- **Transferred to the WP community:** Whenever we have a plugin that is relevant enough to become a community/canonical project, it could be transferred to the `wordpressdotorg` user.
+- **[Adopted by a new user](#plugins/wordpress-org/take-over-an-existing-plugin):** In an application process managed by the team, it could be possibly donated to a different user if approved by the WordPress project leadership.
+
+### How do I remove someone’s access from my plugin?
+
+Anyone with commit access can do this. Go to `https://wordpress.org/plugins/YOURPLUGIN/advanced` and hover over their ID. A delete link will appear. Click on it.
+
+Please don’t delete yourself.
+
+### How do I change the plugin owner?
+
+Go to the Advanced tab and scroll down to the Danger Zone. There you will see a section for **Transfer Your Plugin**. Pick someone from the dropdown and click the button.
+
+For more details, please read the [documentation on transferring plugins](#plugins/wordpress-org/transferring-your-plugin-to-a-new-owner).
+
+### I tried to transfer my plugin but it says I can’t. Why not?
+
+Plugins with a large number of users (over 10,000) or ones that are deemed critical to the WordPress project (such as featured or beta plugins) can only be transfered via written request to the plugins team. [Please read the documentation on transfering plugins for details](#plugins/wordpress-org/transferring-your-plugin-to-a-new-owner).
+
+### How can I take over an abandoned plugin?
+
+[We permit users to adopt existing plugins that are no longer currently developed](#plugins/wordpress-org/take-over-an-existing-plugin).
+
+We ask you try to connect with the original developers first, so they can add you. In some case, that’s not possible and you should start with fixing the plugin. Make sure it meets coding standards, is secure, and update the copyright information to include yourself. Then you can contact us regarding [plugin adoption](#plugins/wordpress-org/take-over-an-existing-plugin).
+
+We offer **no** guarantee that you will be given anyone’s plugin, even following a successful review.
+
+### Are these offers to buy my plugin legit?
+
+Short answer: Probably not.
+
+Many developers receive unsolicited emails or offers to purchase their plugin. We have found the vast majority of these to be fraudulent and do *not* recommend you follow up with them.
+
+While legitimate offers do come, they’re usually from the official company to whom a plugin is related, or from a well established plugin company. The ones that start “We’re reaching out to the WordPress community …” or “We are looking to acquire existing WordPress plugins …” should not be trusted. Such purchases have often destroyed the reputation of the plugin (and the original developer) by engaging in sleazy tactics such as tracking users or other serious guideline violations.
+
+If you do choose to sell your plugin (or give it away to someone else), please make sure the new owners understand all the [guidelines of the repository](#plugins/wordpress-org/detailed-plugin-guidelines). Should they violate our terms the plugin will be removed, and we may not give it back depending on the level of the violation. Whomever has commit access to a plugin has the ownership and responsibility of it’s behavior for users. Spamming, inserting tracking data, and adding junk features are the fastest way to ruin your plugin.
+
+We advocate only giving your plugin to people you *personally* have vetted, and that you trust with being responsible with your code and your users.
+
+### What happens when a plugin developer dies?
+
+When a developer is determined to have died, they are removed from their own plugins in order to prevent the unethical from gaining access and harming users. If they are the only developer, the plugin may be closed. All attempts are made to find their friends and coworkers, to offer them a chance to adopt the code first, but if no one reliable or willing can be found the plugin is closed.
+
+---
+
+# Common issues <a name="plugins/wordpress-org/common-issues" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/common-issues/
+
+This is a compilation of some of the most common issues the Plugin Review Team encounters when reviewing plugins.
+
+This list contains excerpts from the team’s email messages, and should not be considered a complete or exhaustive list; the outcome of the reviews depends on the manual review performed by the team.
+
+## Security
+
+### Sanitize
+
+**Input data must be Sanitized, Validated, and Escaped on output**
+
+When you include POST/GET/REQUEST/FILE calls in your plugin, it’s important to sanitize, validate, and escape them. The goal here is to prevent a user from accidentally sending trash data through the system, as well as protecting them from potential security issues.
+
+SANITIZE: Data that is input (either by a user or automatically) must be sanitized as soon as possible. This lessens the possibility of XSS vulnerabilities and MITM attacks where posted data is subverted.
+
+VALIDATE: All data should be validated, no matter what. Even when you sanitize, remember that you don’t want someone putting in ‘dog’ when the only valid values are numbers.
+
+ESCAPE: Data that is output must be escaped properly when it is echo’d, so it can’t hijack admin screens. There are many esc\_\*() functions you can use to make sure you don’t show people the wrong data.
+
+To help you with this, WordPress comes with a number of sanitization and escaping functions. You can read about those here:
+
+[\#apis/security/sanitizing](#apis/security/sanitizing) [\#apis/security/escaping](#apis/security/escaping)
+
+Remember: You must use the most appropriate functions for the context. If you’re sanitizing email, use [sanitize\_email()](#reference/functions/sanitize_email) , if you’re outputting HTML, use [wp\_kses\_post()](#reference/functions/wp_kses_post) , and so on.
+
+An easy mantra here is this:
+
+Sanitize early  
+Escape Late  
+Always Validate
+
+Clean everything, check everything, escape everything, and never trust the users to always have input sane data. After all, users come from all walks of life.
+
+#### Sanitize: Confusion about escape and sanitize functions
+
+**Note**: escape functions cannot be used to sanitize. They serve different purposes. Even if they seem to be perfect for this purpose, most of the functions are filterable and people expect to use them to escape. Therefore, another plugin may change what they do and make yours at risk and exploitable.
+
+If you are trying to echo the variable, you have to first sanitize it and then escape it, as for example:
+
+```
+echo esc_html(sanitize_text_field($_POST['example']));
+
+```
+
+#### Sanitize: Using filter functions to sanitize
+
+**Note**: When using functions like `filter_var`, `filter_var_array`, `filter_input` and/or `filter_input_array` you will need to [set the FILTER parameter to any kind of filter that sanitizes the input](https://www.php.net/manual/en/filter.filters.php).
+
+Leaving the filter parameter empty, PHP by default will apply the filter “FILTER\_DEFAULT” **which is not sanitizing at all**.
+
+```
+$post_id = filter_input(INPUT_GET, 'post_id', FILTER_SANITIZE_NUMBER_INT);
+
+```
+
+#### Sanitize: Nonces
+
+**Note**: When checking a nonce using `wp_verify_nonce` you will need to sanitize the input using `wp_unslash` AND `sanitize_text_field`, [this is because this function is pluggable, and extenders should not trust its input values](#news/2023/08/understand-and-use-wordpress-nonces-properly).
+
+Example:
+
+```
+if ( ! isset( $_POST['prefix_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash ( $_POST['prefix_nonce'] ) ) , 'prefix_nonce' ) )
+
+```
+
+### Processing the whole input
+
+We strongly recommend you **never** attempt to process the whole $\_POST/$\_REQUEST/$\_GET stack. This makes your plugin slower as you’re needlessly cycling through data you don’t need. Instead, you should only be attempting to process the items within that are required for your plugin to function.
+
+### Escape
+
+**Variables and options must be escaped when echo’d**
+
+Much related to sanitizing everything, all variables that are echoed need to be escaped when they’re echoed, so it can’t hijack users or (worse) admin screens. There are many esc\_\*() functions you can use to make sure you don’t show people the wrong data, as well as some that will allow you to echo HTML safely.
+
+At this time, we ask you escape **all $-variables, options, and any sort of generated data when it is being echoed**. That means you should not be escaping when you build a variable, but when you output it at the end. We call this ‘escaping late.’
+
+Besides protecting yourself from a possible XSS vulnerability, escaping late makes sure that you’re keeping the future you safe. While today your code may be only outputted hardcoded content, that may not be true in the future. By taking the time to properly escape **when** you echo, you prevent a mistake in the future from becoming a critical security issue.
+
+This remains true of options you’ve saved to the database. Even if you’ve properly sanitized when you saved, the tools for sanitizing and escaping aren’t interchangeable. Sanitizing makes sure it’s safe for processing and storing in the database. Escaping makes it safe to output.
+
+Also keep in mind that sometimes a function is echoing when it should really be returning content instead. This is a common mistake when it comes to returning JSON encoded content. Very rarely is that actually something you should be echoing at all. Echoing is because it needs to be on the screen, read by a human. Returning (which is what you would do with an API) can be json encoded, though remember to **sanitize** when you save to that json object!
+
+There are a number of options to secure all types of content (html, email, etc). Yes, even HTML needs to be properly escaped.
+
+> [Escaping Data](#apis/security/escaping)
+
+Remember: You must use the most appropriate functions for the context. There is pretty much an option for everything you could echo. Even echoing HTML safely.
+
+#### Escape: Use of esc\_url\_raw
+
+We know this is confusing, the `esc_url_raw` function is not an escaping function, but a sanitizing function similar to `sanitize_url`. Specifically it is used to sanitize a URL for use in a database or a redirection.
+
+The appropriate function to escape a URL is `esc_url`.
+
+#### Escape: Use of \_\_
+
+The function `__` retrieves the translation without escaping, please either:
+
+- Use an alternative function that escapes the resulting value such as `esc_html__` or `esc_attr__`.
+- Or wrap the `__` function with a proper escaping function such as `esc_html`, `esc_attr`, `wp_kses_post`, etc.
+
+Examples:
+
+```
+<h2><?php echo esc_html__('Settings page', 'plugin-slug'); ?></h2>
+<h2><?php echo esc_html(__('Settings page', 'plugin-slug')); ?></h2>
+
+```
+
+#### Escape: Use of \_e and \_ex
+
+The functions `_e` and `_ex` output the translation without escaping, please use an alternative function that escapes the output.
+
+- An alternative to `_e` would be `esc_html_e`, `esc_attr_e` or simply using `__` wrapped by an escaping function and inside an `echo`.
+- An alternative to `_ex` would be using `_x` wrapped by an escaping function and inside an `echo`.
+
+Examples:
+
+```
+<h2><?php esc_html_e('Settings page', 'plugin-slug'); ?></h2>
+<h2><?php echo esc_html(__('Settings page', 'plugin-slug')); ?></h2>
+<h2><?php echo esc_html(_x('Settings page', 'Settings page title', 'plugin-slug')); ?></h2>
+
+```
+
+#### Escape: Use json\_encode
+
+When you need to echo a JSON, it’s better to make use of the function `wp_json_encode`, also, make sure you are not avoiding escaping with the options passed on the second parameter.
+
+```
+echo wp_json_encode($array_or_object);
+
+```
+
+#### Escape: HTML
+
+When escaping, there are cases where your plugin will need to output HTML. This can be done using the functions `wp_kses_post` or `wp_kses`. The function `wp_kses_post` will allow any common HTML that can go inside a post content, `wp_kses` will allow any HTML that you set up using its second and third parameters, please [refer to its documentation](#reference/functions/wp_kses).
+
+A common mistake is to use `esc_html` to escape HTML. This function is not intended for that, it’s intended to escape the output that will go **inside** an HTML tag, therefore it will strip any HTML tags.
+
+Examples:
+
+```
+echo wp_kses_post($html_content);
+echo wp_kses($html_content, array( 'a', 'div', 'span' ));
+
+```
+
+#### Escape: Using sanitizing functions
+
+Sanitize functions cannot be used to escape. They serve different purposes. Even if they seem to be perfect for this purpose, most of the functions are filterable and people expect to use them to sanitize. Therefore, another plugin may change what they do and make yours at risk and exploitable.
+
+If you are trying to echo the variable, you have to first sanitize it and then escape it, as for example:
+
+```
+echo esc_html(sanitize_text_field($_POST['example']));
+```
+
+### Files
+
+#### Files: Use the WordPress file uploader
+
+**Please use WordPress’ file uploader**
+
+When plugins use `move_uploaded_file()`, they exclude their uploads from the built-in checks and balances with WordPress’s functions. Instead of that, you should use the built in function:
+
+> [wp\_handle\_upload](#reference/functions/wp_handle_upload)
+
+#### Files: Unfiltered uploads
+
+**ALLOW\_UNFILTERED\_UPLOADS is not allowed.**
+
+Setting this constant to true will allow the user to upload any type of file (including PHP and other executables), creating serious potential security risks. As developers, we should not use or allow the use of this constant in any kind of logic, not even in a conditional.
+
+WordPress includes a list of safe files, as you can see in the function [wp\_get\_mime\_types](#reference/functions/wp_get_mime_types).
+
+If you need to add a specific file that is not in the list and that won’t represent a security risk, you can do so using the [upload\_mimes](#reference/hooks/upload_mimes) filter.
+
+#### Files: Calling files remotely
+
+Offloading images, js, css, and other scripts to your servers or any remote service (like Google, MaxCDN, jQuery.com etc) is disallowed. When you call remote data you introduce an unnecessary dependency on another site. If the file you’re calling isn’t a part of WordPress Core, then you should include it -locally- in your plugin, not remotely. If the file IS included in WordPress core, please call that instead.
+
+An exception to this rule is if your plugin is performing a service. We will permit this on a case by case basis. Since this can be confusing we have some examples of what are not permitted:
+
+- Offloading jquery CSS files to Google – You should include the CSS in your plugin.
+- Inserting an iframe with a help doc – A link, or including the docs in your plugin is preferred.
+- Calling images from your own domain – They should be included in your plugin.
+
+Here are some examples of what we would permit:
+
+- Calling font families from Google or their approved CDN (if GPL compatible)
+- API calls back to your server to process possible spam comments (like Akismet)
+- Offloading comments to your own servers (like Disqus)
+- oEmbed calls to a service provider (like Twitter or YouTube)
+
+Please remove external dependencies from your plugin and, if possible, include all files within the plugin (that is not called remotely). If instead you feel you are providing a service, please re-write your readme.txt in a manner that explains the service, the servers being called, and if any account is needed to connect.
+
+### Libraries
+
+#### Libraries: Using development versions
+
+**Using Beta / Alpha / Development versions of libraries**
+
+We do not recommend you use the beta version of a library unless it has features required by your plugin. Instead, you should be using the most stable release of the library.
+
+If there is a technical reason you must use the beta version, please explain why. Otherwise, please change your library to the stable release.
+
+#### Libraries: Not maintained
+
+**Libraries that are no longer maintained are not permitted**
+
+We no longer accept using any library that is no longer supported or maintained by their developers, as they pose a significant security risk. Please consider other options.
+
+#### Libraries: Out of Date
+
+At least one of the 3rd party libraries you’re using is out of date. Please upgrade to the latest stable version for better support and security. We do not recommend you use beta releases.
+
+### WPDB: Unsafe SQL calls
+
+When making database calls, it’s highly important to protect your code from SQL injection vulnerabilities. You need to update your code to use [wpdb](#reference/classes/wpdb) calls and prepare() with your queries to protect them.
+
+Please review the following:
+
+- [\#reference/classes/wpdb#protect-queries-against-sql-injection-attacks](#reference/classes/wpdb#protect-queries-against-sql-injection-attacks)
+- [https://codex.wordpress.org/Data\\\_Validation#Database](https://codex.wordpress.org/Data_Validation#Database)
+- <https://make.wordpress.org/core/2012/12/12/php-warning-missing-argument-2-for-wpdb-prepare/>
+- <https://ottopress.com/2013/better-know-a-vulnerability-sql-injection/>
+
+#### WPDB: Arrays of placeholders
+
+**Note**: Passing individual values to [wpdb::prepare()](#reference/classes/wpdbprepare/) using placeholders is fairly straightforward, but what if we need to pass an array of values instead?
+
+You’ll need to create a placeholder for each item of the array and pass all the corresponding values to those placeholders, this seems tricky, but here is a snippet to do so.
+
+```
+$wordcamp_id_placeholders = implode( ', ', array_fill( 0, count( $wordcamp_ids ), '%d' ) );
+$prepare_values = array_merge( array( $new_status ), $wordcamp_ids );
+$wpdb->query( $wpdb->prepare( "
+    UPDATE `$table_name`
+    SET `post_status` = %s
+    WHERE ID IN ( $wordcamp_id_placeholders )",
+    $prepare_values
+) );
+```
+
+There is a core ticket that could make this easier in the future: <https://core.trac.wordpress.org/ticket/54042>
+
+### Not use HEREDOC-NOWDOC
+
+**Do not use HEREDOC or NOWDOC syntax in your plugins**
+
+While both are totally valid, and in many ways desirable features of PHP that allow you to output content, it comes with a cost that is too high for most plugins.
+
+The primary issue is that most (if not all) codesniffers won’t detect lack of escaping in code when you use HEREDOC or NOWDOC. While there are ways around this they have the end result of dashing all that readability to the rubbish pile and leaving you with a jumbled mess that won’t properly be scanned.
+
+We feel the risk here is much higher than the benefits, which is why we don’t permit their use.
+
+### Direct file access
+
+**Allowing Direct File Access to plugin files**
+
+Direct file access occurs when someone directly queries a PHP file. This can be done by entering the complete path to the file in the browser’s URL bar or by sending a POST request directly to the file.
+
+For files that only contain class or function definitions, the risk of something funky happening when accessed directly is minimal. However, for files that contain executable code (e.g., function calls, class instance creation, class method calls, or inclusion of other PHP files), the risk of security issues is hard to predict because it depends on the specific case, but it can exist and it can be high.
+
+You can easily prevent this by adding the following code at the top of all PHP files that could potentially execute code if accessed directly:
+
+```
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+```
+
+## Compatibility
+
+### Prefixing
+
+**Generic function/class/define/namespace/option names**
+
+All plugins must have unique function names, namespaces, defines, class and option names. This prevents your plugin from conflicting with other plugins or themes. We need you to update your plugin to use more unique and distinct names.
+
+A good way to do this is with a prefix. For example, if your plugin is called “Easy Custom Post Types” then you could use names like these:
+
+- function ecpt\_save\_post()
+- class ECPT\_Admin{}
+- namespace ECPT;
+- update\_option( ‘ecpt\_settings’, $settings );
+- define( ‘ECPT\_LICENSE’, true );
+- global $ecpt\_options;
+
+Don’t try to use two (2) or three (3) letter prefixes anymore. We host nearly 100-thousand plugins on WordPress.org alone. There are tens of thousands more outside our servers. Believe us, you’re going to run into conflicts.
+
+You also need to avoid the use of \_\_ (double underscores), wp\_ , or \_ (single underscore) as a prefix. Those are reserved for WordPress itself. You can use them inside your classes, but not as stand-alone function.
+
+Please remember, if you’re using [\_n()](#reference/functions/_n) or [\_\_()](#reference/functions/__) for translation, that’s fine. We’re **only** talking about functions you’ve created for your plugin, not the core functions from WordPress. In fact, those core features are why you need to not use those prefixes in your own plugin! You don’t want to break WordPress for your users.
+
+Related to this, using if (!function\_exists(‘NAME’)) { around all your functions and classes sounds like a great idea until you realize the fatal flaw. If something else has a function with the same name and their code loads first, your plugin will break. Using if-exists should be reserved for shared libraries only.
+
+Remember: Good prefix names are unique and distinct to your plugin. This will help you and the next person in debugging, as well as prevent conflicts.
+
+### PHP
+
+#### PHP: Do not use Short Tags
+
+The primary issue with PHP’s short tags is that PHP managed to choose a tag (`<?`) that was used by another syntax: XML. This is a big issue when you consider how common XML parsing and management is.
+
+We know as of PHP 5.4, `<?= ... ?>` tags are supported everywhere, regardless of short tags settings. This should mean they’re safe to use in portable code but in reality that has proven not to be the case. Add on to that the fact that many codesniffers won’t detect lack of escaping in code when you use short-tags, and it becomes not worth the headache for anyone.
+
+Basically the risk here is way higher than the benefits, which is why we don’t permit their use.
+
+#### PHP: Changing Settings globally
+
+**Don’t Force Set PHP Settings Globally**
+
+While many plugins can need optimal settings for PHP, we ask you please not set them as global defaults.
+
+Having defines like ini\_set(‘memory\_limit’, ‘-1’); run globally (like on init or in the \_\_construct() part of your code) means you’ll be running that for everything on the site, which may cause your users to fall out of compliance with any limits or restrictions on their host.
+
+If you must use those, you need to limit them specifically to only the exact functions that require them.
+
+#### PHP: Setting a default timezone
+
+This is rarely a good idea. People should be able to define their own timezones in WordPress.
+
+Also WordPress explicitly sets and expects the default timezone to be UTC (in settings.php) and the date/time functions sometimes rely on the fact that the default timezone is UTC. For instance if you do date\_default\_timezone\_set(get\_option(‘timezone\_string’)) and then later try to get a GMT timestamp from [get\_post\_time()](#reference/functions/get_post_time) or [get\_post\_modified\_time()](#reference/functions/get_post_modified_time) , it will fail to give you the right date.
+
+#### PHP: Error reporting
+
+**Don’t Use Error Reporting in Production Code**
+
+While error\_reporting() is a great tool in PHP ( <https://www.php.net/manual/en/function.error-reporting.php> ) but if you set it permanently in your plugin, you mess things up for everyone who uses your code. Should they have a reason to try to debug their site which happens to use your code, they won’t be able to get a clean test because you’re messing with the output. It has no place in the day to day function of your plugin.
+
+### Plugin standards
+
+#### Main file convention
+
+**The main file of the plugin has a name that does not follow the convention.**
+
+We expect the main plugin file (the file containing the plugin headers) to have the same name as the plugin folder, which is also the same name as the slug / permalink of the plugin.
+
+For example, if your plugin slug is `ecpt-social-manager` we expect your main plugin filename to be `ecpt-social-manager.php`.
+
+Note that using some common names as the filename for the main plugin file can lead to issues in some configurations.
+
+Please check out our tips on how to [structure files and folders in a plugin](#plugins/plugin-basics/best-practices).
+
+#### Incomplete Headers
+
+Your headers are either missing or incomplete.
+
+Please review [Header Requirements](#plugins/the-basics/header-requirements) and update your plugin accordingly, putting the headers in only the main file.
+
+#### Incomplete Readme
+
+Your readme is either missing or incomplete.
+
+In some cases, such as for first plugins, ones with dependencies, or plugins that call external services, we require you to provide a complete readme. This means your readme has to have headers as well as a proper description and documentation as to how it works and how one can use it.
+
+Our goal with this is to make sure everyone knows what they’re installing and what they need to do before they install it. No surprises. This is especially important if your plugin is making calls to other servers. You are expected to provide users with all the information they need before they install your plugin.
+
+Your readme also must validate per [Validator](https://wordpress.org/plugins/about/validator/) or we will reject it. Keep in mind, we don’t want to see a readme.MD. While they can work, a readme.txt file will always be given priority, and not all of the markdown will work as expected.
+
+We ask you please create your readme one based on this: <https://wordpress.org/plugins/readme.txt>
+
+#### No GPL-compatible license declared
+
+It is necessary to declare the license of this plugin. You can do this using the fields available both in the plugin readme and in the plugin headers.
+
+Remember that all code, data, and images — anything stored in the plugin directory hosted on WordPress.org — must comply with the GPL or a GPL-Compatible license. Included third-party libraries, code, images, or otherwise, must be also compatible.
+
+For a specific list of compatible licenses, [please read the GPL-Compatible license list on gnu.org](https://www.gnu.org/licenses/license-list.html#GPLCompatibleLicenses).
+
+#### Incorrect Stable Tag
+
+In your readme, your ‘Stable Tag’ does not match the Plugin Version as indicated in your main plugin file.
+
+Your Stable Tag is meant to be the stable version of your plugin, not of WordPress. For your plugin to be properly downloaded from WordPress.org, those values need to be the same. If they’re out of sync, your users won’t get the right version of your code.
+
+We recommend you use Semantic Versioning (aka SemVer) for managing versions:
+
+- [Software Versioning](https://en.wikipedia.org/wiki/Software_versioning)
+- [SemVer](https://semver.org/)
+
+Please note: While currently using the stable tag of trunk currently works in the Plugin Directory, it’s not actually a supported or recommended method to indicate new versions and has been known to cause issues with automatic updates.
+
+We ask you please properly use tags and increment them when you release new versions of your plugin, just like you update the plugin version in the main file. Having them match is the best way to be fully forward supporting.
+
+#### Declared license mismatched
+
+When declaring the license for this plugin, it has to be the same.
+
+Please make sure that you are declaring the same license in both the readme file and the plugin headers.
+
+It is fine for this plugin to contain code from other sources under other licenses as long those are well documented and are under GPL or GPL-Compatible license, but we need a sole license declared for your code.
+
+### Use HTTP API
+
+**Using CURL Instead of HTTP API**
+
+WordPress comes with an extensive HTTP API that should be used instead of creating your own curl calls. It’s both faster and more extensive. It’ll fall back to curl if it has to, but it’ll use a lot of WordPress’ native functionality first.
+
+> [HTTP API](#plugins/http-api)
+
+In case you need, you can use setopt with [\#reference/hooks/http\_api\_curl](#reference/hooks/http_api_curl)
+
+Please note: If you’re using CURL in 3rd party vendor libraries, that’s permitted. It’s in your own code unique to this plugin (or any dedicated WordPress libraries) that we need it corrected.
+
+### Use wp\_enqueue commands
+
+Your plugin is not correctly including JS and/or CSS. You should be using the built in functions for this:
+
+When including **JavaScript code** you can use:
+
+- [wp\_register\_script()](#reference/functions/wp_register_script) and [wp\_enqueue\_script()](#reference/functions/wp_enqueue_script) to add JavaScript code from a file.
+- [wp\_add\_inline\_script()](#reference/functions/wp_add_inline_script) to add inline JavaScript code to previous declared scripts.
+
+When including **CSS** you can use:
+
+- [wp\_register\_style()](#reference/functions/wp_register_style) and [wp\_enqueue\_style()](#reference/functions/wp_enqueue_style) to add CSS from a file.
+- [wp\_add\_inline\_style()](#reference/functions/wp_add_inline_style) to add inline CSS to previously declared CSS.
+
+Note that as of WordPress 5.7, you can pass attributes like async, nonce, and type by using new functions and filters: [Script Attributes Related Functions in WordPress 5.7](https://make.wordpress.org/core/2021/02/23/introducing-script-attributes-related-functions-in-wordpress-5-7/)
+
+If you’re trying to enqueue on the admin pages you’ll want to use the admin enqueues.
+
+- [admin\_enqueue\_scripts](#reference/hooks/admin_enqueue_scripts)
+- [admin\_print\_scripts](#reference/hooks/admin_print_scripts)
+- [admin\_print\_styles](#reference/hooks/admin_print_styles)
+
+### Including Libraries Already In Core
+
+Your plugin has included a copy of a library that WordPress already includes.
+
+WordPress includes a number of useful libraries, such as jQuery, Atom Lib, SimplePie, PHPMailer, PHPass, and more. For security and stability reasons, plugins may not include those libraries in their own code, but instead must use the versions of those libraries packaged with WordPress.
+
+You can see the list of JS Libraries here:
+
+[Default Scripts and JS Libraries included and registered by WordPress](#reference/functions/wp_enqueue_script#default-scripts-and-js-libraries-included-and-registered-by-wordpress)
+
+While we do not YET have a decent public facing page to list all these libraries, we do have a list here:
+
+[Core Credits](https://meta.trac.wordpress.org/browser/sites/trunk/api.wordpress.org/public_html/core/credits/wp-59.php#L739)
+
+It’s fine to locally include add-ons not in core, but please ONLY add those additional files. For example, you do not need the entire jQuery UI library for one file. If your code doesn’t work with the built-in versions of jQuery, it’s most likely a noConflict issue.
+
+### Internationalization
+
+#### Internationalization: Using variables
+
+**Internationalization: Don’t use variables or defines as text, context or text domain parameters.**
+
+In order to make a string translatable in your plugin you are using a set of special functions. These functions collectively are known as “gettext”.
+
+There is a [dedicated team in the WordPress community](https://make.wordpress.org/polyglots/) to translate and help other translating strings of WordPress core, plugins and themes to other languages.
+
+To make them be able to translate this plugin, please **do not use variables or function calls** for the text, context or text domain parameters of any gettext function, all of them **NEED to be strings**. Note that the translation parser reads the code without executing it, so it won’t be able to read anything that is not a string within these functions.
+
+For example, if your gettext function looks like this…
+
+`esc_html__( $greetings , 'plugin-slug' );`
+
+…the translator won’t be able to see anything to be translated as `$greetings` is not a string, it is not something that can be translated. You need to give them the string to be translated, so they can see it in the translation system and can translate it, the correct would be as follows…
+
+`esc_html__( 'Hello, how are you?' , 'plugin-slug' );`
+
+This also applies to the translation domain, this is a bad call:
+
+`esc_html__( 'Hello, how are you?' , $plugin_slug );`
+
+The fix here would be like this:
+
+`esc_html__( 'Hello, how are you?' , 'plugin-slug' );`
+
+Also note that the translation domain needs to be the same as your plugin slug.
+
+What if we want to include a dynamic value inside the translation? Easy, you need to add a placeholder which will be part of the string and change it after the gettext function does its magic, you can use `printf` to do so, like this:
+
+```
+printf(
+    /* translators: %s: First name of the user */
+    esc_html__( 'Hello %s, how are you?', 'plugin-slug' ),
+    esc_html( $user_firstname )
+);
+
+```
+
+You can read [more information here](#plugins/internationalization/how-to-internationalize-your-plugin).
+
+## Compliance
+
+### Changing Active Plugins
+
+It is not allowed for plugins to change the activation status of other plugins, this is an action that must be performed by the user.
+
+It is also not allowed to interfere with the user’s actions when activating or deactivating a plugin, unless that’s done to prevent errors (For example: When your plugin depends on another plugin, deactivate your own plugin when that other plugin is not active).
+
+WordPress 6.5 introduces [Plugin Dependencies](https://make.wordpress.org/core/2024/03/05/introducing-plugin-dependencies-in-wordpress-6-5/), you can use it to manage dependencies (although it’s fine if you use this as a fallback).
+
+### Update checker
+
+**Including An Update Checker / Changing Updates functionality**
+
+Please remove the checks you have in your plugin to provide for updates.
+
+We do not permit plugins to phone home to other servers for updates, as we are providing that service for you with WordPress.org hosting. One of our guidelines is that you actually use our hosting, so we need you to remove that code.
+
+We also ask that plugins not interfere with the built-in updater as it will cause users to have unexpected results with WordPress 5.5 and up.
+
+### Undocumented 3rd party
+
+**Undocumented use of a 3rd Party or external service**
+
+We permit plugins to require the use of 3rd party (i.e. external) services, provided they are properly documented in a clear manner.
+
+We require plugins that reach out to other services to disclose this, in clear and plain language, so users are aware of where data is being sent. This allows them to ensure that any legal issues with data transmissions are covered. This is true even if you are the 3rd party service.
+
+In order to do so, you must update your readme to do the following:
+
+- Clearly explain that your plugin is relying on a 3rd party as a service and under what circumstances
+- Provide a link to the service.
+- Provide a link to the service terms of use and/or privacy policies.
+
+Remember, this is for your own legal protection. Use of services must be upfront and well documented.
+
+### Included Unneeded Folders
+
+This plugin includes folders and files that looks like are not required for the running of your plugin. Some examples are:
+
+- development tools
+- unneeded vendor folders for production (bower, node, grunt, etc)
+- demos
+- unit tests
+
+If you’re trying to include the human-readable version of your own code (in order to comply with our guidelines) that’s fine, remember that we also permit you to put links to them in your readme.
+
+You should also keep and/or link configuration files, as for example, the `composer.json` file in order to allow others to review, study, and yes, fork this code.
+
+[Detailed Plugin Guidelines](#plugins/wordpress-org/detailed-plugin-guidelines)
+
+But you can, and should, safely remove those other unneeded folders from your plugins.
+
+### Not permitted files
+
+A plugin typically consists of files related to the plugin functionality (php, js, css, txt, md) and maybe some multimedia files (png, svg, jpg) and / or data files (json, xml).
+
+We have detected files that are not among of the files normally found in a plugin, are they necessary? If not, then those won’t be allowed.
+
+#### Including code from a “premium” source
+
+Some premium libraries are specifically not permitted to be included in free (WordPress.org hosted) plugins. Those must be removed.
+
+### GPL
+
+#### GPL: Non-GPL compatible Code Included
+
+It’s required that all code be compatible with the GPLv2 (or later) license in order to be included in our directory.
+
+You must remove the code and alter the plugin so it is not required. We suggest you find code that is GPL compatible and use that instead. For more information on what types of licenses are compatible with GPL, please review the following links:
+
+- [GNU Licenses – License List](https://www.gnu.org/licenses/license-list.html)
+- [GPL FAQ – All Compatibility](https://www.gnu.org/licenses/gpl-faq.html#AllCompatibility)
+
+#### GPL: No publicly documented resource
+
+**No publicly documented resource for your compressed content**
+
+In reviewing your plugin, we cannot find a non-compiled version of your javascript and/or css related source code.
+
+In order to comply with our guidelines of human-readable code, we require you to include the source code and/or a link to the non-compressed, developer libraries you’ve included in your plugin. If you include a link, this may be in your source code, however we require you to also have it in your readme.
+
+[Detailed Plugin Guidelines](#plugins/wordpress-org/detailed-plugin-guidelines)
+
+We strongly feel that one of the strengths of open source is the ability to review, observe, and adapt code. By maintaining a public directory of freely available code, we encourage and welcome future developers to engage with WordPress and push it forward.
+
+That said, with the advent of larger and larger plugins using more complex libraries, people are making good use of build tools (such as composer or npm) to generate their distributed production code. In order to balance the need to keep plugin sizes smaller while still encouraging open source development, we require plugins to make the source code to any compressed files available to the public in an easy to find location, by documenting it in the readme.
+
+For example, if you’ve made a Gutenberg plugin and used npm and webpack to compress and minify it, you must either include the source code within the published plugin or provide access to a public maintained source that can be reviewed, studied, and yes, forked.
+
+We strongly recommend you include directions on the use of any build tools to encourage future developers.
+
+#### GPL: Using composer but no composer.json file
+
+We noticed that your plugin is using Composer to handle library dependencies, that’s great as it will help maintaining and updating your plugin in the future while avoiding collisions with other plugins that are using same libraries.
+
+The `composer.json` file describes the dependencies of your project and may contain other metadata as well. It’s a small file that typically can be found in the top-most directory of your plugin.
+
+As one of the strengths of open source is the ability to review, observe, and adapt code, **we would like to ask you to include that file in your plugin**, even if it is only used for development purposes. This will allow others to exercise the open source freedoms from which we all benefit.
+
+---
+
+# How Your Plugin Assets Work <a name="plugins/wordpress-org/plugin-assets" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/plugin-assets/
+
+The `assets` folder in your plugin is where you can store images (like plugin headers, icons, and screenshots) used on your plugin’s display page.
+
+All files should be placed into the `assets` directory of your SVN directory and will work for all versions of your plugin. This is a top level directory, just like `trunk`. You would **not** place the screenshots into `trunk/assets` or `tags/1.0/assets`.
+
+All images are served through a CDN and cached heavily, so it may take a some time to update when changed or added. Please give the proxy some time to retrieve your images and cache them before reporting it’s not working. It should only take a few minutes, but 6 hours is not unheard of when the servers are under high load (like the week before and during a release of a major version of WordPress).
+
+## Default Image Sizes
+
+Image sizes should be the same as implied by the names. That is, `banner-772x250.png` should be 772 pixels wide by 250 pixels high. Similarly, `icon-256x256.png` should be a 256×256 square.
+
+We have **not** defined any new banner sizes so please don’t try to be clever and rename yours thinking they’ll work. They simply won’t show. Similarly, don’t make your images larger (or smaller) and use the existing names. Things will look terrible.
+
+## Plugin Headers
+
+Plugin headers are those images you see at the top of a plugin page:
+
+[![](https://i0.wp.com/developer.wordpress.org/files/2015/05/Screenshot-2024-07-02-at-12.50.04%E2%80%AFPM.png?resize=1024%2C472&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2015/05/Screenshot-2024-07-02-at-12.50.04%E2%80%AFPM.png?ssl=1)When designing your header image, keep in mind the use of international plugin directories. Some of these, like [Hebrew](https://he.wordpress.org/plugins/) and [Arabic](https://ar.wordpress.org/plugins/), use Right-To-Left (RTL) languages. Ideally, design your banner such that the elements included in the image can be positioned from right to left or from left to right. You can create a different image for RTL pages, with `-rtl` in the name.
+
+### Filenames
+
+- Normal Banner: `banner-772x250.(jpg|png)`
+- Normal Banner (Localized): `banner-772x250-(rtl|es|es_ES).(jpg|png)`
+- High-DPI (Retina): `banner-1544x500.(jpg|png)`
+- High-DPI (Retina Localized): `banner-1544x500-(rtl|es|es_ES).(jpg|png)`
+
+Images can be localised to a specific language, or for all RTL languages.  
+The locale can be specified as a full locale (`es_ES`) or as a partial locale (`es`), if the language is RTL and a locale-specific image isn’t provided, the `rtl` image will be checked for.  
+Do not duplicate English images into RTL and locale-specific files without making alterations, the English variant will be used instead.
+
+For example of an RTL image, look at bbPress [in English](https://wordpress.org/plugins/bbpress/) and then [in Arabic](https://ar.wordpress.org/plugins/bbpress/).
+
+For an example of Retina images, [check out Hello Dolly](https://wordpress.org/extend/plugins/hello-dolly/) or [Pluginception](https://wordpress.org/plugins/pluginception/). You *cannot* use the retina image alone, it only works as an “add-on” to the 772×250 image. The larger ‘retina’ image is only used on displays that can show the higher detail.
+
+4MB is the maximum size for headers images, but smaller is better.
+
+## Plugin Icons
+
+Plugin icons are square images that show on the side of the plugin in searches on WordPress.org but also on the back-end of WordPress.org.
+
+[![Akismet with it's Plugin Icon](https://i0.wp.com/developer.wordpress.org/files/2015/05/akismet1.png?resize=651%2C235&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2015/05/akismet1.png?ssl=1)In addition to JPG and PNG formats, you can also use **SVG**. Vectors are perfect for icons, as they can be scaled to any size and the file itself is small. If you chose to use SVGs, you *must* also use a PNG icon as a fallback, otherwise your plugin icon will not display properly in older browsers or on Facebook.
+
+If you do not use an icon, an auto-generated one will be made for you. Some examples are the circled icons below:
+
+[![Example of auto-generated icons](https://i0.wp.com/developer.wordpress.org/files/2015/05/auto-generated-icons.jpg?resize=798%2C332&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2015/05/auto-generated-icons.jpg?ssl=1)1MB is the maximum file size for icons, but as with headers, the smaller the better.
+
+### Filenames
+
+- Normal: `icon-128x128.(png|jpg|gif)`
+- High-DPI (Retina): `icon-256x256.(png|jpg|gif)`
+- SVG: `icon.svg`
+
+There are no plans to change these sizes.
+
+## Screenshots
+
+Screenshots show on the main page of your plugin, and are used to illustrate aspects of the plugin admin dashboard or live examples. There should be **one** screenshot for every line in your `readme.txt` file. The content of the lines will become the captions of the screenshots on your plugin’s page.
+
+For example: `1. This is a monkey`
+
+That would show the caption ‘This is a monkey’ under the first screenshot. Presumably of a monkey.
+
+Screenshots *must* be local to display. Links to external files won’t work.
+
+10MB is maximum file size for screenshots, but as always, the smaller the better.
+
+### Filenames
+
+- `screenshot-1.(png|jpg)`
+- `screenshot-2.(png|jpg)`
+
+All filenames should be lowercase; uppercase names won’t work.
+
+Screenshots can be localized [similar to banners](#banner-filenames), the following filenames would take priority over the above English names when the plugin is viewed in German:
+
+- `screenshot-1<strong>-de</strong>.(png|jpg)`
+- `screenshot-2<strong>-de</strong>.(png|jpg)`
+
+## Issues
+
+If you find your images are downloading when people click on them from your WordPress.org Plugin Directory page, you’ll need to make a change in how you upload them via SVN. It’s due to how some images are sent with the `Content-Type application/octet-stream`.
+
+To fix it, run this command:
+
+```
+svn propset svn:mime-type image/png *.png
+svn propset svn:mime-type image/jpeg *.jpg
+```
+
+Alternatively, plugin authors can set this in their ~/.subversion/config file:
+
+```
+*.png = svn:mime-type=image/png
+*.jpg = svn:mime-type=image/jpeg
+```
+
+That’ll apply to only new files though. Fixing already-committed files will require the command above.
+
+---
+
+# Plugin Readmes <a name="plugins/wordpress-org/how-your-readme-txt-works" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/how-your-readme-txt-works/
+
+This page will explain some aspects of the plugin directory, and explain of the more obvious aspects which a lot of people miss.
+
+To make your entry in the plugin browser most useful, each plugin should have a readme file named `readme.txt` that adheres to the [WordPress plugin readme file standard](https://wordpress.org/plugins/readme.txt). This file controls the output on the front-facing part of the directory. Writing a description in the readme determines exactly what will be displayed on `wordpress.org/plugins/Your-Plugin`
+
+You can use the [plugin readme generator](https://generatewp.com/plugin-readme/) and put your completed result through the [official readme validator](https://wordpress.org/plugins/developers/readme-validator/) to check it. If you need more visual assistance you can use the tool [wpreadme.com](https://wpreadme.com/)
+
+Since WordPress 5.8 plugin [readme files are not parsed for requirements](https://core.trac.wordpress.org/ticket/48520). This means that headers `Requires PHP` and `Requires at least` are going to be parsed from plugin’s main PHP file.
+
+## Section Details
+
+All plugins contain a main PHP file, and almost all plugins have a `readme.txt` file as well. The `readme.txt` file is intended to be written using a subset of markdown.
+
+### Readme Header Information
+
+The Plugin readme header consists of this information:
+
+```adoc
+=== Plugin Name ===
+Contributors: (this should be a list of wordpress.org userid's)
+Donate link: https://example.com/
+Tags: tag1, tag2
+Requires at least: 4.7
+Tested up to: 5.4
+Stable tag: 4.3
+Requires PHP: 7.0
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+```
+
+- **Contributors** – a case sensitive, comma separated list of all WordPress.org usernames who have contributed to the code. It is generally considered respectful to include the names of people who worked on forked projects. Some developers will ask to be removed from the list, as they don’t want other plugins showing up on their profile page. It’s best to honor those requests. Remember to *only* use the WordPress.org username – anything else will show up sans profile link and gravatar. To change someone’s display name (which shows on the front facing pages for the plugin), edit the profile `https://wordpress.org/support/users/YOURID/edit/` and change the display name.
+- **Donate link** – (OPTIONAL) Makes a “Donate to this plugin” link in the sidebar. If there is no link, nothing shows up.
+- **Tags** – 1 to 5 comma separated terms that describe the plugin. Plugins must refrain from using competitors plugin names as tags. Plugins should not use tags which are unique to that plugin, as these will not be shown.
+- **Tested up to** – The version of WordPress that the plugin has been tested against. This field *ignores* minor versions, as plugins shouldn’t break with a minor update. This means a plugin only need to define the major version it is tested against and the WordPress.org plugin directory will automatically add the minor version. This should be numbers *only*, so ‘4.9’ and not ‘WP 4.9’
+- **Requires PHP** – (OPTIONAL) The required *minimum* version of PHP needed for use with this plugin. This should be numbers *only*, so ‘7.0’ and not ‘PHP 7.0’
+- **Stable Tag** – The stable version of the plugin. This is *not* the version of WordPress, but the version of the plugin itself. Only use numbers and periods, and [SemVer formatting](https://semver.org/) is recommended.
+- **License** – The GPLV2 (or later) compatible license used for the plugin.
+- **License URI** – (OPTIONAL) A link to the license. This is optional, but if a plugin uses a more rare license, strongly recommended.
+
+At the end of the header section is a place for a *short* description of a plugin. The example recommends no more than 150 characters and to not use markup. That line of text is the single line description of the plugin which shows up right under the plugin name. If it’s longer than 150 characters, it gets cut off, so keep it short.
+
+### Installation
+
+If your plugin has no custom install settings, it’s okay to omit this section. If your plugin has custom configuration notes post install, this is a great place to put that information.
+
+### Custom Sections
+
+While custom sections are permitted and supported, please use them in moderation. People get used to seeing how every other plugin looks, and when yours is weird, they’ll miss important information.
+
+## Technical Details
+
+While most of the readme details are self evident, there are a few sections that trip people up.
+
+### How The Readme Is Parsed
+
+While using the stable tag of trunk currently works in the Plugin Directory, it’s not a supported or recommended method to indicate new versions and has been known to cause issues with automatic updates. At this time, we are actively discouraging and (in the case of new plugins) prohibiting it’s use 
+
+WordPress.org’s Plugin Directory works based on the information found in the field **Stable Tag** in the readme. When WordPress.org parses the `readme.txt`, the very first thing it does is to look at the `readme.txt` in the `/trunk` directory, where it reads the “Stable Tag” line.
+
+When the Stable Tag is properly set, WordPress.org will go and look in `/tags/` for the referenced version. So a Stable Tag of “1.2.3” will make it look for `/tags/1.2.3/`.
+
+The readme.txt in the tag folder must also be properly updated to have the correct “Stable Tag” — failing to do so may cause your plugin to not be updatable.
+
+If the Stable Tag is 1.2.3 and `/tags/1.2.3/` exists, then nothing in trunk will be read any further for parsing by any part of the system. If you try to change the description of the plugin in `/trunk/readme.txt` then your changes won’t do anything on your plugin page. Everything comes from the `readme.txt` in the file being pointed to by the Stable Tag.
+
+The WordPress.org Plugin Directory reads the main plugin PHP file to get things like the Name of the plugin, the Plugin URI, and most importantly, the version number. On the plugin page, you’ll see the download button which reads “Download Version 1.2.3” or similar. That version number comes from the plugin’s main PHP file, *not* the readme!
+
+The Stable Tag points to a subdirectory in the `/tags` directory. But the version of the plugin is not actually set by that folder name. Instead, it’s the version that is listed in the plugin’s PHP file itself which determines the name. If you have changed Stable Tag to 1.4 and the plugin still says 1.3 in the PHP file, then the version listed will be 1.3.
+
+### Videos
+
+You can embed videos from YouTube, Vimeo, and anywhere else [WordPress supports by default](https://wordpress.org/support/article/embeds/). All you have to do is paste the video URL onto it’s own line in your readme.
+
+We recommend you NOT have the video as the final line in a FAQ section, as sometimes formatting gets weird.
+
+### Markdown
+
+The readmes use a customized version of [Markdown](https://daringfireball.net/projects/markdown/). Most Markdown calls work as expected.
+
+Markdown allows for easy linking in your readme.txt as well. Just write like this to link a word to a URL:
+
+```
+[WordPress](http://wordpress.org)
+```
+
+Videos can be put into your readme.txt too. A YouTube or Vimeo link on a line by itself will be auto-embedded. It’s also possible to embed videos hosted on VideoPress using the wpvideo shortcode.
+
+### Field Details
+
+For those who want to know exactly what gets parsed into what:
+
+- **Authors**  
+    Author field from the plugin header and Contributors field from the readme file.
+- **Version**  
+    Version field from the plugin header.
+- **Tags** (as in categories)  
+    Tags field from the readme file.
+- **Plugin Name**  
+    The Plugin Name from the readme file falling back on the Plugin Name specified in the plugin header.
+- **Author and Plugin Homepages**  
+    The Author URI and Plugin URI fields of the plugin header. The Plugin URI should be *unique* to each plugin. Do **not** use the same URI for your free and pro plugin. It ends badly.
+- **Last updated time**  
+    Time of last check in to the appropriate directory after a version number change.
+- **Creation time**  
+    Time of *first* check in.
+
+### File Size
+
+While readmes are simple text files, having a file larger than 10k may result in errors. Your readme should be brief and to the point. The description should not be a sales pitch as much as a description of the plugin, what it does, and how to use it. Your install directions should be direct. Your FAQ should actually address issues.
+
+As for your changelog, we recommend keeping the current release in the readme and splitting the rest out out into it’s own file — `changelog.txt` for example. By storing all the older changelog data there, you keep your readme small and allow the people who get really into long changelogs to read things on their own.
+
+Similarly, if you need in-depth documentation with inline images and so on, direct people to your own website.
+
+## See Also
+
+- [Plugin Headers](#plugins/plugin-basics/header-requirements) (found in the main file of the plugin)
+
+---
+
+# Take Over an Existing Plugin <a name="plugins/wordpress-org/take-over-an-existing-plugin" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/take-over-an-existing-plugin/
+
+People cease development on their plugins for a variety of reasons. Instead of letting those plugins stagnate, we encourage people to instead list them for adoption by another, more active, developer.
+
+In adopting a plugin, you are promising to be responsible for all future development, and to ensure the plugin (and you) comply with all [plugin guidelines](#plugins/wordpress-org/detailed-plugin-guidelines).
+
+Not all requests will be approved, even following a successful review.
+
+## The Adoption Process
+
+There are two ways a plugin can be adopted.
+
+1. You ask the developer directly, they say yes and add you
+2. You ask the Plugin Review team to assist you
+
+Since you’re reading this, you likely are working on the second method, so keep reading. You will be expected to have followed **all** the steps herein.
+
+In some specific situations, the Plugin Review team might also consider donating the plugin to a different user if the original plugin author gets blocked.
+
+### 1. Check the Plugin Status
+
+If the plugin is open and active, give it a full review on your own before you go any further. Make sure you feel comfortable and capable of maintaining the code long term.
+
+If a plugin is closed because it was **unused**, you can skip the rest of this and email `plugins@wordpress.org` right away and attach your version of the proposed plugin.
+
+If the plugin was closed for security issues, we require **all** those issues to be resolved, so put your best foot forward and demonstrate you have the impetus to find and fix those issues.
+
+Closed plugins are *less* likely to be able to be adopted, as the nature of their closures may be more complex and intricate. If a plugin was closed for license issues, for example, we may not be permitted to reopen it for anyone except the license holders.
+
+Larger plugins (100k users or more) are also less likely to be adopted, as that is a not-insignificant userbase, and we need to be sure you really are capable of managing a plugin of that size.
+
+### 2. Contact the Original Developer
+
+You *must* attempt to contact the original developer, as they can [give you access to the plugin](#plugins/wordpress-org/plugin-developer-faq). We recommend trying:
+
+- email
+- leaving a comment on the plugin support page
+- opening a GitHub issue
+
+We expect you to make all reasonable efforts to reach out to them. If the plugin page says the plugin has no active developer, then you’re fine.
+
+If you *do* get in touch with the developer, ask them to [transfer ownership to you](#plugins/wordpress-org/plugin-developer-faq). They can do this on their own and, once it’s done, you may manage the plugin. If they have issues, have them contact the plugin team via email and we will assist them.
+
+If there’s no way to get in touch, or they don’t reply, move to step 3.
+
+### 3. Update The Code
+
+Even if the plugin has been given to you by the developer, you must review the code from the top down to make sure it’s safe, secure, and meets our current [guidelines](#plugins/wordpress-org/detailed-plugin-guidelines).
+
+Your update must include editing the readme to ensure it documents the new ownership (and preferably when it takes place), removing all links to their site/support resources, as well as updating the copyright information to include you. Remember, copyright is additive. You keep the old and add yours on.
+
+If your plugin is a major upgrade, you *must* provide an upgrade path. Just wanting a name-slug is not sufficient reason to take over a plugin. We care deeply about our users, and violating their trust in us by breaking their existing sites with your upgrades is to be avoided at all costs.
+
+Remember you need to *increase* the version number so people are prompted to upgrade to your new version.
+
+### 4. Submit Your Code for Review
+
+If you still can’t get in touch with the original developer, you’ll need to ask the Plugin Review Team for help.
+
+Once you’ve finished updating the code, email `plugins@wordpress.org` explaining how you tried to contact the original developer and with your code attached as a zip. If you can’t email zips, then upload it to some file service (Google Drive, Dropbox, etc) or provide a link to your code repository (Github, Bitbucket, etc). Make sure the link is public!
+
+After we receive your version of the code as a zip, we will review it and test it. At this point, you will go through a *normal* review process. That is, we will treat you like any new plugin and we will check the whole plugin for security and guidelines. Even if those issues are found in the original plugin, you will be required to fix them.
+
+At this stage, some plugins are determined to have existing security flaws. We may close those plugins, depending on the nature of the issues, and you will be trusted to not publicly disclose those issues.
+
+### 5. We Contact the Original Developer
+
+Once we feel the code is acceptable, and that you are capable of sustaining that specific plugin in a secure manner that adheres to our guidelines, we will contact the original developer on your behalf and give them your information, explaining that you want to take over development.
+
+We’ll do everything we can to ensure the original plugin author has been notified, but sometimes that’s just not possible.
+
+### 6. Wait Patiently
+
+We give the original developer 30 days (1 month) to reply to our inquiry. Should they reply and deny the request, we will honour their decision and ask you to convert the plugin into a forked version. We do our best to respect them as much as we respect you as a developer, and honor their wishes with their work.
+
+If they approve it, we will assist in transitioning the plugin to your account.
+
+If they don’t reply, and you’ve made it this far, we will likely transfer the plugin to you.
+
+### 7. Update the Plugin
+
+In order to *safely* update the plugin, we will close it before we add you. You will then be required to update via SVN. Once that’s done, we’ll double check everything is correct and reopen it. The plugin will now be yours.
+
+## Frequently Asked Questions
+
+### Will old reviews/support posts be removed?
+
+No. You inherit the good and the bad.
+
+### Do I have to keep the original developer on?
+
+No. You can (and in fact should) remove commit access from anyone who is not actively maintaining the plugin. However. Per copyright restrictions, you must retain their credit in the code. We recommend you also leave them listed as a contributor.
+
+### The original developer is dead. Does that change anything?
+
+Yes, but not how you’re thinking. You (obviously) can skip asking them for permissions first, but we actually reach out to the developers’ coworkers and teams to see if they want to continue maintaining the plugin. In some cases, a developer will ask us to permanently close their plugins in the event of their death. We respect their wishes.
+
+### Why was my request denied?
+
+In cases where we deny an adoption, it’s usually for the following reasons.
+
+- The requesting developer does not have the experience we feel the plugin requires
+- The requested plugin is deemed high-risk
+- The existing developer is a company or legal entity who owns the trademark
+- The plugin has legal issues preventing us from from any transfers
+- The requesting developer has had multiple guideline infractions
+- The original developer asked us not to
+
+If we don’t feel comfortable handing over a plugin, we will inform you as soon as possible.
+
+There are rare cases where the plugin has already been given to new owners, but they have not yet deployed code. In general, if you’re told that a specific plugin is not available, there is a long history concerning the plugin preventing us from permitting takeover. In those cases, we recommend you submit your plugin as a fork.
+
+---
+
+# Managing Your Plugin&#8217;s Security <a name="plugins/wordpress-org/plugin-security" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/plugin-security/
+
+The security of code in WordPress plugins is taken [very seriously](https://wordpress.org/about/security/).
+
+If you have found a plugin with a security issue, please read [Reporting Plugin Security Issues](#plugins/wordpress-org/plugin-security/reporting-plugin-security-issues)
+
+When a plugin vulnerability is verified by the WordPress Security Team, they contact the plugin author and direct them as to how to fix and release a secure version of the plugin. If there is a lack of response from the plugin author or if the vulnerability is severe, the plugin/theme is pulled from the public directory, and in some cases, fixed and updated directly by the Security Team.
+
+## Fixing Security Issues
+
+When you receive a report of security issues in your plugins, it can be terrifying. First, don’t panic. Everyone makes mistakes. What matters most is fixing it safely and promptly.
+
+1. Make sure you understand the report. If you’re not sure what it means, ask for details. Even third-party reporters are usually willing to take the time to explain what’s wrong and direct you where to research a proper fix.
+2. Keep your changes as small as possible. This will make it much easier for you to review later on.
+3. Test your plugin. Make sure the security fix doesn’t break anything else. Make sure upgrading doesn’t cause weird errors. Keep `WP_DEBUG` on and log any errors.
+4. Document the issue in your change log. You don’t need to include details on exactly what happened, but do document that a security issue was resolved.
+5. Credit the reporter in your readme. This is just nice, and makes people more inclined to help you for free later on.
+6. Bump your version number. We recommend [SemVer](https://semver.org), so a security release for version 3.9 of your plugin would change the version to 3.9.1 and so on.
+
+## Automatic Plugin Security Updates
+
+Since WordPress 3.7, we have had the ability to push automatic security updates for plugins to fix critical vulnerabilities in plugins. Many sites have made use of the plugin automatic updates functionality, either by opting in directly through filters, or by using one of the many remote management services for WordPress that are available.
+
+In extreme situations, the Plugin Review Team and the WordPress Security Team may determine a plugin issue is great enough that it must be updated for all users. This is exceptionally rare, as the potential for conflicts is high.
+
+The process of approving a plugin for an automatic update, and rolling it out to WordPress users, is highly manual. The security team reviews all code changes in the release, verifies the issue and the fix, and confirms the plugin is safe to trigger an update. Rolling out an automatic update requires modification and deployment of the API code. This is the same standard and process for a core security release.
+
+### Criteria
+
+The current criteria we take into consideration for a security push is a simple list:
+
+1. Has the security team been made aware of the issue?
+2. How severe is the issue? What impact would it have on the security of a WordPress install, and the greater internet?
+3. Is the fix for the issue self-contained or does it add significant extra superfluous code?
+4. If multiple branches of the plugin are affected, has a release per branch been prepared?
+5. Can the update be *safely* installed automatically?
+
+These requirements are defined in a way that anyone should be able to tick each box.
+
+The first criterion — making the security team aware of the issue — is critical. Since it’s a tightly controlled process, the WordPress security team needs to be notified as early as possible. Letting us know is as simple as emailing us at `plugins@wordpress.org` with the details.
+
+The plugin and security teams will work with the plugin author (and the reporter, if different) to study the vulnerability and its exact exposure, verify the proposed fix, and determine what versions will be released and when.
+
+## FAQ
+
+### How do I request my plugin be automatically updated?
+
+If you feel your plugin has a large enough user base or the issue is of great significance, email `plugin@wordpress.org` **before** you push the code. Include a patch of the changes for review in the email, and explain why you feel this should be automated.
+
+### Can I include changes besides the security related ones for automated updates?
+
+With few exceptions, no. A security push should *only* be security related. We prefer (and many times require) plugin releases which fix **only** the security issue, with minimal code changes and with no unrelated changes.
+
+This allows everyone to review the changes quickly and to be far more confident in them. Also it means there is a minimal amount of disruption on the part of the users.
+
+### Why did plugin A get a automatic update, but plugin B didn’t?
+
+It’s not bias from WordPress.org, it’s just a throwback to the manual process we’ve been using. If we’re alerted to an issue, we’ll work to handle it. If we find out several days later, the window of opportunity to get the fix rolled out has usually passed and it won’t be as effective.
+
+### How can I disable automatic updates?
+
+There are several options to disable this functionality. The article for [disabling core automatic updates](https://make.wordpress.org/core/2013/10/25/the-definitive-guide-to-disabling-auto-updates-in-wordpress-3-7/) applies here. Anything that disables all automatic update functionality will prevent plugin updates. If you only wish to disable plugin updates, whether for all plugins or a single plugin, you can do so with a single filter call.
+
+### What if I can’t (or don’t want to) fix my code?
+
+You don’t have to. Your plugin will remain closed and, after 2 or 3 months, the plugin page will report that it was closed for security issues. If you want to push a fix but keep the plugin closed, we can do that too. Just reply to the email and talk to us.
+
+### Do I only have to fix the reported issue?
+
+Yes and no. You *do* have to fix the issues reported, but when you’re done, the *entire* plugin is re-reviewed, and if more issues are found, you’ll be required to fix those as well. The ultimate goal is to make sure the reopened plugin is safe.
+
+### What if I have guideline issues?
+
+This comes up when people are breaking other guidelines like including their own copy of jQuery or making undocumented external service calls. It depends on the severity of the other issues. If it’s just your own jQuery, we’ll likely let it be reopened and allow you to fix that at your own pace. If you’re logging all installs of your plugins, you’ll be required to correct that before we reopen the plugin.
+
+---
+
+# Reporting Plugin Security Issues <a name="plugins/wordpress-org/plugin-security/reporting-plugin-security-issues" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/plugin-security/reporting-plugin-security-issues/
+
+Please do not report security issues with WordPress Core to the plugin team. To report an issue with WordPress itself, [follow the directions for reporting security vulnerabilities.](https://make.wordpress.org/core/handbook/testing/reporting-security-vulnerabilities/)
+
+If you find a plugin with a security issue, please **do not** post about it publicly anywhere. Even if there’s a report filed on one of the official security tracking sites, bringing more awareness to the security issue tends to increase people being hacked, and rarely speeds up the fixing.
+
+To report a plugin, please email `plugins@wordpress.org` with the following:
+
+- a clear and concise description of the issue
+- a link to the specific plugin
+- whether or not you have validated the security issue yourself
+- **optional** – links to any public disclosures on 3rd party sites
+
+In the case of serious exploits, please keep in mind responsible and reasonable disclosure. Every attempt to contact the developer directly should be made *before* you reported the plugin to us (though we understand this can be difficult – check in the source code of the plugin first, many developers list their emails). If you cannot contact them privately, please contact us directly and we’ll help out.
+
+Most plugins are closed to prevent new downloads until the issue is resolved. As such, you may *not* be alerted of a fix until the plugin is updated. We also **do not** provide assistance with filing CVEs at this time, due to a lack of resources. You’re welcome to do so on your own, but we cannot help you.
+
+If you’ve already posted the vulnerability in public and provided a link to your report, please do not delete it! We will pass it on directly to the developers of the plugin.
+
+---
+
+# Special User Roles and Capabilities <a name="plugins/wordpress-org/special-user-roles-capabilities" />
+
+Source: https://developer.wordpress.org/plugins/wordpress-org/special-user-roles-capabilities/
+
+Every person who pushes code for, or aids in support for, a plugin is required to have their **OWN** individual account. These accounts do not have to be personally identifying (that is, you can name them PluginNameSupport1 if you wanted), however all accounts must be used by a single human for your own protection.
+
+There are four roles a user can have with regards to plugins. All can be managed from the **advanced view** section of a plugin page:
+
+![Interface of the plugin page, the link ''Advanced View'' is highlighted.](https://i0.wp.com/developer.wordpress.org/files/2020/08/advanced-view.jpg?resize=300%2C260&ssl=1)There are fields to add Support Reps and Committers as needed.
+
+## Owner
+
+A plugin owner is automatically set by the person who submits the plugin. On plugin approval, they are added as a Committer (see below) and flagged as the owner. Should this need to be changed, scroll down to the **Danger Zone** section and select the new owner from the dropdown:
+
+![Transfer this plugin interface with a selector for the new owner and a "Please transfer -Plugin Name-" button](https://i0.wp.com/developer.wordpress.org/files/2020/08/can-transger.jpg?resize=1024%2C548&ssl=1)If there are no other users with commit access, you will need to grant them access before you can transfer the plugin. Remember, plugin owners should **always** have commit access to the plugins they own.
+
+If you see this message, then you are not the current owner, and need to contact them to have ownership transferred:
+
+![Message: This plugin is currently owned by -user- the can choose to transfer ownership rights of the plugin to you](https://i0.wp.com/developer.wordpress.org/files/2020/08/Owner.jpg?resize=1024%2C249&ssl=1)If the original owner is no longer available, you may contact the plugins team for assistance.
+
+## Committer
+
+Someone with commit access has the ability to push code via SVN and make official requests concerning a plugin to the Plugin Directory Team.
+
+Anyone with commit access has the right to request a plugin be closed, and has the ability to add and remove anyone from commit access. This is done from the **Advanced Page** on the sidebar:
+
+[![Interface to add a committer, an input with an "Add" button next to it](https://i0.wp.com/developer.wordpress.org/files/2021/02/Commit.jpg?resize=604%2C266&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2021/02/Commit.jpg?ssl=1)In the forums, these people are labeled as a “Plugin Author” and have the ability to mark posts regarding their plugin as resolved.
+
+Other than the “Plugin Author” label in the forum for replies to plugin support topics, having commit access is not outwardly displayed. In order to be listed in the plugin’s “Contributors &amp; Developers” section, and to have the plugin included in a WordPress.org profile, the user must be listed as a contributor (see the subsequent section).
+
+Adding and removing commit access can only be done by an existing committer.
+
+## Support Rep
+
+A support rep has **no** extra ability to directly manage the plugin itself. They cannot request changes be made to a plugin’s status in the directory. However, they will be labeled in the forums as being official support and this can help people understand who is helping them.
+
+[![Interface to add a support rep, an input with an "Add" button next to it](https://i0.wp.com/developer.wordpress.org/files/2021/02/Support.jpg?resize=634%2C280&ssl=1)](https://i0.wp.com/developer.wordpress.org/files/2021/02/Support.jpg?ssl=1)In the forums, they are labeled as a “Plugin Support” and have the ability to mark posts regarding their plugin as resolved.
+
+They are displayed on the plugin page, and the plugin appears on their profile page as a Support Representative.
+
+Adding and removing this status can only be done by an existing committer.
+
+## Contributor
+
+A contributor has no extra ability to directly manage the plugin itself. They *cannot* request changes be made to a plugin’s status in the directory.
+
+In the forums, they are labeled as a “Plugin Contributor” and have the ability to mark posts regarding their plugin as resolved.
+
+A contributor is publicly listed in the plugin’s “Contributors &amp; Developers” section and the plugin is listed as one of the user’s plugins in their WordPress.org profile.
+
+To be added as a contributor, a user must be listed within *Contributors* in the plugin’s `readme.txt`.
+
+While it is common to add people who helped with a plugin’s conceptualization or was an original contributor, you do not need to add anyone to your plugin with more access than you’re comfortable with.
 
 ---
 
@@ -10950,474 +11175,6 @@ Same way you would anything. Email `plugins@wordpress.org` with a link to their 
 
 ---
 
-# Privacy <a name="plugins/privacy" />
-
-Source: https://developer.wordpress.org/plugins/privacy/
-
-Are you writing a plugin that handles personal data – things like names, addresses, and other things that can be used to identify a person? You’ll want to take care with that data and protect the privacy of your users and visitors.
-
-## What is Privacy?
-
-WordPress.org made several enhancements ahead of Europe’s General Data Protection Regulation. Following the launch of this work, we have made Privacy a permanent focus in core trac development, which will allow us to continue making enhancements on privacy and data protection outside specific legislation.
-
-But what kind of issues might fall under the definition of “privacy”, and how do we define it? Although privacy requirements vary widely across countries, cultures, and legal systems, there are several general principles applicable across any situation:
-
-- **Consent and choice:** giving users (and site visitors) choices and options over the uses of their data, and requiring clear, specific, and informed opt-in;
-- **Purpose legitimacy and specification:** only collect and use the personal data for the purpose it was intended for, and for which the user was clearly informed of in advance;
-- **Collection limitation:** only collect the user data which is needed; don’t make extra copies of data or combine your data with data from other plugins if you can avoid it
-- **Data minimization:** restrict the processing of data, as well as the number of people who have access to it, to the minimum uses and people necessary;
-- **Use, retention and disclosure limitation:** delete data which is no longer needed, both in active use and in archives, by both the recipient and any third parties;
-- **Accuracy and quality:** ensure that the data collected and used is correct, relevant, and up-to-date, especially if inaccurate or poor data could adversely impact the user;
-- **Openness, transparency and notice:** inform users how their data is being collected, used, and shared, as well as any rights they have over those uses;
-- **Individual participation and access:** give users a means to access or download their data;
-- **Accountability:** documenting the uses of data, protecting it in transit and in use by third parties, and preventing misuse and breaches as much as is possible;
-- **Information security:** protecting data through appropriate technical and security measures;
-- **Privacy compliance:** ensuring that the work meets the privacy regulations of the location where it will be used to collect and process people’s data.
-
-(Source: [ISO 29100/Privacy Framework standard](https://www.iso.org/standard/45123.html))
-
-While not all of these principles will be applicable across all situations and uses, using them in the development process can help to ensure user trust.
-
-## Privacy By Design
-
-Many of these principles are espoused in the Privacy by Design framework, which states that:
-
-- Privacy should be proactive, not reactive, and must anticipate privacy issues before they reach the user. Privacy must also be preventative, not remedial.
-- Privacy should be the default setting. The user should not have to take actions to secure their privacy, and consent for data sharing should not be assumed.
-- Privacy should be built into design as a core function, not an add-on.
-- Privacy should be positive sum: there should be no trade-off between privacy and security, privacy and safety, or privacy and service provision.
-- Privacy should offer end-to-end lifecycle protection through data minimization, minimal data retention, and regular deletion of data which is no longer required.
-- The privacy standards used on your plugin (and service, if applicable) should be visible, transparent, open, documented and independently verifiable.
-- Privacy should be user-centric. People should be given options such as granular privacy choices, maximized privacy defaults, detailed privacy information notices, user-friendly options, and clear notification of changes.
-
-## Food for Thought for Your Plugin
-
-To help your plugin be ready, we recommend going through the following list of questions for every plugin that you make:
-
-1. How does your plugin handle personal data? Use wp\_add\_privacy\_policy\_content (link) to disclose to your users any of the following: 
-    - Does the plugin share personal data with third parties (e.g. to outside APIs/servers). If so, what data does it share with which third parties and do they have a published privacy policy you can provide a link to?
-    - Does the plugin collect personal data? If so, what data and where is it stored? Think about places like user data/meta, options, post meta, custom tables, files, etc.
-    - Does the plugin use personal data collected by others? If so, what data? Does the plugin pass personal data to a SDK? What does that SDK do with the data?
-    - Does the plugin collect telemetry data, directly or indirectly? Loading an image from a third-party source on every install, for example, could indirectly log and track the usage data of all of your plugin installs.
-    - Does the plugin enqueue Javascript, tracking pixels or embed iframes from a third party (third party JS, tracking pixels and iframes can collect visitor’s data/actions, leave cookies, etc.)?
-    - Does the plugin store things in the browser? If so, where and what? Think about things like cookies, local storage, etc.
-2. If your plugin collects personal data… 
-    - Does it provide a personal data exporter?
-    - Does it provide a personal data eraser callback?
-    - For what reasons (if any) does the plugin refuse to erase personal data? (e.g. order not yet completed, etc) – those should be disclosed as well.
-3. Does the plugin use error logging? Does it avoid logging personal data if possible? Could you use things like wp\_privacy\_anonymize\_data to minimize the personal data logged? How long are log entries kept? Who has access to them?
-4. In wp-admin, what role/capabilities are required to access/see personal data? Are they sufficient?
-5. What personal data is exposed on the front end of the site by the plugin? Does it appear to logged-in and logged-out users? Should it?
-6. What personal data is exposed in REST API endpoints by the plugin? Does it appear to logged-in and logged-out users? What roles/capabilities are required to see it? Are those appropriate?
-7. Does the plugin properly remove/clean-up data, including especially personal data: 
-    - During uninstall of the plugin?
-    - When a related item is deleted (e.g. from the post meta or any post-referencing rows in another table)?
-    - When a user is deleted (e.g. from any user referencing rows in a table)?
-8. Does the plugin provide controls to reduce the amount of personal data required?
-9. Does the plugin share personal data with SDKs or APIs only when the SDK or API requires it, or is the plugin also sharing personal data that is optional?
-10. Does the amount of personal data collected or shared by this plugin change when certain other plugins are also installed?
-
-## External Resources
-
-- Privacy Blog <https://privacy.blog>
-- WordPress.org Privacy Policy <https://wordpress.org/about/privacy/>
-
----
-
-# Suggesting text for the site privacy policy <a name="plugins/privacy/suggesting-text-for-the-site-privacy-policy" />
-
-Source: https://developer.wordpress.org/plugins/privacy/suggesting-text-for-the-site-privacy-policy/
-
-Every plugin that collects, uses, or stores user data, or passes it to an external source or third party, should add a section of suggested text to the privacy policy postbox. This is best done with` wp_add_privacy_policy_content( $plugin_name, $policy_text )`. This will allow site administrators to pull that information into their site’s privacy policy.
-
-To make this simpler for the users, the text should address the questions provided in the default privacy policy:
-
-- What personal data we collect and why we collect it
-    - Their own manually input information
-    - WP: Contact forms
-    - WP: Comments
-    - WP: Cookies
-    - WP: Third party embeds
-    - Analytics
-- Who we share your data with
-- How long we retain your data
-- What rights you have over your data
-- Where we send your data
-- Your contact information
-- How we protect your data
-- What data breach procedures we have in place
-- What third parties we receive data from
-- What automated decision making and/or profiling we do with user data
-- Any industry regulatory disclosure requirements
-
-While not all of these questions will be applicable to all plugins, we recommend taking care with the sections on data sharing.
-
-## Code Example
-
-It is recommended to call wp_add_privacy_policy_content during the admin_init action. Calling it outside of an action hook can lead to problems, see ticket #44142 for details.
-
-Supplemental information can be provided through the use of the specialized `.privacy-policy-tutorial` CSS class. Any content contained within HTML elements that have this CSS class applied will be omitted from the clipboard when the section content is copied.
-
-```php
-/**
- * Adds a privacy policy statement.
- */
-function wporg_add_privacy_policy_content() {
-	if ( ! function_exists( 'wp_add_privacy_policy_content' ) ) {
-		return;
-	}
-	$content = '<p class="privacy-policy-tutorial">' . __( 'Some introductory content for the suggested text.', 'text-domain' ) . '</p>'
-			. '<strong class="privacy-policy-tutorial">' . __( 'Suggested Text:', 'my_plugin_textdomain' ) . '</strong> '
-			. sprintf(
-				__( 'When you leave a comment on this site, we send your name, email address, IP address and comment text to example.com. Example.com does not retain your personal data. The example.com privacy policy is <a href="%1$s" target="_blank">here</a>.', 'text-domain' ),
-				'https://example.com/privacy-policy'
-			);
-	wp_add_privacy_policy_content( 'Example Plugin', wp_kses_post( wpautop( $content, false ) ) );
-}
-
-add_action( 'admin_init', 'wporg_add_privacy_policy_content' );
-```
-
----
-
-# Adding the Personal Data Exporter to Your Plugin <a name="plugins/privacy/adding-the-personal-data-exporter-to-your-plugin" />
-
-Source: https://developer.wordpress.org/plugins/privacy/adding-the-personal-data-exporter-to-your-plugin/
-
-In WordPress 4.9.6, new tools were added to make compliance easier with laws like the European Union’s General Data Protection Regulation, or GDPR for short. Among the tools added is a Personal Data Export tool which supports exporting all the personal data for a given user in a ZIP file. In addition to the personal data stored in things like WordPress comments, plugins can also hook into the exporter feature to export the personal data they collect, whether it be in something like postmeta or even an entirely new Custom Post Type (CPT).
-
-The “key” for all the exports is the user’s email address – this was chosen because it supports exporting personal data for both full-fledged registered users and also unregistered users (e.g. like a logged out commenter).
-
-However, since assembling a personal data export could be an intensive process and will likely contain sensitive data, we don’t want to just generate it and email it to the requestor without confirming the request, so the admin-facing user interface starts all requests by having the admin enter the username or email address making the request and then sends then a link to click to confirm their request.
-
-Once a request has been confirmed, the admin can generate and download or directly email the personal data export ZIP file for the user, or do the export anyways if the need arises. Inside the ZIP file the user receives, they will find a “mini website” with an index HTML page containing their personal data organized in groups (e.g. a group for comments, etc. )
-
-Whether the admin downloads the personal data export ZIP file or sends it directly to the requestor, the way the personal data export is assembled is identical – and relies on hooking “exporter” callbacks to do the dirty work of collecting all the data for the export. When the admin clicks on the download or email link, an AJAX loop begins that iterates over all the exporters registered in the system, one at a time. In addition to exporters built into core, plugins can register their own exporter callbacks.
-
-The exporter callback interface is designed to be as simple as possible. A exporter callback receives the email address we are working with and a page parameter as well. The page parameter (which starts at 1) is used to avoid plugins potentially causing timeouts by attempting to export all the personal data they’ve collected at once. A well behaved plugin will limit the amount of data it attempts to erase per page (e.g. 100 posts, 200 comments, etc.)
-
-The exporter callback replies with whatever data it has for that email address and page and whether it is done or not. If a exporter callback reports that it is not done, it will be called again (in a separate request) with the page parameter incremented by 1. Exporter callbacks are expected to return an array of items for the export. Each item contains an a group identifier for the group of which  
-the item is a part (e.g. comments, posts, orders, etc.), an optional group label (translated), an item identifier (e.g. comment-133) and then an array of name, value pairs containing the data to be exported for that item.
-
-It is noteworthy that the value could be a media path, in which case a link to the media file will be added to the index HTML page in the export.
-
-When all the exporters have been called to completion, WordPress first assembles an “index” HTML document that serves as the heart of the export report. If a plugin reports additional data for an item that WordPress or another plugin has already added, all the data for that item will be presented together.
-
-Exports are cached on the server for 3 days and then deleted.
-
-A plugin can register one or more exporters, but most plugins will only need one. Let’s work on a hypothetical plugin which adds location data for the commenter to comments.
-
-First, let’s assume the plugin has used `add\_comment\_meta` to add location data using `meta\_key`s of `latitude` and `longitude`
-
-The first thing the plugin needs to do is to create an exporter function that accepts an email address and a page, e.g.:
-
-```php
-/**
- * Export user meta for a user using the supplied email.
- *
- * @param string $email_address   email address to manipulate
- * @param int    $page            pagination
- *
- * @return array
- */
-function wporg_export_user_data_by_email( $email_address, $page = 1 ) {
-	$number = 500; // Limit us to avoid timing out
-	$page   = (int) $page;
-
-	$export_items = array();
-
-	$comments = get_comments(
-		array(
-			'author_email' => $email_address,
-			'number'       => $number,
-			'paged'        => $page,
-			'order_by'     => 'comment_ID',
-			'order'        => 'ASC',
-		)
-	);
-
-	foreach ( (array) $comments as $comment ) {
-		$latitude  = get_comment_meta( $comment->comment_ID, 'latitude', true );
-		$longitude = get_comment_meta( $comment->comment_ID, 'longitude', true );
-
-		// Only add location data to the export if it is not empty.
-		if ( ! empty( $latitude ) ) {
-			// Most item IDs should look like postType-postID. If you don't have a post, comment or other ID to work with,
-			// use a unique value to avoid having this item's export combined in the final report with other items
-			// of the same id.
-			$item_id = "comment-{$comment->comment_ID}";
-
-			// Core group IDs include 'comments', 'posts', etc. But you can add your own group IDs as needed
-			$group_id = 'comments';
-
-			// Optional group label. Core provides these for core groups. If you define your own group, the first
-			// exporter to include a label will be used as the group label in the final exported report.
-			$group_label = __( 'Comments', 'text-domain' );
-
-			// Plugins can add as many items in the item data array as they want.
-			$data = array(
-				array(
-					'name'  => __( 'Commenter Latitude', 'text-domain' ),
-					'value' => $latitude,
-				),
-				array(
-					'name'  => __( 'Commenter Longitude', 'text-domain' ),
-					'value' => $longitude,
-				),
-			);
-
-			$export_items[] = array(
-				'group_id'    => $group_id,
-				'group_label' => $group_label,
-				'item_id'     => $item_id,
-				'data'        => $data,
-			);
-		}
-	}
-
-	// Tell core if we have more comments to work on still.
-	$done = count( $comments ) > $number;
-	return array(
-		'data' => $export_items,
-		'done' => $done,
-	);
-}
-```
-
-The next thing the plugin needs to do is to register the callback by filtering the exporter array using the `wp\_privacy\_personal\_data\_exporters` filter.
-
-When registering you provide a friendly name for the export (to aid in debugging – this friendly name is not shown to anyone at this time) and the callback, e.g.
-
-```php
-/**
- * Registers all data exporters.
- *
- * @param array $exporters
- *
- * @return mixed
- */
-function wporg_register_user_data_exporters( $exporters ) {
-	$exporters['my-plugin-slug'] = array(
-		'exporter_friendly_name' => __( 'Comment Location Plugin', 'text-domain' ),
-		'callback'               => 'my_plugin_exporter',
-	);
-	return $exporters;
-}
-
-add_filter( 'wp_privacy_personal_data_exporters', 'wporg_register_user_data_exporters' );
-```
-
-And that’s all there is to it! Your plugin will now provide data for the export!
-
----
-
-# Adding the Personal Data Eraser to Your Plugin <a name="plugins/privacy/adding-the-personal-data-eraser-to-your-plugin" />
-
-Source: https://developer.wordpress.org/plugins/privacy/adding-the-personal-data-eraser-to-your-plugin/
-
-In WordPress 4.9.6, new tools were added to make compliance easier with laws like the European Union’s General Data Protection Regulation, or GDPR for short. Among the tools added is a Personal Data Removal tool which supports erasing/anonymizing personal data for a given user. It does NOT delete registered user accounts – that is still a separate step the admin can choose whether or not to do.
-
-In addition to the personal data stored in things like WordPress comments, plugins can also hook into the eraser feature to erase the personal data they collect, whether it be in something like postmeta or even an entirely new Custom Post Type (CPT).
-
-Like the exporters, the “key” for all the erasers is the user’s email address – this was chosen because it supports erasing personal data for both full-fledged registered users and also unregistered users (e.g. like a logged out commenter).
-
-However, since performing a personal data erase is a destructive process, we don’t want to just do it without confirming the request, so the admin-facing user interface starts all requests by having the admin enter the username or email address making the request and then sends then a link to click to confirm their request. Once a request has been confirmed, the admin can kick off personal data erasure for the user, or force one if the need arises.
-
-The way the personal data export is erased is similar to how the personal data exporters – and relies on hooking “eraser” callbacks to do the dirty work of erasing the data. When the admin clicks on the remove personal data link, an AJAX loop begins that iterates over all the erasers registered in the system, one at a time. In addition to erasers built into core, plugins can register their own eraser callbacks.
-
-The eraser callback interface is designed to be as simple as possible. An eraser callback receives the email address we are working with, and a page parameter as well. The page parameter (which starts at 1) is used to avoid plugins potentially causing timeouts by attempting to erase all the personal data they’ve collected at once. A well behaved plugin will limit the amount of data it attempts to erase per page (e.g. 100 posts, 200 comments, etc.)
-
-The eraser callback replies whether items containing personal data were erased, whether any items containing personal data were retained, an array of messages to present to the admin (explaining why items that were retained were retained) and whether it is done or not. If an eraser callback reports that it is not done, it will be called again (in a separate request) with the page parameter incremented by 1.
-
-When all the exporters have been called to completion, the admin user interface is updated to show whether or not all personal data found was erased, and any messages explaining why personal data was retained.
-
-Let’s work on a hypothetical plugin which adds commenter location data to comments. Let’s assume the plugin has used `add_comment_meta` to add location data using `meta_ke`ys of `latitude` and `longitude`
-
-The first thing the plugin needs to do is to create an eraser function that accepts an email address and a page, e.g.:
-
-```php
-/**
- * Removes any stored location data from a user's comment meta for the supplied email address.
- *
- * @param string $email_address   email address to manipulate
- * @param int    $page            pagination
- *
- * @return array
- */
-function wporg_remove_location_meta_from_comments_for_email( $email_address, $page = 1 ) {
-	$number = 500; // Limit us to avoid timing out
-	$page   = (int) $page;
-
-	$comments = get_comments(
-		array(
-			'author_email' => $email_address,
-			'number'       => $number,
-			'paged'        => $page,
-			'order_by'     => 'comment_ID',
-			'order'        => 'ASC',
-		)
-	);
-
-	$items_removed = false;
-
-	foreach ( (array) $comments as $comment ) {
-		$latitude  = get_comment_meta( $comment->comment_ID, 'latitude', true );
-		$longitude = get_comment_meta( $comment->comment_ID, 'longitude', true );
-
-		if ( ! empty( $latitude ) ) {
-			delete_comment_meta( $comment->comment_ID, 'latitude' );
-			$items_removed = true;
-		}
-
-		if ( ! empty( $longitude ) ) {
-			delete_comment_meta( $comment->comment_ID, 'longitude' );
-			$items_removed = true;
-		}
-	}
-
-	// Tell core if we have more comments to work on still
-	$done = count( $comments ) < $number;
-	return array(
-		'items_removed'  => $items_removed,
-		'items_retained' => false, // always false in this example
-		'messages'       => array(), // no messages in this example
-		'done'           => $done,
-	);
-}
-```
-
-The next thing the plugin needs to do is to register the callback by filtering the eraser array using the `wp\_privacy\_personal\_data\_erasers`  
-filter.
-
-When registering you provide a friendly name for the eraser (to aid in debugging – this friendly name is not shown to anyone at this time) and the callback, e.g.
-
-```php
-/**
- * Registers all data erasers.
- *
- * @param array $exporters
- *
- * @return mixed
- */
-function wporg_register_privacy_erasers( $erasers ) {
-	$erasers['my-plugin-slug'] = array(
-		'eraser_friendly_name' => __( 'Comment Location Plugin', 'text-domain' ),
-		'callback'             => 'wporg_remove_location_meta_from_comments_for_email',
-	);
-	return $erasers;
-}
-
-add_filter( 'wp_privacy_personal_data_erasers', 'wporg_register_privacy_erasers' );
-```
-
-And that’s all there is to it! Your plugin will now clean up its personal data!
-
----
-
-# Privacy Related Options, Hooks and Capabilities <a name="plugins/privacy/privacy-related-options-hooks-and-capabilities" />
-
-Source: https://developer.wordpress.org/plugins/privacy/privacy-related-options-hooks-and-capabilities/
-
-The privacy tools were originally introduced in WordPress 4.9.6. These tools are designed to allow (and encourage) developers to use them as part of the Privacy Exporter, Privacy Eraser and the Privacy Policy Guide.
-
-Since then, several newer hooks have been introduced to expand on the available capabilities. These hooks allow developers to include additional personal data in export and erasure requests, and introduce suggested content for the privacy policy guide.
-
-Along with the ability to control these tools, there are several new filters for use with the request and confirmation emails, enabling finer-grained controls over these notifications.
-
-## Options
-
-`wp_page_for_privacy_policy` – contains the page ID of a site’s privacy page
-
-## Actions
-
-`user_request_action_confirmed` – fired when a user confirms a privacy request
-
-`wp_privacy_delete_old_export_files` – a scheduled action used to prune old exports from the personal data exports folder
-
-`wp_privacy_personal_data_erased` – fired after the last page of the last eraser is complete
-
-`wp_privacy_personal_data_export_file` – used to create a personal data export file as part of the export flow
-
-`wp_privacy_personal_data_export_file_created` – fires after a personal data export file has been created
-
-## Filters
-
-`privacy_policy_url` – filters the URL of the privacy policy page.
-
-`the_privacy_policy_link` – filters the privacy policy page link HTML.
-
-`wp_get_default_privacy_policy_content` – filters the default content suggested for inclusion through the privacy policy guide.
-
-`user_request_action_confirmed_message` – allows modifying the action confirmation message displayed to the user
-
-`user_request_action_description` – filters the user action description.
-
-`user_request_action_email_content` – filters the text of the email sent when an account action is attempted.
-
-`user_request_action_email_headers` – filters the headers of the email sent when an account action is attempted.
-
-`user_request_action_email_subject` – filters the subject of the email sent when an account action is attempted.
-
-`user_request_confirmed_email_content` – filters the body of the user request confirmation email.
-
-`user_request_confirmed_email_headers` – filters the headers of the user request confirmation email.
-
-`user_request_confirmed_email_subject` – filters the subject of the user request confirmation email.
-
-`user_request_confirmed_email_to` – filters the recipient of the data request confirmation notification.
-
-`user_request_key_expiration` – filters the expiration time of confirmation keys for user requests.
-
-`wp_privacy_additional_user_profile_data` – filter to extend the user’s profile data for the privacy exporter.
-
-`wp_privacy_export_expiration` – controls how old export files are allowed to get, default is 3 days
-
-`wp_privacy_personal_data_email_content` – allows modifying the email message send to users with their personal data export file link
-
-`wp_privacy_personal_data_email_headers` – filters the headers of the email sent with a personal data export file.
-
-`wp_privacy_personal_data_email_subject` – filters the subject of the email sent when an export request is completed.
-
-`wp_privacy_personal_data_email_to` – filters the recipient of the personal data export email notification.
-
- `wp_privacy_personal_data_email_to` should be used with great caution to avoid sending the data export link to the wrong recipient email address(es).
-
-`wp_privacy_personal_data_erasers` – supports registration of core and plugin personal data erasers
-
-`wp_privacy_personal_data_erasure_page` – Filters a page of personal data eraser data. Allows the erasure response to be consumed by destinations in addition to Ajax.
-
-`wp_privacy_personal_data_exporters` – supports registration of core and plugin personal data exporters
-
-`wp_privacy_personal_data_export_page` – filters a page of personal data exporter data. Used to build the export report. Allows the export response to be consumed by destinations in addition to Ajax.
-
-`wp_privacy_anonymize_data` – filters the anonymous data for each type.
-
-`wp_privacy_exports_dir` – filters the directory used to store personal data export files.
-
-`wp_privacy_exports_url` – filters the URL of the directory used to store personal data export files.
-
-`user_confirmed_action_email_content` – Filters the body of the user request confirmation email. The email is sent to an administrator when an user request is confirmed.
-
-`user_erasure_fulfillment_email_to` – Filters the recipient of the data erasure fulfillment notification.
-
-`user_erasure_complete_email_subject` – Filters the subject of the email sent when an erasure request is completed.
-
-`user_confirmed_action_email_content` – Filters the body of the data erasure fulfillment notification. The email is sent to a user when a their data erasure request is fulfilled by an administrator.
-
-`user_erasure_complete_email_headers` – Filters the headers of the data erasure fulfillment notification.
-
-## Capabilities
-
-Access to the privacy tools is controlled by a few new capabilities. Administrators (on non-multisite installations) have these capabilities by default. These capabilities are:
-
-`erase_others_personal_data` – determines if the Erase Personal Data sub-menu is available under Tools
-
-`export_others_personal_data` – determines if the Export Personal Data sub-menu is available under Tools
-
-`manage_privacy_options` – determines if the Privacy sub-menu is available under Settings
-
----
-
 # Using the Forums <a name="plugins/wordpress-org/using-the-forums" />
 
 Source: https://developer.wordpress.org/plugins/wordpress-org/using-the-forums/
@@ -11484,168 +11241,411 @@ Related to that, don’t share accounts. It causes confusion, drama, and makes i
 
 ---
 
-# Determining Plugin and Content Directories <a name="plugins/plugin-basics/determining-plugin-and-content-directories" />
+# Developer Tools <a name="plugins/developer-tools" />
 
-Source: https://developer.wordpress.org/plugins/plugin-basics/determining-plugin-and-content-directories/
+Source: https://developer.wordpress.org/plugins/developer-tools/
 
-When coding WordPress plugins you often need to reference various files and folders throughout the WordPress installation and within your plugin or theme.
-
-WordPress provides several functions for easily determining where a given file or directory lives. Always use these functions in your plugins instead of hard-coding references to the wp-content directory or using the WordPress internal constants.
-
-WordPress allows users to place their wp-content directory anywhere they want and rename it whatever they want. Never assume that plugins will be in wp-content/plugins, uploads will be in wp-content/uploads, or that themes will be in wp-content/themes.
-
-PHP’s `__FILE__` magic-constant resolves symlinks automatically, so if the `wp-content` or `wp-content/plugins` or even the individual plugin directory is symlinked, hardcoded paths will not work correctly.
-
-## Common Usage
-
-If your plugin includes JavaScript files, CSS files or other external files, then it’s likely you’ll need the URL to these files so you can load them into the page. To do this you should use the [plugins\_url()](#reference/functions/plugins_url) function like so:
-
-```php
-plugins_url( 'myscript.js', __FILE__ );
-```
-
-This will return the full URL to myscript.js, such as `example.com/wp-content/plugins/myplugin/myscript.js`.
-
-To load your plugins’ JavaScript or CSS into the page you should use [`wp_enqueue_script()`](#reference/functions/wp_enqueue_script) or [`wp_enqueue_style()`](#reference/functions/wp_enqueue_style) respectively, passing the result of `plugins_url()` as the file URL.
-
-## Available Functions
-
-WordPress includes many other functions for determining paths and URLs to files or directories within plugins, themes, and WordPress itself. See the individual DevHub pages for each function for complete information on their use.
-
-### Plugins
-
-```php
-plugins_url()
-plugin_dir_url()
-plugin_dir_path()
-plugin_basename()
-```
-
-### Themes
-
-```php
-get_template_directory_uri()
-get_stylesheet_directory_uri()
-get_stylesheet_uri()
-get_theme_root_uri()
-get_theme_root()
-get_theme_roots()
-get_stylesheet_directory()
-get_template_directory()
-```
-
-### Site Home
-
-```php
-home_url()
-get_home_path()
-```
-
-### WordPress
-
-```php
-admin_url()
-site_url()
-content_url()
-includes_url()
-wp_upload_dir()
-```
-
-### Multisite
-
-```php
-get_admin_url()
-get_home_url()
-get_site_url()
-network_admin_url()
-network_site_url()
-network_home_url()
-```
-
-## Constants
-
-WordPress makes use of the following constants when determining the path to the content and plugin directories. These should not be used directly by plugins or themes, but are listed here for completeness.
-
-```php
-WP_CONTENT_DIR  // no trailing slash, full paths only
-WP_CONTENT_URL  // full url 
-WP_PLUGIN_DIR  // full path, no trailing slash
-WP_PLUGIN_URL  // full url, no trailing slash
-
-// Available per default in MS, not set in single site install
-// Can be used in single site installs (as usual: at your own risk)
-UPLOADS // (If set, uploads folder, relative to ABSPATH) (for e.g.: /wp-content/uploads)
-```
-
-## Related
-
-****WordPress Directories****:
-
-| [home\_url()](#reference/functions/home_url) | Home URL | <http://www.example.com> |
-|---|---|---|
-| [site\_url()](#reference/functions/site_url) | Site directory URL | <http://www.example.com> or <http://www.example.com/wordpress> |
-| [admin\_url()](#reference/functions/admin_url) | Admin directory URL | <http://www.example.com/wp-admin> |
-| [includes\_url()](#reference/functions/includes_url) | Includes directory URL | <http://www.example.com/wp-includes> |
-| [content\_url()](#reference/functions/content_url) | Content directory URL | <http://www.example.com/wp-content> |
-| [plugins\_url()](#reference/functions/plugins_url) | Plugins directory URL | <http://www.example.com/wp-content/plugins> |
-| [wp\_upload\_dir()](#reference/functions/wp_upload_dir) | Upload directory URL (returns an array) | <http://www.example.com/wp-content/uploads> |
+There are a wide variety of tools available to help with plugin development. Some of them are run in your development environment ([xdebug](http://xdebug.org/), [PHPCS](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards), etc), but there are also some excellent tools that can run right inside WordPress to help you build things properly and diagnose problems. This chapter deals with the in-browser tools.
 
 ---
 
-# Plugin Handbook <a name="plugins" />
+# Debug Bar and Add-Ons <a name="plugins/developer-tools/debug-bar-and-add-ons" />
 
-Source: https://developer.wordpress.org/plugins/
+Source: https://developer.wordpress.org/plugins/developer-tools/debug-bar-and-add-ons/
 
-*Welcome to the WordPress Plugin Developer Handbook; are you ready to jump right in to the world of WordPress plugins?*
+The Debug Bar is a plugin that adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information.
 
-The Plugin Developer Handbook is a resource for all things WordPress plugins. Whether you’re new to WordPress plugin development, or you’re an experienced plugin developer, you should be able to find the answer to many of your plugin-related questions right here.
+## Debug Bar
 
-- If you’re new to plugin development, start by reading the [introduction](#plugin/intro) and then move on to [the basics](#plugins/plugin-basics).
-- The info in [plugin security](#plugin/security) will introduce best practices for security related stuff.
-- [Hooks](#plugin/hooks) are what make your plugin interact with WordPress, and how you can let other developers interact with your plugin.
-- [Privacy](#plugins/privacy) will help you understand about handling sensitive data.
-- To find out more about WordPress’ built-in functionality that you can use in your plugin, check out [Administration Menus](#plugin/administration-menus), [Shortcodes](#plugin/shortcodes), [Settings](#plugin/settings), [Metadata](#plugin/metadata), [Custom Post Types](#plugins/post-types), [Taxonomies](#plugins/taxonomies), and [Users](#plugin/users).
-- Learn about getting data using the [HTTP API](#plugin/http-api).
-- If you’re using [JavaScript, jQuery or Ajax](#plugin/javascript) in your plugin, you’ll find the information you need in that section.
-- To learn about time-based WordPress tasks, check out the [Cron](#plugin/cron) chapter.
-- [Internationalization](#plugin/internationalization) is how you get your plugin ready for use in locales other than your own.
-- When all that is done, you can prepare your plugin for inclusion in the [Plugin Directory](#plugin/wordpress-org)
-- Finally: some [developer tools](#plugin/developer-tools) you might find useful.
+This is the main plugin, adding the base functionality that is extended by the remaining plugins listed on this page.
 
-The WordPress Plugin Developer Handbook is created by the WordPress community, for the WordPress community. We are always looking for more contributors; if you’re interested, stop by the [docs team blog](https://make.wordpress.org/docs) to find out more about getting involved.
+When WP\_DEBUG is enabled it also tracks PHP Warnings and Notices to make them easier to find.
+
+When SAVEQUERIES is enabled the mysql queries are tracked and displayed.
+
+[Visit Debug Bar](https://wordpress.org/plugins/debug-bar/)
+
+## Debug Bar Console
+
+This plugin adds a console in which you can run arbitrary PHP. This is excellent for testing the contents of variables, among many other uses.
+
+[Visit Debug Bar Console](https://wordpress.org/plugins/debug-bar-console/)
+
+## Debug Bar Shortcodes
+
+This plugin adds a new panel to the Debug Bar that displays the registered shortcodes for the current request.
+
+Additionally it will show you:
+
+- Which function/method is called by the shortcode.
+- Whether the shortcode is used on the current post/page/post type and how (only when on singular).
+- Any additional information available about the shortcode, such as a description, which parameters it takes, whether or not it is self-closing.
+- Find out all pages/posts/etc on which a shortcode is used.
+
+[Visit Debug Bar Shortcodes](https://wordpress.org/plugins/debug-bar-shortcodes/)
+
+## Debug Bar Constants
+
+This plugin adds three new panels to the Debug Bar that display the defined constants available to you as a developer for the current request:
+
+- WP Constants
+- WP Class Constants
+- PHP Constants
+
+[Visit Debug Bar Constants](https://wordpress.org/plugins/debug-bar-constants/)
+
+## Debug Bar Post Types
+
+This plugin adds a new panel to the Debug Bar that displays detailed information about the registered post types for your site.
+
+[Visit Debug Bar Post Types](https://wordpress.org/plugins/debug-bar-post-types/)
+
+## Debug Bar Cron
+
+This plugin adds a new panel in the Debug Bar displaying information about WordPress’ scheduled events.
+
+Once installed, you will have access to the following information:
+
+- Number of scheduled events
+- If cron is currently running
+- Time of next event
+- Current time
+- List of custom scheduled events
+- List of core scheduled events
+- List of schedules
+
+[Visit Debug Bar Cron](https://wordpress.org/plugins/debug-bar-cron/)
+
+## Debug Bar Actions and Filters Addon
+
+This plugin adds two more tabs in the Debug Bar to display hooks (Actions and Filters) attached to the current request. Actions tab displays the actions hooked to current request. Filters tab displays the filter tags along with the functions attached to it with respective priority.
+
+[Visit Debug Bar Actions and Filters Addon](https://wordpress.org/plugins/debug-bar-actions-and-filters-addon/)
+
+## Debug Bar Transients
+
+This plugin adds information about WordPress transients to a new panel in the Debug Bar.
+
+Once installed, you will have access to the following information:
+
+- Number of existing transients
+- List of custom transients
+- List of core transients
+- List of custom site transients
+- List of core site transients
+- An option to delete a transient
+
+[Visit Debug Bar Transients](https://wordpress.org/plugins/debug-bar-transients/)
+
+## Debug Bar List Script &amp; Style Dependencies
+
+This plugin lists scripts and styles that are loaded, in which order they’re loaded, and what dependencies exist.
+
+[Visit Debug Bar List Script &amp; Style Dependencies](https://wordpress.org/plugins/debug-bar-list-dependencies/)
+
+## Debug Bar Remote Requests
+
+This plugin will add a new panel to Debug Bar that will display and profile remote requests made through the HTTP API.
+
+Once installed, you will have access to the following information:
+
+- Request method (GET, POST, etc)
+- URL
+- Time per request
+- Total time for all requests
+- Total number of requests
+
+Optionally, you can add `?dbrr_full=1` to your URL to get additional information, including all request parameters and a full dump of the response with headers.
+
+[Visit Debug Bar Remote Requests](https://wordpress.org/plugins/debug-bar-remote-requests/)
 
 ---
 
-# Introduction to Plugin Development <a name="plugins/intro" />
+# Helper Plugins <a name="plugins/developer-tools/helper-plugins" />
 
-Source: https://developer.wordpress.org/plugins/intro/
+Source: https://developer.wordpress.org/plugins/developer-tools/helper-plugins/
 
-Welcome to the Plugin Developer Handbook. Whether you’re writing your first plugin or your fiftieth, we hope this resource helps you write the best plugin possible.
+## Plugin Check
 
-The Plugin Developer Handbook covers a variety of topics — everything from what should be in the plugin header, to security best practices, to tools you can use to build your plugin. It’s also a work in progress — if you find something missing or incomplete, please notify the documentation team in slack and we’ll make it better together.
+Plugin Check is a tool for testing whether your plugin meets the required standards for the WordPress.org plugin directory. With this plugin you will be able to run most of the checks used for new submissions, and check if your plugin meets the requirements.
 
-## Why We Make Plugins
+Additionally, the tool flags violations or concerns around plugin development best practices, from basic requirements like correct usage of internationalization functions to accessibility, performance, and security best practices.
 
-If there’s one cardinal rule in WordPress development, it’s this: **Don’t touch WordPress core**. This means that you don’t edit core WordPress files to add functionality to your site. This is because WordPress overwrites core files with each update. Any functionality you want to add or modify should be done using plugins.
+[Visit Plugin Check](https://wordpress.org/plugins/plugin-check/)
 
-WordPress plugins can be as simple or as complicated as you need them to be, depending on what you want to do. The simplest plugin is a single PHP file. The [Hello Dolly](https://wordpress.org/plugins/hello-dolly/ "Hello Dolly Plugin") plugin is an example of such a plugin. The plugin PHP file just needs a [Plugin Header](#plugins/the-basics/header-requirements), a couple of PHP functions, and some [hooks](#plugins/hooks) to attach your functions to.
+## Query Monitor
 
-Plugins allow you to greatly extend the functionality of WordPress without touching WordPress core itself.
+Query Monitor is a debugging plugin for anyone developing with WordPress. You can view debugging and performance information on database queries, hooks, conditionals, HTTP requests, redirects and more. It has some advanced features not available in other debugging plugins, including automatic AJAX debugging and the ability to narrow down things by plugin or theme.
+
+[Visit Query Monitor](https://wordpress.org/plugins/query-monitor/)
 
 ---
 
-# What is a Plugin? <a name="plugins/intro/what-is-a-plugin" />
+# Creating Tables with Plugins <a name="plugins/creating-tables-with-plugins" />
 
-Source: https://developer.wordpress.org/plugins/intro/what-is-a-plugin/
+Source: https://developer.wordpress.org/plugins/creating-tables-with-plugins/
 
-Plugins are packages of code that extend the core functionality of WordPress. WordPress plugins are made up of PHP code and can include other assets such as images, CSS, and JavaScript.
+If you are [writing a plugin](#plugins) for WordPress, you will almost certainly find that you need to store some information in the WordPress database. There are two types of information you could store:
 
-By making your own plugin you are *extending* WordPress, i.e. building additional functionality on top of what WordPress already offers. For example, you could write a plugin that displays links to the ten most recent posts on your site.
+- **Setup information** — user choices that are entered when the user first sets up your plugin, and don’t tend to grow much beyond that (for example, in a tag-related plugin, the user’s choices regarding the format of the tag cloud in the sidebar).  
+    Setup information will generally be stored using the [WordPress *options* mechanism](#pluginssettings/options-api/).
+- **Data** — information that is added as the user continues to use your plugin, which is generally expanded information related to posts, categories, uploads, and other WordPress components (for example, in a statistics-related plugin, the various page views, referrers, and other statistics associated with each post on your site).  
+    Data can be stored in a separate MySQL/MariaDB table, which will have to be created. Before jumping in with a whole new table, however, consider if storing your plugin’s data in [WordPress’ Post Meta](#pluginsmetadata/) (a.k.a. Custom Fields) would work. Post Meta is the preferred method; use it when possible/practical.
 
-Or, using WordPress’ custom post types, you could write a plugin that creates a full-featured support ticketing system with email notifications, custom ticket statuses, and a client-facing portal. The possibilities are *endles*s*!*
+This article describes how to have your plugin automatically create a MySQL/MariaDB table to store its data. Note that as an alternative to following the steps here, you could have the plugin user run an install script when they install your plugin. Another approach would be to have the user execute an SQL query on their own, using something like [phpMyAdmin](#advanced-administration/upgrade/phpmyadmin). But neither of those options is very satisfactory, since a user could easily forget to run the install script or mess up the query (and they might not have phpMyAdmin available).
 
-Most WordPress plugins are composed of many files, but a plugin really only *needs* one main file with a specifically formatted [DocBlock](http://en.wikipedia.org/wiki/PHPDoc#DocBlock) in the header.
+So, it is recommended that you follow the steps below to have your plugin automatically create its database tables:
 
-[Hello Dolly](https://wordpress.org/plugins/hello-dolly/ "Hello Dolly"), one of the first plugins, is only [100 lines](https://plugins.trac.wordpress.org/browser/hello-dolly/trunk/hello.php) long. Hello Dolly shows lyrics from [the famous song](http://en.wikipedia.org/wiki/Hello,_Dolly!_(song)) in the WordPress admin. Some CSS is used in the PHP file to control how the lyric is styled.
+1. Write a PHP function that creates the table.
+2. Ensure that WordPress calls the function when the plugin is activated.
+3. Create an upgrade function, if a new version of your plugin needs to have a different table structure.
 
-As a WordPress.org plugin author, you have an amazing opportunity to create a plugin that will be installed, tinkered with, and loved by millions of WordPress users. All **you** need to do is turn your great idea into code. The Plugin Handbook is here to help you with that.
+## Create Database Tables
+
+The first step in making your plugin create database tables automatically is to create a PHP function within your plugin that adds a table or tables to the WordPress MySQL/MariaDB database. For purposes of this article, we’ll assume you want to call this function jal\_install.
+
+### Database Table Prefix
+
+In the wp-config.php file, a WordPress site owner can define a database table prefix. By default, the prefix is “wp\_”, but you’ll need to check on the actual value and use it to define your database table name. This value is found in the $[wpdb](#reference/classes/wpdb)-&gt;prefix variable. (If you’re developing for a version of WordPress older than 2.0, you’ll need to use the $table\_prefix global variable, which is deprecated in version 2.1).
+
+So, if you want to create a table called (prefix)liveshoutbox, the first few lines of your table-creation function will be:
+
+```php
+function jal_install () {
+   global $wpdb;
+
+   $table_name = $wpdb->prefix . "liveshoutbox"; 
+}
+
+```
+
+### Creating or Updating the Table
+
+The next step is to actually create the database table. Rather than executing an SQL query directly, we’ll use the dbDelta function in wp-admin/includes/upgrade.php (we’ll have to load this file, as it is not loaded by default). The dbDelta function examines the current table structure, compares it to the desired table structure, and either adds or modifies the table as necessary, so it can be very handy for updates (see wp-admin/upgrade-schema.php for more examples of how to use dbDelta). Note that the dbDelta function is rather picky, however. For instance:
+
+- You must put each field on its own line in your SQL statement.
+- You must have two spaces between the words PRIMARY KEY and the definition of your primary key.
+- You must use the key word KEY rather than its synonym INDEX and you must include at least one KEY.
+- KEY must be followed by a SINGLE SPACE then the key name then a space then open parenthesis with the field name then a closed parenthesis.
+- You must not use any apostrophes or backticks around field names.
+- Field types must be all lowercase.
+- SQL keywords, like CREATE TABLE and UPDATE, must be uppercase.
+- You must specify the length of all fields that accept a length parameter. int(11), for example.
+
+With those caveats, here are the next lines in our function, which will actually create or update the table. You’ll need to substitute your own table structure in the $sql variable:
+
+```php
+global $wpdb;
+
+$charset_collate = $wpdb->get_charset_collate();
+
+$sql = "CREATE TABLE $table_name (
+  id mediumint(9) NOT NULL AUTO_INCREMENT,
+  time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+  name tinytext NOT NULL,
+  text text NOT NULL,
+  url varchar(55) DEFAULT '' NOT NULL,
+  PRIMARY KEY  (id)
+) $charset_collate;";
+
+require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+dbDelta( $sql );
+
+```
+
+**Note:** Above we set the default character set and collation for the table. If we don’t do this, some characters could end up being converted to just ?’s when saved in our table. In this example we use $[wpdb::get\_charset\_collate()](#reference/classes/wpdbget_charset_collate/) to get the character set and collation. That function was introduced in WordPress 3.5, and if you need to support versions before that you will need create the charset/collate string yourself (you could copy the source of that function).
+
+### Adding Initial Data
+
+Finally, you may want to add some data to the table you just created. Here is an example of how to do that:
+
+```php
+$welcome_name = 'Mr. WordPress';
+$welcome_text = 'Congratulations, you just completed the installation!';
+
+$table_name = $wpdb->prefix . 'liveshoutbox';
+
+$wpdb->insert( 
+	$table_name, 
+	array( 
+		'time' => current_time( 'mysql' ), 
+		'name' => $welcome_name, 
+		'text' => $welcome_text, 
+	) 
+);
+
+```
+
+**NOTE:** **For more on using WPDB, see [wpdb](#reference/classes/wpdb) class.** In this case, we’re using $[wpdb](#reference/classes/wpdb)-&gt;insert, so our data will automatically be escaped. If you need to use another method like $[wpdb](#reference/classes/wpdb)-&gt;query instead, it’s a good idea to run the variables through the $[wpdb](#reference/classes/wpdb)-&gt;prepare function before passing the query to the database to prevent security problems, even though we defined $welcome\_name and $welcome\_text in this function and know that there are no SQL special characters in them.
+
+### A Version Option
+
+Another excellent idea is to add an option to record a version number for your database table structure, so you can use that information later if you need to update the table:
+
+```php
+add_option( "jal_db_version", "1.0" );
+
+```
+
+### The Whole Function
+
+This function is done. Let’s see it all in one piece. Note that the version number is now stored in a global variable.
+
+```php
+<?php
+
+global $jal_db_version;
+$jal_db_version = '1.0';
+
+function jal_install() {
+	global $wpdb;
+	global $jal_db_version;
+
+	$table_name = $wpdb->prefix . 'liveshoutbox';
+	
+	$charset_collate = $wpdb->get_charset_collate();
+
+	$sql = "CREATE TABLE $table_name (
+		id mediumint(9) NOT NULL AUTO_INCREMENT,
+		time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		name tinytext NOT NULL,
+		text text NOT NULL,
+		url varchar(55) DEFAULT '' NOT NULL,
+		PRIMARY KEY  (id)
+	) $charset_collate;";
+
+	require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+	dbDelta( $sql );
+
+	add_option( 'jal_db_version', $jal_db_version );
+}
+
+function jal_install_data() {
+	global $wpdb;
+	
+	$welcome_name = 'Mr. WordPress';
+	$welcome_text = 'Congratulations, you just completed the installation!';
+	
+	$table_name = $wpdb->prefix . 'liveshoutbox';
+	
+	$wpdb->insert( 
+		$table_name, 
+		array( 
+			'time' => current_time( 'mysql' ), 
+			'name' => $welcome_name, 
+			'text' => $welcome_text, 
+		) 
+	);
+}
+
+```
+
+## Calling the functions
+
+Now that we have the initialization function defined, we want to make sure that WordPress calls this function when the plugin is activated by a WordPress administrator. To do that, we will use the activate\_ action hook. If your plugin file is wp-content/plugins/plugindir/pluginfile.php, you’ll add the following line to the main body of your plugin:
+
+```php
+register_activation_hook( __FILE__, 'jal_install' );
+register_activation_hook( __FILE__, 'jal_install_data' );
+
+```
+
+See [Function\_Reference/register\_activation\_hook](#reference/functions/register_activation_hook) for more details.
+
+## Adding an Upgrade Function
+
+Over the lifetime of your plugin, you may find that you need to change the plugin’s database structure in an upgraded version. To do that, you will need to create update code within your plugin that will detect that a new version has been installed, and upgrade the database structure. The easiest thing to do is to add the code to the jal\_install function we just created.
+
+So, let’s assume that the function above was used to create database version 1.0 of your plugin, and you are now upgrading to version 1.1 so that the URL field can be wider (100 characters instead of 55). You will need to add the following lines to the end of your jal\_install function, to check the version and upgrade if necessary:
+
+```php
+<?php
+
+global $wpdb;
+$installed_ver = get_option( "jal_db_version" );
+
+if ( $installed_ver != $jal_db_version ) {
+
+	$table_name = $wpdb->prefix . 'liveshoutbox';
+
+	$sql = "CREATE TABLE $table_name (
+		id mediumint(9) NOT NULL AUTO_INCREMENT,
+		time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		name tinytext NOT NULL,
+		text text NOT NULL,
+		url varchar(100) DEFAULT '' NOT NULL,
+		PRIMARY KEY  (id)
+	);";
+
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+	dbDelta( $sql );
+
+	update_option( "jal_db_version", $jal_db_version );
+}
+
+```
+
+You’ll also need to change the global $jal\_db\_version variable at the top of the file, and of course you’ll want to change the initialization section created above to use the new table structure.
+
+Since 3.1 the activation function registered with [register\_activation\_hook()](#reference/functions/register_activation_hook) is not called when a plugin is updated. So to run the above code after the plugin is upgraded, you need to check the plugin db version on another hook, and call the function manually if the the database version is old. Like this:
+
+```php
+function myplugin_update_db_check() {
+    global $jal_db_version;
+    if ( get_site_option( 'jal_db_version' ) != $jal_db_version ) {
+        jal_install();
+    }
+}
+add_action( 'plugins_loaded', 'myplugin_update_db_check' );
+
+```
+
+## Resources
+
+For further reading on plugin development, check out [Plugin Handbook](#plugins), a comprehensive list of plugin resources. You may also find this post from the [wp-hackers mailing list](https://codex.wordpress.org/Mailing_Lists#Hackers) to be helpful: [WordPress Hackers Mailing List: Answer to Plugin Requires Additional Tables](http://lists.automattic.com/pipermail/wp-hackers/2005-May/000940.html). Also see: [Post meta vs separate database tables](http://wordpress.stackexchange.com/questions/4852/post-meta-vs-seperate-database-tables).
+
+---
+
+# Credits <a name="plugins/credits" />
+
+Source: https://developer.wordpress.org/plugins/credits/
+
+List of credits brought over manually.
+
+- @2Neil
+- @aternus
+- @awoods
+- @blobaugh
+- @code\_poet
+- @cyrijones
+- @danielbachhuber
+- @dawnmschaffer
+- @drewapicture
+- @endeavorm
+- @grapplerulrich
+- @hanni
+- @hlashbrooke
+- @iandunn
+- @jasonm4563
+- @jazzs3quence
+- @joedolson
+- @johnregan3
+- @kimparsell
+- @krogsgard
+- @Marella
+- @metripaldi9
+- @mordauk
+- @NemesisVex
+- @netweb
+- @NikV
+- @nlarnold1
+- @Otto42
+- @pjackson1972
+- @pollyplumber
+- @ramiy
+- @roccotripaldi
+- @sewmyheadon
+- @skippywp
+- @theMikeD
+- @tmoorewp
+- @topher1kenobe

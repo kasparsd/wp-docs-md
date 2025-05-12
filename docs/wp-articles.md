@@ -1,7 +1,6 @@
 Table of Contents:
 
 - [Create a search page](#documentation/article/create-a-search-page)
-- [Twenty Seventeen](#documentation/article/twenty-seventeen)
 - [FAQ Installation](#documentation/article/faq-installation)
 - [First steps with WordPress (Classic Editor)](#documentation/article/first-steps-with-wordpress-classic)
 - [Write posts (Classic Editor)](#documentation/article/write-posts-classic-editor)
@@ -32,7 +31,6 @@ Table of Contents:
 - [Image size and quality](#documentation/article/image-size-and-quality)
 - [Hosting WordPress](#documentation/article/hosting-wordpress)
 - [Post Status](#documentation/article/post-status)
-- [Twenty Sixteen](#documentation/article/twenty-sixteen)
 - [Introduction to Plugins](#documentation/article/introduction-to-plugins)
 - [Taxonomies](#documentation/article/taxonomies)
 - [Troubleshoot login issues](#documentation/article/troubleshoot-login-issues)
@@ -60,7 +58,6 @@ Table of Contents:
 - [Posts screen](#documentation/article/posts-screen)
 - [Set blog content visibility (Classic Editor)](#documentation/article/content-visibility-classic-editor)
 - [Use Images](#documentation/article/use-images)
-- [Twenty Fifteen](#documentation/article/twenty-fifteen)
 - [Customizer](#documentation/article/customizer)
 - [Learn about WordPress origins and version history](#documentation/article/learn-about-wordpress-and-version-history)
 - [Customize permalinks](#documentation/article/customize-permalinks)
@@ -68,7 +65,6 @@ Table of Contents:
 - [WordPress Privacy](#documentation/article/wordpress-privacy)
 - [Roles and Capabilities](#documentation/article/roles-and-capabilities)
 - [What&#8217;s the difference between WordPress.org and WordPress.com?](#documentation/article/difference-between-wordpress-org-and-wordpress-com)
-- [Twenty Nineteen](#documentation/article/twenty-nineteen)
 - [First steps with WordPress (Block Editor)](#documentation/article/first-steps-with-wordpress-block-editor)
 - [What is an excerpt? (Block Editor)](#documentation/article/what-is-an-excerpt-block-editor)
 - [Set blog content visibility (Block Editor)](#documentation/article/content-visibility-block-editor)
@@ -143,7 +139,6 @@ Table of Contents:
 - [Why should I use HTTPS](#documentation/article/why-should-i-use-https)
 - [Page Jumps](#documentation/article/page-jumps)
 - [Adding a new block](#documentation/article/adding-a-new-block)
-- [Twenty Twenty](#documentation/article/twenty-twenty)
 - [Twenty Twenty changelog](#documentation/article/twenty-twenty-changelog)
 - [RSS block](#documentation/article/rss-block)
 - [Facebook embed](#documentation/article/facebook-embed)
@@ -182,7 +177,6 @@ Table of Contents:
 - [Reddit embed](#documentation/article/reddit-embed)
 - [Synced Patterns (Reusable blocks)](#documentation/article/reusable-blocks)
 - [Group block](#documentation/article/group-block)
-- [Twenty Twenty-One](#documentation/article/twenty-twenty-one)
 - [Social Icons block](#documentation/article/social-icons)
 - [Tumblr embed](#documentation/article/tumblr-embed)
 - [Page/Post Settings sidebar](#documentation/article/page-post-settings-sidebar)
@@ -210,7 +204,6 @@ Table of Contents:
 - [Site Editor](#documentation/article/site-editor)
 - [Dimension Settings overview](#documentation/article/dimension-controls-overview)
 - [Twenty Twenty-Two changelog](#documentation/article/twenty-twenty-two-changelog)
-- [Twenty Twenty-Two](#documentation/article/twenty-twenty-two)
 - [Comparing Patterns, Template Parts, and Synced Patterns (Reusable Blocks)](#documentation/article/comparing-patterns-template-parts-and-reusable-blocks)
 - [Term Description block](#documentation/article/term-description-block)
 - [Archive Title Block](#documentation/article/archive-title-block)
@@ -243,7 +236,6 @@ Table of Contents:
 - [Colors Settings overview](#documentation/article/colors-settings-overview)
 - [Layout Settings overview](#documentation/article/layout-settings-overview)
 - [Typography Settings overview](#documentation/article/typography-settings-overview)
-- [Twenty Twenty-Three](#documentation/article/twenty-twenty-three)
 - [Amazon Kindle Embed](#documentation/article/amazon-kindle-embed)
 - [Search Results Title block](#documentation/article/search-results-title-block)
 - [Post Author block](#documentation/article/post-author-block)
@@ -279,7 +271,6 @@ Table of Contents:
 - [Footnotes block](#documentation/article/footnotes-block)
 - [Filters Settings overview](#documentation/article/filters-settings-overview)
 - [Link control](#documentation/article/link-editing)
-- [Twenty Twenty-Four](#documentation/article/twenty-twenty-four)
 - [Twenty Twenty-Four changelog](#documentation/article/twenty-twenty-four-changelog)
 - [Login-out block](#documentation/article/login-out-block)
 - [Twenty Eleven changelog](#documentation/article/twenty-eleven-changelog)
@@ -291,14 +282,23 @@ Table of Contents:
 - [Twenty Ten changelog](#documentation/article/twenty-ten-changelog)
 - [Twenty Thirteen changelog](#documentation/article/twenty-thirteen-changelog)
 - [Twenty Twelve changelog](#documentation/article/twenty-twelve-changelog)
+- [The Font Library](#documentation/article/the-font-library)
+- [Grid block](#documentation/article/grid-block)
+- [Twenty Twenty-Five changelog](#documentation/article/twenty-twenty-five-changelog)
+- [Query Total block](#documentation/article/query-total-block)
 - [Twenty Ten](#documentation/article/twenty-ten)
 - [Twenty Eleven](#documentation/article/twenty-eleven)
 - [Twenty Twelve](#documentation/article/twenty-twelve)
-- [The Font Library](#documentation/article/the-font-library)
-- [Grid block](#documentation/article/grid-block)
+- [Twenty Fifteen](#documentation/article/twenty-fifteen)
+- [Twenty Sixteen](#documentation/article/twenty-sixteen)
+- [Twenty Seventeen](#documentation/article/twenty-seventeen)
+- [Twenty Nineteen](#documentation/article/twenty-nineteen)
+- [Twenty Twenty](#documentation/article/twenty-twenty)
+- [Twenty Twenty-One](#documentation/article/twenty-twenty-one)
+- [Twenty Twenty-Two](#documentation/article/twenty-twenty-two)
+- [Twenty Twenty-Three](#documentation/article/twenty-twenty-three)
+- [Twenty Twenty-Four](#documentation/article/twenty-twenty-four)
 - [Twenty Twenty-Five](#documentation/article/twenty-twenty-five)
-- [Twenty Twenty-Five changelog](#documentation/article/twenty-twenty-five-changelog)
-- [Query Total block](#documentation/article/query-total-block)
 
 # Create a search page <a name="documentation/article/create-a-search-page" />
 
@@ -322,158 +322,6 @@ Follow these steps to create a search page.
 3. In the search field, type the keyword to search and submit.
 4. The search results must appear on the same page.
 5. If no post is found with the keyword then “No posts were found.” message would appear.
-
----
-
-# Twenty Seventeen <a name="documentation/article/twenty-seventeen" />
-
-Source: https://wordpress.org/documentation/article/twenty-seventeen/
-
-[Twenty Seventeen](#themes/twentyseventeen) is the new default theme for WordPress in 2017. Its business-oriented design highlights new video headers, and it has a front-page layout that can be created by combining page sections. The theme can be customized further using custom color options and by adding a site logo, social menu, and widgets.
-
-![Two screenshots of Twenty Seventeen, one for desktop and one for mobile.](https://wordpress.org/documentation/files/2018/10/twenty-seventeen-1058.jpg)## Quick Specs
-
-- The main column width is up to 525px for the two-column layout and 740px for the one-column layout.
-- The sidebar column width is up to 326px.
-- The recommended size for featured images is 2000px wide by 1200px high.
-- The recommended size for header videos and header images is 2000px wide by 1200px high.
-
-## Header Media
-
-Twenty Seventeen supports both header images and header videos. To modify either type on your site, navigate to Customizer &gt; Header Media.
-
-![The Customizer is opened and shows the preview of the site. The settings panel shows the options for the Header Media, including an option for selecting a header video.](https://wordpress.org/documentation/files/2018/10/video-headers.png)For header videos, you can upload your own `mp4` video or link to a video hosted on YouTube. Smaller file sizes will help make sure your site is loaded quickly.
-
-A header image can be used on its own to display a large photograph at the top of your site. It can also be used as a video fallback: If both a video and image are added, the image will be used as a placeholder while the video loads, and it also acts as a fallback on smaller screens where videos may be harder to serve over mobile networks.
-
-## Front Page
-
-Twenty Seventeen allows you to build a striking front page composed of content from different pages on your site. Each page’s featured image is highlighted, displayed at full-screen size with a fixed position. Twenty Seventeen has four different sections you can assign pages to.
-
-To set this up, first navigate to Customizer &gt; Static Front Page, and set your site to use a static front page if you haven’t already.
-
-![The Customizer is open and shows a preview of the site, as well as the Static Front Page settings.](https://wordpress.org/documentation/files/2018/10/front-page.jpg)Navigate to Customizer &gt; Theme Options. Under each `Front Page Section # Content` header, select a page you’d like to display for that section.
-
-![The Customizer is open and shows a preview of the site. The settings panel shows the Page Layout options which are custom options for Twenty Seventeen.](https://wordpress.org/documentation/files/2018/10/theme-options.jpg)If you haven’t created any pages yet, you can do that from the Customizer by clicking `+ Add New Page` beneath any of the sections. This will allow you to create a new page from the Customizer that you can later add content to.
-
-For the best appearance, make sure each page includes a featured image and some content.
-
-You can also select your Blog Posts page, and the panel will display your three latest blog posts.
-
-![An example of the Page Layout options for the front page, with the page section in view.](https://wordpress.org/documentation/files/2018/10/blog.jpg)Once you’ve finished adding pages to the sections, click `Save & Publish`.
-
-If you’d like to change the number of sections you can add pages to, add this snippet to your theme’s `functions.php`:
-
-```php
-`add_filter( 'twentyseventeen_front_page_sections', 'prefix_custom_front_page_sections' );<br></br>function prefix_custom_front_page_sections( $num_sections ) {<br></br>    return 6;<br></br>}`
-```
-
-This snippet changes the default four sections to six.
-
-## Custom Colors
-
-Twenty Seventeen includes three color options: the default light color scheme, a dark color scheme, and a Custom Colors scheme that can be adjusted to various hues using a slider.
-
-![Six screenshots that show the color schemes in the Customizer: Light, dark and custom color hues.](https://wordpress.org/documentation/files/2018/10/colours-screenshot.png)To explore all the color options available, navigate to Customizer &gt; Colors.
-
-## Language Support
-
-Twenty Seventeen includes optimal font styles for many languages, thanks to feedback from the WordPress community. The theme uses [Libre Franklin](https://fonts.google.com/specimen/Libre+Franklin) by default and makes adjustments to the typography for the following alphabets:
-
-- Arabic
-- Chinese
-- Cyrillic
-- Devanagari
-- Greek
-- Gujarati
-- Hebrew
-- Japanese
-- Korean
-- Thai
-
-To improve legibility, Twenty Seventeen also removes its letter-spacing styles for all non-Latin alphabets.
-
-## One- and Two-Column Layouts
-
-For [pages](/support/article/pages/), Twenty Seventeen allows you to choose between a one- and two-column layout. This can be changed via Customizer &gt; Theme Options. The theme defaults to the two-column layout, which displays the page title in one column and the page content in the other.
-
-Note: This feature only becomes available after setting a static front page.
-
-![The Customizer Theme Options panel for single pages.](https://wordpress.org/documentation/files/2018/10/two-column-option.jpg)When the one-column layout is selected, both the page title and content display in a wider single column, centered on the page.
-
-![The theme's two column layout, with the post title on the left and the content on the right.](https://wordpress.org/documentation/files/2018/10/two-column.jpg)![The theme's one column layout, with the post title above the content.](https://wordpress.org/documentation/files/2018/10/one-column.jpg)## Widgets
-
-Twenty Seventeen includes a footer [widget](/support/article/wordpress-widgets/) [](https://codex.wordpress.org/WordPress_Widgets)area allowing widgets to be added below the site’s content.
-
-The blog index, archive, and search pages and single blog posts also include a sidebar widget area. For each of these pages, the content is displayed in one center column if there is no sidebar. With the sidebar, the content is displayed in one column and the widgets are displayed in the other.
-
-## Pullquotes
-
-Pullquotes can be used to direct your readers’ attention to a particular passage or add visual interest to your posts and pages. In Twenty Seventeen, you can pair a pullquote with an `alignleft` or `alignright` class on the `blockquote` element to further highlight it. Instructions on how to do this can be found in [the support article for the Classic Editor](#documentation/article/write-posts-classic-editor). See the following example:
-
-```
-<blockquote class="alignleft">This is my fabulous left-aligned pullquote.</blockquote>
-```
-
-When a two-column layout is used (whether via the Customizer for pages, or by adding a sidebar widget for posts), the pullquote aligned to the same side will display fully outside of the content area and below the second column. Note: This will only work when the pullquote appears in the content below where the second column ends.
-
-![A pullquote that is positioned to the left of the main content.](https://wordpress.org/documentation/files/2018/10/pullquotes.jpg)## Post Formats
-
-Twenty Seventeen supports the following post formats:
-
-- Aside
-- Audio
-- Gallery
-- Image
-- Link
-- Quote
-- Video
-
-## Social Icons
-
-Twenty Seventeen includes a Social Icons Menu, allowing you to add links to your social media profiles that will be displayed as logos in the footer. If you’re not familiar with this functionality, please refer to the [documentation from Twenty Fifteen](/support/article/twenty-fifteen/#add-social-icons).
-
-The following services are supported by Twenty Seventeen’s Social Icons Menu:
-
-- Behance
-- Codepen
-- DeviantArt
-- Digg
-- Dribbble
-- Dropbox
-- Facebook
-- Flickr
-- Foursquare
-- GitHub
-- Google+
-- Instagram
-- LinkedIn
-- Meanpath
-- Medium
-- Pinterest
-- Pocket
-- Reddit
-- Skype
-- SlideShare
-- Snapchat
-- SoundCloud
-- Spotify
-- StumbleUpon
-- Tumblr
-- Twitch
-- Twitter
-- Vimeo
-- Vine
-- VK
-- WordPress
-- Yelp
-- YouTube
-
-## Support and Resources
-
-Get community help with Twenty Seventeen on its [forum](#support/theme/twentyseventeen).
-
-Get tips for theming with Twenty Seventeen from [this post on make.wordpress.org](https://make.wordpress.org/core/2016/11/29/theming-with-twenty-seventeen/) by one of Twenty Seventeen’s developers. You can also read [the theme’s changelog](#documentation/article/twenty-seventeen-changelog).
 
 ---
 
@@ -5379,107 +5227,6 @@ add_action( 'init', 'custom_post_status' );
 
 ---
 
-# Twenty Sixteen <a name="documentation/article/twenty-sixteen" />
-
-Source: https://wordpress.org/documentation/article/twenty-sixteen/
-
-[Twenty Sixteen](#themes/twentysixteen) is the default theme for WordPress in 2016.
-
-![The screenshot of Twenty sixteen with a black border, white background, black text and a blue accent color.
-The screenshot shows a blog post with a photo of a sunset over water, and a sidebar with text, a search form, and category links.](https://wordpress.org/documentation/files/2024/02/twenty-sixteen-screenshot.png)Twenty Sixteen is a modernized take on an ever-popular WordPress layout — the horizontal masthead with an optional right sidebar that works perfectly for blogs and websites. It has custom color options with beautiful default color schemes, a harmonious fluid grid using a mobile-first approach, and impeccable polish in every detail. Twenty Sixteen will make your WordPress look beautiful everywhere.
-
-![Twenty Sixteen mobile design.](https://wordpress.org/documentation/files/2018/11/Twenty-Sixteen-mobile-nav-open.png)![Twenty Sixteen tablet design.](https://wordpress.org/documentation/files/2018/11/Twenty-Sixteen-ipad-portrait.png)
-
-**Quick Specs**
-
-1. The main column width is up to 840px.
-2. The sidebar column width is up to 300px.
-3. The recommended Featured Image size is 1200px wide.
-4. The recommended Custom Header image size is 1200px wide and 280px height.
-
-## No-Sidebar Layout
-
-If you’d like to keep your visitors’ focus squarely on your content, simply don’t add any [widgets](#documentation/article/manage-wordpress-widgets) to the sidebar widget area. This also allows you to give your posts a powerful visual boost by adding a large [Featured Image](#documentation/article/page-post-settings-sidebar), up to 1200px wide.
-
-![Twenty Sixteen blog post design without sidebar. The post has a wide featured image below the post title, above the content.](https://wordpress.org/documentation/files/2018/11/Twenty-Sixteen-post-no-sidebar-446x1024-1.png)## Content Bottom Widget Areas
-
-Twenty Sixteen’s two Content Bottom Widget Areas are handy spots where you can place supplementary content. On single posts and pages, these widget areas display below your content. To add widgets to them, Click **Appearance &gt; Widgets** from the [Administration Screen](#documentation/article/appearance-widgets-screen-classic-editor) and add your favorite widgets to **Content Bottom 1** or **Content Bottom 2** or both.
-
-![A screenshot of a blog post with two widgets below the content.
-The left most widget shows the recent posts. The second widget shows a newsletter signup form.](https://wordpress.org/documentation/files/2018/11/twentysixteen-content-bottom-widgets1.webp)## Post Intro
-
-Twenty Sixteen has a small but nifty intro feature. Also known as a “deck” or “kicker,” the intro area is displayed between the headline and body copy. Your intro can provide important information and act as a link between the title and the rest of your post. A carefully crafted deck grabs readers’ attention, giving them an idea of what to expect in the full post.
-
-Add your intro in the [Excerpt option](#documentation/article/what-is-an-excerpt-classic-editor) in your Post panel.
-
-## Overhanging Full-Size Image
-
-Have you ever wanted to show off your large images without sacrificing the post’s readability? On a large screen, full-size images wider than or equal to 840px overhang the column.
-
-## Pull Quotes
-
-Pull quotes are a great way to refocus your readers’ attention — just add a class of `alignleft` or `alignright` to a `blockquote` element. Here are some examples of how to do that in the [Classic Editor](#documentation/article/write-posts-classic-editor).
-
-```
-
-<blockquote class="alignleft">A bolder pull blockquote that aligns to the lef</blockquote>
-
-<blockquote class="alignright">A bolder pull blockquote that aligns to the right</blockquote>
-```
-
-On a large monitor, the left-aligned pull quote overhangs the main column to maintain the readability of the text wrapped around it.
-
-![A screenshot of a large section of text with two pullquotes:  One left aligned that extends outside of the main column, and a right aligned that is aligned with the right side of the main text column.](https://wordpress.org/documentation/files/2018/11/twentysixteen-pull-quotes.jpg)## Customize
-
-Open the [Customizer](#documentation/article/customizer) to check out the four featured color schemes you can use to instantly change the look of your website.
-
-- (Default)
-- Red
-- Gray
-- Dark
-- Yellow
-
-Personalize the design even further by adding a Custom Header Image or/and Site Logo.
-
-![An image of the color schemes in Twenty Sixteen: dark (black), red, yellow and grey.](https://wordpress.org/documentation/files/2018/11/twentysixteen_color_schemes3.webp)## Social Menu
-
-With Twenty Sixteen, you can display links to your social media profiles with perfectly sized icons in the footer, using the Social Links menu. You can manage menus under [Appearance &gt; Menus](#documentation/article/appearance-menus-screen).
-
-Linking to any of the following sites will automatically display its icon in your menu:
-
-- CodePen
-- Digg
-- Dribbble
-- Dropbox
-- Email (mailto: links)
-- Facebook
-- Flickr
-- Foursquare
-- GitHub
-- Google+
-- Instagram
-- LinkedIn
-- Path
-- Pinterest
-- Polldaddy
-- Reddit
-- RSS Feed (urls with /feed/)
-- Spotify
-- StumbleUpon
-- Tumblr
-- Twitch
-- Twitter
-- Vimeo
-- WordPress
-- YouTube
-
-## Links
-
-- [Twenty Sixteen Demo and Download](#themes/twentysixteen/)
-- [Twenty Sixteen Changelog](#documentation/article/twenty-sixteen-changelog)
-
----
-
 # Introduction to Plugins <a name="documentation/article/introduction-to-plugins" />
 
 Source: https://wordpress.org/documentation/article/introduction-to-plugins/
@@ -7498,124 +7245,6 @@ Further reading:
 
 ---
 
-# Twenty Fifteen <a name="documentation/article/twenty-fifteen" />
-
-Source: https://wordpress.org/documentation/article/twenty-fifteen/
-
-[Twenty Fifteen](#themes/twentyfifteen) is the default theme for WordPress in 2015. It is super-clean, content-focused, and designed to bring a little more simplicity to our blogs. Its careful attention to typography, featuring the expertly-designed [Noto font set](http://www.google.com/get/noto/) in elegant and harmonious margins, makes it beautiful in multiple languages around the world.
-
-Twenty Fifteen looks great on devices of all sizes, from desktop to mobile and everything in between. The theme adapts to any screen without sacrificing usability or design integrity.
-
-[![](#documentation/files/2018/11/750px-Responsive_Twenty_Fifteen.png)](#documentation/files/2018/11/750px-Responsive_Twenty_Fifteen.png)> **Quick Specs (all measurements in pixels)**
-
-There are a few ways that you can customize Twenty Fifteen, all from WordPress’ Customizer. This short guide will show you how to:
-
-- choose a featured color scheme
-- add descriptions to your menus
-- add social icons in your menu
-- add block patterns
-
-## Choose a featured color scheme
-
-Twenty Fifteen has six color schemes you can use to change the look of your blog. The Default color scheme is a light gray, but you can also choose from Dark, Yellow, Pink, Purple, and Blue.
-
-[![](#documentation/files/2018/11/750px-Twenty_Fifteen_Colors.png)](#documentation/files/2018/11/750px-Twenty_Fifteen_Colors.png)To choose your color scheme, go to **Appearance &gt; Customize**.
-
-Under “Colors”, select your preferred color scheme from the drop down:
-
-[![](#documentation/files/2018/11/Twenty_Fifteen_Customize_Color_Schemes.png)](#documentation/files/2018/11/Twenty_Fifteen_Customize_Color_Schemes.png)You’ll see the color scheme change in the preview pane to the right.
-
-When you’re done, click **Save and Publish**.
-
-## Add Menu descriptions
-
-Twenty Fifteen has a menu design that’s easy to navigate, especially when you add menu descriptions.
-
-[![](#documentation/files/2018/11/Twenty_Fifteen_Menu.png)](#documentation/files/2018/11/Twenty_Fifteen_Menu.png)To start adding descriptions to your menus, go to **Appearance &gt; Menus** and **click the Screen Options tab** in the upper right of the screen.
-
-In the “Show advanced menu properties” section, **check the box** next to Description.
-
-[![](#documentation/files/2018/11/750px-Twenty_Fifteen_Screen_Options.png)](#documentation/files/2018/11/750px-Twenty_Fifteen_Screen_Options.png)Now you can begin adding descriptions to any link in a menu.
-
-[![](#documentation/files/2018/11/Twenty_Fifteen_Menu_Descriptions.png)](#documentation/files/2018/11/Twenty_Fifteen_Menu_Descriptions.png)When you’re done, click **Save Menu**.
-
-## Add social icons
-
-Twenty Fifteen also allows you to display links to your social media profiles with crisp, perfectly-sized icons.
-
-You can see these icons at the bottom of the menu displayed in the previous section.
-
-The first step is to go to **Appearance &gt; Menus** and **create a new menu** – you can name your menu anything you like.
-
-You will then add the URL for each social profile to your menu as a custom link.
-
-When you have added all desired links, **click Save Menu**.
-
-Now that you have created your menu and added your social links, **go to the Manage Locations tab** and next to “Social Links Menu”, select the social icons menu you just created from the drop down.
-
-[![](#documentation/files/2018/11/750px-Twenty_Fifteen_Social_Icons_Manage_Menu.png)](#documentation/files/2018/11/750px-Twenty_Fifteen_Social_Icons_Manage_Menu.png)**Click Save Changes** when you’re done.
-
-**Available icons**
-
-Linking to any of the following sites will automatically display its icon in your menu:
-
-- CodePen
-- Digg
-- Dribbble
-- Dropbox
-- Email (mailto: links)
-- Facebook
-- Flickr
-- Foursquare
-- GitHub
-- Google+
-- Instagram
-- LinkedIn
-- Path
-- Pinterest
-- Pocket
-- Polldaddy
-- Reddit
-- RSS Feed (URLs with /feed/
-- Spotify
-- Skype
-- StumbleUpon
-- Tumblr
-- Twitch
-- Twitter
-- Vimeo
-- WordPress
-- YouTube
-
-## Add Block Patterns
-
-Twenty Fifteen comes bundled with a set of [block patterns](#documentation/article/block-pattern).
-
-You can access the block patterns from the Block Editor.
-
-1. Click the + icon to add a new block.
-2. Click on the *Patterns* tab.
-3. Select *Twenty Fifteen* from the drop down menu.
-4. Click on the pattern you wish to insert and the pattern is inserted in the document at the location of your cursor.
-
-![](https://wordpress.org/documentation/files/2021/06/twenty-fifteen-block-patterns-1024x619.png)Block patterns in Twenty Fifteen## What else can you do?
-
-You can also use the Customizer to make the following changes to your website:
-
-- Change your Custom Header image
-- Featured Images: works best with images that are 825px wide by 510px high
-- Change the background image or color
-- Set a static front page
-
-You can also select a gradient option for certain blocks that fit the theme color scheme:
-
-![Select a gradient option for certain blocks](https://wordpress.org/documentation/files/2023/02/208979102-b9bc9bb3-bc66-490e-9052-0eb60f0ff985-932x1024.png)## Links
-
-- [Twenty Fifteen Demo and Download](#themes/twentyfifteen/)
-- [Twenty Fifteen Changelog](#documentation/article/twenty-fifteen-changelog)
-
----
-
 # Customizer <a name="documentation/article/customizer" />
 
 Source: https://wordpress.org/documentation/article/customizer/
@@ -9251,104 +8880,6 @@ Because it isn’t clear what you’re talking about — the Open Source project
 **Why doesn’t Automattic rename WordPress.com to something more distinct?**
 
 WordPress.com offers [multi-site](https://developer.wordpress.org/advanced-administration/multisite/) for free and on very inexpensive plans, has never had any downtime or lost user data since 2005, and has onboarded and introduced hundreds of millions of people to WordPress. Their higher-tier plans offer some of the fastest and most secure WordPress Managed Hosting available anywhere, with full plugin and theme support. That advanced managed platform is now licensed to other hosts [through wp.cloud](https://wp.cloud/) and is raising the bar for the industry. The flavor of WordPress offered by WordPress.com is a huge asset to the brand and adoption of WordPress overall.
-
----
-
-# Twenty Nineteen <a name="documentation/article/twenty-nineteen" />
-
-Source: https://wordpress.org/documentation/article/twenty-nineteen/
-
-[Twenty Nineteen](#themes/twentynineteen) is the new default theme for [WordPress Version 5.0](/support/wordpress-version/version-5-0/). At the core of Twenty Nineteen is its simple, sophisticated typography. The theme’s aesthetic is minimal and non-prescriptive, allowing it to work well in a variety of applications. For example: it is effective as an minimal, typography-driven blogging theme, but can also be adapted for use as a static business website.
-
-![](https://i1.wp.com/wordpress.org/documentation/files/2018/12/Twenty-Nineteen-Business-In-Devices.jpeg?fit=1024%2C943&ssl=1)Twenty Nineteen Web and Mobile views## Quick Specs
-
-- On a 1440px laptop screen, the main column width is up to 1032px wide with the one column layout.
-- There is one widget area in the footer with a column width of 1032px.
-- The recommended Featured Image size is 2000px wide by 1200px high.
-
-## Full Block Editor Support
-
-The block editor introduced in WordPress 5.0 grants users an unprecedented level of freedom to customize their site’s layout and design. In order to fully achieve their vision, users will need a new generation of flexible themes, built to take advantage of the creative freedom that the block editor offers. Twenty Nineteen is built with this in mind and includes both front-end and editor styles for all core blocks that ship with WordPress in 5.0. This means that what you see in the editor will look almost exactly like what you see on the front end.
-
-![A screenshot of a post in Twenty Nineteen that uses the Cover block.
-The block settings are opened and shows the color options.](https://i2.wp.com/wordpress.org/documentation/files/2018/12/Twenty-Nineteen-Post-Editor-Gutenberg.jpeg?fit=1024%2C687&ssl=1)## Site Logo
-
-Twenty Nineteen supports a Site Logo which works great as an avatar for a personal blog or an business logo or icon. To modify it on your site, navigate to Customizer &gt; Site Identity.
-
-![The Customizer is open and shows the preview of the site and the settings panel for the Site Identity. The options include the logo, site title and tagline.](https://wordpress.org/documentation/files/2018/12/File_Twenty-Nineteen-Site-Logo.jpg)## Custom Colors
-
-Twenty Nineteen uses a blue accent color by default. That color can be customized using a color hue slider. To explore the color options, navigate to Customizer &gt; Colors.
-
-![The Customizer is open and shows the preview of the site and the settings panel for the colors. The custom color option is enabled, and a teal color has been selected.](https://i0.wp.com/wordpress.org/documentation/files/2018/12/Twenty-Nineteen-Color-Options.png?fit=1024%2C621&ssl=1)By default, Twenty Nineteen applies a color filter to featured images using the color selected here. This can be disabled by deselecting the “Apply a filter to featured images using the site’s primary color” checkbox. Please not that when this option is disabled, the theme will still apply a black overlay on the featured image on single pages, in order to preserve the readability of the text that sits on top of the image.
-
-## Language Support
-
-Twenty Nineteen includes optimal font styles for many languages, thanks to feedback from the WordPress community. The theme uses local system fonts by default and makes adjustments to the typography for the following alphabets:
-
-- Arabic
-- Chinese
-- Cyrillic
-- Devanagari
-- Greek
-- Gujarati
-- Hebrew
-- Japanese
-- Korean
-- Thai
-
-## Widgets
-
-Twenty Nineteen includes a widget area below the site’s content, just above the footer.
-
-![An example of two widgets above the footer. The widgets are text widgets and shows address information and opening hours for a fictive company.](https://i2.wp.com/wordpress.org/documentation/files/2018/12/Twenty-Nineteen-Widgets.png?fit=1024%2C806&ssl=1)WidgetsOn screens larger than 1168px wide, widgets in this area are automatically arranged into two columns.
-
-![An example of two horizontal widgets.](https://i1.wp.com/wordpress.org/documentation/files/2018/12/Twenty-Nineteen-Widgets-Large-Screen.png?fit=1024%2C405&ssl=1)Widgets in the larger screen## Add Social Icons
-
-Twenty Nineteen includes a Social Icons Menu, where you can add links to your social media profiles that will be displayed as logos in the header. If you’re not familiar with this functionality, please check out the [documentation from Twenty Fifteen](/support/article/twenty-fifteen/#add-social-icons).
-
-The following services are supported by Twenty Nineteen’s Social Icons Menu:
-
-- Behance
-- Codepen
-- DeviantArt
-- DockerHub
-- Digg
-- Dribbble
-- Dropbox
-- Facebook
-- Flickr
-- Foursquare
-- GitHub
-- Google+
-- Instagram
-- LinkedIn
-- Meanpath
-- Medium
-- Pinterest
-- Periscope
-- Pocket
-- Reddit
-- Skype
-- SlideShare
-- Snapchat
-- SoundCloud
-- Spotify
-- StumbleUpon
-- Tumblr
-- Twitch
-- Twitter
-- Vimeo
-- Vine
-- VK
-- WordPress
-- Yelp
-- YouTube
-
-## Support &amp; Resources
-
-Get community help with Twenty Nineteen in its [forum](#support/theme/twentynineteen).
-
-You can also read [the theme’s changelog](#documentation/article/twenty-nineteen-changelog).
 
 ---
 
@@ -17281,143 +16812,6 @@ For information on how to move blocks, check out this article: [Moving blocks.](
 
 ---
 
-# Twenty Twenty <a name="documentation/article/twenty-twenty" />
-
-Source: https://wordpress.org/documentation/article/twenty-twenty/
-
-[Twenty Twenty](#themes/twentytwenty) is the new default theme for [WordPress Version 5.3](/support/wordpress-version/version-5-3/). It is designed with the flexibility of the block editor at its core. If you want to use it for an organization or a business, you can combine columns, groups, and media to create dynamic layouts that show off your services or products. If you want to use it for a traditional blog, the centered content column and considered typography makes it perfect for that as well.
-
-![](https://i0.wp.com/wordpress.org/documentation/files/2019/09/screenshot.jpg?fit=1024%2C768&ssl=1)The Twenty Twenty screenshot## Quick Specs
-
-- On a 1440px laptop screen, the main column width is up to 580px wide. The “Wide” block width is up to 1200px wide, and the “Full” block width extends the entire width of the screen.
-- There are two widget areas in the footer with a maximum column width of 570px.
-- The recommended Featured Image size is 1980px wide by 1485px high.
-
-## Starter Content
-
-Twenty Twenty contains Starter Content that helps to set up the theme identical to the theme demo page. The Starter Content can only be activated on freshly installed sites that do not have any pages or posts yet. To activate, please head over to the Customizer and click on `Publish`.
-
-## Full Block Editor Support
-
-Twenty Twenty is designed and developed to take maximum advantage of the creative freedom enabled by the block editor. Extra care has been given to the Columns and Group blocks, which can be combined into impressive landing pages with intricate blocks layouts. Twenty Twenty includes full editor styles for the block editor, so what you see in the editor will almost exactly match the end result.
-
-![](https://wordpress.org/documentation/files/2019/10/image-2560.png)The block editor in Twenty Twenty## Site Logo
-
-Twenty Twenty includes a site logo setting which can be used to display the logo of your business or an image of yourself. You can set your site logo by going to Customizer → Site Identity. The recommended resolution of the logo is 240px wide by 180px high.
-
-## Custom Colors
-
-Twenty Twenty includes three color settings that make it easy to give your site a personal touch. To change the color settings, navigate to Customizer → Colors.
-
-![](https://i1.wp.com/wordpress.org/documentation/files/2019/10/twenty-twenty-color-settings-2560.jpg?fit=1024%2C640&ssl=1)The color settings included in Twenty Twenty are:
-
-- Background Color (defaults to a light beige)
-- Header &amp; Footer Background Color (defaults to white)
-- Primary Color (defaults to pink)
-
-The colors of the elements on your site are automatically calculated based on the background colors you pick. This ensures that the color contrast is always high enough to be accessible to all visitors.
-
-## Cover Template
-
-Twenty Twenty includes a page template called the “Cover Template” that displays the title of the post or page on top of the featured image.
-
-![The Cover Template in Twenty Twenty](https://wordpress.org/documentation/files/2019/09/twenty-twenty-cover-template-2560.jpg)The Cover Template in Twenty TwentyYou can set a post or page to use the cover template by editing the post or page, selecting the “Document” tab in the right sidebar, expanding the “Post/Page Attributes” tab, and selecting “Cover Template” in the “Template” dropdown.
-
-Twenty Twenty includes a number of different options for the Cover Template, located in the “Cover Template” tab in the Customizer. Here, you can set the background color of the image overlay, the opacity of the image overlay, and the color of the text displayed on top of the overlay. You can also select whether the background image should have a fixed position when the visitor scrolls, which creates a gentle parallax effect.
-
-## Language Support
-
-Twenty Twenty includes optimal font styles for many languages, thanks to feedback from the WordPress community. The theme uses local system fonts by default and makes adjustments to the typography for the following alphabets:
-
-- Arabic
-- Chinese
-- Cyrillic
-- Devanagari
-- Greek
-- Gujarati
-- Hebrew
-- Japanese
-- Korean
-- Thai
-- Vietnamese
-
-## Menus
-
-There are two different desktop menus to choose from in Twenty Twenty:
-
-- A traditional horizontal menu, which is always visible
-- An expandable menu, which is hidden behind a menu button
-
-You can choose which menu location to use by going to Appearance → Menus, where you can assign a menu to the “Desktop Horizontal Menu” or the “Desktop Expanded Menu”. You can also use both menu locations in combination, if you prefer.
-
-Twenty Twenty also includes a footer menu, which is displayed beneath the site content, and a mobile menu, which defaults to the menu set to either the desktop horizontal menu or the desktop expanded menu.
-
-## Widgets
-
-Twenty Twenty includes two widget areas below the site content and above the footer.
-
-![](https://wordpress.org/documentation/files/2019/09/Twenty-Twenty-widgets-stacked-1024x967.png)On screens larger than 699px wide, widgets in this area are automatically arranged into two columns.
-
-![](https://i1.wp.com/wordpress.org/documentation/files/2019/09/Twenty-Twenty-widgets-inline.png?fit=1024%2C461&ssl=1)## Add Social Icons
-
-Twenty Twenty includes a Social Icons Menu, where you can add links to your social media profiles that will be displayed as logos in the footer. If you’re not familiar with this functionality, please check out the [documentation from Twenty Fifteen](/support/article/twenty-fifteen/#add-social-icons).
-
-The following services are supported by Twenty Twenty’s Social Icons Menu:
-
-- 500px
-- Amazon
-- Bandcamp
-- Behance
-- Codepen
-- DeviantArt
-- Dribbble
-- Dropbox
-- Etsy
-- Facebook
-- Feed
-- Flickr
-- Foursquare
-- GitHub
-- GitLab
-- Goodreads
-- Google
-- Instagram
-- Kickstarter
-- JSFiddle
-- Last.fm
-- LinkedIn
-- Mail
-- Mastadom
-- Medium
-- Meetup
-- Pinterest
-- Pocket
-- Reddit
-- Skype
-- Snapchat
-- SoundCloud
-- Spotify
-- TikTok
-- Tumblr
-- Twitch
-- Twitter
-- Vimeo
-- VK
-- WhatsApp
-- WordPress
-- Yelp
-- YouTube
-
-Additional icons can be added following the steps under “Adding icons in Twenty Twenty” at [Themes field guide: WordPress 5.5](https://make.wordpress.org/core/2020/07/30/themes-field-guide-wordpress-5-5/).
-
-## Support &amp; Resources
-
-Get community help with Twenty Twenty in its [forum](#support/theme/twentytwenty).
-
-You can also read [the theme’s changelog](#documentation/article/twenty-twenty-changelog).
-
----
-
 # Twenty Twenty changelog <a name="documentation/article/twenty-twenty-changelog" />
 
 Source: https://wordpress.org/documentation/article/twenty-twenty-changelog/
@@ -21372,279 +20766,6 @@ The option to control block spacing and padding is enabled for the Group block. 
 - Updated to include Dimension controls for WP 5.9 2022-01-17
 - Updated with new images for WP 5.6 2020-11-27
 - Created 2020-09-21
-
----
-
-# Twenty Twenty-One <a name="documentation/article/twenty-twenty-one" />
-
-Source: https://wordpress.org/documentation/article/twenty-twenty-one/
-
-[Twenty Twenty-One](#themes/twentytwentyone) is the new default theme for [WordPress Version 5.6](#documentation/wordpress-version/version-5-6).
-
-[![Screenshot of the new default theme for WordPress, Twenty Twenty-One.](https://wordpress.org/documentation/files/2020/11/image-1024x598.png)](https://2021.wordpress.net/)[Twenty Twenty-One](https://2021.wordpress.net/) is a blank canvas for your ideas and it makes the block editor your best brush. With new block patterns, which allow you to create a beautiful layout in a matter of seconds, this theme’s soft colors and eye-catching — yet timeless — design will let your work shine. Take it for a spin! See how Twenty Twenty-One elevates your portfolio, business website, or personal blog.
-
-## Quick Specs
-
-- Requires at least WordPress 5.3.
-- Requires at least PHP version 5.6.
-- On a 1440px laptop screen, the main column width is up to 1240px wide. The “Wide” block width is also up to 1240px wide, and the “Full” block width extends the entire width of the screen.
-- The recommended Featured Image size is 610px wide or larger.
-- The recommended size of the logo is at least 300px wide, or at least 100px tall.
-- Twenty Twenty-One has one widget area that displays below the site content and above the footer. Each widget takes up one third of the available space, to a maximum of 380px wide.
-- Note that Twenty Twenty-One has limited support for Internet Explorer 11.
-
-## Accessibility features
-
-- Skip to content link
-- Semantic HTML with landmarks
-- Support for High Contrast mode and Dark Mode
-- Support for keyboard navigation
-
-## Starter Content
-
-Twenty Twenty-One comes with [Starter Content](https://make.wordpress.org/core/2016/11/30/starter-content-for-themes-in-4-7/) that explains how to use the theme’s [block patterns](#documentation/article/block-pattern) and styles. You can only activate starter content on freshly installed sites that do not have any pages or posts. To activate, please head over to the Customizer and click on Publish.
-
-## Full Block Editor Support
-
-Twenty Twenty-One is designed and developed to take full advantage of the creative freedom enabled by the block editor. Extra care has been given to the Columns block so you can create impressive landing pages with intricate blocks layouts. Twenty Twenty-One includes styles for the block editor, so what you see in the editor will almost exactly match the end result.
-
-## Block patterns
-
-### Large text
-
-![A screenshot of the large text block pattern, with the text: A new portfolio default theme for WordPress.](https://wordpress.org/documentation/files/2020/11/Large-Text-1024x451.png)A heading with a 144px text size### Links area
-
-![The links area block pattern has a large text followed by social links and an email address. The section has a thin border on all four sides.](https://wordpress.org/documentation/files/2020/11/Links-Area-1024x508.png)For your social links and call-to-action### Contact Information
-
-![The contact information pattern has 3 columns that contains email and phone number, address and social media links with icons.](https://wordpress.org/documentation/files/2020/11/Contact-Information-1024x168.png)How to get in touch with you### Media &amp; Text article title
-
-![The media & text article title has a left aligned image combined with text section. The section has a thin border on all four sides.](https://wordpress.org/documentation/files/2020/11/Media-and-Text-Article-Title-1024x726.png)Highlight your best image and include a summary at the beginning of your article### Overlapping images
-
-![The overlapping images block pattern displays 3 images in two columns.
-The left column has two vertically placed images. The right hand column contains one mage and overlaps the left column.](https://wordpress.org/documentation/files/2020/11/Overlapping-Images-905x1024.png)Place images in a beautiful column pattern### Two Images
-
-![The two images block pattern has two horizontally placed images. The images have different sizes and one image has a frame.](https://wordpress.org/documentation/files/2020/11/Two-Images-Showcase-1024x688.png)Showcase images next to each other with different sizes and borders### Overlapping images and text
-
-![The overlapping images and text pattern uses 3 columns. The two outer columns contains images.
-The middle column contains a paragraph with a border around it, and overlaps the left most column.](https://wordpress.org/documentation/files/2020/11/Overlapping-Images-aand-Text-1024x532.png)Mix images and text content in columns### Portfolio list
-
-![The portfolio list pattern has a vertical list of links and miniature images. The image is displayed to the right of the link text.
-Each portfolio item is separated by a bottom border.
-](https://wordpress.org/documentation/files/2020/11/Portfolio-List-1024x720.png)Display links to your portfolio items together with miniature images[Learn more about block patterns and how to add them](#documentation/article/block-pattern)
-
-## Block styles
-
-Block styles are selected in the block Settings sidebar in the editor.
-
-**Social links**: In addition to the default styles, you can choose a dark grey icon color.
-
-**Separator**: In addition to the default styles, you can choose an extra thick separator.
-
-### Borders
-
-In Twenty Twenty-One, borders can be added to the following blocks:
-
-- Media &amp; Text
-- Latest posts -Styles for borders and dividers
-- Image -Styles for borders and frames
-- Cover
-- Group
-
-### Overlapping columns
-
-The columns block has an optional style called overlap, where the content of every second column overlaps the previous:
-
-![A screenshot of a columns block with the overlapping style applied. The first column has a white background. The second column has a black background and overlaps the bottom right corner of the first column.](https://wordpress.org/documentation/files/2020/11/twenty-twenty-one-column-overlap-840.png)## Color palette
-
-The theme provides several recommended colors that works well with the design of the theme. Select the colors in the background color setting and in the editor. There are also matching gradients.
-
-Black
-
-White
-
-Dark Grey
-
-Grey
-
-Green
-
-Blue
-
-Purple
-
-Red
-
-Orange
-
-Yellow
-
-## Custom Background Color
-
-Twenty Twenty includes the option to change your site’s background color.
-
-To change the background color, navigate to Customizer → Colors &amp; Dark Mode.
-
-[![A screenshot of the Customizer with the preview of the site and with the Colors & Dark Mode settings panel opened.](#documentation/files/2020/11/TT1-Customizer-Colors.png)](#documentation/files/2020/11/TT1-Customizer-Colors.png)Add your own custom color, or select a color from the palette.
-
-[![The Dark Mode option in the Customizer.](#documentation/files/2020/11/TT1-Customizer-Color-Palettes.png)](#documentation/files/2020/11/TT1-Customizer-Color-Palettes.png)The colors of the elements on your site are automatically calculated based on the background colors you pick. This ensures that the color contrast is always high enough to be accessible to all visitors.
-
-## Site Logo
-
-Twenty Twenty-One includes a site logo setting which can be used to display the logo of your business or an image of yourself. You can set your site logo by going to Customizer → Site Identity.
-
-The recommended size of the logo is at least 300px wide, or at least 100px tall. The logo is visible in the header and footer.
-
-[![The Site Identity settings panel in the Customizer.](#documentation/files/2020/12/TT1-Centered-Logo.png)](#documentation/files/2020/12/TT1-Centered-Logo.png)  
-The logo in the site header is centered. If you want to hide the Site Title and Tagline, the logo is placed to the left of the menu:
-
-[![The Site Identity settings panel in the Customizer, with the Site Title and Tagline options toggled off.](#documentation/files/2020/12/TT1-Left-Logo.png)](#documentation/files/2020/12/TT1-Left-Logo.png)## Excerpt settings
-
-In the Customizer you will find a panel called Excerpt Settings:
-
-![The Customizer Excerpt settings have two radio buttons where you can can choose between summary and full text.](https://wordpress.org/documentation/files/2021/01/tt1-excerpt-settings.png)Here you can choose if the blog and archive pages should show the full content or only the summary.   
-The default is summary. The search result page always shows the summary.  
-When the summary is selected, only text will be displayed.
-
-## Menus
-
-Twenty Twenty-One includes two menu locations:
-
-- A traditional responsive horizontal menu at the very top of the site, which supports dropdown menus.
-- A horizontal menu between the widget area and the footer at the bottom of the screen, which only supports one level of navigation.
-
-You can choose a menu location by going to Appearance → Menus, where you can assign a menu to the “Primary Navigation” or the “Footer Navigation”. You can also use both menu locations in combination, if you prefer.
-
-### Menu descriptions
-
-The primary navigation menu supports menu descriptions.
-
-![The menu description is shown below the menu item text.](https://wordpress.org/documentation/files/2021/01/tt1-menu-description-front.png)To enable menu descriptions, go to Appearance → Menus**,**  and open the Screen Options tab at the top of the page.
-
-Under Show advanced menu properties, check the box for Description:
-
-![The screen options tab includes a form with settings for menu properties including the menu descriptions.](https://wordpress.org/documentation/files/2021/01/tt1-menu-description-options.png)Add a description by selecting the menu item and filling out the Description textarea. Remember to save your changes.
-
-![Each menu item uses a textarea where the description can be added.](https://wordpress.org/documentation/files/2021/01/tt1-menu-description-area.png)## Add Social Icons
-
-There are two ways to add social icons in your site:
-
-- Use the Social Icons block within the editor.
-- Add a link to a social media site to your footer menu.
-
-When you create a social menu, the text label you provide will be hidden, and an icon will be shown in its place. If you’re not familiar with this functionality, please check out the [documentation from Twenty Fifteen](#documentation/article/twenty-fifteen).
-
-Twenty Twenty-One provides icons for the following social media services:
-
-- 500px
-- Amazon
-- Bandcamp
-- Behance
-- Codepen
-- DeviantArt
-- Dribbble
-- Dropbox
-- Etsy
-- Facebook
-- Feed
-- Flickr
-- Foursquare
-- GitHub
-- GitLab
-- Goodreads
-- Google
-- Instagram
-- Kickstarter
-- JSFiddle
-- Last.fm
-- LinkedIn
-- Mail
-- Mastodon
-- Medium
-- Meetup
-- Pinterest
-- Pocket
-- Reddit
-- Skype
-- Snapchat
-- SoundCloud
-- Spotify
-- Tumblr
-- Twitch
-- Twitter
-- Vimeo
-- VK
-- WhatsApp
-- WordPress
-- Yelp
-- YouTube
-
-Additional icons can be added following the steps under “Adding icons in Twenty Twenty” at [Themes field guide: WordPress 5.5](https://make.wordpress.org/core/2020/07/30/themes-field-guide-wordpress-5-5/).
-
-## Widgets
-
-Twenty Twenty-One comes with support for one widget area, at the very bottom of each page. Each widget column is 33% of the site width, up to 380px.
-
-![The footer widget area has 3 columns.
-Below the widget area is a site information section with the site title or logo, and a ink to WordPress.org with the link text "Proudly powered by WordPress"](https://wordpress.org/documentation/files/2020/11/widgets.png)## Post formats
-
-Twenty Twenty-One has support for post formats.  
-Post formats are selected in the editors Settings sidebar → Post → Status &amp; visibility.
-
-- Standard
-- Aside
-- Gallery
-- Link
-- Image
-- Quote
-- Status
-- Video
-- Audio
-- Chat
-
-## Language Support
-
-Twenty Twenty-One includes styles for RTL languages.
-
-The theme uses a native system font stack. This font stack provides support for a large number of languages.
-
-```
--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif
-```
-
-Expand this list to see the fonts used for non-Latin languages.  
-- **ar, ary, azb, ckb, fa-IR, haz, ps**: Tahoma, Arial, sans-serif.
-- **zh-CN**: PingFang SC, Helvetica Neue, Microsoft YaHei New, STHeiti Light.
-- **zh-TW**: PingFang TC, Helvetica Neue, Microsoft YaHei New, STHeiti Light.
-- **zh-HK**: PingFang HK, Helvetica Neue, Microsoft YaHei New, STHeiti Light.
-- **bel, bg-BG, kk, mk-MK, mn, ru-RU, sah, sr-RS, tt-RU, uk**: Helvetica Neue, Helvetica, Segoe UI, Arial, sans-serif.
-- **bn-BD, hi-IN, mr, ne-NP**: Arial, sans-serif.
-- **el**: Helvetica Neue, Helvetica, Arial, sans-serif.
-- **gu**: Arial, sans-serif.
-- **he-IL**: Arial Hebrew, Arial, sans-serif.
-- **ja**: sans-serif.
-- **ko-KR**: Apple SD Gothic Neo, Malgun Gothit, Nanum Gothic, Dotum, sans-serif.
-- **th**: Sukhumvit Set, Helvetica Neue, Helvetica, Arial, sans-serif.
-- **vi**: Libre Franklin, sans-serif.
-
-## Dark Mode Support
-
-One of the accessibility features of the Twenty Twenty-One theme is support for the visitor’s color scheme preferences in their operating system or browser’s settings. The feature is opt-in and supported in most operating systems, including [Android](https://support.google.com/chrome/answer/9275525?co=GENIE.Platform=Android&hl=en), [iOS](https://support.apple.com/en-us/HT210332), [OSX](https://support.apple.com/en-us/HT208976), [Windows 10](https://support.microsoft.com/en-us/windows/change-desktop-background-and-colors-176702ca-8e24-393b-15f2-b15b38f69de6), as well as most Linux distributions.
-
-If you have Dark Mode enabled, your site will be shown to visitors using a light or dark color scheme, respecting their operating system’s preferences. Depending on their lighting conditions or personal preferences they may choose to switch color schemes using a dedicated button on the bottom-right of their site (or bottom-left for RTL languages).
-
-### Enabling Dark Mode from the Customizer
-
-To activate Dark Mode Support, you can go to the Colors &amp; Dark Mode section in your Customizer. If you have a light color selected for the site’s background, you will be able to see and activate the `Dark Mode Support` setting. The background color you select will be applied to light mode, while Dark Mode colors are optimized automatically. You can use the Dark Mode On/Off button at the bottom of the preview screen to toggle between dark &amp; light schemes in your preview.
-
-### Dark Mode in the Editor
-
-The editor will by default respect your operating system’s color scheme settings. If on the front of your site you have chosen a different scheme (using the Dark Mode On/Off button), then the editor will use the preferred scheme.
-
-[![The post editor with Dark Mode enabled. The background color is dark grey and the text is white,](#documentation/files/2020/12/TT1-Dark-Mode-Editor-scaled-1.jpg)](#documentation/files/2020/12/TT1-Dark-Mode-Editor-scaled-1.jpg)## Support and Resources
-
-[Get community help with Twenty Twenty-One in its support forum](#support/theme/twentytwentyone).
-
-You can also [read the theme’s changelog](#documentation/article/twenty-twenty-one-changelog).
 
 ---
 
@@ -26718,81 +25839,6 @@ Initial Release.
 
 ---
 
-# Twenty Twenty-Two <a name="documentation/article/twenty-twenty-two" />
-
-Source: https://wordpress.org/documentation/article/twenty-twenty-two/
-
-[Twenty Twenty-Two](#themes/twentytwentytwo) is the new default theme for [WordPress Version 5.9](#documentation/wordpress-version/version-5-9).
-
-![Image showing two different views of the Twenty Twenty-Two templates including an about page and a post category template.](https://wordpress.org/documentation/files/2022/01/image-1-1024x701.jpeg)Everyone deserves a truly unique website, built on a solid, well-designed foundation. Twenty Twenty-Two aims to help you achieve that by offering a wide set of patterns, templates, headers, footers, and custom color palettes. As the first-ever default [block theme](#documentation/article/block-themes), Twenty Twenty-Two invites you to explore full site editing and create a site that reflects your individual vision.
-
-## Quick Specs
-
-- Requires at least WordPress 5.9.
-- Requires at least PHP version 5.6.
-
-## Full Site Editing Support
-
-Twenty Twenty-Two is designed to support all of the features of full site editing. This includes the following:
-
-- [Site Editor](#documentation/article/site-editor): an editor that allows you to edit all parts of your site, navigate between templates, and more.
-- [Styles](#documentation/article/styles-overview): a feature that allows you to customize your site, including individual blocks, as much as you’d like with different colors, typography, layouts, and more.
-- [Templates](#documentation/article/template-editor): edit, create, and manage templates that a page or posts uses.
-- [Template parts](#documentation/article/template-part-block): a way to organize and display groups of blocks as part of a block template mainly for site structure, like Headers and Footers.
-- Theme blocks including the [Navigation Block](#documentation/article/navigation-block), [Query Loop block](#documentation/article/query-loop-block), and more.
-
-Thanks to these options you should find that you won’t need to switch themes as often to create the desired look and feel of your site.
-
-Keep in mind that Twenty Twenty-Two is designed to use the above features instead of the Customizer to edit your site. The Customizer will be hidden by default, though it may be reactivated if you have plugins installed that require it.
-
-## Templates
-
-Twenty Twenty-Two has three custom templates for you to use with your posts and pages:
-
-- Blank: this includes the post content without any additional blocks.
-- Page (Large Header): this includes a big, visually interesting headline.
-- Single Post (No Separators), and Single Page (No Separators): These are the standard post/page templates, but with no horizontal separators on them.
-
-When exploring these templates and making them your own, be sure to take advantage of the Page patterns that you can use to build your templates. To learn more about templates and how to use them on your site, please read the [Template Editor support article](#documentation/article/template-editor).
-
-## Block Patterns
-
-Twenty Twenty-Two comes with 64 patterns to create beautiful content from footers, headers, pages, and more. To learn more about block patterns and how to use them on your site, please read the [Block Patterns support article](#documentation/article/block-pattern).
-
-Here are just a few examples to look forward to:
-
-**Subscribe callout**
-
-![Image of the subscribe callout pattern.](https://wordpress.org/documentation/files/2022/01/image-1024x200.png)**Layered images with duotone**
-
-![Layered images of birds. ](https://wordpress.org/documentation/files/2022/01/image-1-1024x439.png)**List of events**
-
-![List of events with a large header saying Speaker Series.](https://wordpress.org/documentation/files/2022/01/image-2-1024x848.png)## Color Palette
-
-The theme provides several recommended colors that work well with the design of the theme. You can use these colors throughout your site including when customizing your site with [the Styles feature](#documentation/article/styles-overview) or when customizing individual blocks. Duotone filters are also included as part of the color palette options so you can easily have all aspects of your site embrace a shared palette:
-
-![Image of various duotone options built into the Twenty Twenty-Two theme.](https://lh6.googleusercontent.com/1f-AG0cwxVYsmLmG0dNn4oaTS-leY-bnw61WSlXVMv0KIVx5XuIwqXkn_1_0KVqkgWDDTeWbL2i7x7VqwGOBDdV6-nXZU_ci-epHtg2sQHd2TJx-yDL2P7VtXFkLvXKJV25d0CeX)Black
-
-White
-
-Dark Green
-
-Beige
-
-Light Grey
-
-## Support and Resources
-
-Get community help with Twenty Twenty-Two in its [support forum](#support/theme/twentytwentytwo).
-
-Learn how to take full advantage of full site editing with the [Simple Site Design with Full Site Editing Learn WordPress course](https://learn.wordpress.org/course/simple-site-design-with-full-site-editing/).
-
-Read more about the Twenty Twenty-Two theme [in the introduction post](https://make.wordpress.org/core/2021/10/06/introducing-twenty-twenty-two/).
-
-[Twenty Twenty-Two changelog](#documentation/article/twenty-twenty-two-changelog).
-
----
-
 # Comparing Patterns, Template Parts, and Synced Patterns (Reusable Blocks) <a name="documentation/article/comparing-patterns-template-parts-and-reusable-blocks" />
 
 Source: https://wordpress.org/documentation/article/comparing-patterns-template-parts-and-reusable-blocks/
@@ -30133,74 +29179,6 @@ To see the power of these settings in action, here’s an example of using them 
 
 ---
 
-# Twenty Twenty-Three <a name="documentation/article/twenty-twenty-three" />
-
-Source: https://wordpress.org/documentation/article/twenty-twenty-three/
-
-[Twenty Twenty-Three](#themes/twentytwentythree) is the new, accessibility-ready, default theme for [WordPress Version 6.1](#documentation/wordpress-version/version-6-1).
-
-![Collage of Twenty Twenty-Three screenshots](https://wordpress.org/documentation/files/2022/10/tt3-collage-1024x556.png)A minimalist block theme designed to take full advantage of full site editing capabilities, Twenty Twenty-Three includes a collection of [ten community-submitted style variations](https://make.wordpress.org/design/2022/09/07/tt3-default-theme-announcing-style-variation-selections/). Explore the Styles panel and change the look-and-feel of your site in an instant – bold and bright, or soft and subtle, the choice is yours.
-
-## Quick specs
-
-- Requires at least WordPress 6.1.
-- Requires at least PHP version 5.6.
-
-## Full site editing support
-
-Twenty Twenty-Three is designed to support full site editing’s powerful features, including:
-
-- [Site Editor](#documentation/article/site-editor): an editor that allows you to edit all parts of your site, navigate between templates, and more.
-- [Styles](#documentation/article/styles-overview): a feature that allows you to customize your site, including individual blocks, as much as you’d like with different colors, typography, layouts, and more.
-- [Templates](#documentation/article/template-editor): edit, create, and manage templates used by pages, posts, and other content.
-- [Template parts](#documentation/article/template-part-block): a way to organize and display groups of blocks as part of a block template mainly for site structure, like Headers and Footers.
-- Theme blocks including the [Navigation block](#documentation/article/navigation-block),[ Query Loop block](#documentation/article/query-loop-block), and more.
-
-Like its predecessor Twenty Twenty-Two, this theme is designed to use WordPress site-editing features *instead of* the Customizer, which will be hidden by default. The Customizer may be automatically reactivated if you have plugins that require it.
-
-## Templates
-
-Twenty Twenty-Three includes several custom templates for you to use:
-
-- **Blank:** this displays post content without any additional blocks.
-- **Blog (Alternative):** provides a different way of displaying blog posts, in a list format with the date on the left and the post title on the right.
-
-## Block patterns
-
-Explore patterns to save time while crafting creative layouts. Patterns are collections of predesigned blocks whose text and media content can be quickly swapped out with your own. Whether a call-to-action, an event announcement, or a pricing table, patterns can help jump-start the creation of your page or post.
-
-![Event pattern screenshot](https://wordpress.org/documentation/files/2022/10/event-pattern-1024x608.png)![Call to action pattern screenshot](https://wordpress.org/documentation/files/2022/10/cta3-pattern-1024x165.png)![Pricing table pattern screenshot](https://wordpress.org/documentation/files/2022/10/pricing-table-pattern-1024x549.png)## Style variations
-
-Twenty Twenty-Three’s default colour scheme consists of a minimalist black-and-white palette, along with green accents.
-
-![Screenshot of default color palette in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/tt3-styles-2.jpg)Prefer a different look? Visit the Styles area in the Editor and choose from ten additional style variations to instantly switch up the design, including colors and typography.
-
-![Screenshot of styles panel in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/tt3-styles-1.jpg)![Default style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/00-1024x576.png)Default![Pitch style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/01-1024x576.png)Pitch  
-by [@richtabor](https://profiles.wordpress.org/richtabor/)![Canary style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/02-1024x576.png)Canary  
-by [@beafialho](https://profiles.wordpress.org/beafialho/)![Pilgrimage style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/04-1024x576.png)Pilgrimage  
-by [@luminuu](https://profiles.wordpress.org/luminuu/)![Electric style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/03-1024x576.png)Electric  
-by [@beafialho](https://profiles.wordpress.org/beafialho/)![Block out style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/06-1024x576.png)Block out  
-by [@critterverse](https://profiles.wordpress.org/critterverse/)![Marigold style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/05-1024x576.png)Marigold  
-by [@nudge](https://profiles.wordpress.org/nudge/)![Grapes style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/10-1024x576.png)Grapes  
-by [@amjadr360](https://profiles.wordpress.org/amjadr360/)![Aubergine style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/09-1024x576.png)Aubergine  
-by [@anariel-design](https://profiles.wordpress.org/anariel-design/)![Whisper style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/07-1024x576.png)Whisper  
-by [@colorful-tones](https://profiles.wordpress.org/colorful-tones/)![Sherbet style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/08-1024x576.png)Sherbet  
-by [@bgardner](https://profiles.wordpress.org/bgardner/)## Design specifications
-
-Twenty Twenty-Three takes advantage of fluid typography presets, so that each piece of text can adapt to any screen size, automatically. The theme also uses fluid spacing presets, to help maintain consistency in the spacing between blocks at all screen sizes. If you’re interested in learning more about the sizes, spacing, and font families in those presets, check out Twenty Twenty-Three’s [design specification](https://github.com/WordPress/twentytwentythree/blob/trunk/DESIGN-SPEC.md).
-
-## Support and resources
-
-Get community help with Twenty Twenty-Three in its [support forum.](#support/theme/twentytwentythree)
-
-Learn how to take full advantage of full site editing with the [Simple Site Design with Full Site Editing Learn WordPress course](https://learn.wordpress.org/course/simple-site-design-with-full-site-editing/).
-
-Read more about the Twenty Twenty-Three theme in [the introduction post](#documentation/wordpress-version/version-6-1).
-
-[Twenty Twenty-Three changelog.](#documentation/article/twenty-twenty-three-changelog)
-
----
-
 # Amazon Kindle Embed <a name="documentation/article/amazon-kindle-embed" />
 
 Source: https://wordpress.org/documentation/article/amazon-kindle-embed/
@@ -33137,133 +32115,6 @@ This toggle option is also available when you open the link editing panel. Open 
 
 ---
 
-# Twenty Twenty-Four <a name="documentation/article/twenty-twenty-four" />
-
-Source: https://wordpress.org/documentation/article/twenty-twenty-four/
-
-[Twenty Twenty-Four](#themes/twentytwentyfour) is the new, stylish and versatile, default theme for [WordPress Version 6.4.](#documentation/wordpress-version/version-6-4)
-
-A block theme designed to take full advantage of full site editing capabilities, particularly the opportunities offered by patterns. Create new pages in a matter of moments by constructing them from the wide range of patterns that come bundled with the theme.
-
-## Quick specs
-
-- Requires at least WordPress 6.4.
-- Requires at least PHP version 5.6.
-
-## Full site editing support
-
-Twenty Twenty-Four is designed to support full site editing’s powerful features, including:
-
-- [Site Editor](#documentation/article/site-editor): an editor that allows you to edit all parts of your site, navigate between templates, and more.
-- [Styles](#documentation/article/styles-overview): a feature that allows you to customize your site, including individual blocks, as much as you’d like with different colors, typography, layouts, and more.
-- [Templates](#documentation/article/template-editor): edit, create, and manage templates used by pages, posts, and other content.
-- [Template parts](#documentation/article/template-part-block): a way to organize and display groups of blocks as part of a block template mainly for site structure, like Headers and Footers.
-- Theme blocks including the [Navigation block](#documentation/article/navigation-block),[ Query Loop block](#documentation/article/query-loop-block), and more.
-
-Like its predecessor Twenty Twenty-Three, this theme is designed to use WordPress site-editing features *instead of* the Customizer, which will be hidden by default. The Customizer may be automatically reactivated if you have plugins that require it.
-
-## One theme, many variations
-
-In the past, default themes often centered around a specific topic or style. However, Twenty Twenty-Four breaks away from this tradition. This theme is thoughtfully designed to be your all-encompassing choice for any type of website, regardless of its specific focus.
-
-![Three screenshots of alternative Home Page layouts in a a grid](https://wordpress.org/documentation/files/2023/11/TT4-Post-Image-2-1024x538.jpg)Alternative patterns for the Blog Home templateThe Twenty Twenty-Four theme allows users to change certain Templates to use alternative patterns designed for specific use-cases: Business (the default), Writer, and Portfolio.
-
-### Alternative patterns
-
-Alternative patterns for the Writer and Portfolio types can be switched to for the following templates:
-
-- Blog Home
-- Index
-- Archive
-- Search
-
-You can use the Replace Template functionality to select one of the alternative patterns for your current template.
-
-1. When editing one of the Templates mentioned above – make sure the ‘Template’ tab of the sidebar inspector is selected.
-2. Click the three dots next to the Template name, and select the ‘Replace Template’ option from the menu that appears.
-3. You will be shown a selection of alternative patterns to choose from. Clicking to select one will replace the existing template contents with the new pattern.
-4. Save the changes to your template.
-
-### Template Parts
-
-Twenty Twenty-Four also includes a range of different layouts for the Header and Footer of your site. When editing your Templates you can [replace the template part](#documentation/article/template-part-block#replacing-one-template-part-with-another) with one of the variants.
-
-## Custom Templates
-
-Twenty Twenty-Four includes several custom page templates for you to use:
-
-- **Page no Title**: the layout of a standard page, but with no page title at the top.
-- **Page with Sidebar**: displays page content with a sidebar on the right hand side.
-- **Page with Wide Image**: displays a wide featured-image with page title on the left, and content on the right.
-
-## Block patterns
-
-Explore patterns to save time while crafting creative layouts. Patterns are collections of predesigned blocks whose text and media content can be quickly replaced by your own. Whether a call-to-action, an event announcement, or FAQ, patterns can help jump-start the creation of your page or post.
-
-![A grid of pattern layouts that are included with the theme](https://wordpress.org/documentation/files/2023/11/TT4-Post-Image-1-1024x682.jpg)## Style variations
-
-Twenty Twenty-Four’s comes with a minimalist, but versatile, palette in monochromatic greys.
-
-![A screenshot of the default color palette - which includes a range of greyscale tones.](https://wordpress.org/documentation/files/2023/11/Screenshot-2023-11-01-at-9.45.36-pm.png)Prefer a different look? Visit the Styles area in the Editor and choose from 9 additional style variations to instantly switch up the design, including colors and typography.
-
-![A grid of alternative Style color schemes for the theme.](https://wordpress.org/documentation/files/2023/11/Screenshot-2023-11-01-at-9.48.34-pm-656x1024.png)## Block variations
-
-Twenty Twenty-Four comes with style variations for a number of blocks – allowing slightly different appearance from their defaults.
-
-### Heading block
-
-Headings in Twenty Twenty-Four come with a variation that includes an Asterix as a bullet point above the heading.
-
-When editing your headings – you will see an option in the sidebar to switch to the variant style. Selecting the ‘With asterisk’ style will keep the size and font of your heading – but add the stylized asterix above it.
-
-### List block
-
-List items in Twenty Twenty Four come with a variation that uses a checkmark as bullet points instead of the default style.
-
-When editing your list – you will see an option in the sidebar to switch to the variant style. Selecting the ‘Checkmark’ style will keep the swap the default bullet for a checkmark.
-
-### Details block
-
-The Details block in Twenty Twenty Four come with a variation that uses an arrow to mark the summary instead of the default style.
-
-When editing your Details block – you will see an option in the sidebar to switch to the variant style. Selecting the ‘Arrow icon’ style will keep the swap the default marker dor the summary section to use an arrow icon.
-
-### Navigation links
-
-Links within Navigation blocks in Twenty Twenty Four come with a variation that adds an arrow to the right of the link text (sometimes used for indicating a link that leaves the main site).
-
-When editing menu items – you will see an option in the sidebar (Style tab) to switch to the variant style. Selecting the ‘With arrow’ style will add the arrow to the right of the link text.
-
-### Category and Tag list blocks
-
-Category and Tag list blocks in Twenty Twenty Four come with a variation that styles each term as a ‘pill’ with a light background.
-
-When the Category or Tag blocks within a Query Loop – you will see an option in the sidebar (Style tab) to switch to the variant style. Selecting the ‘Pill’ style will add a light background color (with rounded corners) to each term in the list..
-
-## Design specifications
-
-Twenty Twenty-Four comes with the following defaults for style.
-
-- **Cardo Font** for headlines.
-- **Sans-serif System** font for paragraphs.
-- **Instrument Sans**, **Inter**, and **Jost** as alternative fonts.
-- The **default color palette** of Twenty Twenty-Four is **light**, providing a fresh and inviting appearance. The Style Variations (mentioned above) contain a range of alternative color palettes.
-- A **content width** of 620 pixels and ‘**Wide’ width** of 1280 pixels.
-
-Should you wish – you can also view a more [complete list of the spacing, color, and layout presets used by the theme](https://github.com/WordPress/twentytwentyfour/blob/trunk/README.md#token-cheat-sheet). And remember, the Site Editor’s [Styles tools](#documentation/article/styles-overview) give a wide range of options for customizing the style of your site beyond these defaults.
-
-## Support and resources
-
-[Get community help with Twenty Twenty-Four in its support forum](#support/theme/twentytwentyfour).
-
-Learn how to take full advantage of full site editing with the [Simple Site Design with Full Site Editing course on Learn.WordPress.org](https://learn.wordpress.org/course/simple-site-design-with-full-site-editing/).
-
-Read more about the Twenty Twenty-Four theme in [the introduction post](https://make.wordpress.org/core/2023/08/24/introducing-twenty-twenty-four/).
-
-[Twenty Twenty-Four changelog.](#documentation/article/twenty-twenty-four-changelog)
-
----
-
 # Twenty Twenty-Four changelog <a name="documentation/article/twenty-twenty-four-changelog" />
 
 Source: https://wordpress.org/documentation/article/twenty-twenty-four-changelog/
@@ -36132,6 +34983,322 @@ Initial release.
 
 ---
 
+# The Font Library <a name="documentation/article/the-font-library" />
+
+Source: https://wordpress.org/documentation/article/the-font-library/
+
+The Font Library is a new feature released in 6.5. The library allows you to manually upload your own collection or connect directly to Google Fonts and manage fonts in WordPress. It is available globally for [block themes](#documentation/article/block-themes).
+
+## Where to find the Font Library
+
+The Font Library lives in the Site Editorat **Appearance &gt; Editor**. From the editor select to edit your site’s styles. To find the style settings click on the half circle **Styles** icon in the top right corner of the page. In the Styles panel, click **Typography &gt; Manage fonts**.
+
+![Screenshot of the Manage Fonts panel in the WordPress editor, showing the available theme fonts. The panel has tabs for Library, Upload, and Install Fonts, with the Library tab selected.](https://wordpress.org/documentation/files/2024/10/1-font-management-library.png)## The Manage Fonts panel
+
+The Manage Fonts panel contains 3 tabs:
+
+- Library
+- Upload
+- Install Fonts
+
+### Library
+
+The Library contains any fonts installed on the site as well as the theme fonts. Any newly added fonts will appear in this tab.
+
+![Screenshot of the  Library tab in the Manage Fonts panel in the WordPress editor, showing the available fonts. Fonts listed include Cardo (3 variants active), Inter (1 variant active), System Sans-serif (1 variant active), and System Serif (1 variant active).](https://wordpress.org/documentation/files/2024/10/2-library.png)### Upload
+
+A new collection or a single font file can be uploaded on this tab. The supported formats are .ttf, .otf, .woff, and .woff2
+
+### Install Fonts
+
+The Install Fonts tab is where Google Fonts can be uploaded.
+
+First, you need to give access to Google Fonts.
+
+![Screenshot of the Install Fonts tab in the WordPress 'Manage Fonts' panel. The tab displays a prompt to Connect to Google Fonts, explaining that permission is required to connect directly to Google servers. Installed fonts will be stored locally on the site. It also explains how to   upload fonts manually on the 'Upload' tab. A blue button labeled 'Allow access to Google Fonts' is at the bottom of the panel.
+](https://wordpress.org/documentation/files/2024/10/Google-Fonts.png)Access can be revoked by clicking on the 3 dots on the right side.
+
+![Screenshot of the Install Fonts tab in the WordPress Manage Fonts panel, showing a dropdown menu with the option to Revoke access to Google Fonts. The menu is accessed through the three-dot button in the upper right.](https://wordpress.org/documentation/files/2024/10/Revoke-access.png)Find the font you wish to use using the search box. You can filter search results using the category dropdown menu in the upper right side.
+
+![Screenshot of the Google Fonts installation interface in WordPress, highlighting the search functionality. The search term 'Bodoni' is entered in the search bar on the left. Two results are displayed: 'Bodoni Moda' with 12 variants and 'Libre Bodoni' with 8 variants. A category dropdown is on the right, currently set to All.](https://wordpress.org/documentation/files/2024/10/6-font-search.png)![Screenshot of the Google Fonts installation interface in WordPress, highlighting the font category filter dropdown menu. The search term 'Alike' is entered in the search bar, displaying results for 'Alike' and 'Alike Angular,' each with 1 variant. The category dropdown is expanded on the right, showing options including All, Sans Serif, Display, Serif (selected), Handwriting, and Monospace.](https://wordpress.org/documentation/files/2024/10/5-font-category-1.png)### How to install a font with Google Fonts
+
+Choose the desired font &gt; Select the font variants in the next panel &gt; click Install. You’ll see a notice indicating whether the font installed successfully. Newly installed fonts will appear in the Library tab.
+
+The available variations will also appear in the Styles section.
+
+### Removing fonts
+
+To temporarily remove access to some variants of a font, you can check/uncheck them in the Library, then click Update.
+
+To completely remove the font family or single font, click on it, check the box for the font then click**Delete**. You’ll be prompted to confirm the deletion before the Font family is uninstalled..
+
+After a font is deleted, a “Font family uninstalled successfully” notice appears on the main Library tab.
+
+## Changing the default fonts
+
+Fonts are available globally but can also be used on individual blocks.
+
+### Changing fonts globally
+
+To use a font globally, navigate to the **Styles panel &gt; Typography &gt; Elements** then choose the element to change: text, links, headings, captions, and buttons.
+
+On the next panel, choose the font and any of the other font characteristics: size, appearance, line height, letter spacing, and letter space.
+
+## Changelog
+
+- Created 2024-10-17
+
+---
+
+# Grid block <a name="documentation/article/grid-block" />
+
+Source: https://wordpress.org/documentation/article/grid-block/
+
+[Go back to the list of **Blocks**](#documentation/article/blocks)
+
+*Grid* block is one of the container blocks that can be used to organize multiple blocks and adjust the height, width, and position of all blocks inside the container. As a container block, it’s possible to transform a *Grid* block into a *Group*, *Row* or *Stack* block without changing the content of the block.
+
+Click the block inserter **(+)** icon to open the block inserter pop-up window and search for the *Grid* block. You can also use the keyboard shortcut /grid to quickly insert a Grid block.
+
+Detailed instructions on adding blocks can be found [here](#documentation/article/adding-a-new-block).
+
+## Block Toolbar
+
+To view the block toolbar, click on the block, and the toolbar will be displayed.
+
+Every block comes with unique toolbar icons. These block-specific controls allow you to manipulate the block right in the editor.
+
+The Grid block shows the following buttons in the block toolbar:
+
+![Grid block Toolbar](https://wordpress.org/documentation/files/2024/08/grid-block-toolbar-6.6-300x77.jpg)- Transform to
+- Moving handles
+- Align
+- Options
+
+### Transform to
+
+![Grid block Toolbar - Transform to button](https://wordpress.org/documentation/files/2024/08/grid-block-toolbar-transforms-6.6.jpg)Click on the “Transform” button to convert the *Grid* block into Group, Row, Stack, Cover or Columns blocks.
+
+### Moving handles
+
+The dotted icons can be used to drag and drop a block to the place of your choosing. The up and down arrow icons can be used to shift a block up and down in your document.
+
+![Grid block Toolbar - Moving handles](https://wordpress.org/documentation/files/2024/08/grid-block-toolbar-movinghandle-6.6-300x77.jpg)[Get more information about moving a block within the editor.](#documentation/article/moving-blocks)
+
+### Align
+
+![Grid block Toolbar - Align button](https://wordpress.org/documentation/files/2024/08/grid-block-toolbar-align-6.6-300x181.jpg)Use the change alignment tool to change the width of the *Grid* block. The following is a list of the block width options:
+
+- None
+- Wide width
+- Full width
+
+### Options
+
+The Options button on a block toolbar gives you more features to customize the block.
+
+[Read about these and other settings.](#documentation/article/more-options)
+
+## Block settings
+
+The block settings panel contains customization options specific to the block. To open it, select the block and click the cog icon next to the Publish button.
+
+![Block settings icon on the editor](https://wordpress.org/documentation/files/2023/05/block-settings-icon.png)Click Group, Row, Stack button in the Block Settings to transform the Grid block to each block.
+
+![Settings icons](https://wordpress.org/documentation/files/2024/08/grid-block-settings-6.6-300x191.jpg)### Layout
+
+The Grid block provides Layout settings options to change the number of columns in the Grid block.
+
+- **Auto** – Automatically the number of columns is defined by the value specified in **Minimum column width**.
+- **Manual** – The number of columns is set at **Columns** field.
+
+![Layout Auto option](https://wordpress.org/documentation/files/2024/08/grid-block-layout-auto-6.6-300x297.jpg)
+
+![Layout Manual option](https://wordpress.org/documentation/files/2024/08/grid-block-layout-manual-6.6-300x284.jpg)
+
+### Position
+
+The position setting is only available when the Grid block is located at the root-level. The drop-down menu has two options: **Default** and **Sticky**. If the Sticky option is selected, the Grid block will remain at the top of the window when you scroll down the page.
+
+![The position settings for stack block](https://wordpress.org/documentation/files/2023/05/position.png)### Advanced
+
+The **Advanced** tab lets you add HTML anchor and CSS class(es) to your block.
+
+**HTML element** lets you choose the HTML element you want to be used for the block’s wrapper in the HTML code.
+
+**HTML anchor** allows you to [make a unique web address](#documentation/article/page-jumps) just for this block, Then, you’ll be able to link directly to this section of your page. This can be helpful for longer pages where visitors might want to click on a link to go directly to a specific section.
+
+The **Additional CSS class(es)** lets you add CSS class(es) to your block, allowing you to write custom CSS and style the block as you see fit.
+
+![Advanced tab in the Stack block](https://wordpress.org/documentation/files/2022/11/Screenshot-2022-11-28-at-8.40.21-AM.png)## Block Styles
+
+Click Styles icon in the block settings sidebar to access the design settings.
+
+![Styles icon in the block settings](https://wordpress.org/documentation/files/2024/08/grid-block-styles-6.6-300x269.jpg)### Color
+
+The Grid block provides Color settings options to change the text, background, and link colors.
+
+For details, refer to this support article: [Color settings overview](#documentation/article/colors-settings-overview)
+
+![Background image options](https://wordpress.org/documentation/files/2024/08/grid-block-background-image-2-6.6-207x300.jpg)### Background Image
+
+The Grid block provides Background Image settings to display behind the block’s content:
+
+1. Click **Add background image** under the **Background Image** in the block’s Styles.
+2. Select image from Media Library or Upload an image.
+3. You can set Top and/or Left position, and Size from Cover, Contain and Tile.
+
+### Typography
+
+The Grid block provides typography settings to change the font family, appearance, line height, letter spacing, decoration, letter case, and font size.
+
+For details, refer to this support article: [Typography settings overview](#documentation/article/typography-settings-overview)
+
+### Dimensions
+
+The Grid block provides dimension settings options to add padding, margin, and block spacing.
+
+For details, refer to this support article: [Dimension settings overview](#documentation/article/dimension-controls-overview)
+
+### Border
+
+The Grid block provides border settings options to add border color, width, and radius.
+
+For details refer to this support article: [Border settings overview](#documentation/article/border-settings-overview)
+
+## Changelog
+
+- Created 2024-08-24
+
+---
+
+# Twenty Twenty-Five changelog <a name="documentation/article/twenty-twenty-five-changelog" />
+
+Source: https://wordpress.org/documentation/article/twenty-twenty-five-changelog/
+
+## Version 1.2
+
+Released: April 15, 2025 with [WordPress 6.8](#documentation/wordpress-version/version-6-8)
+
+- Improve text strings for patterns and templates. [\#62482](https://core.trac.wordpress.org/ticket/62482)
+
+## Version 1.1
+
+Released: February 11, 2025
+
+- Pin a `theme.json` schema version to Twenty Twenty-Five ([\#62455](https://core.trac.wordpress.org/ticket/62455))
+
+## Version 1.0
+
+Released: November 12, 2024
+
+Initial Release.
+
+---
+
+# Query Total block <a name="documentation/article/query-total-block" />
+
+Source: https://wordpress.org/documentation/article/query-total-block/
+
+[Go to the list of Blocks](#documentation/article/blocks)
+
+Use the *Query Total block* to display the total number of results in a query.
+
+![The Query total block on the site editor](https://wordpress.org/documentation/files/2025/04/query-total-intro-1024x681.png)The Query total block on the site editor***Note:*** This block works only in the Query Loop block*.* This block should be used only in the [Site Editor](#documentation/article/site-editor) to edit the archive page templates.
+
+To add a *Query Total block*, click the **Block Inserter** icon when editing in the Query Loop.
+
+Click on it to add the block to your page template.You can also use the keyboard shortcut `/query-total` to quickly insert the *Query Total block*:
+
+![Adding the Query total block](https://wordpress.org/documentation/files/2025/04/query-total-inserter-1024x699.gif)Adding the Query total block[Detailed instructions on adding blocks](#documentation/article/adding-a-new-block)
+
+## Block toolbar
+
+To view the block toolbar, click on the block, and the toolbar will be displayed.
+
+![Query total block toolbar](https://wordpress.org/documentation/files/2025/04/query-total-toolbar.png)Query total block toolbarEvery block comes with unique toolbar icons and blocks specific user controls that allow you to manipulate the block right in the editor.
+
+The *Query Total block* shows seven buttons in the block toolbar:
+
+- Select parent block
+- Transform to
+- Drag icon
+- Move arrows
+- Change display type
+- More options
+
+### Select parent
+
+Click on the **Select parent** button to move to the *Query Loop block*.
+
+![Select parent for Query Total block](https://wordpress.org/documentation/files/2025/04/query-total-select-parent.png)Select parent for Query Total block### Transform to
+
+![Transform button for the Query Total block](https://wordpress.org/documentation/files/2025/04/query-total-transform.png)Transform button for the Query Total blockClick on the **Transform** button to convert the *Query Total block* into a *Columns, Details, or Group* block:
+
+![Transform options for Query Total block](https://wordpress.org/documentation/files/2025/04/query-total-transform-to.png)Transform options for Query Total block### Drag icon
+
+![Drag and drop tool on the toolbar](https://wordpress.org/documentation/files/2025/04/query-total-drag.png)Drag and drop tool on the toolbarTo drag and drop the block to a new location on the page template, click and hold the rectangle of dots, then drag it to the new location. The blue separator line indicates where the block will be placed. Release the left mouse button when you find the new location to place the block.
+
+### Move arrows
+
+![](https://wordpress.org/documentation/files/2025/04/query-total-move.png)Block moving tools on the block toolbarThe up and down arrow icons can be used to move the block up and down on the page.
+
+[Get more information about moving a block within the editor.](#documentation/article/moving-blocks)
+
+### Change display type
+
+The next button over will allow you to choose two types of displays:
+
+The “Total results” option displays the number of results found, for example: “12 results found”:
+
+![Display type toolbar tool](https://wordpress.org/documentation/files/2025/04/query-total-display-type.jpg)Display type toolbar toolThe “Range display” option displays the range total, for example, “Displaying 1 – 10 of 12”.
+
+![Range display type for Query Total block](https://wordpress.org/documentation/files/2025/04/query-total-display-type-range.png)Range display type for Query Total block### More options
+
+The [More Options menu](#documentation/article/more-options) represented by **three vertical dots on the far right of the toolbar** gives you more features such as the ability to duplicate, remove, or edit your block as HTML.
+
+![Examples of the location of the "More Options" menu in a Query Total block. ](https://wordpress.org/documentation/files/2025/04/query-total-more-options.png)Examples of the location of the “More Options” menu in a Query Total block.[Read about these and other settings.](#documentation/article/more-options/)
+
+## Block settings
+
+The block settings panel contains customization options specific to the block. To get to the settings, select the block and click to open the Inspector sidebar. You should see the block settings displayed below with the title “Query total” at the top:
+
+![Illustrates how to open settings for Query Total block](https://wordpress.org/documentation/files/2025/04/query-total-access-settings-1024x685.png)Illustrates how to open settings for Query Total block### Color 
+
+Text and background colors can be set on a per-block basis, allowing you to call attention to important content. Using the Color settings, you can customize the block by adding text, background, and link colors.
+
+![Color settings](https://wordpress.org/documentation/files/2025/04/image8.png)Color settings[See this guide for more information about changing colors.](#documentation/article/colors-settings-overview)
+
+### Typography 
+
+The Typography settings enable you to customize the font and text appearance of the content within the **Query Total** block. The settings have various options, such as font family, size, appearance, line height, letter case, letter spacing, and decoration.
+
+[Get more details about changing typography settings.](#documentation/article/typography-settings-overview)
+
+### Dimensions
+
+The **Query Total** block provides various options to adjust its dimensions, such as width and height, allowing you to customize the text layout to ensure visual consistency.
+
+![Dimension settings](https://wordpress.org/documentation/files/2025/04/image5.png)Dimension settingsFor details refer to this support article: [Dimension settings overview](#documentation/article/dimension-controls-overview)
+
+### Border
+
+The **Query Total** block provides border settings options to add border color, width, and radius.
+
+![Border settings](https://wordpress.org/documentation/files/2025/04/image13.png)Border settingsFor details refer to this support article: [Border settings overview](#documentation/article/border-settings-overview)
+
+### Advanced
+
+The Advanced tab lets you add CSS class(es) to your block. This will allow you to write custom CSS and styles to the block.
+
+![Advanced tab](https://wordpress.org/documentation/files/2025/04/image15.png)Advanced tabThe Additional CSS class(es) enables you to write custom CSS class(es) to the block, so you can style it as you see fit.
+
+## Changelog
+
+- Created 2025-04-29 (props to [@n8finch](https://profiles.wordpress.org/n8finch/))
+
+---
+
 # Twenty Ten <a name="documentation/article/twenty-ten" />
 
 Source: https://wordpress.org/documentation/article/twenty-ten/
@@ -36386,192 +35553,1152 @@ You can also read [the theme’s changelog.](#documentation/article/twenty-twelv
 
 ---
 
-# The Font Library <a name="documentation/article/the-font-library" />
+# Twenty Fifteen <a name="documentation/article/twenty-fifteen" />
 
-Source: https://wordpress.org/documentation/article/the-font-library/
+Source: https://wordpress.org/documentation/article/twenty-fifteen/
 
-The Font Library is a new feature released in 6.5. The library allows you to manually upload your own collection or connect directly to Google Fonts and manage fonts in WordPress. It is available globally for [block themes](#documentation/article/block-themes).
+[Twenty Fifteen](#themes/twentyfifteen) is the default theme for WordPress in 2015. It is super-clean, content-focused, and designed to bring a little more simplicity to our blogs. Its careful attention to typography, featuring the expertly-designed [Noto font set](http://www.google.com/get/noto/) in elegant and harmonious margins, makes it beautiful in multiple languages around the world.
 
-## Where to find the Font Library
+Twenty Fifteen looks great on devices of all sizes, from desktop to mobile and everything in between. The theme adapts to any screen without sacrificing usability or design integrity.
 
-The Font Library lives in the Site Editorat **Appearance &gt; Editor**. From the editor select to edit your site’s styles. To find the style settings click on the half circle **Styles** icon in the top right corner of the page. In the Styles panel, click **Typography &gt; Manage fonts**.
+[![](#documentation/files/2018/11/750px-Responsive_Twenty_Fifteen.png)](#documentation/files/2018/11/750px-Responsive_Twenty_Fifteen.png)> **Quick Specs (all measurements in pixels)**
 
-![Screenshot of the Manage Fonts panel in the WordPress editor, showing the available theme fonts. The panel has tabs for Library, Upload, and Install Fonts, with the Library tab selected.](https://wordpress.org/documentation/files/2024/10/1-font-management-library.png)## The Manage Fonts panel
+There are a few ways that you can customize Twenty Fifteen, all from WordPress’ Customizer. This short guide will show you how to:
 
-The Manage Fonts panel contains 3 tabs:
+- choose a featured color scheme
+- add descriptions to your menus
+- add social icons in your menu
+- add block patterns
 
-- Library
-- Upload
-- Install Fonts
+## Choose a featured color scheme
 
-### Library
+Twenty Fifteen has six color schemes you can use to change the look of your blog. The Default color scheme is a light gray, but you can also choose from Dark, Yellow, Pink, Purple, and Blue.
 
-The Library contains any fonts installed on the site as well as the theme fonts. Any newly added fonts will appear in this tab.
+[![](#documentation/files/2018/11/750px-Twenty_Fifteen_Colors.png)](#documentation/files/2018/11/750px-Twenty_Fifteen_Colors.png)To choose your color scheme, go to **Appearance &gt; Customize**.
 
-![Screenshot of the  Library tab in the Manage Fonts panel in the WordPress editor, showing the available fonts. Fonts listed include Cardo (3 variants active), Inter (1 variant active), System Sans-serif (1 variant active), and System Serif (1 variant active).](https://wordpress.org/documentation/files/2024/10/2-library.png)### Upload
+Under “Colors”, select your preferred color scheme from the drop down:
 
-A new collection or a single font file can be uploaded on this tab. The supported formats are .ttf, .otf, .woff, and .woff2
+[![](#documentation/files/2018/11/Twenty_Fifteen_Customize_Color_Schemes.png)](#documentation/files/2018/11/Twenty_Fifteen_Customize_Color_Schemes.png)You’ll see the color scheme change in the preview pane to the right.
 
-### Install Fonts
+When you’re done, click **Save and Publish**.
 
-The Install Fonts tab is where Google Fonts can be uploaded.
+## Add Menu descriptions
 
-First, you need to give access to Google Fonts.
+Twenty Fifteen has a menu design that’s easy to navigate, especially when you add menu descriptions.
 
-![Screenshot of the Install Fonts tab in the WordPress 'Manage Fonts' panel. The tab displays a prompt to Connect to Google Fonts, explaining that permission is required to connect directly to Google servers. Installed fonts will be stored locally on the site. It also explains how to   upload fonts manually on the 'Upload' tab. A blue button labeled 'Allow access to Google Fonts' is at the bottom of the panel.
-](https://wordpress.org/documentation/files/2024/10/Google-Fonts.png)Access can be revoked by clicking on the 3 dots on the right side.
+[![](#documentation/files/2018/11/Twenty_Fifteen_Menu.png)](#documentation/files/2018/11/Twenty_Fifteen_Menu.png)To start adding descriptions to your menus, go to **Appearance &gt; Menus** and **click the Screen Options tab** in the upper right of the screen.
 
-![Screenshot of the Install Fonts tab in the WordPress Manage Fonts panel, showing a dropdown menu with the option to Revoke access to Google Fonts. The menu is accessed through the three-dot button in the upper right.](https://wordpress.org/documentation/files/2024/10/Revoke-access.png)Find the font you wish to use using the search box. You can filter search results using the category dropdown menu in the upper right side.
+In the “Show advanced menu properties” section, **check the box** next to Description.
 
-![Screenshot of the Google Fonts installation interface in WordPress, highlighting the search functionality. The search term 'Bodoni' is entered in the search bar on the left. Two results are displayed: 'Bodoni Moda' with 12 variants and 'Libre Bodoni' with 8 variants. A category dropdown is on the right, currently set to All.](https://wordpress.org/documentation/files/2024/10/6-font-search.png)![Screenshot of the Google Fonts installation interface in WordPress, highlighting the font category filter dropdown menu. The search term 'Alike' is entered in the search bar, displaying results for 'Alike' and 'Alike Angular,' each with 1 variant. The category dropdown is expanded on the right, showing options including All, Sans Serif, Display, Serif (selected), Handwriting, and Monospace.](https://wordpress.org/documentation/files/2024/10/5-font-category-1.png)### How to install a font with Google Fonts
+[![](#documentation/files/2018/11/750px-Twenty_Fifteen_Screen_Options.png)](#documentation/files/2018/11/750px-Twenty_Fifteen_Screen_Options.png)Now you can begin adding descriptions to any link in a menu.
 
-Choose the desired font &gt; Select the font variants in the next panel &gt; click Install. You’ll see a notice indicating whether the font installed successfully. Newly installed fonts will appear in the Library tab.
+[![](#documentation/files/2018/11/Twenty_Fifteen_Menu_Descriptions.png)](#documentation/files/2018/11/Twenty_Fifteen_Menu_Descriptions.png)When you’re done, click **Save Menu**.
 
-The available variations will also appear in the Styles section.
+## Add social icons
 
-### Removing fonts
+Twenty Fifteen also allows you to display links to your social media profiles with crisp, perfectly-sized icons.
 
-To temporarily remove access to some variants of a font, you can check/uncheck them in the Library, then click Update.
+You can see these icons at the bottom of the menu displayed in the previous section.
 
-To completely remove the font family or single font, click on it, check the box for the font then click**Delete**. You’ll be prompted to confirm the deletion before the Font family is uninstalled..
+The first step is to go to **Appearance &gt; Menus** and **create a new menu** – you can name your menu anything you like.
 
-After a font is deleted, a “Font family uninstalled successfully” notice appears on the main Library tab.
+You will then add the URL for each social profile to your menu as a custom link.
 
-## Changing the default fonts
+When you have added all desired links, **click Save Menu**.
 
-Fonts are available globally but can also be used on individual blocks.
+Now that you have created your menu and added your social links, **go to the Manage Locations tab** and next to “Social Links Menu”, select the social icons menu you just created from the drop down.
 
-### Changing fonts globally
+[![](#documentation/files/2018/11/750px-Twenty_Fifteen_Social_Icons_Manage_Menu.png)](#documentation/files/2018/11/750px-Twenty_Fifteen_Social_Icons_Manage_Menu.png)**Click Save Changes** when you’re done.
 
-To use a font globally, navigate to the **Styles panel &gt; Typography &gt; Elements** then choose the element to change: text, links, headings, captions, and buttons.
+**Available icons**
 
-On the next panel, choose the font and any of the other font characteristics: size, appearance, line height, letter spacing, and letter space.
+Linking to any of the following sites will automatically display its icon in your menu:
 
-## Changelog
+- CodePen
+- Digg
+- Dribbble
+- Dropbox
+- Email (mailto: links)
+- Facebook
+- Flickr
+- Foursquare
+- GitHub
+- Google+
+- Instagram
+- LinkedIn
+- Path
+- Pinterest
+- Pocket
+- Polldaddy
+- Reddit
+- RSS Feed (URLs with /feed/
+- Spotify
+- Skype
+- StumbleUpon
+- Tumblr
+- Twitch
+- Twitter
+- Vimeo
+- WordPress
+- YouTube
 
-- Created 2024-10-17
+## Add Block Patterns
+
+Twenty Fifteen comes bundled with a set of [block patterns](#documentation/article/block-pattern).
+
+You can access the block patterns from the Block Editor.
+
+1. Click the + icon to add a new block.
+2. Click on the *Patterns* tab.
+3. Select *Twenty Fifteen* from the drop down menu.
+4. Click on the pattern you wish to insert and the pattern is inserted in the document at the location of your cursor.
+
+![](https://wordpress.org/documentation/files/2021/06/twenty-fifteen-block-patterns-1024x619.png)Block patterns in Twenty Fifteen## What else can you do?
+
+You can also use the Customizer to make the following changes to your website:
+
+- Change your Custom Header image
+- Featured Images: works best with images that are 825px wide by 510px high
+- Change the background image or color
+- Set a static front page
+
+You can also select a gradient option for certain blocks that fit the theme color scheme:
+
+![Select a gradient option for certain blocks](https://wordpress.org/documentation/files/2023/02/208979102-b9bc9bb3-bc66-490e-9052-0eb60f0ff985-932x1024.png)## Links
+
+- [Twenty Fifteen Demo and Download](#themes/twentyfifteen/)
+- [Twenty Fifteen Changelog](#documentation/article/twenty-fifteen-changelog)
 
 ---
 
-# Grid block <a name="documentation/article/grid-block" />
+# Twenty Sixteen <a name="documentation/article/twenty-sixteen" />
 
-Source: https://wordpress.org/documentation/article/grid-block/
+Source: https://wordpress.org/documentation/article/twenty-sixteen/
 
-[Go back to the list of **Blocks**](#documentation/article/blocks)
+[Twenty Sixteen](#themes/twentysixteen) is the default theme for WordPress in 2016.
 
-*Grid* block is one of the container blocks that can be used to organize multiple blocks and adjust the height, width, and position of all blocks inside the container. As a container block, it’s possible to transform a *Grid* block into a *Group*, *Row* or *Stack* block without changing the content of the block.
+![The screenshot of Twenty sixteen with a black border, white background, black text and a blue accent color.
+The screenshot shows a blog post with a photo of a sunset over water, and a sidebar with text, a search form, and category links.](https://wordpress.org/documentation/files/2024/02/twenty-sixteen-screenshot.png)Twenty Sixteen is a modernized take on an ever-popular WordPress layout — the horizontal masthead with an optional right sidebar that works perfectly for blogs and websites. It has custom color options with beautiful default color schemes, a harmonious fluid grid using a mobile-first approach, and impeccable polish in every detail. Twenty Sixteen will make your WordPress look beautiful everywhere.
 
-Click the block inserter **(+)** icon to open the block inserter pop-up window and search for the *Grid* block. You can also use the keyboard shortcut /grid to quickly insert a Grid block.
+![Twenty Sixteen mobile design.](https://wordpress.org/documentation/files/2018/11/Twenty-Sixteen-mobile-nav-open.png)![Twenty Sixteen tablet design.](https://wordpress.org/documentation/files/2018/11/Twenty-Sixteen-ipad-portrait.png)
 
-Detailed instructions on adding blocks can be found [here](#documentation/article/adding-a-new-block).
+**Quick Specs**
 
-## Block Toolbar
+1. The main column width is up to 840px.
+2. The sidebar column width is up to 300px.
+3. The recommended Featured Image size is 1200px wide.
+4. The recommended Custom Header image size is 1200px wide and 280px height.
 
-To view the block toolbar, click on the block, and the toolbar will be displayed.
+## No-Sidebar Layout
 
-Every block comes with unique toolbar icons. These block-specific controls allow you to manipulate the block right in the editor.
+If you’d like to keep your visitors’ focus squarely on your content, simply don’t add any [widgets](#documentation/article/manage-wordpress-widgets) to the sidebar widget area. This also allows you to give your posts a powerful visual boost by adding a large [Featured Image](#documentation/article/page-post-settings-sidebar), up to 1200px wide.
 
-The Grid block shows the following buttons in the block toolbar:
+![Twenty Sixteen blog post design without sidebar. The post has a wide featured image below the post title, above the content.](https://wordpress.org/documentation/files/2018/11/Twenty-Sixteen-post-no-sidebar-446x1024-1.png)## Content Bottom Widget Areas
 
-![Grid block Toolbar](https://wordpress.org/documentation/files/2024/08/grid-block-toolbar-6.6-300x77.jpg)- Transform to
-- Moving handles
-- Align
-- Options
+Twenty Sixteen’s two Content Bottom Widget Areas are handy spots where you can place supplementary content. On single posts and pages, these widget areas display below your content. To add widgets to them, Click **Appearance &gt; Widgets** from the [Administration Screen](#documentation/article/appearance-widgets-screen-classic-editor) and add your favorite widgets to **Content Bottom 1** or **Content Bottom 2** or both.
 
-### Transform to
+![A screenshot of a blog post with two widgets below the content.
+The left most widget shows the recent posts. The second widget shows a newsletter signup form.](https://wordpress.org/documentation/files/2018/11/twentysixteen-content-bottom-widgets1.webp)## Post Intro
 
-![Grid block Toolbar - Transform to button](https://wordpress.org/documentation/files/2024/08/grid-block-toolbar-transforms-6.6.jpg)Click on the “Transform” button to convert the *Grid* block into Group, Row, Stack, Cover or Columns blocks.
+Twenty Sixteen has a small but nifty intro feature. Also known as a “deck” or “kicker,” the intro area is displayed between the headline and body copy. Your intro can provide important information and act as a link between the title and the rest of your post. A carefully crafted deck grabs readers’ attention, giving them an idea of what to expect in the full post.
 
-### Moving handles
+Add your intro in the [Excerpt option](#documentation/article/what-is-an-excerpt-classic-editor) in your Post panel.
 
-The dotted icons can be used to drag and drop a block to the place of your choosing. The up and down arrow icons can be used to shift a block up and down in your document.
+## Overhanging Full-Size Image
 
-![Grid block Toolbar - Moving handles](https://wordpress.org/documentation/files/2024/08/grid-block-toolbar-movinghandle-6.6-300x77.jpg)[Get more information about moving a block within the editor.](#documentation/article/moving-blocks)
+Have you ever wanted to show off your large images without sacrificing the post’s readability? On a large screen, full-size images wider than or equal to 840px overhang the column.
 
-### Align
+## Pull Quotes
 
-![Grid block Toolbar - Align button](https://wordpress.org/documentation/files/2024/08/grid-block-toolbar-align-6.6-300x181.jpg)Use the change alignment tool to change the width of the *Grid* block. The following is a list of the block width options:
+Pull quotes are a great way to refocus your readers’ attention — just add a class of `alignleft` or `alignright` to a `blockquote` element. Here are some examples of how to do that in the [Classic Editor](#documentation/article/write-posts-classic-editor).
 
-- None
-- Wide width
-- Full width
+```
 
-### Options
+<blockquote class="alignleft">A bolder pull blockquote that aligns to the lef</blockquote>
 
-The Options button on a block toolbar gives you more features to customize the block.
+<blockquote class="alignright">A bolder pull blockquote that aligns to the right</blockquote>
+```
 
-[Read about these and other settings.](#documentation/article/more-options)
+On a large monitor, the left-aligned pull quote overhangs the main column to maintain the readability of the text wrapped around it.
 
-## Block settings
+![A screenshot of a large section of text with two pullquotes:  One left aligned that extends outside of the main column, and a right aligned that is aligned with the right side of the main text column.](https://wordpress.org/documentation/files/2018/11/twentysixteen-pull-quotes.jpg)## Customize
 
-The block settings panel contains customization options specific to the block. To open it, select the block and click the cog icon next to the Publish button.
+Open the [Customizer](#documentation/article/customizer) to check out the four featured color schemes you can use to instantly change the look of your website.
 
-![Block settings icon on the editor](https://wordpress.org/documentation/files/2023/05/block-settings-icon.png)Click Group, Row, Stack button in the Block Settings to transform the Grid block to each block.
+- (Default)
+- Red
+- Gray
+- Dark
+- Yellow
 
-![Settings icons](https://wordpress.org/documentation/files/2024/08/grid-block-settings-6.6-300x191.jpg)### Layout
+Personalize the design even further by adding a Custom Header Image or/and Site Logo.
 
-The Grid block provides Layout settings options to change the number of columns in the Grid block.
+![An image of the color schemes in Twenty Sixteen: dark (black), red, yellow and grey.](https://wordpress.org/documentation/files/2018/11/twentysixteen_color_schemes3.webp)## Social Menu
 
-- **Auto** – Automatically the number of columns is defined by the value specified in **Minimum column width**.
-- **Manual** – The number of columns is set at **Columns** field.
+With Twenty Sixteen, you can display links to your social media profiles with perfectly sized icons in the footer, using the Social Links menu. You can manage menus under [Appearance &gt; Menus](#documentation/article/appearance-menus-screen).
 
-![Layout Auto option](https://wordpress.org/documentation/files/2024/08/grid-block-layout-auto-6.6-300x297.jpg)
+Linking to any of the following sites will automatically display its icon in your menu:
 
-![Layout Manual option](https://wordpress.org/documentation/files/2024/08/grid-block-layout-manual-6.6-300x284.jpg)
+- CodePen
+- Digg
+- Dribbble
+- Dropbox
+- Email (mailto: links)
+- Facebook
+- Flickr
+- Foursquare
+- GitHub
+- Google+
+- Instagram
+- LinkedIn
+- Path
+- Pinterest
+- Polldaddy
+- Reddit
+- RSS Feed (urls with /feed/)
+- Spotify
+- StumbleUpon
+- Tumblr
+- Twitch
+- Twitter
+- Vimeo
+- WordPress
+- YouTube
 
-### Position
+## Links
 
-The position setting is only available when the Grid block is located at the root-level. The drop-down menu has two options: **Default** and **Sticky**. If the Sticky option is selected, the Grid block will remain at the top of the window when you scroll down the page.
+- [Twenty Sixteen Demo and Download](#themes/twentysixteen/)
+- [Twenty Sixteen Changelog](#documentation/article/twenty-sixteen-changelog)
 
-![The position settings for stack block](https://wordpress.org/documentation/files/2023/05/position.png)### Advanced
+---
 
-The **Advanced** tab lets you add HTML anchor and CSS class(es) to your block.
+# Twenty Seventeen <a name="documentation/article/twenty-seventeen" />
 
-**HTML element** lets you choose the HTML element you want to be used for the block’s wrapper in the HTML code.
+Source: https://wordpress.org/documentation/article/twenty-seventeen/
 
-**HTML anchor** allows you to [make a unique web address](#documentation/article/page-jumps) just for this block, Then, you’ll be able to link directly to this section of your page. This can be helpful for longer pages where visitors might want to click on a link to go directly to a specific section.
+[Twenty Seventeen](#themes/twentyseventeen) is the new default theme for WordPress in 2017. Its business-oriented design highlights new video headers, and it has a front-page layout that can be created by combining page sections. The theme can be customized further using custom color options and by adding a site logo, social menu, and widgets.
 
-The **Additional CSS class(es)** lets you add CSS class(es) to your block, allowing you to write custom CSS and style the block as you see fit.
+![Two screenshots of Twenty Seventeen, one for desktop and one for mobile.](https://wordpress.org/documentation/files/2018/10/twenty-seventeen-1058.jpg)## Quick Specs
 
-![Advanced tab in the Stack block](https://wordpress.org/documentation/files/2022/11/Screenshot-2022-11-28-at-8.40.21-AM.png)## Block Styles
+- The main column width is up to 525px for the two-column layout and 740px for the one-column layout.
+- The sidebar column width is up to 326px.
+- The recommended size for featured images is 2000px wide by 1200px high.
+- The recommended size for header videos and header images is 2000px wide by 1200px high.
 
-Click Styles icon in the block settings sidebar to access the design settings.
+## Header Media
 
-![Styles icon in the block settings](https://wordpress.org/documentation/files/2024/08/grid-block-styles-6.6-300x269.jpg)### Color
+Twenty Seventeen supports both header images and header videos. To modify either type on your site, navigate to Customizer &gt; Header Media.
 
-The Grid block provides Color settings options to change the text, background, and link colors.
+![The Customizer is opened and shows the preview of the site. The settings panel shows the options for the Header Media, including an option for selecting a header video.](https://wordpress.org/documentation/files/2018/10/video-headers.png)For header videos, you can upload your own `mp4` video or link to a video hosted on YouTube. Smaller file sizes will help make sure your site is loaded quickly.
 
-For details, refer to this support article: [Color settings overview](#documentation/article/colors-settings-overview)
+A header image can be used on its own to display a large photograph at the top of your site. It can also be used as a video fallback: If both a video and image are added, the image will be used as a placeholder while the video loads, and it also acts as a fallback on smaller screens where videos may be harder to serve over mobile networks.
 
-![Background image options](https://wordpress.org/documentation/files/2024/08/grid-block-background-image-2-6.6-207x300.jpg)### Background Image
+## Front Page
 
-The Grid block provides Background Image settings to display behind the block’s content:
+Twenty Seventeen allows you to build a striking front page composed of content from different pages on your site. Each page’s featured image is highlighted, displayed at full-screen size with a fixed position. Twenty Seventeen has four different sections you can assign pages to.
 
-1. Click **Add background image** under the **Background Image** in the block’s Styles.
-2. Select image from Media Library or Upload an image.
-3. You can set Top and/or Left position, and Size from Cover, Contain and Tile.
+To set this up, first navigate to Customizer &gt; Static Front Page, and set your site to use a static front page if you haven’t already.
 
-### Typography
+![The Customizer is open and shows a preview of the site, as well as the Static Front Page settings.](https://wordpress.org/documentation/files/2018/10/front-page.jpg)Navigate to Customizer &gt; Theme Options. Under each `Front Page Section # Content` header, select a page you’d like to display for that section.
 
-The Grid block provides typography settings to change the font family, appearance, line height, letter spacing, decoration, letter case, and font size.
+![The Customizer is open and shows a preview of the site. The settings panel shows the Page Layout options which are custom options for Twenty Seventeen.](https://wordpress.org/documentation/files/2018/10/theme-options.jpg)If you haven’t created any pages yet, you can do that from the Customizer by clicking `+ Add New Page` beneath any of the sections. This will allow you to create a new page from the Customizer that you can later add content to.
 
-For details, refer to this support article: [Typography settings overview](#documentation/article/typography-settings-overview)
+For the best appearance, make sure each page includes a featured image and some content.
 
-### Dimensions
+You can also select your Blog Posts page, and the panel will display your three latest blog posts.
 
-The Grid block provides dimension settings options to add padding, margin, and block spacing.
+![An example of the Page Layout options for the front page, with the page section in view.](https://wordpress.org/documentation/files/2018/10/blog.jpg)Once you’ve finished adding pages to the sections, click `Save & Publish`.
 
-For details, refer to this support article: [Dimension settings overview](#documentation/article/dimension-controls-overview)
+If you’d like to change the number of sections you can add pages to, add this snippet to your theme’s `functions.php`:
 
-### Border
+```php
+`add_filter( 'twentyseventeen_front_page_sections', 'prefix_custom_front_page_sections' );<br></br>function prefix_custom_front_page_sections( $num_sections ) {<br></br>    return 6;<br></br>}`
+```
 
-The Grid block provides border settings options to add border color, width, and radius.
+This snippet changes the default four sections to six.
 
-For details refer to this support article: [Border settings overview](#documentation/article/border-settings-overview)
+## Custom Colors
 
-## Changelog
+Twenty Seventeen includes three color options: the default light color scheme, a dark color scheme, and a Custom Colors scheme that can be adjusted to various hues using a slider.
 
-- Created 2024-08-24
+![Six screenshots that show the color schemes in the Customizer: Light, dark and custom color hues.](https://wordpress.org/documentation/files/2018/10/colours-screenshot.png)To explore all the color options available, navigate to Customizer &gt; Colors.
+
+## Language Support
+
+Twenty Seventeen includes optimal font styles for many languages, thanks to feedback from the WordPress community. The theme uses [Libre Franklin](https://fonts.google.com/specimen/Libre+Franklin) by default and makes adjustments to the typography for the following alphabets:
+
+- Arabic
+- Chinese
+- Cyrillic
+- Devanagari
+- Greek
+- Gujarati
+- Hebrew
+- Japanese
+- Korean
+- Thai
+
+To improve legibility, Twenty Seventeen also removes its letter-spacing styles for all non-Latin alphabets.
+
+## One- and Two-Column Layouts
+
+For [pages](/support/article/pages/), Twenty Seventeen allows you to choose between a one- and two-column layout. This can be changed via Customizer &gt; Theme Options. The theme defaults to the two-column layout, which displays the page title in one column and the page content in the other.
+
+Note: This feature only becomes available after setting a static front page.
+
+![The Customizer Theme Options panel for single pages.](https://wordpress.org/documentation/files/2018/10/two-column-option.jpg)When the one-column layout is selected, both the page title and content display in a wider single column, centered on the page.
+
+![The theme's two column layout, with the post title on the left and the content on the right.](https://wordpress.org/documentation/files/2018/10/two-column.jpg)![The theme's one column layout, with the post title above the content.](https://wordpress.org/documentation/files/2018/10/one-column.jpg)## Widgets
+
+Twenty Seventeen includes a footer [widget](/support/article/wordpress-widgets/) [](https://codex.wordpress.org/WordPress_Widgets)area allowing widgets to be added below the site’s content.
+
+The blog index, archive, and search pages and single blog posts also include a sidebar widget area. For each of these pages, the content is displayed in one center column if there is no sidebar. With the sidebar, the content is displayed in one column and the widgets are displayed in the other.
+
+## Pullquotes
+
+Pullquotes can be used to direct your readers’ attention to a particular passage or add visual interest to your posts and pages. In Twenty Seventeen, you can pair a pullquote with an `alignleft` or `alignright` class on the `blockquote` element to further highlight it. Instructions on how to do this can be found in [the support article for the Classic Editor](#documentation/article/write-posts-classic-editor). See the following example:
+
+```
+<blockquote class="alignleft">This is my fabulous left-aligned pullquote.</blockquote>
+```
+
+When a two-column layout is used (whether via the Customizer for pages, or by adding a sidebar widget for posts), the pullquote aligned to the same side will display fully outside of the content area and below the second column. Note: This will only work when the pullquote appears in the content below where the second column ends.
+
+![A pullquote that is positioned to the left of the main content.](https://wordpress.org/documentation/files/2018/10/pullquotes.jpg)## Post Formats
+
+Twenty Seventeen supports the following post formats:
+
+- Aside
+- Audio
+- Gallery
+- Image
+- Link
+- Quote
+- Video
+
+## Social Icons
+
+Twenty Seventeen includes a Social Icons Menu, allowing you to add links to your social media profiles that will be displayed as logos in the footer. If you’re not familiar with this functionality, please refer to the [documentation from Twenty Fifteen](/support/article/twenty-fifteen/#add-social-icons).
+
+The following services are supported by Twenty Seventeen’s Social Icons Menu:
+
+- Behance
+- Codepen
+- DeviantArt
+- Digg
+- Dribbble
+- Dropbox
+- Facebook
+- Flickr
+- Foursquare
+- GitHub
+- Google+
+- Instagram
+- LinkedIn
+- Meanpath
+- Medium
+- Pinterest
+- Pocket
+- Reddit
+- Skype
+- SlideShare
+- Snapchat
+- SoundCloud
+- Spotify
+- StumbleUpon
+- Tumblr
+- Twitch
+- Twitter
+- Vimeo
+- Vine
+- VK
+- WordPress
+- Yelp
+- YouTube
+
+## Support and Resources
+
+Get community help with Twenty Seventeen on its [forum](#support/theme/twentyseventeen).
+
+Get tips for theming with Twenty Seventeen from [this post on make.wordpress.org](https://make.wordpress.org/core/2016/11/29/theming-with-twenty-seventeen/) by one of Twenty Seventeen’s developers. You can also read [the theme’s changelog](#documentation/article/twenty-seventeen-changelog).
+
+---
+
+# Twenty Nineteen <a name="documentation/article/twenty-nineteen" />
+
+Source: https://wordpress.org/documentation/article/twenty-nineteen/
+
+[Twenty Nineteen](#themes/twentynineteen) is the new default theme for [WordPress Version 5.0](/support/wordpress-version/version-5-0/). At the core of Twenty Nineteen is its simple, sophisticated typography. The theme’s aesthetic is minimal and non-prescriptive, allowing it to work well in a variety of applications. For example: it is effective as an minimal, typography-driven blogging theme, but can also be adapted for use as a static business website.
+
+![](https://i1.wp.com/wordpress.org/documentation/files/2018/12/Twenty-Nineteen-Business-In-Devices.jpeg?fit=1024%2C943&ssl=1)Twenty Nineteen Web and Mobile views## Quick Specs
+
+- On a 1440px laptop screen, the main column width is up to 1032px wide with the one column layout.
+- There is one widget area in the footer with a column width of 1032px.
+- The recommended Featured Image size is 2000px wide by 1200px high.
+
+## Full Block Editor Support
+
+The block editor introduced in WordPress 5.0 grants users an unprecedented level of freedom to customize their site’s layout and design. In order to fully achieve their vision, users will need a new generation of flexible themes, built to take advantage of the creative freedom that the block editor offers. Twenty Nineteen is built with this in mind and includes both front-end and editor styles for all core blocks that ship with WordPress in 5.0. This means that what you see in the editor will look almost exactly like what you see on the front end.
+
+![A screenshot of a post in Twenty Nineteen that uses the Cover block.
+The block settings are opened and shows the color options.](https://i2.wp.com/wordpress.org/documentation/files/2018/12/Twenty-Nineteen-Post-Editor-Gutenberg.jpeg?fit=1024%2C687&ssl=1)## Site Logo
+
+Twenty Nineteen supports a Site Logo which works great as an avatar for a personal blog or an business logo or icon. To modify it on your site, navigate to Customizer &gt; Site Identity.
+
+![The Customizer is open and shows the preview of the site and the settings panel for the Site Identity. The options include the logo, site title and tagline.](https://wordpress.org/documentation/files/2018/12/File_Twenty-Nineteen-Site-Logo.jpg)## Custom Colors
+
+Twenty Nineteen uses a blue accent color by default. That color can be customized using a color hue slider. To explore the color options, navigate to Customizer &gt; Colors.
+
+![The Customizer is open and shows the preview of the site and the settings panel for the colors. The custom color option is enabled, and a teal color has been selected.](https://i0.wp.com/wordpress.org/documentation/files/2018/12/Twenty-Nineteen-Color-Options.png?fit=1024%2C621&ssl=1)By default, Twenty Nineteen applies a color filter to featured images using the color selected here. This can be disabled by deselecting the “Apply a filter to featured images using the site’s primary color” checkbox. Please not that when this option is disabled, the theme will still apply a black overlay on the featured image on single pages, in order to preserve the readability of the text that sits on top of the image.
+
+## Language Support
+
+Twenty Nineteen includes optimal font styles for many languages, thanks to feedback from the WordPress community. The theme uses local system fonts by default and makes adjustments to the typography for the following alphabets:
+
+- Arabic
+- Chinese
+- Cyrillic
+- Devanagari
+- Greek
+- Gujarati
+- Hebrew
+- Japanese
+- Korean
+- Thai
+
+## Widgets
+
+Twenty Nineteen includes a widget area below the site’s content, just above the footer.
+
+![An example of two widgets above the footer. The widgets are text widgets and shows address information and opening hours for a fictive company.](https://i2.wp.com/wordpress.org/documentation/files/2018/12/Twenty-Nineteen-Widgets.png?fit=1024%2C806&ssl=1)WidgetsOn screens larger than 1168px wide, widgets in this area are automatically arranged into two columns.
+
+![An example of two horizontal widgets.](https://i1.wp.com/wordpress.org/documentation/files/2018/12/Twenty-Nineteen-Widgets-Large-Screen.png?fit=1024%2C405&ssl=1)Widgets in the larger screen## Add Social Icons
+
+Twenty Nineteen includes a Social Icons Menu, where you can add links to your social media profiles that will be displayed as logos in the header. If you’re not familiar with this functionality, please check out the [documentation from Twenty Fifteen](/support/article/twenty-fifteen/#add-social-icons).
+
+The following services are supported by Twenty Nineteen’s Social Icons Menu:
+
+- Behance
+- Codepen
+- DeviantArt
+- DockerHub
+- Digg
+- Dribbble
+- Dropbox
+- Facebook
+- Flickr
+- Foursquare
+- GitHub
+- Google+
+- Instagram
+- LinkedIn
+- Meanpath
+- Medium
+- Pinterest
+- Periscope
+- Pocket
+- Reddit
+- Skype
+- SlideShare
+- Snapchat
+- SoundCloud
+- Spotify
+- StumbleUpon
+- Tumblr
+- Twitch
+- Twitter
+- Vimeo
+- Vine
+- VK
+- WordPress
+- Yelp
+- YouTube
+
+## Support &amp; Resources
+
+Get community help with Twenty Nineteen in its [forum](#support/theme/twentynineteen).
+
+You can also read [the theme’s changelog](#documentation/article/twenty-nineteen-changelog).
+
+---
+
+# Twenty Twenty <a name="documentation/article/twenty-twenty" />
+
+Source: https://wordpress.org/documentation/article/twenty-twenty/
+
+[Twenty Twenty](#themes/twentytwenty) is the new default theme for [WordPress Version 5.3](/support/wordpress-version/version-5-3/). It is designed with the flexibility of the block editor at its core. If you want to use it for an organization or a business, you can combine columns, groups, and media to create dynamic layouts that show off your services or products. If you want to use it for a traditional blog, the centered content column and considered typography makes it perfect for that as well.
+
+![](https://i0.wp.com/wordpress.org/documentation/files/2019/09/screenshot.jpg?fit=1024%2C768&ssl=1)The Twenty Twenty screenshot## Quick Specs
+
+- On a 1440px laptop screen, the main column width is up to 580px wide. The “Wide” block width is up to 1200px wide, and the “Full” block width extends the entire width of the screen.
+- There are two widget areas in the footer with a maximum column width of 570px.
+- The recommended Featured Image size is 1980px wide by 1485px high.
+
+## Starter Content
+
+Twenty Twenty contains Starter Content that helps to set up the theme identical to the theme demo page. The Starter Content can only be activated on freshly installed sites that do not have any pages or posts yet. To activate, please head over to the Customizer and click on `Publish`.
+
+## Full Block Editor Support
+
+Twenty Twenty is designed and developed to take maximum advantage of the creative freedom enabled by the block editor. Extra care has been given to the Columns and Group blocks, which can be combined into impressive landing pages with intricate blocks layouts. Twenty Twenty includes full editor styles for the block editor, so what you see in the editor will almost exactly match the end result.
+
+![](https://wordpress.org/documentation/files/2019/10/image-2560.png)The block editor in Twenty Twenty## Site Logo
+
+Twenty Twenty includes a site logo setting which can be used to display the logo of your business or an image of yourself. You can set your site logo by going to Customizer → Site Identity. The recommended resolution of the logo is 240px wide by 180px high.
+
+## Custom Colors
+
+Twenty Twenty includes three color settings that make it easy to give your site a personal touch. To change the color settings, navigate to Customizer → Colors.
+
+![](https://i1.wp.com/wordpress.org/documentation/files/2019/10/twenty-twenty-color-settings-2560.jpg?fit=1024%2C640&ssl=1)The color settings included in Twenty Twenty are:
+
+- Background Color (defaults to a light beige)
+- Header &amp; Footer Background Color (defaults to white)
+- Primary Color (defaults to pink)
+
+The colors of the elements on your site are automatically calculated based on the background colors you pick. This ensures that the color contrast is always high enough to be accessible to all visitors.
+
+## Cover Template
+
+Twenty Twenty includes a page template called the “Cover Template” that displays the title of the post or page on top of the featured image.
+
+![The Cover Template in Twenty Twenty](https://wordpress.org/documentation/files/2019/09/twenty-twenty-cover-template-2560.jpg)The Cover Template in Twenty TwentyYou can set a post or page to use the cover template by editing the post or page, selecting the “Document” tab in the right sidebar, expanding the “Post/Page Attributes” tab, and selecting “Cover Template” in the “Template” dropdown.
+
+Twenty Twenty includes a number of different options for the Cover Template, located in the “Cover Template” tab in the Customizer. Here, you can set the background color of the image overlay, the opacity of the image overlay, and the color of the text displayed on top of the overlay. You can also select whether the background image should have a fixed position when the visitor scrolls, which creates a gentle parallax effect.
+
+## Language Support
+
+Twenty Twenty includes optimal font styles for many languages, thanks to feedback from the WordPress community. The theme uses local system fonts by default and makes adjustments to the typography for the following alphabets:
+
+- Arabic
+- Chinese
+- Cyrillic
+- Devanagari
+- Greek
+- Gujarati
+- Hebrew
+- Japanese
+- Korean
+- Thai
+- Vietnamese
+
+## Menus
+
+There are two different desktop menus to choose from in Twenty Twenty:
+
+- A traditional horizontal menu, which is always visible
+- An expandable menu, which is hidden behind a menu button
+
+You can choose which menu location to use by going to Appearance → Menus, where you can assign a menu to the “Desktop Horizontal Menu” or the “Desktop Expanded Menu”. You can also use both menu locations in combination, if you prefer.
+
+Twenty Twenty also includes a footer menu, which is displayed beneath the site content, and a mobile menu, which defaults to the menu set to either the desktop horizontal menu or the desktop expanded menu.
+
+## Widgets
+
+Twenty Twenty includes two widget areas below the site content and above the footer.
+
+![](https://wordpress.org/documentation/files/2019/09/Twenty-Twenty-widgets-stacked-1024x967.png)On screens larger than 699px wide, widgets in this area are automatically arranged into two columns.
+
+![](https://i1.wp.com/wordpress.org/documentation/files/2019/09/Twenty-Twenty-widgets-inline.png?fit=1024%2C461&ssl=1)## Add Social Icons
+
+Twenty Twenty includes a Social Icons Menu, where you can add links to your social media profiles that will be displayed as logos in the footer. If you’re not familiar with this functionality, please check out the [documentation from Twenty Fifteen](/support/article/twenty-fifteen/#add-social-icons).
+
+The following services are supported by Twenty Twenty’s Social Icons Menu:
+
+- 500px
+- Amazon
+- Bandcamp
+- Behance
+- Codepen
+- DeviantArt
+- Dribbble
+- Dropbox
+- Etsy
+- Facebook
+- Feed
+- Flickr
+- Foursquare
+- GitHub
+- GitLab
+- Goodreads
+- Google
+- Instagram
+- Kickstarter
+- JSFiddle
+- Last.fm
+- LinkedIn
+- Mail
+- Mastadom
+- Medium
+- Meetup
+- Pinterest
+- Pocket
+- Reddit
+- Skype
+- Snapchat
+- SoundCloud
+- Spotify
+- TikTok
+- Tumblr
+- Twitch
+- Twitter
+- Vimeo
+- VK
+- WhatsApp
+- WordPress
+- Yelp
+- YouTube
+
+Additional icons can be added following the steps under “Adding icons in Twenty Twenty” at [Themes field guide: WordPress 5.5](https://make.wordpress.org/core/2020/07/30/themes-field-guide-wordpress-5-5/).
+
+## Support &amp; Resources
+
+Get community help with Twenty Twenty in its [forum](#support/theme/twentytwenty).
+
+You can also read [the theme’s changelog](#documentation/article/twenty-twenty-changelog).
+
+---
+
+# Twenty Twenty-One <a name="documentation/article/twenty-twenty-one" />
+
+Source: https://wordpress.org/documentation/article/twenty-twenty-one/
+
+[Twenty Twenty-One](#themes/twentytwentyone) is the new default theme for [WordPress Version 5.6](#documentation/wordpress-version/version-5-6).
+
+[![Screenshot of the new default theme for WordPress, Twenty Twenty-One.](https://wordpress.org/documentation/files/2020/11/image-1024x598.png)](https://2021.wordpress.net/)[Twenty Twenty-One](https://2021.wordpress.net/) is a blank canvas for your ideas and it makes the block editor your best brush. With new block patterns, which allow you to create a beautiful layout in a matter of seconds, this theme’s soft colors and eye-catching — yet timeless — design will let your work shine. Take it for a spin! See how Twenty Twenty-One elevates your portfolio, business website, or personal blog.
+
+## Quick Specs
+
+- Requires at least WordPress 5.3.
+- Requires at least PHP version 5.6.
+- On a 1440px laptop screen, the main column width is up to 1240px wide. The “Wide” block width is also up to 1240px wide, and the “Full” block width extends the entire width of the screen.
+- The recommended Featured Image size is 610px wide or larger.
+- The recommended size of the logo is at least 300px wide, or at least 100px tall.
+- Twenty Twenty-One has one widget area that displays below the site content and above the footer. Each widget takes up one third of the available space, to a maximum of 380px wide.
+- Note that Twenty Twenty-One has limited support for Internet Explorer 11.
+
+## Accessibility features
+
+- Skip to content link
+- Semantic HTML with landmarks
+- Support for High Contrast mode and Dark Mode
+- Support for keyboard navigation
+
+## Starter Content
+
+Twenty Twenty-One comes with [Starter Content](https://make.wordpress.org/core/2016/11/30/starter-content-for-themes-in-4-7/) that explains how to use the theme’s [block patterns](#documentation/article/block-pattern) and styles. You can only activate starter content on freshly installed sites that do not have any pages or posts. To activate, please head over to the Customizer and click on Publish.
+
+## Full Block Editor Support
+
+Twenty Twenty-One is designed and developed to take full advantage of the creative freedom enabled by the block editor. Extra care has been given to the Columns block so you can create impressive landing pages with intricate blocks layouts. Twenty Twenty-One includes styles for the block editor, so what you see in the editor will almost exactly match the end result.
+
+## Block patterns
+
+### Large text
+
+![A screenshot of the large text block pattern, with the text: A new portfolio default theme for WordPress.](https://wordpress.org/documentation/files/2020/11/Large-Text-1024x451.png)A heading with a 144px text size### Links area
+
+![The links area block pattern has a large text followed by social links and an email address. The section has a thin border on all four sides.](https://wordpress.org/documentation/files/2020/11/Links-Area-1024x508.png)For your social links and call-to-action### Contact Information
+
+![The contact information pattern has 3 columns that contains email and phone number, address and social media links with icons.](https://wordpress.org/documentation/files/2020/11/Contact-Information-1024x168.png)How to get in touch with you### Media &amp; Text article title
+
+![The media & text article title has a left aligned image combined with text section. The section has a thin border on all four sides.](https://wordpress.org/documentation/files/2020/11/Media-and-Text-Article-Title-1024x726.png)Highlight your best image and include a summary at the beginning of your article### Overlapping images
+
+![The overlapping images block pattern displays 3 images in two columns.
+The left column has two vertically placed images. The right hand column contains one mage and overlaps the left column.](https://wordpress.org/documentation/files/2020/11/Overlapping-Images-905x1024.png)Place images in a beautiful column pattern### Two Images
+
+![The two images block pattern has two horizontally placed images. The images have different sizes and one image has a frame.](https://wordpress.org/documentation/files/2020/11/Two-Images-Showcase-1024x688.png)Showcase images next to each other with different sizes and borders### Overlapping images and text
+
+![The overlapping images and text pattern uses 3 columns. The two outer columns contains images.
+The middle column contains a paragraph with a border around it, and overlaps the left most column.](https://wordpress.org/documentation/files/2020/11/Overlapping-Images-aand-Text-1024x532.png)Mix images and text content in columns### Portfolio list
+
+![The portfolio list pattern has a vertical list of links and miniature images. The image is displayed to the right of the link text.
+Each portfolio item is separated by a bottom border.
+](https://wordpress.org/documentation/files/2020/11/Portfolio-List-1024x720.png)Display links to your portfolio items together with miniature images[Learn more about block patterns and how to add them](#documentation/article/block-pattern)
+
+## Block styles
+
+Block styles are selected in the block Settings sidebar in the editor.
+
+**Social links**: In addition to the default styles, you can choose a dark grey icon color.
+
+**Separator**: In addition to the default styles, you can choose an extra thick separator.
+
+### Borders
+
+In Twenty Twenty-One, borders can be added to the following blocks:
+
+- Media &amp; Text
+- Latest posts -Styles for borders and dividers
+- Image -Styles for borders and frames
+- Cover
+- Group
+
+### Overlapping columns
+
+The columns block has an optional style called overlap, where the content of every second column overlaps the previous:
+
+![A screenshot of a columns block with the overlapping style applied. The first column has a white background. The second column has a black background and overlaps the bottom right corner of the first column.](https://wordpress.org/documentation/files/2020/11/twenty-twenty-one-column-overlap-840.png)## Color palette
+
+The theme provides several recommended colors that works well with the design of the theme. Select the colors in the background color setting and in the editor. There are also matching gradients.
+
+Black
+
+White
+
+Dark Grey
+
+Grey
+
+Green
+
+Blue
+
+Purple
+
+Red
+
+Orange
+
+Yellow
+
+## Custom Background Color
+
+Twenty Twenty includes the option to change your site’s background color.
+
+To change the background color, navigate to Customizer → Colors &amp; Dark Mode.
+
+[![A screenshot of the Customizer with the preview of the site and with the Colors & Dark Mode settings panel opened.](#documentation/files/2020/11/TT1-Customizer-Colors.png)](#documentation/files/2020/11/TT1-Customizer-Colors.png)Add your own custom color, or select a color from the palette.
+
+[![The Dark Mode option in the Customizer.](#documentation/files/2020/11/TT1-Customizer-Color-Palettes.png)](#documentation/files/2020/11/TT1-Customizer-Color-Palettes.png)The colors of the elements on your site are automatically calculated based on the background colors you pick. This ensures that the color contrast is always high enough to be accessible to all visitors.
+
+## Site Logo
+
+Twenty Twenty-One includes a site logo setting which can be used to display the logo of your business or an image of yourself. You can set your site logo by going to Customizer → Site Identity.
+
+The recommended size of the logo is at least 300px wide, or at least 100px tall. The logo is visible in the header and footer.
+
+[![The Site Identity settings panel in the Customizer.](#documentation/files/2020/12/TT1-Centered-Logo.png)](#documentation/files/2020/12/TT1-Centered-Logo.png)  
+The logo in the site header is centered. If you want to hide the Site Title and Tagline, the logo is placed to the left of the menu:
+
+[![The Site Identity settings panel in the Customizer, with the Site Title and Tagline options toggled off.](#documentation/files/2020/12/TT1-Left-Logo.png)](#documentation/files/2020/12/TT1-Left-Logo.png)## Excerpt settings
+
+In the Customizer you will find a panel called Excerpt Settings:
+
+![The Customizer Excerpt settings have two radio buttons where you can can choose between summary and full text.](https://wordpress.org/documentation/files/2021/01/tt1-excerpt-settings.png)Here you can choose if the blog and archive pages should show the full content or only the summary.   
+The default is summary. The search result page always shows the summary.  
+When the summary is selected, only text will be displayed.
+
+## Menus
+
+Twenty Twenty-One includes two menu locations:
+
+- A traditional responsive horizontal menu at the very top of the site, which supports dropdown menus.
+- A horizontal menu between the widget area and the footer at the bottom of the screen, which only supports one level of navigation.
+
+You can choose a menu location by going to Appearance → Menus, where you can assign a menu to the “Primary Navigation” or the “Footer Navigation”. You can also use both menu locations in combination, if you prefer.
+
+### Menu descriptions
+
+The primary navigation menu supports menu descriptions.
+
+![The menu description is shown below the menu item text.](https://wordpress.org/documentation/files/2021/01/tt1-menu-description-front.png)To enable menu descriptions, go to Appearance → Menus**,**  and open the Screen Options tab at the top of the page.
+
+Under Show advanced menu properties, check the box for Description:
+
+![The screen options tab includes a form with settings for menu properties including the menu descriptions.](https://wordpress.org/documentation/files/2021/01/tt1-menu-description-options.png)Add a description by selecting the menu item and filling out the Description textarea. Remember to save your changes.
+
+![Each menu item uses a textarea where the description can be added.](https://wordpress.org/documentation/files/2021/01/tt1-menu-description-area.png)## Add Social Icons
+
+There are two ways to add social icons in your site:
+
+- Use the Social Icons block within the editor.
+- Add a link to a social media site to your footer menu.
+
+When you create a social menu, the text label you provide will be hidden, and an icon will be shown in its place. If you’re not familiar with this functionality, please check out the [documentation from Twenty Fifteen](#documentation/article/twenty-fifteen).
+
+Twenty Twenty-One provides icons for the following social media services:
+
+- 500px
+- Amazon
+- Bandcamp
+- Behance
+- Codepen
+- DeviantArt
+- Dribbble
+- Dropbox
+- Etsy
+- Facebook
+- Feed
+- Flickr
+- Foursquare
+- GitHub
+- GitLab
+- Goodreads
+- Google
+- Instagram
+- Kickstarter
+- JSFiddle
+- Last.fm
+- LinkedIn
+- Mail
+- Mastodon
+- Medium
+- Meetup
+- Pinterest
+- Pocket
+- Reddit
+- Skype
+- Snapchat
+- SoundCloud
+- Spotify
+- Tumblr
+- Twitch
+- Twitter
+- Vimeo
+- VK
+- WhatsApp
+- WordPress
+- Yelp
+- YouTube
+
+Additional icons can be added following the steps under “Adding icons in Twenty Twenty” at [Themes field guide: WordPress 5.5](https://make.wordpress.org/core/2020/07/30/themes-field-guide-wordpress-5-5/).
+
+## Widgets
+
+Twenty Twenty-One comes with support for one widget area, at the very bottom of each page. Each widget column is 33% of the site width, up to 380px.
+
+![The footer widget area has 3 columns.
+Below the widget area is a site information section with the site title or logo, and a ink to WordPress.org with the link text "Proudly powered by WordPress"](https://wordpress.org/documentation/files/2020/11/widgets.png)## Post formats
+
+Twenty Twenty-One has support for post formats.  
+Post formats are selected in the editors Settings sidebar → Post → Status &amp; visibility.
+
+- Standard
+- Aside
+- Gallery
+- Link
+- Image
+- Quote
+- Status
+- Video
+- Audio
+- Chat
+
+## Language Support
+
+Twenty Twenty-One includes styles for RTL languages.
+
+The theme uses a native system font stack. This font stack provides support for a large number of languages.
+
+```
+-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif
+```
+
+Expand this list to see the fonts used for non-Latin languages.  
+- **ar, ary, azb, ckb, fa-IR, haz, ps**: Tahoma, Arial, sans-serif.
+- **zh-CN**: PingFang SC, Helvetica Neue, Microsoft YaHei New, STHeiti Light.
+- **zh-TW**: PingFang TC, Helvetica Neue, Microsoft YaHei New, STHeiti Light.
+- **zh-HK**: PingFang HK, Helvetica Neue, Microsoft YaHei New, STHeiti Light.
+- **bel, bg-BG, kk, mk-MK, mn, ru-RU, sah, sr-RS, tt-RU, uk**: Helvetica Neue, Helvetica, Segoe UI, Arial, sans-serif.
+- **bn-BD, hi-IN, mr, ne-NP**: Arial, sans-serif.
+- **el**: Helvetica Neue, Helvetica, Arial, sans-serif.
+- **gu**: Arial, sans-serif.
+- **he-IL**: Arial Hebrew, Arial, sans-serif.
+- **ja**: sans-serif.
+- **ko-KR**: Apple SD Gothic Neo, Malgun Gothit, Nanum Gothic, Dotum, sans-serif.
+- **th**: Sukhumvit Set, Helvetica Neue, Helvetica, Arial, sans-serif.
+- **vi**: Libre Franklin, sans-serif.
+
+## Dark Mode Support
+
+One of the accessibility features of the Twenty Twenty-One theme is support for the visitor’s color scheme preferences in their operating system or browser’s settings. The feature is opt-in and supported in most operating systems, including [Android](https://support.google.com/chrome/answer/9275525?co=GENIE.Platform=Android&hl=en), [iOS](https://support.apple.com/en-us/HT210332), [OSX](https://support.apple.com/en-us/HT208976), [Windows 10](https://support.microsoft.com/en-us/windows/change-desktop-background-and-colors-176702ca-8e24-393b-15f2-b15b38f69de6), as well as most Linux distributions.
+
+If you have Dark Mode enabled, your site will be shown to visitors using a light or dark color scheme, respecting their operating system’s preferences. Depending on their lighting conditions or personal preferences they may choose to switch color schemes using a dedicated button on the bottom-right of their site (or bottom-left for RTL languages).
+
+### Enabling Dark Mode from the Customizer
+
+To activate Dark Mode Support, you can go to the Colors &amp; Dark Mode section in your Customizer. If you have a light color selected for the site’s background, you will be able to see and activate the `Dark Mode Support` setting. The background color you select will be applied to light mode, while Dark Mode colors are optimized automatically. You can use the Dark Mode On/Off button at the bottom of the preview screen to toggle between dark &amp; light schemes in your preview.
+
+### Dark Mode in the Editor
+
+The editor will by default respect your operating system’s color scheme settings. If on the front of your site you have chosen a different scheme (using the Dark Mode On/Off button), then the editor will use the preferred scheme.
+
+[![The post editor with Dark Mode enabled. The background color is dark grey and the text is white,](#documentation/files/2020/12/TT1-Dark-Mode-Editor-scaled-1.jpg)](#documentation/files/2020/12/TT1-Dark-Mode-Editor-scaled-1.jpg)## Support and Resources
+
+[Get community help with Twenty Twenty-One in its support forum](#support/theme/twentytwentyone).
+
+You can also [read the theme’s changelog](#documentation/article/twenty-twenty-one-changelog).
+
+---
+
+# Twenty Twenty-Two <a name="documentation/article/twenty-twenty-two" />
+
+Source: https://wordpress.org/documentation/article/twenty-twenty-two/
+
+[Twenty Twenty-Two](#themes/twentytwentytwo) is the new default theme for [WordPress Version 5.9](#documentation/wordpress-version/version-5-9).
+
+![Image showing two different views of the Twenty Twenty-Two templates including an about page and a post category template.](https://wordpress.org/documentation/files/2022/01/image-1-1024x701.jpeg)Everyone deserves a truly unique website, built on a solid, well-designed foundation. Twenty Twenty-Two aims to help you achieve that by offering a wide set of patterns, templates, headers, footers, and custom color palettes. As the first-ever default [block theme](#documentation/article/block-themes), Twenty Twenty-Two invites you to explore full site editing and create a site that reflects your individual vision.
+
+## Quick Specs
+
+- Requires at least WordPress 5.9.
+- Requires at least PHP version 5.6.
+
+## Full Site Editing Support
+
+Twenty Twenty-Two is designed to support all of the features of full site editing. This includes the following:
+
+- [Site Editor](#documentation/article/site-editor): an editor that allows you to edit all parts of your site, navigate between templates, and more.
+- [Styles](#documentation/article/styles-overview): a feature that allows you to customize your site, including individual blocks, as much as you’d like with different colors, typography, layouts, and more.
+- [Templates](#documentation/article/template-editor): edit, create, and manage templates that a page or posts uses.
+- [Template parts](#documentation/article/template-part-block): a way to organize and display groups of blocks as part of a block template mainly for site structure, like Headers and Footers.
+- Theme blocks including the [Navigation Block](#documentation/article/navigation-block), [Query Loop block](#documentation/article/query-loop-block), and more.
+
+Thanks to these options you should find that you won’t need to switch themes as often to create the desired look and feel of your site.
+
+Keep in mind that Twenty Twenty-Two is designed to use the above features instead of the Customizer to edit your site. The Customizer will be hidden by default, though it may be reactivated if you have plugins installed that require it.
+
+## Templates
+
+Twenty Twenty-Two has three custom templates for you to use with your posts and pages:
+
+- Blank: this includes the post content without any additional blocks.
+- Page (Large Header): this includes a big, visually interesting headline.
+- Single Post (No Separators), and Single Page (No Separators): These are the standard post/page templates, but with no horizontal separators on them.
+
+When exploring these templates and making them your own, be sure to take advantage of the Page patterns that you can use to build your templates. To learn more about templates and how to use them on your site, please read the [Template Editor support article](#documentation/article/template-editor).
+
+## Block Patterns
+
+Twenty Twenty-Two comes with 64 patterns to create beautiful content from footers, headers, pages, and more. To learn more about block patterns and how to use them on your site, please read the [Block Patterns support article](#documentation/article/block-pattern).
+
+Here are just a few examples to look forward to:
+
+**Subscribe callout**
+
+![Image of the subscribe callout pattern.](https://wordpress.org/documentation/files/2022/01/image-1024x200.png)**Layered images with duotone**
+
+![Layered images of birds. ](https://wordpress.org/documentation/files/2022/01/image-1-1024x439.png)**List of events**
+
+![List of events with a large header saying Speaker Series.](https://wordpress.org/documentation/files/2022/01/image-2-1024x848.png)## Color Palette
+
+The theme provides several recommended colors that work well with the design of the theme. You can use these colors throughout your site including when customizing your site with [the Styles feature](#documentation/article/styles-overview) or when customizing individual blocks. Duotone filters are also included as part of the color palette options so you can easily have all aspects of your site embrace a shared palette:
+
+![Image of various duotone options built into the Twenty Twenty-Two theme.](https://lh6.googleusercontent.com/1f-AG0cwxVYsmLmG0dNn4oaTS-leY-bnw61WSlXVMv0KIVx5XuIwqXkn_1_0KVqkgWDDTeWbL2i7x7VqwGOBDdV6-nXZU_ci-epHtg2sQHd2TJx-yDL2P7VtXFkLvXKJV25d0CeX)Black
+
+White
+
+Dark Green
+
+Beige
+
+Light Grey
+
+## Support and Resources
+
+Get community help with Twenty Twenty-Two in its [support forum](#support/theme/twentytwentytwo).
+
+Learn how to take full advantage of full site editing with the [Simple Site Design with Full Site Editing Learn WordPress course](https://learn.wordpress.org/course/simple-site-design-with-full-site-editing/).
+
+Read more about the Twenty Twenty-Two theme [in the introduction post](https://make.wordpress.org/core/2021/10/06/introducing-twenty-twenty-two/).
+
+[Twenty Twenty-Two changelog](#documentation/article/twenty-twenty-two-changelog).
+
+---
+
+# Twenty Twenty-Three <a name="documentation/article/twenty-twenty-three" />
+
+Source: https://wordpress.org/documentation/article/twenty-twenty-three/
+
+[Twenty Twenty-Three](#themes/twentytwentythree) is the new, accessibility-ready, default theme for [WordPress Version 6.1](#documentation/wordpress-version/version-6-1).
+
+![Collage of Twenty Twenty-Three screenshots](https://wordpress.org/documentation/files/2022/10/tt3-collage-1024x556.png)A minimalist block theme designed to take full advantage of full site editing capabilities, Twenty Twenty-Three includes a collection of [ten community-submitted style variations](https://make.wordpress.org/design/2022/09/07/tt3-default-theme-announcing-style-variation-selections/). Explore the Styles panel and change the look-and-feel of your site in an instant – bold and bright, or soft and subtle, the choice is yours.
+
+## Quick specs
+
+- Requires at least WordPress 6.1.
+- Requires at least PHP version 5.6.
+
+## Full site editing support
+
+Twenty Twenty-Three is designed to support full site editing’s powerful features, including:
+
+- [Site Editor](#documentation/article/site-editor): an editor that allows you to edit all parts of your site, navigate between templates, and more.
+- [Styles](#documentation/article/styles-overview): a feature that allows you to customize your site, including individual blocks, as much as you’d like with different colors, typography, layouts, and more.
+- [Templates](#documentation/article/template-editor): edit, create, and manage templates used by pages, posts, and other content.
+- [Template parts](#documentation/article/template-part-block): a way to organize and display groups of blocks as part of a block template mainly for site structure, like Headers and Footers.
+- Theme blocks including the [Navigation block](#documentation/article/navigation-block),[ Query Loop block](#documentation/article/query-loop-block), and more.
+
+Like its predecessor Twenty Twenty-Two, this theme is designed to use WordPress site-editing features *instead of* the Customizer, which will be hidden by default. The Customizer may be automatically reactivated if you have plugins that require it.
+
+## Templates
+
+Twenty Twenty-Three includes several custom templates for you to use:
+
+- **Blank:** this displays post content without any additional blocks.
+- **Blog (Alternative):** provides a different way of displaying blog posts, in a list format with the date on the left and the post title on the right.
+
+## Block patterns
+
+Explore patterns to save time while crafting creative layouts. Patterns are collections of predesigned blocks whose text and media content can be quickly swapped out with your own. Whether a call-to-action, an event announcement, or a pricing table, patterns can help jump-start the creation of your page or post.
+
+![Event pattern screenshot](https://wordpress.org/documentation/files/2022/10/event-pattern-1024x608.png)![Call to action pattern screenshot](https://wordpress.org/documentation/files/2022/10/cta3-pattern-1024x165.png)![Pricing table pattern screenshot](https://wordpress.org/documentation/files/2022/10/pricing-table-pattern-1024x549.png)## Style variations
+
+Twenty Twenty-Three’s default colour scheme consists of a minimalist black-and-white palette, along with green accents.
+
+![Screenshot of default color palette in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/tt3-styles-2.jpg)Prefer a different look? Visit the Styles area in the Editor and choose from ten additional style variations to instantly switch up the design, including colors and typography.
+
+![Screenshot of styles panel in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/tt3-styles-1.jpg)![Default style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/00-1024x576.png)Default![Pitch style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/01-1024x576.png)Pitch  
+by [@richtabor](https://profiles.wordpress.org/richtabor/)![Canary style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/02-1024x576.png)Canary  
+by [@beafialho](https://profiles.wordpress.org/beafialho/)![Pilgrimage style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/04-1024x576.png)Pilgrimage  
+by [@luminuu](https://profiles.wordpress.org/luminuu/)![Electric style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/03-1024x576.png)Electric  
+by [@beafialho](https://profiles.wordpress.org/beafialho/)![Block out style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/06-1024x576.png)Block out  
+by [@critterverse](https://profiles.wordpress.org/critterverse/)![Marigold style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/05-1024x576.png)Marigold  
+by [@nudge](https://profiles.wordpress.org/nudge/)![Grapes style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/10-1024x576.png)Grapes  
+by [@amjadr360](https://profiles.wordpress.org/amjadr360/)![Aubergine style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/09-1024x576.png)Aubergine  
+by [@anariel-design](https://profiles.wordpress.org/anariel-design/)![Whisper style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/07-1024x576.png)Whisper  
+by [@colorful-tones](https://profiles.wordpress.org/colorful-tones/)![Sherbet style variation in Twenty Twenty-Three](https://wordpress.org/documentation/files/2022/10/08-1024x576.png)Sherbet  
+by [@bgardner](https://profiles.wordpress.org/bgardner/)## Design specifications
+
+Twenty Twenty-Three takes advantage of fluid typography presets, so that each piece of text can adapt to any screen size, automatically. The theme also uses fluid spacing presets, to help maintain consistency in the spacing between blocks at all screen sizes. If you’re interested in learning more about the sizes, spacing, and font families in those presets, check out Twenty Twenty-Three’s [design specification](https://github.com/WordPress/twentytwentythree/blob/trunk/DESIGN-SPEC.md).
+
+## Support and resources
+
+Get community help with Twenty Twenty-Three in its [support forum.](#support/theme/twentytwentythree)
+
+Learn how to take full advantage of full site editing with the [Simple Site Design with Full Site Editing Learn WordPress course](https://learn.wordpress.org/course/simple-site-design-with-full-site-editing/).
+
+Read more about the Twenty Twenty-Three theme in [the introduction post](#documentation/wordpress-version/version-6-1).
+
+[Twenty Twenty-Three changelog.](#documentation/article/twenty-twenty-three-changelog)
+
+---
+
+# Twenty Twenty-Four <a name="documentation/article/twenty-twenty-four" />
+
+Source: https://wordpress.org/documentation/article/twenty-twenty-four/
+
+[Twenty Twenty-Four](#themes/twentytwentyfour) is the new, stylish and versatile, default theme for [WordPress Version 6.4.](#documentation/wordpress-version/version-6-4)
+
+A block theme designed to take full advantage of full site editing capabilities, particularly the opportunities offered by patterns. Create new pages in a matter of moments by constructing them from the wide range of patterns that come bundled with the theme.
+
+## Quick specs
+
+- Requires at least WordPress 6.4.
+- Requires at least PHP version 5.6.
+
+## Full site editing support
+
+Twenty Twenty-Four is designed to support full site editing’s powerful features, including:
+
+- [Site Editor](#documentation/article/site-editor): an editor that allows you to edit all parts of your site, navigate between templates, and more.
+- [Styles](#documentation/article/styles-overview): a feature that allows you to customize your site, including individual blocks, as much as you’d like with different colors, typography, layouts, and more.
+- [Templates](#documentation/article/template-editor): edit, create, and manage templates used by pages, posts, and other content.
+- [Template parts](#documentation/article/template-part-block): a way to organize and display groups of blocks as part of a block template mainly for site structure, like Headers and Footers.
+- Theme blocks including the [Navigation block](#documentation/article/navigation-block),[ Query Loop block](#documentation/article/query-loop-block), and more.
+
+Like its predecessor Twenty Twenty-Three, this theme is designed to use WordPress site-editing features *instead of* the Customizer, which will be hidden by default. The Customizer may be automatically reactivated if you have plugins that require it.
+
+## One theme, many variations
+
+In the past, default themes often centered around a specific topic or style. However, Twenty Twenty-Four breaks away from this tradition. This theme is thoughtfully designed to be your all-encompassing choice for any type of website, regardless of its specific focus.
+
+![Three screenshots of alternative Home Page layouts in a a grid](https://wordpress.org/documentation/files/2023/11/TT4-Post-Image-2-1024x538.jpg)Alternative patterns for the Blog Home templateThe Twenty Twenty-Four theme allows users to change certain Templates to use alternative patterns designed for specific use-cases: Business (the default), Writer, and Portfolio.
+
+### Alternative patterns
+
+Alternative patterns for the Writer and Portfolio types can be switched to for the following templates:
+
+- Blog Home
+- Index
+- Archive
+- Search
+
+You can use the Replace Template functionality to select one of the alternative patterns for your current template.
+
+1. When editing one of the Templates mentioned above – make sure the ‘Template’ tab of the sidebar inspector is selected.
+2. Click the three dots next to the Template name, and select the ‘Replace Template’ option from the menu that appears.
+3. You will be shown a selection of alternative patterns to choose from. Clicking to select one will replace the existing template contents with the new pattern.
+4. Save the changes to your template.
+
+### Template Parts
+
+Twenty Twenty-Four also includes a range of different layouts for the Header and Footer of your site. When editing your Templates you can [replace the template part](#documentation/article/template-part-block#replacing-one-template-part-with-another) with one of the variants.
+
+## Custom Templates
+
+Twenty Twenty-Four includes several custom page templates for you to use:
+
+- **Page no Title**: the layout of a standard page, but with no page title at the top.
+- **Page with Sidebar**: displays page content with a sidebar on the right hand side.
+- **Page with Wide Image**: displays a wide featured-image with page title on the left, and content on the right.
+
+## Block patterns
+
+Explore patterns to save time while crafting creative layouts. Patterns are collections of predesigned blocks whose text and media content can be quickly replaced by your own. Whether a call-to-action, an event announcement, or FAQ, patterns can help jump-start the creation of your page or post.
+
+![A grid of pattern layouts that are included with the theme](https://wordpress.org/documentation/files/2023/11/TT4-Post-Image-1-1024x682.jpg)## Style variations
+
+Twenty Twenty-Four’s comes with a minimalist, but versatile, palette in monochromatic greys.
+
+![A screenshot of the default color palette - which includes a range of greyscale tones.](https://wordpress.org/documentation/files/2023/11/Screenshot-2023-11-01-at-9.45.36-pm.png)Prefer a different look? Visit the Styles area in the Editor and choose from 9 additional style variations to instantly switch up the design, including colors and typography.
+
+![A grid of alternative Style color schemes for the theme.](https://wordpress.org/documentation/files/2023/11/Screenshot-2023-11-01-at-9.48.34-pm-656x1024.png)## Block variations
+
+Twenty Twenty-Four comes with style variations for a number of blocks – allowing slightly different appearance from their defaults.
+
+### Heading block
+
+Headings in Twenty Twenty-Four come with a variation that includes an Asterix as a bullet point above the heading.
+
+When editing your headings – you will see an option in the sidebar to switch to the variant style. Selecting the ‘With asterisk’ style will keep the size and font of your heading – but add the stylized asterix above it.
+
+### List block
+
+List items in Twenty Twenty Four come with a variation that uses a checkmark as bullet points instead of the default style.
+
+When editing your list – you will see an option in the sidebar to switch to the variant style. Selecting the ‘Checkmark’ style will keep the swap the default bullet for a checkmark.
+
+### Details block
+
+The Details block in Twenty Twenty Four come with a variation that uses an arrow to mark the summary instead of the default style.
+
+When editing your Details block – you will see an option in the sidebar to switch to the variant style. Selecting the ‘Arrow icon’ style will keep the swap the default marker dor the summary section to use an arrow icon.
+
+### Navigation links
+
+Links within Navigation blocks in Twenty Twenty Four come with a variation that adds an arrow to the right of the link text (sometimes used for indicating a link that leaves the main site).
+
+When editing menu items – you will see an option in the sidebar (Style tab) to switch to the variant style. Selecting the ‘With arrow’ style will add the arrow to the right of the link text.
+
+### Category and Tag list blocks
+
+Category and Tag list blocks in Twenty Twenty Four come with a variation that styles each term as a ‘pill’ with a light background.
+
+When the Category or Tag blocks within a Query Loop – you will see an option in the sidebar (Style tab) to switch to the variant style. Selecting the ‘Pill’ style will add a light background color (with rounded corners) to each term in the list..
+
+## Design specifications
+
+Twenty Twenty-Four comes with the following defaults for style.
+
+- **Cardo Font** for headlines.
+- **Sans-serif System** font for paragraphs.
+- **Instrument Sans**, **Inter**, and **Jost** as alternative fonts.
+- The **default color palette** of Twenty Twenty-Four is **light**, providing a fresh and inviting appearance. The Style Variations (mentioned above) contain a range of alternative color palettes.
+- A **content width** of 620 pixels and ‘**Wide’ width** of 1280 pixels.
+
+Should you wish – you can also view a more [complete list of the spacing, color, and layout presets used by the theme](https://github.com/WordPress/twentytwentyfour/blob/trunk/README.md#token-cheat-sheet). And remember, the Site Editor’s [Styles tools](#documentation/article/styles-overview) give a wide range of options for customizing the style of your site beyond these defaults.
+
+## Support and resources
+
+[Get community help with Twenty Twenty-Four in its support forum](#support/theme/twentytwentyfour).
+
+Learn how to take full advantage of full site editing with the [Simple Site Design with Full Site Editing course on Learn.WordPress.org](https://learn.wordpress.org/course/simple-site-design-with-full-site-editing/).
+
+Read more about the Twenty Twenty-Four theme in [the introduction post](https://make.wordpress.org/core/2023/08/24/introducing-twenty-twenty-four/).
+
+[Twenty Twenty-Four changelog.](#documentation/article/twenty-twenty-four-changelog)
 
 ---
 
@@ -36730,130 +36857,3 @@ Learn how to take full advantage of full site editing with the [Simple Site Desi
 Read more about the Twenty Twenty-Five theme in [the introduction post](https://make.wordpress.org/core/2024/08/15/introducing-twenty-twenty-five/).
 
 [Twenty Twenty-Five changelog.](#documentation/article/twenty-twenty-five-changelog)
-
----
-
-# Twenty Twenty-Five changelog <a name="documentation/article/twenty-twenty-five-changelog" />
-
-Source: https://wordpress.org/documentation/article/twenty-twenty-five-changelog/
-
-## Version 1.2
-
-Released: April 15, 2025 with [WordPress 6.8](#documentation/wordpress-version/version-6-8)
-
-- Improve text strings for patterns and templates. [\#62482](https://core.trac.wordpress.org/ticket/62482)
-
-## Version 1.1
-
-Released: February 11, 2025
-
-- Pin a `theme.json` schema version to Twenty Twenty-Five ([\#62455](https://core.trac.wordpress.org/ticket/62455))
-
-## Version 1.0
-
-Released: November 12, 2024
-
-Initial Release.
-
----
-
-# Query Total block <a name="documentation/article/query-total-block" />
-
-Source: https://wordpress.org/documentation/article/query-total-block/
-
-[Go to the list of Blocks](#documentation/article/blocks)
-
-Use the *Query Total block* to display the total number of results in a query.
-
-![The Query total block on the site editor](https://wordpress.org/documentation/files/2025/04/query-total-intro-1024x681.png)The Query total block on the site editor***Note:*** This block works only in the Query Loop block*.* This block should be used only in the [Site Editor](#documentation/article/site-editor) to edit the archive page templates.
-
-To add a *Query Total block*, click the **Block Inserter** icon when editing in the Query Loop.
-
-Click on it to add the block to your page template.You can also use the keyboard shortcut `/query-total` to quickly insert the *Query Total block*:
-
-![Adding the Query total block](https://wordpress.org/documentation/files/2025/04/query-total-inserter-1024x699.gif)Adding the Query total block[Detailed instructions on adding blocks](#documentation/article/adding-a-new-block)
-
-## Block toolbar
-
-To view the block toolbar, click on the block, and the toolbar will be displayed.
-
-![Query total block toolbar](https://wordpress.org/documentation/files/2025/04/query-total-toolbar.png)Query total block toolbarEvery block comes with unique toolbar icons and blocks specific user controls that allow you to manipulate the block right in the editor.
-
-The *Query Total block* shows seven buttons in the block toolbar:
-
-- Select parent block
-- Transform to
-- Drag icon
-- Move arrows
-- Change display type
-- More options
-
-### Select parent
-
-Click on the **Select parent** button to move to the *Query Loop block*.
-
-![Select parent for Query Total block](https://wordpress.org/documentation/files/2025/04/query-total-select-parent.png)Select parent for Query Total block### Transform to
-
-![Transform button for the Query Total block](https://wordpress.org/documentation/files/2025/04/query-total-transform.png)Transform button for the Query Total blockClick on the **Transform** button to convert the *Query Total block* into a *Columns, Details, or Group* block:
-
-![Transform options for Query Total block](https://wordpress.org/documentation/files/2025/04/query-total-transform-to.png)Transform options for Query Total block### Drag icon
-
-![Drag and drop tool on the toolbar](https://wordpress.org/documentation/files/2025/04/query-total-drag.png)Drag and drop tool on the toolbarTo drag and drop the block to a new location on the page template, click and hold the rectangle of dots, then drag it to the new location. The blue separator line indicates where the block will be placed. Release the left mouse button when you find the new location to place the block.
-
-### Move arrows
-
-![](https://wordpress.org/documentation/files/2025/04/query-total-move.png)Block moving tools on the block toolbarThe up and down arrow icons can be used to move the block up and down on the page.
-
-[Get more information about moving a block within the editor.](#documentation/article/moving-blocks)
-
-### Change display type
-
-The next button over will allow you to choose two types of displays:
-
-The “Total results” option displays the number of results found, for example: “12 results found”:
-
-![Display type toolbar tool](https://wordpress.org/documentation/files/2025/04/query-total-display-type.jpg)Display type toolbar toolThe “Range display” option displays the range total, for example, “Displaying 1 – 10 of 12”.
-
-![Range display type for Query Total block](https://wordpress.org/documentation/files/2025/04/query-total-display-type-range.png)Range display type for Query Total block### More options
-
-The [More Options menu](#documentation/article/more-options) represented by **three vertical dots on the far right of the toolbar** gives you more features such as the ability to duplicate, remove, or edit your block as HTML.
-
-![Examples of the location of the "More Options" menu in a Query Total block. ](https://wordpress.org/documentation/files/2025/04/query-total-more-options.png)Examples of the location of the “More Options” menu in a Query Total block.[Read about these and other settings.](#documentation/article/more-options/)
-
-## Block settings
-
-The block settings panel contains customization options specific to the block. To get to the settings, select the block and click to open the Inspector sidebar. You should see the block settings displayed below with the title “Query total” at the top:
-
-![Illustrates how to open settings for Query Total block](https://wordpress.org/documentation/files/2025/04/query-total-access-settings-1024x685.png)Illustrates how to open settings for Query Total block### Color 
-
-Text and background colors can be set on a per-block basis, allowing you to call attention to important content. Using the Color settings, you can customize the block by adding text, background, and link colors.
-
-![Color settings](https://wordpress.org/documentation/files/2025/04/image8.png)Color settings[See this guide for more information about changing colors.](#documentation/article/colors-settings-overview)
-
-### Typography 
-
-The Typography settings enable you to customize the font and text appearance of the content within the **Query Total** block. The settings have various options, such as font family, size, appearance, line height, letter case, letter spacing, and decoration.
-
-[Get more details about changing typography settings.](#documentation/article/typography-settings-overview)
-
-### Dimensions
-
-The **Query Total** block provides various options to adjust its dimensions, such as width and height, allowing you to customize the text layout to ensure visual consistency.
-
-![Dimension settings](https://wordpress.org/documentation/files/2025/04/image5.png)Dimension settingsFor details refer to this support article: [Dimension settings overview](#documentation/article/dimension-controls-overview)
-
-### Border
-
-The **Query Total** block provides border settings options to add border color, width, and radius.
-
-![Border settings](https://wordpress.org/documentation/files/2025/04/image13.png)Border settingsFor details refer to this support article: [Border settings overview](#documentation/article/border-settings-overview)
-
-### Advanced
-
-The Advanced tab lets you add CSS class(es) to your block. This will allow you to write custom CSS and styles to the block.
-
-![Advanced tab](https://wordpress.org/documentation/files/2025/04/image15.png)Advanced tabThe Additional CSS class(es) enables you to write custom CSS class(es) to the block, so you can style it as you see fit.
-
-## Changelog
-
-- Created 2025-04-29 (props to [@n8finch](https://profiles.wordpress.org/n8finch/))
