@@ -349,8 +349,10 @@ Table of Contents:
 - [Edit Site](#block-editor/reference-guides/data/data-core-edit-site)
 - [Edit Widgets](#block-editor/reference-guides/data/data-core-edit-widgets)
 - [The Post Editor’s Data](#block-editor/reference-guides/data/data-core-editor)
+- [The Keyboard Shortcuts Data](#block-editor/reference-guides/data/data-core-keyboard-shortcuts)
 - [Notices Data](#block-editor/reference-guides/data/data-core-notices)
 - [The NUX (New User Experience) Data](#block-editor/reference-guides/data/data-core-nux)
+- [Preferences](#block-editor/reference-guides/data/data-core-preferences)
 - [Reusable blocks](#block-editor/reference-guides/data/data-core-reusable-blocks)
 - [Rich Text](#block-editor/reference-guides/data/data-core-rich-text)
 - [The Viewport Data](#block-editor/reference-guides/data/data-core-viewport)
@@ -399,7 +401,7 @@ Table of Contents:
 - [Accessibility Testing](#block-editor/contributors/accessibility-testing)
 - [Repository Management](#block-editor/contributors/repository-management)
 - [Folder Structure](#block-editor/contributors/folder-structure)
-- [Versions in WordPress](#block-editor/contributors/versions-in-wordpress)
+- [Gutenberg versions in WordPress](#block-editor/contributors/versions-in-wordpress)
 
 # Block Editor Handbook <a name="block-editor" />
 
@@ -19936,7 +19938,7 @@ Here you have some more resources to learn/read more about the Interactivity API
 - [Interactivity API Discussions](https://github.com/WordPress/gutenberg/discussions/52882), especially the [showcase](https://github.com/WordPress/gutenberg/discussions/55642#discussioncomment-9667164) discussions.
 - [wpmovies.dev](https://wpmovies.dev/) demo and its [wp-movies-demo](https://github.com/WordPress/wp-movies-demo) repo
 - Examples using the Interactivity API at [block-development-examples](https://github.com/WordPress/block-development-examples): 
-    - [`interactivity-api-block-833d15`](https://github.com/WordPress/block-development-examples/tree/trunk/plugins/interactivity-api-block-833d15)
+    - [`my-first-interactive-block`](https://github.com/WordPress/block-development-examples/tree/trunk/plugins/my-first-interactive-block)
     - [`interactivity-api-countdown-3cd73e`](https://github.com/WordPress/block-development-examples/tree/trunk/plugins/interactivity-api-countdown-3cd73e)
     - [`interactivity-api-quiz-1835fa`](https://github.com/WordPress/block-development-examples/tree/trunk/plugins/interactivity-api-quiz-1835fa)
 
@@ -34749,8 +34751,19 @@ Possible values:
 
 Adjusts the size of the popover to prevent its contents from going out of view when meeting the viewport edges.
 
+**Note:** The `resize` and `shift` props are not intended to be used together. Enabling both can cause unexpected behavior.
+
 - Required: No
 - Default: `true`
+
+### `shift`: `boolean`
+
+Enables the `Popover` to shift in order to stay in view when meeting the viewport edges.
+
+**Note:** The `shift` and `resize` props are not intended to be used together. If you enable `shift`, set `resize` to `false`.
+
+- Required: No
+- Default: `false`
 
 ### `variant`: `'toolbar' | 'unstyled'`
 
@@ -40226,6 +40239,8 @@ Source: https://developer.wordpress.org/block-editor/reference-guides/packages/p
 
 Base SCSS utilities and variables for WordPress.
 
+Note: This package requires [Dart Sass](https://www.npmjs.com/package/sass) to compile. When using this package, make sure you are using Sass version 1.23.0 or later, which is based on Dart Sass.
+
 ## Installation
 
 Install the module
@@ -40235,35 +40250,30 @@ npm install @wordpress/base-styles --save-dev
 
 ```
 
-## Use
-
-### SCSS utilities and variables
+## Usage
 
 In your application’s SCSS file, include styles like so:
 
 ```scss
-@import 'node_modules/@wordpress/base-styles/colors';
-@import 'node_modules/@wordpress/base-styles/variables';
-@import 'node_modules/@wordpress/base-styles/mixins';
-@import 'node_modules/@wordpress/base-styles/breakpoints';
-@import 'node_modules/@wordpress/base-styles/animations';
-@import 'node_modules/@wordpress/base-styles/z-index';
-@import 'node_modules/@wordpress/base-styles/default-custom-properties';
+@use '@wordpress/base-styles/colors';
+@use '@wordpress/base-styles/variables';
+@use '@wordpress/base-styles/mixins';
+@use '@wordpress/base-styles/breakpoints';
+@use '@wordpress/base-styles/animations';
+@use '@wordpress/base-styles/z-index';
+@use '@wordpress/base-styles/default-custom-properties';
 
 ```
 
-If you use [Webpack](https://webpack.js.org/) for your SCSS pipeline, you can use `~` to resolve to `node_modules`:
+Make sure to use namespaces when accessing utilities, variables, functions, etc. For example:
 
 ```scss
-@import '~@wordpress/base-styles/colors';
+.selector {
+    color: colors.$gray-300;
 
-```
-
-To make that work with [`sass`](https://www.npmjs.com/package/sass) or [`node-sass`](https://www.npmjs.com/package/node-sass) NPM modules without Webpack, you’d have to use [includePaths option](https://sass-lang.com/documentation/js-api#includepaths):
-
-```json
-{
-    "includePaths": [ "node_modules" ]
+    @include mixins.break-medium() {
+        font-size: variables.$font-size-large;
+    }
 }
 
 ```
@@ -67051,6 +67061,28 @@ Returns true if any widget area is currently being saved.
 
 Returns whether widget saving is locked.
 
+*Usage*
+
+```jsx
+import { __ } from '@wordpress/i18n';
+import { store as widgetStore } from '@wordpress/edit-widgets';
+import { useSelect } from '@wordpress/data';
+
+const ExampleComponent = () => {
+    const isSavingLocked = useSelect(
+        ( select ) => select( widgetStore ).isWidgetSavingLocked(),
+        []
+    );
+
+    return isSavingLocked ? (
+        <p>{ __( 'Widget saving is locked' ) }</p>
+    ) : (
+        <p>{ __( 'Widget saving is not locked' ) }</p>
+    );
+};
+
+```
+
 *Parameters*
 
 - *state* `Object`: Global application state.
@@ -67072,6 +67104,23 @@ Returns an action object signalling that the user closed the sidebar.
 ### lockWidgetSaving
 
 Returns an action object used to signal that widget saving is locked.
+
+*Usage*
+
+```js
+import { store as widgetStore } from '@wordpress/edit-widgets';
+import { useDispatch } from '@wordpress/data';
+
+const ExampleComponent = () => {
+    const { lockWidgetSaving } = useDispatch( widgetStore );
+    return (
+        <Button onClick={ () => lockWidgetSaving( 'lockName' ) }>
+            { __( 'Lock Widget Saving' ) }
+        </Button>
+    );
+};
+
+```
 
 *Parameters*
 
@@ -67204,6 +67253,23 @@ Sets the clientId stored for a particular widgetId.
 ### unlockWidgetSaving
 
 Returns an action object used to signal that widget saving is unlocked.
+
+*Usage*
+
+```js
+import { store as widgetStore } from '@wordpress/edit-widgets';
+import { useDispatch } from '@wordpress/data';
+
+const ExampleComponent = () => {
+    const { unlockWidgetSaving } = useDispatch( widgetStore );
+    return (
+        <Button onClick={ () => unlockWidgetSaving( 'lockName' ) }>
+            { __( 'Unlock Widget Saving' ) }
+        </Button>
+    );
+};
+
+```
 
 *Parameters*
 
@@ -68950,6 +69016,452 @@ Action that locks the editor.
 
 ---
 
+# The Keyboard Shortcuts Data <a name="block-editor/reference-guides/data/data-core-keyboard-shortcuts" />
+
+Source: https://developer.wordpress.org/block-editor/reference-guides/data/data-core-keyboard-shortcuts/
+
+Namespace: `core/keyboard-shortcuts`.
+
+## Selectors
+
+### getAllShortcutKeyCombinations
+
+Returns the shortcuts that include aliases for a given shortcut name.
+
+*Usage*
+
+```js
+import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { useSelect } from '@wordpress/data';
+import { createInterpolateElement } from '@wordpress/element';
+import { sprintf } from '@wordpress/i18n';
+
+const ExampleComponent = () => {
+    const allShortcutKeyCombinations = useSelect(
+        ( select ) =>
+            select( keyboardShortcutsStore ).getAllShortcutKeyCombinations(
+                'core/editor/next-region'
+            ),
+        []
+    );
+
+    return (
+        allShortcutKeyCombinations.length > 0 && (
+            <ul>
+                { allShortcutKeyCombinations.map(
+                    ( { character, modifier }, index ) => (
+                        <li key={ index }>
+                            { createInterpolateElement(
+                                sprintf(
+                                    'Character: %s / Modifier: %s',
+                                    character,
+                                    modifier
+                                ),
+                                {
+                                    code: ,
+                                }
+                            ) }
+                        </li>
+                    )
+                ) }
+            </ul>
+        )
+    );
+};
+
+```
+
+*Parameters*
+
+- *state* `Object`: Global state.
+- *name* `string`: Shortcut name.
+
+*Returns*
+
+- `WPShortcutKeyCombination[]`: Key combinations.
+
+### getAllShortcutRawKeyCombinations
+
+Returns the raw representation of all the keyboard combinations of a given shortcut name.
+
+*Usage*
+
+```js
+import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { useSelect } from '@wordpress/data';
+import { createInterpolateElement } from '@wordpress/element';
+import { sprintf } from '@wordpress/i18n';
+
+const ExampleComponent = () => {
+    const allShortcutRawKeyCombinations = useSelect(
+        ( select ) =>
+            select( keyboardShortcutsStore ).getAllShortcutRawKeyCombinations(
+                'core/editor/next-region'
+            ),
+        []
+    );
+
+    return (
+        allShortcutRawKeyCombinations.length > 0 && (
+            <ul>
+                { allShortcutRawKeyCombinations.map(
+                    ( shortcutRawKeyCombination, index ) => (
+                        <li key={ index }>
+                            { createInterpolateElement(
+                                sprintf(
+                                    ' %s',
+                                    shortcutRawKeyCombination
+                                ),
+                                {
+                                    code: ,
+                                }
+                            ) }
+                        </li>
+                    )
+                ) }
+            </ul>
+        )
+    );
+};
+
+```
+
+*Parameters*
+
+- *state* `Object`: Global state.
+- *name* `string`: Shortcut name.
+
+*Returns*
+
+- `string[]`: Shortcuts.
+
+### getCategoryShortcuts
+
+Returns the shortcut names list for a given category name.
+
+*Usage*
+
+```js
+import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { useSelect } from '@wordpress/data';
+
+const ExampleComponent = () => {
+    const categoryShortcuts = useSelect(
+        ( select ) =>
+            select( keyboardShortcutsStore ).getCategoryShortcuts( 'block' ),
+        []
+    );
+
+    return (
+        categoryShortcuts.length > 0 && (
+            <ul>
+                { categoryShortcuts.map( ( categoryShortcut ) => (
+                    <li key={ categoryShortcut }>{ categoryShortcut }</li>
+                ) ) }
+            </ul>
+        )
+    );
+};
+
+```
+
+*Parameters*
+
+- *state* `Object`: Global state.
+- *name* `string`: Category name.
+
+*Returns*
+
+- `string[]`: Shortcut names.
+
+### getShortcutAliases
+
+Returns the aliases for a given shortcut name.
+
+*Usage*
+
+```js
+import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { useSelect } from '@wordpress/data';
+import { createInterpolateElement } from '@wordpress/element';
+import { sprintf } from '@wordpress/i18n';
+const ExampleComponent = () => {
+    const shortcutAliases = useSelect(
+        ( select ) =>
+            select( keyboardShortcutsStore ).getShortcutAliases(
+                'core/editor/next-region'
+            ),
+        []
+    );
+
+    return (
+        shortcutAliases.length > 0 && (
+            <ul>
+                { shortcutAliases.map( ( { character, modifier }, index ) => (
+                    <li key={ index }>
+                        { createInterpolateElement(
+                            sprintf(
+                                'Character: %s / Modifier: %s',
+                                character,
+                                modifier
+                            ),
+                            {
+                                code: ,
+                            }
+                        ) }
+                    </li>
+                ) ) }
+            </ul>
+        )
+    );
+};
+
+```
+
+*Parameters*
+
+- *state* `Object`: Global state.
+- *name* `string`: Shortcut name.
+
+*Returns*
+
+- `WPShortcutKeyCombination[]`: Key combinations.
+
+### getShortcutDescription
+
+Returns the shortcut description given its name.
+
+*Usage*
+
+```js
+import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { useSelect } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
+const ExampleComponent = () => {
+    const shortcutDescription = useSelect(
+        ( select ) =>
+            select( keyboardShortcutsStore ).getShortcutDescription(
+                'core/editor/next-region'
+            ),
+        []
+    );
+
+    return shortcutDescription ? (
+        <div>{ shortcutDescription }</div>
+    ) : (
+        <div>{ __( 'No description.' ) }</div>
+    );
+};
+
+```
+
+*Parameters*
+
+- *state* `Object`: Global state.
+- *name* `string`: Shortcut name.
+
+*Returns*
+
+- `?string`: Shortcut description.
+
+### getShortcutKeyCombination
+
+Returns the main key combination for a given shortcut name.
+
+*Usage*
+
+```js
+import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { useSelect } from '@wordpress/data';
+import { createInterpolateElement } from '@wordpress/element';
+import { sprintf } from '@wordpress/i18n';
+const ExampleComponent = () => {
+    const { character, modifier } = useSelect(
+        ( select ) =>
+            select( keyboardShortcutsStore ).getShortcutKeyCombination(
+                'core/editor/next-region'
+            ),
+        []
+    );
+
+    return (
+        <div>
+            { createInterpolateElement(
+                sprintf(
+                    'Character: %s / Modifier: %s',
+                    character,
+                    modifier
+                ),
+                {
+                    code: ,
+                }
+            ) }
+        </div>
+    );
+};
+
+```
+
+*Parameters*
+
+- *state* `Object`: Global state.
+- *name* `string`: Shortcut name.
+
+*Returns*
+
+- `WPShortcutKeyCombination?`: Key combination.
+
+### getShortcutRepresentation
+
+Returns a string representing the main key combination for a given shortcut name.
+
+*Usage*
+
+```js
+import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { useSelect } from '@wordpress/data';
+import { sprintf } from '@wordpress/i18n';
+
+const ExampleComponent = () => {
+    const { display, raw, ariaLabel } = useSelect( ( select ) => {
+        return {
+            display: select( keyboardShortcutsStore ).getShortcutRepresentation(
+                'core/editor/next-region'
+            ),
+            raw: select( keyboardShortcutsStore ).getShortcutRepresentation(
+                'core/editor/next-region',
+                'raw'
+            ),
+            ariaLabel: select(
+                keyboardShortcutsStore
+            ).getShortcutRepresentation(
+                'core/editor/next-region',
+                'ariaLabel'
+            ),
+        };
+    }, [] );
+
+    return (
+        <ul>
+            <li>{ sprintf( 'display string: %s', display ) }</li>
+            <li>{ sprintf( 'raw string: %s', raw ) }</li>
+            <li>{ sprintf( 'ariaLabel string: %s', ariaLabel ) }</li>
+        </ul>
+    );
+};
+
+```
+
+*Parameters*
+
+- *state* `Object`: Global state.
+- *name* `string`: Shortcut name.
+- *representation* `keyof FORMATTING_METHODS`: Type of representation (display, raw, ariaLabel).
+
+*Returns*
+
+- `?string`: Shortcut representation.
+
+## Actions
+
+### registerShortcut
+
+Returns an action object used to register a new keyboard shortcut.
+
+*Usage*
+
+```js
+import { useEffect } from 'react';
+import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { useSelect, useDispatch } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
+
+const ExampleComponent = () => {
+    const { registerShortcut } = useDispatch( keyboardShortcutsStore );
+
+    useEffect( () => {
+        registerShortcut( {
+            name: 'custom/my-custom-shortcut',
+            category: 'my-category',
+            description: __( 'My custom shortcut' ),
+            keyCombination: {
+                modifier: 'primary',
+                character: 'j',
+            },
+        } );
+    }, [] );
+
+    const shortcut = useSelect(
+        ( select ) =>
+            select( keyboardShortcutsStore ).getShortcutKeyCombination(
+                'custom/my-custom-shortcut'
+            ),
+        []
+    );
+
+    return shortcut ? (
+        <p>{ __( 'Shortcut is registered.' ) }</p>
+    ) : (
+        <p>{ __( 'Shortcut is not registered.' ) }</p>
+    );
+};
+
+```
+
+*Parameters*
+
+- *config* `WPShortcutConfig`: Shortcut config.
+
+*Returns*
+
+- `Object`: action.
+
+### unregisterShortcut
+
+Returns an action object used to unregister a keyboard shortcut.
+
+*Usage*
+
+```js
+import { useEffect } from 'react';
+import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { useSelect, useDispatch } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
+
+const ExampleComponent = () => {
+    const { unregisterShortcut } = useDispatch( keyboardShortcutsStore );
+
+    useEffect( () => {
+        unregisterShortcut( 'core/editor/next-region' );
+    }, [] );
+
+    const shortcut = useSelect(
+        ( select ) =>
+            select( keyboardShortcutsStore ).getShortcutKeyCombination(
+                'core/editor/next-region'
+            ),
+        []
+    );
+
+    return shortcut ? (
+        <p>{ __( 'Shortcut is not unregistered.' ) }</p>
+    ) : (
+        <p>{ __( 'Shortcut is unregistered.' ) }</p>
+    );
+};
+
+```
+
+*Parameters*
+
+- *name* `string`: Shortcut name.
+
+*Returns*
+
+- `Object`: action.
+
+---
+
 # Notices Data <a name="block-editor/reference-guides/data/data-core-notices" />
 
 Source: https://developer.wordpress.org/block-editor/reference-guides/data/data-core-notices/
@@ -69447,6 +69959,87 @@ Returns an action object that, when dispatched, presents a guide that takes the 
 *Returns*
 
 - `Object`: Action object.
+
+---
+
+# Preferences <a name="block-editor/reference-guides/data/data-core-preferences" />
+
+Source: https://developer.wordpress.org/block-editor/reference-guides/data/data-core-preferences/
+
+Namespace: `core/preferences`.
+
+## Selectors
+
+### get
+
+Returns a boolean indicating whether a prefer is active for a particular scope.
+
+*Parameters*
+
+- *state* `Object`: The store state.
+- *scope* `string`: The scope of the feature (e.g. core/edit-post).
+- *name* `string`: The name of the feature.
+
+*Returns*
+
+- `*`: Is the feature enabled?
+
+## Actions
+
+### set
+
+Returns an action object used in signalling that a preference should be set to a value
+
+*Parameters*
+
+- *scope* `string`: The preference scope (e.g. core/edit-post).
+- *name* `string`: The preference name.
+- *value* `*`: The value to set.
+
+*Returns*
+
+- `Object`: Action object.
+
+### setDefaults
+
+Returns an action object used in signalling that preference defaults should be set.
+
+*Parameters*
+
+- *scope* `string`: The preference scope (e.g. core/edit-post).
+- *defaults* `Object<string, *>`: A key/value map of preference names to values.
+
+*Returns*
+
+- `Object`: Action object.
+
+### setPersistenceLayer
+
+Sets the persistence layer.
+
+When a persistence layer is set, the preferences store will:
+
+- call `get` immediately and update the store state to the value returned.
+- call `set` with all preferences whenever a preference changes value.
+
+`setPersistenceLayer` should ideally be dispatched at the start of an application’s lifecycle, before any other actions have been dispatched to the preferences store.
+
+*Parameters*
+
+- *persistenceLayer* `WPPreferencesPersistenceLayer`: The persistence layer.
+
+*Returns*
+
+- `Object`: Action object.
+
+### toggle
+
+Returns an action object used in signalling that a preference should be toggled.
+
+*Parameters*
+
+- *scope* `string`: The preference scope (e.g. core/edit-post).
+- *name* `string`: The preference name.
 
 ---
 
@@ -76949,7 +77542,7 @@ The following snippet explains how the Gutenberg repository is structured omitti
 
 ---
 
-# Versions in WordPress <a name="block-editor/contributors/versions-in-wordpress" />
+# Gutenberg versions in WordPress <a name="block-editor/contributors/versions-in-wordpress" />
 
 Source: https://developer.wordpress.org/block-editor/contributors/versions-in-wordpress/
 

@@ -4425,9 +4425,6 @@ Source: https://developer.wordpress.org/apis/security/escaping/
 
 *Escaping* output is the process of securing output data by stripping out unwanted data, like malformed HTML or script tags. This process helps secure your data prior to rendering it for the end user.
 
-  
-most WordPress functions properly prepare the data for output, and additional escaping is not needed.  
-
 ## Escaping Functions
 
 WordPress has many helper functions you can use for most common scenarios.
