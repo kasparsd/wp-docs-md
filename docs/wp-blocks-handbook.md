@@ -1245,7 +1245,7 @@ Update the [`supports`](#block-editor/getting-started/fundamentals/block-json#en
 
 Note that when you enable text color support with `"text": true`, the background color is also enabled by default. You are welcome to keep it enabled, but it’s not required for this tutorial, so you can manually set `"background": false`.
 
-Save the file and select the block in the Editor. You will now see both Color and Typography panels in the Settings Sidebar. Try modifying the settings and see what happens.
+Save the file and select the block in the Editor. You will now see both Color and Typography panels in the Settings Panel. Try modifying the settings and see what happens.
 
 ![The block in the Editor with block supports](https://i0.wp.com/developer.wordpress.org/files/2023/12/block-tutorial-5.png?ssl=1)
 
@@ -3163,7 +3163,7 @@ A block which embeds the TinyMCE editor as a block, TinyMCE was the base of the 
 
 ## Dynamic block
 
-A type of block where the content of which may change and cannot be determined at the time of saving a post, instead calculated any time the post is shown on the front of a site. These blocks may save fallback content or no content at all in their JavaScript implementation, instead deferring to a PHP block implementation for runtime rendering.
+A type of block in which the content may change and cannot be determined at the time of saving a post, instead calculated any time the post is shown on the front of a site. These blocks may save fallback content or no content at all in their JavaScript implementation, instead deferring to a PHP block implementation for runtime rendering.
 
 ## Full Site Editing
 
@@ -4548,7 +4548,7 @@ The WordPress block editor is a powerful tool that allows you to create and form
 
 This package can also be used to create custom block editors for virtually any other web application. This means that you can use the same blocks and block editing experience outside of WordPress.
 
-![alt text](https://i0.wp.com/developer.wordpress.org/files/2023/07/custom-block-editor.png?ssl=1 "The Standalone Editor instance populated with example Blocks within a custom WordPress admin page.")
+![WordPress block editor showing content blocks and editing options](https://i0.wp.com/developer.wordpress.org/files/2023/07/custom-block-editor.png?ssl=1 "The Standalone Editor instance populated with example Blocks within a custom WordPress admin page.")
 
 This flexibility and interoperability makes blocks a powerful tool for building and managing content across multiple applications. It also makes it simpler for developers to create content editors that work best for their users.
 
@@ -4588,7 +4588,7 @@ The custom editor is going to be built as a WordPress plugin. To keep things sim
 
 The plugin file structure will look like this:
 
-![alt text](https://i0.wp.com/wordpress.org/gutenberg/files/2020/03/repo-files.png?ssl=1 "Screenshot showing file structure of the Plugin at https://github.com/getdave/standalone-block-editor.")
+![Project directory listing with configuration and source files](https://i0.wp.com/wordpress.org/gutenberg/files/2020/03/repo-files.png?ssl=1 "Screenshot showing file structure of the Plugin at https://github.com/getdave/standalone-block-editor.")
 
 Here is a brief summary of what’s going on:
 
@@ -5011,7 +5011,7 @@ it display within the editor’s sidebar. Exploring this component in more detai
 You have come a long way on your journey to create a custom block editor. But there is one major area left to touch upon – block persistence. In other words, having your  
 blocks saved and available *between* page refreshes.
 
-![alt text](https://i0.wp.com/developer.wordpress.org/files/2023/07/custom-block-editor-persistance.gif?ssl=1 "Screencapture showing blocks being restored between page refreshes.")
+![WordPress custom block editor interface with various content blocks and editing options](https://i0.wp.com/developer.wordpress.org/files/2023/07/custom-block-editor-persistance.gif?ssl=1 "Screencapture showing blocks being restored between page refreshes.")
 
 As this is only an *experiment*, this guide has opted to utilize the browser’s `localStorage` API to handle saving block data. In a real-world scenario, you would likely choose a more reliable and robust system (e.g. a database).
 
@@ -5351,7 +5351,7 @@ Source: https://developer.wordpress.org/block-editor/how-to-guides/data-basics/2
 
 In this part, we will build a filterable list of all WordPress pages. This is what the app will look like at the end of this section:
 
-![](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/part1-finished.jpg?ssl=1)
+![Searchable WordPress pages list](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/part1-finished.jpg?ssl=1)
 
 Let’s see how we can get there step by step.
 
@@ -5381,7 +5381,7 @@ function PagesList( { pages } ) {
 
 Note that this component does not fetch any data yet, only presents the hardcoded list of pages. When you refresh the page, you should see the following:
 
-![](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/simple-list.jpg?ssl=1)
+![WordPress pages list showing Sample page](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/simple-list.jpg?ssl=1)
 
 ## Step 2: Fetch the data
 
@@ -5389,7 +5389,7 @@ The hard-coded sample page isn’t very useful. We want to display your actual W
 
 Before we start, let’s confirm we actually have some pages to fetch. Within WPAdmin, Navigate to Pages using the sidebar menu and ensure it shows at least four or five Pages:
 
-![](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/pages-list.jpg?ssl=1)
+![WordPress admin Pages list](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/pages-list.jpg?ssl=1)
 
 If it doesn’t, go ahead and create a few pages – you can use the same titles as on the screenshot above. Be sure to *publish* and not just *save* them.
 
@@ -5469,7 +5469,7 @@ Note that post title may contain HTML entities like `&aacute;`, so we need to us
 
 Refreshing the page should display a list similar to this one:
 
-![](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/fetch-the-data.jpg?ssl=1)
+![List of website pages](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/fetch-the-data.jpg?ssl=1)
 
 ## Step 3: Turn it into a table
 
@@ -5495,7 +5495,7 @@ function PagesList( { pages } ) {
 
 ```
 
-![](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/make-a-table.jpg?ssl=1)
+![Table listing website page titles](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/make-a-table.jpg?ssl=1)
 
 ## Step 4: Add a search box
 
@@ -5525,7 +5525,7 @@ function MyFirstApp() {
 
 Note that instead of using an `input` tag, we took advantage of the [SearchControl](#block-editor/reference-guides/components/search-control) component. This is what it looks like:
 
-![](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/filter-field.jpg?ssl=1)
+![Searchable list of WordPress pages](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/filter-field.jpg?ssl=1)
 
 The field starts empty, and the contents are stored in the `searchTerm` state value. If you aren’t familiar with the [useState](https://react.dev/reference/react/useState) hook, you can learn more in [React’s documentation](https://react.dev/reference/react/useState).
 
@@ -5599,7 +5599,7 @@ function MyFirstApp() {
 
 Voila! We can now filter the results:
 
-![](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/filter.jpg?ssl=1)
+![Filtered WordPress pages list showing About us](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/filter.jpg?ssl=1)
 
 ### Using core-data instead vs calling the API directly
 
@@ -5636,7 +5636,7 @@ All in all, the utilities built into core-data are designed to solve the typical
 
 There is one problem with our search feature. We can’t be quite sure whether it’s still searching or showing no results:
 
-![](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/unclear-status.jpg?ssl=1)
+![No matching WordPress pages found for search query](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/unclear-status.jpg?ssl=1)
 
 A few messages like *Loading…* or *No results* would clear it up. Let’s implement them! First, `PagesList` has to be aware of the current status:
 
@@ -5803,8 +5803,8 @@ window.addEventListener(
 
 All that’s left is to refresh the page and enjoy the brand new status indicator:
 
-![](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/indicator.jpg?ssl=1)  
-![](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/no-results.jpg?ssl=1)
+![Loading indicator shown while searching WordPress pages](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/indicator.jpg?ssl=1)  
+![No results found for page search query in WordPress](https://i0.wp.com/raw.githubusercontent.com/WordPress/gutenberg/HEAD/docs/how-to-guides/data-basics/media/list-of-pages/no-results.jpg?ssl=1)
 
 ## What’s next?
 
@@ -7977,20 +7977,6 @@ wp.domReady( () => {
 
 This JavaScript should be enqueued much like the block variation example above. Refer to the [block styles](#block-editor/reference-guides/block-api/block-styles) documentation for how to register and unregister styles using PHP.
 
-## Disable access to the Template Editor
-
-Whether you’re using theme.json in a Classic or Block theme, you can add the following to your `functions.php` file to remove access to the Template Editor that is available when editing posts or pages:
-
-```php
-function example_theme_support() {
-    remove_theme_support( 'block-templates');
-}
-add_action( 'after_setup_theme', 'example_theme_support' );
-
-```
-
-This prevents both the ability to create new block templates or edit them from within the Post Editor.
-
 ## Disable access to the Code Editor
 
 The Code Editor allows you to view the underlying block markup for a page or post. While this view is handy for experienced users, you can inadvertently break block markup by editing content. Add the following to your `functions.php` file to restrict access.
@@ -9077,11 +9063,13 @@ function myguten_admin_notice() {
         return;
     }
     // Render the notice's HTML.
-    // Each notice should be wrapped in a <div>
-    // with a 'notice' class.
-    echo '<div class="notice notice-success is-dismissible"><p>';
-    echo sprintf( __( 'Post draft updated. <a href="%s" target="_blank">Preview post</a>' ), get_preview_post_link() );
-    echo '</p></div>';
+    wp_admin_notice(
+        sprintf( __( 'Post draft updated. <a href="%s" target="_blank">Preview post</a>' ), get_preview_post_link() ),
+        array(
+            'type'        => 'success',
+            'dismissible' => true,
+        )
+    );
 };
 add_action( 'admin_notices', 'myguten_admin_notice' );
 
@@ -12869,6 +12857,41 @@ The value is provided by the `default` field, and the value should match the exp
 }
 
 ```
+
+## Role
+
+The `role` property designates an attribute as being of a particular conceptual type. This property can be applied to any attribute to provide semantic meaning about how the attribute should be handled.
+
+Use `content` to designate the attribute as user-editable content. Blocks with attributes marked as `content` may be enabled for privileged editing in special circumstances such as content only locking.  
+Use `local` to mark the attribute as temporary and non-persistable. Attributes marked as `local` are ignored by the Block Serializer and never saved to post content.
+
+*Example*: `content` role used by the paragraph block
+
+```js
+{
+    content: {
+        type: 'string',
+        source: 'html',
+        selector: 'p',
+        role: 'content',
+    }
+}
+
+```
+
+*Example*: `local` role used for temporary data.
+
+```js
+{
+    blob: {
+        type: 'string',
+        role: 'local',
+    }
+}
+
+```
+
+Learn more in the [WordPress 6.7 dev note](https://make.wordpress.org/core/2024/10/20/miscellaneous-block-editor-changes-in-wordpress-6-7/#stabilized-role-property-for-block-attributes).
 
 ---
 
@@ -18191,7 +18214,7 @@ Add a page, link, or another item to your navigation. ([Source](https://github.c
 - **Parent:** core/navigation
 - **Allowed Blocks:** core/navigation-link, core/navigation-submenu, core/page-list
 - **Supports:** interactivity (clientNavigation), typography (fontSize, lineHeight), html, renaming, reusable
-- **Attributes:** description, id, isTopLevelLink, kind, label, opensInNewTab, rel, type, url
+- **Attributes:** description, id, isTopLevelLink, kind, label, opensInNewTab, rel, title, type, url
 
 ## Submenu
 
@@ -18201,7 +18224,7 @@ Add a submenu to your navigation. ([Source](https://github.com/WordPress/gutenbe
 - **Category:** design
 - **Parent:** core/navigation
 - **Supports:** interactivity (clientNavigation), typography (fontSize, lineHeight), html, reusable
-- **Attributes:** description, id, isTopLevelItem, kind, label, opensInNewTab, rel, type, url
+- **Attributes:** description, id, isTopLevelItem, kind, label, opensInNewTab, rel, title, type, url
 
 ## Page Break
 
@@ -43425,6 +43448,15 @@ npm install @wordpress/commands --save
 
 *This package assumes that your code will run in an **ES2015+** environment. If you’re using an environment that has limited or no support for such language features and APIs, you should include [the polyfill shipped in `@wordpress/babel-preset-default`](https://github.com/WordPress/gutenberg/tree/HEAD/packages/babel-preset-default#polyfill) in your code.*
 
+*This package requires the following stylesheets to be included for proper styling:*
+
+```css
+/* From node_modules: */
+@import '@wordpress/components/build-style/style.css';
+@import '@wordpress/commands/build-style/style.css';
+
+```
+
 ## API
 
 ### store
@@ -45711,6 +45743,20 @@ $ npx @wordpress/create-block@latest [options] [slug]
 ### Interactive Mode
 
 When no `slug` is provided, the script will run in interactive mode and will start prompting for the input required (`slug`, title, namespace…) to scaffold the project.
+
+### `namespace`
+
+By default, blocks are created with the `create-block` namespace. You should specify your own unique namespace:
+
+```bash
+$ npx @wordpress/create-block@latest my-block --namespace=my-namespace
+
+```
+
+This creates `my-namespace/my-block` instead of `create-block/my-block`.
+
+If you’ve already created a block, update the namespace in:  
+– `block.json` – the `name` property
 
 ### `slug`
 
@@ -63089,7 +63135,7 @@ Determines if the given blocks are allowed to be inserted into the block list.
 *Parameters*
 
 - *state* `Object`: Editor state.
-- *clientIds* `string`: The block client IDs to be inserted.
+- *clientIds* `string[]`: The block client IDs to be inserted.
 - *rootClientId* `?string`: Optional root client ID of block list.
 
 *Returns*
@@ -68326,6 +68372,28 @@ Returns whether the edition of the post has been taken over.
 ### isPostSavingLocked
 
 Returns whether post saving is locked.
+
+*Usage*
+
+```jsx
+import { __ } from '@wordpress/i18n';
+import { store as editorStore } from '@wordpress/editor';
+import { useSelect } from '@wordpress/data';
+
+const ExampleComponent = () => {
+    const isSavingLocked = useSelect(
+        ( select ) => select( editorStore ).isPostSavingLocked(),
+        []
+    );
+
+    return isSavingLocked ? (
+        <p>{ __( 'Post saving is locked' ) }</p>
+    ) : (
+        <p>{ __( 'Post saving is not locked' ) }</p>
+    );
+};
+
+```
 
 *Parameters*
 
@@ -77479,7 +77547,7 @@ The following snippet explains how the Gutenberg repository is structured omitti
 │   PHP Source code of the Gutenberg plugin.
 │
 ├── lib/compact/wordpress-x.x
-│   PHP code that was include in WordPress ont the WordPrexx X.X version.
+│   PHP code that was include in WordPress ont the WordPress X.X version.
 │   It is kept to ensure plugin compatibility with older WordPress versions.
 │
 ├── packages

@@ -20865,7 +20865,7 @@ The *Social Icons* block toolbar has five buttons:
 
 You can transform the *Social Icons* block into a Group or Columns. You can also transform the style of the *Social Icons* block. There are three styles available: **Default**, **Logos only**, and **Pill Shape**.
 
-![Transform tool in the Social Icons block](https://wordpress.org/documentation/files/2022/09/Screen-Shot-2022-09-17-at-8.28.48-AM.png)**Drag icon**
+![Transform tool in the Social Icons block](https://wordpress.org/documentation/files/2020/11/social-icons-transform.png)Transform tool in the Social Icons block**Drag icon**
 
 ![Drag icon in the Social Icons block toolbar](https://wordpress.org/documentation/files/2022/09/Screen-Shot-2022-09-17-at-8.32.56-AM.png)To drag and drop the block to a new location on the page template, click and hold the rectangle of dots, then drag to the new location. The blue separator line indicates where the block will be placed. Release the left mouse button when you find the new location to place the block.
 
@@ -20956,9 +20956,7 @@ You can also change the orientation of the social icons to horizontal or stack v
 
 ![Sample social icon with label](https://wordpress.org/documentation/files/2022/09/Screen-Shot-2022-09-17-at-10.56.43-AM.png)Sample social icon with label
 
-![Settings tab for Social icons block.](https://user-images.githubusercontent.com/1508963/246128818-3548abb0-4fd8-4e7e-90ba-3ad9822117fe.jpg)
-
-**Advanced settings**
+![Settings tab for Social icons block.](https://wordpress.org/documentation/files/2020/11/social-icons-settings-331x1024.png)Settings tab for Social icons block.**Advanced settings**
 
 The HTML Anchor is a useful tool for creating page jumps. If you toggle the block to its HTML view, you’ll see that the HTML Anchor input is added as a CSS ID to the heading tag. You can also see the CSS class in the block HTML.
 
@@ -21014,10 +21012,10 @@ To achieve this, these social networks require users to set a link back to their
 
 The advanced tab lets you add a CSS class to your block, allowing you to write custom CSS and style the block as you see fit.
 
-![Block settings for individual icon block](https://user-images.githubusercontent.com/1508963/246105281-c798ae5b-8ff6-4f1e-ae01-e44ae6f650f0.png)
+![](https://wordpress.org/documentation/files/2020/11/social-icon.png)Block settings for individual icon block## Changelog 
 
-## Changelog 
-
+- Update 2025-06-05 (props to [@rollybueno](https://profiles.wordpress.org/rollybueno/)) 
+    - Update screenshots to 6.8
 - Update 2023-06-15 
     - Add Link rel section and screenshot.
     - Add alpha filter section for color setting.
@@ -21492,7 +21490,7 @@ The **More options** menu in the block toolbar gives you additional options to c
 
 ## Cut
 
-![You can use the Cut option to cut your block and paste it elsewhere on a post/page.](https://wordpress.org/documentation/files/2020/12/more-options-cut-1024x647.gif)Use the **Cut** option to cut a selected block and paste it elsewhere in the editor or even on a different post/page. When you select the **Cut** option, the block will be copied to your clipboard. Then, you can use Ctrl + V (Command + V) to paste it anywhere on your post/page or other posts/pages.
+![](https://wordpress.org/documentation/files/2020/12/more-option-cut-1024x563.jpg)Use the **Cut** option to cut a selected block and paste it elsewhere in the editor or even on a different post/page. When you select the **Cut** option, the block will be copied to your clipboard. Then, you can use Ctrl + V (Command + V) to paste it anywhere on your post/page or other posts/pages.
 
 ## Duplicate
 
@@ -21504,7 +21502,7 @@ The **More options** menu in the block toolbar gives you additional options to c
 
 ## Add after
 
-![Insert another block right after the current block](https://wordpress.org/documentation/files/2020/12/image-6.jpeg)![Insert another block right after the current block](https://wordpress.org/documentation/files/2020/12/more-options-add-after.png)Use this option to insert a new block after the selected block(s). It creates an empty line for adding a new block below your current one.
+![Insert another block right after the current block](https://wordpress.org/documentation/files/2020/12/more-options-add-after.png)Use this option to insert a new block after the selected block(s). It creates an empty line for adding a new block below your current one.
 
 ## Edit as HTML
 
@@ -21543,6 +21541,9 @@ Creating a group block will allow you to handle all the nested blocks in one goS
 
 ## Changelog 
 
+- Updated 2025-06-05 
+    - Updated “Cut” screenshot to match 6.8.1
+    - Deleted duplicate image in “Add after”
 - Updated 2025-04-15 (props to [@nikunj8866](https://profiles.wordpress.org/nikunj8866/)) 
     - Removed **Select parent block (name)** and **Move to** sections.
     - Add **Cut** section.
@@ -24234,7 +24235,18 @@ Source: https://wordpress.org/documentation/article/query-loop-block/
 
 The *Query Loop block* is an advanced block that allows you to display posts based on specified parameters, like a PHP loop without the code. You can think of it as a more complex and powerful [*Latest Posts Block*](#documentation/article/latest-posts-block). With various block patterns integrated into the block setup, you can do things like create a portfolio or a page full of your favorite recipes.
 
-![Query loop block in the editor](https://wordpress.org/documentation/files/2023/03/query-loop-main.png)To add the *Query Loop* block to a page, click the **block inserter** (+) icon to open the block inserter pop-up window and choose the *Query Loop* block.
+![Query loop block in the editor](https://wordpress.org/documentation/files/2023/03/query-loop-main.png)## Anatomy of the Query Loop block
+
+The block inspector provides a quick overview of the Query Loop block’s structure. Each part gives you access to different settings:
+
+- **Query Loop:** Configure the query parameters, such as post type or category.
+- **Post Template**: Choose how the content is displayed, either in a list or grid format.
+- **Pagination**: Select which navigation elements to include, such as next/previous buttons or page numbers.
+- **No Results**: Set a message to display hen a query returns no results.
+
+![image showing the query loop anatomy](https://wordpress.org/documentation/files/2021/07/query-loop-block.jpg)## Adding the Query Loop block
+
+To add the *Query Loop* block to a page, click the **block inserter** (+) icon to open the block inserter pop-up window and choose the *Query Loop* block.
 
 ![Adding a query loop block](https://wordpress.org/documentation/files/2023/03/adding-query-loop-pattern.gif)You can also use the keyboard shortcut /query-loop to quickly insert a *Query Loop* block.
 
@@ -24535,9 +24547,9 @@ If you find a pattern unusable or broken, has trademark issues or is inappropria
 
 Reporting will not be
 
-![](https://wordpress.org/documentation/files/2022/03/Screen-Shot-2022-03-23-at-15.21.10-1.png)You will see a message on screen.
+![Report pattern dialog with reason options and text box.](https://wordpress.org/documentation/files/2022/03/Screen-Shot-2022-03-23-at-15.21.10-1.png)You will see a message on screen.
 
-![](https://wordpress.org/documentation/files/2022/03/Screen-Shot-2022-03-23-at-15.39.26-1.png)## Resource Links
+![Report pattern dialog with submit confirmation.](https://wordpress.org/documentation/files/2022/03/Screen-Shot-2022-03-23-at-15.39.26-1.png)## Resource Links
 
 - [Intro to Block Patterns Learn WordPress course](https://learn.wordpress.org/workshop/intro-to-block-patterns/)
 - [Block Patterns support article](#documentation/article/block-pattern)
@@ -24545,11 +24557,11 @@ Reporting will not be
 
 **Changelog:**
 
-- Updated 2022-03-23
+- 2025-05-27 (props [@ravigadhiyawp](https://profiles.wordpress.org/ravigadhiyawp/)) 
+    - Update missing ALT texts.
+- Updated 2022-03-23 
     - Added Report this pattern section
     - Added link to the new page on how to submit patterns
-    
-    
     - Added Changelog
 - Created: 2021-07-20
 
@@ -26569,7 +26581,14 @@ In addition to the block toolbar, every block has specific options in the editor
 
 *If you do not see the sidebar, click the icon next to the Publish button.*
 
-![Categories block settings sidebar](https://wordpress.org/documentation/files/2023/06/categories-sidebar-block-510x1024.png)How to turn on the Block Settings sidebar![Categories block settings.](https://lh4.googleusercontent.com/wHmRVAi6nYepDTXi8d1FIZv-CxZMbcVegcGukQTMZ4QLt8LbfDWPyT79kqzjy7VdR0j4wSmnCLzl_BvHmriddozeT8XT9z0uEJHJ96eJI2c2NHjJch3JNXNE440LO6wJpUhucqaT)Categories block settings### Color 
+![How to turn on the Block Settings sidebar](https://wordpress.org/documentation/files/2022/03/How-to-turn-on-the-Block-Settings-sidebar-402x1024.png)How to turn on the Block Settings sidebar![Categories block settings](https://wordpress.org/documentation/files/2022/03/Categories-block-settings.png)Categories block settings### Styles
+
+You can customize “Styles” options to change the appearance of the Categories block. Available options are **Default** or **Pilled shaped**:
+
+- **Default**: Displays the categories in a standard list format, following the theme’s typography and spacing.
+- **Pilled shaped:** Displays each category inside a rounded pill-like container, making them stand out with a more modern and visually distinct look.
+
+![Styles settings in the Categories block](https://wordpress.org/documentation/files/2022/03/Change-the-style-of-display-categories.png)Change the style of display categories### Color 
 
 You can customize the text color, background color, gradient background, and link color for the Categories block. *The color options available will vary based on the theme.*
 
@@ -26583,6 +26602,18 @@ To access all the typography options click on the + button in the right corner o
 
 ![Typography settings in the Categories block](https://wordpress.org/documentation/files/2022/03/categories-typography.png)Typography settings in the Categories block[](#documentation/article/more-options)[](#documentation/article/colors-settings-overview)[Get more details about changing typography settings.](#documentation/article/typography-settings-overview)
 
+### Dimensions
+
+On this tab, you can adjust properties such as the **Padding, Margin, and Block spacing** for the **Categories** block. These options help in defining the spacing around and between elements, ensuring proper alignment and layout consistency across different sections of your site.
+
+![Dimensions settings in the Categories block](https://wordpress.org/documentation/files/2022/03/Dimensions-settings-in-the-Categories-block.png)Dimensions settings in the Categories block[](#documentation/article/more-options)[](#documentation/article/colors-settings-overview)[Get more details about changing dimensions settings.](#documentation/article/dimension-controls-overview)
+
+### Border
+
+On this tab, you can add **custom border** to the **Categories** block by adjusting **Border width, Style, Color, and Radius**. These options provide greater flexibility in styling, allowing you to create visually distinct category lists that align with your site’s design.
+
+![Border settings in the Categories block](https://wordpress.org/documentation/files/2022/03/Border-settings-in-the-Categories-block-1.png)Border settings in the Categories block[](#documentation/article/more-options)[](#documentation/article/colors-settings-overview)[Get more details about changing border settings.](#documentation/article/border-settings-overview)
+
 **Advanced settings:**
 
 The “Advanced” tab lets you enter character(s) that can be used to separate the category terms. The default setting is a comma.
@@ -26591,6 +26622,11 @@ You can also add CSS class(es) to your block. This will allow you to write custo
 
 ![Advanced setting in Categories block](https://wordpress.org/documentation/files/2022/03/categories-advanced.png)Advanced setting in Categories block## Changelog
 
+- Update 2025-06-05 
+    - Add border support
+    - Add dimensions support
+    - Add styles support
+    - Update screenshots to 6.8.1
 - Update 2025-04-22 (props to [@karthickmurugan](https://profiles.wordpress.org/karthickmurugan/)) 
     - Add color support.
     - Update screenshots to 6.8.
@@ -31543,11 +31579,11 @@ In the example image below, the content panel includes a post featured image, th
 - Selecting the post featured image block will let you upload or add an image from the media library, but you can not remove the block.
 - Selecting the title block will let you change the page title. But you can not change the title’s color or font size.
 
-![](https://wordpress.org/documentation/files/2023/07/63-site-editor-pages-content-panel.png)The content panel in the settings sidebarBlocks that are **placed inside the Post Content block** are editable. You can add new blocks, edit, move, and remove blocks. **These are the same blocks that you would see in the block editor when editing the page.**
+![Content panel with options for featured image, title, and post content.](https://wordpress.org/documentation/files/2023/07/63-site-editor-pages-content-panel.png)The content panel in the settings sidebarBlocks that are **placed inside the Post Content block** are editable. You can add new blocks, edit, move, and remove blocks. **These are the same blocks that you would see in the block editor when editing the page.**
 
 In this example image, the editable blocks are the paragraph and quote blocks:
 
-![](https://wordpress.org/documentation/files/2023/07/63-site-editor-pages-editing-list-view.png)The post featured image block, title, and post content blocks are locked in the list view. The blocks nested inside the post content block are unlocked and can be edited.## Enable template editing
+![WordPress editor list view showing featured image, title, and post content blocks.](https://wordpress.org/documentation/files/2023/07/63-site-editor-pages-editing-list-view.png)The post featured image block, title, and post content blocks are locked in the list view. The blocks nested inside the post content block are unlocked and can be edited.## Enable template editing
 
 When you click on a block in the template, WordPress shows a notification in the bottom left corner that says: Edit your template to edit this block.
 
@@ -31566,6 +31602,8 @@ To go back to the page, you can use the back button above the editor:
 
 ## Changelog
 
+- 2025-05-27 (props [@ravigadhiyawp](https://profiles.wordpress.org/ravigadhiyawp/)) 
+    - Update missing ALT texts.
 - Updated 2023-08-24 
     - Edited some text
     - Changed the category to Site Editor
@@ -31936,57 +31974,64 @@ You can also save them by clicking `cmd+s` in Mac or `ctrl+s` in Windows.
 
 Source: https://wordpress.org/documentation/article/site-editor-patterns/
 
-Since WordPress version 6.3, it is possible create and manage your site’s [Patterns and template parts](#documentation/article/comparing-patterns-template-parts-and-reusable-blocks) via the Site Editor’s sidebar. You can learn about the Site Editor in this support article: [Site Editor](#documentation/article/site-editor).
+Since WordPress version 6.3, it is possible to create and manage your site’s [Patterns and template parts](#documentation/article/comparing-patterns-template-parts-and-reusable-blocks) via the Site Editor’s sidebar. You can learn about the Site Editor in this article: [Site Editor](#documentation/article/site-editor).
 
 The Site Editor Patterns menu is **only** available when you install and activate a [Block theme](#documentation/article/block-themes) on your site.
 
-## Working with patterns
+## **Working with patterns**
 
-Navigate to **Appearance &gt; Editor &gt; Navigation** to access your Patterns and template parts.
+Navigate to **Appearance &gt; Editor &gt; Patterns** to access your Patterns and template parts.
 
 Please note that template parts are now listed under **Patterns**.
 
-![Notice letting users know that Template Parts can now be found under the "Patterns" section. The message reads:
+![Showing the location Pattern menu itim](https://wordpress.org/documentation/files/2023/08/patterns-1024x639.png)## **Template parts**
 
-"Looking for template parts? Find them under "Patterns".](https://wordpress.org/documentation/files/2023/08/site-editor-patterns-rename-1024x602.png)Looking for template parts? Find them under “Patterns”.## My patterns
+The first type of pattern you will find are **Template parts**. Template parts are **included with block themes** and are typically used on multiple templates across your site.
+
+If you click on the **Actions** (ellipsis) button, you will see options to **edit** or **duplicate** that Template part.
+
+Finally, you can edit the Template part by clicking directly on it.
+
+![Template parts and their option](https://wordpress.org/documentation/files/2023/08/template_parts-1024x640.png)## **My patterns**
 
 The first item in the Patterns section is **My patterns**. This section lists all the custom patterns you added to your site yourself. They can be filtered by [**Synced**](#documentation/article/reusable-blocks) or **Standard** (non-synced).
 
 If you have a lot of Patterns, the **Command Palette** is another great find them. Learn more about the [Command Palette here](#support/article/site-editor-command-palette).
 
-If you click on the **Actions** (ellipsis) button next to each pattern, you will see options to rename, duplicate or delete that pattern.
+If you click on the **Actions** (ellipsis) button next to each pattern, you will see options to **Edit**, **Duplicate**, **Rename, Export as JSON** or **Delete** that pattern.
 
-![Contextual menu inside "My Patterns" to rename, duplicate or delete a pattern.](https://wordpress.org/documentation/files/2023/08/site-editor-patterns-edit-1024x513.png)You can edit any pattern just by clicking on the pattern itself, on the right-hand side of your screen.
+![My patterns action menu](https://wordpress.org/documentation/files/2023/08/my_patterns_options-1024x640.png)You can edit any pattern just by clicking on the pattern itself.
 
-## Theme patterns
+## **Theme patterns**
 
-Underneath My patterns, you can find regular patterns that come bundled with your theme. These patterns **cannot be edited directly**. Instead, you can click on the **Actions** (ellipsis) button and click **Copy to My patterns** to create an editable copy of that pattern. This copy will be listed under **My patterns**.
+Underneath **My patterns**, you can find regular patterns that come bundled with your theme. These patterns **cannot be edited directly** (hence they are marked with a lock symbol). Instead, you can click on the **Actions** (ellipsis) button and click **Duplicate** to create an editable copy of that pattern. This copy will be listed under **My patterns**.
 
-![Contextual menu inside "Patterns" to create a copy of that pattern.](https://wordpress.org/documentation/files/2023/08/site-editor-patterns-copy-1024x560.png)## Template parts
+![Theme patterns' duplicate option](https://wordpress.org/documentation/files/2023/08/theme_patterns_duplicate-1-1024x640.png)## **Add or import new patterns**
 
-The next type of pattern you will find are **Template parts**. Template parts are **included with block themes** and are typically used on multiple templates across your site.
+There is an **Add Pattern** button in the right corner that you can click on to create new patterns. If you click on it, you will see three options: **Add Pattern, Add Template part,** and **Import pattern from JSON**.
 
-If you click on the **Actions** (ellipsis) button, you will see an option to **duplicate** that Template part and a second option to **clear customizations**. If you choose this option, the Template part will be reset to the content, layout, and styles it had when you block theme was first installed.
+![Plus sign icon to create new patterns](https://wordpress.org/documentation/files/2023/08/add_pattern_button-1024x640.png)You can learn more about the difference between [Patterns and template parts here](#documentation/article/comparing-patterns-template-parts-and-reusable-blocks).
 
-Finally, you can edit the Template part by clicking on it directly.
+## **Export patterns**
 
-![Contextual menu inside a "Template part" to create a duplicate or clear customizations.](https://wordpress.org/documentation/files/2023/08/site-editor-patterns-template-parts-1024x533.png)## Create new patterns
+You can export patterns from the **My Patterns** section in the Site Editor. Patterns that come with a theme are locked and cannot be exported.
 
-There is a **create patterns** (**+**) icon next to the Patterns sidebar title you can click on to create new patterns. If you click on it, you will see two options: **Create pattern** and **Create template part**.
+To export a single pattern, go to **Patterns &gt; My Patterns**. Click the **Actions** (ellipsis) button next to the pattern. Select **Export as JSON**, which downloads the pattern as a .json file.
 
-![Plus sign icon to create new patterns.](https://wordpress.org/documentation/files/2023/08/site-editor-patterns-create-patterns-1024x553.png)You can learn more about the difference between [Patterns and template parts here](#documentation/article/comparing-patterns-template-parts-and-reusable-blocks).
+To export multiple patterns, in My Patterns, select the box to check all patterns located at the bottom. And then click the **Download icon**. This downloads a .zip file containing .json files for each pattern chosen.Besides that, the box to check all patterns located at the bottom allows you to bulk **Delete** patterns as well.
 
-## Manage all patterns and template parts
+![Export patterns option showcased on single pattern and as a part of the bulk edit.](https://wordpress.org/documentation/files/2023/08/export_patterns-1024x640.png)## **Appearance Settings**
 
-There are two links at the bottom of the Site Editor Pattern section:
+In the top-right corner of the **Patterns** screen, just below the **Add Pattern** button, you’ll find options to customize how patterns are displayed.
 
-- Manage all my patterns
-- Manage all template parts
+The first icon, **Layout**, lets you switch between grid and list views, depending on your preference.
 
-![Link showing how to access the Manage all my patterns and template parts sections.](https://wordpress.org/documentation/files/2023/08/Screen-Shot-on-2023-08-04-at-135943-1024x755.png)If you click on them, you will be redirected to an wp-admin view. This view can be convenient if you want to import patterns or apply bulk actions.
+The second icon, **View Options**, provides more detailed controls. You can change the sort order of patterns, adjust the preview size, set the number of patterns per page, and choose which pattern details are displayed in the list.
 
-![Patterns listed in the wp-admin interface. The "Import from JSON" and "Bulk actions" options are highlighted.](https://wordpress.org/documentation/files/2023/08/site-editor-patterns-all-patterns-1024x505.png)## Changelog
+![Appearance Settings icons and opened appearance settings section](https://wordpress.org/documentation/files/2023/08/layout-1024x640.png)## Changelog
 
+- Updated 2025-06-05 
+    - Completly rewritten all content to match WP 6.8 FSE capabilities
 - Updated 2023-08-24 
     - Updated formatting
     - Updated category and subcategory
@@ -32102,16 +32147,24 @@ You can also use the Search text box to search for pages on your own website. If
 
 **Tip:** If you already have the URL of the website you want to link to in the clipboard, highlight the text, you want to make into a link and use Ctrl+V (or ⌘+V) to add the hyperlink to the text.
 
-## Open location
+## Open location &amp; nofollow
 
-![Example of how to open the link on a new tab.](https://wordpress.org/documentation/files/2024/01/image-7.png)The **Open in new tab** toggle switch allows you to control where the new page should open. By default, the switch is set to **off**.
+The **Open in new tab** toggle switch allows you to control where the new page should open. By default, the switch is set to **off**.
 
 - **off** opens in the same browser tab
 - **on** opens in a new browser tab
 
 This toggle option is also available when you open the link editing panel. Open the **Advanced** menu and you will see the same toggle switch as well as the **nofollow** option.
 
-![Link editing panel with the advanced options displayed](https://wordpress.org/documentation/files/2024/01/image-8.png)
+![Link editing panel with the advanced options displayed](https://wordpress.org/documentation/files/2024/01/image-8.png)## Changelog
+
+- Updated 2025-06-05 
+    - Updated screenshots with WordPress 6.8
+
+## Changelog
+
+- Updated 2023-07-05 
+    - Removed developer jargon and old links to Codex
 
 ---
 
@@ -34991,7 +35044,7 @@ The Font Library is a new feature released in 6.5. The library allows you to man
 
 ## Where to find the Font Library
 
-The Font Library lives in the Site Editorat **Appearance &gt; Editor**. From the editor select to edit your site’s styles. To find the style settings click on the half circle **Styles** icon in the top right corner of the page. In the Styles panel, click **Typography &gt; Manage fonts**.
+The Font Library lives in the Site Editor at **Appearance &gt; Editor**. From the editor select to edit your site’s styles. To find the style settings click on the half circle **Styles** icon in the top right corner of the page. In the Styles panel, click **Typography &gt; Manage fonts**.
 
 ![Screenshot of the Manage Fonts panel in the WordPress editor, showing the available theme fonts. The panel has tabs for Library, Upload, and Install Fonts, with the Library tab selected.](https://wordpress.org/documentation/files/2024/10/1-font-management-library.png)## The Manage Fonts panel
 

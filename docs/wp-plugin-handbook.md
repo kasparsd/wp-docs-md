@@ -10728,8 +10728,6 @@ While most of the readme details are self evident, there are a few sections that
 
 ### How The Readme Is Parsed
 
-While using the stable tag of trunk currently works in the Plugin Directory, it’s not a supported or recommended method to indicate new versions and has been known to cause issues with automatic updates. At this time, we are actively discouraging and (in the case of new plugins) prohibiting it’s use 
-
 WordPress.org’s Plugin Directory works based on the information found in the field **Stable Tag** in the readme. When WordPress.org parses the `readme.txt`, the very first thing it does is to look at the `readme.txt` in the `/trunk` directory, where it reads the “Stable Tag” line.
 
 When the Stable Tag is properly set, WordPress.org will go and look in `/tags/` for the referenced version. So a Stable Tag of “1.2.3” will make it look for `/tags/1.2.3/`.
@@ -10741,6 +10739,8 @@ If the Stable Tag is 1.2.3 and `/tags/1.2.3/` exists, then nothing in trunk will
 The WordPress.org Plugin Directory reads the main plugin PHP file to get things like the Name of the plugin, the Plugin URI, and most importantly, the version number. On the plugin page, you’ll see the download button which reads “Download Version 1.2.3” or similar. That version number comes from the plugin’s main PHP file, *not* the readme!
 
 The Stable Tag points to a subdirectory in the `/tags` directory. But the version of the plugin is not actually set by that folder name. Instead, it’s the version that is listed in the plugin’s PHP file itself which determines the name. If you have changed Stable Tag to 1.4 and the plugin still says 1.3 in the PHP file, then the version listed will be 1.3.
+
+While using the **stable tag** set to `trunk` (rather than a version) still works in the Plugin Directory, it is neither supported nor recommended as a method of indicating new versions, and has been known to cause issues with automatic updates. We are currently actively discouraging the use of “Stable Tag: trunk” and prohibiting its use for new plugins.
 
 ### Videos
 

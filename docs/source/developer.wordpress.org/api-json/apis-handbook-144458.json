@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/?post_type=apis-handbook&#038;p=144458"
     },
-    "modified": "2022-12-03T19:47:12",
-    "modified_gmt": "2022-12-03T19:47:12",
+    "modified": "2025-06-05T10:08:25",
+    "modified_gmt": "2025-06-05T10:08:25",
     "slug": "security",
     "status": "publish",
     "type": "apis-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Security"
     },
     "content": {
-        "rendered": "\n<p>Congratulations, your code works! But is it safe?</p>\n\n\n\n<p>The WordPress development team takes security seriously. With so much of the web relying on the integrity of the platform, security is critical. While the core developers have a dedicated team focused on securing&nbsp;the core platform, as a theme or plugin developer you are quite aware that there is potentially much that is outside the core which can be vulnerable. Because WordPress provides so much power and flexibility, plugins and themes are key points of weakness.</p>\n\n\n\n<p>When writing code that will run across hundreds if not thousands of websites, you should be extra cautious of how you handle data coming into WordPress and how it&#8217;s then presented to the end user. This commonly comes up when building a settings page for your theme, creating and manipulating shortcodes, or saving and rendering extra data associated with a post.</p>\n\n\n\n<h2 class=\"wp-block-heading\">Developing a Security Mindset</h2>\n\n\n\n<p>When developing, it is important to consider security as you add functionality. Use the following principles as you progress through your development efforts:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>Don&#8217;t trust any data.</strong>&nbsp;Don\u2019t trust user input, third-party APIs, or data in your database without verification. Protection of your WordPress themes begins with ensuring the data entering and leaving your theme is as intended.&nbsp;Always make sure to <em>validate</em> and <em>sanitize</em> user input fore using it, and to <em>escape</em> on output.</li>\n\n\n\n<li><strong>Rely on the WordPress API.</strong>&nbsp;Many core WordPress functions provide the build in the functionality of validating and sanitizing data. Rely on the WordPress provided functions when possible.</li>\n\n\n\n<li><strong>Keep your code up to date.</strong>&nbsp;As technology evolves, so does the potential for new security holes in your plugin or theme. Stay vigilant by maintaining your code and updating as required.</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\" id=\"h-guiding-principles\">Guiding principles</h2>\n\n\n\n<ol class=\"wp-block-list\">\n<li>Never trust user input.</li>\n\n\n\n<li><a href=\"https://developer.wordpress.org/apis/security/escaping/\" data-type=\"apis-handbook\" data-id=\"144472\">Escape</a> as late as possible.</li>\n\n\n\n<li><a href=\"https://developer.wordpress.org/apis/security/escaping/\" data-type=\"apis-handbook\" data-id=\"144472\">Escape</a> everything from untrusted sources (e.g., databases and users), third-parties (e.g., Twitter), etc.</li>\n\n\n\n<li>Never assume anything.</li>\n\n\n\n<li><a href=\"https://developer.wordpress.org/apis/security/sanitizing/\" data-type=\"apis-handbook\" data-id=\"144468\">Sanitation</a> is okay, but <a href=\"https://developer.wordpress.org/apis/security/data-validation/\" data-type=\"apis-handbook\" data-id=\"144470\">validation/rejection</a> is better.</li>\n</ol>\n",
+        "rendered": "\n<p>Congratulations, your code works! But is it safe?</p>\n\n\n\n<p>The WordPress development team takes security seriously. With so much of the web relying on the integrity of the platform, security is critical. While the core developers have a dedicated team focused on securing&nbsp;the core platform, as a theme or plugin developer you are quite aware that there is potentially much that is outside the core which can be vulnerable. Because WordPress provides so much power and flexibility, plugins and themes are key points of weakness.</p>\n\n\n\n<p>When writing code that will run across hundreds if not thousands of websites, you should be extra cautious of how you handle data coming into WordPress and how it&#8217;s then presented to the end user. This commonly comes up when building a settings page for your theme, creating and manipulating shortcodes, or saving and rendering extra data associated with a post.</p>\n\n\n\n<h2 class=\"wp-block-heading\">Developing a Security Mindset</h2>\n\n\n\n<p>When developing, it is important to consider security as you add functionality. Use the following principles as you progress through your development efforts:</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li><strong>Don&#8217;t trust any data.</strong>\u00a0Don\u2019t trust user input, third-party APIs, or data in your database without verification. Protection of your WordPress themes begins with ensuring the data entering and leaving your theme is as intended.\u00a0Always make sure to <em>validate</em> and <em>sanitize</em> user input before using it, and to <em>escape</em> on output.</li>\n\n\n\n<li><strong>Rely on the WordPress API.</strong>&nbsp;Many core WordPress functions provide the build in the functionality of validating and sanitizing data. Rely on the WordPress provided functions when possible.</li>\n\n\n\n<li><strong>Keep your code up to date.</strong>&nbsp;As technology evolves, so does the potential for new security holes in your plugin or theme. Stay vigilant by maintaining your code and updating as required.</li>\n</ul>\n\n\n\n<h2 class=\"wp-block-heading\" id=\"h-guiding-principles\">Guiding principles</h2>\n\n\n\n<ol class=\"wp-block-list\">\n<li>Never trust user input.</li>\n\n\n\n<li><a href=\"https://developer.wordpress.org/apis/security/escaping/\" data-type=\"apis-handbook\" data-id=\"144472\">Escape</a> as late as possible.</li>\n\n\n\n<li><a href=\"https://developer.wordpress.org/apis/security/escaping/\" data-type=\"apis-handbook\" data-id=\"144472\">Escape</a> everything from untrusted sources (e.g., databases and users), third-parties (e.g., Twitter), etc.</li>\n\n\n\n<li>Never assume anything.</li>\n\n\n\n<li><a href=\"https://developer.wordpress.org/apis/security/sanitizing/\" data-type=\"apis-handbook\" data-id=\"144468\">Sanitation</a> is okay, but <a href=\"https://developer.wordpress.org/apis/security/data-validation/\" data-type=\"apis-handbook\" data-id=\"144470\">validation/rejection</a> is better.</li>\n</ol>\n",
         "protected": false
     },
     "author": 7923389,
@@ -65,14 +65,14 @@
         ],
         "version-history": [
             {
-                "count": 4,
+                "count": 5,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/apis-handbook/144458/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 144499,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/apis-handbook/144458/revisions/144499"
+                "id": 158981,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/apis-handbook/144458/revisions/158981"
             }
         ],
         "wp:attachment": [
