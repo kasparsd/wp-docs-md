@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/performance/"
     },
-    "modified": "2024-01-16T20:30:04",
-    "modified_gmt": "2024-01-16T20:30:04",
+    "modified": "2025-07-07T21:30:52",
+    "modified_gmt": "2025-07-07T21:30:52",
     "slug": "performance",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Performance / Optimization"
     },
     "content": {
-        "rendered": "<h2>Changelog</h2>\n<ul>\n<li>2022-08-16: Nothing here, yet.</li>\n</ul>\n",
+        "rendered": "",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 2,
+                "count": 3,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145870/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 151931,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145870/revisions/151931"
+                "id": 159061,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145870/revisions/159061"
             }
         ],
         "wp:attachment": [

@@ -122,6 +122,8 @@ Table of Contents:
 - [BoxControl](#block-editor/reference-guides/components/box-control)
 - [ButtonGroup](#block-editor/reference-guides/components/button-group)
 - [Button](#block-editor/reference-guides/components/button)
+- [DateCalendar](#block-editor/reference-guides/components/date-calendar)
+- [DateRangeCalendar](#block-editor/reference-guides/components/date-range-calendar)
 - [CardBody](#block-editor/reference-guides/components/card-body)
 - [CardDivider](#block-editor/reference-guides/components/card-divider)
 - [CardFooter](#block-editor/reference-guides/components/card-footer)
@@ -135,10 +137,10 @@ Table of Contents:
 - [ColorPalette](#block-editor/reference-guides/components/color-palette)
 - [ColorPicker](#block-editor/reference-guides/components/color-picker)
 - [ComboboxControl](#block-editor/reference-guides/components/combobox-control)
+- [Flyout](#block-editor/reference-guides/components/flyout)
 - [Composite](#block-editor/reference-guides/components/composite)
 - [ConfirmDialog](#block-editor/reference-guides/components/confirm-dialog)
 - [CustomSelectControl](#block-editor/reference-guides/components/custom-select-control)
-- [Flyout](#block-editor/reference-guides/components/flyout)
 - [Dashicon](#block-editor/reference-guides/components/dashicon)
 - [DateTime](#block-editor/reference-guides/components/date-time)
 - [DimensionControl](#block-editor/reference-guides/components/dimension-control)
@@ -209,12 +211,12 @@ Table of Contents:
 - [Snackbar](#block-editor/reference-guides/components/snackbar)
 - [Spacer](#block-editor/reference-guides/components/spacer)
 - [Spinner](#block-editor/reference-guides/components/spinner)
+- [TextControl](#block-editor/reference-guides/components/text-control)
 - [Surface](#block-editor/reference-guides/components/surface)
 - [TabPanel](#block-editor/reference-guides/components/tab-panel)
-- [TextControl](#block-editor/reference-guides/components/text-control)
 - [TextHighlight](#block-editor/reference-guides/components/text-highlight)
-- [Text](#block-editor/reference-guides/components/text)
 - [TextareaControl](#block-editor/reference-guides/components/textarea-control)
+- [Text](#block-editor/reference-guides/components/text)
 - [ToggleControl](#block-editor/reference-guides/components/toggle-control)
 - [ToggleGroupControlOptionBase](#block-editor/reference-guides/components/toggle-group-control-option-base)
 - [ToggleGroupControlOptionIcon](#block-editor/reference-guides/components/toggle-group-control-option-icon)
@@ -239,6 +241,7 @@ Table of Contents:
 - [Package Reference](#block-editor/reference-guides/packages)
 - [@wordpress/a11y](#block-editor/reference-guides/packages/packages-a11y)
 - [@wordpress/annotations](#block-editor/reference-guides/packages/packages-annotations)
+- [@wordpress/api-fetch](#block-editor/reference-guides/packages/packages-api-fetch)
 - [@wordpress/autop](#block-editor/reference-guides/packages/packages-autop)
 - [@wordpress/babel-plugin-import-jsx-pragma](#block-editor/reference-guides/packages/packages-babel-plugin-import-jsx-pragma)
 - [@wordpress/babel-plugin-makepot](#block-editor/reference-guides/packages/packages-babel-plugin-makepot)
@@ -250,9 +253,9 @@ Table of Contents:
 - [@wordpress/block-library](#block-editor/reference-guides/packages/packages-block-library)
 - [@wordpress/block-serialization-default-parser](#block-editor/reference-guides/packages/packages-block-serialization-default-parser)
 - [@wordpress/block-serialization-spec-parser](#block-editor/reference-guides/packages/packages-block-serialization-spec-parser)
+- [@wordpress/custom-templated-path-webpack-plugin](#block-editor/reference-guides/packages/packages-custom-templated-path-webpack-plugin)
 - [@wordpress/blocks](#block-editor/reference-guides/packages/packages-blocks)
 - [@wordpress/browserslist-config](#block-editor/reference-guides/packages/packages-browserslist-config)
-- [@wordpress/custom-templated-path-webpack-plugin](#block-editor/reference-guides/packages/packages-custom-templated-path-webpack-plugin)
 - [@wordpress/commands](#block-editor/reference-guides/packages/packages-commands)
 - [@wordpress/components](#block-editor/reference-guides/packages/packages-components)
 - [@wordpress/compose](#block-editor/reference-guides/packages/packages-compose)
@@ -269,9 +272,9 @@ Table of Contents:
 - [@wordpress/date](#block-editor/reference-guides/packages/packages-date)
 - [@wordpress/dependency-extraction-webpack-plugin](#block-editor/reference-guides/packages/packages-dependency-extraction-webpack-plugin)
 - [@wordpress/deprecated](#block-editor/reference-guides/packages/packages-deprecated)
+- [@wordpress/experiments](#block-editor/reference-guides/packages/packages-experiments)
 - [@wordpress/docgen](#block-editor/reference-guides/packages/packages-docgen)
 - [@wordpress/dom-ready](#block-editor/reference-guides/packages/packages-dom-ready)
-- [@wordpress/experiments](#block-editor/reference-guides/packages/packages-experiments)
 - [@wordpress/dom](#block-editor/reference-guides/packages/packages-dom)
 - [@wordpress/e2e-test-utils-playwright](#block-editor/reference-guides/packages/packages-e2e-test-utils-playwright)
 - [@wordpress/e2e-test-utils](#block-editor/reference-guides/packages/packages-e2e-test-utils)
@@ -399,9 +402,9 @@ Table of Contents:
 - [Triage](#block-editor/contributors/triage)
 - [Localizing Gutenberg](#block-editor/contributors/localizing)
 - [Accessibility Testing](#block-editor/contributors/accessibility-testing)
+- [Gutenberg versions in WordPress](#block-editor/contributors/versions-in-wordpress)
 - [Repository Management](#block-editor/contributors/repository-management)
 - [Folder Structure](#block-editor/contributors/folder-structure)
-- [Gutenberg versions in WordPress](#block-editor/contributors/versions-in-wordpress)
 
 # Block Editor Handbook <a name="block-editor" />
 
@@ -516,9 +519,10 @@ This guide will help you set up the right development environment to create bloc
 
 A block development environment includes the tools you need on your computer to successfully develop for the Block Editor. The three essential requirements are:
 
-1. [Code editor](#code-editor)
-2. [Node.js development tools](#node-js-development-tools)
-3. [Local WordPress environment (site)](#local-wordpress-environment)
+- [Block Development Environment](#block-development-environment)
+    - [Code editor](#code-editor)
+    - [Node.js development tools](#nodejs-development-tools)
+    - [Local WordPress environment](#local-wordpress-environment)
 
  To contribute to the Gutenberg project itself, refer to the additional documentation in the [code contribution guide](#block-editor/contributors/code/getting-started-with-code-contribution). 
 
@@ -535,7 +539,7 @@ Node.js (`node`) is an open-source runtime environment that allows you to execut
 Node.js and its accompanying development tools allow you to:
 
 - Install and run WordPress packages needed for Block Editor development, such as `wp-scripts`
-- Setup local WordPress environments with `wp-env` and `wp-now`
+- Set up local WordPress environments with `wp-env` and `@wp-playground/cli`
 - Use the latest ECMAScript features and write code in ESNext
 - Lint, format, and test JavaScript code
 - Scaffold custom blocks with the `create-block` package
@@ -557,12 +561,12 @@ In the broader WordPress community, many tools are available for setting up a lo
 
 Refer to the [Get started with `wp-env`](#block-editor/getting-started/devenv/get-started-with-wp-env) guide for setup instructions.
 
- Throughout the Handbook, you may also see references to `<a href="https://github.com/WordPress/playground-tools/tree/trunk/packages/wp-now">wp-now</a>`. This is a lightweight tool powered by <a>WordPress Playground</a> that streamlines setting up a simple local WordPress environment. While still experimental, this tool is great for quickly testing WordPress releases, plugins, and themes. 
+ Throughout the Handbook, you may also see references to `<a href="https://github.com/WordPress/wordpress-playground/tree/trunk/packages/playground/cli">@wp-playground/cli</a>`. This is a lightweight tool powered by [WordPress Playground](#playground) that streamlines setting up a simple local WordPress environment. While still experimental, this tool is great for quickly testing WordPress releases, plugins, and themes. 
 
 This list is not exhaustive, but here are several additional options to choose from if you prefer not to use `wp-env`:
 
+- [WordPress Studio](https://developer.wordpress.com/studio/)
 - [Local](https://localwp.com/)
-- [WP Studio](https://developer.wordpress.com/studio/)
 - [XAMPP](https://www.apachefriends.org/)
 - [MAMP](https://www.mamp.info/en/mamp/mac/)
 - [Varying Vagrant Vagrants](https://varyingvagrantvagrants.org/) (VVV)
@@ -4056,6 +4060,8 @@ When defining a set of possible descendant blocks, use the `allowedBlocks` block
 You can use a react hook called `useInnerBlocksProps` instead of the `InnerBlocks` component. This hook allows you to take more control over the markup of inner blocks areas.
 
 The `useInnerBlocksProps` is exported from the `@wordpress/block-editor` package same as the `InnerBlocks` component itself and supports everything the component does. It also works like the `useBlockProps` hook.
+
+It is important to note that `useBlockProps` hook must be called *before* `useInnerBlocksProps`, otherwise `useBlockProps` will return empty object.
 
 Here is the basic `useInnerBlocksProps` hook usage.
 
@@ -8500,7 +8506,7 @@ If you run into errors:
 Reference documentation used in this guide:
 
 - RichText: [`registerFormatType`](#block-editor/reference-guide/packages/packages-rich-text)
-- Components: [`RichTextToolbarButton`](#block-editor/reference-guide/packages/packages-block-editor/src/components/rich-text)
+- Components: [`RichTextToolbarButton`](#block-editor/reference-guide/packages/packages-block-editor)
 - RichText: [`applyFormat`](#block-editor/reference-guide/packages/packages-rich-text)
 - RichText: [`removeFormat`](#block-editor/reference-guide/packages/packages-rich-text)
 - RichText: [`toggleFormat`](#block-editor/reference-guide/packages/packages-rich-text)
@@ -12327,6 +12333,7 @@ This document lists the changes made between the different API versions.
 ## Version 3 (&gt;= WordPress 6.3)
 
 - The post editor will be iframed if all registered blocks have a Block API version 3 or higher. Adding version 3 support means that the block should work inside an iframe, though the block may still be rendered outside the iframe if not all blocks support version 3.
+- See [this article](https://make.wordpress.org/core/2021/06/29/blocks-in-an-iframed-template-editor/) for a migration guide to bump the API version to 3 and make them work in an iframe editor.
 
 ## Version 2 (&gt;= WordPress 5.6)
 
@@ -13796,9 +13803,9 @@ For most blocks, the return value of `save` should be an [instance of WordPress 
 
 *Note:* While it is possible to return a string value from `save`, it *will be escaped*. If the string includes HTML markup, the markup will be shown on the front of the site verbatim, not as the equivalent HTML node content. If you must return raw HTML from `save`, use `wp.element.RawHTML`. As the name implies, this is prone to [cross-site scripting](https://en.wikipedia.org/wiki/Cross-site_scripting) and therefore is discouraged in favor of a WordPress Element hierarchy whenever possible.
 
-*Note:* The save function should be a pure function that depends only on the attributes used to invoke it.  
-It can not have any side effect or retrieve information from another source, e.g. it is not possible to use the data module inside it `select( store ).selector( ... )`.  
-This is because if the external information changes, the block may be flagged as invalid when the post is later edited ([read more about Validation](#validation)).  
+*Note:* The save function should be a pure and stateless function that depends only on the attributes used to invoke it. It shouldn’t use any APIs such as `useState` or `useEffect`, nor retrieve information from another source; for example, it is not possible to use the data module inside – `select( store ).selector( ... )`.  
+This is because if the external information changes, the block may be flagged as invalid when the post is later edited ([read more about Validation](#validation)).
+
 If there is a need to have other information as part of the save, developers can consider one of these two alternatives:
 
 - Use [dynamic blocks](#block-editor/how-to-guides/block-tutorial/creating-dynamic-blocks) and dynamically retrieve the required information on the server.
@@ -15111,6 +15118,30 @@ registerBlockType( 'my-plugin/book', {} );
 
 *Note:* This name is used on the comment delimiters as `\<!-- wp:my-plugin/book -->`. Those blocks provided by core don’t include a namespace when serialized.
 
+#### Important: Choose Your Namespace Carefully
+
+Block names cannot be changed later without consequences. The block name is stored in the post content of every post using that block, so changing it requires editing all affected posts or running database scripts.
+
+#### Namespace Best Practices
+
+- Use your actual plugin/theme name: `my-awesome-plugin/block-name`
+- Avoid generic names like `editorial/`, `block/`, or `create-block/`
+- Use the same namespace for all blocks in your plugin/theme
+- Make it unique to prevent conflicts with other plugins
+
+```js
+// Good examples
+registerBlockType( 'my-company-blocks/hero', {} );
+registerBlockType( 'awesome-gallery-plugin/slideshow', {} );
+
+// Avoid these
+registerBlockType( 'create-block/example', {} ); // Too generic
+registerBlockType( 'block/content', {} ); // Too generic
+
+```
+
+*Note:* `registerBlockCollection()` only works with blocks from a single namespace.
+
 ### Block configuration
 
 - **Type:** `Object` \[ `{ key: value }` \]
@@ -15654,7 +15685,7 @@ Besides the two mandatory properties, the styles properties array should also in
 - `style_handle`: Contains the handle to an already registered style that should be enqueued in places where block styles are needed.
 - `style_data`: Contains a theme.json-like notation in an array of style properties.
 
-It is also possible to set the `is_default` property to `true` to mark one of the block styles as the default one, should one be mising.
+It is also possible to set the `is_default` property to `true` to mark one of the block styles as the default one, should one be missing.
 
 The following code sample registers a style for the quote block named “Blue Quote”, and provides an inline style that makes quote blocks with the “Blue Quote” style have blue color:
 
@@ -17078,7 +17109,7 @@ $template = array(
         ) ),
         array( 'core/column', array(), array(
             array( 'core/paragraph', array(
-                'placeholder' => 'Add a inner paragraph'
+                'placeholder' => 'Add an inner paragraph'
             ) ),
         ) ),
     ) )
@@ -17373,7 +17404,7 @@ A transformation of type `shortcode` is an object that takes the following param
 - **type** *(string)*: the value `shortcode`.
 - **tag** *(string|array)*: the shortcode tag or list of shortcode aliases this transform can work with.
 - **transform** *(function, optional)*: a callback that receives the shortcode attributes as the first argument and the [WPShortcodeMatch](#block-editor/reference-guide/packages/packages-shortcode) as the second. It should return a block object or an array of block objects. When this parameter is defined, it will take precedence over the `attributes` parameter.
-- **attributes** *(object, optional)*: object representing where the block attributes should be sourced from, according to the attributes shape defined by the [block configuration object](./block-registration.md). If a particular attribute contains a `shortcode` key, it should be a function that receives the shortcode attributes as the first arguments and the [WPShortcodeMatch](#block-editor/reference-guide/packages/packages-shortcode) as second, and returns a value for the attribute that will be sourced in the block’s comment.
+- **attributes** *(object, optional)*: object representing where the block attributes should be sourced from, according to the attributes shape defined by the [block configuration object](#block-editor/reference-guides/block-api/block-registration). If a particular attribute contains a `shortcode` key, it should be a function that receives the shortcode attributes as the first arguments and the [WPShortcodeMatch](#block-editor/reference-guide/packages/packages-shortcode) as second, and returns a value for the attribute that will be sourced in the block’s comment.
 - **isMatch** *(function, optional)*: a callback that receives the shortcode attributes per the [Shortcode API](https://codex.wordpress.org/Shortcode_API) and should return a boolean. Returning `false` from this function will prevent the shortcode to be transformed into this block.
 - **priority** *(number, optional)*: controls the priority with which a transform is applied, where a lower value will take precedence over higher values. This behaves much like a [WordPress hook](#reference). Like hooks, the default priority is `10` when not otherwise set.
 
@@ -17976,7 +18007,7 @@ Add an image or video with a text overlay. ([Source](https://github.com/WordPres
 - **Name:** core/cover
 - **Category:** media
 - **Supports:** align, anchor, color (heading, text, background, enableContrastChecker), dimensions (aspectRatio), filter (duotone), interactivity (clientNavigation), layout (allowJustification), shadow, spacing (blockGap, margin, padding), typography (fontSize, lineHeight), html
-- **Attributes:** allowedBlocks, alt, backgroundType, contentPosition, customGradient, customOverlayColor, dimRatio, focalPoint, gradient, hasParallax, id, isDark, isRepeated, isUserOverlayColor, minHeight, minHeightUnit, overlayColor, sizeSlug, tagName, templateLock, url, useFeaturedImage
+- **Attributes:** allowedBlocks, alt, backgroundType, contentPosition, customGradient, customOverlayColor, dimRatio, focalPoint, gradient, hasParallax, id, isDark, isRepeated, isUserOverlayColor, minHeight, minHeightUnit, overlayColor, poster, sizeSlug, tagName, templateLock, url, useFeaturedImage
 
 ## Details
 
@@ -18345,6 +18376,7 @@ Displays the contents of a post or page. ([Source](https://github.com/WordPress/
 - **Name:** core/post-content
 - **Category:** theme
 - **Supports:** align (full, wide), background (backgroundImage, backgroundSize), color (background, gradients, heading, link, text), dimensions (minHeight), layout, spacing (blockGap, margin, padding), typography (fontSize, lineHeight), html
+- **Attributes:** tagName
 
 ## Date
 
@@ -18353,7 +18385,7 @@ Display the publish date for an entry such as a post or page. ([Source](https://
 - **Name:** core/post-date
 - **Category:** theme
 - **Supports:** color (background, gradients, link, text), interactivity (clientNavigation), spacing (margin, padding), typography (fontSize, lineHeight), html
-- **Attributes:** displayType, format, isLink, textAlign
+- **Attributes:** datetime, format, isLink, textAlign
 
 ## Excerpt
 
@@ -18580,7 +18612,7 @@ Display an image to represent this site. Update this block and the changes apply
 
 ## Site Tagline
 
-Describe in a few words what the site is about. The tagline can be used in search results or when sharing on social networks even if it’s not displayed in the theme design. ([Source](https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/site-tagline))
+Describe in a few words what this site is about. This is important for search results, sharing on social media, and gives overall clarity to visitors. ([Source](https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/site-tagline))
 
 - **Name:** core/site-tagline
 - **Category:** theme
@@ -21334,7 +21366,7 @@ store( 'myFruitPlugin', {
 
 The derived state, regardless of whether it derives from the global state, local context, or both, can also be processed on the server by the Server Directive Processing.
 
-*Please, visit the [Understanding global state, local context and derived state](./undestanding-global-state-local-context-and-derived-state.md) guide to learn more about how derived state works in the Interactivity API.*
+*Please, visit the [Understanding global state, local context and derived state](#block-editor/reference-guides/interactivity-api/core-concepts/undestanding-global-state-local-context-and-derived-state) guide to learn more about how derived state works in the Interactivity API.*
 
 ### Derived state that can be defined statically
 
@@ -21951,7 +21983,7 @@ That’s it! Now you can access the context properties with the correct types.
 
 The derived state is data that is calculated based on the global state or local context. In the client store definition, it is defined using a getter in the `state` object.
 
-*Please, visit the [Understanding global state, local context and derived state](./undestanding-global-state-local-context-and-derived-state.md) guide to learn more about how derived state works in the Interactivity API.*
+*Please, visit the [Understanding global state, local context and derived state](#block-editor/reference-guides/interactivity-api/core-concepts/undestanding-global-state-local-context-and-derived-state) guide to learn more about how derived state works in the Interactivity API.*
 
 Following our previous example, let’s create a derived state that is the double of our counter.
 
@@ -22164,7 +22196,7 @@ type Store = {
 
 ```
 
-There’s something to keep in mind when when using asynchronous actions. Just like with the derived state, if the asynchronous action needs to return a value and this value directly depends on some part of the global state, TypeScript will not be able to infer the type due to a circular reference.
+There’s something to keep in mind when using asynchronous actions. Just like with the derived state, if an asynchronous action uses `state` within a `yield` expression (for example, by passing `state` to an async function that is then yielded) or if its return value depends on `state`, TypeScript might not be able to infer the types correctly due to a potential circular reference.
 
 ```
 ```ts
@@ -22173,33 +22205,84 @@ const { state, actions } = store( 'myCounterPlugin', {
         counter: 0,
     },
     actions: {
-        *delayedReturn() {
-            yield new Promise( ( r ) => setTimeout( r, 1000 ) );
-            return state.counter; // TypeScript can't infer this return type.
+        *delayedOperation() {
+            // Example: state.counter is used as part of the yielded logic.
+            yield fetchCounterData( state.counter );
+
+            // And/or the final return value depends on state.
+            return state.counter + 1;
         },
     },
 } );
 ```
 
-In this case, just as we did with the derived state, we must manually type the return value of the generator.
+```
 
+In such cases, TypeScript might issue a warning about a circular reference or default to `any`. To solve this, you need to manually type the generator function. The Interactivity API provides a helper type, `AsyncAction<ReturnType>`, for this purpose.
+
+```
 ```ts
+import { store, type AsyncAction } from '@wordpress/interactivity';
+
 const { state, actions } = store( 'myCounterPlugin', {
     state: {
         counter: 0,
     },
     actions: {
-        *delayedReturn(): Generator< unknown, number, unknown > {
-            yield new Promise( ( r ) => setTimeout( r, 1000 ) );
-            return state.counter; // Now this is correctly inferred.
+        *delayedOperation(): AsyncAction< number > {
+            // Now, this doesn't cause a circular reference.
+            yield fetchCounterData( state.counter );
+
+            // Now, this is correctly typed.
+            return state.counter + 1;
         },
     },
 } );
 ```
 
-That's it! Remember that the return type of a Generator is the second generic argument: `Generator< unknown, ReturnType, unknown >`.
+```
+
+That’s it! The `AsyncAction<ReturnType>` helper is defined as `Generator<any, ReturnType, unknown>`. By using `any` for the type of values yielded by the generator, it helps break the circular reference, allowing TypeScript to correctly infer the types when `state` is involved in `yield` expressions or in the final return value. You only need to specify the final `ReturnType` of your asynchronous action.
+
+### Typing yielded values in asynchronous actions
+
+While `AsyncAction<ReturnType>` types the overall generator and its final return value, the value resolved by an individual `yield` expression within that generator might still be typed as `any`.
+
+If you need to ensure the correct type for a value that a `yield` expression resolves to (e.g., the result of a `fetch` call or another async operation), you can use the `TypeYield<T>` helper. This helper takes the type of the asynchronous function/operation being yielded (`T`) and resolves to the type of the value that the promise fulfills with.
+
+Suppose `fetchCounterData` returns a promise that resolves to an object:
 
 ```
+```ts
+import { store, type AsyncAction, type TypeYield } from '@wordpress/interactivity';
+
+// Assume this function is defined elsewhere and fetches specific data.
+const fetchCounterData = async ( counterValue: number ): Promise< { current: number, next: number } > => {
+    // internal logic...
+};
+
+const { state, actions } = store( 'myCounterPlugin', {
+    state: {
+        counter: 0,
+    },
+    actions: {
+        *loadCounterData(): AsyncAction< void > {
+            // Use TypeYield to correctly type the resolved value of the yield.
+            const data = ( yield fetchCounterData( state.counter ) ) as TypeYield< typeof fetchCounterData >;
+
+            // Now, `data` is correctly typed as { current: number, next: number }.
+            console.log( data.current, data.next );
+
+            // Update state based on the fetched data.
+            state.counter = data.next;
+        },
+    },
+} );
+```
+
+```
+
+In this example, `( yield fetchCounterData( state.counter ) ) as TypeYield< typeof fetchCounterData >` ensures that the `data` constant is correctly typed as `{ current: number, next: number }`, matching the return type of `fetchCounterData`. This allows you to confidently access properties like `data.current` and `data.next` with type safety.
 
 ## Typing stores that are divided into multiple parts
 
@@ -22493,10 +22576,10 @@ When you are finished making changes, run the `npm run build` command. This opti
 
 ## View the block in action
 
-If you have a local WordPress installation already running, you can launch the commands above inside the `plugins` folder of that installation. If not, you can use [`wp-now`](https://github.com/WordPress/playground-tools/tree/trunk/packages/wp-now) to launch a WordPress site with the plugin installed by executing the following command from the plugin’s folder (`my-first-interactive-block`).
+If you have a local WordPress installation already running, you can launch the commands above inside the `plugins` folder of that installation. If not, you can use [`@wp-playground/cli`](https://github.com/WordPress/wordpress-playground/tree/trunk/packages/playground/cli) to launch a WordPress site with the plugin installed by executing the following command from the plugin’s folder (`my-first-interactive-block`).
 
 ```
-npx @wp-now/wp-now start
+npx @wp-playground/cli server --auto-mount
 
 ```
 
@@ -27772,6 +27855,600 @@ The accepted values are:
 
 ---
 
+# DateCalendar <a name="block-editor/reference-guides/components/date-calendar" />
+
+Source: https://developer.wordpress.org/block-editor/reference-guides/components/date-calendar/
+
+🔒 This component is locked as a [private API](#block-editor/reference-guides/packages/packages-private-apis). We do not yet recommend using this outside of the Gutenberg project.
+
+`DateCalendar` is a React component that provides a customizable calendar interface for **single date** selection.
+
+The component is built with accessibility in mind and follows ARIA best practices for calendar widgets. It provides keyboard navigation, screen reader support, and customizable labels for internationalization.
+
+## Usage example
+
+```tsx
+import { DateCalendar } from '@wordpress/components';
+
+function MyComponent() {
+    const [ selected, setSelected ] = useState< Date >( new Date() );
+
+    return <DateCalendar selected={ selected } onSelect={ setSelected } />;
+}
+
+```
+
+## Props
+
+These props are shared between both single date and date range calendar modes.
+
+### `required`
+
+- Type: `boolean`
+- Required: No
+- Default: `false`
+
+Whether the selection is required. When `true`, there always needs to be a date selected.
+
+### `selected`
+
+- Type: `Date | undefined | null`
+- Required: No
+
+The selected date.
+
+### `onSelect`
+
+- Type: `(selected: Date | undefined, triggerDate: Date, modifiers: Modifiers, e: React.MouseEvent | React.KeyboardEvent) => void`
+- Required: No
+
+Event handler when a day is selected.
+
+### `defaultSelected`
+
+- Type: `Date`
+- Required: No
+
+The default selected date (for uncontrolled usage).
+
+### `defaultMonth`
+
+- Type: `Date`
+- Required: No
+- Default: Current month
+
+The initial month to show in the calendar view (uncontrolled).
+
+### `month`
+
+- Type: `Date`
+- Required: No
+
+The month displayed in the calendar view (controlled). Use together with `onMonthChange` to change the month programmatically.
+
+### `numberOfMonths`
+
+- Type: `number`
+- Required: No
+- Default: `1`
+
+The number of months displayed at once.
+
+### `startMonth`
+
+- Type: `Date`
+- Required: No
+
+The earliest month to start the month navigation.
+
+### `endMonth`
+
+- Type: `Date`
+- Required: No
+
+The latest month to end the month navigation.
+
+### `autoFocus`
+
+- Type: `boolean`
+- Required: No
+
+Focus the first selected day (if set) or today’s date (if not disabled). Use this prop when you need to focus the calendar after a user action (e.g. opening the dialog with the calendar).
+
+### `disabled`
+
+- Type: `Matcher | Matcher[] | undefined`
+- Required: No
+
+Specify which days are disabled. Using `true` will disable all dates. See the [Matcher Types](#matcher-types) section for more details.
+
+### `disableNavigation`
+
+- Type: `boolean`
+- Required: No
+
+Disable the navigation buttons.
+
+### `labels`
+
+- Type: `object`
+- Required: No
+
+Use custom labels for internationalization. All labels are optional and have sensible defaults:
+
+```typescript
+{
+  labelNav?: () => string; // Navigation toolbar label
+  labelGrid?: (date: Date) => string; // Month grid label (default: "LLLL y")
+  labelGridcell?: (date: Date, modifiers?: Modifiers) => string; // Grid cell label
+  labelNext?: (month: Date | undefined) => string; // Next month button label
+  labelPrevious?: (month: Date | undefined) => string; // Previous month button label
+  labelDayButton?: (date: Date, modifiers?: Modifiers) => string; // Day button label
+  labelWeekday?: (date: Date) => string; // Weekday label
+}
+
+```
+
+**Important: For a correct localized experience, consumers should make sure the locale used for the translated labels and `locale` prop are consistent.**
+
+### `locale`
+
+- Type: `Locale`
+- Required: No
+- Default: `enUS` from `@date-fns/locale`
+
+The locale object used to localize dates. Pass a locale from `@date-fns/locale` to localize the calendar.
+
+**Important: For a correct localized experience, consumers should make sure the locale used for the translated labels and `locale` prop are consistent.**
+
+### `weekStartsOn`
+
+- Type: `0 | 1 | 2 | 3 | 4 | 5 | 6 | undefined`
+- Required: No
+- Default: Based on the `locale` prop
+
+The index of the first day of the week (0 – Sunday). Overrides the locale’s setting.
+
+### `onMonthChange`
+
+- Type: `(month: Date) => void`
+- Required: No
+
+Event fired when the user navigates between months.
+
+### `timeZone`
+
+- Type: `string`
+- Required: No
+
+The time zone (IANA or UTC offset) to use in the calendar. See [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for possible values.
+
+When working with time zones, use the `TZDate` object exported by this package instead of the native `Date` object.
+
+```tsx
+import { DateCalendar, TZDate } from '@wordpress/components';
+
+export function WithTimeZone() {
+    const timeZone = 'America/New_York';
+    const [ selected, setSelected ] = useState< Date | undefined >(
+        new TZDate( 2024, 12, 10, timeZone ) // Use `TZDate` instead of `Date`
+    );
+    return (
+        <DateCalendar
+            timeZone={ timeZone }
+            selected={ selected }
+            onSelect={ setSelected }
+        />
+    );
+}
+
+```
+
+### `role`
+
+- Type: `'application' | 'dialog' | undefined`
+- Required: No
+- Default: `'application'`
+
+The role attribute to add to the container element.
+
+## Matcher Types
+
+The calendar component uses a flexible matching system to determine which days should be disabled or have specific modifiers. Here are the available matcher types:
+
+### Boolean Matcher
+
+```typescript
+const booleanMatcher: Matcher = true; // Will always match the day
+
+```
+
+### Date Matcher
+
+```typescript
+const dateMatcher: Matcher = new Date(); // Will match today's date
+
+```
+
+### Array Matcher
+
+```typescript
+const arrayMatcher: Matcher = [
+    new Date( 2019, 1, 2 ),
+    new Date( 2019, 1, 4 ),
+]; // Will match the days in the array
+
+```
+
+### Date After Matcher
+
+```typescript
+const afterMatcher: DateAfter = { after: new Date( 2019, 1, 2 ) }; // Will match days after the 2nd of February 2019
+
+```
+
+### Date Before Matcher
+
+```typescript
+const beforeMatcher: DateBefore = { before: new Date( 2019, 1, 2 ) }; // Will match days before the 2nd of February 2019
+
+```
+
+### Date Interval Matcher
+
+```typescript
+const intervalMatcher: DateInterval = {
+    after: new Date( 2019, 1, 2 ),
+    before: new Date( 2019, 1, 5 ),
+}; // Will match the days between the 2nd and the 5th of February 2019 (exclusive)
+
+```
+
+### Date Range Matcher
+
+```typescript
+const rangeMatcher: DateRange = {
+    from: new Date( 2019, 1, 2 ),
+    to: new Date( 2019, 1, 5 ),
+}; // Will match the days between the 2nd and the 5th of February 2019 (inclusive)
+
+```
+
+### Day of Week Matcher
+
+```typescript
+const dayOfWeekMatcher: DayOfWeek = { dayOfWeek: 0 }; // Will match Sundays
+const weekendMatcher: DayOfWeek = { dayOfWeek: [ 0, 6 ] }; // Will match weekends
+
+```
+
+### Function Matcher
+
+```typescript
+const functionMatcher: Matcher = ( day: Date ) => {
+    return day.getMonth() === 2; // Will match when month is March
+};
+
+```
+
+---
+
+# DateRangeCalendar <a name="block-editor/reference-guides/components/date-range-calendar" />
+
+Source: https://developer.wordpress.org/block-editor/reference-guides/components/date-range-calendar/
+
+🔒 This component is locked as a [private API](#block-editor/reference-guides/packages/packages-private-apis). We do not yet recommend using this outside of the Gutenberg project.
+
+`DateRangeCalendar` is a React component that provides a customizable calendar interface for **date range** selection.
+
+The component is built with accessibility in mind and follows ARIA best practices for calendar widgets. It provides keyboard navigation, screen reader support, and customizable labels for internationalization.
+
+## Usage example
+
+```tsx
+import { DateRangeCalendar } from '@wordpress/components';
+
+type DateRange = {
+    from: Date | undefined;
+    to?: Date | undefined;
+};
+
+function MyComponent() {
+    const [ selected, setSelected ] = useState< DateRange >( {
+        from: new Date( date.getFullYear(), date.getMonth(), 1 ),
+        to: new Date(),
+    } );
+
+    return <DateRangeCalendar selected={ selected } onSelect={ setSelected } />;
+}
+
+```
+
+## Props
+
+These props are shared between both single date and date range calendar modes.
+
+### `required`
+
+- Type: `boolean`
+- Required: No
+- Default: `false`
+
+Whether the selection is required. When `true`, there always needs to be a date selected.
+
+### `selected`
+
+- Type: `DateRange | undefined | null`
+- Required: No
+
+The selected date range. A `DateRange` object has the following shape:
+
+```typescript
+{
+  from: Date | undefined;
+  to?: Date | undefined;
+}
+
+```
+
+### `onSelect`
+
+- Type: `(selected: DateRange | undefined, triggerDate: Date, modifiers: Modifiers, e: React.MouseEvent | React.KeyboardEvent) => void`
+- Required: No
+
+Event handler when the selection changes. The `selected` parameter will contain the new date range.
+
+### `defaultSelected`
+
+- Type: `DateRange`
+- Required: No
+
+The default selected range (for uncontrolled usage).
+
+### `excludeDisabled`
+
+- Type: `boolean`
+- Required: No
+
+When `true`, the range will reset when including a disabled day. This is useful to prevent users from selecting ranges that include unavailable dates.
+
+### `min`
+
+- Type: `number`
+- Required: No
+
+The minimum number of days to include in the range. If a user tries to select a range shorter than this, the selection will be adjusted to meet the minimum requirement.
+
+### `max`
+
+- Type: `number`
+- Required: No
+
+The maximum number of days to include in the range. If a user tries to select a range longer than this, the selection will be adjusted to meet the maximum requirement.
+
+### `defaultMonth`
+
+- Type: `Date`
+- Required: No
+- Default: Current month
+
+The initial month to show in the calendar view (uncontrolled).
+
+### `month`
+
+- Type: `Date`
+- Required: No
+
+The month displayed in the calendar view (controlled). Use together with `onMonthChange` to change the month programmatically.
+
+### `numberOfMonths`
+
+- Type: `number`
+- Required: No
+- Default: `1`
+
+The number of months displayed at once.
+
+### `startMonth`
+
+- Type: `Date`
+- Required: No
+
+The earliest month to start the month navigation.
+
+### `endMonth`
+
+- Type: `Date`
+- Required: No
+
+The latest month to end the month navigation.
+
+### `autoFocus`
+
+- Type: `boolean`
+- Required: No
+
+Focus the first selected day (if set) or today’s date (if not disabled). Use this prop when you need to focus the calendar after a user action (e.g. opening the dialog with the calendar).
+
+### `disabled`
+
+- Type: `Matcher | Matcher[] | undefined`
+- Required: No
+
+Specify which days are disabled. Using `true` will disable all dates. See the [Matcher Types](#matcher-types) section for more details.
+
+### `disableNavigation`
+
+- Type: `boolean`
+- Required: No
+
+Disable the navigation buttons.
+
+### `labels`
+
+- Type: `object`
+- Required: No
+
+Use custom labels for internationalization. All labels are optional and have sensible defaults:
+
+```typescript
+{
+  labelNav?: () => string; // Navigation toolbar label
+  labelGrid?: (date: Date) => string; // Month grid label (default: "LLLL y")
+  labelGridcell?: (date: Date, modifiers?: Modifiers) => string; // Grid cell label
+  labelNext?: (month: Date | undefined) => string; // Next month button label
+  labelPrevious?: (month: Date | undefined) => string; // Previous month button label
+  labelDayButton?: (date: Date, modifiers?: Modifiers) => string; // Day button label
+  labelWeekday?: (date: Date) => string; // Weekday label
+}
+
+```
+
+**Important: For a correct localized experience, consumers should make sure the locale used for the translated labels and `locale` prop are consistent.**
+
+### `locale`
+
+- Type: `Locale`
+- Required: No
+- Default: `enUS` from `@date-fns/locale`
+
+The locale object used to localize dates. Pass a locale from `@date-fns/locale` to localize the calendar.
+
+**Important: For a correct localized experience, consumers should make sure the locale used for the translated labels and `locale` prop are consistent.**
+
+### `weekStartsOn`
+
+- Type: `0 | 1 | 2 | 3 | 4 | 5 | 6 | undefined`
+- Required: No
+- Default: Based on the `locale` prop
+
+The index of the first day of the week (0 – Sunday). Overrides the locale’s setting.
+
+### `onMonthChange`
+
+- Type: `(month: Date) => void`
+- Required: No
+
+Event fired when the user navigates between months.
+
+### `timeZone`
+
+- Type: `string`
+- Required: No
+
+The time zone (IANA or UTC offset) to use in the calendar. See [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for possible values.
+
+When working with time zones, use the `TZDate` object exported by this package instead of the native `Date` object.
+
+```tsx
+import { DateRangeCalendar, TZDate } from '@wordpress/components';
+
+export function WithTimeZone() {
+    const timeZone = 'America/New_York';
+    const [ selected, setSelected ] = useState< Date | undefined >( {
+        from: new TZDate( 2024, 12, 10, timeZone ), // Use `TZDate` instead of `Date`
+        to: new TZDate( 2024, 12, 8, timeZone ), // Use `TZDate` instead of `Date`
+    } );
+    return (
+        <DateRangeCalendar
+            timeZone={ timeZone }
+            selected={ selected }
+            onSelect={ setSelected }
+        />
+    );
+}
+
+```
+
+### `role`
+
+- Type: `'application' | 'dialog' | undefined`
+- Required: No
+- Default: `'application'`
+
+The role attribute to add to the container element.
+
+## Matcher Types
+
+The calendar component uses a flexible matching system to determine which days should be disabled or have specific modifiers. Here are the available matcher types:
+
+### Boolean Matcher
+
+```typescript
+const booleanMatcher: Matcher = true; // Will always match the day
+
+```
+
+### Date Matcher
+
+```typescript
+const dateMatcher: Matcher = new Date(); // Will match today's date
+
+```
+
+### Array Matcher
+
+```typescript
+const arrayMatcher: Matcher = [
+    new Date( 2019, 1, 2 ),
+    new Date( 2019, 1, 4 ),
+]; // Will match the days in the array
+
+```
+
+### Date After Matcher
+
+```typescript
+const afterMatcher: DateAfter = { after: new Date( 2019, 1, 2 ) }; // Will match days after the 2nd of February 2019
+
+```
+
+### Date Before Matcher
+
+```typescript
+const beforeMatcher: DateBefore = { before: new Date( 2019, 1, 2 ) }; // Will match days before the 2nd of February 2019
+
+```
+
+### Date Interval Matcher
+
+```typescript
+const intervalMatcher: DateInterval = {
+    after: new Date( 2019, 1, 2 ),
+    before: new Date( 2019, 1, 5 ),
+}; // Will match the days between the 2nd and the 5th of February 2019 (exclusive)
+
+```
+
+### Date Range Matcher
+
+```typescript
+const rangeMatcher: DateRange = {
+    from: new Date( 2019, 1, 2 ),
+    to: new Date( 2019, 1, 5 ),
+}; // Will match the days between the 2nd and the 5th of February 2019 (inclusive)
+
+```
+
+### Day of Week Matcher
+
+```typescript
+const dayOfWeekMatcher: DayOfWeek = { dayOfWeek: 0 }; // Will match Sundays
+const weekendMatcher: DayOfWeek = { dayOfWeek: [ 0, 6 ] }; // Will match weekends
+
+```
+
+### Function Matcher
+
+```typescript
+const functionMatcher: Matcher = ( day: Date ) => {
+    return day.getMonth() === 2; // Will match when month is March
+};
+
+```
+
+---
+
 # CardBody <a name="block-editor/reference-guides/components/card-body" />
 
 Source: https://developer.wordpress.org/block-editor/reference-guides/components/card-body/
@@ -28885,6 +29562,107 @@ Start opting into the new margin-free styles that will become the default in a f
 
 ---
 
+# Flyout <a name="block-editor/reference-guides/components/flyout" />
+
+Source: https://developer.wordpress.org/block-editor/reference-guides/components/flyout/
+
+This feature is still experimental. “Experimental” means this is an early implementation subject to drastic and breaking changes. 
+
+`Flyout` is a component to render a floating content modal. It is similar in purpose to a tooltip, but renders content of any sort, not only simple text.
+
+## Usage
+
+```php
+import { Button, __experimentalFlyout as Flyout, __experimentalText as Text } from '@wordpress/components';
+
+function Example() {
+    return (
+        <Flyout trigger={ <Button>Show/Hide content</Button> }>
+            <Text>Code is Poetry</Text>
+        </Flyout>
+    );
+}
+```
+
+## Props
+
+### `state`: `PopoverStateReturn`
+
+- Required: No
+
+### `label`: `string`
+
+- Required: No
+
+### `animated`: `boolean`
+
+Determines if `Flyout` has animations.
+
+- Required: No
+- Default: `true`
+
+### `animationDuration`: `boolean`
+
+The duration of `Flyout` animations.
+
+- Required: No
+- Default: `160`
+
+### `baseId`: `string`
+
+ID that will serve as a base for all the items IDs. See https://reakit.io/docs/popover/#usepopoverstate
+
+- Required: No
+- Default: `160`
+
+### `elevation`: `number`
+
+Size of the elevation shadow. For more information, check out [`Card`](#block-editor/reference-guide/components/card/card).
+
+- Required: No
+- Default: `5`
+
+### `maxWidth`: `CSSProperties[ 'maxWidth' ]`
+
+Max-width for the `Flyout` element.
+
+- Required: No
+- Default: `360`
+
+### `onVisibleChange`: `( ...args: any ) => void`
+
+Callback for when the `visible` state changes.
+
+- Required: No
+
+### `trigger`: `FunctionComponentElement< any >`
+
+Element that triggers the `visible` state of `Flyout` when clicked.
+
+```php
+<Flyout trigger={<Button>Greet</Button>}>
+    <Text>Hi! I'm Olaf!</Text>
+</Flyout>
+```
+
+- Required: Yes
+
+### `visible`: `boolean`
+
+Whether `Flyout` is visible. See [the `Reakit` docs](https://reakit.io/docs/popover/#usepopoverstate) for more information.
+
+- Required: No
+- Default: `false`
+
+### `placement`: `PopperPlacement`
+
+Position of the popover element. See [the `popper` docs](https://popper.js.org/docs/v1/#popperplacements--codeenumcode) for more information.
+
+- Required: No
+- Default: `auto`
+
+---
+
 # Composite <a name="block-editor/reference-guides/components/composite" />
 
 Source: https://developer.wordpress.org/block-editor/reference-guides/components/composite/
@@ -29511,107 +30289,6 @@ Start opting into the larger default height that will become the default size in
 - To select one or more items from a set, use the `CheckboxControl` component.
 - To toggle a single setting on or off, use the `ToggleControl` component.
 - If you have a lot of items, `ComboboxControl` might be a better fit.
-
----
-
-# Flyout <a name="block-editor/reference-guides/components/flyout" />
-
-Source: https://developer.wordpress.org/block-editor/reference-guides/components/flyout/
-
-This feature is still experimental. “Experimental” means this is an early implementation subject to drastic and breaking changes. 
-
-`Flyout` is a component to render a floating content modal. It is similar in purpose to a tooltip, but renders content of any sort, not only simple text.
-
-## Usage
-
-```php
-import { Button, __experimentalFlyout as Flyout, __experimentalText as Text } from '@wordpress/components';
-
-function Example() {
-    return (
-        <Flyout trigger={ <Button>Show/Hide content</Button> }>
-            <Text>Code is Poetry</Text>
-        </Flyout>
-    );
-}
-```
-
-## Props
-
-### `state`: `PopoverStateReturn`
-
-- Required: No
-
-### `label`: `string`
-
-- Required: No
-
-### `animated`: `boolean`
-
-Determines if `Flyout` has animations.
-
-- Required: No
-- Default: `true`
-
-### `animationDuration`: `boolean`
-
-The duration of `Flyout` animations.
-
-- Required: No
-- Default: `160`
-
-### `baseId`: `string`
-
-ID that will serve as a base for all the items IDs. See https://reakit.io/docs/popover/#usepopoverstate
-
-- Required: No
-- Default: `160`
-
-### `elevation`: `number`
-
-Size of the elevation shadow. For more information, check out [`Card`](#block-editor/reference-guide/components/card/card).
-
-- Required: No
-- Default: `5`
-
-### `maxWidth`: `CSSProperties[ 'maxWidth' ]`
-
-Max-width for the `Flyout` element.
-
-- Required: No
-- Default: `360`
-
-### `onVisibleChange`: `( ...args: any ) => void`
-
-Callback for when the `visible` state changes.
-
-- Required: No
-
-### `trigger`: `FunctionComponentElement< any >`
-
-Element that triggers the `visible` state of `Flyout` when clicked.
-
-```php
-<Flyout trigger={<Button>Greet</Button>}>
-    <Text>Hi! I'm Olaf!</Text>
-</Flyout>
-```
-
-- Required: Yes
-
-### `visible`: `boolean`
-
-Whether `Flyout` is visible. See [the `Reakit` docs](https://reakit.io/docs/popover/#usepopoverstate) for more information.
-
-- Required: No
-- Default: `false`
-
-### `placement`: `PopperPlacement`
-
-Position of the popover element. See [the `popper` docs](https://popper.js.org/docs/v1/#popperplacements--codeenumcode) for more information.
-
-- Required: No
-- Default: `auto`
 
 ---
 
@@ -36928,6 +37605,153 @@ Check out the [Storybook page](https://wordpress.github.io/gutenberg/?path=/docs
 
 ---
 
+# TextControl <a name="block-editor/reference-guides/components/text-control" />
+
+Source: https://developer.wordpress.org/block-editor/reference-guides/components/text-control/
+
+TextControl components let users enter and edit text.
+
+![Unfilled and filled TextControl components](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl.png?ssl=1)
+
+## Design guidelines
+
+### Usage
+
+#### When to use TextControls
+
+TextControls are best used for free text entry. If you have a set of predefined options you want users to select from, it’s best to use a more constrained component, such as a SelectControl, RadioControl, CheckboxControl, or RangeControl.
+
+Because TextControls are single-line fields, they are not suitable for collecting long responses. For those, use a text area instead.
+
+TextControls should:
+
+- Stand out and indicate that users can input information.
+- Have clearly differentiated states (selected/unselected, active/inactive).
+- Make it easy to understand the requested information and to address any errors.
+- Have visible labels; placeholder text is not an acceptable replacement for a label as it vanishes when users start typing.
+
+### Anatomy
+
+![Features of a TextControl component with numbered labels](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl-Anatomy.png?ssl=1)
+
+1. Label
+2. Input container
+3. Input text
+
+#### Label text
+
+Label text is used to inform users as to what information is requested for a text field. Every text field should have a label. Label text should be above the input field, and always visible.
+
+#### Containers
+
+Containers improve the discoverability of text fields by creating contrast between the text field and surrounding content.
+
+![A TextControl with a stroke around the container to clearly indicate the input area](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl-Do.png?ssl=1)
+
+**Do**  
+A stroke around the container clearly indicates that users can input information.
+
+![A TextControl without a clear visual marker to indicate the input area](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl-Dont.png?ssl=1)
+
+**Don’t**  
+Don’t use unclear visual markers to indicate a text field.
+
+## Development guidelines
+
+### Usage
+
+Render a user interface to input the name of an additional css class.
+
+```js
+import { useState } from 'react';
+import { TextControl } from '@wordpress/components';
+
+const MyTextControl = () => {
+    const [ className, setClassName ] = useState( '' );
+
+    return (
+        <TextControl
+            __nextHasNoMarginBottom
+            __next40pxDefaultSize
+            label="Additional CSS Class"
+            value={ className }
+            onChange={ ( value ) => setClassName( value ) }
+        />
+    );
+};
+
+```
+
+### Props
+
+The set of props accepted by the component will be specified below.  
+Props not included in this set will be applied to the input element.
+
+#### label
+
+If this property is added, a label will be generated using label property as the content.
+
+- Type: `String`
+- Required: No
+
+#### hideLabelFromVision
+
+If true, the label will only be visible to screen readers.
+
+- Type: `Boolean`
+- Required: No
+
+#### help
+
+If this property is added, a help text will be generated using help property as the content.
+
+- Type: `String`
+- Required: No
+
+#### type
+
+Type of the input element to render. Defaults to “text”.
+
+- Type: `String`
+- Required: No
+- Default: “text”
+
+#### value
+
+The current value of the input.
+
+- Type: `String | Number`
+- Required: Yes
+
+#### className
+
+The class that will be added with “components-base-control” to the classes of the wrapper div.  
+If no className is passed only components-base-control is used.
+
+- Type: `String`
+- Required: No
+
+#### onChange
+
+A function that receives the value of the input.
+
+- Type: `function`
+- Required: Yes
+
+#### \_\_next40pxDefaultSize
+
+Start opting into the larger default height that will become the default size in a future version.
+
+- Type: `Boolean`
+- Required: No
+- Default: `false`
+
+## Related components
+
+- To offer users more constrained options for input, use SelectControl, RadioControl, CheckboxControl, or RangeControl.
+
+---
+
 # Surface <a name="block-editor/reference-guides/components/surface" />
 
 Source: https://developer.wordpress.org/block-editor/reference-guides/components/surface/
@@ -37170,153 +37994,6 @@ A function which renders the tabviews given the selected tab. The function is pa
 
 ---
 
-# TextControl <a name="block-editor/reference-guides/components/text-control" />
-
-Source: https://developer.wordpress.org/block-editor/reference-guides/components/text-control/
-
-TextControl components let users enter and edit text.
-
-![Unfilled and filled TextControl components](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl.png?ssl=1)
-
-## Design guidelines
-
-### Usage
-
-#### When to use TextControls
-
-TextControls are best used for free text entry. If you have a set of predefined options you want users to select from, it’s best to use a more constrained component, such as a SelectControl, RadioControl, CheckboxControl, or RangeControl.
-
-Because TextControls are single-line fields, they are not suitable for collecting long responses. For those, use a text area instead.
-
-TextControls should:
-
-- Stand out and indicate that users can input information.
-- Have clearly differentiated states (selected/unselected, active/inactive).
-- Make it easy to understand the requested information and to address any errors.
-- Have visible labels; placeholder text is not an acceptable replacement for a label as it vanishes when users start typing.
-
-### Anatomy
-
-![Features of a TextControl component with numbered labels](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl-Anatomy.png?ssl=1)
-
-1. Label
-2. Input container
-3. Input text
-
-#### Label text
-
-Label text is used to inform users as to what information is requested for a text field. Every text field should have a label. Label text should be above the input field, and always visible.
-
-#### Containers
-
-Containers improve the discoverability of text fields by creating contrast between the text field and surrounding content.
-
-![A TextControl with a stroke around the container to clearly indicate the input area](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl-Do.png?ssl=1)
-
-**Do**  
-A stroke around the container clearly indicates that users can input information.
-
-![A TextControl without a clear visual marker to indicate the input area](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl-Dont.png?ssl=1)
-
-**Don’t**  
-Don’t use unclear visual markers to indicate a text field.
-
-## Development guidelines
-
-### Usage
-
-Render a user interface to input the name of an additional css class.
-
-```js
-import { useState } from 'react';
-import { TextControl } from '@wordpress/components';
-
-const MyTextControl = () => {
-    const [ className, setClassName ] = useState( '' );
-
-    return (
-        <TextControl
-            __nextHasNoMarginBottom
-            __next40pxDefaultSize
-            label="Additional CSS Class"
-            value={ className }
-            onChange={ ( value ) => setClassName( value ) }
-        />
-    );
-};
-
-```
-
-### Props
-
-The set of props accepted by the component will be specified below.  
-Props not included in this set will be applied to the input element.
-
-#### label
-
-If this property is added, a label will be generated using label property as the content.
-
-- Type: `String`
-- Required: No
-
-#### hideLabelFromVision
-
-If true, the label will only be visible to screen readers.
-
-- Type: `Boolean`
-- Required: No
-
-#### help
-
-If this property is added, a help text will be generated using help property as the content.
-
-- Type: `String`
-- Required: No
-
-#### type
-
-Type of the input element to render. Defaults to “text”.
-
-- Type: `String`
-- Required: No
-- Default: “text”
-
-#### value
-
-The current value of the input.
-
-- Type: `String | Number`
-- Required: Yes
-
-#### className
-
-The class that will be added with “components-base-control” to the classes of the wrapper div.  
-If no className is passed only components-base-control is used.
-
-- Type: `String`
-- Required: No
-
-#### onChange
-
-A function that receives the value of the input.
-
-- Type: `function`
-- Required: Yes
-
-#### \_\_next40pxDefaultSize
-
-Start opting into the larger default height that will become the default size in a future version.
-
-- Type: `Boolean`
-- Required: No
-- Default: `false`
-
-## Related components
-
-- To offer users more constrained options for input, use SelectControl, RadioControl, CheckboxControl, or RangeControl.
-
----
-
 # TextHighlight <a name="block-editor/reference-guides/components/text-highlight" />
 
 Source: https://developer.wordpress.org/block-editor/reference-guides/components/text-highlight/
@@ -37358,6 +38035,156 @@ The string of text to be tested for occurrences of then given `highlight`.
 
 - Required: Yes
 - Default: `''`
+
+---
+
+# TextareaControl <a name="block-editor/reference-guides/components/textarea-control" />
+
+Source: https://developer.wordpress.org/block-editor/reference-guides/components/textarea-control/
+
+TextareaControls are TextControls that allow for multiple lines of text, and wrap overflow text onto a new line. They are a fixed height and scroll vertically when the cursor reaches the bottom of the field.
+
+![An empty TextareaControl, and a focused TextareaControl with some content entered.](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl.png?ssl=1)
+
+## Design guidelines
+
+### Usage
+
+#### When to use TextareaControl
+
+Use TextareaControl when you need to encourage users enter an amount of text that’s longer than a single line. (A bigger box can encourage people to be more verbose, where a smaller one encourages them to be succinct.)
+
+TextareaControl should:
+
+- Stand out from the background of the page and indicate that users can input information.
+- Have clearly differentiated active/inactive states, including focus styling.
+- Make it easy to understand and address any errors via clear and direct error notices.
+- Make it easy to understand the requested information by using a clear and descriptive label.
+
+#### When not to use TextareaControl
+
+Do not use TextareaControl if you need to let users enter shorter answers (no longer than a single line), such as a phone number or name. In this case, you should use `Text Control`.
+
+![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Answers-Do.png?ssl=1)
+
+**Do**
+
+Use TextareaControl to let users to enter text longer than a single line.
+
+![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Answers-Dont.png?ssl=1)
+
+**Don’t**
+
+Use TextareaControl for shorter answers.
+
+## Anatomy
+
+![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Anatomy.png?ssl=1)
+
+1. Container
+2. Label
+
+### Containers
+
+Containers improve the discoverability of text fields by creating contrast between the text field and surrounding content.
+
+![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Stroke-Do.png?ssl=1)
+
+**Do**  
+Use a stroke around the container, which clearly indicates that users can input information.
+
+![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Stroke-Dont.png?ssl=1)
+
+**Don’t**  
+Use unclear visual markers to indicate a text field.
+
+### Label text
+
+Label text is used to inform users as to what information is requested for a text field. Every text field should have a label. Label text should be above the input field, and always visible. Write labels in sentence capitalization.
+
+### Error text
+
+When text input isn’t accepted, an error message can display instructions on how to fix it. Error messages are displayed below the input line, replacing helper text until fixed.
+
+![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Error.png?ssl=1)
+
+## Development guidelines
+
+### Usage
+
+```jsx
+import { useState } from 'react';
+import { TextareaControl } from '@wordpress/components';
+
+const MyTextareaControl = () => {
+    const [ text, setText ] = useState( '' );
+
+    return (
+        <TextareaControl
+          __nextHasNoMarginBottom
+            label="Text"
+            help="Enter some text"
+            value={ text }
+            onChange={ ( value ) => setText( value ) }
+        />
+    );
+};
+
+```
+
+### Props
+
+The set of props accepted by the component will be specified below.
+
+Props not included in this set will be applied to the textarea element.
+
+#### `help`: `string | Element`
+
+If this property is added, a help text will be generated using help property as the content.
+
+- Required: No
+
+#### `hideLabelFromVision`: `boolean`
+
+If true, the label will only be visible to screen readers.
+
+- Required: No
+
+#### `label`: `string`
+
+If this property is added, a label will be generated using label property as the content.
+
+- Required: No
+
+#### `onChange`: `( value: string ) => void`
+
+A function that receives the new value of the textarea each time it changes.
+
+- Required: Yes
+
+#### `rows`: `number`
+
+The number of rows the textarea should contain.
+
+- Required: No
+- Default: 4
+
+#### `value`: `string`
+
+The current value of the textarea.
+
+- Required: Yes
+
+#### `__nextHasNoMarginBottom`: `Boolean`
+
+Start opting into the new margin-free styles that will become the default in a future version.
+
+- Required: No
+- Default: `false`
+
+## Related components
+
+- For a field where users only enter one line of text, use the `TextControl` component.
 
 ---
 
@@ -37614,156 +38441,6 @@ function Example() {
 **Type**: `CSSProperties['fontWeight']`,`TextWeight`
 
 Adjusts font-weight of the text.
-
----
-
-# TextareaControl <a name="block-editor/reference-guides/components/textarea-control" />
-
-Source: https://developer.wordpress.org/block-editor/reference-guides/components/textarea-control/
-
-TextareaControls are TextControls that allow for multiple lines of text, and wrap overflow text onto a new line. They are a fixed height and scroll vertically when the cursor reaches the bottom of the field.
-
-![An empty TextareaControl, and a focused TextareaControl with some content entered.](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl.png?ssl=1)
-
-## Design guidelines
-
-### Usage
-
-#### When to use TextareaControl
-
-Use TextareaControl when you need to encourage users enter an amount of text that’s longer than a single line. (A bigger box can encourage people to be more verbose, where a smaller one encourages them to be succinct.)
-
-TextareaControl should:
-
-- Stand out from the background of the page and indicate that users can input information.
-- Have clearly differentiated active/inactive states, including focus styling.
-- Make it easy to understand and address any errors via clear and direct error notices.
-- Make it easy to understand the requested information by using a clear and descriptive label.
-
-#### When not to use TextareaControl
-
-Do not use TextareaControl if you need to let users enter shorter answers (no longer than a single line), such as a phone number or name. In this case, you should use `Text Control`.
-
-![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Answers-Do.png?ssl=1)
-
-**Do**
-
-Use TextareaControl to let users to enter text longer than a single line.
-
-![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Answers-Dont.png?ssl=1)
-
-**Don’t**
-
-Use TextareaControl for shorter answers.
-
-## Anatomy
-
-![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Anatomy.png?ssl=1)
-
-1. Container
-2. Label
-
-### Containers
-
-Containers improve the discoverability of text fields by creating contrast between the text field and surrounding content.
-
-![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Stroke-Do.png?ssl=1)
-
-**Do**  
-Use a stroke around the container, which clearly indicates that users can input information.
-
-![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Stroke-Dont.png?ssl=1)
-
-**Don’t**  
-Use unclear visual markers to indicate a text field.
-
-### Label text
-
-Label text is used to inform users as to what information is requested for a text field. Every text field should have a label. Label text should be above the input field, and always visible. Write labels in sentence capitalization.
-
-### Error text
-
-When text input isn’t accepted, an error message can display instructions on how to fix it. Error messages are displayed below the input line, replacing helper text until fixed.
-
-![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Error.png?ssl=1)
-
-## Development guidelines
-
-### Usage
-
-```jsx
-import { useState } from 'react';
-import { TextareaControl } from '@wordpress/components';
-
-const MyTextareaControl = () => {
-    const [ text, setText ] = useState( '' );
-
-    return (
-        <TextareaControl
-          __nextHasNoMarginBottom
-            label="Text"
-            help="Enter some text"
-            value={ text }
-            onChange={ ( value ) => setText( value ) }
-        />
-    );
-};
-
-```
-
-### Props
-
-The set of props accepted by the component will be specified below.
-
-Props not included in this set will be applied to the textarea element.
-
-#### `help`: `string | Element`
-
-If this property is added, a help text will be generated using help property as the content.
-
-- Required: No
-
-#### `hideLabelFromVision`: `boolean`
-
-If true, the label will only be visible to screen readers.
-
-- Required: No
-
-#### `label`: `string`
-
-If this property is added, a label will be generated using label property as the content.
-
-- Required: No
-
-#### `onChange`: `( value: string ) => void`
-
-A function that receives the new value of the textarea each time it changes.
-
-- Required: Yes
-
-#### `rows`: `number`
-
-The number of rows the textarea should contain.
-
-- Required: No
-- Default: 4
-
-#### `value`: `string`
-
-The current value of the textarea.
-
-- Required: Yes
-
-#### `__nextHasNoMarginBottom`: `Boolean`
-
-Start opting into the new margin-free styles that will become the default in a future version.
-
-- Required: No
-- Default: `false`
-
-## Related components
-
-- For a field where users only enter one line of text, use the `TextControl` component.
 
 ---
 
@@ -39969,6 +40646,192 @@ You need to include `wp-annotations` as a dependency of the JavaScript file in w
 ## Usage
 
 [See this page for more detailed usage instructions](#block-editor/developers/block-api/block-annotations).
+
+## Contributing to this package
+
+This is an individual package that’s part of the Gutenberg project. The project is organized as a monorepo. It’s made up of multiple self-contained software packages, each with a specific purpose. The packages in this monorepo are published to [npm](https://www.npmjs.com/) and used by [WordPress](https://make.wordpress.org/core/) as well as other software projects.
+
+To find out more about contributing to this package or Gutenberg as a whole, please read the project’s main [contributor guide](https://github.com/WordPress/gutenberg/tree/HEAD/CONTRIBUTING.md).
+
+---
+
+# @wordpress/api-fetch <a name="block-editor/reference-guides/packages/packages-api-fetch" />
+
+Source: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-api-fetch/
+
+Utility to make WordPress REST API requests. It’s a wrapper around `window.fetch`.
+
+## Installation
+
+Install the module
+
+```bash
+npm install @wordpress/api-fetch --save
+
+```
+
+*This package assumes that your code will run in an **ES2015+** environment. If you’re using an environment that has limited or no support for such language features and APIs, you should include [the polyfill shipped in `@wordpress/babel-preset-default`](https://github.com/WordPress/gutenberg/tree/HEAD/packages/babel-preset-default#polyfill) in your code.*
+
+## Usage
+
+### GET
+
+```js
+import apiFetch from '@wordpress/api-fetch';
+
+apiFetch( { path: '/wp/v2/posts' } ).then( ( posts ) => {
+    console.log( posts );
+} );
+
+```
+
+### GET with Query Args
+
+```js
+import apiFetch from '@wordpress/api-fetch';
+import { addQueryArgs } from '@wordpress/url';
+
+const queryParams = { include: [1,2,3] }; // Return posts with ID = 1,2,3.
+
+apiFetch( { path: addQueryArgs( '/wp/v2/posts', queryParams ) } ).then( ( posts ) => {
+    console.log( posts );
+} );
+
+```
+
+### POST
+
+```js
+apiFetch( {
+    path: '/wp/v2/posts/1',
+    method: 'POST',
+    data: { title: 'New Post Title' },
+} ).then( ( res ) => {
+    console.log( res );
+} );
+
+```
+
+### Options
+
+`apiFetch` supports and passes through all [options of the `fetch` global](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch).
+
+Additionally, the following options are available:
+
+#### `path` (`string`)
+
+Shorthand to be used in place of `url`, appended to the REST API root URL for the current site.
+
+#### `url` (`string`)
+
+Absolute URL to the endpoint from which to fetch.
+
+#### `parse` (`boolean`, default `true`)
+
+Unlike `fetch`, the `Promise` return value of `apiFetch` will resolve to the parsed JSON result. Disable this behavior by passing `parse` as `false`.
+
+#### `data` (`object`)
+
+Sent on `POST` or `PUT` requests only. Shorthand to be used in place of `body`, accepts an object value to be stringified to JSON.
+
+### Aborting a request
+
+Aborting a request can be achieved through the use of [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) in the same way as you would when using the native `fetch` API.
+
+For legacy browsers that don’t support `AbortController`, you can either:
+
+- Provide your own polyfill of `AbortController` if you still want it to be abortable.
+- Ignore it as shown in the example below.
+
+**Example**
+
+```js
+const controller =
+    typeof AbortController === 'undefined' ? undefined : new AbortController();
+
+apiFetch( { path: '/wp/v2/posts', signal: controller?.signal } ).catch(
+    ( error ) => {
+        // If the browser doesn't support AbortController then the code below will never log.
+        // However, in most cases this should be fine as it can be considered to be a progressive enhancement.
+        if ( error.name === 'AbortError' ) {
+            console.log( 'Request has been aborted' );
+        }
+    }
+);
+
+controller?.abort();
+
+```
+
+### Middlewares
+
+the `api-fetch` package supports middlewares. Middlewares are functions you can use to wrap the `apiFetch` calls to perform any pre/post process to the API requests.
+
+**Example**
+
+```js
+import apiFetch from '@wordpress/api-fetch';
+
+apiFetch.use( ( options, next ) => {
+    const start = Date.now();
+    const result = next( options );
+    result.then( () => {
+        console.log( 'The request took ' + ( Date.now() - start ) + 'ms' );
+    } );
+    return result;
+} );
+
+```
+
+### Built-in middlewares
+
+The `api-fetch` package provides built-in middlewares you can use to provide a `nonce` and a custom `rootURL`.
+
+**Nonce middleware**
+
+```js
+import apiFetch from '@wordpress/api-fetch';
+
+const nonce = 'nonce value';
+apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
+
+```
+
+The function returned by `createNonceMiddleware` includes a `nonce` property corresponding to the actively used nonce. You may also assign to this property if you have a fresh nonce value to use.
+
+**Root URL middleware**
+
+```js
+import apiFetch from '@wordpress/api-fetch';
+
+const rootURL = 'http://my-wordpress-site/wp-json/';
+apiFetch.use( apiFetch.createRootURLMiddleware( rootURL ) );
+
+```
+
+### Custom fetch handler
+
+The `api-fetch` package uses `window.fetch` for making the requests but you can use a custom fetch handler by using the `setFetchHandler` method. The custom fetch handler will receive the `options` passed to the `apiFetch` calls.
+
+**Example**
+
+The example below uses a custom fetch handler for making all the requests with [`axios`](https://github.com/axios/axios).
+
+```js
+import apiFetch from '@wordpress/api-fetch';
+import axios from 'axios';
+
+apiFetch.setFetchHandler( ( options ) => {
+    const { url, path, data, method } = options;
+
+    return axios( {
+        url: url || path,
+        method,
+        data,
+    } );
+} );
+
+```
 
 ## Contributing to this package
 
@@ -42226,6 +43089,82 @@ To find out more about contributing to this package or Gutenberg as a whole, ple
 
 ---
 
+# @wordpress/custom-templated-path-webpack-plugin <a name="block-editor/reference-guides/packages/packages-custom-templated-path-webpack-plugin" />
+
+Source: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-custom-templated-path-webpack-plugin/
+
+> **DEPRECATED for webpack v5**: please use [`output.filename`](https://webpack.js.org/configuration/output/#outputfilename) instead.
+
+Webpack plugin for creating custom path template tags. Extend the [default set of template tags](https://webpack.js.org/configuration/output/#output-filename) with your own custom behavior. Hooks into Webpack’s compilation process to allow you to replace tags with a substitute value.
+
+## Installation
+
+Install the module
+
+```bash
+npm install @wordpress/custom-templated-path-webpack-plugin --save-dev
+
+```
+
+**Note**: This package requires Node.js 12.0.0 or later. It is not compatible with older versions. It works only with webpack v4.
+
+## Usage
+
+Construct an instance of `CustomTemplatedPathPlugin` in your Webpack configurations `plugins` entry, passing an object where keys correspond to the template tag name. The value for each key is a function passed the original intended path and data corresponding to the asset.
+
+The following example creates a new `basename` tag to substitute the basename of each entry file in the build output file. When compiled, the built file will be output as `build-entry.js`.
+
+```js
+const { basename } = require( 'path' );
+const CustomTemplatedPathPlugin = require( '@wordpress/custom-templated-path-webpack-plugin' );
+
+module.exports = {
+    // ...
+
+    entry: './entry',
+
+    output: {
+        filename: 'build-[basename].js',
+    },
+
+    plugins: [
+        new CustomTemplatedPathPlugin( {
+            basename( path, data ) {
+                let rawRequest;
+
+                const entryModule = get( data, [ 'chunk', 'entryModule' ], {} );
+                switch ( entryModule.type ) {
+                    case 'javascript/auto':
+                        rawRequest = entryModule.rawRequest;
+                        break;
+
+                    case 'javascript/esm':
+                        rawRequest = entryModule.rootModule.rawRequest;
+                        break;
+                }
+
+                if ( rawRequest ) {
+                    return basename( rawRequest );
+                }
+
+                return path;
+            },
+        } ),
+    ],
+};
+
+```
+
+For more examples, refer to Webpack’s own [`TemplatedPathPlugin.js`](https://github.com/webpack/webpack/blob/v4.1.1/lib/TemplatedPathPlugin.js), which implements the base set of template tags.
+
+## Contributing to this package
+
+This is an individual package that’s part of the Gutenberg project. The project is organized as a monorepo. It’s made up of multiple self-contained software packages, each with a specific purpose. The packages in this monorepo are published to [npm](https://www.npmjs.com/) and used by [WordPress](https://make.wordpress.org/core/) as well as other software projects.
+
+To find out more about contributing to this package or Gutenberg as a whole, please read the project’s main [contributor guide](https://github.com/WordPress/gutenberg/tree/HEAD/CONTRIBUTING.md).
+
+---
+
 # @wordpress/blocks <a name="block-editor/reference-guides/packages/packages-blocks" />
 
 Source: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-blocks/
@@ -42622,7 +43561,8 @@ Determines whether the block’s attributes are equal to the default attributes 
 
 *Parameters*
 
-- *block* `WPBlock`: Block Object
+- *block* `WPBlock`: Block Object.
+- *role* `?string`: Optional role to filter attributes for modification check.
 
 *Returns*
 
@@ -42635,6 +43575,7 @@ Determines whether the block is a default block and its attributes are equal to 
 *Parameters*
 
 - *block* `WPBlock`: Block Object
+- *role* `?string`: Optional role to filter attributes for modification check.
 
 *Returns*
 
@@ -42770,13 +43711,7 @@ registerBlockBindingsSource( {
 
 *Parameters*
 
-- *source* `Object`: Properties of the source to be registered.
-- *source.name* `string`: The unique and machine-readable name.
-- *source.label* `[string]`: Human-readable label. Optional when it is defined in the server.
-- *source.usesContext* `[Array]`: Optional array of context needed by the source only in the editor.
-- *source.getValues* `[Function]`: Optional function to get the values from the source.
-- *source.setValues* `[Function]`: Optional function to update multiple values connected to the source.
-- *source.canUserEditValue* `[Function]`: Optional function to determine if the user can edit the value.
+- *source* `WPBlockBindingsSource`: Object describing a block bindings source.
 
 *Changelog*
 
@@ -43302,82 +44237,6 @@ extends @wordpress/browserslist-config
 ```
 
 This package when imported returns an array of supported browsers, for more configuration examples including Autoprefixer, Babel, ESLint, PostCSS, and stylelint see the [Browserslist examples](https://github.com/ai/browserslist-example#browserslist-example) repo.
-
-## Contributing to this package
-
-This is an individual package that’s part of the Gutenberg project. The project is organized as a monorepo. It’s made up of multiple self-contained software packages, each with a specific purpose. The packages in this monorepo are published to [npm](https://www.npmjs.com/) and used by [WordPress](https://make.wordpress.org/core/) as well as other software projects.
-
-To find out more about contributing to this package or Gutenberg as a whole, please read the project’s main [contributor guide](https://github.com/WordPress/gutenberg/tree/HEAD/CONTRIBUTING.md).
-
----
-
-# @wordpress/custom-templated-path-webpack-plugin <a name="block-editor/reference-guides/packages/packages-custom-templated-path-webpack-plugin" />
-
-Source: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-custom-templated-path-webpack-plugin/
-
-> **DEPRECATED for webpack v5**: please use [`output.filename`](https://webpack.js.org/configuration/output/#outputfilename) instead.
-
-Webpack plugin for creating custom path template tags. Extend the [default set of template tags](https://webpack.js.org/configuration/output/#output-filename) with your own custom behavior. Hooks into Webpack’s compilation process to allow you to replace tags with a substitute value.
-
-## Installation
-
-Install the module
-
-```bash
-npm install @wordpress/custom-templated-path-webpack-plugin --save-dev
-
-```
-
-**Note**: This package requires Node.js 12.0.0 or later. It is not compatible with older versions. It works only with webpack v4.
-
-## Usage
-
-Construct an instance of `CustomTemplatedPathPlugin` in your Webpack configurations `plugins` entry, passing an object where keys correspond to the template tag name. The value for each key is a function passed the original intended path and data corresponding to the asset.
-
-The following example creates a new `basename` tag to substitute the basename of each entry file in the build output file. When compiled, the built file will be output as `build-entry.js`.
-
-```js
-const { basename } = require( 'path' );
-const CustomTemplatedPathPlugin = require( '@wordpress/custom-templated-path-webpack-plugin' );
-
-module.exports = {
-    // ...
-
-    entry: './entry',
-
-    output: {
-        filename: 'build-[basename].js',
-    },
-
-    plugins: [
-        new CustomTemplatedPathPlugin( {
-            basename( path, data ) {
-                let rawRequest;
-
-                const entryModule = get( data, [ 'chunk', 'entryModule' ], {} );
-                switch ( entryModule.type ) {
-                    case 'javascript/auto':
-                        rawRequest = entryModule.rawRequest;
-                        break;
-
-                    case 'javascript/esm':
-                        rawRequest = entryModule.rootModule.rawRequest;
-                        break;
-                }
-
-                if ( rawRequest ) {
-                    return basename( rawRequest );
-                }
-
-                return path;
-            },
-        } ),
-    ],
-};
-
-```
-
-For more examples, refer to Webpack’s own [`TemplatedPathPlugin.js`](https://github.com/webpack/webpack/blob/v4.1.1/lib/TemplatedPathPlugin.js), which implements the base set of template tags.
 
 ## Contributing to this package
 
@@ -44733,7 +45592,7 @@ Calling this may trigger an OPTIONS request to the REST API via the `canUser()` 
 
 - *state* `State`: Data state.
 - *action* `string`: Action to check. One of: ‘create’, ‘read’, ‘update’, ‘delete’.
-- *resource* `string | EntityResource`: Entity resource to check. Accepts entity object `{ kind: 'root', name: 'media', id: 1 }` or REST base as a string – `media`.
+- *resource* `string | EntityResource`: Entity resource to check. Accepts entity object `{ kind: 'postType', name: 'attachment', id: 1 }` or REST base as a string – `media`.
 - *id* `EntityRecordKey`: Optional ID of the rest resource to check.
 
 *Returns*
@@ -45629,7 +46488,7 @@ the store state using `canUser()`, or resolved if missing.
 
 *Parameters*
 
-- *resource* `string | EntityResource`: Entity resource to check. Accepts entity object `{ kind: 'root', name: 'media', id: 1 }` or REST base as a string – `media`.
+- *resource* `string | EntityResource`: Entity resource to check. Accepts entity object `{ kind: 'postType', name: 'attachment', id: 1 }` or REST base as a string – `media`.
 - *id* `IdType`: Optional ID of the resource to check, e.g. 10. Note: This argument is discouraged when using an entity object as a resource to check permissions and will be ignored.
 
 *Returns*
@@ -46054,6 +46913,32 @@ This content is only rendered if `--variant primary` is passed.
 {{#isSecondaryVariant}}
 This content is only rendered if `--variant secondary` is passed.
 {{/isSecondaryVariant}}
+
+```
+
+Variants can also define their own files by defining `pluginTemplatesPath`, `blockTemplatesPath`, or `assetsPath`. If these are defined, they will override the paths defined by the project template. In the case that a variant doesn’t need some of the files defined by the template, `null` can be passed to the appropriate variable to skip scaffolding those files.
+
+```js
+module.exports = {
+    defaultValues: {
+        slug: 'my-fantastic-block',
+        title: 'My fantastic block',
+        dashicon: 'palmtree',
+        version: '1.2.3',
+    },
+    variants: {
+        primary: {},
+        secondary: {
+            title: 'My fantastic block - secondary variant',
+            blockTemplatesPath: join(
+                __dirname,
+                'custom-path',
+                'block-templates'
+            ),
+            assetsPath: null, // Will not scaffold any assets files even if defined by the main template.
+        },
+    },
+};
 
 ```
 
@@ -47673,6 +48558,7 @@ Properties:
     - `field`: which field this filter is bound to.
     - `operator`: which type of filter it is. See “Operator types”.
     - `value`: the actual value selected by the user.
+    - `isLocked`: whether the filter is locked (cannot be edited by the user).
 - `perPage`: number of records to show per page.
 - `page`: the page that is visible.
 - `sort`: 
@@ -47685,6 +48571,7 @@ Properties:
 - `showMedia`: Whether the media should be shown in the UI. `true` by default.
 - `showDescription`: Whether the description should be shown in the UI. `true` by default.
 - `showLevels`: Whether to display the hierarchical levels for the data. `false` by default. See related `getItemLevel` DataView prop.
+- `groupByField`: The id of the field used for grouping the dataset. Supported by the `grid` and `table` layouts.
 - `fields`: a list of remaining field `id` that are visible in the UI and the specific order in which they are displayed.
 - `layout`: config that is specific to a particular layout type.
 
@@ -47693,7 +48580,10 @@ Properties:
 | Properties of `layout` | Table | Grid | List |
 |---|---|---|---|
 | `badgeFields`: a list of field’s `id` to render without label and styled as badges. |  | ✓ |  |
-| `styles`: additional `width`, `maxWidth`, `minWidth` styles for each field column. | ✓ |  |  |
+| `styles`: additional `width`, `maxWidth`, `minWidth`, `align` styles for each field column. | ✓ |  |  |
+
+**For column alignment (`align` property), follow these guidelines:**  
+Right-align whenever the cell value is fundamentally quantitative—numbers, decimals, currency, percentages—so that digits and decimal points line up, aiding comparison and calculation. Otherwise, default to left-alignment for all other types (text, codes, labels, dates).
 
 #### `onChangeView`: `function`
 
@@ -47777,7 +48667,7 @@ const actions = [
         icon: <Icon icon={ view } />,
         isEligible: ( item ) => item.status === 'published',
         callback: ( items ) => {
-            console.log( 'Viewing item:', items[0] );
+            console.log( 'Viewing item:', items[ 0 ] );
         },
     },
     {
@@ -47787,7 +48677,7 @@ const actions = [
         supportsBulk: true,
         callback: ( items ) => {
             console.log( 'Editing items:', items );
-        }
+        },
     },
     {
         id: 'delete',
@@ -47799,17 +48689,17 @@ const actions = [
                 <p>Are you sure you want to delete { items.length } item(s)?</p>
                 <Button
                     variant="primary"
-                    onClick={() => {
+                    onClick={ () => {
                         console.log( 'Deleting items:', items );
                         onActionPerformed();
                         closeModal();
-                    }}
+                    } }
                 >
                     Confirm Delete
                 </Button>
             </div>
-        )
-    }
+        ),
+    },
 ];
 
 ```
@@ -47867,13 +48757,111 @@ If `selection` and `onChangeSelection` are provided, the `DataViews` component b
 
 A function that determines if a media field or a primary field is clickable. It receives an item as an argument and returns a boolean value indicating whether the item can be clicked.
 
-#### `onClickItem`: `function`
+#### `renderItemLink`: `React.ComponentType`
 
-A callback function that is triggered when a user clicks on a media field or primary field. This function is currently implemented only in the `grid` and `list` views.
+A render function used to render clickable items.
+
+It can render regular links, but also allows integration with routing libraries (like TanStack Router or React Router).
+
+The component receives the following props:
+
+- `item`: The data item that was clicked
+- Additional standard HTML anchor props (className, style, etc.)
+
+```jsx
+// Then use it in DataViews
+<DataViews
+    // ...other props
+    renderItemLink={ ( { item, ...props } ) => (
+        <Link to={ `/sites/${ item.slug }` } preload="intent" { ...props } />
+    ) }
+/>
+
+```
 
 #### `header`: React component
 
 React component to be rendered next to the view config button.
+
+#### `perPageSizes`: `number[]`
+
+A list of numbers used to control the available item counts per page. It’s optional. Defaults to `[10, 20, 50, 100]`. The list needs to have a minimum of 2 items and a maximum of 6, otherwise the UI component won’t be displayed.
+
+#### `empty`: React node
+
+A message or element to be displayed instead of the dataview’s default empty message.
+
+### Composition modes
+
+The `DataViews` component supports two composition modes:
+
+- **Controlled**: This is the default usage mode. `DataViews` renders a full layout out-of-the-box — including search, filters, view switcher, layout grid or table, actions, and pagination. It’s the simplest way to get started and requires minimal setup.
+- **Free composition**: This mode gives developers full control over the layout. You can compose your own UI using internal components — placing them exactly where they’re needed in your interface. This is useful for more advanced or custom layouts, while still relying on the same shared context for user interactions.
+
+The component automatically detects the mode based on the `children` prop. If no `children` are passed, `DataViews` renders its internal layout (controlled mode). If `children` are provided, the component switches to free composition mode, skipping the default layout entirely.
+
+In both modes, user interactions update the same `view` object and share the same behavior. Free composition components rely on context state and don’t require additional props to work, making them safe to use without extra boilerplate.
+
+### Free composition
+
+When you pass the `children` prop to the `DataViews` component, it enters free composition mode. In this mode, `DataViews` no longer renders its built-in layout — instead, it acts as a wrapper that provides access to internal state and shared behavior through context.
+
+This allows you to build your own layout from scratch using the subcomponents exposed by `DataViews`. Each subcomponent automatically connects to the shared context, so you don’t need to wire props manually. You can arrange these components however you want and combine them with your own custom elements.
+
+This pattern enables full layout flexibility while keeping the data logic centralized.
+
+The following components are available directly under `DataViews`:
+
+- `DataViews.Search`
+- `DataViews.FiltersToggle`
+- `DataViews.Filters`
+- `DataViews.Layout`
+- `DataViews.LayoutSwitcher`
+- `DataViews.Pagination`
+- `DataViews.BulkActionToolbar`
+- `DataViews.ViewConfig`
+
+#### example
+
+```jsx
+import DataViews from '@wordpress/dataviews';
+import { __ } from '@wordpress/i18n';
+
+const CustomLayout = () => {
+    // Declare data, fields, etc.
+
+    return (
+        <DataViews
+            data={ data }
+            fields={ fields }
+            view={ view }
+            onChangeView={ onChangeView }
+            paginationInfo={ paginationInfo }
+            defaultLayouts={ { table: {} } }
+        >
+            <h1>{ __( 'Free composition' ) }</h1>
+            <DataViews.Search />
+            <DataViews.FiltersToggle />
+            <DataViews.Filters />
+            <DataViews.Layout />
+            <DataViews.Pagination />
+        </DataViews>
+    );
+};
+
+```
+
+> You can render only the pieces you need, rearrange them freely, or combine them with custom components.
+
+### Accessibility considerations
+
+All `DataViews` subcomponents are designed with accessibility in mind — including keyboard interactions, focus management, and semantic roles. Components like `Search`, `Pagination`, `FiltersToggle`, and `Filters` already handle these responsibilities internally and can be safely used in custom layouts.
+
+When using free composition, developers are responsible for the outer structure of the layout.
+
+Developers don’t need to worry about the internal accessibility logic for individual features. The core behaviors — like search semantics, filter toggles, or pagination focus — are encapsulated.
+
+`FiltersToggle` controls the visibility of the filters panel, and `Filters` renders the actual filters inside it. They work together and should always be used as a pair. While their internal behavior is accessible by default, how they’re positioned and grouped in custom layouts may affect the overall experience — especially for assistive technologies. Extra care is recommended.
 
 ## `DataForm`
 
@@ -48336,6 +49324,7 @@ React component that renders the field. This is used by the layouts.
 - Defaults to `getValue`.
 - Props 
     - `item` value to be processed.
+    - `config` object containing configuration options for the field. It’s optional. So far, the only object property available is `sizes`: in fields that are set to be the media field, layouts can pass down the expected size reserved for them so that the field can react accordingly.
 - Returns a React element that represents the field’s value.
 
 Example:
@@ -48461,43 +49450,58 @@ Example:
 
 ### `isValid`
 
-Function to validate a field’s value.
+Object that contains the validation rules for the field. If a rule is not met, the control will be marked as invalid and a message will be displayed.
 
-- Type: function.
-- Optional.
-- Args 
-    - `item`: the data to validate
-    - `context`: an object containing the following props: 
-        - `elements`: the elements defined by the field
-- Returns a boolean, indicating if the field is valid or not.
+- `required`: boolean indicating whether the field is required or not.
+- `custom`: a function that validates a field’s value. If the value is invalid, the function should return a string explaining why the value is invalid. Otherwise, the function must return null.
 
 Example:
 
 ```js
-// Custom isValid function.
 {
-    isValid: ( item, context ) => {
-        return !! item;
-    };
+    isValid: {
+        custom: ( item: Item, field: NormalizedField<Item> ) => {
+            if ( /* item value is invalid */) {
+                return 'Reason why item value is invalid';
+            }
+
+            return null;
+        }
+    }
 }
 
 ```
 
+Note that fields that define a type (e.g., `integer`) come with default validation for the type. For example, the `integer` type if the value is a valid integer:
+
 ```js
-// If the field defines a type,
-// it'll get a default isValid function for the type.
 {
-    type: 'number',
+    type: 'integer',
 }
 
 ```
 
+However, this can be overriden by the field author:
+
 ```js
-// Even if the field provides a type,
-// the field can override the default isValid function.
 {
-    type: 'number',
-    isValid: ( item, context ) => { /* Custom function. */ }
+    type: 'integer',
+    isValid: {
+        custom: ( item: Item, field: NormalizedField<Item> ) => {
+            /* Your custom validation logic. */
+        }
+    }
+}
+
+```
+
+Fields that define their own Edit component have access to the validation rules via the `field.isValid` object:
+
+```js
+{
+  Edit: ( { field }) => {
+      return <input required={ !! field.isValid.required } />
+  }
 }
 
 ```
@@ -48577,7 +49581,7 @@ Example:
 
 ### `elements`
 
-List of valid values for a field. If provided, it creates a DataViews’ filter for the field. DataForm’s edit control will also use these values. (See `Edit` field property.)
+List of valid values for a field. If provided, the field’s filter will use these as predefined options instead of using the field’s `Edit` function for user input (unless `filterBy` is set to `false`, see below).
 
 - Type: `array` of objects.
 - Optional.
@@ -48600,13 +49604,16 @@ Example:
 
 ```
 
+By default, we add an empty value (label: “Select item”). The label can be overriden by providing an empty element (`{ value: '', label: 'Custom label for empty value'}`).
+
 ### `filterBy`
 
-Configuration of the filters.
+Configuration of the filters. By default, fields have filtering enabled using the field’s `Edit` function for user input. When `elements` are provided, the filter will use those as predefined options instead. Set to `false` to opt the field out of filtering entirely.
 
-- Type: `object`.
+- Type: `object` | `boolean`.
 - Optional.
-- Properties: 
+- If `false`, the field will not be available for filtering.
+- If an object, it can have the following properties: 
     - `operators`: the list of operators supported by the field. See “operators” below. A filter will support the `isAny` and `isNone` multi-selection operators by default.
     - `isPrimary`: boolean, optional. Indicates if the filter is primary. A primary filter is always visible and is not listed in the “Add filter” component, except for the list layout where it behaves like a secondary filter.
 
@@ -48620,8 +49627,24 @@ Operators:
 | `isNone` | Multiple items | `NOT OR`. The item’s field is not present in a list of values. | Author is none: Admin, Editor |
 | `isAll` | Multiple items | `AND`. The item’s field has all of the values in the list. | Category is all: Book, Review, Science Fiction |
 | `isNotAll` | Multiple items | `NOT AND`. The item’s field doesn’t have all of the values in the list. | Category is not all: Book, Review, Science Fiction |
+| `lessThan` | Single item | `LESS THAN`. The item’s field is numerically less than a single value. | Age is less than 18 |
+| `greaterThan` | Single item | `GREATER THAN`. The item’s field is numerically greater than a single value. | Age is greater than 65 |
+| `lessThanOrEqual` | Single item | `LESS THAN OR EQUAL TO`. The item’s field is numerically less than or equal to a single value. | Age is less than or equal to 18 |
+| `greaterThanOrEqual` | Single item | `GREATER THAN OR EQUAL TO`. The item’s field is numerically greater than or equal to a single value. | Age is greater than or equal to 65 |
+| `contains` | Text | `CONTAINS`. The item’s field contains the given substring. | Title contains: Mars |
+| `notContains` | Text | `NOT CONTAINS`. The item’s field does not contain the given substring. | Description doesn’t contain: photo |
+| `startsWith` | Text | `STARTS WITH`. The item’s field starts with the given substring. | Title starts with: Mar |
+| `on` | Date | `ON`. The item’s field is on a given date (date equality using proper date parsing). | Date is on: 2024-01-01 |
+| `notOn` | Date | `NOT ON`. The item’s field is not on a given date (date inequality using proper date parsing). | Date is not on: 2024-01-01 |
+| `before` | Date | `BEFORE`. The item’s field is before a given date. | Date is before 2024-01-01 |
+| `after` | Date | `AFTER`. The item’s field is after a given date. | Date is after 2024-01-01 |
+| `beforeInc` | Date | `BEFORE (Inc)`. The item’s field is before a given date, including the date. | Date is before 2024-01-01, including 2024-01-01 |
+| `afterInc` | Date | `AFTER (Inc)`. The item’s field is after a given date, including the date. | Date is after 2024-01-01, including 2024-01-01 |
+| `inThePast` | Date | `IN THE PAST`. The item’s field is within the last N units (days, weeks, months, or years) from now. | Orders placed in the past 7 days |
+| `over` | Date | `OVER`. The item’s field is older than N units (days, weeks, months, or years) from now. | Orders placed over 7 days ago |
+| `between` | Multiple items | `BETWEEN`. The item’s field is between two values. | Item count between (inc): 10-180 |
 
-`is` and `isNot` are single-selection operators, while `isAny`, `isNone`, `isAll`, and `isNotALl` are multi-selection. A filter with no operators declared will support the `isAny` and `isNone` multi-selection operators by default. A filter cannot mix single-selection &amp; multi-selection operators; if a single-selection operator is present in the list of valid operators, the multi-selection ones will be discarded, and the filter won’t allow selecting more than one item.
+`is`, `isNot`, `on`, `notOn`, `lessThan`, `greaterThan`, `lessThanOrEqual`, `greaterThanOrEqual`, `before`, `after`, `beforeInc`, `afterInc`, `contains`, `notContains`, and `startsWith` are single-selection operators, while `isAny`, `isNone`, `isAll`, and `isNotAll` are multi-selection. `between` is a special operator that requires two values and it’s not supported for preset layout. A filter with no operators declared will support the `isAny` and `isNone` multi-selection operators by default. A filter cannot mix single-selection &amp; multi-selection operators; if a single-selection operator is present in the list of valid operators, the multi-selection ones will be discarded, and the filter won’t allow selecting more than one item.
 
 Example:
 
@@ -48651,6 +49674,14 @@ Example:
     filterBy: {
         operators: [ `isAny`, `isNone`, `isAll`, `isNotAll` ];
     }
+}
+
+```
+
+```js
+// Opt out of filtering entirely.
+{
+    filterBy: false;
 }
 
 ```
@@ -49337,7 +50368,7 @@ Logs a message to notify developers about a deprecated feature.
 import deprecated from '@wordpress/deprecated';
 
 deprecated( 'Eating meat', {
-    since: '2019.01.01'
+    since: '2019.01.01',
     version: '2020.01.01',
     alternative: 'vegetables',
     plugin: 'the earth',
@@ -49351,13 +50382,7 @@ deprecated( 'Eating meat', {
 *Parameters*
 
 - *feature* `string`: Name of the deprecated feature.
-- *options* `[Object]`: Personalisation options
-- *options.since* `[string]`: Version in which the feature was deprecated.
-- *options.version* `[string]`: Version in which the feature will be removed.
-- *options.alternative* `[string]`: Feature to use instead
-- *options.plugin* `[string]`: Plugin name if it’s a plugin feature
-- *options.link* `[string]`: Link to documentation
-- *options.hint* `[string]`: Additional message to help transition away from the deprecated feature.
+- *options* `[DeprecatedOptions]`: Personalisation options
 
 ### logged
 
@@ -49365,7 +50390,113 @@ Object map tracking messages which have been logged, for use in ensuring a messa
 
 *Type*
 
-- `Record<string, true | undefined>`
+- `Record< string, true >`
+
+## Contributing to this package
+
+This is an individual package that’s part of the Gutenberg project. The project is organized as a monorepo. It’s made up of multiple self-contained software packages, each with a specific purpose. The packages in this monorepo are published to [npm](https://www.npmjs.com/) and used by [WordPress](https://make.wordpress.org/core/) as well as other software projects.
+
+To find out more about contributing to this package or Gutenberg as a whole, please read the project’s main [contributor guide](https://github.com/WordPress/gutenberg/tree/HEAD/CONTRIBUTING.md).
+
+---
+
+# @wordpress/experiments <a name="block-editor/reference-guides/packages/packages-experiments" />
+
+Source: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-experiments/
+
+`@wordpress/experiments` enables sharing private `__experimental` APIs across `@wordpress` packages without  
+[publicly exposing them to WordPress extenders](https://make.wordpress.org/core/2022/08/10/proposal-stop-merging-experimental-apis-from-gutenberg-to-wordpress-core/#respond).
+
+## Getting started
+
+Every `@wordpress` package wanting to privately access or expose experimental APIs must opt-in to `@wordpress/experiments`:
+
+```js
+// In packages/block-editor/experiments.js:
+import { __dangerousOptInToUnstableAPIsOnlyForCoreModules } from '@wordpress/experiments';
+export const { lock, unlock } =
+    __dangerousOptInToUnstableAPIsOnlyForCoreModules(
+        'I know using unstable features means my plugin or theme will inevitably break on the next WordPress release.',
+        '@wordpress/block-editor' // Name of the package calling __dangerousOptInToUnstableAPIsOnlyForCoreModules,
+                                  // (not the name of the package whose APIs you want to access)
+    );
+
+```
+
+Each package may only opt in once. The function name communicates that plugins are not supposed to use it.
+
+The function will throw an error if the following conditions are not met:
+
+1. The first argument must exactly match the required consent string: `'I know using unstable features means my plugin or theme will inevitably break on the next WordPress release.'`.
+2. The second argument must be a known `@wordpress` package that hasn’t yet opted into `@wordpress/experiments`
+
+Once the opt-in is complete, the obtained `lock()` and `unlock()` utilities enable hiding `__experimental` APIs from the naked eye:
+
+```js
+// Say this object is exported from a package:
+export const publicObject = {};
+
+// However, this string is internal and should not be publicly available:
+const __experimentalString = '__experimental information';
+
+// Solution: lock the string "inside" of the object:
+lock( publicObject, __experimentalString );
+
+// The string is not nested in the object and cannot be extracted from it:
+console.log( publicObject );
+// {}
+
+// The only way to access the string is by "unlocking" the object:
+console.log( unlock( publicObject ) );
+// "__experimental information"
+
+// lock() accepts all data types, not just strings:
+export const anotherObject = {};
+lock( anotherObject, function __experimentalFn() {} );
+console.log( unlock( anotherObject ) );
+// function __experimentalFn() {}
+
+```
+
+Use `lock()` and `unlock()` to privately distribute the `__experimental` APIs across `@wordpress` packages:
+
+```js
+// In packages/package1/index.js:
+import { lock } from './experiments';
+
+export const experiments = {};
+/* Attach private data to the exported object */
+lock(experiments, {
+    __experimentalFunction: function() {},
+});
+
+// In packages/package2/index.js:
+import { experiments } from '@wordpress/package1';
+import { unlock } from './experiments';
+
+const {
+    __experimentalFunction
+} = unlock( experiments );
+
+```
+
+## Shipping experimental APIs
+
+See the [Experimental and Unstable APIs chapter of Coding Guidelines](#block-editor/contributors/code/coding-guidelines) to learn how `lock()` and `unlock()` can help  
+you ship private experimental functions, arguments, components, properties, actions, selectors.
+
+## Technical limitations
+
+A determined developer who would want to use the private experimental APIs at all costs would have to:
+
+- Realize a private importing system exists
+- Read the code where the risks would be spelled out in capital letters
+- Explicitly type out he or she is aware of the consequences
+- Pretend to register a `@wordpress` package (and trigger an error as soon as the real package is loaded)
+
+Dangerously opting in to using these APIs by theme and plugin developers is not recommended. Furthermore, the WordPress Core philosophy to strive to maintain backward compatibility for third-party developers **does not apply** to experimental APIs registered via this package.
+
+The consent string for opting in to these APIs may change at any time and without notice. This change will break existing third-party code. Such a change may occur in either a major or minor release.
 
 ## Contributing to this package
 
@@ -49737,112 +50868,6 @@ domReady( function () {
 ## Browser support
 
 See <https://make.wordpress.org/core/handbook/best-practices/browser-support/>
-
-## Contributing to this package
-
-This is an individual package that’s part of the Gutenberg project. The project is organized as a monorepo. It’s made up of multiple self-contained software packages, each with a specific purpose. The packages in this monorepo are published to [npm](https://www.npmjs.com/) and used by [WordPress](https://make.wordpress.org/core/) as well as other software projects.
-
-To find out more about contributing to this package or Gutenberg as a whole, please read the project’s main [contributor guide](https://github.com/WordPress/gutenberg/tree/HEAD/CONTRIBUTING.md).
-
----
-
-# @wordpress/experiments <a name="block-editor/reference-guides/packages/packages-experiments" />
-
-Source: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-experiments/
-
-`@wordpress/experiments` enables sharing private `__experimental` APIs across `@wordpress` packages without  
-[publicly exposing them to WordPress extenders](https://make.wordpress.org/core/2022/08/10/proposal-stop-merging-experimental-apis-from-gutenberg-to-wordpress-core/#respond).
-
-## Getting started
-
-Every `@wordpress` package wanting to privately access or expose experimental APIs must opt-in to `@wordpress/experiments`:
-
-```js
-// In packages/block-editor/experiments.js:
-import { __dangerousOptInToUnstableAPIsOnlyForCoreModules } from '@wordpress/experiments';
-export const { lock, unlock } =
-    __dangerousOptInToUnstableAPIsOnlyForCoreModules(
-        'I know using unstable features means my plugin or theme will inevitably break on the next WordPress release.',
-        '@wordpress/block-editor' // Name of the package calling __dangerousOptInToUnstableAPIsOnlyForCoreModules,
-                                  // (not the name of the package whose APIs you want to access)
-    );
-
-```
-
-Each package may only opt in once. The function name communicates that plugins are not supposed to use it.
-
-The function will throw an error if the following conditions are not met:
-
-1. The first argument must exactly match the required consent string: `'I know using unstable features means my plugin or theme will inevitably break on the next WordPress release.'`.
-2. The second argument must be a known `@wordpress` package that hasn’t yet opted into `@wordpress/experiments`
-
-Once the opt-in is complete, the obtained `lock()` and `unlock()` utilities enable hiding `__experimental` APIs from the naked eye:
-
-```js
-// Say this object is exported from a package:
-export const publicObject = {};
-
-// However, this string is internal and should not be publicly available:
-const __experimentalString = '__experimental information';
-
-// Solution: lock the string "inside" of the object:
-lock( publicObject, __experimentalString );
-
-// The string is not nested in the object and cannot be extracted from it:
-console.log( publicObject );
-// {}
-
-// The only way to access the string is by "unlocking" the object:
-console.log( unlock( publicObject ) );
-// "__experimental information"
-
-// lock() accepts all data types, not just strings:
-export const anotherObject = {};
-lock( anotherObject, function __experimentalFn() {} );
-console.log( unlock( anotherObject ) );
-// function __experimentalFn() {}
-
-```
-
-Use `lock()` and `unlock()` to privately distribute the `__experimental` APIs across `@wordpress` packages:
-
-```js
-// In packages/package1/index.js:
-import { lock } from './experiments';
-
-export const experiments = {};
-/* Attach private data to the exported object */
-lock(experiments, {
-    __experimentalFunction: function() {},
-});
-
-// In packages/package2/index.js:
-import { experiments } from '@wordpress/package1';
-import { unlock } from './experiments';
-
-const {
-    __experimentalFunction
-} = unlock( experiments );
-
-```
-
-## Shipping experimental APIs
-
-See the [Experimental and Unstable APIs chapter of Coding Guidelines](#block-editor/contributors/code/coding-guidelines) to learn how `lock()` and `unlock()` can help  
-you ship private experimental functions, arguments, components, properties, actions, selectors.
-
-## Technical limitations
-
-A determined developer who would want to use the private experimental APIs at all costs would have to:
-
-- Realize a private importing system exists
-- Read the code where the risks would be spelled out in capital letters
-- Explicitly type out he or she is aware of the consequences
-- Pretend to register a `@wordpress` package (and trigger an error as soon as the real package is loaded)
-
-Dangerously opting in to using these APIs by theme and plugin developers is not recommended. Furthermore, the WordPress Core philosophy to strive to maintain backward compatibility for third-party developers **does not apply** to experimental APIs registered via this package.
-
-The consent string for opting in to these APIs may change at any time and without notice. This change will break existing third-party code. Such a change may occur in either a major or minor release.
 
 ## Contributing to this package
 
@@ -52102,7 +53127,7 @@ The module also checks for sessionStorage support and conditionally exports the 
 
 ### mediaUpload
 
-Upload a media file when the file upload button is activated. Wrapper around mediaUpload() that injects the current post ID.
+Upload a media file when the file upload button is activated. Wrapper around uploadMedia() that injects the current post ID.
 
 *Parameters*
 
@@ -53715,7 +54740,24 @@ const placeholderLabel = Platform.select( {
 
 ### RawHTML
 
-Component used as equivalent of Fragment with unescaped HTML, in cases where it is desirable to render dangerous HTML without needing a wrapper element. To preserve additional props, a `div` wrapper *will* be created if any props aside from `children` are passed.
+Component used to render unescaped HTML.
+
+Note: The `renderElement` serializer will remove the `div` wrapper unless non-children props are present; typically when preparing a block for saving.
+
+*Usage*
+
+```jsx
+import { RawHTML } from '@wordpress/element';
+
+const Component = () => (
+    <RawHTML>
+        <h3>Hello world</h3>
+    </RawHTML>
+);
+// Edit: <div><h3>Hello world</h3></div>
+// save: <h3>Hello world</h3>
+
+```
 
 *Parameters*
 
@@ -55293,13 +56335,13 @@ Create an i18n instance
 
 *Parameters*
 
-- *initialData* `[LocaleData]`: Locale data configuration.
-- *initialDomain* `[string]`: Domain for which configuration applies.
+- *initialData* `[LocaleData< TextDomain >]`: Locale data configuration.
+- *initialDomain* `[TextDomain]`: Domain for which configuration applies.
 - *hooks* `[Hooks]`: Hooks implementation.
 
 *Returns*
 
-- `I18n`: I18n instance.
+- `I18n< TextDomain >`: I18n instance.
 
 ### defaultI18n
 
@@ -55315,7 +56357,7 @@ Returns locale data by domain in a Jed-formatted JSON object shape.
 
 *Parameters*
 
-- *domain* `[string]`: Domain for which to get the data.
+- *domain* `[ string | undefined ]`: Domain for which to get the data.
 
 *Returns*
 
@@ -55328,8 +56370,8 @@ Check if there is a translation for a given string (in singular form).
 *Parameters*
 
 - *single* `string`: Singular form of the string to look up.
-- *context* `[string]`: Context information for the translators.
-- *domain* `[string]`: Domain to retrieve the translated text.
+- *context* `string`: Context information for the translators.
+- *domain* `string`: Domain to retrieve the translated text.
 
 *Returns*
 
@@ -55356,7 +56398,7 @@ Resets all current Tannin instance locale data and sets the specified locale dat
 *Parameters*
 
 - *data* `[LocaleData]`: Locale data configuration.
-- *domain* `[string]`: Domain for which configuration applies.
+- *domain* `[string | undefined]`: Domain for which configuration applies.
 
 ### setLocaleData
 
@@ -55368,21 +56410,21 @@ Merges locale data into the Tannin instance by domain. Accepts data in a Jed-for
 
 *Parameters*
 
-- *data* `[LocaleData]`: Locale data configuration.
-- *domain* `[string]`: Domain for which configuration applies.
+- *data* `[LocaleData ]`: Locale data configuration.
+- *domain* `[string | undefined]`: Domain for which configuration applies.
 
 ### sprintf
 
-Returns a formatted string. If an error occurs in applying the format, the original format string is returned.
+Returns a formatted string.
 
 *Related*
 
-- <https://www.npmjs.com/package/sprintf-js>
+- <https://www.npmjs.com/package/@tannin/sprintf>
 
 *Parameters*
 
-- *format* `string`: The format of the string to generate.
-- *args* `...*`: Arguments to apply to the format.
+- *format* `T | TranslatableText< T >`: The format of the string to generate.
+- *args* `DistributeSprintfArgs< T >`: Arguments to apply to the format.
 
 *Returns*
 
@@ -55410,14 +56452,14 @@ Translates and retrieves the singular or plural form based on the supplied numbe
 
 *Parameters*
 
-- *single* `string`: The text to be used if the number is singular.
-- *plural* `string`: The text to be used if the number is plural.
+- *single* `Single`: The text to be used if the number is singular.
+- *plural* `Plural`: The text to be used if the number is plural.
 - *number* `number`: The number to compare against to use either the singular or plural form.
-- *domain* `[string]`: Domain to retrieve the translated text.
+- *domain* `string | undefined`: Domain to retrieve the translated text.
 
 *Returns*
 
-- `string`: The translated singular or plural form.
+- `TranslatableText<Single | Plural>`: The translated singular or plural form.
 
 ### \_nx
 
@@ -55429,15 +56471,16 @@ Translates and retrieves the singular or plural form based on the supplied numbe
 
 *Parameters*
 
-- *single* `string`: The text to be used if the number is singular.
-- *plural* `string`: The text to be used if the number is plural.
+- *single* `Single`: The text to be used if the number is singular.
+- *single* `Single`: The text to be used if the number is singular.
+- *plural* `Plural`: The text to be used if the number is plural.
 - *number* `number`: The number to compare against to use either the singular or plural form.
 - *context* `string`: Context information for the translators.
-- *domain* `[string]`: Domain to retrieve the translated text.
+- *domain* `[string | undefined]`: Domain to retrieve the translated text.
 
 *Returns*
 
-- `string`: The translated singular or plural form.
+- `TranslatableText<Single | Plural>`: The translated singular or plural form.
 
 ### \_x
 
@@ -55449,13 +56492,13 @@ Retrieve translated string with gettext context.
 
 *Parameters*
 
-- *text* `string`: Text to translate.
+- *text* `Text`: Text to translate.
 - *context* `string`: Context information for the translators.
-- *domain* `[string]`: Domain to retrieve the translated text.
+- *domain* `string | undefined`: Domain to retrieve the translated text.
 
 *Returns*
 
-- `string`: Translated context string without pipe.
+- `TranslatableText<Text>`: Translated context string without pipe.
 
 ### \_\_
 
@@ -55467,12 +56510,12 @@ Retrieve the translation of text.
 
 *Parameters*
 
-- *text* `string`: Text to translate.
-- *domain* `[string]`: Domain to retrieve the translated text.
+- *text* `Text`: Text to translate.
+- *domain* `string | undefined`: Domain to retrieve the translated text.
 
 *Returns*
 
-- `string`: Translated text.
+- `TranslatableText<Text>`: Translated text.
 
 ## Contributing to this package
 
@@ -55600,6 +56643,8 @@ const { state, actions } = store( 'core/router', {
 
 It defines a region that is updated on navigation. It requires a unique ID as the value and can only be used in root interactive elements, i.e., elements with `data-wp-interactive` that are not nested inside other elements with `data-wp-interactive`.
 
+The value can be a string with the region ID, or a JSON object containing the `id` and an optional `attachTo` property.
+
 Example:
 
 ```html
@@ -55610,6 +56655,27 @@ Example:
      <li><a href="/post-3">Post 3</a></li>
   </ul>
   <a data-wp-on--click="actions.navigate" href="/page/2">Page 2</a>
+</div>
+
+```
+
+The `attachTo` property is a CSS selector that points to the parent element where the new router region should be rendered. This is useful for regions that may not exist on the initial page but are present on subsequent pages, like a modal or an overlay.
+
+When navigating between pages:
+
+- If a region exists on both the current and the new page, its content is updated. `attachTo` is ignored in this case.
+- If a region without `attachTo` exists on the new page but not on the current one, it is not added to the DOM.
+- If a region with `attachTo` exists on the new page but not on the current one, it is created and appended to the parent element specified in `attachTo`.
+- If a region exists on the current page but not on the new one, it is removed from the DOM. `attachTo` is ignored in this case.
+
+Example with `attachTo`:
+
+```html
+<div
+  data-wp-interactive="myblock"
+  data-wp-router-region='{ "id": "myblock/overlay", "attachTo": "body" }'
+>
+  I'm in a new region!
 </div>
 
 ```
@@ -56406,9 +57472,7 @@ displayShortcut.primary( 'm' );
 
 ```
 
-*Type*
-
-- `WPModifierHandler<WPKeyHandler<string>>`Keyed map of functions to display shortcuts.
+Keyed map of functions to display shortcuts.
 
 ### displayShortcutList
 
@@ -56423,9 +57487,7 @@ displayShortcutList.primary( 'm' );
 
 ```
 
-*Type*
-
-- `WPModifierHandler<WPKeyHandler<string[]>>`Keyed map of functions to shortcut sequences.
+Keyed map of functions to shortcut sequences.
 
 ### DOWN
 
@@ -56457,7 +57519,7 @@ Return true if platform is MacOS.
 
 *Parameters*
 
-- *\_window* `Window?`: window object by default; used for DI testing.
+- *\_window* `Window`: window object by default; used for DI testing.
 
 *Returns*
 
@@ -56476,9 +57538,7 @@ isKeyboardEvent.primary( event, 'm' );
 
 ```
 
-*Type*
-
-- `WPModifierHandler<WPEventKeyHandler>`Keyed map of functions to match events.
+Keyed map of functions to match events.
 
 ### LEFT
 
@@ -56490,7 +57550,7 @@ Object that contains functions that return the available modifier depending on p
 
 *Type*
 
-- `WPModifierHandler< ( isApple: () => boolean ) => WPModifierPart[]>`
+- `WPModifierHandler< WPModifier >`
 
 ### PAGEDOWN
 
@@ -56515,10 +57575,6 @@ rawShortcut.primary( 'm' );
 
 ```
 
-*Type*
-
-- `WPModifierHandler<WPKeyHandler<string>>`Keyed map of functions to raw shortcuts.
-
 ### RIGHT
 
 Keycode for RIGHT key.
@@ -56540,9 +57596,7 @@ shortcutAriaLabel.primary( '.' );
 
 ```
 
-*Type*
-
-- `WPModifierHandler<WPKeyHandler<string>>`Keyed map of functions to shortcut ARIA labels.
+Keyed map of functions to shortcut ARIA labels.
 
 ### SPACE
 
@@ -58216,11 +59270,11 @@ Creates a Redux middleware, given an object of controls where each key is an act
 
 *Parameters*
 
-- *controls* `Record<string, (value: import('redux').AnyAction) => Promise<boolean> | boolean>`: Object of control handlers.
+- *controls* `Record< string, ( value: AnyAction ) => Promise< boolean > | boolean >`: Object of control handlers.
 
 *Returns*
 
-- `import('redux').Middleware`: Co-routine runtime
+- `Middleware`: Co-routine runtime
 
 ## Motivation
 
@@ -59795,145 +60849,109 @@ npm install @wordpress/server-side-render --save
 
 *This package assumes that your code will run in an **ES2015+** environment. If you’re using an environment that has limited or no support for such language features and APIs, you should include [the polyfill shipped in `@wordpress/babel-preset-default`](https://github.com/WordPress/gutenberg/tree/HEAD/packages/babel-preset-default#polyfill) in your code.*
 
-## Usage
+## API
 
-The props accepted by the component are described below.
+### default
 
-## Props
+> **Deprecated** Use `ServerSideRender` non-default export instead.
 
-### attributes
+A compatibility layer for the `ServerSideRender` component when used with `wp` global namespace.
 
-An object containing the attributes of the block to be server-side rendered.  
-E.g: `{ displayAsDropdown: true }`, `{ showHierarchy: true }`, etc…
+*Usage*
 
-- Type: `Object`
-- Required: No
-
-### block
-
-The identifier of the block to be server-side rendered.  
-Examples: “core/archives”, “core/latest-comments”, “core/rss”, etc…
-
-- Type: `String`
-- Required: Yes
-
-### className
-
-A class added to the DOM element that wraps the server side rendered block.  
-Examples: “my-custom-server-side-rendered”.
-
-- Type: `String`
-- Required: No
-
-### httpMethod
-
-The HTTP request method to use, either ‘GET’ or ‘POST’. It’s ‘GET’ by default. The ‘POST’ value will cause an error on WP earlier than 5.5, unless ‘rest\_endpoints’ is filtered in PHP to allow this. If ‘POST’, this sends the attributes in the request body, not in the URL. This can allow a bigger attributes object.
-
-- Type: `String`
-- Required: No
-- Default: ‘GET’
-
-#### Example:
-
-```php
-function add_rest_method( $endpoints ) {
-    if ( is_wp_version_compatible( '5.5' ) ) {
-        return $endpoints;
-    }
-
-    foreach ( $endpoints as $route => $handler ) {
-        if ( isset( $endpoints[ $route ][0] ) ) {
-            $endpoints[ $route ][0]['methods'] = [ WP_REST_Server::READABLE, WP_REST_Server::CREATABLE ];
-        }
-    }
-
-    return $endpoints;
-}
-add_filter( 'rest_endpoints', 'add_rest_method');
-
-```
-
-### skipBlockSupportAttributes
-
-Remove attributes and style properties applied by the block supports. This prevents duplication of styles in the block wrapper and the `ServerSideRender` components. Even if certain features skip serialization to HTML markup by `__experimentalSkipSerialization`, all attributes and style properties are removed.
-
-- Type: `Boolean`
-- Required: No
-- Default: false
-
-### urlQueryArgs
-
-Query arguments to apply to the request URL.  
-E.g: `{ post_id: 12 }`.
-
-- Type: `Object`
-- Required: No
-
-### EmptyResponsePlaceholder
-
-The component is rendered when the API response is empty. The component will receive the value of the API response, and all props passed into `ServerSideRenderer`.
-
-- Type: `Component`
-- Required: No
-
-### ErrorResponsePlaceholder
-
-The component is rendered when the API response is an error. The component will receive the value of the API response, and all props passed into `ServerSideRenderer`.
-
-- Type: `Component`
-- Required: No
-
-### LoadingResponsePlaceholder
-
-The component is rendered while the API request is being processed (loading state). The component will receive the value of the API response, and all props passed into `ServerSideRenderer`.
-
-- Type: `Component`
-- Required: No
-
-#### Example usage
-
-```jsx
-const MyServerSideRender = () => (
-    <ServerSideRender LoadingResponsePlaceholder={ MyAmazingPlaceholder } />
-);
-
-```
-
-## Usage
-
-Render core/archives preview.
-
-```jsx
+```js
 import ServerSideRender from '@wordpress/server-side-render';
 
-const MyServerSideRender = () => (
-    <ServerSideRender
-        block="core/archives"
-        attributes={ {
-            showPostCounts: true,
-            displayAsDropdown: false,
-        } }
-    />
-);
-
 ```
 
-If imported from the `wp` global, an alias is required to work in JSX.
+### ServerSideRender
+
+A component that renders server-side content for blocks.
+
+Note: URL query will include the current post ID when applicable. This is useful for blocks that depend on the context of the current post for rendering.
+
+*Usage*
 
 ```jsx
-const { serverSideRender: ServerSideRender } = wp;
+import { ServerSideRender } from '@wordpress/server-side-render';
+// Legacy import for WordPress 6.8 and earlier
+// import { default as ServerSideRender } from '@wordpress/server-side-render';
 
-const MyServerSideRender = () => (
-    <ServerSideRender
-        block="core/archives"
-        attributes={ {
-            showPostCounts: true,
-            displayAsDropdown: false,
-        } }
-    />
-);
+function Example() {
+    return (
+        <ServerSideRender
+            block="core/archives"
+            attributes={ { showPostCounts: true } }
+            urlQueryArgs={ { customArg: 'value' } }
+            className="custom-class"
+        />
+    );
+}
 
 ```
+
+*Parameters*
+
+- *props* `Object`: Component props.
+- *props.block* `string`: The identifier of the block to be serverside rendered.
+- *props.attributes* `Object`: The block attributes to be sent to the server for rendering.
+- *props.className* `[string]`: Additional classes to apply to the wrapper element.
+- *props.httpMethod* `[string]`: The HTTP method to use (‘GET’ or ‘POST’). Default is ‘GET’
+- *props.urlQueryArgs* `[Object]`: Additional query arguments to append to the request URL.
+- *props.skipBlockSupportAttributes* `[boolean]`: Whether to remove block support attributes before sending.
+- *props.EmptyResponsePlaceholder* `[Function]`: Component rendered when the API response is empty.
+- *props.ErrorResponsePlaceholder* `[Function]`: Component rendered when the API response is an error.
+- *props.LoadingResponsePlaceholder* `[Function]`: Component rendered while the API request is loading.
+
+*Returns*
+
+- `JSX.Element`: The rendered server-side content.
+
+### useServerSideRender
+
+A hook for server-side rendering a preview of dynamic blocks to display in the editor.
+
+Handles fetching server-rendered previews for blocks, managing loading states, and automatically debouncing requests to prevent excessive API calls. It supports both GET and POST requests, with POST requests used for larger attribute payloads.
+
+*Usage*
+
+Basic usage:
+
+```jsx
+import { RawHTML } from '@wordpress/element';
+import { useServerSideRender } from '@wordpress/server-side-render';
+
+function MyServerSideRender( { attributes, block } ) {
+    const { content, status, error } = useServerSideRender( {
+        attributes,
+        block,
+    } );
+
+    if ( status === 'loading' ) {
+        return <div>Loading...</div>;
+    }
+
+    if ( status === 'error' ) {
+        return <div>Error: { error }</div>;
+    }
+
+    return <RawHTML>{ content }</RawHTML>;
+}
+
+```
+
+*Parameters*
+
+- *args* `Object`: The hook configuration object.
+- *args.attributes* `Object`: The block attributes to be sent to the server for rendering.
+- *args.block* `string`: The identifier of the block to be serverside rendered. Example: ‘core/archives’.
+- *args.skipBlockSupportAttributes* `[boolean]`: Whether to remove block support attributes before sending.
+- *args.httpMethod* `[string]`: The HTTP method to use (‘GET’ or ‘POST’). Default is ‘GET’.
+- *args.urlQueryArgs* `[Object]`: Additional query arguments to append to the request URL.
+
+*Returns*
+
+- `ServerSideRenderResponse`: The server-side render response object.
 
 ## Output
 
@@ -60895,7 +61913,7 @@ Creates an undo manager.
 
 *Returns*
 
-- `UndoManager`: Undo manager.
+- `UndoManager< T >`: Undo manager.
 
 ## Contributing to this package
 
@@ -61072,8 +62090,8 @@ const newURL = addQueryArgs( 'https://google.com', { q: 'test' } ); // https://g
 
 *Parameters*
 
-- *url* `[string]`: URL to which arguments should be appended. If omitted, only the resulting querystring is returned.
-- *args* `[Object]`: Query arguments to apply to URL.
+- *url* `string`: URL to which arguments should be appended. If omitted, only the resulting querystring is returned.
+- *args* `Record< string, unknown >`: Query arguments to apply to URL.
 
 *Returns*
 
@@ -61103,7 +62121,7 @@ const queryString = buildQueryString( {
 
 *Parameters*
 
-- *data* `Record<string,*>`: Data to encode.
+- *data* `Record< string, unknown >`: Data to encode.
 
 *Returns*
 
@@ -61145,7 +62163,7 @@ const imageUrl = filterURLForDisplay(
 *Parameters*
 
 - *url* `string`: Original URL.
-- *maxLength* `number|null`: URL length.
+- *maxLength* `number | null`: URL length.
 
 *Returns*
 
@@ -61169,7 +62187,7 @@ const authority2 = getAuthority( 'https://localhost:8080/test/' ); // 'localhost
 
 *Returns*
 
-- `string|void`: The authority part of the URL.
+- `string | void`: The authority part of the URL.
 
 ### getFilename
 
@@ -61189,7 +62207,7 @@ const filename2 = getFilename( '/this/is/a/test.png' ); // 'test.png'
 
 *Returns*
 
-- `string|void`: The filename part of the URL.
+- `string | void`: The filename part of the URL.
 
 ### getFragment
 
@@ -61213,7 +62231,7 @@ const fragment2 = getFragment(
 
 *Returns*
 
-- `string|void`: The fragment part of the URL.
+- `string | void`: The fragment part of the URL.
 
 ### getPath
 
@@ -61233,7 +62251,7 @@ const path2 = getPath( 'https://wordpress.org/help/faq/' ); // 'help/faq'
 
 *Returns*
 
-- `string|void`: The path part of the URL.
+- `string | void`: The path part of the URL.
 
 ### getPathAndQueryString
 
@@ -61277,7 +62295,7 @@ const protocol2 = getProtocol( 'https://wordpress.org' ); // 'https:'
 
 *Returns*
 
-- `string|void`: The protocol part of the URL.
+- `string | void`: The protocol part of the URL.
 
 ### getQueryArg
 
@@ -61297,7 +62315,7 @@ const foo = getQueryArg( 'https://wordpress.org?foo=bar&bar=baz', 'foo' ); // ba
 
 *Returns*
 
-- `QueryArgParsed|void`: Query arg value.
+- `QueryArgParsed | undefined`: Query arg value.
 
 ### getQueryArgs
 
@@ -61338,7 +62356,7 @@ const queryString = getQueryString(
 
 *Returns*
 
-- `string|void`: The query string part of the URL.
+- `string | void`: The query string part of the URL.
 
 ### hasQueryArg
 
@@ -61592,7 +62610,7 @@ const newUrl = removeQueryArgs(
 *Parameters*
 
 - *url* `string`: URL.
-- *args* `...string`: Query Args.
+- *args* `string[]`: Query Args.
 
 *Returns*
 
@@ -61883,7 +62901,7 @@ Count some words.
 
 *Usage*
 
-```js
+```ts
 import { count } from '@wordpress/wordcount';
 const numberOfWords = count( 'Words to count', 'words', {} );
 
@@ -61892,8 +62910,8 @@ const numberOfWords = count( 'Words to count', 'words', {} );
 *Parameters*
 
 - *text* `string`: The text being processed
-- *type* `WPWordCountStrategy`: The type of count. Accepts ‘words’, ‘characters\_excluding\_spaces’, or ‘characters\_including\_spaces’.
-- *userSettings* `WPWordCountUserSettings`: Custom settings object.
+- *type* `Strategy`: The type of count. Accepts ‘words’, ‘characters\_excluding\_spaces’, or ‘characters\_including\_spaces’.
+- *userSettings* `UserSettings`: Custom settings object.
 
 *Returns*
 
@@ -62063,7 +63081,7 @@ Calling this may trigger an OPTIONS request to the REST API via the `canUser()` 
 
 - *state* `State`: Data state.
 - *action* `string`: Action to check. One of: ‘create’, ‘read’, ‘update’, ‘delete’.
-- *resource* `string | EntityResource`: Entity resource to check. Accepts entity object `{ kind: 'root', name: 'media', id: 1 }` or REST base as a string – `media`.
+- *resource* `string | EntityResource`: Entity resource to check. Accepts entity object `{ kind: 'postType', name: 'attachment', id: 1 }` or REST base as a string – `media`.
 - *id* `EntityRecordKey`: Optional ID of the rest resource to check.
 
 *Returns*
@@ -63660,15 +64678,9 @@ Returns the total number of blocks, or the total number of blocks with a specifi
 
 ### getHoveredBlockClientId
 
+> **Deprecated**
+
 Returns the currently hovered block.
-
-*Parameters*
-
-- *state* `Object`: Global application state.
-
-*Returns*
-
-- `Object`: Client Id of the hovered block.
 
 ### getInserterItems
 
@@ -64391,15 +65403,9 @@ Action that hides the insertion point.
 
 ### hoverBlock
 
+> **Deprecated**
+
 Returns an action object used in signalling that the block with the specified client ID has been hovered.
-
-*Parameters*
-
-- *clientId* `string`: Block client ID.
-
-*Returns*
-
-- `Object`: Action object.
 
 ### insertAfterBlock
 
@@ -67628,11 +68634,15 @@ Returns a single attribute of the post being edited, preferring the unsaved edit
 const getFeaturedMediaUrl = useSelect( ( select ) => {
     const getFeaturedMediaId =
         select( 'core/editor' ).getEditedPostAttribute( 'featured_media' );
-    const getMedia = select( 'core' ).getMedia( getFeaturedMediaId );
+    const media = select( 'core' ).getEntityRecord(
+        'postType',
+        'attachment',
+        getFeaturedMediaId
+    );
 
     return (
-        getMedia?.media_details?.sizes?.large?.source_url ||
-        getMedia?.source_url ||
+        media?.media_details?.sizes?.large?.source_url ||
+        media?.source_url ||
         ''
     );
 }, [] );
@@ -68337,6 +69347,28 @@ Returns whether the permalink is editable or not.
 
 Returns whether post autosaving is locked.
 
+*Usage*
+
+```jsx
+import { __ } from '@wordpress/i18n';
+import { store as editorStore } from '@wordpress/editor';
+import { useSelect } from '@wordpress/data';
+
+const ExampleComponent = () => {
+    const isAutoSavingLocked = useSelect(
+        ( select ) => select( editorStore ).isPostAutosavingLocked(),
+        []
+    );
+
+    return isAutoSavingLocked ? (
+        <p>{ __( 'Post auto saving is locked' ) }</p>
+    ) : (
+        <p>{ __( 'Post auto saving is not locked' ) }</p>
+    );
+};
+
+```
+
 *Parameters*
 
 - *state* `Object`: Global application state.
@@ -68533,23 +69565,6 @@ Returns an action object used in signalling that attributes of the post have bee
 ```js
 // Update the post title
 wp.data.dispatch( 'core/editor' ).editPost( { title: `${ newTitle }` } );
-
-```
-
-```js
-// Get specific media size based on the featured media ID
-// Note: change sizes?.large for any registered size
-const getFeaturedMediaUrl = useSelect( ( select ) => {
-    const getFeaturedMediaId =
-        select( 'core/editor' ).getEditedPostAttribute( 'featured_media' );
-    const getMedia = select( 'core' ).getMedia( getFeaturedMediaId );
-
-    return (
-        getMedia?.media_details?.sizes?.large?.source_url ||
-        getMedia?.source_url ||
-        ''
-    );
-}, [] );
 
 ```
 
@@ -69602,7 +70617,7 @@ const ExampleComponent = () => {
             }
         >
             { __(
-                'Generate an snackbar error notice with explicit dismiss button.'
+                'Generate a snackbar error notice with explicit dismiss button.'
             ) }
         </Button>
     );
@@ -72846,7 +73861,7 @@ privateValidateBlocks( blocks, true );
 #### Private React component properties
 
 To add a private argument to a stable component you’ll need  
-to prepare a stable and an private version of that component.  
+to prepare a stable and a private version of that component.  
 Then, export the stable function and `lock()` the unstable function  
 inside it:
 
@@ -74395,7 +75410,7 @@ The [Gutenberg repository](https://github.com/WordPress/gutenberg) on GitHub is 
 
 Before you begin, there are some requirements that must be met in order to successfully release a stable version of the Gutenberg plugin. You will need to:
 
-- Be a member of the [Gutenberg development team](#block-editor/block-editor/contributors/repository-management). This gives you the ability to launch the GitHub actions that are related to the release process and to backport pull requests (PRs) to the release branch.
+- Be a member of the [Gutenberg development team](#block-editor/contributors/repository-management). This gives you the ability to launch the GitHub actions that are related to the release process and to backport pull requests (PRs) to the release branch.
 - Have write permissions on the [Make WordPress Core](https://make.wordpress.org/core) blog. This allows you to draft the release post.
 - Obtain approval from a member of the Gutenberg Core team in order to upload the new version Gutenberg to the WordPress.org plugin directory.
 
@@ -74403,7 +75418,7 @@ Similar requirements apply to releasing WordPress’s [npm packages](#block-edit
 
 ## Gutenberg plugin releases
 
-The first step in releasing a stable version of the Gutenberg plugin is to [create an issue](https://github.com/WordPress/gutenberg/issues/new?assignees=&labels=&projects=&template=New_release.md) in the Gutenberg repository. The issue template is called “Gutenberg Release,” and it contains a checklist for the complete release process, from release candidate to changelog curation to cherry-picking, stable release, and release post. The issue for [Gutenberg 15.7](https://github.com/WordPress/gutenberg/issues/50092) is a good example.
+The first step in releasing a stable version of the Gutenberg plugin is to [create an issue](https://github.com/WordPress/gutenberg/issues/new?template=New_release.md) in the Gutenberg repository. The issue template is called “Gutenberg Release,” and it contains a checklist for the complete release process, from release candidate to changelog curation to cherry-picking, stable release, and release post. The issue for [Gutenberg 21.2](https://github.com/WordPress/gutenberg/issues/70662) is a good example.
 
 The checklist helps you coordinate with developers and other teams involved in the release process. It ensures that all of the necessary steps are completed and that everyone is aware of the schedule and important milestones.
 
@@ -74421,11 +75436,11 @@ If critical bugs are discovered in stable versions of the plugin, patch versions
 
 ### Release management
 
-Each major Gutenberg release is run by a release manager, also known as a release lead. This individual, or small team of individuals, is responsible for the release of Gutenberg with support from the broader [Gutenberg development team](#block-editor/block-editor/contributors/repository-management).
+Each major Gutenberg release is run by a release manager, also known as a release lead. This individual, or small team of individuals, is responsible for the release of Gutenberg with support from the broader [Gutenberg development team](#block-editor/contributors/repository-management).
 
 The release manager is responsible for initiating all release activities, and their approval is required for any changes to the release plan. In the event of an emergency or if the release manager is unavailable, other team members may take appropriate action, but they should keep the release manager informed.
 
-If you are a member of the [Gutenberg development team](#block-editor/block-editor/contributors/repository-management) and are interested in leading a Gutenberg release, reach out in the [\#core-editor](https://wordpress.slack.com/messages/C02QB2JS7) Slack channel.
+If you are a member of the [Gutenberg development team](#block-editor/contributors/repository-management) and are interested in leading a Gutenberg release, reach out in the [\#core-editor](https://wordpress.slack.com/messages/C02QB2JS7) Slack channel.
 
 ### Preparing a release
 
@@ -74501,7 +75516,7 @@ Here are some additional tips for preparing clear and concise changelogs:
 - Move all entries under the `Various` section to a more appropriate section.
 - Fix spelling errors or clarify wording. Phrasing should be easy to understand where the intended audience is those who use the plugin or are keeping up with ongoing development.
 - Create new groupings as applicable, and move pull requests between.
-- When multiple PRs relate to the same task (such as a follow-up pull request), try to combine them into a single entry. Good examples for this are PRs around removing Lodash for performance purposes, replacement of Puppeteer E2D tests with Playwright or efforts to convert public components to TypeScript.
+- When multiple PRs relate to the same task (such as a follow-up pull request), try to combine them into a single entry. Good examples for this are PRs around removing Lodash for performance purposes, replacement of Puppeteer E2E tests with Playwright or efforts to convert public components to TypeScript.
 - If subtasks of a related set of PRs are substantial, consider organizing as entries in a nested list.
 - Remove PRs that revert other PRs in the same release if the net change in code is zero.
 - Remove all PRs that only update the mobile app. The only exception to this rule is if the mobile app pull request also updates functionality for the web.
@@ -74511,7 +75526,7 @@ Here are some additional tips for preparing clear and concise changelogs:
 
  **Quick reference**- Ensure all PRs that need cherry-picking have the `Backport to Gutenberg RC` label.
 - In your local clone of the Gutenberg repository, switch to the release branch: `git checkout release/X.Y`
-- Cherry-pick all merged PRs using the automated script: npm run other:cherry-pick “Backport to Gutenberg RC”
+- Cherry-pick all merged PRs using the automated script: `npm run other:cherry-pick "Backport to Gutenberg RC"`
 
 After an RC is published but before the final stable release, some bugs related to the release might be fixed and committed to `trunk`. The stable release will not automatically include these fixes. Including them is a manual process, which is called cherry-picking.
 
@@ -74524,7 +75539,7 @@ There are a couple of ways you might be made aware of these bugs as a release ma
 
 The cherry-picking process can be automated with the `npm run other:cherry-pick "[Insert Label]"` script, which is included in Gutenberg. You will need to use the label `Backport to Gutenberg RC` when running the command and ensure all PRs that need cherry-picking have the label assigned.
 
-To cherry-pick PRs, you must clone (not fork) the Gutenberg repository and have write access. Only members of the [Gutenberg development team](#block-editor/block-editor/contributors/repository-management) have the necessary permissions to perform this action.
+To cherry-pick PRs, you must clone (not fork) the Gutenberg repository and have write access. Only members of the [Gutenberg development team](#block-editor/contributors/repository-management) have the necessary permissions to perform this action.
 
 Once you have cloned the Gutenberg repository to your local development environment, begin by switching to the release branch:
 
@@ -74583,7 +75598,7 @@ Publishing the release will create a `git` tag for the version, publish the rele
 1. Use the release notes that you just edited to update `changelog.txt`, and
 2. Upload the new plugin version to the WordPress.org plugin repository (SVN) (only if you’re releasing a stable version).
 
-The last step needs approval by a member of either the [Gutenberg Release](https://github.com/orgs/WordPress/teams/gutenberg-release), [Gutenberg Core](https://github.com/orgs/WordPress/teams/gutenberg-core), or the [WordPress Core](https://github.com/orgs/WordPress/teams/wordpress-core) teams. These teams get a notification email when the release is ready to be approved, but if time is of the essence, you can ask in the #core-editor Slack channel or ping the [Gutenberg Release team](https://github.com/orgs/WordPress/teams/gutenberg-release)) to accelerate the process. Reaching out before launching the release process so that somebody is ready to approve is recommended. Locate the [“Upload Gutenberg plugin to WordPress.org plugin repo” workflow](https://github.com/WordPress/gutenberg/actions/workflows/upload-release-to-plugin-repo.yml) for the new version, and have it [approved](https://docs.github.com/en/actions/managing-workflow-runs/reviewing-deployments#approving-or-rejecting-a-job).
+The last step needs approval by a member of either the [Gutenberg Release](https://github.com/orgs/WordPress/teams/gutenberg-release), [Gutenberg Core](https://github.com/orgs/WordPress/teams/gutenberg-core), or the [WordPress Core](https://github.com/orgs/WordPress/teams/wordpress-core) teams. These teams get a notification email when the release is ready to be approved, but if time is of the essence, you can ask in the `#core-editor` Slack channel or ping the [Gutenberg Release team](https://github.com/orgs/WordPress/teams/gutenberg-release) to accelerate the process. Reaching out before launching the release process so that somebody is ready to approve is recommended. Locate the [“Upload Gutenberg plugin to WordPress.org plugin repo” workflow](https://github.com/WordPress/gutenberg/actions/workflows/upload-release-to-plugin-repo.yml) for the new version, and have it [approved](https://docs.github.com/en/actions/how-tos/managing-workflow-runs-and-deployments/managing-deployments/reviewing-deployments#approving-or-rejecting-a-job).
 
 Once approved, the new Gutenberg version will be available to WordPress users all over the globe. Once uploaded, confirm that the latest version can be downloaded and updated from the WordPress plugin dashboard.
 
@@ -74593,7 +75608,7 @@ The final step is to write a release post on [make.wordpress.org/core](https://m
 
 > The plugin was published to the WordPress.org plugin directory but the workflow failed.
 
-This has happened occasionally, see [this one](https://github.com/WordPress/gutenberg/actions/runs/6955409957/job/18924124118) for example.
+This has happened occasionally, see [this one](https://github.com/WordPress/gutenberg/actions/runs/16325916698/job/46115920213) for example.
 
 It’s important to check that:
 
@@ -74603,9 +75618,9 @@ It’s important to check that:
     - the `trunk` folder should have “Committing version X.Y.Z”
     - there is a new `tags/X.Y.Z` folder with the same contents as `trunk` whose latest commit is “Tagging version X.Y.Z”
 
-Most likely, the tag folder couldn’t be created. This is a [known issue](https://plugins.trac.wordpress.org/browser/gutenberg/) that [can be fixed manually](https://github.com/WordPress/gutenberg/issues/55295#issuecomment-1759292978).
+Most likely, the tag folder couldn’t be created. This is a [known issue](https://github.com/WordPress/gutenberg/issues/55295) that [can be fixed manually](https://github.com/WordPress/gutenberg/issues/55295#issuecomment-1759292978).
 
-Either substitute SVN\_USERNAME, SVN\_PASSWORD, and VERSION for the proper values or set them as global environment variables first:
+Either substitute `SVN_USERNAME`, `SVN_PASSWORD`, and `VERSION` for the proper values or set them as global environment variables first:
 
 ```sh
 # CHECKOUT THE REPOSITORY
@@ -74627,7 +75642,7 @@ Ask around if you need help with any of this.
 
 ### Documenting the release
 
-Documenting the release is led by the release manager with the help of [Gutenberg development team](#block-editor/block-editor/contributors/repository-management) members. This process is comprised of a series of sequential steps that, because of the number of people involved, and the coordination required, need to adhere to a timeline between the RC and stable releases. Stable Gutenberg releases happen on Wednesdays, one week after the initial RC.
+Documenting the release is led by the release manager with the help of [Gutenberg development team](#block-editor/contributors/repository-management) members. This process is comprised of a series of sequential steps that, because of the number of people involved, and the coordination required, need to adhere to a timeline between the RC and stable releases. Stable Gutenberg releases happen on Wednesdays, one week after the initial RC.
 
  **Timeline**1. Make a copy of the [Google Doc Template for release posts](https://docs.google.com/document/d/1D-MTOCmL9eMlP9TDTXqlzuKVOg_ghCPm9_whHFViqMk/edit) – Wednesday to Friday
 2. Select the release highlights – Friday to Monday
@@ -74641,9 +75656,13 @@ Once the changelog is cleaned up, the next step is to choose a few changes to hi
 
 Given the big scope of Gutenberg and the high number of PRs merged in each milestone, it is not uncommon to overlook impactful changes worth highlighting; because of this, this step is a collaborative effort between the release manager and other Gutenberg development team members. If you don’t know what to pick, reach out to others on the team for assistance.
 
-#### Requesting release assets
+#### Release assets
 
-After identifying the highlights of a new WordPress release, the release manager requests visual assets from the Design team. The request is made in the [\#design](https://wordpress.slack.com/archives/C02S78ZAL) Slack channel, and an example post for 15.8 can be found [here](https://wordpress.slack.com/archives/C02S78ZAL/p1684161811926279). The assets will be provided in a [Google Drive folder](https://drive.google.com/drive/folders/1U8bVbjOc0MekWjpMjNaVFVhHFEzQkYLB) assigned to the specific release.
+The release post has a few visual assets that need to be organized. For the post’s featured image, use the same image as the previous release used. It should already be in the media library called ‘gb-featured’.
+
+There’s also a banner in the post body, which can be added via a synced pattern called ‘Gutenberg What’s New Banner’. Insert this pattern and update the text to the correct version number.
+
+The highlighted features also require visual assets. For a high profile feature you can request visual assets from the Design team. For other features you can create the assets yourself if you’re comfortable. To request assets from design, reach out in the [\#design](https://wordpress.slack.com/archives/C02S78ZAL) Slack channel, and an example post for 15.8 can be found [here](https://wordpress.slack.com/archives/C02S78ZAL/p1684161811926279). The assets will be provided in a [Google Drive folder](https://drive.google.com/drive/folders/1U8bVbjOc0MekWjpMjNaVFVhHFEzQkYLB) assigned to the specific release.
 
 When creating visual assets for a WordPress release, use animations (video or GIF) or static images to showcase the highlights. Use [previous release posts](https://make.wordpress.org/core/tag/gutenberg-new/) as a guide, and keep in mind that animations are better for demonstrating workflows, while more direct highlights can be shown with an image. When creating assets, avoid using copyrighted material and disable browser plugins that can be seen in the browser canvas.
 
@@ -74664,6 +75683,12 @@ The author should then enable public preview on the post and ask for a final pee
 
 Finally, the post should be published after the stable version is released and is available on WordPress.org. This will help external media to echo and amplify the release.
 
+### Call for volunteer for the next release
+
+After you’ve completed the release, post in #core-editor slack channel asking for volunteers to handle the next Gutenberg release.
+
+See an example of that [here](https://wordpress.slack.com/archives/C02QB2JS7/p1751595983193709).
+
 ### Creating minor releases
 
 Occasionally it’s necessary to create a minor release (i.e. X.Y.**Z**) of the Plugin. This is usually done to expedite fixes for bad regressions or bugs. The `Backport to Gutenberg Minor Release` is usually used to identify PRs that need to be included in a minor release, but as release coordinator you may also be notified more informally through slack. Even so, it’s good to ensure all relevant PRs have the correct label.
@@ -74676,7 +75701,7 @@ The method for minor releases is nearly identical to the main Plugin release pro
 
 The minor release should only contain the *specific commits* required. To do this you should checkout the previous *major* stable (i.e. non-RC) release branch (e.g. `release/12.5`) locally and then cherry pick any commits that you require into that branch.
 
-If an RC already exists for a new version, you _need_ to cherry-pick the same commits in the respective release branch, as they will not be included automatically. E.g.: If you’re about to release a new minor release for 12.5 and just cherry-picked into `release/12.5`, but 12.6.0-rc.1 is already out, then you need to cherry-pick the same commits into the `release/12.6` branch, or they won’t be included in subsequent releases for 12.6! Usually it’s best to coordinate this process with the release coordinator for the next release. 
+If an RC already exists for a new version, you **need** to cherry-pick the same commits in the respective release branch, as they will not be included automatically. E.g.: If you’re about to release a new minor release for 12.5 and just cherry-picked into `release/12.5`, but 12.6.0-rc.1 is already out, then you need to cherry-pick the same commits into the `release/12.6` branch, or they won’t be included in subsequent releases for 12.6! Usually it’s best to coordinate this process with the release coordinator for the next release. 
 
 The cherry-picking process can be automated with the [`npm run cherry-pick`](#block-editor/contributors/code/auto-cherry-picking) script, but be sure to use the `Backport to Gutenberg Minor Release` label when running the script.
 
@@ -74704,7 +75729,7 @@ To do this, when running the Workflow, select the appropriate `release/` branch 
 
 It is possible to create a minor release for any release branch even after a more recent stable release has been published. This can be done for *any* previous release branches, allowing more flexibility in delivering updates to users. In the past, users had to wait for the next stable release, potentially taking days. Now, fixes can be swiftly shipped to any previous release branches as required.
 
-The process is identical to the one documented above when an RC is already out: choose a previous release branch, type `stable`, and click “Run workflow”. The release will be published on the GitHub releases page for Gutenberg and to the WordPress core repository SVN as a `tag` under https://plugins.svn.wordpress.org/gutenberg/tags/. The SVN `trunk` directory will not be touched.
+The process is identical to the one documented above when an RC is already out: choose a previous release branch, type `stable`, and click “Run workflow”. The release will be published on the GitHub releases page for Gutenberg and to the WordPress core repository SVN as a `tag` under <https://plugins.svn.wordpress.org/gutenberg/tags/>. The SVN `trunk` directory will not be touched.
 
 **IMPORTANT:** When publishing the draft created by the [“Build Plugin Zip” workflow](https://github.com/WordPress/gutenberg/actions/workflows/build-plugin-zip.yml), make sure to leave the “Set as last release” checkbox unchecked. If it is left checked by accident, the [“Upload Gutenberg plugin to WordPress.org plugin” workflow](https://github.com/WordPress/gutenberg/actions/workflows/upload-release-to-plugin-repo.yml) will still correctly upload it **as a tag (and will *not* replace the `trunk` version)** to the WordPress plugin repository SVN – the workflow will perform some version arithmetic to determine how the plugin should be shipped – but you’ll still need to fix the state on GitHub by setting the right release as `latest` on the [releases](https://github.com/WordPress/gutenberg/releases/) page!
 
@@ -74742,7 +75767,7 @@ The Gutenberg repository follows the [WordPress SVN repository’s](https://make
 
 Release types and their schedule:
 
-- [Synchronizing Gutenberg Plugin](#synchronizing-gutenberg-plugin) (`latest` dist tag) – publishing happens automatically every two weeks based on the newly created `release/X.Y` (example `release/12.8`) branch with the RC1 version of the Gutenberg plugin.
+- [Synchronizing Gutenberg Plugin](#synchronizing-the-gutenberg-plugin) (`latest` dist tag) – publishing happens automatically every two weeks based on the newly created `release/X.Y` (example `release/12.8`) branch with the RC1 version of the Gutenberg plugin.
 - [WordPress Releases](#wordpress-releases) (`wp-X.Y` dist tag, example `wp-6.2`) – publishing gets triggered on demand from the `wp/X.Y` (example `wp/6.2`) branch. Once we reach the point in the WordPress major release cycle (shortly before Beta 1) where we only cherry-pick commits from the Gutenberg repository to the WordPress core, we use `wp/X.Y` branch (created from `release/X.Y` branch, example `release/15.1`) for npm publishing with the `wp-X.Y` dist-tag. It’s also possible to use older branches to backport bug or security fixes to the corresponding older versions of WordPress Core.
 - [Development Releases](#development-releases) (`next` dist tag) – it is also possible to perform development releases at any time when there is a need to test the upcoming changes.
 
@@ -74750,7 +75775,7 @@ There is also an option to perform [Standalone Bugfix Package Releases](#standal
 
 ### Synchronizing the Gutenberg plugin
 
-For each Gutenberg plugin release, we also publish to npm an updated version of WordPress packages. This is automated with the [Release Tool](#release-tool) that handles releases for the Gutenberg plugin. A successful RC1 release triggers the npm publishing job, and this needs to be approved by a Gutenberg Core team member. Locate the [“Build Gutenberg Plugin Zip” workflow](https://github.com/WordPress/gutenberg/actions/workflows/build-plugin-zip.yml) for the new version, and have it [approved](https://docs.github.com/en/actions/managing-workflow-runs/reviewing-deployments#approving-or-rejecting-a-job).
+For each Gutenberg plugin release, we also publish to npm an updated version of WordPress packages. This is automated with the [Release Tool](https://github.com/WordPress/gutenberg/blob/trunk/.github/workflows/build-plugin-zip.yml) that handles releases for the Gutenberg plugin. A successful RC1 release triggers the npm publishing job, and this needs to be approved by a Gutenberg Core team member. Locate the [“Build Gutenberg Plugin Zip” workflow](https://github.com/WordPress/gutenberg/actions/workflows/build-plugin-zip.yml) for the new version, and have it [approved](https://docs.github.com/en/actions/how-tos/managing-workflow-runs-and-deployments/managing-deployments/reviewing-deployments#approving-or-rejecting-a-job).
 
 We deliberately update the `wp/latest` branch within the Gutenberg repo with the content from the Gutenberg release `release/X.Y` (example `release/12.7`) branch at the time of the Gutenberg RC1 release. This is done to ensure that the `wp/latest` branch is as close as possible to the latest version of the Gutenberg plugin. It also practically removes the chances of conflicts while backporting to `trunk` commits with updates applied during publishing to `package.json` and `CHANGELOG.md` files. In the past, we had many issues in that aspect when doing npm publishing after the regular Gutenberg release a week later. When publishing the new package versions to npm, we pick at least the `minor` version bump to account for future bugfix or security releases.
 
@@ -74778,8 +75803,8 @@ The following workflow is needed when bug or security fixes need to be backporte
 - During the `beta` and `RC` periods of the WordPress release cycle when `wp/X.Y` (example `wp/5.7`) branch for the release is already present.
 - For WordPress minor releases and WordPress security releases (example `5.1.1`).
 
-1. Check out the relevant WordPress major branch (If the minor release is 5.2.1, check out `wp/5.2`).
-2. Create a feature branch from that branch, and cherry-pick the merge commits for the needed bug fixes onto it. The cherry-picking process can be automated with the [`npm run other:cherry-pick` script](#block-editor/contributors/code/auto-cherry-picking).
+1. Check out the relevant WordPress major branch (If the minor release is `5.2.1`, check out `wp/5.2`).
+2. Create a feature branch from that branch, and cherry-pick the merge commits for the needed bug fixes onto it. The cherry-picking process can be automated with the [`npm run other:cherry-pick`](#block-editor/contributors/code/auto-cherry-picking) script.
 3. Create a Pull Request from this branch targeting the WordPress major branch used above.
 4. Merge the Pull Request using the “Rebase and Merge” button to keep the history of the commits.
 
@@ -74787,7 +75812,7 @@ Now, the `wp/X.Y` branch is ready for publishing npm packages. In order to start
 
 ![Run workflow dropdown for npm publishing](https://i0.wp.com/developer.wordpress.org/files/2023/07/image-2.png?ssl=1)
 
-To publish packages to npm for the WordPress major release, select `trunk` as the branch to run the workflow from (this means that the script used to run the workflow comes from the trunk branch, though the packages themselves will published from the release branch as long as the correct “Release type” is selected below), then select `wp` from the “Release type” dropdown and enter `X.Y` (example `5.2`) in the “WordPress major release” input field. Finally, press the green “Run workflow” button. It triggers the npm publishing job, and this needs to be approved by a Gutenberg Core team member. Locate the [“Publish npm packages” action](https://github.com/WordPress/gutenberg/actions/workflows/publish-npm-packages.yml) for the current publishing, and have it [approved](https://docs.github.com/en/actions/managing-workflow-runs/reviewing-deployments#approving-or-rejecting-a-job).
+To publish packages to npm for the WordPress major release, select `trunk` as the branch to run the workflow from (this means that the script used to run the workflow comes from the trunk branch, though the packages themselves will published from the release branch as long as the correct “Release type” is selected below), then select `wp` from the “Release type” dropdown and enter `X.Y` (example `5.2`) in the “WordPress major release” input field. Finally, press the green “Run workflow” button. It triggers the npm publishing job, and this needs to be approved by a Gutenberg Core team member. Locate the [“Publish npm packages” action](https://github.com/WordPress/gutenberg/actions/workflows/publish-npm-packages.yml) for the current publishing, and have it [approved](https://docs.github.com/en/actions/how-tos/managing-workflow-runs-and-deployments/managing-deployments/reviewing-deployments#approving-or-rejecting-a-job).
 
 For the record, the manual process would look like the following:
 
@@ -74833,9 +75858,8 @@ Whilst waiting for the GitHub actions build for `wp/latest`[branch to pass](http
 
 1. `git checkout wp/latest`
 2. `npx lerna updated`  
-    &gt; Example  
-    &gt;  
-    &gt; `shell<br></br>> npx lerna updated<br></br>> @wordpress/e2e-tests<br></br>> @wordpress/jest-preset-default<br></br>> @wordpress/scripts<br></br>> lerna success found 3 packages ready to publish<br></br>>`
+    Example:  
+    `shell<br></br>npx lerna updated<br></br>@wordpress/e2e-tests<br></br>@wordpress/jest-preset-default<br></br>@wordpress/scripts<br></br>lerna success found 3 packages ready to publish`
 
 Check the versions listed in the current `CHANGELOG.md` file, looking through the commit history of a package e.g [@wordpress/scripts](https://github.com/WordPress/gutenberg/commits/HEAD/packages/scripts) and look out for *“chore(release): publish”* and *“Update changelogs”* commits to determine recent version bumps, then looking at the commits since the most recent release should aid with discovering what changes have occurred since the last release.
 
@@ -74845,7 +75869,7 @@ Now, the `wp/latest` branch is ready for publishing npm packages. In order to st
 
 ![Run workflow dropdown for npm publishing](https://i0.wp.com/developer.wordpress.org/files/2023/07/image-6.png?ssl=1)
 
-To publish packages to npm with bugfixes, select `bugfix` from the “Release type” dropdown and leave empty “WordPress major release” input field. Finally, press the green “Run workflow” button. It triggers the npm publishing job, and this needs to be approved by a Gutenberg Core team member. Locate the [“Publish npm packages” action](https://github.com/WordPress/gutenberg/actions/workflows/publish-npm-packages.yml) for the current publishing, and have it [approved](https://docs.github.com/en/actions/managing-workflow-runs/reviewing-deployments#approving-or-rejecting-a-job).
+To publish packages to npm with bugfixes, select `bugfix` from the “Release type” dropdown and leave empty “WordPress major release” input field. Finally, press the green “Run workflow” button. It triggers the npm publishing job, and this needs to be approved by a Gutenberg Core team member. Locate the [“Publish npm packages” action](https://github.com/WordPress/gutenberg/actions/workflows/publish-npm-packages.yml) for the current publishing, and have it [approved](https://docs.github.com/en/actions/how-tos/managing-workflow-runs-and-deployments/managing-deployments/reviewing-deployments#approving-or-rejecting-a-job).
 
 Behind the scenes, the rest of the process is automated with `./bin/plugin/cli.js npm-bugfix` command. For the record, the manual process would look very close to the following steps:
 
@@ -74861,7 +75885,7 @@ Behind the scenes, the rest of the process is automated with `./bin/plugin/cli.j
 
 ### Development releases
 
-As noted in the [Synchronizing Gutenberg Plugin](#synchronizing-gutenberg-plugin) section, packages publishing happens every two weeks from the `wp/latest` branch. It’s also possible to use the development release to test the upcoming changes present in the `trunk` branch at any time. We are taking advantage of [package distribution tags](https://docs.npmjs.com/cli/v7/commands/npm-dist-tag) that make it possible to consume the future version of the codebase according to npm guidelines:
+As noted in the [Synchronizing Gutenberg Plugin](#synchronizing-the-gutenberg-plugin) section, packages publishing happens every two weeks from the `wp/latest` branch. It’s also possible to use the development release to test the upcoming changes present in the `trunk` branch at any time. We are taking advantage of [package distribution tags](https://docs.npmjs.com/cli/v7/commands/npm-dist-tag) that make it possible to consume the future version of the codebase according to npm guidelines:
 
 > By default, the `latest` tag is used by npm to identify the current version of a package, and `npm install <pkg>` (without any `@<version>` or `@<tag>` specifier) installs the `latest` tag. Typically, projects only use the `latest` tag for stable release versions, and use other tags for unstable versions such as prereleases.
 
@@ -74876,7 +75900,7 @@ In order to start the publishing process for development version of npm packages
 
 ![Run workflow dropdown for npm publishing](https://i0.wp.com/developer.wordpress.org/files/2023/07/image-4.png?ssl=1)
 
-To publish development packages to npm, select `development` from the “Release type” dropdown and leave empty “WordPress major release” input field. Finally, press the green “Run workflow” button. It triggers the npm publishing job, and this needs to be approved by a Gutenberg Core team member. Locate the [“Publish npm packages” action](https://github.com/WordPress/gutenberg/actions/workflows/publish-npm-packages.yml) for the current publishing, and have it [approved](https://docs.github.com/en/actions/managing-workflow-runs/reviewing-deployments#approving-or-rejecting-a-job).
+To publish development packages to npm, select `development` from the “Release type” dropdown and leave empty “WordPress major release” input field. Finally, press the green “Run workflow” button. It triggers the npm publishing job, and this needs to be approved by a Gutenberg Core team member. Locate the [“Publish npm packages” action](https://github.com/WordPress/gutenberg/actions/workflows/publish-npm-packages.yml) for the current publishing, and have it [approved](https://docs.github.com/en/actions/how-tos/managing-workflow-runs-and-deployments/managing-deployments/reviewing-deployments#approving-or-rejecting-a-job).
 
 Behind the scenes, the release process is fully automated via `./bin/plugin/cli.js npm-next` command. It ensures  
 the `wp/next` branch is synchronized with the latest release branch (`release/X.Y`) created for the Gutenberg plugin. To avoid collisions in the versioning of packages, we always include the newest commit’s `sha`, for example, `@wordpress/block-editor@5.2.10-next.645224df70.0`.
@@ -77286,6 +78310,235 @@ Once you find the region you want to interact with, you can use Control+Option p
 
 ---
 
+# Gutenberg versions in WordPress <a name="block-editor/contributors/versions-in-wordpress" />
+
+Source: https://developer.wordpress.org/block-editor/contributors/versions-in-wordpress/
+
+With each major release of WordPress a new version of Gutenberg is included. This has caused confusion over time as people have tried to figure out how to best debug problems and report bugs appropriately. To make this easier we have made this document to serve as a canonical list of the Gutenberg versions integrated into each major WordPress release. Of note, during the beta period of a WordPress release, additional bug fixes from later Gutenberg releases than those noted are added into the WordPress release where it is needed. If you want details about what’s in each Gutenberg release outside of the high level items shared as part of major WordPress releases, please review the [release notes shared on Make Core](https://make.wordpress.org/core/tag/gutenberg-new/).
+
+If anything looks incorrect here, please bring it up in #core-editor in [WordPress.org slack](https://make.wordpress.org/chat/).
+
+| Gutenberg Versions | WordPress Version |
+|---|---|
+| 19.4-20.4 | 6.8 |
+| 18.6-19.3 | 6.7.2 |
+| 18.6-19.3 | 6.7.1 |
+| 18.6-19.3 | 6.7 |
+| 17.8-18.5 | 6.6.2 |
+| 17.8-18.5 | 6.6.1 |
+| 17.8-18.5 | 6.6 |
+| 16.8-17.7 | 6.5.5 |
+| 16.8-17.7 | 6.5.4 |
+| 16.8-17.7 | 6.5.3 |
+| 16.8-17.7 | 6.5.2 |
+| 16.8-17.7 | 6.5 |
+| 16.2-16.7 | 6.4.4 |
+| 16.2-16.7 | 6.4.5 |
+| 16.2-16.7 | 6.4.3 |
+| 16.2-16.7 | 6.4.2 |
+| 16.2-16.7 | 6.4.1 |
+| 16.2-16.7 | 6.4 |
+| 15.2-16.1 | 6.3.5 |
+| 15.2-16.1 | 6.3.4 |
+| 15.2-16.1 | 6.3.3 |
+| 15.2-16.1 | 6.3.2 |
+| 15.2-16.1 | 6.3.1 |
+| 15.2-16.1 | 6.3 |
+| 14.2-15.1 | 6.2.6 |
+| 14.2-15.1 | 6.2.5 |
+| 14.2-15.1 | 6.2.4 |
+| 14.2-15.1 | 6.2.3 |
+| 14.2-15.1 | 6.2.2 |
+| 14.2-15.1 | 6.2.1 |
+| 14.2-15.1 | 6.2 |
+| 13.1-14.1 | 6.1.7 |
+| 13.1-14.1 | 6.1.6 |
+| 13.1-14.1 | 6.1.5 |
+| 13.1-14.1 | 6.1.4 |
+| 13.1-14.1 | 6.1.3 |
+| 13.1-14.1 | 6.1.2 |
+| 13.1-14.1 | 6.1.1 |
+| 13.1-14.1 | 6.1 |
+| 12.0-13.0 | 6.0.9 |
+| 12.0-13.0 | 6.0.8 |
+| 12.0-13.0 | 6.0.7 |
+| 12.0-13.0 | 6.0.6 |
+| 12.0-13.0 | 6.0.5 |
+| 12.0-13.0 | 6.0.4 |
+| 12.0-13.0 | 6.0.3 |
+| 12.0-13.0 | 6.0.2 |
+| 12.0-13.0 | 6.0.1 |
+| 12.0-13.0 | 6.0 |
+| 10.8-11.9 | 5.9.10 |
+| 10.8-11.9 | 5.9.9 |
+| 10.8-11.9 | 5.9.8 |
+| 10.8-11.9 | 5.9.7 |
+| 10.8-11.9 | 5.9.6 |
+| 10.8-11.9 | 5.9.5 |
+| 10.8-11.9 | 5.9.4 |
+| 10.8-11.9 | 5.9.3 |
+| 10.8-11.9 | 5.9.2 |
+| 10.8-11.9 | 5.9.1 |
+| 10.8-11.9 | 5.9 |
+| 10.0-10.7 | 5.8.10 |
+| 10.0-10.7 | 5.8.9 |
+| 10.0-10.7 | 5.8.8 |
+| 10.0-10.7 | 5.8.7 |
+| 10.0-10.7 | 5.8.6 |
+| 10.0-10.7 | 5.8.5 |
+| 10.0-10.7 | 5.8.4 |
+| 10.0-10.7 | 5.8.3 |
+| 10.0-10.7 | 5.8.2 |
+| 10.0-10.7 | 5.8.1 |
+| 10.0-10.7 | 5.8 |
+| 9.3-9.9 | 5.7.12 |
+| 9.3-9.9 | 5.7.11 |
+| 9.3-9.9 | 5.7.10 |
+| 9.3-9.9 | 5.7.9 |
+| 9.3-9.9 | 5.7.8 |
+| 9.3-9.9 | 5.7.7 |
+| 9.3-9.9 | 5.7.6 |
+| 9.3-9.9 | 5.7.5 |
+| 9.3-9.9 | 5.7.4 |
+| 9.3-9.9 | 5.7.3 |
+| 9.3-9.9 | 5.7.2 |
+| 9.3-9.9 | 5.7.1 |
+| 9.3-9.9 | 5.7 |
+| 8.6-9.2 | 5.6.14 |
+| 8.6-9.2 | 5.6.13 |
+| 8.6-9.2 | 5.6.12 |
+| 8.6-9.2 | 5.6.11 |
+| 8.6-9.2 | 5.6.10 |
+| 8.6-9.2 | 5.6.9 |
+| 8.6-9.2 | 5.6.8 |
+| 8.6-9.2 | 5.6.7 |
+| 8.6-9.2 | 5.6.6 |
+| 8.6-9.2 | 5.6.5 |
+| 8.6-9.2 | 5.6.4 |
+| 8.6-9.2 | 5.6.3 |
+| 8.6-9.2 | 5.6.2 |
+| 8.6-9.2 | 5.6.1 |
+| 8.6-9.2 | 5.6 |
+| 7.6-8.5 | 5.5.15 |
+| 7.6-8.5 | 5.5.14 |
+| 7.6-8.5 | 5.5.13 |
+| 7.6-8.5 | 5.5.12 |
+| 7.6-8.5 | 5.5.11 |
+| 7.6-8.5 | 5.5.10 |
+| 7.6-8.5 | 5.5.9 |
+| 7.6-8.5 | 5.5.8 |
+| 7.6-8.5 | 5.5.7 |
+| 7.6-8.5 | 5.5.6 |
+| 7.6-8.5 | 5.5.5 |
+| 7.6-8.5 | 5.5.4 |
+| 7.6-8.5 | 5.5.3 |
+| 7.6-8.5 | 5.5.2 |
+| 7.6-8.5 | 5.5.1 |
+| 7.6-8.5 | 5.5 |
+| 6.6-7.5 | 5.4.16 |
+| 6.6-7.5 | 5.4.15 |
+| 6.6-7.5 | 5.4.14 |
+| 6.6-7.5 | 5.4.13 |
+| 6.6-7.5 | 5.4.12 |
+| 6.6-7.5 | 5.4.11 |
+| 6.6-7.5 | 5.4.10 |
+| 6.6-7.5 | 5.4.9 |
+| 6.6-7.5 | 5.4.8 |
+| 6.6-7.5 | 5.4.7 |
+| 6.6-7.5 | 5.4.6 |
+| 6.6-7.5 | 5.4.5 |
+| 6.6-7.5 | 5.4.4 |
+| 6.6-7.5 | 5.4.3 |
+| 6.6-7.5 | 5.4.2 |
+| 6.6-7.5 | 5.4.1 |
+| 6.6-7.5 | 5.4 |
+| 5.5-6.5 | 5.3.18 |
+| 5.5-6.5 | 5.3.17 |
+| 5.5-6.5 | 5.3.16 |
+| 5.5-6.5 | 5.3.15 |
+| 5.5-6.5 | 5.3.14 |
+| 5.5-6.5 | 5.3.13 |
+| 5.5-6.5 | 5.3.12 |
+| 5.5-6.5 | 5.3.11 |
+| 5.5-6.5 | 5.3.10 |
+| 5.5-6.5 | 5.3.9 |
+| 5.5-6.5 | 5.3.8 |
+| 5.5-6.5 | 5.3.7 |
+| 5.5-6.5 | 5.3.6 |
+| 5.5-6.5 | 5.3.5 |
+| 5.5-6.5 | 5.3.4 |
+| 5.5-6.5 | 5.3.3 |
+| 5.5-6.5 | 5.3.2 |
+| 5.5-6.5 | 5.3.1 |
+| 5.5-6.5 | 5.3 |
+| 4.9-5.4 | 5.2.21 |
+| 4.9-5.4 | 5.2.20 |
+| 4.9-5.4 | 5.2.19 |
+| 4.9-5.4 | 5.2.18 |
+| 4.9-5.4 | 5.2.17 |
+| 4.9-5.4 | 5.2.16 |
+| 4.9-5.4 | 5.2.15 |
+| 4.9-5.4 | 5.2.14 |
+| 4.9-5.4 | 5.2.13 |
+| 4.9-5.4 | 5.2.12 |
+| 4.9-5.4 | 5.2.11 |
+| 4.9-5.4 | 5.2.10 |
+| 4.9-5.4 | 5.2.9 |
+| 4.9-5.4 | 5.2.8 |
+| 4.9-5.4 | 5.2.7 |
+| 4.9-5.4 | 5.2.6 |
+| 4.9-5.4 | 5.2.5 |
+| 4.9-5.4 | 5.2.4 |
+| 4.9-5.4 | 5.2.3 |
+| 4.9-5.4 | 5.2.2 |
+| 4.9-5.4 | 5.2.1 |
+| 4.9-5.4 | 5.2 |
+| 4.8 | 5.1.19 |
+| 4.8 | 5.1.18 |
+| 4.8 | 5.1.17 |
+| 4.8 | 5.1.16 |
+| 4.8 | 5.1.15 |
+| 4.8 | 5.1.14 |
+| 4.8 | 5.1.13 |
+| 4.8 | 5.1.12 |
+| 4.8 | 5.1.11 |
+| 4.8 | 5.1.10 |
+| 4.8 | 5.1.9 |
+| 4.8 | 5.1.8 |
+| 4.8 | 5.1.7 |
+| 4.8 | 5.1.6 |
+| 4.8 | 5.1.5 |
+| 4.8 | 5.1.4 |
+| 4.8 | 5.1.3 |
+| 4.8 | 5.1.2 |
+| 4.8 | 5.1.1 |
+| 4.8 | 5.1 |
+| 4.7.1 | 5.0.22 |
+| 4.7.1 | 5.0.21 |
+| 4.7.1 | 5.0.20 |
+| 4.7.1 | 5.0.19 |
+| 4.7.1 | 5.0.18 |
+| 4.7.1 | 5.0.17 |
+| 4.7.1 | 5.0.16 |
+| 4.7.1 | 5.0.15 |
+| 4.7.1 | 5.0.14 |
+| 4.7.1 | 5.0.13 |
+| 4.7.1 | 5.0.12 |
+| 4.7.1 | 5.0.11 |
+| 4.7.1 | 5.0.10 |
+| 4.7.1 | 5.0.9 |
+| 4.7.1 | 5.0.8 |
+| 4.7.1 | 5.0.7 |
+| 4.7.1 | 5.0.6 |
+| 4.7.1 | 5.0.5 |
+| 4.7.1 | 5.0.4 |
+| 4.7.1 | 5.0.3 |
+| 4.7.0 | 5.0.2 |
+| 4.6.1 | 5.0.1 |
+| 4.6.1 | 5.0 |
+
+---
+
 # Repository Management <a name="block-editor/contributors/repository-management" />
 
 Source: https://developer.wordpress.org/block-editor/contributors/repository-management/
@@ -77607,232 +78860,3 @@ The following snippet explains how the Gutenberg repository is structured omitti
 │   Configuration files for the webpack build.
 
 ```
-
----
-
-# Gutenberg versions in WordPress <a name="block-editor/contributors/versions-in-wordpress" />
-
-Source: https://developer.wordpress.org/block-editor/contributors/versions-in-wordpress/
-
-With each major release of WordPress a new version of Gutenberg is included. This has caused confusion over time as people have tried to figure out how to best debug problems and report bugs appropriately. To make this easier we have made this document to serve as a canonical list of the Gutenberg versions integrated into each major WordPress release. Of note, during the beta period of a WordPress release, additional bug fixes from later Gutenberg releases than those noted are added into the WordPress release where it is needed. If you want details about what’s in each Gutenberg release outside of the high level items shared as part of major WordPress releases, please review the [release notes shared on Make Core](https://make.wordpress.org/core/tag/gutenberg-new/).
-
-If anything looks incorrect here, please bring it up in #core-editor in [WordPress.org slack](https://make.wordpress.org/chat/).
-
-| Gutenberg Versions | WordPress Version |
-|---|---|
-| 19.4-20.4 | 6.8 |
-| 18.6-19.3 | 6.7.2 |
-| 18.6-19.3 | 6.7.1 |
-| 18.6-19.3 | 6.7 |
-| 17.8-18.5 | 6.6.2 |
-| 17.8-18.5 | 6.6.1 |
-| 17.8-18.5 | 6.6 |
-| 16.8-17.7 | 6.5.5 |
-| 16.8-17.7 | 6.5.4 |
-| 16.8-17.7 | 6.5.3 |
-| 16.8-17.7 | 6.5.2 |
-| 16.8-17.7 | 6.5 |
-| 16.2-16.7 | 6.4.4 |
-| 16.2-16.7 | 6.4.5 |
-| 16.2-16.7 | 6.4.3 |
-| 16.2-16.7 | 6.4.2 |
-| 16.2-16.7 | 6.4.1 |
-| 16.2-16.7 | 6.4 |
-| 15.2-16.1 | 6.3.5 |
-| 15.2-16.1 | 6.3.4 |
-| 15.2-16.1 | 6.3.3 |
-| 15.2-16.1 | 6.3.2 |
-| 15.2-16.1 | 6.3.1 |
-| 15.2-16.1 | 6.3 |
-| 14.2-15.1 | 6.2.6 |
-| 14.2-15.1 | 6.2.5 |
-| 14.2-15.1 | 6.2.4 |
-| 14.2-15.1 | 6.2.3 |
-| 14.2-15.1 | 6.2.2 |
-| 14.2-15.1 | 6.2.1 |
-| 14.2-15.1 | 6.2 |
-| 13.1-14.1 | 6.1.7 |
-| 13.1-14.1 | 6.1.6 |
-| 13.1-14.1 | 6.1.5 |
-| 13.1-14.1 | 6.1.4 |
-| 13.1-14.1 | 6.1.3 |
-| 13.1-14.1 | 6.1.2 |
-| 13.1-14.1 | 6.1.1 |
-| 13.1-14.1 | 6.1 |
-| 12.0-13.0 | 6.0.9 |
-| 12.0-13.0 | 6.0.8 |
-| 12.0-13.0 | 6.0.7 |
-| 12.0-13.0 | 6.0.6 |
-| 12.0-13.0 | 6.0.5 |
-| 12.0-13.0 | 6.0.4 |
-| 12.0-13.0 | 6.0.3 |
-| 12.0-13.0 | 6.0.2 |
-| 12.0-13.0 | 6.0.1 |
-| 12.0-13.0 | 6.0 |
-| 10.8-11.9 | 5.9.10 |
-| 10.8-11.9 | 5.9.9 |
-| 10.8-11.9 | 5.9.8 |
-| 10.8-11.9 | 5.9.7 |
-| 10.8-11.9 | 5.9.6 |
-| 10.8-11.9 | 5.9.5 |
-| 10.8-11.9 | 5.9.4 |
-| 10.8-11.9 | 5.9.3 |
-| 10.8-11.9 | 5.9.2 |
-| 10.8-11.9 | 5.9.1 |
-| 10.8-11.9 | 5.9 |
-| 10.0-10.7 | 5.8.10 |
-| 10.0-10.7 | 5.8.9 |
-| 10.0-10.7 | 5.8.8 |
-| 10.0-10.7 | 5.8.7 |
-| 10.0-10.7 | 5.8.6 |
-| 10.0-10.7 | 5.8.5 |
-| 10.0-10.7 | 5.8.4 |
-| 10.0-10.7 | 5.8.3 |
-| 10.0-10.7 | 5.8.2 |
-| 10.0-10.7 | 5.8.1 |
-| 10.0-10.7 | 5.8 |
-| 9.3-9.9 | 5.7.12 |
-| 9.3-9.9 | 5.7.11 |
-| 9.3-9.9 | 5.7.10 |
-| 9.3-9.9 | 5.7.9 |
-| 9.3-9.9 | 5.7.8 |
-| 9.3-9.9 | 5.7.7 |
-| 9.3-9.9 | 5.7.6 |
-| 9.3-9.9 | 5.7.5 |
-| 9.3-9.9 | 5.7.4 |
-| 9.3-9.9 | 5.7.3 |
-| 9.3-9.9 | 5.7.2 |
-| 9.3-9.9 | 5.7.1 |
-| 9.3-9.9 | 5.7 |
-| 8.6-9.2 | 5.6.14 |
-| 8.6-9.2 | 5.6.13 |
-| 8.6-9.2 | 5.6.12 |
-| 8.6-9.2 | 5.6.11 |
-| 8.6-9.2 | 5.6.10 |
-| 8.6-9.2 | 5.6.9 |
-| 8.6-9.2 | 5.6.8 |
-| 8.6-9.2 | 5.6.7 |
-| 8.6-9.2 | 5.6.6 |
-| 8.6-9.2 | 5.6.5 |
-| 8.6-9.2 | 5.6.4 |
-| 8.6-9.2 | 5.6.3 |
-| 8.6-9.2 | 5.6.2 |
-| 8.6-9.2 | 5.6.1 |
-| 8.6-9.2 | 5.6 |
-| 7.6-8.5 | 5.5.15 |
-| 7.6-8.5 | 5.5.14 |
-| 7.6-8.5 | 5.5.13 |
-| 7.6-8.5 | 5.5.12 |
-| 7.6-8.5 | 5.5.11 |
-| 7.6-8.5 | 5.5.10 |
-| 7.6-8.5 | 5.5.9 |
-| 7.6-8.5 | 5.5.8 |
-| 7.6-8.5 | 5.5.7 |
-| 7.6-8.5 | 5.5.6 |
-| 7.6-8.5 | 5.5.5 |
-| 7.6-8.5 | 5.5.4 |
-| 7.6-8.5 | 5.5.3 |
-| 7.6-8.5 | 5.5.2 |
-| 7.6-8.5 | 5.5.1 |
-| 7.6-8.5 | 5.5 |
-| 6.6-7.5 | 5.4.16 |
-| 6.6-7.5 | 5.4.15 |
-| 6.6-7.5 | 5.4.14 |
-| 6.6-7.5 | 5.4.13 |
-| 6.6-7.5 | 5.4.12 |
-| 6.6-7.5 | 5.4.11 |
-| 6.6-7.5 | 5.4.10 |
-| 6.6-7.5 | 5.4.9 |
-| 6.6-7.5 | 5.4.8 |
-| 6.6-7.5 | 5.4.7 |
-| 6.6-7.5 | 5.4.6 |
-| 6.6-7.5 | 5.4.5 |
-| 6.6-7.5 | 5.4.4 |
-| 6.6-7.5 | 5.4.3 |
-| 6.6-7.5 | 5.4.2 |
-| 6.6-7.5 | 5.4.1 |
-| 6.6-7.5 | 5.4 |
-| 5.5-6.5 | 5.3.18 |
-| 5.5-6.5 | 5.3.17 |
-| 5.5-6.5 | 5.3.16 |
-| 5.5-6.5 | 5.3.15 |
-| 5.5-6.5 | 5.3.14 |
-| 5.5-6.5 | 5.3.13 |
-| 5.5-6.5 | 5.3.12 |
-| 5.5-6.5 | 5.3.11 |
-| 5.5-6.5 | 5.3.10 |
-| 5.5-6.5 | 5.3.9 |
-| 5.5-6.5 | 5.3.8 |
-| 5.5-6.5 | 5.3.7 |
-| 5.5-6.5 | 5.3.6 |
-| 5.5-6.5 | 5.3.5 |
-| 5.5-6.5 | 5.3.4 |
-| 5.5-6.5 | 5.3.3 |
-| 5.5-6.5 | 5.3.2 |
-| 5.5-6.5 | 5.3.1 |
-| 5.5-6.5 | 5.3 |
-| 4.9-5.4 | 5.2.21 |
-| 4.9-5.4 | 5.2.20 |
-| 4.9-5.4 | 5.2.19 |
-| 4.9-5.4 | 5.2.18 |
-| 4.9-5.4 | 5.2.17 |
-| 4.9-5.4 | 5.2.16 |
-| 4.9-5.4 | 5.2.15 |
-| 4.9-5.4 | 5.2.14 |
-| 4.9-5.4 | 5.2.13 |
-| 4.9-5.4 | 5.2.12 |
-| 4.9-5.4 | 5.2.11 |
-| 4.9-5.4 | 5.2.10 |
-| 4.9-5.4 | 5.2.9 |
-| 4.9-5.4 | 5.2.8 |
-| 4.9-5.4 | 5.2.7 |
-| 4.9-5.4 | 5.2.6 |
-| 4.9-5.4 | 5.2.5 |
-| 4.9-5.4 | 5.2.4 |
-| 4.9-5.4 | 5.2.3 |
-| 4.9-5.4 | 5.2.2 |
-| 4.9-5.4 | 5.2.1 |
-| 4.9-5.4 | 5.2 |
-| 4.8 | 5.1.19 |
-| 4.8 | 5.1.18 |
-| 4.8 | 5.1.17 |
-| 4.8 | 5.1.16 |
-| 4.8 | 5.1.15 |
-| 4.8 | 5.1.14 |
-| 4.8 | 5.1.13 |
-| 4.8 | 5.1.12 |
-| 4.8 | 5.1.11 |
-| 4.8 | 5.1.10 |
-| 4.8 | 5.1.9 |
-| 4.8 | 5.1.8 |
-| 4.8 | 5.1.7 |
-| 4.8 | 5.1.6 |
-| 4.8 | 5.1.5 |
-| 4.8 | 5.1.4 |
-| 4.8 | 5.1.3 |
-| 4.8 | 5.1.2 |
-| 4.8 | 5.1.1 |
-| 4.8 | 5.1 |
-| 4.7.1 | 5.0.22 |
-| 4.7.1 | 5.0.21 |
-| 4.7.1 | 5.0.20 |
-| 4.7.1 | 5.0.19 |
-| 4.7.1 | 5.0.18 |
-| 4.7.1 | 5.0.17 |
-| 4.7.1 | 5.0.16 |
-| 4.7.1 | 5.0.15 |
-| 4.7.1 | 5.0.14 |
-| 4.7.1 | 5.0.13 |
-| 4.7.1 | 5.0.12 |
-| 4.7.1 | 5.0.11 |
-| 4.7.1 | 5.0.10 |
-| 4.7.1 | 5.0.9 |
-| 4.7.1 | 5.0.8 |
-| 4.7.1 | 5.0.7 |
-| 4.7.1 | 5.0.6 |
-| 4.7.1 | 5.0.5 |
-| 4.7.1 | 5.0.4 |
-| 4.7.1 | 5.0.3 |
-| 4.7.0 | 5.0.2 |
-| 4.6.1 | 5.0.1 |
-| 4.6.1 | 5.0 |

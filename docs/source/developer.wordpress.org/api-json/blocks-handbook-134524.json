@@ -1,0 +1,91 @@
+{
+    "id": 134524,
+    "date": "2021-03-09T08:38:22",
+    "date_gmt": "2021-03-09T08:38:22",
+    "guid": {
+        "rendered": "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-api-fetch/"
+    },
+    "modified": "2025-07-08T10:16:04",
+    "modified_gmt": "2025-07-08T10:16:04",
+    "slug": "packages-api-fetch",
+    "status": "publish",
+    "type": "blocks-handbook",
+    "link": "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-api-fetch/",
+    "title": {
+        "rendered": "@wordpress/api-fetch"
+    },
+    "content": {
+        "rendered": "<p>Utility to make WordPress REST API requests. It&#8217;s a wrapper around <code>window.fetch</code>.</p>\n<h2>Installation</h2>\n<p>Install the module</p>\n<pre><code class=\"language-bash\">npm install @wordpress/api-fetch --save\n</code></pre>\n<p><em>This package assumes that your code will run in an <strong>ES2015+</strong> environment. If you&#8217;re using an environment that has limited or no support for such language features and APIs, you should include <a href=\"https://github.com/WordPress/gutenberg/tree/HEAD/packages/babel-preset-default#polyfill\">the polyfill shipped in <code>@wordpress/babel-preset-default</code></a> in your code.</em></p>\n<h2>Usage</h2>\n<h3>GET</h3>\n<pre><code class=\"language-js\">import apiFetch from '@wordpress/api-fetch';\n\napiFetch( { path: '/wp/v2/posts' } ).then( ( posts ) =&gt; {\n    console.log( posts );\n} );\n</code></pre>\n<h3>GET with Query Args</h3>\n<pre><code class=\"language-js\">import apiFetch from '@wordpress/api-fetch';\nimport { addQueryArgs } from '@wordpress/url';\n\nconst queryParams = { include: [1,2,3] }; // Return posts with ID = 1,2,3.\n\napiFetch( { path: addQueryArgs( '/wp/v2/posts', queryParams ) } ).then( ( posts ) =&gt; {\n    console.log( posts );\n} );\n</code></pre>\n<h3>POST</h3>\n<pre><code class=\"language-js\">apiFetch( {\n    path: '/wp/v2/posts/1',\n    method: 'POST',\n    data: { title: 'New Post Title' },\n} ).then( ( res ) =&gt; {\n    console.log( res );\n} );\n</code></pre>\n<h3>Options</h3>\n<p><code>apiFetch</code> supports and passes through all <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch\">options of the <code>fetch</code> global</a>.</p>\n<p>Additionally, the following options are available:</p>\n<h4><code>path</code> (<code>string</code>)</h4>\n<p>Shorthand to be used in place of <code>url</code>, appended to the REST API root URL for the current site.</p>\n<h4><code>url</code> (<code>string</code>)</h4>\n<p>Absolute URL to the endpoint from which to fetch.</p>\n<h4><code>parse</code> (<code>boolean</code>, default <code>true</code>)</h4>\n<p>Unlike <code>fetch</code>, the <code>Promise</code> return value of <code>apiFetch</code> will resolve to the parsed JSON result. Disable this behavior by passing <code>parse</code> as <code>false</code>.</p>\n<h4><code>data</code> (<code>object</code>)</h4>\n<p>Sent on <code>POST</code> or <code>PUT</code> requests only. Shorthand to be used in place of <code>body</code>, accepts an object value to be stringified to JSON.</p>\n<h3>Aborting a request</h3>\n<p>Aborting a request can be achieved through the use of <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/AbortController\"><code>AbortController</code></a> in the same way as you would when using the native <code>fetch</code> API.</p>\n<p>For legacy browsers that don&#8217;t support <code>AbortController</code>, you can either:</p>\n<ul>\n<li>Provide your own polyfill of <code>AbortController</code> if you still want it to be abortable.</li>\n<li>Ignore it as shown in the example below.</li>\n</ul>\n<p><strong>Example</strong></p>\n<pre><code class=\"language-js\">const controller =\n    typeof AbortController === 'undefined' ? undefined : new AbortController();\n\napiFetch( { path: '/wp/v2/posts', signal: controller?.signal } ).catch(\n    ( error ) =&gt; {\n        // If the browser doesn't support AbortController then the code below will never log.\n        // However, in most cases this should be fine as it can be considered to be a progressive enhancement.\n        if ( error.name === 'AbortError' ) {\n            console.log( 'Request has been aborted' );\n        }\n    }\n);\n\ncontroller?.abort();\n</code></pre>\n<h3>Middlewares</h3>\n<p>the <code>api-fetch</code> package supports middlewares. Middlewares are functions you can use to wrap the <code>apiFetch</code> calls to perform any pre/post process to the API requests.</p>\n<p><strong>Example</strong></p>\n<pre><code class=\"language-js\">import apiFetch from '@wordpress/api-fetch';\n\napiFetch.use( ( options, next ) =&gt; {\n    const start = Date.now();\n    const result = next( options );\n    result.then( () =&gt; {\n        console.log( 'The request took ' + ( Date.now() - start ) + 'ms' );\n    } );\n    return result;\n} );\n</code></pre>\n<h3>Built-in middlewares</h3>\n<p>The <code>api-fetch</code> package provides built-in middlewares you can use to provide a <code>nonce</code> and a custom <code>rootURL</code>.</p>\n<p><strong>Nonce middleware</strong></p>\n<pre><code class=\"language-js\">import apiFetch from '@wordpress/api-fetch';\n\nconst nonce = 'nonce value';\napiFetch.use( apiFetch.createNonceMiddleware( nonce ) );\n</code></pre>\n<p>The function returned by <code>createNonceMiddleware</code> includes a <code>nonce</code> property corresponding to the actively used nonce. You may also assign to this property if you have a fresh nonce value to use.</p>\n<p><strong>Root URL middleware</strong></p>\n<pre><code class=\"language-js\">import apiFetch from '@wordpress/api-fetch';\n\nconst rootURL = 'http://my-wordpress-site/wp-json/';\napiFetch.use( apiFetch.createRootURLMiddleware( rootURL ) );\n</code></pre>\n<h3>Custom fetch handler</h3>\n<p>The <code>api-fetch</code> package uses <code>window.fetch</code> for making the requests but you can use a custom fetch handler by using the <code>setFetchHandler</code> method. The custom fetch handler will receive the <code>options</code> passed to the <code>apiFetch</code> calls.</p>\n<p><strong>Example</strong></p>\n<p>The example below uses a custom fetch handler for making all the requests with <a href=\"https://github.com/axios/axios\"><code>axios</code></a>.</p>\n<pre><code class=\"language-js\">import apiFetch from '@wordpress/api-fetch';\nimport axios from 'axios';\n\napiFetch.setFetchHandler( ( options ) =&gt; {\n    const { url, path, data, method } = options;\n\n    return axios( {\n        url: url || path,\n        method,\n        data,\n    } );\n} );\n</code></pre>\n<h2>Contributing to this package</h2>\n<p>This is an individual package that&#8217;s part of the Gutenberg project. The project is organized as a monorepo. It&#8217;s made up of multiple self-contained software packages, each with a specific purpose. The packages in this monorepo are published to <a href=\"https://www.npmjs.com/\">npm</a> and used by <a href=\"https://make.wordpress.org/core/\">WordPress</a> as well as other software projects.</p>\n<p>To find out more about contributing to this package or Gutenberg as a whole, please read the project&#8217;s main <a href=\"https://github.com/WordPress/gutenberg/tree/HEAD/CONTRIBUTING.md\">contributor guide</a>.</p>\n",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 134521,
+    "menu_order": 239,
+    "template": "",
+    "meta": {
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-134524",
+        "blocks-handbook",
+        "type-blocks-handbook",
+        "status-publish",
+        "hentry",
+        "type-handbook"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook/134524",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/types/blocks-handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 13,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook/134524/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 151828,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook/134524/revisions/151828"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook/134521"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/media?parent=134524"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

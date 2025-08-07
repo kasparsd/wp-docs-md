@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/secure-custom-fields/code-reference/admin/"
     },
-    "modified": "2025-02-21T05:46:04",
-    "modified_gmt": "2025-02-21T05:46:04",
+    "modified": "2025-06-23T10:16:11",
+    "modified_gmt": "2025-06-23T10:16:11",
     "slug": "admin",
     "status": "publish",
     "type": "scf-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Admin"
     },
     "content": {
-        "rendered": "<h2>Files</h2>\n<ul>\n<li><a href=\"admin-notices-file\">Admin Notices</a></li>\n<li><a href=\"admin-tools-file\">Admin Tools</a></li>\n</ul>\n",
+        "rendered": "<h2>Files</h2>\n<ul>\n<li><a href=\"admin-commands-file\">Admin Commands</a></li>\n<li><a href=\"admin-notices-file\">Admin Notices</a></li>\n<li><a href=\"admin-tools-file\">Admin Tools</a></li>\n<li><a href=\"beta-features-file\">Beta Features</a></li>\n</ul>\n",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 2,
+                "count": 3,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/157165/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 157299,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/157165/revisions/157299"
+                "id": 159006,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/157165/revisions/159006"
             }
         ],
         "up": [

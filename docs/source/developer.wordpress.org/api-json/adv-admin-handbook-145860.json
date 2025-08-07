@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/plugins/"
     },
-    "modified": "2024-01-16T20:30:05",
-    "modified_gmt": "2024-01-16T20:30:05",
+    "modified": "2025-07-07T21:30:54",
+    "modified_gmt": "2025-07-07T21:30:54",
     "slug": "plugins",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Plugins"
     },
     "content": {
-        "rendered": "<h2>Changelog</h2>\n<ul>\n<li>2022-08-16: Nothing here, yet.</li>\n</ul>\n",
+        "rendered": "",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 2,
+                "count": 3,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145860/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 151936,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145860/revisions/151936"
+                "id": 159071,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145860/revisions/159071"
             }
         ],
         "wp:attachment": [

@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/upgrade/"
     },
-    "modified": "2024-01-16T20:30:07",
-    "modified_gmt": "2024-01-16T20:30:07",
+    "modified": "2025-07-07T21:30:57",
+    "modified_gmt": "2025-07-07T21:30:57",
     "slug": "upgrade",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Upgrading / Migration"
     },
     "content": {
-        "rendered": "<h2>Changelog</h2>\n<ul>\n<li>2022-08-16: Nothing here, yet.</li>\n</ul>\n",
+        "rendered": "",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 2,
+                "count": 3,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145847/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 151947,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145847/revisions/151947"
+                "id": 159084,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145847/revisions/159084"
             }
         ],
         "wp:attachment": [

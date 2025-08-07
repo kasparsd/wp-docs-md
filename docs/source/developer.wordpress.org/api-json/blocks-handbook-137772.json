@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/contributors/code/react-native/"
     },
-    "modified": "2025-01-07T18:34:08",
-    "modified_gmt": "2025-01-07T18:34:08",
+    "modified": "2025-07-08T10:15:40",
+    "modified_gmt": "2025-07-08T10:15:40",
     "slug": "react-native",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 135090,
-    "menu_order": 381,
+    "menu_order": 383,
     "template": "",
     "meta": {
         "footnotes": ""

@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/block-api/block-api-versions/"
     },
-    "modified": "2024-09-16T16:39:56",
-    "modified_gmt": "2024-09-16T16:39:56",
+    "modified": "2025-08-04T11:15:43",
+    "modified_gmt": "2025-08-04T11:15:43",
     "slug": "block-api-versions",
     "status": "publish",
     "type": "blocks-handbook",
@@ -15,7 +15,7 @@
         "rendered": "API Versions"
     },
     "content": {
-        "rendered": "<p>This document lists the changes made between the different API versions.</p>\n<h2>Version 3 (&gt;= WordPress 6.3)</h2>\n<ul>\n<li>The post editor will be iframed if all registered blocks have a Block API version 3 or higher. Adding version 3 support means that the block should work inside an iframe, though the block may still be rendered outside the iframe if not all blocks support version 3.</li>\n</ul>\n<h2>Version 2 (&gt;= WordPress 5.6)</h2>\n<ul>\n<li>To render the block element wrapper for the block&#8217;s <code>edit</code> implementation, the block author must use the <code>useBlockProps()</code> hook.</li>\n<li>The generated class names and styles are no longer added automatically to the saved markup for static blocks when <code>save</code> is processed. To include them, the block author must explicitly use <code>useBlockProps.save()</code> and add to their block wrapper.</li>\n</ul>\n<h2>Version 1</h2>\n<p>Initial version.</p>\n",
+        "rendered": "<p>This document lists the changes made between the different API versions.</p>\n<h2>Version 3 (&gt;= WordPress 6.3)</h2>\n<ul>\n<li>The post editor will be iframed if all registered blocks have a Block API version 3 or higher. Adding version 3 support means that the block should work inside an iframe, though the block may still be rendered outside the iframe if not all blocks support version 3.</li>\n<li>See <a href=\"https://make.wordpress.org/core/2021/06/29/blocks-in-an-iframed-template-editor/\">this article</a> for a migration guide to bump the API version to 3 and make them work in an iframe editor.</li>\n</ul>\n<h2>Version 2 (&gt;= WordPress 5.6)</h2>\n<ul>\n<li>To render the block element wrapper for the block&#8217;s <code>edit</code> implementation, the block author must use the <code>useBlockProps()</code> hook.</li>\n<li>The generated class names and styles are no longer added automatically to the saved markup for static blocks when <code>save</code> is processed. To include them, the block author must explicitly use <code>useBlockProps.save()</code> and add to their block wrapper.</li>\n</ul>\n<h2>Version 1</h2>\n<p>Initial version.</p>\n",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 5,
+                "count": 6,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook/135620/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 155229,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook/135620/revisions/155229"
+                "id": 159159,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook/135620/revisions/159159"
             }
         ],
         "up": [

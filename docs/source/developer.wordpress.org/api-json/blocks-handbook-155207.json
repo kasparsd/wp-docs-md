@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-fields/"
     },
-    "modified": "2025-01-07T15:04:06",
-    "modified_gmt": "2025-01-07T15:04:06",
+    "modified": "2025-07-08T10:30:51",
+    "modified_gmt": "2025-07-08T10:30:51",
     "slug": "packages-fields",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134521,
-    "menu_order": 281,
+    "menu_order": 283,
     "template": "",
     "meta": {
         "footnotes": ""

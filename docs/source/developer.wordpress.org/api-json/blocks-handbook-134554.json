@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-e2e-tests/"
     },
-    "modified": "2025-01-06T18:49:13",
-    "modified_gmt": "2025-01-06T18:49:13",
+    "modified": "2025-07-08T10:15:59",
+    "modified_gmt": "2025-07-08T10:15:59",
     "slug": "packages-e2e-tests",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134521,
-    "menu_order": 272,
+    "menu_order": 274,
     "template": "",
     "meta": {
         "footnotes": ""

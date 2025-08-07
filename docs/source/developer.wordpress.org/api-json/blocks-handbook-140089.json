@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/contributors/code/deprecations/"
     },
-    "modified": "2025-01-07T18:34:08",
-    "modified_gmt": "2025-01-07T18:34:08",
+    "modified": "2025-07-08T10:15:37",
+    "modified_gmt": "2025-07-08T10:15:37",
     "slug": "deprecations",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 135090,
-    "menu_order": 387,
+    "menu_order": 389,
     "template": "",
     "meta": {
         "footnotes": ""

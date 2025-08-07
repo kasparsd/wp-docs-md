@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/components/radio-group/"
     },
-    "modified": "2024-10-31T14:25:27",
-    "modified_gmt": "2024-10-31T14:25:27",
+    "modified": "2025-07-08T10:16:06",
+    "modified_gmt": "2025-07-08T10:16:06",
     "slug": "radio-group",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134435,
-    "menu_order": 193,
+    "menu_order": 195,
     "template": "",
     "meta": {
         "footnotes": ""

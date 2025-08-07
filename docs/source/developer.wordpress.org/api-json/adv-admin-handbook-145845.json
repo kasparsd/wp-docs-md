@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/wordpress/loopback/"
     },
-    "modified": "2025-01-08T06:19:06",
-    "modified_gmt": "2025-01-08T06:19:06",
+    "modified": "2025-07-07T21:30:58",
+    "modified_gmt": "2025-07-07T21:30:58",
     "slug": "loopback",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Loopbacks"
     },
     "content": {
-        "rendered": "<p>A loopback is when your own server or website tries to connect to it self.</p>\n<p>WordPress uses this functionality to trigger scheduled posts, and other scheduled events that plugins or themes may introduce.</p>\n<p>They are also used when making changes in the Plugin- or Theme-editor, by connecting back to the website and making sure that the changes made does not break your website.</p>\n<h2 id=\"troubleshooting-loopback-issues\">Troubleshooting loopback issues</h2>\n<p>If you are having problems with scheduled posts or other timed events not running, or seeing Site Health warnings about loopbacks failing, you may want to troubleshoot these.</p>\n<p>The most common cause of loopback failures is a plugin or theme conflict, you should start by following the normal troubleshooting steps:</p>\n<h2 id=\"common-troubleshooting-steps\">Common troubleshooting steps</h2>\n<ul>\n<li>Deactivating <strong>all plugins</strong> (yes, all) to see if this resolves the problem. If this works, re-activate the plugins one by one until you find the problematic plugin(s). If you can&#8217;t get into your admin dashboard, try resetting the plugins folder by <a href=\"https://developer.wordpress.org/advanced-administration/upgrade/ftp/\">SFTP/FTP</a> or phpMyAdmin (read <a href=\"https://wordpress.org/documentation/article/faq-troubleshooting/\">How to deactivate all plugins when you can\u2019t log in to wp-admin</a> if you need help). Sometimes, an apparently inactive plugin can still cause problems. Also remember to deactivate any plugins in the <code>mu-plugins</code> folder. The easiest way is to rename that folder to <code>mu-plugins-old</code>.</li>\n<li>Switching to a Twenty-Something theme to rule out any theme-specific problems. If you can&#8217;t log in to change themes, you can remove the theme folders via <a href=\"https://developer.wordpress.org/advanced-administration/upgrade/ftp/\">SFTP/FTP</a> so the only one is <code>twentytwentythree</code>. That will force your site to use it.</li>\n<li>If you can install plugins, install the plugin <a href=\"https://wordpress.org/plugins/health-check/\">Health Check</a>. On the troubleshooting tab, you can click the button to disable all plugins and change the theme for you, while you&#8217;re still logged in, <strong>without affecting normal visitors to your site</strong>.</li>\n</ul>\n<h2>Changelog</h2>\n<ul>\n<li>2023-01-20: Content migrated from <a href=\"https://wordpress.org/documentation/article/loopbacks/\">Loopbacks</a>.</li>\n</ul>\n",
+        "rendered": "<p>A loopback is when your own server or website tries to connect to it self.</p>\n<p>WordPress uses this functionality to trigger scheduled posts, and other scheduled events that plugins or themes may introduce.</p>\n<p>They are also used when making changes in the Plugin- or Theme-editor, by connecting back to the website and making sure that the changes made does not break your website.</p>\n<h2 id=\"troubleshooting-loopback-issues\">Troubleshooting loopback issues</h2>\n<p>If you are having problems with scheduled posts or other timed events not running, or seeing Site Health warnings about loopbacks failing, you may want to troubleshoot these.</p>\n<p>The most common cause of loopback failures is a plugin or theme conflict, you should start by following the normal troubleshooting steps:</p>\n<h2 id=\"common-troubleshooting-steps\">Common troubleshooting steps</h2>\n<ul>\n<li>Deactivating <strong>all plugins</strong> (yes, all) to see if this resolves the problem. If this works, re-activate the plugins one by one until you find the problematic plugin(s). If you can&#8217;t get into your admin dashboard, try resetting the plugins folder by <a href=\"https://developer.wordpress.org/advanced-administration/upgrade/ftp/\">SFTP/FTP</a> or phpMyAdmin (read <a href=\"https://wordpress.org/documentation/article/faq-troubleshooting/\">How to deactivate all plugins when you can\u2019t log in to wp-admin</a> if you need help). Sometimes, an apparently inactive plugin can still cause problems. Also remember to deactivate any plugins in the <code>mu-plugins</code> folder. The easiest way is to rename that folder to <code>mu-plugins-old</code>.</li>\n<li>Switching to a Twenty-Something theme to rule out any theme-specific problems. If you can&#8217;t log in to change themes, you can remove the theme folders via <a href=\"https://developer.wordpress.org/advanced-administration/upgrade/ftp/\">SFTP/FTP</a> so the only one is <code>twentytwentythree</code>. That will force your site to use it.</li>\n<li>If you can install plugins, install the plugin <a href=\"https://wordpress.org/plugins/health-check/\">Health Check</a>. On the troubleshooting tab, you can click the button to disable all plugins and change the theme for you, while you&#8217;re still logged in, <strong>without affecting normal visitors to your site</strong>.</li>\n</ul>\n",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 2,
+                "count": 3,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145845/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 156192,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145845/revisions/156192"
+                "id": 159086,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145845/revisions/159086"
             }
         ],
         "up": [

@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/security/logging-in/"
     },
-    "modified": "2024-01-16T20:30:05",
-    "modified_gmt": "2024-01-16T20:30:05",
+    "modified": "2025-07-07T21:30:54",
+    "modified_gmt": "2025-07-07T21:30:54",
     "slug": "logging-in",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Your password"
     },
     "content": {
-        "rendered": "<p>Creating an extension <a href=\"https://wordpress.org/documentation/article/resetting-your-password/\">of this post about resetting your password</a>, but placing all technical details here.</p>\n<p><a href=\"https://github.com/WordPress/Documentation-Issue-Tracker/issues/79\">See this issue on github on sections to take over</a> with the following note:<br />\n&#8211; promote WP CLI above the other options, for being the safest.</p>\n<h2>Changelog</h2>\n<ul>\n<li>2022-09-27: Adding the bare essentials.</li>\n</ul>\n",
+        "rendered": "<p>Creating an extension <a href=\"https://wordpress.org/documentation/article/resetting-your-password/\">of this post about resetting your password</a>, but placing all technical details here.</p>\n<p><a href=\"https://github.com/WordPress/Documentation-Issue-Tracker/issues/79\">See this issue on github on sections to take over</a> with the following note:<br />\n&#8211; promote WP CLI above the other options, for being the safest.</p>\n",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 2,
+                "count": 3,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145864/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 151934,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145864/revisions/151934"
+                "id": 159067,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145864/revisions/159067"
             }
         ],
         "up": [

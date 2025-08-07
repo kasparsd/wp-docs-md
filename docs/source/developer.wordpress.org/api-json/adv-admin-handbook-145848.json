@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/upgrade/ftp/"
     },
-    "modified": "2024-01-16T20:30:07",
-    "modified_gmt": "2024-01-16T20:30:07",
+    "modified": "2025-07-07T21:30:57",
+    "modified_gmt": "2025-07-07T21:30:57",
     "slug": "ftp",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Updating WordPress using FTP"
     },
     "content": {
-        "rendered": "<h2>FTP Clients</h2>\n<p>There are two ways of getting files onto your site, and once there, changing them:</p>\n<ol>\n<li>By using the file manager provided in your host\u2019s control panel. Popular file managers: <a href=\"https://documentation.cpanel.net/display/64Docs/File+Manager\">cPanel</a>, <a href=\"https://www.site-helper.com/filemanager.html\">DirectAdmin</a>, <a href=\"https://www.plesk.com/\">Plesk</a>.</li>\n<li>By using an FTP or SFTP client. This guide will show you how to use <a href=\"https://filezilla-project.org/\">FileZilla</a>.</li>\n</ol>\n<p>FTP or \u201cFile Transfer Protocol\u201d has been the most widely used transfer protocol for over thirty years, but it sends your information in the clear, which is a security risk. Use SFTP (Secure File Transfer Protocol) if your host supports it. This transfers your files and your password over a secured connection, and should therefore be used instead of FTP whenever possible. Sometimes you have to contact your host to have SFTP enabled on your account.</p>\n<p>Why use FileZilla? Because, like WordPress, it is released under the GPL. So, it is not just free, it is staying that way, too. The following pages will show you how to setup and use Filezilla:</p>\n<ol>\n<li><a href=\"https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/\">Setting up FileZilla for Your Website</a></li>\n<li><a href=\"https://developer.wordpress.org/advanced-administration/server/file-permissions/\">Setting Permissions</a></li>\n<li><a href=\"https://wiki.filezilla-project.org/Documentation\">FileZilla\u2019s Extensive Documentation</a></li>\n</ol>\n<p>Want to try a different FTP or SFTP client? <a href=\"https://en.wikipedia.org/wiki/Comparison_of_FTP_clients\">Find more on Wikipedia</a>.</p>\n<h2>Changelog</h2>\n<ul>\n<li>2022-09-11: Original content from <a href=\"https://wordpress.org/documentation/article/ftp-clients/\">FTP Clients</a>. Minor copy-editing.</li>\n</ul>\n",
+        "rendered": "<h2>FTP Clients</h2>\n<p>There are two ways of getting files onto your site, and once there, changing them:</p>\n<ol>\n<li>By using the file manager provided in your host\u2019s control panel. Popular file managers: <a href=\"https://documentation.cpanel.net/display/64Docs/File+Manager\">cPanel</a>, <a href=\"https://www.site-helper.com/filemanager.html\">DirectAdmin</a>, <a href=\"https://www.plesk.com/\">Plesk</a>.</li>\n<li>By using an FTP or SFTP client. This guide will show you how to use <a href=\"https://filezilla-project.org/\">FileZilla</a>.</li>\n</ol>\n<p>FTP or \u201cFile Transfer Protocol\u201d has been the most widely used transfer protocol for over thirty years, but it sends your information in the clear, which is a security risk. Use SFTP (Secure File Transfer Protocol) if your host supports it. This transfers your files and your password over a secured connection, and should therefore be used instead of FTP whenever possible. Sometimes you have to contact your host to have SFTP enabled on your account.</p>\n<p>Why use FileZilla? Because, like WordPress, it is released under the GPL. So, it is not just free, it is staying that way, too. The following pages will show you how to setup and use Filezilla:</p>\n<ol>\n<li><a href=\"https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/\">Setting up FileZilla for Your Website</a></li>\n<li><a href=\"https://developer.wordpress.org/advanced-administration/server/file-permissions/\">Setting Permissions</a></li>\n<li><a href=\"https://wiki.filezilla-project.org/Documentation\">FileZilla\u2019s Extensive Documentation</a></li>\n</ol>\n<p>Want to try a different FTP or SFTP client? <a href=\"https://en.wikipedia.org/wiki/Comparison_of_FTP_clients\">Find more on Wikipedia</a>.</p>\n",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 3,
+                "count": 4,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145848/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 151946,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145848/revisions/151946"
+                "id": 159083,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145848/revisions/159083"
             }
         ],
         "up": [

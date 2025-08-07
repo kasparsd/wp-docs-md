@@ -286,6 +286,8 @@ Table of Contents:
 - [Grid block](#documentation/article/grid-block)
 - [Twenty Twenty-Five changelog](#documentation/article/twenty-twenty-five-changelog)
 - [Query Total block](#documentation/article/query-total-block)
+- [Query Title block](#documentation/article/query-title-block)
+- [Title block](#documentation/article/title-block)
 - [Twenty Ten](#documentation/article/twenty-ten)
 - [Twenty Eleven](#documentation/article/twenty-eleven)
 - [Twenty Twelve](#documentation/article/twenty-twelve)
@@ -579,7 +581,7 @@ Begin by logging in to the administration area, or the [back end](/support/artic
 
 ### Start at the Top
 
-![Dashboard ‹ Your Website — WordPress](https://wordpress.org/documentation/files/2018/10/Dashboard-‹-Your-Website-—-WordPress.png)After logging in you are on the main [Administration Screen](/support/article/administration-screens/) called the [Dashboard](/support/article/glossary/#dashboard). This is where the organization of your site begins.
+![The WordPress administrative dashboard](https://wordpress.org/documentation/files/2018/10/Dashboard-‹-Your-Website-—-WordPress.png)After logging in you are on the main [Administration Screen](/support/article/administration-screens/) called the [Dashboard](/support/article/glossary/#dashboard). This is where the organization of your site begins.
 
 At the top of the screen is the area called the [*toolbar*](/support/article/administration-screens/#toolbar-keeping-it-all-together). Click on your site name; it’s a link and it will take you to a view of your new WordPress site. Like it? Don’t like it? Doesn’t matter, just look at it. This is where you are going to be spending a lot of time!
 
@@ -587,7 +589,7 @@ At the top of the screen is the area called the [*toolbar*](/support/article/adm
 
 Take time to look at the site before you get into changing it and figuring out [how it all works](https://codex.wordpress.org/Working_with_WordPress); it’s important to see how the WordPress Twenty Nineteen theme is laid out and how it works. Consider this the test drive before you start adding all the special features.
 
-![](https://wordpress.org/documentation/files/2019/05/localhost_8080_wpdev_Laptop-with-HiDPI-screen-1024x997.png)The layout you are looking at is defined by a [WordPress Theme](/support/article/using-themes/). It is the [appearance](/support/article/administration-screens/#appearance-change-the-look-of-your-blog) of your website, styling the look of the site and the framing of the content. The WordPress Twenty Nineteen theme features a “header” at the top with the title and tagline for your site. Below this is your [Menu](/support/article/appearance-menus-screen/), if you have one. Along the side you will see some titles and links. This is the Sidebar. The different items inside a Sidebar are called [Widgets](/support/article/wordpress-widgets/). The main middle section of the page is the content area.
+![The home page of a new installation of WordPress](https://wordpress.org/documentation/files/2019/05/localhost_8080_wpdev_Laptop-with-HiDPI-screen-1024x997.png)The layout you are looking at is defined by a [WordPress Theme](/support/article/using-themes/). It is the [appearance](/support/article/administration-screens/#appearance-change-the-look-of-your-blog) of your website, styling the look of the site and the framing of the content. The WordPress Twenty Nineteen theme features a “header” at the top with the title and tagline for your site. Below this is your [Menu](/support/article/appearance-menus-screen/), if you have one. Along the side you will see some titles and links. This is the Sidebar. The different items inside a Sidebar are called [Widgets](/support/article/wordpress-widgets/). The main middle section of the page is the content area.
 
 Scroll down the page and notice the bar at the end of the page. This is called the “footer.” It says “Proudly powered by WordPress.”
 
@@ -605,7 +607,7 @@ All of these changes are created from a few files called [template files](https:
 
 Now that you have an idea of how your site looks and what the different layout sections are called, it’s time to test drive the [WordPress Administration](https://codex.wordpress.org/Administering_Your_Blog). This is like familiarizing yourself with the backend of your new website. In fact, the first page you see after logging in is called the [Dashboard](/support/article/glossary/#dashboard), a collection of information and data about the activities and actions on your WordPress site.
 
-![Dashboard ‹ Your Website — WordPress](https://wordpress.org/documentation/files/2018/10/Dashboard-‹-Your-Website-—-WordPress.png)The [Dashboard](/support/article/glossary/#dashboard) features a list of the most recent activity you’ve accomplished on your site and it helps to keep you up to date on new and interesting bits of information from the many WordPress resources.
+![The WordPress administrative dashboard](https://wordpress.org/documentation/files/2018/10/Dashboard-‹-Your-Website-—-WordPress.png)The [Dashboard](/support/article/glossary/#dashboard) features a list of the most recent activity you’ve accomplished on your site and it helps to keep you up to date on new and interesting bits of information from the many WordPress resources.
 
 On the left side of the screen is the **main navigation** menu detailing each of the administrative functions you can perform. Move your mouse down the list and the sub-menus will “fly out” for you to move your mouse to and click. Once you choose a “parent” navigation section, it will open up to reveal the options within that section.
 
@@ -626,18 +628,18 @@ The various menu items are as follows:
 
 Click on the **Users** tab. The screen will change and you will see the Screen called [All Users](/support/article/administration-screens/#all-users) that shows a list of all your users; from here you can add or change existing users and authors accounts. In the navigation menu, click on the [Your Profile](/support/article/administration-screens/#your-profile) menu choice. This is where you will enter information about you, the author and [administrator](/support/article/roles-and-capabilities/#administrator) of the site. Fill in the information and click **Update Profile** when done.
 
-![Profile ‹ Your Website — WordPress](https://wordpress.org/documentation/files/2018/10/Profile-‹-Your-Website-—-WordPress.png)Now, let’s look at some other powerful features of the WordPress Admin.
+![The User > Profile page in the admin dashboard](https://wordpress.org/documentation/files/2018/10/Profile-‹-Your-Website-—-WordPress.png)Now, let’s look at some other powerful features of the WordPress Admin.
 
 ### Changing the Look
 
-![](https://wordpress.org/documentation/files/2018/10/localhost_8080_wordpress_wp-admin_themes.phpLaptop-with-HiDPI-screen-1024x640.png)  
+![The 'Themes' page in the admin dashboard](https://wordpress.org/documentation/files/2018/10/localhost_8080_wordpress_wp-admin_themes.phpLaptop-with-HiDPI-screen-1024x640.png)  
  The [Appearance, Themes Screen](/support/article/administration-screens/#appearance-change-the-look-of-your-blog) allows you to change the look of your site using different [Themes](/support/article/using-themes/). Themes are presentation styles that completely change the look of your site. Designed by developers and users, there are hundreds of themes available for you to choose from. In your Appearance Screen, you will see a list of currently installed themes, including the WordPress Twenty Nineteen theme. To quickly change the theme, simply click on the Activate button under one of the themes listed, then click on your site name in the top [toolbar](/support/article/administration-screens/#toolbar-keeping-it-all-together) to see how it looks. Wow, you have another look. It’s that easy. Go back to **Appearance &gt; Theme** and click the Activate button under the WordPress Twenty Nineteen theme to bring the design back to what you had. To see it again, click your site name in the toolbar, and there it is.
 
 ### Creating a post
 
 Back in the [Administration Screen](/support/article/administration-screens/), take a look at the [Posts Screen](/support/article/administration-screens#all-posts). You can use the tabs under the Posts Menu to [write and manage your posts](/support/article/writing-posts/). Let’s start by making your first test post in the [Add New](/support/article/administration-screens/#posts-make-some-content) tab.
 
-![Add a New Post ‹ Your Website — WordPress](https://wordpress.org/documentation/files/2018/10/Add-a-New-Post-‹-Your-Website-—-WordPress.png)Simply fill in the blanks, one by one, in the post beginning with the title and then write a little test message in the post window. This is just for a test, so you can write anything you want. When you are done, click the **Publish** button that is to the right of the post entry window and it is done. There’s more exciting work ahead! Now that you’ve gotten a feel for writing posts, you can view your posts by clicking your site name in the [toolbar](/support/article/administration-screens#toolbar) at top of the screen.
+![The 'New Post' page in the admin dashboard](https://wordpress.org/documentation/files/2018/10/Add-a-New-Post-‹-Your-Website-—-WordPress.png)Simply fill in the blanks, one by one, in the post beginning with the title and then write a little test message in the post window. This is just for a test, so you can write anything you want. When you are done, click the **Publish** button that is to the right of the post entry window and it is done. There’s more exciting work ahead! Now that you’ve gotten a feel for writing posts, you can view your posts by clicking your site name in the [toolbar](/support/article/administration-screens#toolbar) at top of the screen.
 
 ### Comments
 
@@ -691,7 +693,7 @@ If you are familiar with CSS, HTML, and even PHP and MySQL, consider either cust
 
 ## Using WordPress Plugins
 
-![Plugin screen](https://wordpress.org/documentation/files/2018/10/plugin-panel.png)[WordPress Plugins](/support/article/plugins/) are also known as add-ons or extensions. They are software scripts that add functions and events to your website. They cover the gamut from up-to-date weather reports to simple organization of your posts and categories. Plugins are designed by volunteer contributors and enthusiasts who like challenges and problem solving. They are usually fairly [simple to install](/support/article/managing-plugins/) through the WordPress Admin Plugin Screen, just follow the instructions provided by the plugin author. Remember, these are free and non-essential. If you have any problems with plugins, contact the plugin author’s website or plugin source first, then search the Internet for help with that specific plugin, and if you haven’t found a solution, then visit the WordPress forums for more help.
+![The 'Plugin' page list of installed plugins](https://wordpress.org/documentation/files/2018/10/plugin-panel.png)[WordPress Plugins](/support/article/plugins/) are also known as add-ons or extensions. They are software scripts that add functions and events to your website. They cover the gamut from up-to-date weather reports to simple organization of your posts and categories. Plugins are designed by volunteer contributors and enthusiasts who like challenges and problem solving. They are usually fairly [simple to install](/support/article/managing-plugins/) through the WordPress Admin Plugin Screen, just follow the instructions provided by the plugin author. Remember, these are free and non-essential. If you have any problems with plugins, contact the plugin author’s website or plugin source first, then search the Internet for help with that specific plugin, and if you haven’t found a solution, then visit the WordPress forums for more help.
 
 - [WordPress Plugin Directory](#plugins)
 - [Managing Plugins](/support/article/managing-plugins/)
@@ -1236,7 +1238,7 @@ Comments allow your website’s visitors to have a discussion with you and each 
 
 All comments on a WordPress website are displayed on the **Comments** dashboard in your WordPress admin area. It displays all comments by default
 
-![Comments dashboard](https://i2.wp.com/wordpress.org/documentation/files/2020/04/comments-dashboard.png?fit=1024%2C572&ssl=1)You can switch the view to see Pending, Approved, Spam, and Trash comments:
+![The 'Comments' page in the admin dashboard](https://i2.wp.com/wordpress.org/documentation/files/2020/04/comments-dashboard.png?fit=1024%2C572&ssl=1)You can switch the view to see Pending, Approved, Spam, and Trash comments:
 
 - **Pending:** comments submitted by your visitors, but won’t be visible on your blog posts unless you approve them.
 - **Approved:** comments published and are publicly visible on your blog posts by all your website visitors.
@@ -1261,8 +1263,7 @@ Before you enable comments on posts or [Pages](/support/article/pages/), reviewi
 
 ### Notification
 
-![Settings > Discussion > Default post settings.
-page sample image](https://wordpress.org/documentation/files/2020/04/default-post-settings.png)If you link another site post on your site, **Attempt to notify any blogs linked to from the post** will enable your site to notify the website owners that you have linked to them. They can then choose to tell their users that another site linked to them through a [trackback or pingback](/support/article/introduction-to-blogging/).
+![The 'Discussion Settings' section of the 'Settings' page in the admin dashboard](https://wordpress.org/documentation/files/2020/04/default-post-settings.png)If you link another site post on your site, **Attempt to notify any blogs linked to from the post** will enable your site to notify the website owners that you have linked to them. They can then choose to tell their users that another site linked to them through a [trackback or pingback](/support/article/introduction-to-blogging/).
 
 Just like the option above, you can enable your site to accept pingbacks and trackbacks from other websites by checking **Allow link notifications from other blogs (pingbacks and trackbacks) on new posts**.
 
@@ -1270,7 +1271,7 @@ Just like the option above, you can enable your site to accept pingbacks and tra
 
 **Allow people to post comments on new articles** will enable you to disable comments if you don’t need comments on your websites.
 
-![](https://wordpress.org/documentation/files/2020/04/other-comment-settings.png)**Comment author must fill out name and e-mail** prevents people from leaving anonymous comments.
+![Other comments options on the 'Settings' page of the admin dashboard](https://wordpress.org/documentation/files/2020/04/other-comment-settings.png)**Comment author must fill out name and e-mail** prevents people from leaving anonymous comments.
 
 **Users must be registered and logged in to comment** will only allow registered users of your site to post comments.
 
@@ -1284,7 +1285,7 @@ Just like the option above, you can enable your site to accept pingbacks and tra
 
 **Comments should be displayed with the \_\_\_\_\_ comments at the top of each Page** will place newer or older comments at the top of each page.
 
-![](https://wordpress.org/documentation/files/2020/04/comment-administration.png)### Comment administration
+![Email and comment options on the 'Settings' page in the admin dashboard](https://wordpress.org/documentation/files/2020/04/comment-administration.png)### Comment administration
 
 **Email me whenever … Anyone posts a comment** and/or **A comment is held for moderation** will help you stay up to date on your comments. If you don’t check your site often.
 
@@ -1294,7 +1295,7 @@ Just like the option above, you can enable your site to accept pingbacks and tra
 
 ### Comment spam
 
-![](https://i2.wp.com/wordpress.org/documentation/files/2020/04/comment-moderation.png?fit=1024%2C338&ssl=1)**Hold a comment in the queue if it contains \_\_\_\_\_ links**, Spam comments are designed to get users to click on links in order to drive traffic to other sites. As a result, many spam comments contain multiple links. Setting this option to hold all comments that contain 2 or more links will help catch more spam.
+![The comment moderation and blocklist options on the 'Settings' page](https://i2.wp.com/wordpress.org/documentation/files/2020/04/comment-moderation.png?fit=1024%2C338&ssl=1)**Hold a comment in the queue if it contains \_\_\_\_\_ links**, Spam comments are designed to get users to click on links in order to drive traffic to other sites. As a result, many spam comments contain multiple links. Setting this option to hold all comments that contain 2 or more links will help catch more spam.
 
 You can experiment with **Comment Moderation and Comment Blacklist** to catch spam that contains certain words or is posted from a particular IP address. Comments caught through blacklisting are not deleted but instead [moved to your spam folder](#documentation/article/comment-moderation).
 
@@ -1310,12 +1311,12 @@ Once you have decided on your discussion options, you are ready to enable commen
 
 ### Turning on comments for a single post or page
 
-![](https://i2.wp.com/wordpress.org/documentation/files/2020/04/enable-comment-on-page-1.png?fit=1024%2C480&ssl=1)  
+![WordPress block editor interface showing an empty post titled ‘Enter the article title here.’ On the right-hand side under the ‘Document’ tab, various post settings are visible. The ‘Discussion’ section is highlighted in yellow, with checkboxes for ‘Allow comments’ and ‘Allow pingbacks & trackbacks’ both checked.](https://i2.wp.com/wordpress.org/documentation/files/2020/04/enable-comment-on-page-1.png?fit=1024%2C480&ssl=1)  
 On the post or page you wish to add comments to, find the “Discussion” box, and check “Allow Comments.” (If you do not see the “Discussion” box on the Edit Page, click “Screen Options” in the upper right corner of the browser window. Make sure the box next to “Discussion” is checked.) Save your changes by clicking “Publish”, “Save Draft” or “Update.
 
 ### Turning on comments from the posts or pages screen
 
-![](https://i1.wp.com/wordpress.org/documentation/files/2020/04/enable-comment-from-quick-edit.png?fit=1024%2C228&ssl=1)Navigate to the Posts/Pages screen. In the list of pages or posts, find the one you want and hover your cursor over the title of the post. You will see several links appear underneath the title. Click “Quick Edit” and check “Allow Comments.” Click “Update” to turn comments on for that post.
+![WordPress Quick Edit panel for a post. The panel displays fields for title, slug, date, author, categories, template, tags, and status. On the right side, the options ‘Allow Comments’ (checked) and ‘Allow Pings’ (unchecked) are highlighted in yellow, with the post status set to ‘Published.’](https://i1.wp.com/wordpress.org/documentation/files/2020/04/enable-comment-from-quick-edit.png?fit=1024%2C228&ssl=1)Navigate to the Posts/Pages screen. In the list of pages or posts, find the one you want and hover your cursor over the title of the post. You will see several links appear underneath the title. Click “Quick Edit” and check “Allow Comments.” Click “Update” to turn comments on for that post.
 
 ### Turning on comments for multiple posts or pages
 
@@ -2805,15 +2806,26 @@ Here is an example of what this information might look like on your post:
 <strong>Currently Reading</strong>: <em>Calvin and Hobbes</em><br></br><strong>Today's Mood</strong>: <em>Jolly and Happy</em>
 ```
 
-## Usage
+## Displaying Custom Fields in the Block Editor
+
+![Option button and Preferences menu  in the sidebar](https://wordpress.org/documentation/files/2018/10/custom-fileds-1-6.8-177x300.jpg)In the Block Editor, Custom Fields area is hidden by default if they have not been used before. To display the area, follow the below steps.
+
+Note: Before displaying the Custom Fields area, make sure your content is saved since page reload is required for this option change.
+
+1. Click Options button (three dots icon) at the right of the top toolbar.
+2. Select Preferences
+3. Select General tab and turn on the Custom fields in the Advanced section
+4. Click Select &amp; Reload Page button
+
+![Custom fields in the Preferences panel](https://wordpress.org/documentation/files/2018/10/cusom-fields-2-6.8.jpg)You’ll see Custom Fields in the bottom of the Block Editor.
+
+### Usage
 
 Based upon our example above, let’s add two custom fields, one called “Currently Reading” and the other “Today’s Mood”. Please follow the below steps to add this information to a post using Custom Fields.
 
-1. Custom Fields options on the Post &amp; Page edit screens are hidden by default if they have not been used before. Using the Block Editor, click the three dots button at the top of the right sidebar and visit **Options** to enable it. (If you are using the Classic editor, check the [screen options](#documentation/article/administration-screens)).
-2. After you have written your post, scroll down to the area titled **Custom Fields**.
-3. To create a new **Custom Field** called “Currently Reading”, enter the text “Currently Reading” (without the quotes) in the text entry field titled **Name**.
-4. The newly created **Key** (“Currently Reading”) should now be assigned a **Value**, which in our case is the name of the book currently being read, “Calvin and Hobbes”. Type “Calvin and Hobbes” in the *Value* field, again without the quotes.
-5. Click **Add Custom Field** button to save this custom information for that post.
+1. To create a new **Custom Field** called “Currently Reading”, click Enter new button, enter the text “Currently Reading” (without the quotes) in the text entry field titled **Name**.
+2. The newly created **Key** (“Currently Reading”) should now be assigned a **Value**, which in our case is the name of the book currently being read, “Calvin and Hobbes”. Type “Calvin and Hobbes” in the *Value* field, again without the quotes.
+3. Click **Add Custom Field** button to save this custom information for that post.
 
 ![](https://wordpress.org/documentation/files/2018/10/custom_field_example.jpg)Custom FieldsTo add your “Today’s Mood”, repeat the process and add “Today’s Mood” to the **key** and a description of your mood in the **value** text boxes and click **Add Custom Field** to save this information with the post.
 
@@ -2821,7 +2833,7 @@ On your next post, you can add a new book and mood to your metadata. In the **Cu
 
 You only need to create a new “KEY” **once**, after which you can assign a value to that key for every post, if you so desire. You can also assign more than one *Value* to a key, for a post. This will come in handy for people who read more than one book at a time.
 
-## Displaying Custom Fields
+## Displaying Custom Fields on the front end
 
 To display the Custom Fields for each post, you have to use a template tag that customizes your theme. For more details about it, please refer to:
 
@@ -6599,7 +6611,7 @@ Certain WordPress tag functions are used to display or return date and time info
 
 By default, these functions will display or return date and time in format as it is set in [Administration](/support/article/administration-screens/) &gt; [Settings](/support/article/administration-screens/#general) &gt; [General](/support/article/settings-general-screen/). This is the place where customizing format for Date and Time will take effect throughout the whole WordPress installation.
 
-![](https://wordpress.org/documentation/files/2018/11/time-and-date-settings.png)Formatting Date and TimeNotice the string of characters next to each Date and Time formatting in screenshot. This string is called a **format string**. Each letter represents specific part of Date or Time.
+![Dashoboad > Settings > General](https://wordpress.org/documentation/files/2018/11/time-and-date-settings.png)Formatting Date and TimeNotice the string of characters next to each Date and Time formatting in screenshot. This string is called a **format string**. Each letter represents specific part of Date or Time.
 
 For example, the format string:
 
@@ -7602,7 +7614,7 @@ Except for this detail, they are similar to Pretty Permalinks.
 
 On the WordPress dashboard, go to Settings → Permalinks Screen. You can choose one of the permalink structures or enter your own in the “Custom structure” field using the *structure tags*.
 
-![](https://lh4.googleusercontent.com/Lcb0FZp6yKMbXUPN_IobSjNDSP3sl1IGphrkuwVdBzZ81rpigq04ewoiJd3drRIdEC_wrFjfV-smOvngr9enVzmff0eAdg2IeFPbMaHRT_I_AwUxNo5DfE_nyZPqqq-RHZu-BgLq)There are six options to select from:
+![Permalink settings in Admin Dashboard > Settings > Permalink](https://lh4.googleusercontent.com/Lcb0FZp6yKMbXUPN_IobSjNDSP3sl1IGphrkuwVdBzZ81rpigq04ewoiJd3drRIdEC_wrFjfV-smOvngr9enVzmff0eAdg2IeFPbMaHRT_I_AwUxNo5DfE_nyZPqqq-RHZu-BgLq)There are six options to select from:
 
 Plain: This is the Ugly Permalink setting.
 
@@ -7679,7 +7691,7 @@ A sanitized version of the post author’s name.
 
 You also have the option of setting custom category and tag bases for your site on the same screen under the **Optional** settings section.
 
-![](https://lh3.googleusercontent.com/T1ebzj_2xkBSUS9rNTXkrnIB_hB84Mc3MxCy2Sl82jesIPUO48GomcQzVfF5s-oVfABCm19HZsVvfUCBrBrUXVrDeolsyWvx1N2mFWaAeHCUy0J7ZG-OtXZuApJ8yFwZ09hr7-hV)The *Category base* and *Tag base* are prefixes used in URLs for category and tag archives, which look like this:
+![Optional Category base and Tag base permalink settings in Admin Dashboard > Settings > Permalink](https://lh3.googleusercontent.com/T1ebzj_2xkBSUS9rNTXkrnIB_hB84Mc3MxCy2Sl82jesIPUO48GomcQzVfF5s-oVfABCm19HZsVvfUCBrBrUXVrDeolsyWvx1N2mFWaAeHCUy0J7ZG-OtXZuApJ8yFwZ09hr7-hV)The *Category base* and *Tag base* are prefixes used in URLs for category and tag archives, which look like this:
 
 example.net/category\_base/category\_name
 
@@ -7692,6 +7704,11 @@ The default values for *Category base* and *Tag base* are category and tag. You 
 When you assign multiple categories to a post, only one can show up in the permalink. Which category gets displayed in the permalink is determined alphabetically.
 
 If you want to choose which category shows up in the permalink, you can use one of the plugins from the [plugin directory](#plugins/search/taxonomy).
+
+## Changelog
+
+- Updated 2025-06-28 
+    - Added Alt texts.
 
 ---
 
@@ -8897,13 +8914,13 @@ Let’s take a step-by-step tour through your WordPress site and see how the dif
 
 ### Log In
 
-![](https://wordpress.org/documentation/files/2021/01/Screen-Shot-2020-12-31-at-3.22.22-PM-920x1024.png)
+![Login screen of the WordPress Website](https://wordpress.org/documentation/files/2021/01/Screen-Shot-2020-12-31-at-3.22.22-PM-920x1024.png)
 
 Begin by logging into the administration area, or the [back end](/support/article/glossary/#back-end), of your website. Visit your site’s login page by placing *wp-admin* after your domain name (e.g., http://example.com/wp-admin). Some [themes](/support/article/using-themes/) provide a login link or form on the [front end](/support/article/glossary/#front-end) as well. Now login to WordPress using the username and password you created in the 5-minute install.
 
 ### Start at the top
 
-![](https://wordpress.org/documentation/files/2022/06/wordpress-6-0-dashboard-1024x583.png)After logging in you are on the main [Administration Screen](/support/article/administration-screens/) called the [Dashboard](/support/article/glossary/#dashboard). This is where the organization of your site begins.
+![Admin Dashboard home page](https://wordpress.org/documentation/files/2022/06/wordpress-6-0-dashboard-1024x583.png)After logging in you are on the main [Administration Screen](/support/article/administration-screens/) called the [Dashboard](/support/article/glossary/#dashboard). This is where the organization of your site begins.
 
 At the top of the screen is the area called the [*toolbar*](/support/article/administration-screens/#toolbar-keeping-it-all-together). Click on your site name; it’s a link and it will take you to a view of your new WordPress site. Like it? Don’t like it? Doesn’t matter, just look at it. This is where you are going to be spending a lot of time!
 
@@ -8911,7 +8928,7 @@ At the top of the screen is the area called the [*toolbar*](/support/article/adm
 
 Take time to look at the site before you get into changing it and figuring out [how it all works](https://codex.wordpress.org/Working_with_WordPress); it’s important to see how the WordPress Twenty Twenty-Two theme is laid out and how it works. Consider this the test drive before you start adding all the special features.
 
-![](https://wordpress.org/documentation/files/2022/03/myfirstwpsite-–-Just-another-WordPress-site-1024x838.png)The layout you are looking at is defined by a [WordPress Theme](/support/article/using-themes/). It is the [appearance](/support/article/administration-screens/#appearance-change-the-look-of-your-blog) of your website, styling the look of the site, and the framing of the content. The WordPress Twenty Twenty-Two theme features a “header” at the top with the title and tagline for your site. Below is your [Menu](/support/article/appearance-menus-screen/), if you have one. The main middle section of the page is the content area.
+![Front side of the WordPress Website](https://wordpress.org/documentation/files/2022/03/myfirstwpsite-–-Just-another-WordPress-site-1024x838.png)The layout you are looking at is defined by a [WordPress Theme](/support/article/using-themes/). It is the [appearance](/support/article/administration-screens/#appearance-change-the-look-of-your-blog) of your website, styling the look of the site, and the framing of the content. The WordPress Twenty Twenty-Two theme features a “header” at the top with the title and tagline for your site. Below is your [Menu](/support/article/appearance-menus-screen/), if you have one. The main middle section of the page is the content area.
 
 Scroll down the page and you will see a search box, recent posts, and recent comments. These are called [Widgets](/support/article/wordpress-widgets/).
 
@@ -8929,7 +8946,7 @@ All of these changes are created from a few files called [template files](https:
 
 Now that you have an idea of how your site looks and what the different layout sections are called, it’s time to test drive the [WordPress Administration](#documentation/article/administering-your-blog). This is like familiarizing yourself with the backend of your new website. In fact, the first page you see after logging in is called the [Dashboard](/support/article/glossary/#dashboard), a collection of information and data about the activities and actions on your WordPress site.
 
-![](https://wordpress.org/documentation/files/2022/06/wordpress-6-0-dashboard-1024x583.png)The [Dashboard](/support/article/glossary/#dashboard) features a list of the most recent activity you’ve accomplished on your site and it helps to keep you up to date on new and interesting bits of information from the many WordPress resources.
+![Admin Dashboard home page of the WordPress Website](https://wordpress.org/documentation/files/2022/06/wordpress-6-0-dashboard-1024x583.png)The [Dashboard](/support/article/glossary/#dashboard) features a list of the most recent activity you’ve accomplished on your site and it helps to keep you up to date on new and interesting bits of information from the many WordPress resources.
 
 On the left side of the screen is the **main navigation** menu detailing each of the administrative functions you can perform. Move your mouse down the list and the sub-menus will “fly out” for you to move your mouse to and click. Once you choose a “parent” navigation section, it will open up to reveal the options within that section.
 
@@ -8950,11 +8967,11 @@ The various menu items are as follows:
 
 Click on the **Users** tab. The screen will change and you will see the Screen called [All Users](/support/article/administration-screens/#all-users) that shows a list of all your users; from here you can add or change existing users and authors’ accounts. In the navigation menu, click on the Your Profile menu choice. This is where you will enter information about yourself, the author, and the [administrator](/support/article/roles-and-capabilities/#administrator) of the site. Fill in the information and click **Update Profile** when done.
 
-![](https://wordpress.org/documentation/files/2022/03/Profile-‹-myfirstwpsite-—-WordPress-1024x472.png)Now, let’s look at some other powerful features of the WordPress Admin.
+![User profile screen](https://wordpress.org/documentation/files/2022/03/Profile-‹-myfirstwpsite-—-WordPress-1024x472.png)Now, let’s look at some other powerful features of the WordPress Admin.
 
 ### Changing the Look
 
-![](https://wordpress.org/documentation/files/2022/03/Manage-Themes-‹-myfirstwpsite-—-WordPress-1024x615.png)  
+![Themes in the Admin dashboard > Themes](https://wordpress.org/documentation/files/2022/03/Manage-Themes-‹-myfirstwpsite-—-WordPress-1024x615.png)  
  The [Appearance, Themes Screen](/support/article/administration-screens/#appearance-change-the-look-of-your-blog) allows you to change the look of your site using different [Themes](/support/article/using-themes/). Themes are presentation styles that completely change the look of your site. Designed by developers and users, there are hundreds of themes available for you to choose from. In your Appearance Screen, you will see a list of currently installed themes, including the WordPress Twenty Twenty-Two theme. To quickly change the theme, simply click on the Activate button under one of the themes listed, then click on your site name in the top [toolbar](/support/article/administration-screens/#toolbar-keeping-it-all-together) to see how it looks. Wow, you have another look. It’s that easy. Go back to **Appearance &gt; Theme** and click the Activate button under the WordPress Twenty Twenty-Two theme to bring the design back to what you had. To see it again, click your site name in the toolbar, and there it is.
 
 ![First time opening "Create a post" screen with welcome wizard. ](https://wordpress.org/documentation/files/2024/04/324626067-55fd593f-e477-479a-893d-495b84e6d67f-1024x612.jpg)### Creating a post
@@ -9045,6 +9062,8 @@ The exciting thing about WordPress is that there are few limits. Thousands of pe
 
 #### **Changelog** 
 
+- Updated 2025-06-28 
+    - Added Alt texts.
 - Updated 2024-04-23 
     - Update screenshots for 6.5
 - Updated 2022-06-19 
@@ -10674,7 +10693,9 @@ http://<site_address>/
 
 [![](https://i2.wp.com/wordpress.org/documentation/files/2019/02/ErasePersonalData_4.9.6_confirmation.jpg?fit=400%2C408&ssl=1)](#support)At the same time, the Status of Request will be changed to *Confirmed*, and **Next Steps** shows **Erase Personal Data** button.
 
-[![](https://i1.wp.com/wordpress.org/documentation/files/2019/02/ErasePersonalData_4.9.6_confirmed.jpg?fit=939%2C247&ssl=1)](#support)Confirmed – Erase Personal Data4\. Click **Erase Personal Data**.  
+[![](https://i1.wp.com/wordpress.org/documentation/files/2019/02/ErasePersonalData_4.9.6_confirmed.jpg?fit=939%2C247&ssl=1)](#support)Confirmed – Erase Personal DataIf user didn’t confirm the request, the Status will be “failed”. You may resend the request.
+
+4\. Click **Erase Personal Data**.  
  **Status** will be changed to *Completed*, and **Next Steps** displays **Remove request** button.
 
 Notice: There are no confirmation prompt. Clicking the button means erasing the data.
@@ -11657,9 +11678,9 @@ After you’ve done this, you will now see a small “smiley face” icon to the
 
 There is a smiley face button in the lower right corner of the keyboard. Tap this to access emoji.
 
-[![](https://wordpress.org/support/files/2019/02/714px-AndroidKeyboard.jpg)](https://codex.wordpress.org/File:AndroidKeyboard.jpeg)In some apps, you may need to tap and hold the Enter button for the smiley face button to appear.
+[![Android Keyboard](https://wordpress.org/support/files/2019/02/714px-AndroidKeyboard.jpg)](https://codex.wordpress.org/File:AndroidKeyboard.jpeg)In some apps, you may need to tap and hold the Enter button for the smiley face button to appear.
 
-[![](https://wordpress.org/support/files/2019/02/721px-AndroidKeyboard2.jpg)](https://codex.wordpress.org/File:AndroidKeyboard2.jpeg)## Using Emoji on Desktops
+[![Android Keyboard with emoji shortcut key](https://wordpress.org/support/files/2019/02/721px-AndroidKeyboard2.jpg)](https://codex.wordpress.org/File:AndroidKeyboard2.jpeg)## Using Emoji on Desktops
 
 ### Windows 10
 
@@ -11814,7 +11835,7 @@ Once you start receiving comments on your site, you can check the status of comm
 
 ### Moderating comments with the comment screen
 
-![](https://wordpress.org/documentation/files/2023/08/comment_pending_numbered_smaller.png)WordPress makes moderating your users’ comments a simple process. The [Comments Screen](#documentation/article/comments-screen) lays out the basic information about each comment and lets you decide what to do with it.
+![WordPress comment moderation panel displaying a comment from a user named ‘blogreader.’ The entry shows the user’s avatar, username, website (example.com), email (blogreader@example.com), and IP address (192.168.0.5). The comment, submitted on 2013/12/16 at 8:18 am, reads: ‘By default anybody can leave comments without logging in.’ Below the comment are moderation options: Approve, Reply, Quick Edit, Edit, Spam, and Trash. On the right, the comment is shown as a response to the post titled ‘Hello world!,’ with a link to ‘View Post.’](https://wordpress.org/documentation/files/2023/08/comment_pending_numbered_smaller.png)WordPress makes moderating your users’ comments a simple process. The [Comments Screen](#documentation/article/comments-screen) lays out the basic information about each comment and lets you decide what to do with it.
 
 1. <a href="">Commenter Gravatar</a>
 2. Commenter Name
@@ -11829,7 +11850,7 @@ Once you start receiving comments on your site, you can check the status of comm
 
 ### Bulk edit comments
 
-![](https://wordpress.org/documentation/files/2023/08/bulk-action.webp)Like the posts and Pages screens, the Comments screen supplies a Bulk Action drop-down box. Select the comments you want to edit, and then select Unapprove, Approve, Mark as Spam, or Move to Trash from the drop-down and click “Apply.”
+![WordPress Comments dashboard showing the comment management toolbar. Tabs display counts for All, Mine, Pending, Approved, Spam, and Trash comments. Dropdown menus for ‘Bulk Actions’ and ‘All comment types’ are visible along with ‘Apply’ and ‘Filter’ buttons. A ‘Search Comments’ box appears on the right, and pagination controls.](https://wordpress.org/documentation/files/2023/08/bulk-action.webp)Like the posts and Pages screens, the Comments screen supplies a Bulk Action drop-down box. Select the comments you want to edit, and then select Unapprove, Approve, Mark as Spam, or Move to Trash from the drop-down and click “Apply.”
 
 ---
 
@@ -11919,9 +11940,9 @@ To launch the WordPress block editor, click on **Posts** &gt; **Add New** or **P
 
 Before you publish your post or page, you will see the following options in the top toolbar.
 
-![Top toolbar showing available icons in post edit screen](https://wordpress.org/documentation/files/2019/03/wordpress-block-editor-toolbar-6.7-1024x115.jpg)After the publishing, you will see the following options.
+![Top toolbar showing available icons in post edit screen](https://wordpress.org/documentation/files/2019/03/block-editor-toolbar-1-6.8-1024x53.png)After the publishing, you will see the following options.
 
-![After the publishing, new option View Post / View Page is appeared.](https://wordpress.org/documentation/files/2019/03/wordpress-block-editor-toolbar-published-6.7-1024x108.jpg)The options corresponding to the numbers in the figure are as followings:
+![After the publishing, new option View Post / View Page is appeared.](https://wordpress.org/documentation/files/2019/03/block-editor-toolbar-2-6.8-1024x54.png)The options corresponding to the numbers in the figure are as followings:
 
 #### 1. View Posts / View Pages
 
@@ -11931,50 +11952,44 @@ Shows the W icon by default, or the Site Icon if available. Click to exit the ed
 
 Show or Hide block inserter that allows users to add block, patterns or media to your post or page.
 
-#### 3. Tools
+![Block options, patterns and media when clicking block inserter.
 
-Switch between editing a block and selecting a block. Choose the Select tool (or press the Escape key on your keyboard) to select individual blocks. Once a block is selected, press the Enter key on your keyboard to return to editing.
-
-![Edit/select buttons in the WordPress block editor workspace](https://user-images.githubusercontent.com/70191331/279970840-fff800a8-9af6-4200-adbc-d95569287178.png)#### 4. Undo and Redo
+](https://wordpress.org/documentation/files/2019/03/block-editor-toolbar-3-6.8-553x1024.png)#### 3. Undo and Redo
 
 Undo an action, or redo an undone action.
 
-#### 5. Document Overview
+#### 4. Document Overview
 
 This option includes two tabs: List View and Outline.
 
 - List View: a list of all of the blocks that are on the post/page and easily navigate between the blocks on your post/page. [Read more about List View tool](#documentation/article/list-view).
 - Outline: Show the the post/page details including the character and word count, estimated time to read, the number of paragraphs and blocks on the post/page, and the document outline showing the headings and how they are structured on the post/page.
 
-![The i icon next to redo icon shows document details in the WordPress block editor workspace including characters, word counts, and headings](https://user-images.githubusercontent.com/70191331/279980515-5bc8308f-8e67-45b6-a3f5-968cc45df6f5.png)Outline tab in the Document Overview#### 6. Command Palette
+![A preview of the document overview showing outline tab content.](https://wordpress.org/documentation/files/2019/03/block-editor-toolbar-4-6.8.png)Outline tab in the Document Overview#### 5. Command Palette
 
 The Command Palette helps you streamline your workflow in the WordPress editor by providing a centralized location to work on various aspects of your site’s design. Click this field, or press Cmd+k on Mac or Ctrl+k on Windows. For more details about Command Palete, refer [Editor Command Palette](#documentation/article/site-editor-command-palette).
 
-#### 7. Save draft / Saved
+![Command palette on post for duplication, add, group or delete.](https://wordpress.org/documentation/files/2019/03/block-editor-toolbar-5-6.8.png)#### 6. Save draft / Saved
 
 Save a draft of your post or page without publishing it. If the post or page is saved successfully, the label changes to **Saved**. Once the post or page is published, this label is hidden.
 
-#### 8. View
+#### 7. View
 
 View how your post/page looks on your site with the current changes applied. For more details, refer [How to use the View feature](#documentation/article/how-to-use-the-preview-function).
 
-#### 9. Zoom Out
-
-The Zoom out mode allows users to zoom out to edit and create at the pattern level over granular block editing.
-
-#### 10. Settings
+#### 8. Settings
 
 Show or hide the [post/page sidebar settings](#documentation/article/settings-sidebar) and the [block settings](#documentation/article/working-with-blocks).
 
-#### 11. Publish
+![Page or block settings.](https://wordpress.org/documentation/files/2019/03/block-editor-toolbar-6-6.8-385x1024.png)#### 9. Publish
 
 Make your post/page available publicly.
 
-#### 12. Options
+#### 10. Options
 
 Open up [more options](#documentation/article/wordpress-block-editor). See below section.
 
-#### 13. View Post / View Page
+#### 11. View Post / View Page
 
 After you publish your post or page, you will see this option. Opens a new tab where you can see how your post/page looks on the frontend.
 
@@ -12034,6 +12049,10 @@ Uploading media item from openverse category uploads to the media library as wel
 
 **Change Log**
 
+- Updated on 2025-07-20 
+    - Remove Tools in the top toolbar  
+        Updated screenshot for the top toolbar  
+        Updated top toolbar items hierarchy
 - Updated on 2025-01-01 
     - Updated whole contents and screenshots for 6.7
 - Updated on 2023-11-11 
@@ -12175,7 +12194,7 @@ The Block Inserter categorizes the blocks into 6 different types: Text, Media, D
 - [Site Tagline](#documentation/article/site-tagline-block) *(new in 5.8)*
 - [Query Loop](#documentation/article/query-loop-block)*(new in 5.8)*
     - [Post Template](#documentation/article/post-template-block)
-    - [Post Title ](#documentation/article/post-title-block)*(new in 5.8)*
+    - [Title](#documentation/article/title-block) *(new in 5.8. Renamed from Post Title)*
     - [Post Excerpt](#documentation/article/post-excerpt-block) *(new in 5.8)*
     - [Post Featured Image](#documentation/article/post-featured-image-block) *(new in 5.8)*
     - [Post Content ](#documentation/article/post-content-block)*(new in 5.8)*
@@ -12188,6 +12207,7 @@ The Block Inserter categorizes the blocks into 6 different types: Text, Media, D
     - [Post Tags](#documentation/article/post-tags-block) *(new in 5.8*)
     - [Pagination](#documentation/article/pagination-block)
     - [Query Total](#documentation/article/query-total-block) *(new in 6.8)*
+- [Query Title](#documentation/article/query-title-block)
 - [Posts List](#documentation/article/posts-list-block)
 - [Avatar](#documentation/article/avatar-block)
 - [Post Navigation Link](#documentation/article/post-navigation-link-block)
@@ -12886,9 +12906,9 @@ After you add images to the Gallery block, you can change the order of images in
 
 ![Moving images in your gallery](https://wordpress.org/documentation/files/2019/03/moving-images-1024x309.png)Moving images in your gallery#### Add a link to an image
 
-To add a link to an image, click the link icon in the block toolbar for the selected image. You can paste a URL for the link, type in the text field to search for a page. You can also link to the **Media file** of the image or the **Attachment Page** for the image.
+To add a link to an image, click the link icon in the block toolbar for the selected image. You can paste a URL for the link, type in the text field to search for a page. You can also **Link to image file** or **Link to attachment page**, or **Enlarge on click**, which opens the image in a lightbox for a larger view.
 
-![Adding a link to the images in the gallery block](https://wordpress.org/documentation/files/2019/03/adding-links-1024x518.png)Adding a link to the images in the Gallery blockYou can change the link settings by clicking the down arrow in the top right corner. You can choose to open the link in a new tab, add CSS class for the link and link rel attribute, if needed.
+![Adding a link to the images in the Gallery block](https://wordpress.org/documentation/files/2019/03/gallery-lightbox-6.8-1024x496.png)Adding a link to the images in the Gallery blockYou can change the link settings by clicking the down arrow in the top right corner. You can choose to open the link in a new tab, add CSS class for the link and link rel attribute, if needed.
 
 ![Settings for the image link](https://wordpress.org/documentation/files/2022/08/Screen-Shot-2022-08-20-at-4.21.57-PM.png)Settings for the image linkAfter you add a link to the image, you can click the link icon in the block toolbar and choose the **pen** icon to edit the link or the **X** icon to delete the link.
 
@@ -13031,6 +13051,8 @@ The advanced tab also lets you add a CSS class to your block, allowing you to wr
 
 ## Changelog 
 
+- Updated 2025-07-05 
+    - Added Enlarge on click option of the image
 - Updated 2024-01-16 
     - Updated screenshots and content for 6.3
     - Fixed text formatting consistecy
@@ -13504,9 +13526,9 @@ The **Cover** block settings panel is divided into two tabs – Settings and Sty
 - The *Inner blocks use the content width toggle* button, allowing nested blocks to use content width with options for full and wide widths.
 - The *Content width* tool lets you customize the width for all elements assigned to the center or wide columns.
 
-### Media settings
+### Settings
 
-![The media settings for the cover block](https://wordpress.org/documentation/files/2023/10/image-7.png)#### Fixed background
+![Image settings for Cover block](https://wordpress.org/documentation/files/2019/03/cover-block-1-6.8.png)#### Fixed background
 
 ![Fixed background setting for the cover image ](https://wordpress.org/documentation/files/2020/12/Screenshot54545dffd.png)Fixed background setting for the cover imageIn the block settings on the sidebar, you have some other options, the first of which is a toggle for a fixed background. A fixed background means the cover image scrolls along with your page. Turning this option off embeds the image in place, so the image doesn’t scroll.
 
@@ -13521,6 +13543,14 @@ You can use the **Repeated background** toggle in combination with **Fixed backg
 ![Focal point picker for the cover image](https://wordpress.org/documentation/files/2019/03/cover-block-focalpoint.png)Focal point picker for the cover imageIf the fixed background option is turned off, you will see the focal point picker. This tool lets you identify the main point of interest in the photo and highlight. Click on the picker to drag it to the spot you want, or use the left and top position percentages below to set it manually.
 
 The clear media button removes the media and any changes you have to it.
+
+#### Resolution
+
+Cover block has been enhanced with new image resolution controls. You now have access to Resolution dropdown when selecting either a Featured Image, existing image from Media Library or uploading new image. This dropdown allows you to choose from available image sizes such as Thumbnail, Medium, Large and Full Size, helping you optimize for performance and visual quality.
+
+#### Featured Image
+
+#### Background Image
 
 #### Alternative text
 
@@ -13564,6 +13594,9 @@ The **Additional CSS class(es)** lets you add CSS class(es) to your block, allow
 
 ## Changelog 
 
+- Updated 2025-06-28 
+    - Added new image Resolution option for 6.8  
+        Added two new videos showcasing the new Resolution option
 - Updated 2023-11-21 
     - consistency changes for Cover block mentions in text
 - Updated 2023-11-11 
@@ -14445,6 +14478,8 @@ Source: https://wordpress.org/documentation/article/custom-html/
 
 **Hypertext Markup Language (HTML)**, is language used to describe the semantic content of web pages. This can be added using the *custom HTML block*. This block allows you to insert your code so you can fine-tune your content.
 
+The custom HTML block is for raw HTML only; for example, shortcode is not parsed in this block. It attempts to render any valid HTML. However, if a user lacks the `unfiltered_html` capability (e.g., Contributor), WordPress will sanitize the content using `<a href="https://developer.wordpress.org/reference/functions/wp_kses/">wp_kses()</a>`, stripping disallowed tags like `<script>`, `<iframe>`, etc.
+
 In order to add a *custom HTML block*, click on the **Block Inserter** icon.
 
 You can also type /html and hit enter in a new paragraph block to add one quickly.
@@ -14469,7 +14504,9 @@ While most blocks have specific options in the editor sidebar in addition to the
 
 ![Block settings  for the custom HTML block](https://user-images.githubusercontent.com/1508963/164263778-594309aa-4b96-45bb-b6c7-ae650f226594.png)Block settings for the custom HTML block## Changelog
 
-- Updated 22-11-26 
+- Updated 2025-07-21 
+    - Added detail HTML processing
+- Updated 2022-11-26 
     - Removed redudant content
     - Aligned images for mobile view
     - Added heading
@@ -22908,6 +22945,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[4.1.39](#documentation/wordpress-version/version-4-1-39)** | October 12, 2023 |  | [Changelog](#documentation/wordpress-version/version-4-1-39#summary) |  | 30135 |
 | **[4.1.40](#documentation/wordpress-version/version-4-1-40)** | January 30, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-1-40) | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 30135 |
 | [**4.1.41**](#documentation/wordpress-version/version-4-1-41) | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-1-41#summary) |  |  |
+| **[4.1.42](#documentation/wordpress-version/version-4-1-42)** | July 15, 2025 |  | [Changelog](#documentation/wordpress-version/version-4-1-42) | [Blog](#news/2025/06/dropping-security-updates-for-wordpress-versions-4-1-through-4-6) |  |
 
 **Version 4.2**
 
@@ -22952,6 +22990,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[4.2.36](#documentation/wordpress-version/version-4-2-36)** | October 12, 2023 |  |  |  | 31536 |
 | **[4.2.37](#documentation/wordpress-version/version-4-2-37)** | January 30, 2024 |  |  | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 31536 |
 | [**4.2.38**](#documentation/wordpress-version/version-4-2-38) | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-2-38#summary) |  |  |
+| **[4.2.39](#documentation/wordpress-version/version-4-2-39)** | July 15, 2025 |  | [Changelog](#documentation/wordpress-version/version-4-2-39) | [Blog](#news/2025/06/dropping-security-updates-for-wordpress-versions-4-1-through-4-6) |  |
 
 **Version 4.3**
 
@@ -22992,6 +23031,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[4.3.32](#documentation/wordpress-version/version-4-3-32)** | October 12, 2023 |  |  |  | 33056 |
 | **[4.3.33](#documentation/wordpress-version/version-4-3-33)** | January 30, 2024 |  |  | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 33056 |
 | [**4.3.34**](#documentation/wordpress-version/version-4-3-34) | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-3-34/#summary) |  |  |
+| [**4.3.35**](#documentation/wordpress-version/version-4-3-35) | July 15, 2025 |  | [Changelog](#documentation/wordpress-version/version-4-3-35) | [Blog](#news/2025/06/dropping-security-updates-for-wordpress-versions-4-1-through-4-6) |  |
 
 **Version 4.4**
 
@@ -23031,6 +23071,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[4.4.31](#documentation/wordpress-version/version-4-4-31)** | October 12, 2023 |  |  |  | 35700 |
 | **[4.4.32](#documentation/wordpress-version/version-4-4-32)** | January 30, 2024 |  |  | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 35700 |
 | [**4.4.33**](#documentation/wordpress-version/version-4-4-33) | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-4-33#summary) |  |  |
+| [**4.4.34**](#documentation/wordpress-version/version-4-4-34) | July 15, 2025 |  | [Changelog](#documentation/wordpress-version/version-4-4-34) | [Blog](#news/2025/06/dropping-security-updates-for-wordpress-versions-4-1-through-4-6) |  |
 
 **Version 4.5**
 
@@ -23069,6 +23110,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[4.5.30](#documentation/wordpress-version/version-4-5-30)** | October 12, 2023 |  |  |  | 36686 |
 | **4.5.31** | January 30, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-5-31) | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 36686 |
 | [**4.5.32**](#documentation/wordpress-version/version-4-5-32) | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-5-32#summary) |  |  |
+| **[4.5.33](#documentation/wordpress-version/version-4-5-33)** | July 15, 2025 |  | [Changelog](#documentation/wordpress-version/version-4-5-33) | [Blog](#news/2025/06/dropping-security-updates-for-wordpress-versions-4-1-through-4-6) |  |
 
 **Version 4.6**
 
@@ -23139,6 +23181,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[4.7.27](#documentation/wordpress-version/version-4-7-27)** | October 12, 2023 |  |  |  | 38590 |
 | **4.7.28** | January 30, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-7-28) | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 38590 |
 | **[4.7.29](#documentation/wordpress-version/version-4-7-29)** | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-7-29#summary) |  |  |
+| **[4.7.30](#documentation/wordpress-version/version-4-7-30)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-4-7-30) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 4.8**
 
@@ -23168,8 +23211,9 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | [**4.8.21**](#documentation/wordpress-version/version-4.8.21) | October 17, 2022 |  | [Changelog](#documentation/wordpress-version/version-4.8.21#list-of-files-revised) | [Blog](#news/2022/10/wordpress-6-0-3-security-release) | 38590 |
 | **[4.8.22](#documentation/wordpress-version/version-4-8-22)** | May 16, 2023 |  |  |  | 38590 |
 | **[4.8.23](#documentation/wordpress-version/version-4-8-23)** | October 12, 2023 |  |  |  | 38590 |
-| **4.8.24** | January 30, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-8-24) | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 38590 |
+| **4.8.24** | January 30, 2024 |  | Changelog | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 38590 |
 | **[4.8.25](#documentation/wordpress-version/version-4-8-25)** | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-8-25#summary) |  |  |
+| **[4.8.26](#documentation/wordpress-version/version-4-8-26)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-4-8-26) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 4.9**
 
@@ -23202,6 +23246,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[4.9.24](#documentation/wordpress-version/version-4-9-24)** | October 12, 2023 |  |  |  | 38590 |
 | **4.9.25** | January 30, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-9-25) | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 38590 |
 | **[4.9.26](#documentation/wordpress-version/version-4-9-26)** | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-4-9-26#summary) |  |  |
+| **[4.9.27](#documentation/wordpress-version/version-4-9-27)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-4-9-27) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 5.0**
 
@@ -23229,6 +23274,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[5.0.20](#documentation/wordpress-version/version-5-0-20)** | October 12, 2023 |  | [Changelog](#documentation/wordpress-version/version-5-0-20#summary) |  | 43764 |
 | **5.0.21** | January 30, 2024 |  | [Changelog](#documentation/wordpress-version/version-5-0-21) | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 43764 |
 | **[5.0.22](#documentation/wordpress-version/version-5-0-22)** | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-5-0-22#summary) |  |  |
+| **[5.0.23](#documentation/wordpress-version/version-5-0-23)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-5-0-23) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 5.1**
 
@@ -23254,6 +23300,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[5.1.17](#documentation/wordpress-version/version-5-1-17)** | October 12, 2023 |  | [Changelog](#documentation/wordpress-version/version-5-1-17#summary) |  | 44719 |
 | **5.1.18** | January 30, 2024 |  |  | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 44719 |
 | **[5.1.19](#documentation/wordpress-version/version-5-1-19)** | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-5-1-19#summary) |  | 44719 |
+| **[5.1.20](#documentation/wordpress-version/version-5-1-20)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-5-1-20) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 5.2**
 
@@ -23281,6 +23328,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[5.2.19](#documentation/wordpress-version/version-5-2-19)** | October 12, 2023 |  |  |  | 44719 |
 | **5.2.20** | January 30, 2024 |  |  | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 44719 |
 | **[5.2.21](#documentation/wordpress-version/version-5-2-21)** | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-5-2-21/#summary) |  |  |
+| **[5.2.22](#documentation/wordpress-version/version-5-2-22)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-5-2-22) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 5.3**
 
@@ -23305,6 +23353,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[5.3.16](#documentation/wordpress-version/version-5-3-16)** | October 12, 2023 |  |  |  | 45805 |
 | **5.3.17** | January 30, 2024 |  |  | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 45805 |
 | [**5.3.18**](#documentation/wordpress-version/version-5-3-18) | June 24, 2024 |  |  |  |  |
+| **[5.3.19](#documentation/wordpress-version/version-5-3-19)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-5-3-19) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 5.4**
 
@@ -23327,6 +23376,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[5.4.14](#documentation/wordpress-version/version-5-4-14)** | October 12, 2023 |  |  |  | 47018 |
 | **5.4.15** | January 30, 2024 |  |  | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 47018 |
 | **[5.4.16](#documentation/wordpress-version/version-5-4-16)** | June 24, 2024 |  |  |  | 47018 |
+| **[5.4.17](#documentation/wordpress-version/version-5-4-17)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-5-4-17) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 5.5**
 
@@ -23348,6 +23398,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[5.5.13](#documentation/wordpress-version/version-5-5-13)** | October 12, 2023 |  |  |  | 48748 |
 | **5.5.14** | January 30, 2024 |  |  | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 48748 |
 | **[5.5.15](#documentation/wordpress-version/version-5-5-15)** | June 24, 2024 |  |  |  |  |
+| **[5.5.16](#documentation/wordpress-version/version-5-5-16)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-5-5-16) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 5.6**
 
@@ -23368,6 +23419,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[5.6.12](#documentation/wordpress-version/version-5-6-12)** | October 12, 2023 |  |  |  | 49752 |
 | **5.6.13** | January 30, 2024 |  |  | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 49752 |
 | **[5.6.14](#documentation/wordpress-version/version-5-6-14)** | June 24, 2024 |  |  |  |  |
+| **[5.6.15](#documentation/wordpress-version/version-5-6-15)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-5-6-15) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 5.7**
 
@@ -23386,6 +23438,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[5.7.10](#documentation/wordpress-version/version-5-7-10)** | October 12, 2023 |  |  |  | 49752 |
 | **5.7.11** | January 30, 2024 |  |  | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 49752 |
 | [**5.7.12**](#documentation/wordpress-version/version-5-7-12) | June 24, 2024 |  |  |  |  |
+| **[5.7.13](#documentation/wordpress-version/version-5-7-13)** | August 5, 2025 |  | C[hangelog](#documentation/wordpress-version/version-5-7-13) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 5.8**
 
@@ -23402,6 +23455,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[5.8.8](#documentation/wordpress-version/version-5-8-8)** | October 12, 2023 |  |  |  | 49752 |
 | **5.8.9** | January 30, 2024 |  |  | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 49752 |
 | **[5.8.10](#documentation/wordpress-version/version-5-8-10)** | June 24, 2024 |  |  |  |  |
+| **[5.8.11](#documentation/wordpress-version/version-5-8-11)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-5-8-11) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 5.9**
 
@@ -23418,6 +23472,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[5.9.8](#documentation/wordpress-version/version-5-9-8)** | October 12, 2023 |  |  |  | 51917 |
 | **5.9.9** | January 30, 2024 |  |  | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 51917 |
 | **[5.9.10](#documentation/wordpress-version/version-5-9-10)** | June 24, 2024 |  |  |  |  |
+| **[5.9.11](#documentation/wordpress-version/version-5-9-11)** | August 2025 |  | [Changelog](#documentation/wordpress-version/version-5-9-11) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 6.0**
 
@@ -23433,6 +23488,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[6.0.7](#documentation/wordpress-version/version-6-0-7)** | January 30, 2024 |  |  | No Blog | 53496 |
 | **6.0.8** | April 10, 2024 |  |  | No Blog |  |
 | **[6.0.9](#documentation/wordpress-version/version-6-0-9)** | June 24, 2024 |  |  | No Blog |  |
+| **[6.0.10](#documentation/wordpress-version/version-6-0-10)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-6-0-10) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 6.1**
 
@@ -23446,6 +23502,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[6.1.5](#documentation/wordpress-version/version-6-1-5)** | January 30, 2024 |  |  | No blog | 53496 |
 | **[6.1.6](#documentation/wordpress-version/version-6-1-6)** | April 9, 2024 |  |  | No blog |  |
 | **[6.1.7](#documentation/wordpress-version/version-6-1-7)** | June 24, 2024 |  |  | No blog |  |
+| **[6.1.8](#documentation/wordpress-version/version-6-1-8)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-6-1-8) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 6.2**
 
@@ -23458,6 +23515,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[6.2.4](#documentation/wordpress-version/version-6-2-4)** | January 30, 2024 |  |  | No blog | 53496 |
 | **[6.2.5](#documentation/wordpress-version/version-6-2-5)** | April 9, 2024 |  |  | No blog |  |
 | [**6.2.6**](#documentation/wordpress-version/version-6-2-6) | June 24, 2024 |  |  | No blog |  |
+| **[6.2.7](#documentation/wordpress-version/version-6-2-7)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-6-2-7) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 6.3**
 
@@ -23466,9 +23524,10 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[6.3](#documentation/wordpress-version/version-6-3)** | August 8, 2023 | Lionel | [Changelog](#documentation/wordpress-version/version-6-3#changelog) | [Blog](#news/2023/08/lionel) | 55853 |
 | [**6.3.1**](#documentation/wordpress-version/version-6-3-1) | August 29, 2023 |  | [Changelog](#documentation/wordpress-version/version-6-3-1#changelog) | [Blog](#news/2023/08/wordpress-6-3-1-maintenance-release) | 55853 |
 | [**6.3.2**](#documentation/wordpress-version/version-6-3-2) | October 12, 2023 |  | [Changelog](#documentation/wordpress-version/version-6-3-2#changelog) | [Blog](#news/2023/10/wordpress-6-3-2-maintenance-and-security-release) | 55853 |
-| **[6.3.3](#documentation/wordpress-version/version-6-3-3)** | January 30, 2024 |  |  | No blog | 55853 |
-| [**6.3.4**](#documentation/wordpress-version/version-6-3-4) | April 9, 2024 |  |  | No blog |  |
-| **[6.3.5](#documentation/wordpress-version/version-6-3-5)** | June 24, 2024 |  |  | No blog |  |
+| **[6.3.3](#documentation/wordpress-version/version-6-3-3)** | January 30, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-3-3) | No blog | 55853 |
+| [**6.3.4**](#documentation/wordpress-version/version-6-3-4) | April 9, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-3-4) | No blog |  |
+| **[6.3.5](#documentation/wordpress-version/version-6-3-5)** | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-3-5) | No blog |  |
+| **[6.3.6](#documentation/wordpress-version/version-6-3-6)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-6-3-6) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 6.4**
 
@@ -23480,17 +23539,19 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | [**6.4.3**](#documentation/wordpress-version/version-6-4-3) | January 30, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-4-3#changelog) | [Blog](#news/2024/01/wordpress-6-4-3-maintenance-and-security-release) | 56657 |
 | [**6.4.4**](#documentation/wordpress-version/version-6-4-4) | April 9, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-4-4#changelog) | [Blog](#documentation/wordpress-version/version-6-4-4#maintenance-updates) | 56657 |
 | [**6.4.5**](#documentation/wordpress-version/version-6-4-5) | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-4-5#changelog) | [Blog](#documentation/wordpress-version/version-6-4-5) | 56657 |
+| **[6.4.6](#documentation/wordpress-version/version-6-4-6)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-6-4-6) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 6.5**
 
 | **Version** | **Release Date** | **Musician** | **Change Log** | **Announcement** | **DB Version** |
 |---|---|---|---|---|---|
 | **[6.5](#documentation/wordpress-version/version-6-5)** | April 2, 2024 | Regina | [Changelog](#documentation/wordpress-version/version-6-5#changelog) | [Blog](#news/2024/04/wordpress-6-5-regina) | 57155 |
-| [**6.5.1**](#documentation/wordpress-version/version-6-5-1) |  |  |  | [Blog](https://make.wordpress.org/core/2024/04/09/what-happened-to-wordpress-6-5-1/) |  |
+| [**6.5.1**](#documentation/wordpress-version/version-6-5-1) |  |  | [Changelog](#documentation/wordpress-version/version-6-5-1) | [Blog](https://make.wordpress.org/core/2024/04/09/what-happened-to-wordpress-6-5-1/) |  |
 | [**6.5.2**](#documentation/wordpress-version/version-6-5-2) | April 9, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-5-2#changelog) | [Blog](#news/2024/04/wordpress-6-5-2-maintenance-and-security-release) | 57155 |
 | [**6.5.3**](#documentation/wordpress-version/version-6-5-3) | May 7, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-5-3#changelog) | [Blog](#news/2024/05/wordpress-6-5-3-maintenance-release) | 57155 |
 | [**6.5.4**](#documentation/wordpress-version/version-6-5-4) | June 5, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-5-4) | [Blog](#news/2024/06/wordpress-6-5-4-maintenance-release) | 57155 |
 | **[6.5.5](#documentation/wordpress-version/version-6-5-5)** | June 24, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-5-5#changelog) | [Blog](#news/2024/06/wordpress-6-5-5) | 57155 |
+| **[6.5.6](#documentation/wordpress-version/version-6-5-6)** | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-6-5-6) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 6.6**
 
@@ -23499,6 +23560,7 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | **[6.6](#documentation/wordpress-version/version-6-6)** | July 16, 2024 | Dorsey | [Changelog](#documentation/wordpress-version/version-6-6/#changelog) | [Blog](#news/2024/07/wordpress-6-6-dorsey) | 57155 |
 | **[6.6.1](#documentation/wordpress-version/version-6-6-1)** | July 23, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-6-1/#change-log) | [Blog](#news/2024/07/wordpress-6-6-1-maintenance-release) | 57155 |
 | **[6.6.2](#documentation/wordpress-version/version-6-6-2)** | September 10, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-6-2/#change-log) | [Blog](#news/2024/09/wordpress-6-6-2-maintenance-release) | 57155 |
+| [**6.6.3**](#documentation/wordpress-version/version-6-6-3/) | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-6-6-3/) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 6.7**
 
@@ -23507,13 +23569,15 @@ The following are the various versions of WordPress, listed [chronologically](#d
 | [**6.7**](#documentation/wordpress-version/version-6-7) | November 12, 2024 | Rollins | [Changelog](#documentation/wordpress-version/version-6-7/#changelog) | [Blog](#news/2024/11/rollins) | 58975 |
 | **[6.7.1](#documentation/wordpress-version/version-6-7-1/)** | November 21, 2024 |  | [Changelog](#documentation/wordpress-version/version-6-7-1/#change-log) | [Blog](#news) | 58975 |
 | **[6.7.2](#documentation/wordpress-version/version-6-7-2/)** | February 11, 2025 |  | [Changelog](#documentation/wordpress-version/version-6-7-2/#change-log) | [Blog](#news/2025/02/wordpress-6-7-2-maintenance-release) | 58975 |
+| [**6.7.3**](#documentation/wordpress-version/version-6-7-3/) | August 5, 2025 |  | [Changelog](#documentation/wordpress-version/version-6-7-3/) | [Blog](#news/2025/08/maintenance-releases-for-wordpress-branches-4-7-to-6-7) |  |
 
 **Version 6.8**
 
 | **Version** | **Release Date** | **Musician** | **Change Log** | **Announcement** | **DB Version** |
 |---|---|---|---|---|---|
 | **[6.8](#download/releases/6-8)** | April 15, 2025 | Cecil | [Changelog](#documentation) | [Blog](#news/2025/04/cecil) | 58975 |
-| 6.8.1 | April 30, 2025 |  | [Changelog](#documentation/wordpress-version/version-6-8-1) | [Blog](#news/2025/04/wordpress-6-8-1-maintenance-release) | 58975 |
+| **[6.8.1](#documentation/wordpress-version/version-6-8-1)** | April 30, 2025 |  | [Changelog](#documentation/wordpress-version/version-6-8-1) | [Blog](#news/2025/04/wordpress-6-8-1-maintenance-release) | 58975 |
+| [**6.8.2**](#documentation/wordpress-version/version-6-8-2) | July 15, 2025 |  | [Changelog](#documentation/wordpress-version/version-6-8-2) | [Blog](#news/2025/07/wordpress-6-8-2-maintenance-release) |  |
 
 ## Planned Versions
 
@@ -23521,7 +23585,7 @@ There are no plans for major releases during 2025. Follow changes in progress fo
 
 | **Version** | **Planned Release Date** | **Remarks** |
 |---|---|---|
-| **6.9** | Tentatively 2026 | [Follow up for updates](https://make.wordpress.org/core/2025/04/04/dotorg-core-committers-check-in/) |
+| **6.9** | December 5, 2025 | [Roadmap](https://make.wordpress.org/core/2025/07/28/roadmap-to-6-9/) |
 
 ## See Also
 
@@ -23531,6 +23595,8 @@ There are no plans for major releases during 2025. Follow changes in progress fo
 
 Changelog:
 
+- 2025-08-05 Added maintenance releases for 6.7.3, 6.6.3, 6.5.6, 6.4.6, 6.3.6, 6.2.7, 6.1.8, 6.0.10, 5.9.11, 5.8.11, 5.7.13, 5.6.15, 5.5.16, 5.4.17, 5.3.19, 5.2.22, 5.1.20, 5.0.23, 4.9.27, 4.8.26, 4.7.30
+- 2025-07-15 Added 6.8.2 maintenance release and final release for versions 4.1 to 4.6
 - 2025-04-30 Added WP 6.8.1 maintenance release.
 - 2025-04-15 Added 6.8 “Cecil”
 - 2024-11-21 Added WP 6.7.1 maintenance release.
@@ -23677,7 +23743,7 @@ Note: Editor’s visual mode may add the domain information back into the link. 
 
 You can easily disable pingbacks on individual posts via the Discussion metabox on your Add New or Edit Post page:
 
-![](https://wordpress.org/documentation/files/2021/06/pingbacks-disabled.jpg)## Trackbacks
+![Posts > Add New > Discussion](https://wordpress.org/documentation/files/2021/06/pingbacks-disabled.jpg)## Trackbacks
 
 Trackbacks are a way to notify legacy blog systems that you’ve linked to them. If you link to a WordPress blog they’ll be notified automatically using pingbacks, no other action necessary. Think of trackbacks as the equivalent of acknowledgements and references at the end of an academic paper or chapter in a text book. To send a trackback, add the trackback URI from the other blog post to the Send Trackbacks module in your blog post before you publish it. A trackback URI from a WordPress blog will end with /trackback/.
 
@@ -24263,7 +24329,7 @@ After adding the *Query Loop* block you will see two options:
 
 If you select the *Choose* option, you will have various pattern options. Just select one that you like, and it will be added. Each *Query Loop block* is made up of various nested blocks, like the *Post Title block* and [*Pagination block*](#documentation/article/pagination-block), so depending on which pattern you choose, nested blocks can differ.
 
-![Choosing a query loop block pattern](https://wordpress.org/documentation/files/2023/03/query-loop-pattern.png)### How to start blank
+### How to start blank
 
 If you select the *Start blank* option, you’ll see four variations you can choose from. Select the one you want to use.
 
@@ -24380,6 +24446,8 @@ WordPress contains different types of content, and they are divided into collect
 - Oldest to Newest
 - Alphabetical A to Z
 - Alphabetical Z to A
+- Ascending by order
+- Descending by order
 
 ### Sticky posts
 
@@ -24387,6 +24455,7 @@ This option allows you to choose between three options:
 
 - Include (default) – Displays sticky posts.
 - Exclude – Removes sticky posts.
+- Ignore – Ignore sticky posts.
 - Only – Shows only sticky posts.
 
 ### Filters
@@ -24416,6 +24485,9 @@ The advanced tab lets you add a CSS class to your block, allowing you to write c
 
 ## Changelog
 
+- Updated 2025-07-05 
+    - Updated Order by to include new Ascending and Descending order  
+        Updated Sticky posts to include new Ignore option
 - Updated 2023-03-26 
     - Revised formatting for the whole article
     - Added videos/screenshots where applicable
@@ -24878,13 +24950,36 @@ This section allows you to manage the various typography settings for the differ
 
 - Click **Typography** to open the Typography panel. Select the element you want to customize and it will open up the **Typography** panel for that element.
 
-![Typography settings in the Styles panel.](https://wordpress.org/documentation/files/2022/10/Screen-Shot-2022-10-13-at-12.34.54-PM.png)- You can change the typography settings including font type, font size, appearance, and line height. As you pick your choices you can see a preview of how it looks.
+Preset typography options are now available in the Styles interface. These presets, defined by the theme, provide a curated set of font sizes, line heights, and other typographic values that help maintain consistency across your site.
 
-![Typography settings for the Link element with a preview of your choices](https://wordpress.org/documentation/files/2022/01/Screen-Shot-2022-10-13-at-12.32.01-PM-548x1024.png)- You can set the font size from `S`, `M,` `L`, `XL` and `XXL`. You can also set custom values in px, em and rem.
+![Typography customization settings](https://wordpress.org/documentation/files/2023/03/typography-1-6.8-392x1024.png)- You can change the typography settings including font type, font size, appearance, line height and text decoration. As you pick your choices you can see a preview of how it looks.
 
-Video showing how to change the font size- You can change the typography settings for heading elements from `H1` through `H6`.
+![Interactive previews of typography settings](https://wordpress.org/documentation/files/2023/03/typography-2-6.8.png)- As you attempt to change the font type, each option in the dropdown shows a preview of the font.
 
-Video showing how to use the Typography settings in Styles ### Colors 
+![List of fonts with live previews](https://wordpress.org/documentation/files/2023/03/typography-3-6.8.png)- You can choose a font size from the preset options: S, M, L, XL, and XXL, or define a custom size using units like px, em, or rem.
+
+Video showing how to change the font size- You can customize typography settings for heading elements from H1 to H6, including:
+
+1. **Font Family**: Choose from a range of available fonts, each with a live preview.
+2. **Font Size**: Select from preset sizes (S, M, L, XL, XXL) or define custom values and units.
+3. **Font Style**: Choose from Default (inherited from general typography settings), Regular, Bold, Italic, or Bold Italic.
+4. **Line Height &amp; Letter Spacing**: Adjust both with customizable units.
+5. **Text Decoration**: Apply styles such as None, Underline, or Strikethrough.
+6. **Text Orientation &amp; Letter Case**: Modify text direction and transform casing as needed.
+7. 
+8. You can change the typography settings for heading elements from `H1` through `H6`.
+
+Video showing how to use the Typography settings in Styles #### Font size presets
+
+Font size presets provide a set of predefined size options that can be applied consistently across blocks and elements. These presets are defined by the theme and appear in the typography controls as labeled choices such as Small, Medium, Large, Extra Large and Extra Extra Large, making it easier for users to select appropriate font sizes without manually entering values.
+
+![Define and manage the predefined font size options available throughout the site.](https://wordpress.org/documentation/files/2023/03/style-font-size-preset-1-6.8.png)You can modify a font size preset by clicking on the one you want to change. In this example, we’ll adjust the preset named Small. You’ll see a live preview along with options to set a custom size using various units such as px, em, rem, vw, and vh. You can use the slider to adjust the value or enter a specific size manually.
+
+![Managing or customising the font size preset](https://wordpress.org/documentation/files/2023/03/style-font-size-preset-2-6.8.png)Note: The standard size input will be disabled if you enable **Custom fluid values**.
+
+When using custom fluid values, you can define both a minimum and maximum size, with the same range of supported units as the standard size option.
+
+![Customising fluid values of font preset](https://wordpress.org/documentation/files/2023/03/style-font-size-preset-3-6.8.png)### Colors 
 
 This section allows you to manage the color palettes and the default color of different global elements on the site. This includes your site’s background color, and the colors for texts, links, headings, and buttons.
 
@@ -24919,7 +25014,11 @@ You can also create a custom palette from the **Custom** section in the **Palett
 - Click **Done** once you are done adding custom colors.
 - Click the three vertical dots icon on the upper right corner and select **Remove all colors** to remove the colors from the palette.
 
-Video showing how to add custom colors to the palette#### Customize the theme gradients
+Video showing how to add custom colors to the palette#### Preset Color Palette
+
+Starting with WordPress 6.7, the **Color** interface introduces a new preset color palette that provides a curated set of default colors designed to complement your theme’s design. These presets serve as a consistent foundation for applying color across blocks and global elements, helping to maintain visual harmony and accessibility throughout your site.
+
+![Preset color palette option](https://wordpress.org/documentation/files/2023/03/styles-color-palette-preset-6.9.png)#### Customize the theme gradients
 
 The **Palette** panel opens to the **Solid** tab by default. You can click the **Gradient** tab to add gradients to your theme. From the **Palette** panel, you can edit the **Default** gradients that came with the theme or add **Custom** gradients.
 
@@ -24998,7 +25097,11 @@ Similar to padding, WordPress comes with preset spacing guidelines that your the
 - Clicking the black slider icon in the right corner (next to the link icon) will show the block spacing preset slider.
 - To reset the values for ******Block spacing******, click the three vertical dots icon and select ******Block spacing,****** and the changes you made are reverted.
 
-Video showing how to use block spacing in Styles### Blocks
+Video showing how to use block spacing in Styles### Background
+
+The Background section in Styles allows you to upload and apply a background image to your site.
+
+Add background image to the site### Blocks
 
 In the **Blocks** panel, you will see a list of all the blocks that can be customized for the whole site. You can also search for a block by its name in the search box. Click on a block from the list to see the available options for that block.
 
@@ -25175,6 +25278,14 @@ To revert back to the theme styles you had, before making changes, click on the 
 
 ![Reset to defaults in the Styles panel](https://wordpress.org/documentation/files/2022/10/Screen-Shot-2022-10-13-at-12.57.11-PM.png)## **Changelog:**
 
+- Updated 2025-07-20 
+    - Updated to include color palette presets and typesets
+    - Updated font size presets and how to modify or customise them
+    - Updated to include background support
+- Updated 2025-06-28 
+    - Updated content for 6.8 adding font-family preview  
+        Updated content for typography settings for heading elements  
+        Updated screenshots including showcasing the font-family preview
 - Updated 2024-09-05 
     - Added Color and typography style variations section.
 - Updated 2023-03-27 
@@ -26272,113 +26383,7 @@ Source: https://wordpress.org/documentation/article/post-title-block/
 
 [Go to the List of Blocks](#documentation/article/blocks)
 
-Use the **Post Title** block to display the title of a post or page. This block is primarily nested inside a [query loop](#documentation/article/query-loop-block) block and helps to customize the appearance of the query loop.
-
-To add a **Post Title** block, click the **Block Inserter** icon when editing the page template. Search for the Post Title **block**. Click on it to add the block to your page template.
-
-Video showing how to add Post Title blockYou can also type /post-title and hit enter in a new paragraph block to add the **Post Title** block quickly.
-
-![Slash command triggering the block inserter proposing the title block](https://wordpress.org/documentation/files/2022/12/197788232-5222196b-b0f2-4805-b9a5-7300ac72088f.png)How to add Post Title block quickly[Detailed instructions on adding blocks](#documentation/article/adding-a-new-block)
-
-## Block Toolbar
-
-To view the block toolbar, click on the block and the toolbar will be displayed.
-
-Every block comes with unique toolbar icons. These block-specific controls allow you to manipulate the block right in the editor.
-
-The Post Title block shows seven buttons in the block toolbar:
-
-- Transform to
-- Drag icon
-- Move arrows
-- Change alignment
-- Change heading level
-- Change text alignment
-- More options
-
-![Block Toolbar for the post title block](https://wordpress.org/documentation/files/2022/12/197788365-ecc5a53a-3985-4b8e-8568-5bb1b2d3dede.png)Post Title block toolbar### Transform to
-
-![Block Toolbar for the post title block with an emphasis on the "transform to" option with everything a post title can be transformed to.](https://wordpress.org/documentation/files/2022/12/197788726-1c21a0a0-92b6-4aa7-ab22-94cc668d568a.png)Transform options in Post Title blockClick on the **Transform** button to convert the **Post Title** block into a Group block or **Columns** block.
-
-### Drag icon
-
-![Block Toolbar for the post title block with an emphasis on the "drag handle" to drag the block to another position](https://wordpress.org/documentation/files/2022/12/197789000-9032d0ff-e29e-4d14-bfef-ef4c09ecf57e.png)Drag icon in the Post Title blockTo drag and drop the block to a new location on the page template, click and hold the rectangle of dots, then drag it to the new location. The blue separator line indicates where the block will be placed. Release the left mouse button when you find the new location to place the block.
-
-### Move arrows
-
-![Block Toolbar for the post title block with an emphasis on the "move arrows" to move the block](https://wordpress.org/documentation/files/2022/12/197789358-7b786300-eb14-4b31-bea2-6a9913f0e677.png)Move arrows in the Post Title blockThe up and down arrow icons can be used to move the block up and down on the page.
-
-[Get more information about moving a block within the editor.](#documentation/article/moving-blocks)
-
-### Change alignment
-
-![Block Toolbar for the post title block with an emphasis on the "change block alignment" button](https://wordpress.org/documentation/files/2022/12/197789608-c184d751-33d7-458b-af07-8e3c068e6625.png)Change alignment options in the Post Title block- **None –** Leaves the block the current size.
-- **Wide width –** Increase the width of the block beyond the content size.
-- **Full width –** Extend the block to cover the full width of the screen.
-
-### Change heading level
-
-![Block Toolbar for the post title block with an emphasis on the "change heading level" button](https://wordpress.org/documentation/files/2022/12/197789888-94cf061b-bd58-4c39-8ec0-831af1487876.png)You can choose the heading level for the post title from **H1**–**H6**.
-
-### Change text alignment
-
-![Block Toolbar for the post title block with an emphasis on the "change text alignment" button](https://wordpress.org/documentation/files/2022/12/197790114-2f67aa11-4fe9-4b53-85d9-5159aec73d2d.png)Click the **Change alignment** button in the Block toolbar to display the alignment drop-down. You can align the block text to the left, make it center-aligned or align it to the right.
-
-### More options
-
-The [More Options menu](#documentation/article/more-options) represented by **three vertical dots on the far right of the toolbar** gives you more features such as the ability to duplicate, remove, or edit your block as HTML.
-
-![Examples of the location of the "More Options" menu in a Paragraph block. ](https://wordpress.org/documentation/files/2023/08/more-options-generic-6-3.png)Example of the location of the “More Options” menu in a Paragraph block.[Read about these and other settings.](#documentation/article/more-options/)
-
-## Block Settings
-
-In addition to the block toolbar, every block has specific options in the editor sidebar.
-
-If you do not see the sidebar, click the ‘**cog**’ icon next to the **Save** or **Publish** button.
-
-![How to turn on the Block Settings sidebar](https://lh3.googleusercontent.com/sJnNIi0oAkRB_cJbK_PkAstYXxrqi9TCnRgf2NyuAFY3vWA0RNv5vVMm9vpnmfwgYi-O12JGAhOQAdRKKwpklxIoKlDRPaBSu0jYwP6mbNM2KEaQ2vczrabemigtqsPYW8Jgj5zZ)How to turn on the Block Settings sidebar![Block Settings Sidebar with an emphasis on the "settings" button in the Editor Top Bar](https://wordpress.org/documentation/files/2022/12/198240157-92e67cde-cf4b-4631-b6d9-cccf0dc8e698-278x1024.png)### Link
-
-Turn on **Make title a link** button in the Block Settings to link the post title to the URL of the post. This enables the website visitor to go to the post by clicking on the Post Title. Turn on **Open in new tab** to make sure that the post opens in a separate browser tab. **Link Rel** controls the post link’s rel attribute (the relationship between the current document and the linked document), for adding nofollow amongst other things.
-
-![Link settings in the Post Title block](https://wordpress.org/documentation/files/2022/12/Screenshot-2022-12-12-at-2.42.11-PM.png)Link settings in the Post Title block### Color
-
-Text, link and background colors can be set on a per-block basis, allowing you to call attention to important content. Pick a color from the suggestions, or add a custom color using the color picker or by adding a color code.
-
-![Color settings in the Post Title block](https://wordpress.org/documentation/files/2022/12/198240666-1d61bfcc-fb62-4e56-813c-0afbf0f6af1c.png)Color settings in the Post Title block[See this guide for more information about changing colors](#documentation/article/colors-settings-overview)
-
-### Typography
-
-Typography settings allow you to change a block’s font size, appearance, line height, letter casing, and spacing.
-
-![Typography Options panel in the Block Settings Sidebar with an emphasis on the "more (3 dots)" button](https://wordpress.org/documentation/files/2022/12/198242122-01046b85-2703-4362-805c-f27fe943827c.png)Typography settings in the Post Title block[Get more details about changing typography settings.](#documentation/article/typography-settings-overview)
-
-### Dimension
-
-Dimension controls are used to control how groups of blocks are placed alongside one another, by changing the values for padding, and margin.
-
-![Dimension setting in the Post Title Block](https://wordpress.org/documentation/files/2022/12/Screenshot-2022-12-12-at-2.49.44-PM.png)Dimension setting in the Post Title Block[](#documentation/article/dimension-controls-overview)[Learn more about dimension controls.](#documentation/article/dimension-controls-overview)
-
-### Advanced
-
-The Advanced tab lets you add CSS class(es) to your block. This will allow you to write custom CSS and styles for the block.
-
-![Advanced tab with additional CSS](https://wordpress.org/documentation/files/2022/11/Screenshot-2022-11-11-at-11.26.17-AM-1.png)Advanced option in the selected Block### Hiding Post Titles
-
-When you are using a theme that supports the Site Editor, you can hide the post title by removing this Post Title block.
-
-1. Launch Site Editor from Appearance &gt; Editor in Administration Screen and select template that you want to remove the post title.
-2. Select Post Title Block
-3. Click More options (3 dot icon) from the Block Toolbar.
-4. Click Remove Post Title.
-5. Click Save at the top right.
-
-## Changelog
-
-- 2023-07-25 
-    - Fix broken images URLs
-- 2022-12-12 
-    - Updated screenshots for 6.1
-- Created 2022-03-17
+Post Title block was renamed to [Title block](#documentation/article/title-block).
 
 ---
 
@@ -29089,9 +29094,9 @@ Every supported block comes with different typography settings.
 
 ### Font family 
 
-This option allows you to change the font family for your text. The list of fonts available in the drop-down menu depends on your theme.
+This option allows you to change the font family for your text, with a preview of the fonts available in the drop-down menu. The list of available fonts depends on your theme.
 
-![How to change font family on a block](https://wordpress.org/documentation/files/2022/10/font-family-1.gif)### Font size 
+![Available options for font-family](https://wordpress.org/documentation/files/2022/11/typography-4-6.8.png)![Previews of available fonts based on your theme](https://wordpress.org/documentation/files/2022/11/typography-5-6.8.png)![How to change font family on a block](https://wordpress.org/documentation/files/2022/10/font-family-1.gif)### Font size 
 
 Font size allows you to adjust the size of your text. You can choose from preset sizes like (**S**)small, (**M**)medium, (**L**)large and (**XL**)extra large. You can also set a custom value by clicking the slider icon directly above the default selections.
 
@@ -29208,6 +29213,9 @@ To see the power of these settings in action, here’s an example of using them 
 
 ## Changelog 
 
+- Updated 2025-06-28 
+    - Updated font-family with preview feature  
+        Updated screenshot and add new showcasing the font-family preview
 - Updated 2023-04-03 
     - Updated list of blocks that support typography settings
     - Updated screenshots
@@ -29308,31 +29316,31 @@ If you add this block in other templates, a page, or a post, the block won’t a
 
 To add one, open the search template in the [Site Editor](#documentation/article/site-editor) by clicking on the site icon (or the W icon, if no site icon is set for the site) and select **Templates**. Then choose the **Search** template from the list (If you don’t find the **Search** template, click **Add New** button and add the **Search** template to your theme). In the **Search** template, click the **Block Inserter** (+) icon and add the **Search Results Title** block to the template.
 
-![Adding search results title block](https://lh4.googleusercontent.com/cWxGvFnMvZ7KEK5kVQkHo5BtIal9pVTe7kd5CISyCoKuVhuILLdcj0PKIs8ebFM3mLNQYdNI35oTdU8UClAtIBoRUjiDHExWaRvMdpcrf7x59j91suvJd1zAsqJPlKfmKzNIek24MQRNduDFkSJNdWJZo7SCDbAhxNRJ27ePJ0y02aYWiXRBJ9N-igQhpQ)Refer to this support article for [detailed instructions on adding blocks](#documentation/article/adding-a-new-block).
+![Searching the "Search Results Title" in the block](https://wordpress.org/documentation/files/2022/11/search-result-title-1-6.8.png)Refer to this support article for [detailed instructions on adding blocks](#documentation/article/adding-a-new-block).
 
 Now, if you perform a search on your website, you’ll see the search results title on the search page.
 
-![Search page with the search results title block](https://lh4.googleusercontent.com/lpF0MpyFLWbqo6JxJuwuYUx3huJN7PCl4hGUPfytgpEWHEn_yoD8pFNsMI5UbPS9OyVxTFapJIiUrxEBfox_lct9NqxZL2FzeZFjQzZIhyoKDB245ojkgjj0TvWIBCYBUvs75JwjG0U3Pqr86bksdgEBdD92MoZDv4ou_bWxAiolhdaRth-FgVFUb4s0FQ)## Block toolbar
+![Search page results when using "Search Results Title" block](https://wordpress.org/documentation/files/2022/11/search-result-title-2-6.8.png)## Block toolbar
 
 Each block has its own toolbar, which contains unique controls that let you customize or configure the block. The Search Results Title block has the following options:
 
 **Transform to**
 
-![Transform options in the search results title block](https://lh6.googleusercontent.com/mjbLgVj9nUxZ6mA_wZgs2bvza3bZqFOLcTR_kYkGLJggbsV1lEc4WsqQKWnN32v0No2I_x5HdTRK4NNl_8ZJu4uZhbJAnNc4CvWoKPeOzvgr1FFxFkkfKeIzkvJC0shWFismirUKW1nQ5NF-rxG5pJ-muBxnJGcPTmi7opO_S4f0nxrZ_71NaQRu75umXw)If you click the **Search Results Title** icon on the toolbar, you’ll open the **Transform to** options to convert the block into **Columns** and **Group** blocks.
+![Transform options in the search results title block](https://wordpress.org/documentation/files/2022/11/search-result-title-3-6.8.png)If you click the **Search Results Title** icon on the toolbar, you’ll open the **Transform to** options to convert the block into **Columns** and **Group** blocks.
 
 **Block moving tools**
 
 The **Drag** button lets you drag and drop the Search Results Title block and reposition it anywhere on the editor, while the **Move up** and **Move down** buttons let you move the Search Results Title block up or down on the editor.
 
-![Block moving tools in the search results title block](https://lh6.googleusercontent.com/-m2fJ4gHo5zV86bIiYYMBIrx8otJt50-3S0EPbnWy4_oqHDcJ6PjbfbNJSj56GNR4qkBy9bOPWxe3hW5bqz5g7knyFjSNImernZPzl5aZ_2VpuUL5W8wH8Wj9HpkzYuOc6T4IiKPQi0OeYU4Nf_dtzsn_BZxddOb9-PcnbSuwEq_PhMPHYEoO_r5S40yRw)**Heading level**
+![Block moving tools in the search results title block](https://wordpress.org/documentation/files/2022/11/search-result-title-4-6.8.png)**Heading level**
 
 The **Change Heading Level** button lets you open a drop-down menu where you can select the heading level for the search results title. You can choose from H1 to H6 heading levels.
 
-![Change heading in the search results title block](https://lh5.googleusercontent.com/jy-K7gEEAXjzj2nXV5Dbq8FiFMcema1Y5TmuEaW8gwFNmPa5NYOZNawcJOAilxAm3lTCmpXCzbEyhN9dDnObcco2bSj1gcpsvkP60pRj7Zq0E0LwLLUW6CnTRfgoglfR2MD7jmF2uCcP-m6ptkZD0UfhxlSjZ5Qkd6-f2Cj--rnuS9wZ0jFJhhdVsj7OXg)**Text alignment**
+![Change heading in the search results title block](https://wordpress.org/documentation/files/2022/11/search-result-title-5-6.8.png)**Text alignment**
 
 Text alignment options let you choose to align the title left, center, or right.
 
-![Text alignment in the search results title block](https://lh5.googleusercontent.com/kD1KaQTInpzsAHOGlaZ2OTVw4942g11OHGc6AOvPFnzRG38SrYeNOE4z2F0I00gR2uwITOe-hrYOG99OYswLMv9c0vblNQhE2IPfy8BR19hn_b-oUBVpJfeBi5YIVM1u6xtanXo5JdKmI4ZBDOL3f6o8WZOwfdRkMKwEuMgYhgK5ymJi_DJdNEfCLMUrjA)**More options**
+![Text alignment in the search results title block](https://wordpress.org/documentation/files/2022/11/search-result-title-6-6.8.png)**More options**
 
 ![More options in the search results title block](https://wordpress.org/documentation/files/2023/07/more-options-pattern-reusable-block-1024x926.png)Click on the **Options** button to show more block options. A drop-down menu will appear, and here are the actions you can find:
 
@@ -29357,30 +29365,32 @@ Every block has specific options in the block settings panel. To open it, select
 
 The **Show search term in title** option lets you add the search query in the title. If disabled, the Search Results Title block only shows the “Search Results” text.
 
-![Settings in the search results title block](https://lh5.googleusercontent.com/Q3O5kmuSfYOfjbATyH29uBAxCV--b_60TxWTWnxhCj5Tpd0fUsazTt4PygUtRxSWcGO_vXFo_TkOhStYRuy7LkyT1cRbOtbZqhnjEsHe3NaBS_NyfpkM7CN9_KhsWgtPtMbrZOabcwakX2oLb7WwE4o6SoUwdqB96KwoJ1WFiN3jvsASGURm_9duXZBXFA)**Color**
+![Settings in the search results title block](https://wordpress.org/documentation/files/2022/11/search-result-title-7-6.8.png)**Color**
 
 The **Search Results Title block** provides Color settings options to change the text and background.
 
 For details refer to this support article: [Color settings overview](#documentation/article/colors-settings-overview)
 
-**Typography**
+![Color settings panel with options for text and background color](https://wordpress.org/documentation/files/2022/11/search-result-title-8-6.8.png)**Typography**
 
 The ****Search Results Title block**** provides typography settings to change the font family, appearance, line height, letter spacing, decoration, letter case, and font size.
 
 For details refer to this support article: [Typography settings overview](#documentation/article/typography-settings-overview)
 
-**Dimensions**
+![Typography controls including font familt, size, appearance, line height, letter spacing, decoration and letter case](https://wordpress.org/documentation/files/2022/11/search-result-title-9-6.8.png)**Dimensions**
 
 The ****Search Results Title block**** provides dimension settings options to add padding and margin.
 
 For details refer to this support article: [Dimension settings overview](#documentation/article/dimension-controls-overview)
 
-**Advanced**
+![Responsive dimension settings](https://wordpress.org/documentation/files/2022/11/search-result-title-10-6.8.png)**Advanced**
 
 The Advanced section lets you add CSS classes to use a custom style for the Search Results Title block.
 
-![Advanced section in the Search Results Title block ](https://lh5.googleusercontent.com/EuXCtFMKhFGb6cSdA--7iKQiyWju9cQQ-8ejZjOQh1EcB7cdEMepBvesa-C_0b-eFvtnme2JC0kj2FtRxKq4YDvpZO8BGUKpPVvFdj47hMLX746GZ-E_3OBsg_KWKEfGG7oIdHZJWJASpIy9FfbdosLzxAYF7E7MGAFrzQRY3dignyvBuvISUDN8QsZhIg)## Changelog
+![Advanced section in the Search Results Title block ](https://wordpress.org/documentation/files/2022/11/search-result-title-11-6.8.png)## Changelog
 
+- Updated 2025-06-28 
+    - Added screenshots
 - Created 2022-11-17
 
 ---
@@ -31742,7 +31752,7 @@ The **Details block** displays a text summary and an arrow button: When you clic
 
 This block provides a way to show or hide content on your site. This can be useful on faq pages, showing /hiding detailed event information etc.
 
-The **Summary** is customizable by selecting the “Write summary…” placeholder text and adding your own text.
+The **Summary** is customizable by selecting the “Write summary…” placeholder text and adding your own text. By default, the block uses the summary content as its label, similar to how the Heading block works.
 
 The additional content are blocks that you place inside the Details block that are hidden until you click on the summary text or the button. Because the content is hidden until you open the block, it is referred to as “hidden content”.
 
@@ -31801,9 +31811,21 @@ Enabling this option keeps the block open and the hidden content will be disapla
 
 ### Advanced
 
-The Advanced tab lets you add CSS class(es) to your block. This will allow you to write custom CSS and styles for the block.
+![Advanced tab with HTML anchor, additional CSS and name attribute](https://wordpress.org/documentation/files/2023/08/details-advanced-6.8.png)#### HTML anchor
 
-![Advanced tab with additional CSS](https://wordpress.org/documentation/files/2022/11/Screenshot-2022-11-11-at-11.26.17-AM-1.png)Advanced option in the selected Block## Styles
+This settings let you make a unique anchor text for the Group block and link it to another web page. For more detail, refer to [Page Jumps](#documentation/article/page-jumps).
+
+#### Additional CSS class(es)
+
+It enables you to write custom CSS class(es) to the Group block, so you can style the block as you see fit.
+
+#### Name attribute
+
+This attribute gives the name of the group of related details elements that the element is a member of. Opening one member of this group causes other members of the group to close. If the attribute is specified, its value must not be the empty string.
+
+In below example, Summay1 and Summary2 have the same name value, and Summary3 has another one. Both Summary1 and Summary2 are synched, but Summary3 is not.
+
+## Styles
 
 ![The styles tab in the Details block settings sidebar.](https://wordpress.org/documentation/files/2023/07/63-details-sidebar-styles.png)### Color
 
@@ -31831,6 +31853,8 @@ For details refer to this support article: [Border settings overview](#documenta
 
 ## Changelog
 
+- 2024-07-05 
+    - Added name attribute in advanced settings for 6.8
 - 2024-06-13 Updated video to 6.5 version
 - 2023-12-05 Headings case resolved
 - Created 2023-08-08
@@ -34728,6 +34752,12 @@ Initial release.
 
 Source: https://wordpress.org/documentation/article/twenty-twelve-changelog/
 
+## Version 4.6
+
+Released July 15, 2025, with [WordPress 6.8.2](#documentation/wordpress-version/version-6-8-2).
+
+- Fix alignment and styling of `figcaption` elements in the block editor. [\#63073](https://core.trac.wordpress.org/ticket/63073)
+
 ## Version 4.5
 
 Released: April 15, 2025 with [WordPress 6.8](#documentation/wordpress-version/version-6-8)
@@ -35255,15 +35285,19 @@ Source: https://wordpress.org/documentation/article/query-total-block/
 
 [Go to the list of Blocks](#documentation/article/blocks)
 
-Use the *Query Total block* to display the total number of results in a query.
+WordPress 6.8 is set to introduce a new block called Query Total, enhancing the flexibility of the Query Loop block.
 
-![The Query total block on the site editor](https://wordpress.org/documentation/files/2025/04/query-total-intro-1024x681.png)The Query total block on the site editor***Note:*** This block works only in the Query Loop block*.* This block should be used only in the [Site Editor](#documentation/article/site-editor) to edit the archive page templates.
+This new block displays the total number of results within a query, making it easier for users to showcase the number of posts retrieved by a query loop.
+
+The Query Total block is designed to be used inside a Query Loop block. It automatically counts the total number of posts retrieved by the query and displays the result in a user-friendly manner. For example, if a Query Loop retrieves 12 posts, the Query Total block will display:
+
+![The Query total block on the site editor](https://wordpress.org/documentation/files/2025/04/query-total-intro-1024x681.png)The Query total block on the site editor***Note:*** You can only insert the Query Total Block inside a Query Loop block.
 
 To add a *Query Total block*, click the **Block Inserter** icon when editing in the Query Loop.
 
 Click on it to add the block to your page template.You can also use the keyboard shortcut `/query-total` to quickly insert the *Query Total block*:
 
-![Adding the Query total block](https://wordpress.org/documentation/files/2025/04/query-total-inserter-1024x699.gif)Adding the Query total block[Detailed instructions on adding blocks](#documentation/article/adding-a-new-block)
+[Detailed instructions on adding blocks](#documentation/article/adding-a-new-block)
 
 ## Block toolbar
 
@@ -35348,7 +35382,154 @@ The Advanced tab lets you add CSS class(es) to your block. This will allow you t
 
 ## Changelog
 
+- Updated 2025-06-28 (props to [@benazeer](https://profiles.wordpress.org/benazeer/)) 
+    - Added overview and video
 - Created 2025-04-29 (props to [@n8finch](https://profiles.wordpress.org/n8finch/))
+
+---
+
+# Query Title block <a name="documentation/article/query-title-block" />
+
+Source: https://wordpress.org/documentation/article/query-title-block/
+
+The Query Title block displays a dynamic heading based on the type of content being viewed, such as a category name, search term etc.
+
+It has two main variations:
+
+## Archive Title
+
+- Displays the title of the current archive page, such as a category, tag, author, or date.
+- To add a Archive Title block, click the Block Inserter (+) icon, search for “Archive Title”, and select it from the list to insert it into your template.
+
+![Archive Title](https://wordpress.org/documentation/files/2025/08/query-title-1-6.8-1024x604.png)## Search Result Title
+
+- Displays a heading based on the user’s search query.
+- To add a Search Results Title block, click the Block Inserter (+) icon, search for “Search Results Title”, and select it from the list to insert it into your template.
+
+![Search Result Title](https://wordpress.org/documentation/files/2025/08/query-title-2-6.8-1024x607.png)Both of these are built on top of the same underlying block (core/query-title) and share the same functionality and controls — they differ only in what type of content they’re designed to display.
+
+## Block toolbar
+
+To view the block toolbar, click on the block, and the toolbar will be displayed.
+
+Every block comes with unique toolbar icons and blocks specific user controls that allow you to manipulate the block right in the editor.
+
+**The Query Title block shows seven buttons in the block toolbar ( From Left to Right ):**[](https://private-user-images.githubusercontent.com/80690679/457388405-46d04f7b-9832-4213-a87e-0b252ece1cdd.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTQwNjQxMzIsIm5iZiI6MTc1NDA2MzgzMiwicGF0aCI6Ii84MDY5MDY3OS80NTczODg0MDUtNDZkMDRmN2ItOTgzMi00MjEzLWE4N2UtMGIyNTJlY2UxY2RkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA4MDElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwODAxVDE1NTcxMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWI1YjdjNTA3NmQ5ZmUxNTM0YmNlN2U5OWQ4ZDU4NDdhNDgyODI3NGEwZWRiMDg5YmU5ZDQyYzAzMTg2NTdiMmQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.wQ_6TYYB9pL-TlBtbwl8MST1mlh-WFx_kZ1mSEN9QkE)
+
+![Block toolbar](https://wordpress.org/documentation/files/2025/08/query-title-3-6.8-300x56.png)- Transform to
+- Drag icon
+- Move arrows
+- Heading Level
+- Text Alignment
+- More options
+
+### Transform To
+
+Click on the Transform button to convert the Archive Title block into a Columns, Details, or Groupblock:
+
+![Block toolbar - Transform To](https://wordpress.org/documentation/files/2025/08/query-title-4-6.8-300x56.png)### Drag
+
+To drag and drop the block to a new location on the page template, click and hold the rectangle of dots, then drag it to the new location. The blue separator line indicates where the block will be placed. Release the left mouse button when you find the new location to place the block.
+
+![Block toolbar - Drag](https://wordpress.org/documentation/files/2025/08/query-title-5-6.8-300x56.png)### Move Up / Down Arrows
+
+The up and down arrow icons can be used to move the block up and down on the page.  
+[Get more information about moving a block within the editor.](#documentation/article/moving-blocks)
+
+![Block toolbar - Move Up and Down Arrows](https://wordpress.org/documentation/files/2025/08/query-title-6-6.8-300x55.png)### Heading Level
+
+You can choose the heading level for the Archive Title from H1–H6.
+
+![Block toolbar - Heading Level](https://wordpress.org/documentation/files/2025/08/query-title-7-6.8-300x57.png)### Text Alignment
+
+Click the Change alignment button in the Block toolbar to display the alignment drop-down. You can align the block text to the left, make it center-aligned or align it to the right.
+
+![Block toolbar - Text Alignment](https://wordpress.org/documentation/files/2025/08/query-title-8-6.8-300x53.png)### Options Menu
+
+The [More Options menu](#documentation/article/more-options) represented by three vertical dots on the far right of the toolbar gives you more features such as the ability to duplicate, remove, or edit your block as HTML.
+
+![Block toolbar - Options Menu](https://wordpress.org/documentation/files/2025/08/query-title-9-6.8-300x56.png)## Block settings
+
+The block settings panel contains customization options specific to the block. To get to the settings, select the block and click to open the Inspector sidebar. You should see the block settings displayed below with the title “Archive Title” at the top:
+
+### Block Settings
+
+![Block Settings panel](https://wordpress.org/documentation/files/2025/08/query-title-10-6.8-249x300.png)#### Show archive type in title
+
+Toggle this option to include or exclude the archive type (e.g., “Category”, “Tag”, “Author”) in the title.
+
+- Enabled (default): Displays titles like Category: Travel
+- Disabled: Displays just Travel
+
+### Style Settings
+
+![Style Settings panel](https://wordpress.org/documentation/files/2025/08/query-title-11-6.8-300x1024.png)#### Color
+
+Text and background colors can be set on a per-block basis, allowing you to call attention to important content. Using the Color settings, you can customize the block by adding text, background, and link colors.
+
+[See this guide for more information about changing colors.](#documentation/article/colors-settings-overview)
+
+![Color panel](https://wordpress.org/documentation/files/2025/08/query-title-12-6.8-300x295.png)#### Typography
+
+The Typography settings enable you to customize the font and text appearance of the content within the Archive Title block. The settings have various options, such as font family, size, appearance, line height, letter case, letter spacing, and decoration.
+
+[Get more details about changing typography settings.](#documentation/article/typography-settings-overview)
+
+#### Dimensions
+
+The Archive Title block provides various options to adjust its dimensions, such as width and height, allowing you to customize the text layout to ensure visual consistency.
+
+#### Border
+
+The Archive Title block provides border settings options to add border color, width, and radius.
+
+For details refer to this support article: [Border settings overview](#documentation/article/border-settings-overview)
+
+#### Advanced
+
+The Advanced tab lets you add CSS class(es) to your block. This will allow you to write custom CSS and styles to the block.
+
+![Advanced Settings panel](https://wordpress.org/documentation/files/2025/08/query-title-13-6.8.png)## Changelog
+
+- Created 2025-08-01
+
+---
+
+# Title block <a name="documentation/article/title-block" />
+
+Source: https://wordpress.org/documentation/article/title-block/
+
+[Go to the List of Blocks](#documentation/article/blocks)
+
+Title block (formerly known as Post Title block) displays the title of a post or page. This block is primarily nested inside a [query loop](#documentation/article/query-loop-block) block and helps to customize the appearance of the query loop.
+
+![Title block in the Query Loop block.](https://wordpress.org/documentation/files/2025/08/title-6.8-1-1024x597.jpg)See [here](#documentation/article/work-with-blocks) for a description of how to use blocks in general and each component such as toolbars, settings panel, etc.
+
+## Block settings
+
+![](https://wordpress.org/documentation/files/2025/08/title-settings-6.8.jpg)Screenshot### Settings
+
+#### Make title a link
+
+It links the title to the URL of the post or page. This enables the website visitor to go to the page by clicking on the Title.
+
+#### Open in new tab
+
+It opens the linked page in a separate browser tab.
+
+#### Link Rel
+
+It controls the page link’s `<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel">rel</a>` attribute (the relationship between the current document and the linked document), for adding nofollow amongst other things.
+
+## Changelog
+
+- 2025-08-02 
+    - Renamed to Title block from Post Title block
+- 2023-07-25 
+    - Fix broken images URLs
+- 2022-12-12 
+    - Updated screenshots for 6.1
+- Created 2022-03-17
 
 ---
 

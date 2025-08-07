@@ -36,6 +36,8 @@ Table of Contents:
 - [Using the User Field](#secure-custom-fields/features/field/user/user-tutorial)
 - [WYSIWYG Field](#secure-custom-fields/features/field/wysiwyg)
 - [Using the WYSIWYG Field](#secure-custom-fields/features/field/wysiwyg/wysiwyg-tutorial)
+- [Nav Menu Field](#secure-custom-fields/features/field/nav_menu)
+- [**Using the Nav Menu Field**](#secure-custom-fields/features/field/nav_menu/nav_menu-tutorial)
 - [Tutorials](#secure-custom-fields/tutorials)
 - [Creating Your First Post Type](#secure-custom-fields/tutorials/first-post-type)
 - [Code Reference](#secure-custom-fields/code-reference)
@@ -127,6 +129,8 @@ Table of Contents:
 - [Admin](#secure-custom-fields/code-reference/admin)
 - [Admin Notices Global Functions](#secure-custom-fields/code-reference/admin/admin-notices-file)
 - [Admin Tools Global Functions](#secure-custom-fields/code-reference/admin/admin-tools-file)
+- [Admin Commands Global Functions](#secure-custom-fields/code-reference/admin/admin-commands-file)
+- [Beta Features Global Functions](#secure-custom-fields/code-reference/admin/beta-features-file)
 - [Form Front Global Functions](#secure-custom-fields/code-reference/form-front-file)
 - [Forms](#secure-custom-fields/code-reference/forms)
 - [Hooks](#secure-custom-fields/code-reference/hooks)
@@ -135,6 +139,7 @@ Table of Contents:
 - [ACF_Rest_Embed_Links](#secure-custom-fields/code-reference/class-acf-rest-api-file/class-acf-rest-embed-links-file)
 - [ACF_Rest_Request](#secure-custom-fields/code-reference/class-acf-rest-api-file/class-acf-rest-request-file)
 - [REST API](#secure-custom-fields/code-reference/rest-api)
+- [SCF_Rest_Types_Endpoint](#secure-custom-fields/code-reference/rest-api/class-acf-rest-types-endpoint-file)
 
 # Getting Started with Secure Custom Fields <a name="secure-custom-fields" />
 
@@ -200,8 +205,9 @@ Before installing, ensure your site meets these requirements:
 1. Download the latest release from WordPress.org
 2. Extract the plugin files
 3. Upload the plugin folder to `/wp-content/plugins/`
+4. Activate through the WordPress admin interface
 
-## 4. Activate through the WordPress admin interface
+---
 
 ### Composer Installation
 
@@ -302,7 +308,7 @@ if (! class_exists('ACF')) {
 
 ⚠️ **Note:** Replace MY\_SCF\_PATH and MY\_SCF\_URL with constants that match your plugin/theme structure if necessary.
 
-### Done!
+### Done
 
 You have successfully installed and integrated Secure Custom Fields via Composer. You can now use it as you would with a normal installation, but with all the benefits of Composer-based dependency management.
 
@@ -568,7 +574,7 @@ Guide for contributing to Secure Custom Fields development.
 
 1. Fork the repository
 2. Set up local environment 
-    - The local environment runs with WP env, for setup, see: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/ along with prerequisites.
+    - The local environment runs with WP env, for setup, see: [\#block-editor/reference-guides/packages/packages-env](#block-editor/reference-guides/packages/packages-env) along with prerequisites.
 3. Install dependencies 
     - run `composer install`
     - build the plugin files (JS/CSS) via `npm run build`
@@ -1517,6 +1523,100 @@ Source: https://developer.wordpress.org/secure-custom-fields/features/field/wysi
 
 ---
 
+# Nav Menu Field <a name="secure-custom-fields/features/field/nav_menu" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/nav_menu/
+
+The Nav Menu Field field provides a way to select nav menus and output them.
+
+## Key Features
+
+- Different Return Value (Object, HTML, ID)
+- Different Menu Container (nav, div)
+- Ability to select no value
+
+## Settings
+
+- Return Value
+- Menu Container
+- Allow Null?
+
+---
+
+# **Using the Nav Menu Field** <a name="secure-custom-fields/features/field/nav_menu/nav_menu-tutorial" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/features/field/nav_menu/nav_menu-tutorial/
+
+## **Basic Setup**
+
+To get started with the **Nav Menu Field** in SCF, follow these steps to configure and display a WordPress navigation menu:
+
+### **Step 1: Create a New Field Group**
+
+First, create a new field group in **Secure Custom Fields (SCF)**. This field group will hold your custom fields, including the **Nav Menu** field.
+
+1. Go to **Custom Fields &gt; Add New** in your WordPress admin panel.
+2. Title your field group and choose the location rules for where this field group should be displayed (e.g., on a specific page or post type).
+
+### **Step 2: Add a Nav Menu Field**
+
+Once you’ve created a new field group, add a new field of type **Nav Menu**. This field will allow users to select a navigation menu from the available menus on your site.
+
+1. Click **Add Field** within the field group.
+2. Set the **Field Type** to **Nav Menu**.
+3. Configure the necessary field options based on your needs.
+
+### **Step 3: Configure Options**
+
+Configure the field options for the **Nav Menu** field to tailor it to your needs.
+
+- **Return Value:** Choose how you want the selected menu to be returned: 
+    - **Menu ID:** The ID of the selected menu.
+    - **Nav Menu HTML:** The raw HTML of the selected menu.
+    - **Nav Menu Object:** The complete menu object, including properties like the menu name and term ID.
+- **Menu Container:** This option determines the wrapper tag for the menu when the **Nav Menu HTML** return format is selected. Common options include `div`, `nav`, or `none`. You can also add additional container tags using the `wp_nav_menu_container_allowed_tags` filter.
+- **Allow Null:** Set this option to **true** or **false** to allow or disallow a **null** value (i.e., no menu selected). When **true**, an empty option will be available for the user to select.
+
+### **Code Example: Basic Setup**
+
+Here’s how you can implement the **Nav Menu Field** in a template file:
+
+```php
+// Check if the Nav Menu Field has a value
+$menu_id = get_field('your_nav_menu_field_name');
+
+if ($menu_id) {
+    // Get the menu object or HTML based on your configuration
+    $menu_html = wp_nav_menu(array(
+        'menu'      => $menu_id,  // Use the menu ID
+        'container' => 'nav',      // Use a 'nav' container
+        'echo'      => false,      // Don't output directly; return the HTML
+    ));
+
+    echo $menu_html; // Output the menu HTML
+}
+
+```
+
+## **Common Use Cases**
+
+1. **Use to Output WordPress Navigation Menu Anywhere:**  
+    The **Nav Menu Field** allows you to output a WordPress navigation menu in custom locations across your site, such as in custom templates, widgets, or shortcodes.
+
+## **Tips**
+
+- **To Add More Menu Containers:**  
+    Use the `wp_nav_menu_container_allowed_tags` hook to add additional allowed container tags for the Nav Menu field. This will enable more flexibility in the menu’s wrapper tag. Example:
+    
+    “`php  
+    function my\_custom\_menu\_container\_tags($tags) {  
+     $tags\[\] = ‘section’; // Adds ‘section’ as an allowed container tag  
+     return $tags;  
+    }  
+    add\_filter(‘wp\_nav\_menu\_container\_allowed\_tags’, ‘my\_custom\_menu\_container\_tags’);
+
+---
+
 # Tutorials <a name="secure-custom-fields/tutorials" />
 
 Source: https://developer.wordpress.org/secure-custom-fields/tutorials/
@@ -1920,6 +2020,7 @@ It’s action will also allow WPML to set the lang and avoid AJAX get\_posts iss
 - @since ACF 5.2.3
 - @param string $nonce The nonce to check.
 - @param string $action The action of the nonce.
+- @param bool $action\_is\_field Whether the action is a field key or not. Defaults to false.
 - @return boolean
 
 ## `acf_get_image_sizes()`
@@ -4686,6 +4787,7 @@ Process updating bidirectional fields.
 - @param integer|string $post\_id The ACF encoded origin post, user or term ID.
 - @param array $field The field being updated on the origin post, user or term ID.
 - @param string|false $target\_prefix The ACF prefix for a post, user or term ID required for the update\_field call for this field type.
+- @return void
 
 ## `acf_get_valid_bidirectional_target_types()`
 
@@ -4718,6 +4820,7 @@ Renders the field settings required for bidirectional fields
 
 - @since ACF 6.2
 - @param array $field The field object passed into field setting functions.
+- @return void
 
 ## `acf_get_bidirectional_field_settings_instruction_text()`
 
@@ -5599,7 +5702,7 @@ acf\_set\_filters
 - @date 14/7/16
 - @since ACF 5.4.0
 - @param array $filters An Array of modifiers.
-- @return array
+- @return void
 
 ## `acf_disable_filters()`
 
@@ -5918,7 +6021,7 @@ acf\_hidden\_input
 - @date 3/02/2014
 - @since ACF 5.0.0
 - @param array $attrs The array of attrs.
-- @return string
+- @return void echos out value.
 
 ## `acf_get_hidden_input()`
 
@@ -5938,7 +6041,7 @@ acf\_text\_input
 - @date 3/02/2014
 - @since ACF 5.0.0
 - @param array $attrs The array of attrs.
-- @return string
+- @return void echos out value.
 
 ## `acf_get_text_input()`
 
@@ -5958,7 +6061,7 @@ acf\_file\_input
 - @date 3/02/2014
 - @since ACF 5.0.0
 - @param array $attrs The array of attrs.
-- @return string
+- @return void echos out value.
 
 ## `acf_get_file_input()`
 
@@ -5978,7 +6081,7 @@ acf\_textarea\_input
 - @date 3/02/2014
 - @since ACF 5.0.0
 - @param array $attrs The array of attrs.
-- @return string
+- @return void echos out value.
 
 ## `acf_get_textarea_input()`
 
@@ -5998,7 +6101,7 @@ acf\_checkbox\_input
 - @date 3/02/2014
 - @since ACF 5.0.0
 - @param array $attrs The array of attrs.
-- @return string
+- @return void echos out value.
 
 ## `acf_get_checkbox_input()`
 
@@ -6018,7 +6121,7 @@ acf\_radio\_input
 - @date 3/02/2014
 - @since ACF 5.0.0
 - @param array $attrs The array of attrs.
-- @return string
+- @return void echos out value.
 
 ## `acf_get_radio_input()`
 
@@ -6038,7 +6141,7 @@ acf\_select\_input
 - @date 3/02/2014
 - @since ACF 5.0.0
 - @param array $attrs The array of attrs.
-- @return string
+- @return void
 
 ## `acf_get_select_input()`
 
@@ -6483,13 +6586,11 @@ Deletes metadata from the database.
 
 ## `acf_copy_metadata()`
 
-acf\_copy\_postmeta
+Copies meta from one post to another. Useful for saving and restoring revisions.
 
-- Copies meta from one post to another. Useful for saving and restoring revisions.
-- @date 25/06/2016
 - @since ACF 5.3.8
-- @param (int|string) $from\_post\_id The post id to copy from.
-- @param (int|string) $to\_post\_id The post id to paste to.
+- @param integer|string $from\_post\_id The post id to copy from.
+- @param integer|string $to\_post\_id The post id to paste to.
 - @return void
 
 ## `acf_copy_postmeta()`
@@ -6539,6 +6640,45 @@ acf\_update\_metaref
 - @param string type The reference type (fields|groups).
 - @param array $references An array of references.
 - @return (int|bool) Meta ID if the key didn’t exist, true on successful update, false on failure.
+
+## `acf_get_meta_instance()`
+
+Retrieves an ACF meta instance for the provided meta type.
+
+- @since 6.5
+- @param string $type The meta type as decoded from the post ID.
+- @return object|null
+
+## `acf_get_metadata_by_field()`
+
+Gets metadata from the database.
+
+- @since 6.5
+- @param integer|string $post\_id The post id.
+- @param array $field The field array.
+- @param boolean $hidden True if we should return the reference key.
+- @return mixed
+
+## `acf_update_metadata_by_field()`
+
+Updates metadata in the database.
+
+- @since 6.5
+- @param integer|string $post\_id The post id.
+- @param array $field The field array.
+- @param mixed $value The meta value.
+- @param boolean $hidden True if we should update the reference key.
+- @return integer|boolean Meta ID if the key didn’t exist, true on successful update, false on failure.
+
+## `acf_delete_metadata_by_field()`
+
+Deletes metadata from the database.
+
+- @since 6.5
+- @param integer|string $post\_id The post id.
+- @param array $field The field array.
+- @param boolean $hidden True if we should update the reference key.
+- @return boolean
 
 ---
 
@@ -6972,10 +7112,8 @@ acf\_get\_user\_role\_labels
 
 ## `acf_allow_unfiltered_html()`
 
-acf\_allow\_unfiltered\_html
+Returns true if the current user is allowed to save unfiltered HTML.
 
-- Returns true if the current user is allowed to save unfiltered HTML.
-- @date 9/1/19
 - @since ACF 5.7.10
 - @return boolean
 
@@ -8087,7 +8225,7 @@ acf\_add\_local\_fields
 - @date 22/1/19
 - @since ACF 5.7.10
 - @param array $fields An array of un prepared fields.
-- @return array
+- @return void|array
 
 ## `acf_get_local_fields()`
 
@@ -8380,7 +8518,7 @@ Returns true if the provided rule matches the screen args.
 - @since ACF 5.6.0
 - @param array $rule The location rule.
 - @param array $screen The screen args.
-- @param array $field The field group array.
+- @param array $field\_group The field group array.
 - @return boolean
 
 ## `acf_get_location_screen()`
@@ -8390,7 +8528,7 @@ Returns ann array of screen args to be used against matching rules.
 - @date 8/4/20
 - @since ACF 5.9.0
 - @param array $screen The screen args.
-- @param array $deprecated The field group array.
+- @param array $deprecated Deprecated.
 - @return array
 
 ## `acf_register_location_rule()`
@@ -8466,7 +8604,7 @@ alias of acf()-&gt;loop-&gt;remove\_loop()
 - @date 6/10/13
 - @since ACF 5.0.0
 - @param n/a
-- @return n/a
+- @return bool
 
 ---
 
@@ -8906,8 +9044,10 @@ Source: https://developer.wordpress.org/secure-custom-fields/code-reference/admi
 
 ## Files
 
+- [Admin Commands](admin-commands-file)
 - [Admin Notices](admin-notices-file)
 - [Admin Tools](admin-tools-file)
+- [Beta Features](beta-features-file)
 
 ---
 
@@ -8940,7 +9080,7 @@ Creates and returns a new notice.
 - @since ACF 5.0.0
 - @param string $text The admin notice text.
 - @param string $type The type of notice (warning, error, success, info).
-- @param boolean $dismissible Is this notification dismissible (default true) (since ACF 5.11.0).
+- @param boolean $dismissible Is this notification dismissible (default true) (since 5.11.0).
 - @param boolean $persisted Store once a notice has been dismissed per user and prevent showing it again. (since ACF 6.1.0).
 - @return ACF\_Admin\_Notice
 
@@ -8979,6 +9119,56 @@ This function will return the admin URL to the tools page
 - @since ACF 5.6.0
 - @param string $tool The tool name.
 - @return string The URL to a particular tool’s page.
+
+---
+
+---
+
+# Admin Commands Global Functions <a name="secure-custom-fields/code-reference/admin/admin-commands-file" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/code-reference/admin/admin-commands-file/
+
+## `acf_commands_init()`
+
+Initializes SCF commands integration
+
+- This function handles the integration with WordPress Commands (Cmd+K / Ctrl+K),  
+    providing navigation commands for SCF admin pages and custom post types.
+- The implementation follows these principles:
+
+1. Only loads in screens where WordPress commands are available.
+2. Performs capability checks to ensure users only see commands they can access.
+3. Core administrative commands are only shown to users with SCF admin capabilities.
+4. Custom post type commands are conditionally shown based on edit\_posts capability  
+    for each specific post type.
+5. Post types must have UI enabled (show\_ui setting) to appear in commands.
+
+- @since SCF 6.5.0
+
+---
+
+---
+
+# Beta Features Global Functions <a name="secure-custom-fields/code-reference/admin/beta-features-file" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/code-reference/admin/beta-features-file/
+
+## `scf_register_admin_beta_feature()`
+
+Alias of acf()-&gt;admin\_beta\_features-&gt;register\_beta\_feature()
+
+- @type function
+- @since SCF 6.5.0
+- @param string $beta\_feature The beta feature class.
+- @return void
+
+## `scf_get_admin_beta_features_url()`
+
+This function will return the admin URL to the beta features page
+
+- @type function
+- @since SCF 6.5.0
+- @return string The URL to the beta features page.
 
 ---
 
@@ -9318,3 +9508,45 @@ Source: https://developer.wordpress.org/secure-custom-fields/code-reference/rest
 - [Class Acf REST API](class-acf-rest-api-file)
 - [Class ACF REST Embed Links](class-acf-rest-embed-links-file)
 - [Class ACF REST Request](class-acf-rest-request-file)
+- [Class ACF REST Types Endpoint](class-acf-rest-types-endpoint-file)
+
+---
+
+# SCF_Rest_Types_Endpoint <a name="secure-custom-fields/code-reference/rest-api/class-acf-rest-types-endpoint-file" />
+
+Source: https://developer.wordpress.org/secure-custom-fields/code-reference/rest-api/class-acf-rest-types-endpoint-file/
+
+Class SCF\_Rest\_Types\_Endpoint
+
+- Extends the /wp/v2/types endpoint to include SCF fields.
+- @since SCF 6.5.0
+
+## Methods
+
+### `__construct`
+
+Initialize the class.
+
+- @since SCF 6.5.0
+
+### `register_extra_fields`
+
+Register extra SCF fields for the post types endpoint.
+
+- @since SCF 6.5.0
+- @return void
+
+### `get_scf_fields`
+
+Get SCF fields for a post type.
+
+- @since SCF 6.5.0
+- @param array $post\_type\_object The post type object.
+- @return array Array of field data.
+
+### `get_field_schema`
+
+Get the schema for the SCF fields.
+
+- @since SCF 6.5.0
+- @return array The schema for the SCF fields.

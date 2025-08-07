@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/contributors/folder-structure/"
     },
-    "modified": "2025-06-10T15:00:49",
-    "modified_gmt": "2025-06-10T15:00:49",
+    "modified": "2025-07-08T10:15:51",
+    "modified_gmt": "2025-07-08T10:15:51",
     "slug": "folder-structure",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 135089,
-    "menu_order": 397,
+    "menu_order": 399,
     "template": "",
     "meta": {
         "footnotes": ""

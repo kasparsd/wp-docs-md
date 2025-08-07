@@ -1,0 +1,107 @@
+{
+    "id": 16365943,
+    "date": "2025-08-02T06:07:44",
+    "date_gmt": "2025-08-02T06:07:44",
+    "guid": {
+        "rendered": "https://wordpress.org/documentation/?post_type=helphub_article&#038;p=16365943"
+    },
+    "modified": "2025-08-02T06:07:44",
+    "modified_gmt": "2025-08-02T06:07:44",
+    "slug": "title-block",
+    "status": "publish",
+    "type": "helphub_article",
+    "link": "https://wordpress.org/documentation/article/title-block/",
+    "title": {
+        "rendered": "Title block"
+    },
+    "content": {
+        "rendered": "\n<p class=\"has-text-align-right has-small-font-size\"><a href=\"https://wordpress.org/documentation/article/blocks/\">Go to the List of Blocks</a></p>\n\n\n\n<p>Title block (formerly known as Post Title block) displays the title of a post or page. This block is primarily nested inside a <a href=\"https://wordpress.org/documentation/article/query-loop-block/\">query loop</a> block and helps to customize the appearance of the query loop.</p>\n\n\n\n<figure class=\"wp-block-image size-large\"><img loading=\"lazy\" decoding=\"async\" width=\"1024\" height=\"597\" src=\"https://wordpress.org/documentation/files/2025/08/title-6.8-1-1024x597.jpg\" alt=\"Title block in the Query Loop block.\" class=\"wp-image-16365946\" srcset=\"https://wordpress.org/documentation/files/2025/08/title-6.8-1-1024x597.jpg 1024w, https://wordpress.org/documentation/files/2025/08/title-6.8-1-300x175.jpg 300w, https://wordpress.org/documentation/files/2025/08/title-6.8-1-768x448.jpg 768w, https://wordpress.org/documentation/files/2025/08/title-6.8-1-1536x896.jpg 1536w, https://wordpress.org/documentation/files/2025/08/title-6.8-1-2048x1194.jpg 2048w\" sizes=\"auto, (max-width: 1024px) 100vw, 1024px\" /></figure>\n\n\n\n<p class=\"has-text-align-left has-background\" style=\"background-color:#e5f5fa\">See <a href=\"https://wordpress.org/documentation/article/work-with-blocks/\">here</a> for a description of how to use blocks in general and each component such as toolbars, settings panel, etc.</p>\n\n\n\n<h2 class=\"wp-block-heading\">Block settings</h2>\n\n\n\n<figure class=\"wp-block-image alignright size-full is-resized\"><img loading=\"lazy\" decoding=\"async\" width=\"564\" height=\"782\" src=\"https://wordpress.org/documentation/files/2025/08/title-settings-6.8.jpg\" alt=\"\" class=\"wp-image-16365949\" style=\"width:285px\" srcset=\"https://wordpress.org/documentation/files/2025/08/title-settings-6.8.jpg 564w, https://wordpress.org/documentation/files/2025/08/title-settings-6.8-216x300.jpg 216w\" sizes=\"auto, (max-width: 564px) 100vw, 564px\" /><figcaption class=\"wp-element-caption\">Screenshot</figcaption></figure>\n\n\n\n<h3 class=\"wp-block-heading\">Settings</h3>\n\n\n\n<h4 class=\"wp-block-heading\">Make title a link</h4>\n\n\n\n<p>It links the title to the URL of the post or page. This enables the website visitor to go to the page by clicking on the Title.</p>\n\n\n\n<h4 class=\"wp-block-heading\">Open in new tab</h4>\n\n\n\n<p>It opens the linked page in a separate browser tab.</p>\n\n\n\n<h4 class=\"wp-block-heading\">Link Rel</h4>\n\n\n\n<p>It controls the page link\u2019s <code><a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel\">rel</a></code> attribute (the relationship between the current document and the linked document), for adding nofollow amongst other things.</p>\n\n\n\n<div id=\"changelog\" class=\"wp-block-group changelog has-background is-layout-flow wp-block-group-is-layout-flow\" style=\"background-color:#dce5ec\">\n<h2 class=\"wp-block-heading has-medium-font-size\">Changelog</h2>\n\n\n\n<ul class=\"wp-block-list\">\n<li>2025-08-02\n<ul class=\"wp-block-list\">\n<li>Renamed to Title block from Post Title block</li>\n</ul>\n</li>\n\n\n\n<li>2023-07-25\n<ul class=\"wp-block-list\">\n<li>Fix broken images URLs</li>\n</ul>\n</li>\n\n\n\n<li>2022-12-12\n<ul class=\"wp-block-list\">\n<li>Updated screenshots for 6.1</li>\n</ul>\n</li>\n\n\n\n<li>Created 2022-03-17</li>\n</ul>\n</div>\n\n\n\n<p></p>\n",
+        "protected": false
+    },
+    "excerpt": {
+        "rendered": "<p>Go to the List of Blocks Title block (formerly known as Post Title block) displays the title of a post or page. This block is primarily nested inside a query loop block and helps to customize the appearance of the query loop. See here for a description of how to use blocks in general and [&hellip;]</p>\n",
+        "protected": false
+    },
+    "featured_media": 0,
+    "menu_order": 0,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "template": "",
+    "meta": {
+        "advanced_seo_description": "",
+        "jetpack_seo_html_title": "",
+        "jetpack_seo_noindex": false
+    },
+    "category": [
+        91
+    ],
+    "class_list": [
+        "post-16365943",
+        "helphub_article",
+        "type-helphub_article",
+        "status-publish",
+        "hentry",
+        "category-theme-blocks"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/articles/16365943",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/articles"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/types/helphub_article"
+            }
+        ],
+        "replies": [
+            {
+                "embeddable": true,
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/comments?post=16365943"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 6,
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/articles/16365943/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 16365952,
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/articles/16365943/revisions/16365952"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/media?parent=16365943"
+            }
+        ],
+        "wp:term": [
+            {
+                "taxonomy": "category",
+                "embeddable": true,
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/category?post=16365943"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

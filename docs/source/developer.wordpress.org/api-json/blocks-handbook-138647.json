@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/components/gradient-picker/"
     },
-    "modified": "2024-12-26T16:49:09",
-    "modified_gmt": "2024-12-26T16:49:09",
+    "modified": "2025-07-08T10:15:39",
+    "modified_gmt": "2025-07-08T10:15:39",
     "slug": "gradient-picker",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134435,
-    "menu_order": 158,
+    "menu_order": 160,
     "template": "",
     "meta": {
         "footnotes": ""

@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/components/external-link/"
     },
-    "modified": "2024-10-30T16:55:46",
-    "modified_gmt": "2024-10-30T16:55:46",
+    "modified": "2025-07-08T10:16:10",
+    "modified_gmt": "2025-07-08T10:16:10",
     "slug": "external-link",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134435,
-    "menu_order": 148,
+    "menu_order": 150,
     "template": "",
     "meta": {
         "footnotes": ""

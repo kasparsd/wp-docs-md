@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/explanations/"
     },
-    "modified": "2025-01-07T18:34:11",
-    "modified_gmt": "2025-01-07T18:34:11",
+    "modified": "2025-07-08T10:15:52",
+    "modified_gmt": "2025-07-08T10:15:52",
     "slug": "explanations",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 0,
-    "menu_order": 353,
+    "menu_order": 355,
     "template": "",
     "meta": {
         "footnotes": ""

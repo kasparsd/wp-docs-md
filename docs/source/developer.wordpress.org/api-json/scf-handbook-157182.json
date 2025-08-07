@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/secure-custom-fields/code-reference/rest-api/"
     },
-    "modified": "2025-02-21T05:46:02",
-    "modified_gmt": "2025-02-21T05:46:02",
+    "modified": "2025-06-23T10:16:10",
+    "modified_gmt": "2025-06-23T10:16:10",
     "slug": "rest-api",
     "status": "publish",
     "type": "scf-handbook",
@@ -15,7 +15,7 @@
         "rendered": "REST API"
     },
     "content": {
-        "rendered": "<h2>Files</h2>\n<ul>\n<li><a href=\"acf-rest-api-functions-file\">Acf REST API Functions</a></li>\n<li><a href=\"class-acf-rest-api-file\">Class Acf REST API</a></li>\n<li><a href=\"class-acf-rest-embed-links-file\">Class ACF REST Embed Links</a></li>\n<li><a href=\"class-acf-rest-request-file\">Class ACF REST Request</a></li>\n</ul>\n",
+        "rendered": "<h2>Files</h2>\n<ul>\n<li><a href=\"acf-rest-api-functions-file\">Acf REST API Functions</a></li>\n<li><a href=\"class-acf-rest-api-file\">Class Acf REST API</a></li>\n<li><a href=\"class-acf-rest-embed-links-file\">Class ACF REST Embed Links</a></li>\n<li><a href=\"class-acf-rest-request-file\">Class ACF REST Request</a></li>\n<li><a href=\"class-acf-rest-types-endpoint-file\">Class ACF REST Types Endpoint</a></li>\n</ul>\n",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 2,
+                "count": 3,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/157182/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 157292,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/157182/revisions/157292"
+                "id": 159004,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/157182/revisions/159004"
             }
         ],
         "up": [

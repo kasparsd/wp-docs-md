@@ -1,0 +1,91 @@
+{
+    "id": 159115,
+    "date": "2025-07-08T10:15:28",
+    "date_gmt": "2025-07-08T10:15:28",
+    "guid": {
+        "rendered": "https://developer.wordpress.org/block-editor/reference-guides/components/date-range-calendar/"
+    },
+    "modified": "2025-07-11T06:00:28",
+    "modified_gmt": "2025-07-11T06:00:28",
+    "slug": "date-range-calendar",
+    "status": "publish",
+    "type": "blocks-handbook",
+    "link": "https://developer.wordpress.org/block-editor/reference-guides/components/date-range-calendar/",
+    "title": {
+        "rendered": "DateRangeCalendar"
+    },
+    "content": {
+        "rendered": "<p>\ud83d\udd12 This component is locked as a <a href=\"https://developer.wordpress.org/block-editor/reference-guides/packages/packages-private-apis/\">private API</a>. We do not yet recommend using this outside of the Gutenberg project.</p>\n<p><code>DateRangeCalendar</code> is a React component that provides a customizable calendar interface for <strong>date range</strong> selection.</p>\n<p>The component is built with accessibility in mind and follows ARIA best practices for calendar widgets. It provides keyboard navigation, screen reader support, and customizable labels for internationalization.</p>\n<h2>Usage example</h2>\n<pre><code class=\"language-tsx\">import { DateRangeCalendar } from '@wordpress/components';\n\ntype DateRange = {\n    from: Date | undefined;\n    to?: Date | undefined;\n};\n\nfunction MyComponent() {\n    const [ selected, setSelected ] = useState&lt; DateRange &gt;( {\n        from: new Date( date.getFullYear(), date.getMonth(), 1 ),\n        to: new Date(),\n    } );\n\n    return &lt;DateRangeCalendar selected={ selected } onSelect={ setSelected } /&gt;;\n}\n</code></pre>\n<h2>Props</h2>\n<p>These props are shared between both single date and date range calendar modes.</p>\n<h3><code>required</code></h3>\n<ul>\n<li>Type: <code>boolean</code></li>\n<li>Required: No</li>\n<li>Default: <code>false</code></li>\n</ul>\n<p>Whether the selection is required. When <code>true</code>, there always needs to be a date selected.</p>\n<h3><code>selected</code></h3>\n<ul>\n<li>Type: <code>DateRange | undefined | null</code></li>\n<li>Required: No</li>\n</ul>\n<p>The selected date range. A <code>DateRange</code> object has the following shape:</p>\n<pre><code class=\"language-typescript\">{\n  from: Date | undefined;\n  to?: Date | undefined;\n}\n</code></pre>\n<h3><code>onSelect</code></h3>\n<ul>\n<li>Type: <code>(selected: DateRange | undefined, triggerDate: Date, modifiers: Modifiers, e: React.MouseEvent | React.KeyboardEvent) =&gt; void</code></li>\n<li>Required: No</li>\n</ul>\n<p>Event handler when the selection changes. The <code>selected</code> parameter will contain the new date range.</p>\n<h3><code>defaultSelected</code></h3>\n<ul>\n<li>Type: <code>DateRange</code></li>\n<li>Required: No</li>\n</ul>\n<p>The default selected range (for uncontrolled usage).</p>\n<h3><code>excludeDisabled</code></h3>\n<ul>\n<li>Type: <code>boolean</code></li>\n<li>Required: No</li>\n</ul>\n<p>When <code>true</code>, the range will reset when including a disabled day. This is useful to prevent users from selecting ranges that include unavailable dates.</p>\n<h3><code>min</code></h3>\n<ul>\n<li>Type: <code>number</code></li>\n<li>Required: No</li>\n</ul>\n<p>The minimum number of days to include in the range. If a user tries to select a range shorter than this, the selection will be adjusted to meet the minimum requirement.</p>\n<h3><code>max</code></h3>\n<ul>\n<li>Type: <code>number</code></li>\n<li>Required: No</li>\n</ul>\n<p>The maximum number of days to include in the range. If a user tries to select a range longer than this, the selection will be adjusted to meet the maximum requirement.</p>\n<h3><code>defaultMonth</code></h3>\n<ul>\n<li>Type: <code>Date</code></li>\n<li>Required: No</li>\n<li>Default: Current month</li>\n</ul>\n<p>The initial month to show in the calendar view (uncontrolled).</p>\n<h3><code>month</code></h3>\n<ul>\n<li>Type: <code>Date</code></li>\n<li>Required: No</li>\n</ul>\n<p>The month displayed in the calendar view (controlled). Use together with <code>onMonthChange</code> to change the month programmatically.</p>\n<h3><code>numberOfMonths</code></h3>\n<ul>\n<li>Type: <code>number</code></li>\n<li>Required: No</li>\n<li>Default: <code>1</code></li>\n</ul>\n<p>The number of months displayed at once.</p>\n<h3><code>startMonth</code></h3>\n<ul>\n<li>Type: <code>Date</code></li>\n<li>Required: No</li>\n</ul>\n<p>The earliest month to start the month navigation.</p>\n<h3><code>endMonth</code></h3>\n<ul>\n<li>Type: <code>Date</code></li>\n<li>Required: No</li>\n</ul>\n<p>The latest month to end the month navigation.</p>\n<h3><code>autoFocus</code></h3>\n<ul>\n<li>Type: <code>boolean</code></li>\n<li>Required: No</li>\n</ul>\n<p>Focus the first selected day (if set) or today&#8217;s date (if not disabled). Use this prop when you need to focus the calendar after a user action (e.g. opening the dialog with the calendar).</p>\n<h3><code>disabled</code></h3>\n<ul>\n<li>Type: <code>Matcher | Matcher[] | undefined</code></li>\n<li>Required: No</li>\n</ul>\n<p>Specify which days are disabled. Using <code>true</code> will disable all dates. See the <a href=\"#matcher-types\">Matcher Types</a> section for more details.</p>\n<h3><code>disableNavigation</code></h3>\n<ul>\n<li>Type: <code>boolean</code></li>\n<li>Required: No</li>\n</ul>\n<p>Disable the navigation buttons.</p>\n<h3><code>labels</code></h3>\n<ul>\n<li>Type: <code>object</code></li>\n<li>Required: No</li>\n</ul>\n<p>Use custom labels for internationalization. All labels are optional and have sensible defaults:</p>\n<pre><code class=\"language-typescript\">{\n  labelNav?: () =&gt; string; // Navigation toolbar label\n  labelGrid?: (date: Date) =&gt; string; // Month grid label (default: \"LLLL y\")\n  labelGridcell?: (date: Date, modifiers?: Modifiers) =&gt; string; // Grid cell label\n  labelNext?: (month: Date | undefined) =&gt; string; // Next month button label\n  labelPrevious?: (month: Date | undefined) =&gt; string; // Previous month button label\n  labelDayButton?: (date: Date, modifiers?: Modifiers) =&gt; string; // Day button label\n  labelWeekday?: (date: Date) =&gt; string; // Weekday label\n}\n</code></pre>\n<p><strong>Important: For a correct localized experience, consumers should make sure the locale used for the translated labels and <code>locale</code> prop are consistent.</strong></p>\n<h3><code>locale</code></h3>\n<ul>\n<li>Type: <code>Locale</code></li>\n<li>Required: No</li>\n<li>Default: <code>enUS</code> from <code>@date-fns/locale</code></li>\n</ul>\n<p>The locale object used to localize dates. Pass a locale from <code>@date-fns/locale</code> to localize the calendar.</p>\n<p><strong>Important: For a correct localized experience, consumers should make sure the locale used for the translated labels and <code>locale</code> prop are consistent.</strong></p>\n<h3><code>weekStartsOn</code></h3>\n<ul>\n<li>Type: <code>0 | 1 | 2 | 3 | 4 | 5 | 6 | undefined</code></li>\n<li>Required: No</li>\n<li>Default: Based on the <code>locale</code> prop</li>\n</ul>\n<p>The index of the first day of the week (0 &#8211; Sunday). Overrides the locale&#8217;s setting.</p>\n<h3><code>onMonthChange</code></h3>\n<ul>\n<li>Type: <code>(month: Date) =&gt; void</code></li>\n<li>Required: No</li>\n</ul>\n<p>Event fired when the user navigates between months.</p>\n<h3><code>timeZone</code></h3>\n<ul>\n<li>Type: <code>string</code></li>\n<li>Required: No</li>\n</ul>\n<p>The time zone (IANA or UTC offset) to use in the calendar. See <a href=\"https://en.wikipedia.org/wiki/List_of_tz_database_time_zones\">Wikipedia</a> for possible values.</p>\n<p>When working with time zones, use the <code>TZDate</code> object exported by this package instead of the native <code>Date</code> object.</p>\n<pre><code class=\"language-tsx\">import { DateRangeCalendar, TZDate } from '@wordpress/components';\n\nexport function WithTimeZone() {\n    const timeZone = 'America/New_York';\n    const [ selected, setSelected ] = useState&lt; Date | undefined &gt;( {\n        from: new TZDate( 2024, 12, 10, timeZone ), // Use `TZDate` instead of `Date`\n        to: new TZDate( 2024, 12, 8, timeZone ), // Use `TZDate` instead of `Date`\n    } );\n    return (\n        &lt;DateRangeCalendar\n            timeZone={ timeZone }\n            selected={ selected }\n            onSelect={ setSelected }\n        /&gt;\n    );\n}\n</code></pre>\n<h3><code>role</code></h3>\n<ul>\n<li>Type: <code>'application' | 'dialog' | undefined</code></li>\n<li>Required: No</li>\n<li>Default: <code>'application'</code></li>\n</ul>\n<p>The role attribute to add to the container element.</p>\n<h2>Matcher Types</h2>\n<p>The calendar component uses a flexible matching system to determine which days should be disabled or have specific modifiers. Here are the available matcher types:</p>\n<h3>Boolean Matcher</h3>\n<pre><code class=\"language-typescript\">const booleanMatcher: Matcher = true; // Will always match the day\n</code></pre>\n<h3>Date Matcher</h3>\n<pre><code class=\"language-typescript\">const dateMatcher: Matcher = new Date(); // Will match today's date\n</code></pre>\n<h3>Array Matcher</h3>\n<pre><code class=\"language-typescript\">const arrayMatcher: Matcher = [\n    new Date( 2019, 1, 2 ),\n    new Date( 2019, 1, 4 ),\n]; // Will match the days in the array\n</code></pre>\n<h3>Date After Matcher</h3>\n<pre><code class=\"language-typescript\">const afterMatcher: DateAfter = { after: new Date( 2019, 1, 2 ) }; // Will match days after the 2nd of February 2019\n</code></pre>\n<h3>Date Before Matcher</h3>\n<pre><code class=\"language-typescript\">const beforeMatcher: DateBefore = { before: new Date( 2019, 1, 2 ) }; // Will match days before the 2nd of February 2019\n</code></pre>\n<h3>Date Interval Matcher</h3>\n<pre><code class=\"language-typescript\">const intervalMatcher: DateInterval = {\n    after: new Date( 2019, 1, 2 ),\n    before: new Date( 2019, 1, 5 ),\n}; // Will match the days between the 2nd and the 5th of February 2019 (exclusive)\n</code></pre>\n<h3>Date Range Matcher</h3>\n<pre><code class=\"language-typescript\">const rangeMatcher: DateRange = {\n    from: new Date( 2019, 1, 2 ),\n    to: new Date( 2019, 1, 5 ),\n}; // Will match the days between the 2nd and the 5th of February 2019 (inclusive)\n</code></pre>\n<h3>Day of Week Matcher</h3>\n<pre><code class=\"language-typescript\">const dayOfWeekMatcher: DayOfWeek = { dayOfWeek: 0 }; // Will match Sundays\nconst weekendMatcher: DayOfWeek = { dayOfWeek: [ 0, 6 ] }; // Will match weekends\n</code></pre>\n<h3>Function Matcher</h3>\n<pre><code class=\"language-typescript\">const functionMatcher: Matcher = ( day: Date ) =&gt; {\n    return day.getMonth() === 2; // Will match when month is March\n};\n</code></pre>\n",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 134435,
+    "menu_order": 122,
+    "template": "",
+    "meta": {
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-159115",
+        "blocks-handbook",
+        "type-blocks-handbook",
+        "status-publish",
+        "hentry",
+        "type-handbook"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook/159115",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/types/blocks-handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 2,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook/159115/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 159120,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook/159115/revisions/159120"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/blocks-handbook/134435"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/media?parent=159115"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

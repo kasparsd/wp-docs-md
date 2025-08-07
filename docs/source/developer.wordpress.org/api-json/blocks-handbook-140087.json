@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/explanations/user-interface/design-resources/"
     },
-    "modified": "2025-01-07T18:34:08",
-    "modified_gmt": "2025-01-07T18:34:08",
+    "modified": "2025-07-08T10:15:37",
+    "modified_gmt": "2025-07-08T10:15:37",
     "slug": "design-resources",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134400,
-    "menu_order": 366,
+    "menu_order": 368,
     "template": "",
     "meta": {
         "footnotes": ""

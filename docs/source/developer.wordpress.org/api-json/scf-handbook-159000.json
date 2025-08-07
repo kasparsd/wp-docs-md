@@ -1,0 +1,91 @@
+{
+    "id": 159000,
+    "date": "2025-06-23T10:16:09",
+    "date_gmt": "2025-06-23T10:16:09",
+    "guid": {
+        "rendered": "https://developer.wordpress.org/secure-custom-fields/code-reference/admin/beta-features-file/"
+    },
+    "modified": "2025-06-23T10:32:06",
+    "modified_gmt": "2025-06-23T10:32:06",
+    "slug": "beta-features-file",
+    "status": "publish",
+    "type": "scf-handbook",
+    "link": "https://developer.wordpress.org/secure-custom-fields/code-reference/admin/beta-features-file/",
+    "title": {
+        "rendered": "Beta Features Global Functions"
+    },
+    "content": {
+        "rendered": "<h2><code>scf_register_admin_beta_feature()</code></h2>\n<p>Alias of acf()-&gt;admin_beta_features-&gt;register_beta_feature()</p>\n<ul>\n<li>@type    function</li>\n<li>@since SCF 6.5.0</li>\n<li>@param   string $beta_feature The beta feature class.</li>\n<li>@return void</li>\n</ul>\n<h2><code>scf_get_admin_beta_features_url()</code></h2>\n<p>This function will return the admin URL to the beta features page</p>\n<ul>\n<li>@type    function</li>\n<li>@since SCF 6.5.0</li>\n<li>@return  string The URL to the beta features page.</li>\n</ul>\n<hr />\n",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 157165,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-159000",
+        "scf-handbook",
+        "type-scf-handbook",
+        "status-publish",
+        "hentry",
+        "type-handbook"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/159000",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/types/scf-handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/159000/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 159021,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/159000/revisions/159021"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/157165"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/media?parent=159000"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

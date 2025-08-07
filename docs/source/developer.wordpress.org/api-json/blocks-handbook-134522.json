@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-a11y/"
     },
-    "modified": "2024-10-30T16:55:33",
-    "modified_gmt": "2024-10-30T16:55:33",
+    "modified": "2025-07-08T10:16:04",
+    "modified_gmt": "2025-07-08T10:16:04",
     "slug": "packages-a11y",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134521,
-    "menu_order": 235,
+    "menu_order": 237,
     "template": "",
     "meta": {
         "footnotes": ""

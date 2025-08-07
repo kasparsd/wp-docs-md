@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/secure-custom-fields/code-reference/acf-user-functions-file/"
     },
-    "modified": "2025-02-21T05:46:13",
-    "modified_gmt": "2025-02-21T05:46:13",
+    "modified": "2025-06-23T10:16:13",
+    "modified_gmt": "2025-06-23T10:16:13",
     "slug": "acf-user-functions-file",
     "status": "publish",
     "type": "scf-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Acf User Functions Global Functions"
     },
     "content": {
-        "rendered": "<h2><code>acf_get_users()</code></h2>\n<p>acf_get_users</p>\n<ul>\n<li>Similar to the <a href=\"https://developer.wordpress.org/reference/functions/get_users/\" rel=\"function\">get_users()</a>  function but with extra functionality.</li>\n<li>@date    9/1/19</li>\n<li>@since ACF 5.7.10</li>\n<li>@param   array $args The query args.</li>\n<li>@return array</li>\n</ul>\n<h2><code>acf_get_user_result()</code></h2>\n<p>acf_get_user_result</p>\n<ul>\n<li>Returns a result containing &#8220;id&#8221; and &#8220;text&#8221; for the given user.</li>\n<li>@date    21/5/19</li>\n<li>@since ACF 5.8.1</li>\n<li>@param   <a href=\"https://developer.wordpress.org/reference/classes/wp_user/\" rel=\"class\">WP_User</a> $user The user object.</li>\n<li>@return array</li>\n</ul>\n<h2><code>acf_get_user_role_labels()</code></h2>\n<p>acf_get_user_role_labels</p>\n<ul>\n<li>Returns an array of user roles in the format &#8220;name =&gt; label&#8221;.</li>\n<li>@date    20/5/19</li>\n<li>@since ACF 5.8.1</li>\n<li>@param   array $roles A specific array of roles.</li>\n<li>@return array</li>\n</ul>\n<h2><code>acf_allow_unfiltered_html()</code></h2>\n<p>acf_allow_unfiltered_html</p>\n<ul>\n<li>Returns true if the current user is allowed to save unfiltered HTML.</li>\n<li>@date    9/1/19</li>\n<li>@since ACF 5.7.10</li>\n<li>@return  boolean</li>\n</ul>\n<hr />\n",
+        "rendered": "<h2><code>acf_get_users()</code></h2>\n<p>acf_get_users</p>\n<ul>\n<li>Similar to the <a href=\"https://developer.wordpress.org/reference/functions/get_users/\" rel=\"function\">get_users()</a>  function but with extra functionality.</li>\n<li>@date    9/1/19</li>\n<li>@since ACF 5.7.10</li>\n<li>@param   array $args The query args.</li>\n<li>@return array</li>\n</ul>\n<h2><code>acf_get_user_result()</code></h2>\n<p>acf_get_user_result</p>\n<ul>\n<li>Returns a result containing &#8220;id&#8221; and &#8220;text&#8221; for the given user.</li>\n<li>@date    21/5/19</li>\n<li>@since ACF 5.8.1</li>\n<li>@param   <a href=\"https://developer.wordpress.org/reference/classes/wp_user/\" rel=\"class\">WP_User</a> $user The user object.</li>\n<li>@return array</li>\n</ul>\n<h2><code>acf_get_user_role_labels()</code></h2>\n<p>acf_get_user_role_labels</p>\n<ul>\n<li>Returns an array of user roles in the format &#8220;name =&gt; label&#8221;.</li>\n<li>@date    20/5/19</li>\n<li>@since ACF 5.8.1</li>\n<li>@param   array $roles A specific array of roles.</li>\n<li>@return array</li>\n</ul>\n<h2><code>acf_allow_unfiltered_html()</code></h2>\n<p>Returns true if the current user is allowed to save unfiltered HTML.</p>\n<ul>\n<li>@since   ACF 5.7.10</li>\n<li>@return  boolean</li>\n</ul>\n<hr />\n",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 2,
+                "count": 3,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/157141/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 157320,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/157141/revisions/157320"
+                "id": 159011,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/157141/revisions/159011"
             }
         ],
         "up": [

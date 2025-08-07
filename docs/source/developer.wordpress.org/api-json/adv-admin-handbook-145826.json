@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/server/"
     },
-    "modified": "2024-01-16T20:30:10",
-    "modified_gmt": "2024-01-16T20:30:10",
+    "modified": "2025-07-07T21:31:02",
+    "modified_gmt": "2025-07-07T21:31:02",
     "slug": "server",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Server configuration"
     },
     "content": {
-        "rendered": "<h2>Changelog</h2>\n<ul>\n<li>2022-08-16: Nothing here, yet.</li>\n</ul>\n",
+        "rendered": "",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 2,
+                "count": 3,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145826/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 151959,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145826/revisions/151959"
+                "id": 159105,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145826/revisions/159105"
             }
         ],
         "wp:attachment": [

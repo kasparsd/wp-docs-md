@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/security/"
     },
-    "modified": "2024-01-16T20:30:05",
-    "modified_gmt": "2024-01-16T20:30:05",
+    "modified": "2025-07-07T21:30:54",
+    "modified_gmt": "2025-07-07T21:30:54",
     "slug": "security",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Security"
     },
     "content": {
-        "rendered": "<p>The goal of the page is to inform users who manage a WordPress site about general security best practices both in terms of environment level items, such as file permissions, as well as application-level items, such as setting up proper user roles, so they have a better foundation for security than setting up WordPress somewhere with no additional configuration.</p>\n<p><strong>The most important thing to do for WordPress security is to keep WordPress itself and all installed plugins and themes up to date. It is also encouraged for users to choose themes and plugins that are actively receiving updates.</strong></p>\n<p>WordPress is committed to providing a secure experience for users. Information about WordPress&#8217;s official stance on security and a general discussion about WordPress&#8217;s overall aims for security can be found on <a href=\"https://wordpress.org/about/security/\">WordPress.org&#8217;s Security page</a>.</p>\n<p>This guide borrows heavily from the WordPress Codex&#8217;s guide on <a href=\"https://wordpress.org/support/article/hardening-wordpress/\">Hardening WordPress</a>. Since it&#8217;s publicly editable, advice in the codex should be viewed with caution.</p>\n<p>Keeping any system, not just WordPress, secure is continuous work. Good security requires careful planning, monitoring, and periodic maintenance.</p>\n<p>Security largely consists of reducing risk and planning for recovery. Most security plans focus on minimizing the risk of unauthorized access only, but risk can never be successfully reduced to zero. As long as there is some risk, you must plan for recovery so that if something were to happen, user sites are not completely lost and can be quickly restored to normal operation.</p>\n<p>Security is also about more than WordPress. It is also about making sure your hosting environment is secure and your personal online practices and behaviors keep you safe. Good security depends on the technology in use and the people using the technology. Obsolete or out-of-date technology can have bugs or vulnerabilities that can put your WordPress website at risk. People&#8217;s bad online practices can also put your WordPress website as risk. It is important to make sure that not only do you keep the technology you use up-to-date and maintained but also that employees are using security best practices when using the Internet and when interacting with your hosting platform or customer WordPress sites.</p>\n<h2>Changelog</h2>\n<ul>\n<li>2022-08-16: Nothing here, yet.</li>\n<li>2023-06-08: Moved from https://make.wordpress.org/hosting/handbook/security/</li>\n</ul>\n",
+        "rendered": "<p>The goal of the page is to inform users who manage a WordPress site about general security best practices both in terms of environment level items, such as file permissions, as well as application-level items, such as setting up proper user roles, so they have a better foundation for security than setting up WordPress somewhere with no additional configuration.</p>\n<p><strong>The most important thing to do for WordPress security is to keep WordPress itself and all installed plugins and themes up to date. It is also encouraged for users to choose themes and plugins that are actively receiving updates.</strong></p>\n<p>WordPress is committed to providing a secure experience for users. Information about WordPress&#8217;s official stance on security and a general discussion about WordPress&#8217;s overall aims for security can be found on <a href=\"https://wordpress.org/about/security/\">WordPress.org&#8217;s Security page</a>.</p>\n<p>This guide borrows heavily from the WordPress Codex&#8217;s guide on <a href=\"https://wordpress.org/support/article/hardening-wordpress/\">Hardening WordPress</a>. Since it&#8217;s publicly editable, advice in the codex should be viewed with caution.</p>\n<p>Keeping any system, not just WordPress, secure is continuous work. Good security requires careful planning, monitoring, and periodic maintenance.</p>\n<p>Security largely consists of reducing risk and planning for recovery. Most security plans focus on minimizing the risk of unauthorized access only, but risk can never be successfully reduced to zero. As long as there is some risk, you must plan for recovery so that if something were to happen, user sites are not completely lost and can be quickly restored to normal operation.</p>\n<p>Security is also about more than WordPress. It is also about making sure your hosting environment is secure and your personal online practices and behaviors keep you safe. Good security depends on the technology in use and the people using the technology. Obsolete or out-of-date technology can have bugs or vulnerabilities that can put your WordPress website at risk. People&#8217;s bad online practices can also put your WordPress website as risk. It is important to make sure that not only do you keep the technology you use up-to-date and maintained but also that employees are using security best practices when using the Internet and when interacting with your hosting platform or customer WordPress sites.</p>\n",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 2,
+                "count": 3,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145863/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 147630,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145863/revisions/147630"
+                "id": 159068,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145863/revisions/159068"
             }
         ],
         "wp:attachment": [

@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/components/tools-panel/"
     },
-    "modified": "2024-11-29T15:34:09",
-    "modified_gmt": "2024-11-29T15:34:09",
+    "modified": "2025-07-08T10:15:41",
+    "modified_gmt": "2025-07-08T10:15:41",
     "slug": "tools-panel",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134435,
-    "menu_order": 225,
+    "menu_order": 227,
     "template": "",
     "meta": {
         "footnotes": ""

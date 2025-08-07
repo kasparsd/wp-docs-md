@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/"
     },
-    "modified": "2025-01-06T18:49:14",
-    "modified_gmt": "2025-01-06T18:49:14",
+    "modified": "2025-07-08T10:16:02",
+    "modified_gmt": "2025-07-08T10:16:02",
     "slug": "packages-components",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134521,
-    "menu_order": 252,
+    "menu_order": 254,
     "template": "",
     "meta": {
         "footnotes": ""

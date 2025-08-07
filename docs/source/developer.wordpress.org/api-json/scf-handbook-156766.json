@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/secure-custom-fields/contributing/"
     },
-    "modified": "2025-03-14T04:46:14",
-    "modified_gmt": "2025-03-14T04:46:14",
+    "modified": "2025-06-23T10:16:17",
+    "modified_gmt": "2025-06-23T10:16:17",
     "slug": "contributing",
     "status": "publish",
     "type": "scf-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Contributing to SCF"
     },
     "content": {
-        "rendered": "<p>Guide for contributing to Secure Custom Fields development.</p>\n<h2>Ways to Contribute</h2>\n<ol>\n<li><strong>Code Contributions</strong>\n<ul>\n<li>Bug fixes</li>\n<li>New features</li>\n<li>Performance improvements</li>\n<li>Security enhancements</li>\n</ul>\n</li>\n<li><strong>Documentation</strong>\n<ul>\n<li>Writing tutorials</li>\n<li>Improving reference docs</li>\n<li>Fixing errors</li>\n<li>Adding examples</li>\n</ul>\n</li>\n<li><strong>Testing</strong>\n<ul>\n<li>Unit testing</li>\n<li>Integration testing</li>\n<li>Bug reporting</li>\n<li>Feature validation</li>\n</ul>\n</li>\n</ol>\n<h2>Development Setup</h2>\n<ol>\n<li>Fork the repository</li>\n<li>Set up local environment\n<ul>\n<li>The local environment runs with WP env, for setup, see: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/ along with prerequisites.</li>\n</ul>\n</li>\n<li>Install dependencies\n<ul>\n<li>run <code>composer install</code></li>\n<li>build the plugin files (JS/CSS) via <code>npm run build</code></li>\n</ul>\n</li>\n<li>Run test suite\n<ul>\n<li><code>composer run test</code></li>\n</ul>\n</li>\n</ol>\n<h2>Contribution Guidelines</h2>\n<ul>\n<li>Follow WordPress coding standards</li>\n<li>Write unit tests for new features</li>\n<li>Document all changes</li>\n<li>Keep pull requests focused</li>\n</ul>\n",
+        "rendered": "<p>Guide for contributing to Secure Custom Fields development.</p>\n<h2>Ways to Contribute</h2>\n<ol>\n<li><strong>Code Contributions</strong>\n<ul>\n<li>Bug fixes</li>\n<li>New features</li>\n<li>Performance improvements</li>\n<li>Security enhancements</li>\n</ul>\n</li>\n<li><strong>Documentation</strong>\n<ul>\n<li>Writing tutorials</li>\n<li>Improving reference docs</li>\n<li>Fixing errors</li>\n<li>Adding examples</li>\n</ul>\n</li>\n<li><strong>Testing</strong>\n<ul>\n<li>Unit testing</li>\n<li>Integration testing</li>\n<li>Bug reporting</li>\n<li>Feature validation</li>\n</ul>\n</li>\n</ol>\n<h2>Development Setup</h2>\n<ol>\n<li>Fork the repository</li>\n<li>Set up local environment\n<ul>\n<li>The local environment runs with WP env, for setup, see: <a href=\"https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/\">https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/</a> along with prerequisites.</li>\n</ul>\n</li>\n<li>Install dependencies\n<ul>\n<li>run <code>composer install</code></li>\n<li>build the plugin files (JS/CSS) via <code>npm run build</code></li>\n</ul>\n</li>\n<li>Run test suite\n<ul>\n<li><code>composer run test</code></li>\n</ul>\n</li>\n</ol>\n<h2>Contribution Guidelines</h2>\n<ul>\n<li>Follow WordPress coding standards</li>\n<li>Write unit tests for new features</li>\n<li>Document all changes</li>\n<li>Keep pull requests focused</li>\n</ul>\n",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 2,
+                "count": 3,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/156766/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 157395,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/156766/revisions/157395"
+                "id": 159017,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/156766/revisions/159017"
             }
         ],
         "wp:attachment": [

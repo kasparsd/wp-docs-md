@@ -66,6 +66,7 @@ Table of Contents:
 - [Debugging](#themes/advanced-topics/debugging)
 - [Security](#themes/advanced-topics/security)
 - [Publishing Themes](#themes/advanced-topics/publishing-themes)
+- [Theme Testing](#themes/advanced-topics/theme-testing)
 - [Plugin API Hooks](#themes/advanced-topics/plugin-api-hooks)
 - [UI Best Practices](#themes/advanced-topics/ui-best-practices)
 - [JavaScript Best Practices](#themes/advanced-topics/javascript-best-practices)
@@ -466,11 +467,11 @@ For developing WordPress themes, you need to set up a development environment th
 
 - [@wordpress/env](#block-editor/getting-started/devenv/get-started-with-wp-env) (local WordPress environment package)
 - [Docker](https://www.docker.com/)
+- [WordPress Studio](https://developer.wordpress.com/studio/)
 - [Local](https://localwp.com/)
 - [MAMP](https://www.mamp.info/en/mamp/mac/)
-- [Studio](https://developer.wordpress.com/studio/)
-- [Varying Vagrant Vagrants](https://varyingvagrantvagrants.org/) (VVV)
 - [XAMPP](https://www.apachefriends.org/)
+- [Varying Vagrant Vagrants](https://varyingvagrantvagrants.org/) (VVV)
 
 For more information, read the [Setting Up a Development Environment](https://make.wordpress.org/core/handbook/tutorials/installing-a-local-server/) documentation in the Core Handbook.
 
@@ -9920,6 +9921,29 @@ Hosting your WordPress theme on third-party marketplaces provides visibility and
 However, challenges include intense competition, fees and revenue sharing, adherence to marketplace guidelines, limited direct customer interaction, and dependence on the platform’s policies.
 
 When hosting on third-party marketplaces, it is important to understand the audience, focus on creating high-quality theme, stay informed about marketplace policies, optimize your theme for visibility, and more. While navigating these marketplaces requires balancing their benefits and constraints, they can be a valuable avenue for distributing your WordPress theme to a large audience.
+
+---
+
+# Theme Testing <a name="themes/advanced-topics/theme-testing" />
+
+Source: https://developer.wordpress.org/themes/advanced-topics/theme-testing/
+
+The [Theme Unit Test data](https://github.com/WordPress/theme-test-data) is a WordPress import file will fill a WordPress site with enough stub data (posts, media, users) to test a theme.
+
+The Theme Unit Tests are manual tests to walk through to test theme functionality and how the theme responds to the edge-cases of content and settings.
+
+### Theme Unit Test Overview
+
+1. Fix PHP and WordPress errors. Add the following debug setting to your `wp-config.php` file to see deprecated function calls and other WordPress-related errors:   
+    `define('WP_DEBUG', true);`  
+     See [Deprecated Functions Hook](https://codex.wordpress.org/WordPress_Deprecated_Functions_Hook) for more information.
+2. Check template files against [Template File Checklist](#themes/template-files-section) (see above).
+3. Do a run-through using the [Theme Unit Test](https://make.wordpress.org/themes/handbook/review/theme-unit-test/).
+4. Validate HTML and CSS. See [Validating a Website](#themes/advanced-topics/validating-your-theme).
+5. Check for JavaScript errors.
+6. Test in all your target browsers. For example Safari, Chrome, Opera, Firefox and Microsoft Edge.
+7. Clean up any extraneous comments, debug settings or TODO items.
+8. See [Theme Review](https://make.wordpress.org/themes/handbook/review/) if you are publicly releasing the Theme by submitting it to the Themes Directory.
 
 ---
 

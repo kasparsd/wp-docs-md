@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/data/data-core-edit-widgets/"
     },
-    "modified": "2025-05-22T12:00:30",
-    "modified_gmt": "2025-05-22T12:00:30",
+    "modified": "2025-07-08T10:15:34",
+    "modified_gmt": "2025-07-08T10:15:34",
     "slug": "data-core-edit-widgets",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134606,
-    "menu_order": 344,
+    "menu_order": 346,
     "template": "",
     "meta": {
         "footnotes": ""

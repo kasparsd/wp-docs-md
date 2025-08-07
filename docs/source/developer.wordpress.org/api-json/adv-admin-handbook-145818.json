@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/before-install/"
     },
-    "modified": "2024-02-20T16:54:47",
-    "modified_gmt": "2024-02-20T16:54:47",
+    "modified": "2025-07-07T21:31:03",
+    "modified_gmt": "2025-07-07T21:31:03",
     "slug": "before-install",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Before You Install"
     },
     "content": {
-        "rendered": "Before installing WordPress, you need to check that your web hosting provider fulfills the necessary software and conditions. Also, you must have access to the server and some tools.\n\n<h2>Requirements on the server side</h2>\n\n<ul>\n<li>PHP 7.4 or greater</li>\n<li>MySQL 5.7 or MariaDB 10.3 or greater</li>\n<li>HTTPS support</li>\n</ul>\n\nFor a list of detail requirements on your web host, refer the <a href=\"https://wordpress.org/about/requirements/\">official requirement page</a> and the <a href=\"https://make.wordpress.org/hosting/handbook/server-environment/\">Server Environment page</a>.\n\n<h2>Requirements on local</h2>\n\n<ul>\n<li>Login Account (user id and password) to the server via FTP or shell</li>\n<li>Text Editor</li>\n<li>FTP</li>\n<li>Your web browser of choice</li>\n</ul>\n\nYou will need to know how to use a text editor to edit the main configuration file. If you are a Windows user, Notepad will do. If you\u2019re an OS X user you can use TextEdit. Later, you will likely want to edit your Template Files (see <a href=\"https://codex.wordpress.org/Templates\">Templates</a> for some references). You can do this through the WordPress <a href=\"https://wordpress.org/documentation/article/administration-screens/\">Administration Screens</a>, but using a good text editor is highly recommended. For more information on this, see <a href=\"https://developer.wordpress.org/advanced-administration/wordpress/edit-files/\">Editing files</a>.\n\nYou will need to be able to use an FTP program to <a href=\"https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/\">upload</a> files and <a href=\"https://developer.wordpress.org/advanced-administration/server/file-permissions/\">set file permissions</a> (optional). You could choose <a href=\"https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/\">FileZilla</a> for this task.\n\nNow you are all set to go on to <a href=\"https://developer.wordpress.org/advanced-administration/before-install/howto-install/\">Installation</a>.\n\n<h2>Changelog</h2>\n\n<ul>\n<li>2023-01-20: Changed MySQL and MariaDB versions. Fixed some links.</li>\n<li>2022-09-11: Original content from <a href=\"https://wordpress.org/documentation/article/before-you-install/\">Before You Install</a>.</li>\n</ul>\n",
+        "rendered": "Before installing WordPress, you need to check that your web hosting provider fulfills the necessary software and conditions. Also, you must have access to the server and some tools.\n\n<h2>Requirements on the server side</h2>\n\n<ul>\n<li>PHP 7.4 or greater</li>\n<li>MySQL 5.7 or MariaDB 10.3 or greater</li>\n<li>HTTPS support</li>\n</ul>\n\nFor a list of detail requirements on your web host, refer the <a href=\"https://wordpress.org/about/requirements/\">official requirement page</a> and the <a href=\"https://make.wordpress.org/hosting/handbook/server-environment/\">Server Environment page</a>.\n\n<h2>Requirements on local</h2>\n\n<ul>\n<li>Login Account (user id and password) to the server via FTP or shell</li>\n<li>Text Editor</li>\n<li>FTP</li>\n<li>Your web browser of choice</li>\n</ul>\n\nYou will need to know how to use a text editor to edit the main configuration file. If you are a Windows user, Notepad will do. If you\u2019re an OS X user you can use TextEdit. Later, you will likely want to edit your Template Files (see <a href=\"https://codex.wordpress.org/Templates\">Templates</a> for some references). You can do this through the WordPress <a href=\"https://wordpress.org/documentation/article/administration-screens/\">Administration Screens</a>, but using a good text editor is highly recommended. For more information on this, see <a href=\"https://developer.wordpress.org/advanced-administration/wordpress/edit-files/\">Editing files</a>.\n\nYou will need to be able to use an FTP program to <a href=\"https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/\">upload</a> files and <a href=\"https://developer.wordpress.org/advanced-administration/server/file-permissions/\">set file permissions</a> (optional). You could choose <a href=\"https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/\">FileZilla</a> for this task.\n\nNow you are all set to go on to <a href=\"https://developer.wordpress.org/advanced-administration/before-install/howto-install/\">Installation</a>.\n",
         "protected": false
     },
     "author": 148148,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 2,
+                "count": 3,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145818/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 152398,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145818/revisions/152398"
+                "id": 159112,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145818/revisions/159112"
             }
         ],
         "author": [

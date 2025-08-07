@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/server/web-server/"
     },
-    "modified": "2024-11-25T10:49:08",
-    "modified_gmt": "2024-11-25T10:49:08",
+    "modified": "2025-07-07T21:31:00",
+    "modified_gmt": "2025-07-07T21:31:00",
     "slug": "web-server",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Web servers"
     },
     "content": {
-        "rendered": "<p>The web server is a piece of software that accepts user web requests and serves them the appropriate result. Many different web servers run on other operation systems. Generally, if your web server supports and executes PHP files, it should be able to work with WordPress.</p>\n<h2>Apache HTTPD</h2>\n<p>See <a href=\"https://developer.wordpress.org/advanced-administration/server/web-server/httpd/\">Apache HTTPD / .htaccess</a></p>\n<h2>nginx</h2>\n<p>See <a href=\"https://developer.wordpress.org/advanced-administration/server/web-server/nginx/\">Nginx</a>.</p>\n<h2>Changelog</h2>\n<ul>\n<li>2022-09-11: First move from the old handbook.</li>\n</ul>\n",
+        "rendered": "<p>The web server is a piece of software that accepts user web requests and serves them the appropriate result. Many different web servers run on other operation systems. Generally, if your web server supports and executes PHP files, it should be able to work with WordPress.</p>\n<h2>Apache HTTPD</h2>\n<p>See <a href=\"https://developer.wordpress.org/advanced-administration/server/web-server/httpd/\">Apache HTTPD / .htaccess</a></p>\n<h2>nginx</h2>\n<p>See <a href=\"https://developer.wordpress.org/advanced-administration/server/web-server/nginx/\">Nginx</a>.</p>\n",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 3,
+                "count": 4,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145832/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 155836,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145832/revisions/155836"
+                "id": 159099,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145832/revisions/159099"
             }
         ],
         "up": [

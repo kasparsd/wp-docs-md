@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/components/popover/"
     },
-    "modified": "2025-05-13T19:00:42",
-    "modified_gmt": "2025-05-13T19:00:42",
+    "modified": "2025-07-08T10:16:07",
+    "modified_gmt": "2025-07-08T10:16:07",
     "slug": "popover",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134435,
-    "menu_order": 189,
+    "menu_order": 191,
     "template": "",
     "meta": {
         "footnotes": ""

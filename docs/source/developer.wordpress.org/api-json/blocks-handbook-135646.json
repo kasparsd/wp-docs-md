@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/components/duotone-picker/"
     },
-    "modified": "2024-10-30T16:55:03",
-    "modified_gmt": "2024-10-30T16:55:03",
+    "modified": "2025-07-08T10:15:48",
+    "modified_gmt": "2025-07-08T10:15:48",
     "slug": "duotone-picker",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134435,
-    "menu_order": 146,
+    "menu_order": 148,
     "template": "",
     "meta": {
         "footnotes": ""

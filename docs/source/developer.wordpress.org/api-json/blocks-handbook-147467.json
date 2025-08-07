@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-e2e-test-utils-playwright/"
     },
-    "modified": "2024-10-30T17:09:44",
-    "modified_gmt": "2024-10-30T17:09:44",
+    "modified": "2025-07-08T10:15:32",
+    "modified_gmt": "2025-07-08T10:15:32",
     "slug": "packages-e2e-test-utils-playwright",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134521,
-    "menu_order": 270,
+    "menu_order": 272,
     "template": "",
     "meta": {
         "footnotes": ""

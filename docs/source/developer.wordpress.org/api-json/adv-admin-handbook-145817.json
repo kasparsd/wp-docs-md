@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/"
     },
-    "modified": "2024-02-21T06:54:46",
-    "modified_gmt": "2024-02-21T06:54:46",
+    "modified": "2025-07-07T21:31:03",
+    "modified_gmt": "2025-07-07T21:31:03",
     "slug": "handbook",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Advanced Administration Handbook"
     },
     "content": {
-        "rendered": "<p>Welcome to the <strong>WordPress Advanced Administration Handbook</strong>! Here you will find WordPress advanced documentation. Use the &#8220;Contents&#8221; menu on the left to navigate topics.</p>\n<h2>Why Advanced Administration?</h2>\n<p>Not all users who use WordPress have to know about technology, and therefore in its documentation should not appear either, and developers do not have to know certain advanced system configurations.</p>\n<p>With this in mind, all the more technically complex documentation has been included in this documentation so that it can be used by more or less technical people.</p>\n<h2>Where can I be involved?</h2>\n<p>The Documentation Team meets in the WordPress Slack, in the <a href=\"https://wordpress.slack.com/archives/docs/\">#docs</a> channel. The conversations are in English. Check out the <a href=\"https://make.wordpress.org/meetings#docs\">WordPress Meeting calendar</a> for the current schedule.</p>\n<h2>Advanced Administration Handbook managers</h2>\n<p>This documentation is managed by <a href=\"https://profiles.wordpress.org/javiercasares/\">@javiercasares</a>, <a href=\"https://profiles.wordpress.org/lucp/\">@lucp</a>, and <a href=\"https://profiles.wordpress.org/milana_cap/\">@milana_cap</a>. Also, the <a href=\"https://make.wordpress.org/docs/\">Documentation Team</a> and <a href=\"https://make.wordpress.org/hosting/\">Hosting Team</a> are involved in this.</p>\n<p>\n<div class=\"wp-block-wporg-notice is-info-notice\">\n<div class=\"wp-block-wporg-notice__icon\"></div>\n<div class=\"wp-block-wporg-notice__content\"><p>If you&#8217;re interested in improving this handbook, check the <a href=\"https://github.com/WordPress/WordPress-Advanced-administration-handbook\">Github Handbook repo</a>, the <a href=\"https://github.com/WordPress/Documentation-Issue-Tracker/labels/advanced%20administration\">Documentation Issue tracked</a>, or leave a message in the <a href=\"https://wordpress.slack.com/archives/hosting-community/\">#hosting-community channel</a> at <a href=\"https://make.wordpress.org/chat/\">WordPress Slack</a>.</p>\n</div></div>\n</p>\n<h2>Changelog</h2>\n<ul>\n<li>2023-01-15: Minor fixes, and reviewed.</li>\n<li>2022-08-16: First version.</li>\n</ul>\n",
+        "rendered": "<p>Welcome to the <strong>WordPress Advanced Administration Handbook</strong>! Here you will find WordPress advanced documentation. Use the &#8220;Contents&#8221; menu on the left to navigate topics.</p>\n<h2>Why Advanced Administration?</h2>\n<p>Not all users who use WordPress have to know about technology, and therefore in its documentation should not appear either, and developers do not have to know certain advanced system configurations.</p>\n<p>With this in mind, all the more technically complex documentation has been included in this documentation so that it can be used by more or less technical people.</p>\n<h2>Where can I be involved?</h2>\n<p>The Documentation Team meets in the WordPress Slack, in the <a href=\"https://wordpress.slack.com/archives/docs/\">#docs</a> channel. The conversations are in English. Check out the <a href=\"https://make.wordpress.org/meetings#docs\">WordPress Meeting calendar</a> for the current schedule.</p>\n<h2>Advanced Administration Handbook managers</h2>\n<p>This documentation is managed by <a href=\"https://profiles.wordpress.org/javiercasares/\">@javiercasares</a>, <a href=\"https://profiles.wordpress.org/lucp/\">@lucp</a>, and <a href=\"https://profiles.wordpress.org/milana_cap/\">@milana_cap</a>. Also, the <a href=\"https://make.wordpress.org/docs/\">Documentation Team</a> and <a href=\"https://make.wordpress.org/hosting/\">Hosting Team</a> are involved in this.</p>\n<p>\n<div class=\"wp-block-wporg-notice is-info-notice\">\n<div class=\"wp-block-wporg-notice__icon\"></div>\n<div class=\"wp-block-wporg-notice__content\"><p>If you&#8217;re interested in improving this handbook, check the <a href=\"https://github.com/WordPress/WordPress-Advanced-administration-handbook\">Github Handbook repo</a>, the <a href=\"https://github.com/WordPress/Documentation-Issue-Tracker/labels/advanced%20administration\">Documentation Issue tracked</a>, or leave a message in the <a href=\"https://wordpress.slack.com/archives/hosting-community/\">#hosting-community channel</a> at <a href=\"https://make.wordpress.org/chat/\">WordPress Slack</a>.</p>\n</div></div>\n</p>\n",
         "protected": false
     },
     "author": 148148,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 3,
+                "count": 4,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145817/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 152410,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145817/revisions/152410"
+                "id": 159113,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145817/revisions/159113"
             }
         ],
         "author": [

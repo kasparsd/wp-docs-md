@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/contributors/code/getting-started-with-code-contribution/"
     },
-    "modified": "2025-03-24T11:49:10",
-    "modified_gmt": "2025-03-24T11:49:10",
+    "modified": "2025-07-08T10:15:50",
+    "modified_gmt": "2025-07-08T10:15:50",
     "slug": "getting-started-with-code-contribution",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 135090,
-    "menu_order": 370,
+    "menu_order": 372,
     "template": "",
     "meta": {
         "footnotes": ""

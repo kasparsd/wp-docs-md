@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-shortcode/"
     },
-    "modified": "2024-11-30T08:04:10",
-    "modified_gmt": "2024-11-30T08:04:10",
+    "modified": "2025-07-08T10:15:55",
+    "modified_gmt": "2025-07-08T10:15:55",
     "slug": "packages-shortcode",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134521,
-    "menu_order": 321,
+    "menu_order": 323,
     "template": "",
     "meta": {
         "footnotes": ""

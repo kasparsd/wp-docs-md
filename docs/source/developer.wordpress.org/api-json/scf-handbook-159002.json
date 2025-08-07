@@ -1,0 +1,91 @@
+{
+    "id": 159002,
+    "date": "2025-06-23T10:16:09",
+    "date_gmt": "2025-06-23T10:16:09",
+    "guid": {
+        "rendered": "https://developer.wordpress.org/secure-custom-fields/features/field/nav_menu/"
+    },
+    "modified": "2025-06-23T10:32:06",
+    "modified_gmt": "2025-06-23T10:32:06",
+    "slug": "nav_menu",
+    "status": "publish",
+    "type": "scf-handbook",
+    "link": "https://developer.wordpress.org/secure-custom-fields/features/field/nav_menu/",
+    "title": {
+        "rendered": "Nav Menu Field"
+    },
+    "content": {
+        "rendered": "<p>The Nav Menu Field field provides a way to select nav menus and output them.</p>\n<h2>Key Features</h2>\n<ul>\n<li>Different Return Value (Object, HTML, ID)</li>\n<li>Different Menu Container (nav, div)</li>\n<li>Ability to select no value</li>\n</ul>\n<h2>Settings</h2>\n<ul>\n<li>Return Value</li>\n<li>Menu Container</li>\n<li>Allow Null?</li>\n</ul>\n",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 157183,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-159002",
+        "scf-handbook",
+        "type-scf-handbook",
+        "status-publish",
+        "hentry",
+        "type-handbook"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/159002",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/types/scf-handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/159002/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 159019,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/159002/revisions/159019"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/scf-handbook/157183"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/media?parent=159002"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

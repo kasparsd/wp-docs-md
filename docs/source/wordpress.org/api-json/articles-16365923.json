@@ -1,0 +1,107 @@
+{
+    "id": 16365923,
+    "date": "2025-08-01T16:45:48",
+    "date_gmt": "2025-08-01T16:45:48",
+    "guid": {
+        "rendered": "https://wordpress.org/documentation/?post_type=helphub_article&#038;p=16365923"
+    },
+    "modified": "2025-08-01T16:45:48",
+    "modified_gmt": "2025-08-01T16:45:48",
+    "slug": "query-title-block",
+    "status": "publish",
+    "type": "helphub_article",
+    "link": "https://wordpress.org/documentation/article/query-title-block/",
+    "title": {
+        "rendered": "Query Title block"
+    },
+    "content": {
+        "rendered": "\n<p>The Query Title block displays a dynamic heading based on the type of content being viewed, such as a category name, search term etc.</p>\n\n\n\n<p>It has two main variations:</p>\n\n\n\n<h2 class=\"wp-block-heading\">Archive Title</h2>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Displays the title of the current archive page, such as a category, tag, author, or date.</li>\n\n\n\n<li>To add a Archive Title block, click the Block Inserter (+) icon, search for &#8220;Archive Title&#8221;, and select it from the list to insert it into your template.</li>\n</ul>\n\n\n\n<figure class=\"wp-block-image size-large\"><img loading=\"lazy\" decoding=\"async\" width=\"1024\" height=\"604\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-1-6.8-1024x604.png\" alt=\"Archive Title\" class=\"wp-image-16365924\" srcset=\"https://wordpress.org/documentation/files/2025/08/query-title-1-6.8-1024x604.png 1024w, https://wordpress.org/documentation/files/2025/08/query-title-1-6.8-300x177.png 300w, https://wordpress.org/documentation/files/2025/08/query-title-1-6.8-768x453.png 768w, https://wordpress.org/documentation/files/2025/08/query-title-1-6.8-1536x907.png 1536w, https://wordpress.org/documentation/files/2025/08/query-title-1-6.8-2048x1209.png 2048w\" sizes=\"auto, (max-width: 1024px) 100vw, 1024px\" /></figure>\n\n\n\n<h2 class=\"wp-block-heading\">Search Result Title</h2>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Displays a heading based on the user&#8217;s search query.</li>\n\n\n\n<li>To add a Search Results Title block, click the Block Inserter (+) icon, search for &#8220;Search Results Title&#8221;, and select it from the list to insert it into your template.</li>\n</ul>\n\n\n\n<figure class=\"wp-block-image size-large\"><img loading=\"lazy\" decoding=\"async\" width=\"1024\" height=\"607\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-2-6.8-1024x607.png\" alt=\"Search Result Title\" class=\"wp-image-16365925\" srcset=\"https://wordpress.org/documentation/files/2025/08/query-title-2-6.8-1024x607.png 1024w, https://wordpress.org/documentation/files/2025/08/query-title-2-6.8-300x178.png 300w, https://wordpress.org/documentation/files/2025/08/query-title-2-6.8-768x455.png 768w, https://wordpress.org/documentation/files/2025/08/query-title-2-6.8-1536x910.png 1536w, https://wordpress.org/documentation/files/2025/08/query-title-2-6.8-2048x1213.png 2048w\" sizes=\"auto, (max-width: 1024px) 100vw, 1024px\" /></figure>\n\n\n\n<p class=\"has-background\" style=\"background-color:#e5f5fa\">Both of these are built on top of the same underlying block (core/query-title) and share the same functionality and controls \u2014 they differ only in what type of content they\u2019re designed to display.</p>\n\n\n\n<h2 class=\"wp-block-heading\">Block toolbar</h2>\n\n\n\n<p>To view the block toolbar, click on the block, and the toolbar will be displayed.</p>\n\n\n\n<p class=\"has-background\" style=\"background-color:#e5f5fa\">Every block comes with unique toolbar icons and blocks specific user controls that allow you to manipulate the block right in the editor.</p>\n\n\n\n<p><strong>The Query Title block shows seven buttons in the block toolbar ( From Left to Right ):</strong><a href=\"https://private-user-images.githubusercontent.com/80690679/457388405-46d04f7b-9832-4213-a87e-0b252ece1cdd.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTQwNjQxMzIsIm5iZiI6MTc1NDA2MzgzMiwicGF0aCI6Ii84MDY5MDY3OS80NTczODg0MDUtNDZkMDRmN2ItOTgzMi00MjEzLWE4N2UtMGIyNTJlY2UxY2RkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA4MDElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwODAxVDE1NTcxMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWI1YjdjNTA3NmQ5ZmUxNTM0YmNlN2U5OWQ4ZDU4NDdhNDgyODI3NGEwZWRiMDg5YmU5ZDQyYzAzMTg2NTdiMmQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.wQ_6TYYB9pL-TlBtbwl8MST1mlh-WFx_kZ1mSEN9QkE\" target=\"_blank\" rel=\"noreferrer noopener\"></a></p>\n\n\n\n<figure class=\"wp-block-image size-medium\"><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"56\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-3-6.8-300x56.png\" alt=\"Block toolbar\" class=\"wp-image-16365926\" srcset=\"https://wordpress.org/documentation/files/2025/08/query-title-3-6.8-300x56.png 300w, https://wordpress.org/documentation/files/2025/08/query-title-3-6.8.png 574w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></figure>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Transform to</li>\n\n\n\n<li>Drag icon</li>\n\n\n\n<li>Move arrows</li>\n\n\n\n<li>Heading Level</li>\n\n\n\n<li>Text Alignment</li>\n\n\n\n<li>More options</li>\n</ul>\n\n\n\n<h3 class=\"wp-block-heading\">Transform To</h3>\n\n\n\n<p>Click on the Transform button to convert the Archive Title block into a Columns, Details, or Groupblock:</p>\n\n\n\n<figure class=\"wp-block-image size-medium\"><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"56\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-4-6.8-300x56.png\" alt=\"Block toolbar - Transform To\" class=\"wp-image-16365927\" srcset=\"https://wordpress.org/documentation/files/2025/08/query-title-4-6.8-300x56.png 300w, https://wordpress.org/documentation/files/2025/08/query-title-4-6.8.png 570w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></figure>\n\n\n\n<h3 class=\"wp-block-heading\">Drag</h3>\n\n\n\n<p>To drag and drop the block to a new location on the page template, click and hold the rectangle of dots, then drag it to the new location. The blue separator line indicates where the block will be placed. Release the left mouse button when you find the new location to place the block.</p>\n\n\n\n<figure class=\"wp-block-image size-medium\"><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"56\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-5-6.8-300x56.png\" alt=\"Block toolbar - Drag\" class=\"wp-image-16365928\" srcset=\"https://wordpress.org/documentation/files/2025/08/query-title-5-6.8-300x56.png 300w, https://wordpress.org/documentation/files/2025/08/query-title-5-6.8.png 570w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></figure>\n\n\n\n<h3 class=\"wp-block-heading\">Move Up / Down Arrows</h3>\n\n\n\n<p>The up and down arrow icons can be used to move the block up and down on the page.<br><a href=\"https://wordpress.org/documentation/article/moving-blocks/\">Get more information about moving a block within the editor.</a></p>\n\n\n\n<figure class=\"wp-block-image size-medium\"><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"55\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-6-6.8-300x55.png\" alt=\"Block toolbar - Move Up and Down Arrows\" class=\"wp-image-16365929\" srcset=\"https://wordpress.org/documentation/files/2025/08/query-title-6-6.8-300x55.png 300w, https://wordpress.org/documentation/files/2025/08/query-title-6-6.8.png 570w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></figure>\n\n\n\n<h3 class=\"wp-block-heading\">Heading Level</h3>\n\n\n\n<p>You can choose the heading level for the Archive Title from H1\u2013H6.</p>\n\n\n\n<figure class=\"wp-block-image size-medium\"><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"57\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-7-6.8-300x57.png\" alt=\"Block toolbar - Heading Level\" class=\"wp-image-16365930\" srcset=\"https://wordpress.org/documentation/files/2025/08/query-title-7-6.8-300x57.png 300w, https://wordpress.org/documentation/files/2025/08/query-title-7-6.8.png 570w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></figure>\n\n\n\n<h3 class=\"wp-block-heading\">Text Alignment</h3>\n\n\n\n<p>Click the Change alignment button in the Block toolbar to display the alignment drop-down. You can align the block text to the left, make it center-aligned or align it to the right.</p>\n\n\n\n<figure class=\"wp-block-image size-medium\"><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"53\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-8-6.8-300x53.png\" alt=\"Block toolbar - Text Alignment\" class=\"wp-image-16365931\" srcset=\"https://wordpress.org/documentation/files/2025/08/query-title-8-6.8-300x53.png 300w, https://wordpress.org/documentation/files/2025/08/query-title-8-6.8.png 572w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></figure>\n\n\n\n<h3 class=\"wp-block-heading\">Options Menu</h3>\n\n\n\n<p>The&nbsp;<a href=\"https://wordpress.org/documentation/article/more-options\">More Options menu</a>&nbsp;represented by three vertical dots on the far right of the toolbar gives you more features such as the ability to duplicate, remove, or edit your block as HTML.</p>\n\n\n\n<figure class=\"wp-block-image size-medium\"><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"56\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-9-6.8-300x56.png\" alt=\"Block toolbar - Options Menu\" class=\"wp-image-16365932\" srcset=\"https://wordpress.org/documentation/files/2025/08/query-title-9-6.8-300x56.png 300w, https://wordpress.org/documentation/files/2025/08/query-title-9-6.8.png 572w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></figure>\n\n\n\n<h2 class=\"wp-block-heading\">Block settings</h2>\n\n\n\n<p>The block settings panel contains customization options specific to the block. To get to the settings, select the block and click to open the Inspector sidebar. You should see the block settings displayed below with the title \u201cArchive Title\u201d at the top:</p>\n\n\n\n<h3 class=\"wp-block-heading\">Block Settings</h3>\n\n\n\n<figure class=\"wp-block-image size-medium\"><img loading=\"lazy\" decoding=\"async\" width=\"249\" height=\"300\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-10-6.8-249x300.png\" alt=\"Block Settings panel\" class=\"wp-image-16365933\" srcset=\"https://wordpress.org/documentation/files/2025/08/query-title-10-6.8-249x300.png 249w, https://wordpress.org/documentation/files/2025/08/query-title-10-6.8.png 570w\" sizes=\"auto, (max-width: 249px) 100vw, 249px\" /></figure>\n\n\n\n<h4 class=\"wp-block-heading\">Show archive type in title</h4>\n\n\n\n<p>Toggle this option to include or exclude the archive type (e.g., &#8220;Category&#8221;, &#8220;Tag&#8221;, &#8220;Author&#8221;) in the title.</p>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Enabled (default): Displays titles like Category: Travel</li>\n\n\n\n<li>Disabled: Displays just Travel</li>\n</ul>\n\n\n\n<h3 class=\"wp-block-heading\">Style Settings</h3>\n\n\n\n<figure class=\"wp-block-image size-large\"><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"1024\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-11-6.8-300x1024.png\" alt=\"Style Settings panel\" class=\"wp-image-16365934\" srcset=\"https://wordpress.org/documentation/files/2025/08/query-title-11-6.8-300x1024.png 300w, https://wordpress.org/documentation/files/2025/08/query-title-11-6.8-88x300.png 88w, https://wordpress.org/documentation/files/2025/08/query-title-11-6.8.png 450w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></figure>\n\n\n\n<h4 class=\"wp-block-heading\">Color</h4>\n\n\n\n<p>Text and background colors can be set on a per-block basis, allowing you to call attention to important content. Using the Color settings, you can customize the block by adding text, background, and link colors.</p>\n\n\n\n<p class=\"has-background\" style=\"background-color:#e5f5fa\"><a href=\"https://wordpress.org/documentation/article/colors-settings-overview/\">See this guide for more information about changing colors.</a></p>\n\n\n\n<figure class=\"wp-block-image size-medium\"><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"295\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-12-6.8-300x295.png\" alt=\"Color panel\" class=\"wp-image-16365936\" srcset=\"https://wordpress.org/documentation/files/2025/08/query-title-12-6.8-300x295.png 300w, https://wordpress.org/documentation/files/2025/08/query-title-12-6.8-1024x1006.png 1024w, https://wordpress.org/documentation/files/2025/08/query-title-12-6.8-768x755.png 768w, https://wordpress.org/documentation/files/2025/08/query-title-12-6.8.png 1168w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></figure>\n\n\n\n<h4 class=\"wp-block-heading\">Typography</h4>\n\n\n\n<p>The Typography settings enable you to customize the font and text appearance of the content within the Archive Title block. The settings have various options, such as font family, size, appearance, line height, letter case, letter spacing, and decoration.</p>\n\n\n\n<p class=\"has-background\" style=\"background-color:#e5f5fa\"><a href=\"https://wordpress.org/documentation/article/typography-settings-overview/\">Get more details about changing typography settings.</a></p>\n\n\n\n<h4 class=\"wp-block-heading\">Dimensions</h4>\n\n\n\n<p>The Archive Title block provides various options to adjust its dimensions, such as width and height, allowing you to customize the text layout to ensure visual consistency.</p>\n\n\n\n<h4 class=\"wp-block-heading\">Border</h4>\n\n\n\n<p>The Archive Title block provides border settings options to add border color, width, and radius.</p>\n\n\n\n<p class=\"has-background\" style=\"background-color:#e5f5fa\">For details refer to this support article:&nbsp;<a href=\"https://wordpress.org/documentation/article/border-settings-overview/\">Border settings overview</a></p>\n\n\n\n<h4 class=\"wp-block-heading\">Advanced</h4>\n\n\n\n<p>The Advanced tab lets you add CSS class(es) to your block. This will allow you to write custom CSS and styles to the block.</p>\n\n\n\n<figure class=\"wp-block-image size-full\"><img loading=\"lazy\" decoding=\"async\" width=\"282\" height=\"166\" src=\"https://wordpress.org/documentation/files/2025/08/query-title-13-6.8.png\" alt=\"Advanced Settings panel\" class=\"wp-image-16365937\" /></figure>\n\n\n\n<div id=\"changelog\" class=\"wp-block-group changelog has-background is-layout-flow wp-block-group-is-layout-flow\" style=\"background-color:#dce5ec;padding-top:var(--wp--preset--spacing--20);padding-right:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--20)\">\n<h2 class=\"wp-block-heading has-heading-6-font-size\">Changelog</h2>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Created 2025-08-01</li>\n</ul>\n</div>\n\n\n\n<p></p>\n",
+        "protected": false
+    },
+    "excerpt": {
+        "rendered": "<p>The Query Title block displays a dynamic heading based on the type of content being viewed, such as a category name, search term etc. It has two main variations: Archive Title Search Result Title Both of these are built on top of the same underlying block (core/query-title) and share the same functionality and controls \u2014 [&hellip;]</p>\n",
+        "protected": false
+    },
+    "featured_media": 0,
+    "menu_order": 0,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "template": "",
+    "meta": {
+        "advanced_seo_description": "",
+        "jetpack_seo_html_title": "",
+        "jetpack_seo_noindex": false
+    },
+    "category": [
+        91
+    ],
+    "class_list": [
+        "post-16365923",
+        "helphub_article",
+        "type-helphub_article",
+        "status-publish",
+        "hentry",
+        "category-theme-blocks"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/articles/16365923",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/articles"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/types/helphub_article"
+            }
+        ],
+        "replies": [
+            {
+                "embeddable": true,
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/comments?post=16365923"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 3,
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/articles/16365923/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 16365940,
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/articles/16365923/revisions/16365940"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/media?parent=16365923"
+            }
+        ],
+        "wp:term": [
+            {
+                "taxonomy": "category",
+                "embeddable": true,
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/category?post=16365923"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

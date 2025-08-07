@@ -96,11 +96,6 @@ This documentation is managed by [@javiercasares](https://profiles.wordpress.org
 
 If you’re interested in improving this handbook, check the [Github Handbook repo](https://github.com/WordPress/WordPress-Advanced-administration-handbook), the [Documentation Issue tracked](https://github.com/WordPress/Documentation-Issue-Tracker/labels/advanced%20administration), or leave a message in the [\#hosting-community channel](https://wordpress.slack.com/archives/hosting-community/) at [WordPress Slack](https://make.wordpress.org/chat/).
 
-## Changelog
-
-- 2023-01-15: Minor fixes, and reviewed.
-- 2022-08-16: First version.
-
 ---
 
 # Before You Install <a name="advanced-administration/before-install" />
@@ -122,10 +117,7 @@ For a list of detail requirements on your web host, refer the [official requirem
 - FTP
 - Your web browser of choice
 
-You will need to know how to use a text editor to edit the main configuration file. If you are a Windows user, Notepad will do. If you’re an OS X user you can use TextEdit. Later, you will likely want to edit your Template Files (see [Templates](https://codex.wordpress.org/Templates) for some references). You can do this through the WordPress [Administration Screens](https://wordpress.org/documentation/article/administration-screens/), but using a good text editor is highly recommended. For more information on this, see [Editing files](#advanced-administration/wordpress/edit-files). You will need to be able to use an FTP program to [upload](#advanced-administration/upgrade/ftp/filezilla) files and [set file permissions](#advanced-administration/server/file-permissions) (optional). You could choose [FileZilla](#advanced-administration/upgrade/ftp/filezilla) for this task. Now you are all set to go on to [Installation](#advanced-administration/before-install/howto-install). ## Changelog
-
-- 2023-01-20: Changed MySQL and MariaDB versions. Fixed some links.
-- 2022-09-11: Original content from [Before You Install](https://wordpress.org/documentation/article/before-you-install/).
+You will need to know how to use a text editor to edit the main configuration file. If you are a Windows user, Notepad will do. If you’re an OS X user you can use TextEdit. Later, you will likely want to edit your Template Files (see [Templates](https://codex.wordpress.org/Templates) for some references). You can do this through the WordPress [Administration Screens](https://wordpress.org/documentation/article/administration-screens/), but using a good text editor is highly recommended. For more information on this, see [Editing files](#advanced-administration/wordpress/edit-files). You will need to be able to use an FTP program to [upload](#advanced-administration/upgrade/ftp/filezilla) files and [set file permissions](#advanced-administration/server/file-permissions) (optional). You could choose [FileZilla](#advanced-administration/upgrade/ftp/filezilla) for this task. Now you are all set to go on to [Installation](#advanced-administration/before-install/howto-install).
 
 ---
 
@@ -236,10 +228,6 @@ If you’re a regular User of a single-site webhosting account, you can log in n
 Reseller accounts Admin accounts may need to click **User Level**. They must first log in as Reseller if the relevant domain is a Reseller’s primary domain… or log in as a User if the domain is not a Reseller’s primary domain. If it’s the Reseller’s primary domain, then when logged in as Reseller, simply click **User Level**. However if the relevant domain is not the Reseller’s primary domain, then you must log in as a User. Then click **MySQL Management**. (If not readily visible, perhaps you need to return to the Reseller or Admin level, and modify the “Manage user package” or “Manage Reseller package” to enable MySQL.)
 
 In MySQL Management, click on the small words: **Create new database**. Here you are asked to submit two suffixes for the database and its username. For maximum security, use two different sets of 4-6 random characters. Then the password field has a Random button that generates an 8-character password. You may also add more characters to the password for maximum security. Click **Create**. The next screen will summarize the database, username, password and hostname. Be sure to copy and paste these into a text file for future reference.
-
-## Changelog
-
-- 2022-09-11: Original content from [Creating Database for WordPress](https://wordpress.org/documentation/article/creating-database-for-wordpress/).
 
 ---
 
@@ -476,12 +464,6 @@ Check to make sure that your configuration of your web-server is correct and tha
 
 If you use the Rich Text Editor on a blog that’s installed in a subdirectory, and drag a newly uploaded image into the editor field, the image may vanish a couple seconds later. This is due to a problem with TinyMCE (the rich text editor) not getting enough information during the drag operation to construct the path to the image or other file correctly. The solution is to NOT drag uploaded images into the editor. Instead, click and hold on the image and select **Send to Editor.**
 
-## Changelog
-
-- 2022-09-14: Added alt tags to all images.
-- 2022-09-14: cleared up a link refering to the [utf8mb4 article](https://make.wordpress.org/core/2015/04/02/the-utf8mb4-upgrade/)
-- 2022-09-14: Original content from [How to install WordPress](https://wordpress.org/documentation/article/how-to-install-wordpress/)
-
 ---
 
 # Running a Development Copy of WordPress <a name="advanced-administration/before-install/development" />
@@ -492,43 +474,15 @@ Having a development instance of WordPress is a good way to update, develop, and
 
 ## Installing WordPress on your computer
 
-Use these instructions to set up a local server environment for testing and development.
+Use these instructions to set up a local server environment for testing and development. Installing WordPress locally is usually meant for development. Those interested in development can follow the instructions below to download and install WordPress locally. – [wp-env](#block-editor/reference-guides/packages/packages-env) – a free, open-source development environment maintained by the WordPress core developer community. – [VVV or Varying Vagrant Vagrants](https://varyingvagrantvagrants.org/) – free, open-source local development environment maintained by members of the WordPress community. – [XAMPP](https://www.apachefriends.org/) – free and open-source local development environment maintained by Apache Friends – [MAMP](https://www.mamp.info/en/mac/) – free local development environment that everything you need to install WordPress locally. – [DDEV](https://ddev.readthedocs.io/en/stable/users/quickstart/#wordpress) – free, open-source, development environment. Seamlessly share local sites over public domains, includes a database editor, Xdebug, and other performance profiling tools. – [Lando](https://lando.dev/) – free, open-source development environment that offers a [plugin to install WordPress locally](https://docs.lando.dev/plugins/wordpress/). – [AMPPS](https://ampps.com/downloads/) – free WAMP/MAMP/LAMP stack with Softaculous Installer built in. It can 1-click install and upgrade WordPress and others as well. – [Bitnami package for WordPress](https://bitnami.com/stack/wordpress) and [Bitnami package for WordPress Multisite](https://bitnami.com/stack/wordpress-multisite) – Bitnami packages for WordPress that provide a one-click install solution for WordPress or WordPress Multisite on your local computer or in the cloud. – [Instant WordPress](https://instantwp.com/) – free, standalone, portable WordPress development environment for Windows that will run from a USB key. – [WordPress Studio](https://developer.wordpress.com/studio/) – free, open-source app to install and manage multiple WordPress sites locally. ### Software Appliance – Ready-to-use
 
-Installing WordPress locally is usually meant for development. Those interested in development can follow the instructions below to download and install WordPress locally.  
-– [wp-env](#block-editor/reference-guides/packages/packages-env) – a free, open-source development environment maintained by the WordPress core developer community.  
-– [VVV or Varying Vagrant Vagrants](https://varyingvagrantvagrants.org/) – free, open-source local development environment maintained by members of the WordPress community.  
-– [XAMPP](https://www.apachefriends.org/) – free and open-source local development environment maintained by Apache Friends  
-– [MAMP](https://www.mamp.info/en/mac/) – free local development environment that everything you need to install WordPress locally.  
-– [DDEV](https://ddev.readthedocs.io/en/stable/users/quickstart/#wordpress) – free, open-source, development environment. Seamlessly share local sites over public domains, includes a database editor, Xdebug, and other performance profiling tools.  
-– [Lando](https://lando.dev/) – free, open-source development environment that offers a [plugin to install WordPress locally](https://docs.lando.dev/plugins/wordpress/).  
-– [AMPPS](https://ampps.com/downloads/) – free WAMP/MAMP/LAMP stack with Softaculous Installer built in. It can 1-click install and upgrade WordPress and others as well.  
-– [Bitnami package for WordPress](https://bitnami.com/stack/wordpress) and [Bitnami package for WordPress Multisite](https://bitnami.com/stack/wordpress-multisite) – Bitnami packages for WordPress that provide a one-click install solution for WordPress or WordPress Multisite on your local computer or in the cloud.  
-– [Instant WordPress](https://instantwp.com/) – free, standalone, portable WordPress development environment for Windows that will run from a USB key.  
-– [Studio by WordPress.com](https://developer.wordpress.com/studio/) – free, open-source app to install and manage multiple WordPress sites locally.
-
-### Software Appliance – Ready-to-use
-
-You may find that using a pre-integrated [software appliance](https://en.wikipedia.org/wiki/Software_appliance) is a great way to get up and running with WordPress, especially in combination with virtual machine software (e.g., VMWare, VirtualBox, Xen HVM, KVM).
-
-Parallels is another software that can be used. Unlike virtual machine software, it requires payment. It allows you to run both Mac and Windows on your machine.
-
-A software appliance allows users to skip the manual installation of WordPress and its dependencies and instead deploy a self-contained system that requires little to no setup in just a couple of minutes.
-
-- [TurnKey WordPress Appliance](https://www.turnkeylinux.org/wordpress): a free Debian-based appliance that just works. It bundles a collection of popular WordPress plugins and features a small footprint, automatic security updates, SSL support, and a Web administration interface. Available as ISO, virtual machine images, or launch in the cloud.
+You may find that using a pre-integrated [software appliance](https://en.wikipedia.org/wiki/Software_appliance) is a great way to get up and running with WordPress, especially in combination with virtual machine software (e.g., VMWare, VirtualBox, Xen HVM, KVM). Parallels is another software that can be used. Unlike virtual machine software, it requires payment. It allows you to run both Mac and Windows on your machine. A software appliance allows users to skip the manual installation of WordPress and its dependencies and instead deploy a self-contained system that requires little to no setup in just a couple of minutes. - [TurnKey WordPress Appliance](https://www.turnkeylinux.org/wordpress): a free Debian-based appliance that just works. It bundles a collection of popular WordPress plugins and features a small footprint, automatic security updates, SSL support, and a Web administration interface. Available as ISO, virtual machine images, or launch in the cloud.
 
 ### Unattended/automated installation of WordPress on Ubuntu Server 16.04 LTS
 
 ## Two WordPress Installations with One Database
 
-**Note:** This method is NOT recommended if you plan on doing database development.
-
-A popular approach to running a local copy of your live site is using the same local and live database. Using the same database will allow you to work on your local copy and push changes from local to your production with no break in uptime.
-
-**Setup of the local copy**
-
-Once you have your local files set up, you must modify wp-config.php in the root of your local install.
-
-```
+**Note:** This method is NOT recommended if you plan on doing database development. A popular approach to running a local copy of your live site is using the same local and live database. Using the same database will allow you to work on your local copy and push changes from local to your production with no break in uptime. **Setup of the local copy**Once you have your local files set up, you must modify wp-config.php in the root of your local install. ```
 define('WP_HOME',  "https://{$_SERVER['HTTP_HOST']}");
 define('WP_SITEURL', "https://{$_SERVER['HTTP_HOST']}");
 
@@ -550,15 +504,11 @@ function ob_replace_home_url( $content ) {
 
 ### Using a Drop-In
 
-What if we don’t want to hack core code? Avoiding changes to core code is a good practice for easy upgrading and code-sharing. There is even a filter for this (`pre_option_siteurl` and `pre_option_home`) but there’s a problem: within **wp-settings.php**,
-
-- the filter can’t be defined until after line 65 when `functions.php` is included
+What if we don’t want to hack core code? Avoiding changes to core code is a good practice for easy upgrading and code-sharing. There is even a filter for this (`pre_option_siteurl` and `pre_option_home`) but there’s a problem: within **wp-settings.php**, - the filter can’t be defined until after line 65 when `functions.php` is included
 - WordPress makes calls to `get_option` on line 155 of (via `wp_plugin_directory_constants()`)
 - plugins aren’t defined until later down around line 194.
 
-However, between lines 65 and 155, there is something we can use, namely the loading of the drop-in `db.php`; the filter can be safely defined there. (However, this is perhaps only halfway towards “not core” code.) Check if you already have an existing wp-content/db.php before trying this technique. Plugins like W3 Total Cache use it for similar reasons.
-
-```
+However, between lines 65 and 155, there is something we can use, namely the loading of the drop-in `db.php`; the filter can be safely defined there. (However, this is perhaps only halfway towards “not core” code.) Check if you already have an existing wp-content/db.php before trying this technique. Plugins like W3 Total Cache use it for similar reasons. ```
 <?php
 // paste this in a (new) file, wp-content/db.php
 add_filter ( 'pre_option_home', 'test_localhosts' );
@@ -571,11 +521,6 @@ function test_localhosts( ) {
 }
 
 ```
-
-## Changelog
-
-- 2022-11-20: Fixed typos and improved readability. Added Studio as an option for local development (launched after the last update to this developer doc).
-- 2022-09-27: Original content from [Running a development copy of wordpress](https://wordpress.org/documentation/article/running-a-development-copy-of-wordpress/) and [installing wordpress on your own computer](https://wordpress.org/documentation/article/installing-wordpress-on-your-own-computer/).
 
 ---
 
@@ -643,10 +588,6 @@ You can set the default language for the entire network under the `Network Admin
 ### Adding translation
 
 If you want to add translations for terms that are still displaying in English after installation, visit [translate.wordpress.org](https://translate.wordpress.org) and select your language. To get started, refer [this page](https://make.wordpress.org/polyglots/handbook/tools/glotpress-translate-wordpress-org/) in the [Translator’s Handbook](https://make.wordpress.org/polyglots/handbook/).
-
-## Changelog
-
-- 2022-09-11: Original content from [Installing WordPress in your language](https://wordpress.org/documentation/article/installing-wordpress-in-your-language/).
 
 ---
 
@@ -736,11 +677,6 @@ For enhanced security you can also add multiple users to the same database and g
 You can use the same userbase for all your blogs on the same domain by defining the `CUSTOM_USER_TABLE` and optionally the `CUSTOM_USER_META_TABLE` constants to point to the same `wp_your_blog_users` and `wp_your_blog_usermeta` tables.  
 See [Editing wp-config.php/Custom User and Usermeta Tables](#advanced-administration/wordpress/wp-config#custom-user-and-usermeta-tables).
 
-## Changelog
-
-- 2023-02-17: WCAsia Contributor Day – Review and rework
-- 2022-10-21: Original content from [Installing Multiple WordPress Instances](https://wordpress.org/support/article/installing-multiple-blogs/).
-
 ---
 
 # Install WordPress at popular providers <a name="advanced-administration/before-install/popular-providers" />
@@ -788,19 +724,13 @@ You can also install WordPress on Ubuntu with one click [WordPress Hosting](http
 - Running into some issues and need to troubleshoot your WordPress site on Azure? Follow this handy [Troubleshooting guide for WordPress on Azure](https://learn.microsoft.com/troubleshoot/azure/app-service/web-apps-open-source-technologies-faqs).
 - For other WordPress related content or specific WordPress related questions, you may perform a [search with WordPress related terms on Microsoft Learn](https://learn.microsoft.com/en-us/search/?terms=wordpress).
 
-## Changelog
-
-- 2023-01-20: Migrated content from [Installing WordPress at popular Hosting Companies](https://wordpress.org/documentation/article/installing-wordpress-at-popular-hosting-companies/).
-
 ---
 
 # Server configuration <a name="advanced-administration/server" />
 
 Source: https://developer.wordpress.org/advanced-administration/server/
 
-## Changelog
 
-- 2022-08-16: Nothing here, yet.
 
 ---
 
@@ -1130,10 +1060,6 @@ usage:  setenforce \[ Enforcing | Permissive | 1 | 0 \]
 
 ```
 
-## Changelog
-
-- 2022-09-11: Original content from [Changing File Permissions](https://wordpress.org/documentation/article/changing-file-permissions/).
-
 ---
 
 # Finding Server Info <a name="advanced-administration/server/server-info" />
@@ -1186,21 +1112,23 @@ That’s it. Make sure you remember to delete the file once you’re done with i
 - [Zend’s PHP Manual on phpinfo](https://www.zend.com/manual/function.phpinfo.php)
 - [WordPress Environment PHP library](https://github.com/abelcallejo/wordpress-environment)
 
-## Changelog
-
-- 2022-11-11: Original content from [Finding Server Info](https://wordpress.org/documentation/article/finding-server-info/).
-
 ---
 
 # Giving WordPress Its Own Directory <a name="advanced-administration/server/wordpress-in-directory" />
 
 Source: https://developer.wordpress.org/advanced-administration/server/wordpress-in-directory/
 
-Many people want WordPress to power their website’s root (e.g. https://example.com) but they don’t want all of the WordPress files cluttering up their root directory. WordPress allows you to install it into a subdirectory, but have your website served from the website root. As of [Version 3.5](https://wordpress.org/documentation/wordpress-version/version-3-5/), Multisite users may use all of the functionality listed below. If you are running a version of WordPress older than 3.5, please update before installing a Multisite WordPress install on a subdirectory. **Note to theme/plugin developers:** this will not separate your code from WordPress. Themes and plugins will still reside under `wp-content` folder.
+Many people want WordPress to power their website’s root (e.g. https://example.com) but they don’t want all of the WordPress files cluttering up their root directory. WordPress allows you to install it into a subdirectory, but have your website served from the website root.
+
+As of [Version 3.5](https://wordpress.org/documentation/wordpress-version/version-3-5/), Multisite users may use all of the functionality listed below. If you are running a version of WordPress older than 3.5, please update before installing a Multisite WordPress install on a subdirectory.
+
+**Note to theme/plugin developers:** this will not separate your code from WordPress. Themes and plugins will still reside under `wp-content` folder.
 
 ## Moving a Root install to its own directory
 
-Let’s say you’ve installed WordPress at `example.com`. Now you have two different methods to move WordPress installations into subdirectory: 1. Without change of SITE-URL (remains `example.com`)
+Let’s say you’ve installed WordPress at `example.com`. Now you have two different methods to move WordPress installations into subdirectory:
+
+1. Without change of SITE-URL (remains `example.com`)
 2. With change in SITE-URL (it will redirect to `example.com/subdirectory`)
 
 ## Method I (Without URL change)
@@ -1222,11 +1150,15 @@ RewriteRule ^(/)?$ my_subdir/index.php [L]
 
 ```
 
-That’s all 🙂 ## Method II (With URL change)
+That’s all 🙂
+
+## Method II (With URL change)
 
 ### Moving process
 
-*(p.s. If you’ve already installed WP in subdirectory, some steps might be already done automatically).*1. Create the new location for the core WordPress files to be stored—we will use `/wordpress` in our examples. On Linux, use `mkdir wordpress` from your `www` directory. You’ll probably want to use `chown apache:apache` on the `wordpress` directory you created.
+*(p.s. If you’ve already installed WP in subdirectory, some steps might be already done automatically).*
+
+1. Create the new location for the core WordPress files to be stored—we will use `/wordpress` in our examples. On Linux, use `mkdir wordpress` from your `www` directory. You’ll probably want to use `chown apache:apache` on the `wordpress` directory you created.
 2. Go to the [General](https://wordpress.org/documentation/article/administration-screens/#settings-configuration-settings) screen.
 3. In **WordPress address (URL):** set the address of your main WordPress core files. Example: `https://example.com/wordpress`.
 4. In **Site address (URL):** set root directory’s URL. Example: `https://example.com`.
@@ -1240,16 +1172,24 @@ That’s all 🙂 ## Method II (With URL change)
 
 ### .htaccess modification
 
-In some cases, some people like to install separate versions in a subdirectory (such as `/2010`, `/2011`, `/latest` and etc..), and want that website (by default) used the latest version, then Install WordPress in a subdirectory, such as `/my_subdir` and in your root folder’s .htaccess file add the following (just change the words as you need): ```
+In some cases, some people like to install separate versions in a subdirectory (such as `/2010`, `/2011`, `/latest` and etc..), and want that website (by default) used the latest version, then Install WordPress in a subdirectory, such as `/my_subdir` and in your root folder’s .htaccess file add the following (just change the words as you need):
+
+```
 RewriteEngine On
 RewriteCond %{HTTP_HOST} ^(www.)?example.com$
 RewriteRule ^(/)?$ my_subdir\[L\]
 
 ```
 
-Now when users to go your root domain (`example.com`), it will automatically redirect to the subdirectory you specified. Note: This code comes from Site 5’s post here: [How to Redirect Your Domain to a Subfolder Using .htaccess](https://qa.site5.com/advanced/how-to-redirect-your-domain-to-a-subfolder-using-htaccess/). ## Moving Specific WordPress Folders
+Now when users to go your root domain (`example.com`), it will automatically redirect to the subdirectory you specified.
 
-The following links explains how to change specific directories within WordPress: - [Moving wp-content folder](https://wordpress.org/documentation/article/editing-wp-config-php/#moving-wp-content-folder)
+Note: This code comes from Site 5’s post here: [How to Redirect Your Domain to a Subfolder Using .htaccess](https://qa.site5.com/advanced/how-to-redirect-your-domain-to-a-subfolder-using-htaccess/).
+
+## Moving Specific WordPress Folders
+
+The following links explains how to change specific directories within WordPress:
+
+- [Moving wp-content folder](https://wordpress.org/documentation/article/editing-wp-config-php/#moving-wp-content-folder)
 - [Moving Plugin Folder](https://wordpress.org/documentation/article/editing-wp-config-php/#moving-plugin-folder)
 - [Moving Themes Folder](https://wordpress.org/documentation/article/editing-wp-config-php/#moving-themes-folder)
 - [Moving Uploads Folder](https://wordpress.org/documentation/article/editing-wp-config-php/#moving-uploads-folder)
@@ -1257,10 +1197,6 @@ The following links explains how to change specific directories within WordPress
 ## See also
 
 - [Using Caddy to give WordPress its own directory](https://caddy.community/t/using-caddy-to-give-wordpress-its-own-directory/13185)
-
-## Changelog
-
-- 2022-09-11: Original content from [Giving WordPress Its Own Directory](https://wordpress.org/documentation/article/giving-wordpress-its-own-directory/).
 
 ---
 
@@ -1327,10 +1263,6 @@ AWS Elastic Load Balancers cannot be assigned an elastic IP, therefore you must 
 - Some registrars do not currently support wildcard CNames.
 - Amazon’s Route53 Domain Name Service eliminates the CName issue, but at an additional cost.
 
-## Changelog
-
-- 2023-01-20: Original copied from [Configuring Wildcard Subdomains](https://wordpress.org/documentation/article/configuring-wildcard-subdomains/) and links checked.
-
 ---
 
 # Emptying a Database Table <a name="advanced-administration/server/empty-database" />
@@ -1372,10 +1304,6 @@ See [WordPress Backups](#advanced-administration/security/backup) and [Backing U
 
 1. Click “OK” and you will be returned to viewing all the tables in your database with the specified table’s contents emptied.
 
-## Changelog
-
-- 2022-09-11: Original content from [Emptying a Database Table](https://wordpress.org/documentation/article/emptying-a-database-table/).
-
 ---
 
 # Web servers <a name="advanced-administration/server/web-server" />
@@ -1391,10 +1319,6 @@ See [Apache HTTPD / .htaccess](#advanced-administration/server/web-server/httpd)
 ## nginx
 
 See [Nginx](#advanced-administration/server/web-server/nginx).
-
-## Changelog
-
-- 2022-09-11: First move from the old handbook.
 
 ---
 
@@ -1784,10 +1708,6 @@ ErrorDocument 403 https://www.example.com
 - [Changing File Permissions](https://wordpress.org/documentation/article/changing-file-permissions/)
 - [UNIX Shell Skills](https://codex.wordpress.org/UNIX%20Shell%20Skills)
 - [Rewrite API](https://codex.wordpress.org/Rewrite%20API)
-
-## Changelog
-
-- 2023-04-25: Original content from [htaccess](https://wordpress.org/documentation/article/htaccess/).
 
 ---
 
@@ -2512,10 +2432,6 @@ For WordPress Nginx scripted installation [CentminMod](https://centminmod.com/ng
 - [Securing Nginx and PHP](http://kbeezie.com/securing-nginx-php/)
 - [Setting up PHP-FastCGI and nginx? Don’t trust the tutorials: check your configuration!](https://nealpoole.com/blog/2011/04/setting-up-php-fastcgi-and-nginx-dont-trust-the-tutorials-check-your-configuration/)
 
-## Changelog
-
-- 2022-10-25: Original content from [Nginx](https://wordpress.org/documentation/article/nginx/).
-
 ---
 
 # Control Panels <a name="advanced-administration/server/control-panel" />
@@ -2603,21 +2519,13 @@ The controls below give you easy access to the following settings and tools:
 - “Maintenance mode” hides your website’s content from visitors.
 - “Password Protection” specifies the password you will use to log in to WordPress from Plesk.
 
-## Changelog
-
-- 2023-04-25: Removed outdated manual instructions from cPanel section and combined common WP Toolkit info for cPanel and Plesk.
-- 2023-01-26: Original copied from [Using cPanel](https://wordpress.org/documentation/article/using-cpanel/).
-- 2022-09-11: Original copied for Plesk.
-
 ---
 
 # WordPress configuration <a name="advanced-administration/wordpress" />
 
 Source: https://developer.wordpress.org/advanced-administration/wordpress/
 
-## Changelog
 
-- 2022-08-16: Nothing here, yet.
 
 ---
 
@@ -3374,12 +3282,6 @@ Before you save the file, be sure to **double-check** that you have not accident
 
 To save the file, choose **File &gt; Save As &gt; wp-config.php** and save the file in the root of your WordPress install. Upload the file to your web server and you’re ready to install WordPress!
 
-## Changelog
-
-- 2022-10-25: Fix content and links.
-- 2022-09-04: Original content from [wp-config.php](#apis/wp-config-php); ticket [Github](https://github.com/WordPress/Documentation-Issue-Tracker/issues/349).
-- 2023-01-20: Add content to the start from [documentation](https://wordpress.org/documentation/article/editing-wp-config-php/) ticket [Github](https://github.com/WordPress/Advanced-administration-handbook/issues/89)
-
 ---
 
 # Site Architecture (v1.5) <a name="advanced-administration/wordpress/site-architecture" />
@@ -4056,11 +3958,6 @@ The Default Theme’s footer is styled by the footer ID and the paragraph tag. W
 - [Blog Design and Layout](https://codex.wordpress.org/Blog_Design_and_Layout)
 - [Stepping Into Template Tags](https://codex.wordpress.org/Stepping_Into_Template_Tags)
 
-## Changelog
-
-- 2022-09-11: Check the content and format.
-- 2022-09-04: Original content from [Site Architecture 1.5](https://codex.wordpress.org/Site_Architecture_1.5); ticket [Github](https://github.com/WordPress/Documentation-Issue-Tracker/issues/332).
-
 ---
 
 # Post Formats <a name="advanced-administration/wordpress/post-formats" />
@@ -4235,10 +4132,6 @@ You must also register the `post_format` taxonomy with [register\_taxonomy()](#r
 - [Smarter Post Formats?](https://dougal.gunters.org/blog/2010/12/10/smarter-post-formats/)
 - [WordPress Theme Support Generator](https://generatewp.com/theme-support/)
 
-## Changelog
-
-- 2023-04-25: original content from [Post Formats](https://wordpress.org/documentation/article/post-formats/).
-
 ---
 
 # Cookies <a name="advanced-administration/wordpress/cookies" />
@@ -4303,12 +4196,6 @@ WordPress allows you to alter the language of all translatable strings on login.
 - [RFC2965](http://www.faqs.org/rfcs/rfc2965.html)
 - [PHP cookie documentation](https://www.php.net/manual/en/features.cookies.php)
 
-## Changelog
-
-- 2023-06-08: Adding Test Cookie, language cookie and improvements.
-- 2022-09-20: Minor adjustments.
-- 2022-09-11: Original content from [Cookies](https://wordpress.org/documentation/article/cookies/); added minor adjustments.
-
 ---
 
 # Update Services <a name="advanced-administration/wordpress/update-services" />
@@ -4350,10 +4237,6 @@ An alternative is [Feed Shark](https://feedshark.brainbliss.com/), which pings o
 ## WordPress Multisite Network
 
 By default, editing the Ping Services for a WordPress Multisite network site is disabled. This can be re-enabled with a plugin such as the [Activate Update Services](https://wordpress.org/plugins/activate-update-services/) plugin.
-
-## Changelog
-
-- 2022-09-11: Original content from [Update Services](https://wordpress.org/documentation/article/update-services/).
 
 ---
 
@@ -4467,11 +4350,6 @@ The following [text editors](https://wordpress.org/documentation/article/wordpre
 - [vim](https://www.vim.org/) (Mac, Linux, Windows) Open-Source, Free
 - [Visual Studio Code](https://code.visualstudio.com/) (Mac, Linux, Windows)
 - [NetBeans](https://netbeans.apache.org/) (Mac, Linux, Windows)
-
-## Changelog
-
-- 2023-01-20: Updated broken links. Removed non-existing text editors.
-- 2022-09-11: Original content from [Editing Files](https://wordpress.org/documentation/article/editing-files/).
 
 ---
 
@@ -4667,10 +4545,6 @@ If you are having some problems or questions about your WordPress Theme or layou
 - [Conditional Comment CSS](https://codex.wordpress.org/Conditional_Comment_CSS)
 - [Validating a Website](https://codex.wordpress.org/Validating_a_Website)
 
-## Changelog
-
-- 2022-09-04: Original content from [CSS](https://wordpress.org/documentation/article/css/); ticket [Github](https://github.com/WordPress/Documentation-Issue-Tracker/issues/424).
-
 ---
 
 # WordPress Feeds <a name="advanced-administration/wordpress/feeds" />
@@ -4679,39 +4553,59 @@ Source: https://developer.wordpress.org/advanced-administration/wordpress/feeds/
 
 ## WordPress Built-in Feeds
 
-By default, WordPress comes with various feeds. They are generated by template tag for [bloginfo()](#reference/functions/bloginfo) for each type of feed and are typically listed in the sidebar and/or footer of most WordPress Themes. They look like this: URL for [RDF/RSS 1.0 feed](https://web.resource.org/rss/1.0/)```
+By default, WordPress comes with various feeds. They are generated by template tag for [bloginfo()](#reference/functions/bloginfo) for each type of feed and are typically listed in the sidebar and/or footer of most WordPress Themes. They look like this:
+
+URL for [RDF/RSS 1.0 feed](https://web.resource.org/rss/1.0/)
+
+```
 <?php bloginfo('rdf_url'); ?>
 
 ```
 
-URL for [RSS 0.92 feed](https://www.rssboard.org/rss-0-9-2)```
+URL for [RSS 0.92 feed](https://www.rssboard.org/rss-0-9-2)
+
+```
 <?php bloginfo('rss_url'); ?>
 
 ```
 
-URL for [RSS 2.0 feed](https://www.rssboard.org/rss-specification)```
+URL for [RSS 2.0 feed](https://www.rssboard.org/rss-specification)
+
+```
 <?php bloginfo('rss2_url'); ?>
 
 ```
 
-URL for [Atom feed](http://www.atomenabled.org/)```
+URL for [Atom feed](http://www.atomenabled.org/)
+
+```
 <?php bloginfo('atom_url'); ?>
 
 ```
 
-URL for comments RSS 2.0 feed ```
+URL for comments RSS 2.0 feed
+
+```
 <?php bloginfo('comments_rss2_url'); ?>
 
 ```
 
-The first four feeds display recent updates and changes to your site’s content for the different feedreaders. Of these, the RSS feeds are the most well known. The last feed example is used by RSS 2.0 feedreaders and does not show your site’s content. It only shows the comments made on your site. To track the comments on a specific post, the [post\_comments\_feed\_link()](#reference/functions/post_comments_feed_link) template tag is used on single post pages like this: ```
+The first four feeds display recent updates and changes to your site’s content for the different feedreaders. Of these, the RSS feeds are the most well known. The last feed example is used by RSS 2.0 feedreaders and does not show your site’s content. It only shows the comments made on your site.
+
+To track the comments on a specific post, the [post\_comments\_feed\_link()](#reference/functions/post_comments_feed_link) template tag is used on single post pages like this:
+
+```
 <?php post_comments_feed_link('RSS 2.0'); ?>
 
 ```
 
-There are ways to modify these feeds, and these are covered in the article on [Customizing Feeds](https://codex.wordpress.org/Customizing_Feeds). ## Adding Feeds
+There are ways to modify these feeds, and these are covered in the article on [Customizing Feeds](https://codex.wordpress.org/Customizing_Feeds).
 
-Not all WordPress Themes feature all of the RSS Feed types that are available through WordPress. To add a feed to your site, find the location of where the other feeds are, typically in your sidebar.php or footer.php template files of your Theme. Then add one of the tags listed above to the list, like this example: ```
+## Adding Feeds
+
+Not all WordPress Themes feature all of the RSS Feed types that are available through WordPress. To add a feed to your site, find the location of where the other feeds are, typically in your sidebar.php or footer.php template files of your Theme. Then add one of the tags listed above to the list, like this example:
+
+```
 <ul class="feeds">
   <li><a href="<?php bloginfo('rss2_url'); ?>" title="<?php _e('Syndicate this site using RSS'); ?>"><?php _e('<abbr title="Really Simple Syndication">RSS</abbr>'); ?></a></li>
   <li><a href="<?php bloginfo('atom_url'); ?>" title="<?php _e('Syndicate this site using Atom'); ?>"><?php _e('Atom'); ?></a></li>
@@ -4722,26 +4616,34 @@ Not all WordPress Themes feature all of the RSS Feed types that are available th
 
 ### Adding Graphics to Feed Links
 
-Many people like to have a graphic representing the feed instead of words. There are now [standards](http://www.feedicons.com/) for these graphics or “buttons”, but you can [make your own](https://kalsey.com/tools/buttonmaker/) to match the look and colors on your site. ![](https://i0.wp.com/wordpress.org/documentation/files/2019/03/rssfeed.gif?ssl=1)To add a graphic to your feed link, simply wrap the link around the graphic such as: ```
+Many people like to have a graphic representing the feed instead of words. There are now [standards](http://www.feedicons.com/) for these graphics or “buttons”, but you can [make your own](https://kalsey.com/tools/buttonmaker/) to match the look and colors on your site. ![](https://i0.wp.com/wordpress.org/documentation/files/2019/03/rssfeed.gif?ssl=1)
+
+To add a graphic to your feed link, simply wrap the link around the graphic such as:
+
+```
 <a href="<?php bloginfo('rss2_url'); ?>" title="<?php _e('Syndicate this site using RSS'); ?>"><img src="https://example.com/images/feed-icon-14x14.png" alt="RSS Feed" title="RSS Feed"></a>
 
 ```
 
 ### Changing Addresses
 
-If you are currently using other webblog software and are changing to WordPress, or are moving your weblog to a new location, you can “forward” RSS readers to your new RSS feeds using file rewrites and redirects in your .htaccess file. Edit the `.htaccess` file in your root folder; if no file exists, create one. Here is an example for a b2 feed: ```
+If you are currently using other webblog software and are changing to WordPress, or are moving your weblog to a new location, you can “forward” RSS readers to your new RSS feeds using file rewrites and redirects in your .htaccess file.
+
+Edit the `.htaccess` file in your root folder; if no file exists, create one.
+
+Here is an example for a b2 feed:
+
+```
 RewriteRule ^b2rss2.php(.*)? /wordpress/?feed=rss2 [QSA]
 
 ```
 
-Here is an example for MovableType Users: ```
+Here is an example for MovableType Users:
+
+```
 RewriteRule ^index.xml(.*)? /wordpress/?feed=rss2 [QSA]
 
 ```
-
-## Changelog
-
-- 2023-01-20: Original content from [WordPress Feeds](https://wordpress.org/documentation/article/wordpress-feeds/), issue [\#93](https://github.com/WordPress/Advanced-administration-handbook/issues/93).
 
 ---
 
@@ -4864,11 +4766,6 @@ Since many multilingual plugins change the database significantly, doing a [data
 
 - [WordPress in Your Language](#advanced-administration/before-install/in-your-language)
 
-## Changelog
-
-- 2023-09-14: Removed links to individual plugins
-- 2022-10-25: Original content from [Multilingual WordPress](https://wordpress.org/documentation/article/multilingual-wordpress/).
-
 ---
 
 # oEmbed <a name="advanced-administration/wordpress/oembed" />
@@ -4909,12 +4806,6 @@ However, if you feel you are knowledgeable enough to not require this level of s
 
 The oEmbed discovery content for “link” and “photo” types is not quite so heavily filtered in this manner; however, it is properly escaped for security and to prevent any malicious content from being displayed on the site
 
-## Changelog
-
-- 2023-01-25: Review and Update Content. Linked list of whitelisted providers.
-- 2022-09-11: Added content from [oEmbed](https://oembed.com).
-- 2025-03-10: Fixed wrong link in Changelog
-
 ---
 
 # Loopbacks <a name="advanced-administration/wordpress/loopback" />
@@ -4938,10 +4829,6 @@ The most common cause of loopback failures is a plugin or theme conflict, you sh
 - Deactivating **all plugins** (yes, all) to see if this resolves the problem. If this works, re-activate the plugins one by one until you find the problematic plugin(s). If you can’t get into your admin dashboard, try resetting the plugins folder by [SFTP/FTP](#advanced-administration/upgrade/ftp) or phpMyAdmin (read [How to deactivate all plugins when you can’t log in to wp-admin](https://wordpress.org/documentation/article/faq-troubleshooting/) if you need help). Sometimes, an apparently inactive plugin can still cause problems. Also remember to deactivate any plugins in the `mu-plugins` folder. The easiest way is to rename that folder to `mu-plugins-old`.
 - Switching to a Twenty-Something theme to rule out any theme-specific problems. If you can’t log in to change themes, you can remove the theme folders via [SFTP/FTP](#advanced-administration/upgrade/ftp) so the only one is `twentytwentythree`. That will force your site to use it.
 - If you can install plugins, install the plugin [Health Check](https://wordpress.org/plugins/health-check/). On the troubleshooting tab, you can click the button to disable all plugins and change the theme for you, while you’re still logged in, **without affecting normal visitors to your site**.
-
-## Changelog
-
-- 2023-01-20: Content migrated from [Loopbacks](https://wordpress.org/documentation/article/loopbacks/).
 
 ---
 
@@ -5135,40 +5022,22 @@ You will first be asked to map the authors in this export file to users on the b
 
 [xanga.r](https://www.timwylie.com/xword.html) is a program that parses xanga pages to get the post and comments. Then it can output them in the WordPress rss 2.0 xml format for WordPress to import.
 
-## Changelog
-
-- 2024-01-25: Removed HTML and Blogroll sections as they are no longer accurate
-- 2023-04-25: Added content from [Importing Content](https://wordpress.org/documentation/article/importing-content/).
-
 ---
 
 # Common WordPress errors <a name="advanced-administration/wordpress/common-errors" />
 
 Source: https://developer.wordpress.org/advanced-administration/wordpress/common-errors/
 
-If you are encountering a WordPress error message or white screen, don’t panic. Someone has likely encountered the same message before and it can easily be solved.
-
-This page lists the most common WordPress errors experienced by WordPress users, and provides a starting point for fixing them. At [WordPress Support](https://wordpress.org/documentation/), you will also find links to more detailed pages or forums where a volunteer will be there to help.
+If you are encountering a WordPress error message or white screen, don’t panic. Someone has likely encountered the same message before and it can easily be solved. This page lists the most common WordPress errors experienced by WordPress users, and provides a starting point for fixing them. At [WordPress Support](https://wordpress.org/documentation/), you will also find links to more detailed pages or forums where a volunteer will be there to help.
 
 ## The White Screen of Death
 
-Both PHP errors and database errors can manifest as a white screen, a blank screen with no information, commonly known in the WordPress community as the *WordPress White Screen of Death* (WSOD).
-
-Before resorting to desperate measures, there are a number of reasons for the WordPress white screen of death:
-
-- **A Plugin is causing compatibility issues**. If you can access the [Administration Screens](https://wordpress.org/documentation/article/administration-screens/) try deactivating all of your Plugins and then reactivating them one by one. If you are unable to access your Screens, log in to your website via [FTP](#advanced-administration/upgrade/ftp). Locate the folder `wp-content/plugins` and rename the Plugin folder `plugins_old`. This will deactivate all of your Plugins. You can read more about manually deactivating your plugins in the [Troubleshooting FAQ](https://wordpress.org/documentation/article/faq-troubleshooting/#how-to-deactivate-all-plugins-when-not-able-to-access-the-administrative-menus).
+Both PHP errors and database errors can manifest as a white screen, a blank screen with no information, commonly known in the WordPress community as the *WordPress White Screen of Death* (WSOD). Before resorting to desperate measures, there are a number of reasons for the WordPress white screen of death: - **A Plugin is causing compatibility issues**. If you can access the [Administration Screens](https://wordpress.org/documentation/article/administration-screens/) try deactivating all of your Plugins and then reactivating them one by one. If you are unable to access your Screens, log in to your website via [FTP](#advanced-administration/upgrade/ftp). Locate the folder `wp-content/plugins` and rename the Plugin folder `plugins_old`. This will deactivate all of your Plugins. You can read more about manually deactivating your plugins in the [Troubleshooting FAQ](https://wordpress.org/documentation/article/faq-troubleshooting/#how-to-deactivate-all-plugins-when-not-able-to-access-the-administrative-menus).
 - **Your Theme may be causing the problem**. This is especially likely if you are experiencing the white screen of death after you have just activated a new Theme, or created a New Site in a WordPress Network. Log in to the WordPress Administration Screens and activate a default WordPress Theme (e.g. Twenty Twenty-One). If you are using WordPress 5.8 and below, please switch to Twenty Twenty-One theme since the Twenty Twenty-Two theme requires 5.9 and above. If you can’t access your Administration Screens, access your website via FTP and navigate to the `/wp-content/themes/` folder. Rename the folder for the active Theme.
 
-The [WP\_DEBUG feature](#advanced-administration/debug/debug-wordpress) often provides additional information.
+The [WP\_DEBUG feature](#advanced-administration/debug/debug-wordpress) often provides additional information. ## Internal Server Error
 
-## Internal Server Error
-
-[![](https://i0.wp.com/wordpress.org/documentation/files/2018/11/internalservererror2.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/internalservererror2.jpg?ssl=1)  
-Internal Server Error message
-
-There can be a number of reasons for an Internal Server Error. Here are some thing you can do to solve it:
-
-- The most likely issue is a corrupted `.htaccess` file. Log in to your site root using FTP and rename your `.htaccess` file to `.htaccess_old`. Try loading your site to see if this has solved your problem. If it works, make sure to visit [Settings](https://wordpress.org/documentation/article/administration-screens/#settings-configuration-settings) &gt; [Permalinks](https://wordpress.org/documentation/article/administration-screens/#permalinks) and reset your [permalinks](https://wordpress.org/documentation/article/using-permalinks/). This will generate a new `.htaccess` file for you.
+[![](https://i0.wp.com/wordpress.org/documentation/files/2018/11/internalservererror2.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/internalservererror2.jpg?ssl=1)Internal Server Error message There can be a number of reasons for an Internal Server Error. Here are some thing you can do to solve it: - The most likely issue is a corrupted `.htaccess` file. Log in to your site root using FTP and rename your `.htaccess` file to `.htaccess_old`. Try loading your site to see if this has solved your problem. If it works, make sure to visit [Settings](https://wordpress.org/documentation/article/administration-screens/#settings-configuration-settings) &gt; [Permalinks](https://wordpress.org/documentation/article/administration-screens/#permalinks) and reset your [permalinks](https://wordpress.org/documentation/article/using-permalinks/). This will generate a new `.htaccess` file for you.
 - Try deactivating all of your Plugins to see if it is a Plugin issue. If you are unable to access your WordPress Administration Screens, deactivate your Plugins via FTP by following [these instructions](https://wordpress.org/documentation/article/faq-troubleshooting/#how-to-deactivate-all-plugins-when-not-able-to-access-the-administrative-menus).
 - Switch the Theme to a WordPress default Theme (e.g. Twenty Twenty-One) to eliminate any Theme-related problems. If you are using WordPress 5.8 and below, please switch to Twenty Twenty-One theme since the Twenty Twenty-Two theme requires 5.9 and above.
 - Increase the [PHP Memory limit](https://wordpress.org/documentation/article/editing-wp-config-php/#increasing-memory-allocated-to-php)
@@ -5176,85 +5045,43 @@ There can be a number of reasons for an Internal Server Error. Here are some thi
 
 ## Error Establishing Database Connection
 
-If you get a page featuring the message “Error Establishing Database Connection”, this means that there is a problem with the connection to your database and there could be a number of reasons for this. The following are possible reasons and solutions.
+If you get a page featuring the message “Error Establishing Database Connection”, this means that there is a problem with the connection to your database and there could be a number of reasons for this. The following are possible reasons and solutions. ### Incorrect wp-config.php Information
 
-### Incorrect wp-config.php Information
-
-“Error establishing a database connection” is usually caused by an error in your [wp-config.php](https://wordpress.org/documentation/article/editing-wp-config-php/) file. Access your site in your FTP client. Open up `wp-config.php` and ensure that the following are correct:
-
-- Database name
+“Error establishing a database connection” is usually caused by an error in your [wp-config.php](https://wordpress.org/documentation/article/editing-wp-config-php/) file. Access your site in your FTP client. Open up `wp-config.php` and ensure that the following are correct: - Database name
 - Database username
 - Database password
 - Database host
 
-Learn more about [editing wp-config.php](https://wordpress.org/documentation/article/editing-wp-config-php/).
+Learn more about [editing wp-config.php](https://wordpress.org/documentation/article/editing-wp-config-php/). If you are sure your configuration is correct you could [try resetting your MySQL password manually](#advanced-administration/before-install/howto-install). ### Problems with Your Web Host
 
-If you are sure your configuration is correct you could [try resetting your MySQL password manually](#advanced-administration/before-install/howto-install).
-
-### Problems with Your Web Host
-
-The next step is to contact your web host. The following hosting issues may be causing the problem:
-
-- Your database has met its quota and has been shut down.
+The next step is to contact your web host. The following hosting issues may be causing the problem: - Your database has met its quota and has been shut down.
 - The server is down.
 
-Contact your hosting provider to see if either of these issues is causing your problem.
+Contact your hosting provider to see if either of these issues is causing your problem. ### Compromised Website
 
-### Compromised Website
+If you have checked `wp-config.php` for errors, and confirmed with your host for hosting issues, it is possible that your site has been hacked. Scan your site with [Sucuri SiteCheck](https://sitecheck.sucuri.net/) to ensure that it hasn’t been compromised. If it has you should check out [My Site was Hacked](https://wordpress.org/documentation/article/faq-my-site-was-hacked/). ## Failed Auto-Upgrade
 
-If you have checked `wp-config.php` for errors, and confirmed with your host for hosting issues, it is possible that your site has been hacked.
-
-Scan your site with [Sucuri SiteCheck](https://sitecheck.sucuri.net/) to ensure that it hasn’t been compromised. If it has you should check out [My Site was Hacked](https://wordpress.org/documentation/article/faq-my-site-was-hacked/).
-
-## Failed Auto-Upgrade
-
-There will be situations when the WordPress auto-update feature fails. Symptoms include:
-
-- A blank white screen and no information.
+There will be situations when the WordPress auto-update feature fails. Symptoms include: - A blank white screen and no information.
 - A warning that the update failed.
 - A PHP error message.
 
-The WordPress automatic upgrade feature may fail due to a glitch in the connection with the main WordPress files, a problem with your Internet connection during upgrade, or incorrect [File Permissions](#advanced-administration/server/file-permissions).
+The WordPress automatic upgrade feature may fail due to a glitch in the connection with the main WordPress files, a problem with your Internet connection during upgrade, or incorrect [File Permissions](#advanced-administration/server/file-permissions). To update your WordPress site manually, see the [Manual Update article](https://wordpress.org/documentation/article/updating-wordpress/#manual-update). ## Connection Timed Out
 
-To update your WordPress site manually, see the [Manual Update article](https://wordpress.org/documentation/article/updating-wordpress/#manual-update).
-
-## Connection Timed Out
-
-The connection timed out error appears when your website is trying to do more than your server can manage. It is particularly common on shared hosting where your memory limit is restricted. Here are some things you can try:
-
-- **Deactivate all Plugins.** If deactivating all the WordPress Plugins on your site resolves the issue, reactivate them one-by-one to see which plugin is causing the problem. If you are unable to access your Administration Screens, [read about how to manually deactivate your plugins](https://wordpress.org/documentation/article/faq-troubleshooting/#how-to-deactivate-all-plugins-when-not-able-to-access-the-administrative-menus).
+The connection timed out error appears when your website is trying to do more than your server can manage. It is particularly common on shared hosting where your memory limit is restricted. Here are some things you can try: - **Deactivate all Plugins.** If deactivating all the WordPress Plugins on your site resolves the issue, reactivate them one-by-one to see which plugin is causing the problem. If you are unable to access your Administration Screens, [read about how to manually deactivate your plugins](https://wordpress.org/documentation/article/faq-troubleshooting/#how-to-deactivate-all-plugins-when-not-able-to-access-the-administrative-menus).
 - **Switch to a default WordPress Theme.** If you are using WordPress 5.8 and below, please switch to Twenty Twenty-One theme since the Twenty Twenty-Two theme requires 5.9 and above. This should rule out any Theme-related problems.
 - **Increase your [memory limit in wp-config.php](https://wordpress.org/documentation/article/editing-wp-config-php/#increasing-memory-allocated-to-php)**. If you are on shared hosting you may have to ask your hosting provider to increase your memory limit for you.
 - **Increase the maximum execution time in your [php.ini](https://php.net/manual/en/ini.core.php) file.** This is not a WordPress core file so if you are not sure how to edit it, contact your hosting provider to ask them to increase your maximum execution time. See below instructions for increasing maximum execution time.
 
 ## Maintenance Mode Following Upgrade
 
-[![](https://i0.wp.com/wordpress.org/documentation/files/2018/11/maintenancemode1.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/maintenancemode1.jpg?ssl=1)
-
-When WordPress updates, it automatically installs a `.maintenance` file. Following upgrade, you may receive a message that says “Briefly unavailable for scheduled maintenance. Please check back in a minute.” The maintenance file may not have been removed properly.
-
-To remove this message do the following:
-
-1. Log in to your website using your FTP program
+[![](https://i0.wp.com/wordpress.org/documentation/files/2018/11/maintenancemode1.jpg?ssl=1)](https://i0.wp.com/wordpress.org/documentation/files/2018/11/maintenancemode1.jpg?ssl=1)When WordPress updates, it automatically installs a `.maintenance` file. Following upgrade, you may receive a message that says “Briefly unavailable for scheduled maintenance. Please check back in a minute.” The maintenance file may not have been removed properly. To remove this message do the following: 1. Log in to your website using your FTP program
 2. Delete the `.maintenance` file, which will be found in your site root.
 
-Read more about the [maintenance mode issue](https://wordpress.org/documentation/article/faq-troubleshooting/#how-to-clear-the-briefly-unavailable-for-scheduled-maintenance-message-after-doing-automatic-upgrade).
+Read more about the [maintenance mode issue](https://wordpress.org/documentation/article/faq-troubleshooting/#how-to-clear-the-briefly-unavailable-for-scheduled-maintenance-message-after-doing-automatic-upgrade). ## You Make Changes and Nothing Happens
 
-## You Make Changes and Nothing Happens
+If you are making changes to your website and you do not see the changes in your browser, you may need to clear your [browser cache](https://wordpress.org/support/topic/i-make-changes-and-nothing-happens/). Your browser stores information about the websites that you visit. This makes it faster to load websites when you visit them because the browser just has to reload information already stored on your computer, rather than downloading it again. If you make a change to a website and the browser does not think it is significant, it will simply load the data from your cache, and you won’t see your changes. To fix the problem, simply [empty your browser cache](https://wordpress.org/support/topic/i-make-changes-and-nothing-happens/) or close the tab and reopen the link. ## Pretty Permalinks 404 and Images not Working
 
-If you are making changes to your website and you do not see the changes in your browser, you may need to clear your [browser cache](https://wordpress.org/support/topic/i-make-changes-and-nothing-happens/). Your browser stores information about the websites that you visit. This makes it faster to load websites when you visit them because the browser just has to reload information already stored on your computer, rather than downloading it again.
-
-If you make a change to a website and the browser does not think it is significant, it will simply load the data from your cache, and you won’t see your changes. To fix the problem, simply [empty your browser cache](https://wordpress.org/support/topic/i-make-changes-and-nothing-happens/) or close the tab and reopen the link.
-
-## Pretty Permalinks 404 and Images not Working
-
-If you are experiencing 404 errors with pretty [permalinks](https://wordpress.org/documentation/article/using-permalinks/) and a white screen when you upload images, [mod\_rewrite](https://wordpress.org/documentation/article/glossary#mod_rewrite) may not be enabled in Apache by default. Mod\_rewrite is an extension module of the [Apache web server](https://wordpress.org/documentation/article/glossary#apache) software which allows for “rewriting” of [URLs](https://en.wikipedia.org/wiki/Url) on-the-fly. It’s what you need to make pretty permalinks work.
-
-[WordPress Multisite](https://wordpress.org/documentation/article/glossary#multisite) networks usually experience this but it can also occur on shared hosting providers or after a [site migration or server move](https://wordpress.org/documentation/article/moving-wordpress/).
-
-Reset your permalinks through **Settings &gt; Permalinks.** If this does not work, you may have to edit the `.htaccess` file manually.
-
-```
+If you are experiencing 404 errors with pretty [permalinks](https://wordpress.org/documentation/article/using-permalinks/) and a white screen when you upload images, [mod\_rewrite](https://wordpress.org/documentation/article/glossary#mod_rewrite) may not be enabled in Apache by default. Mod\_rewrite is an extension module of the [Apache web server](https://wordpress.org/documentation/article/glossary#apache) software which allows for “rewriting” of [URLs](https://en.wikipedia.org/wiki/Url) on-the-fly. It’s what you need to make pretty permalinks work. [WordPress Multisite](https://wordpress.org/documentation/article/glossary#multisite) networks usually experience this but it can also occur on shared hosting providers or after a [site migration or server move](https://wordpress.org/documentation/article/moving-wordpress/). Reset your permalinks through **Settings &gt; Permalinks.** If this does not work, you may have to edit the `.htaccess` file manually. ```
 # BEGIN WordPress  
 <IfModule mod\_rewrite.c>  
 RewriteEngine On  
@@ -5268,92 +5095,54 @@ RewriteRule . /index.php [L]
 
 ```
 
-If you are not familiar with editing your `.htaccess` file, contact your hosting provider to ask them to turn on mod\_rewrite rules. There is more information on [pretty permalinks in the WordPress Codex](https://wordpress.org/documentation/article/using-permalinks/#using-pretty-permalinks).
+If you are not familiar with editing your `.htaccess` file, contact your hosting provider to ask them to turn on mod\_rewrite rules. There is more information on [pretty permalinks in the WordPress Codex](https://wordpress.org/documentation/article/using-permalinks/#using-pretty-permalinks). ## Custom Post Type 404 Errors
 
-## Custom Post Type 404 Errors
-
-You may experience problems with 404 errors and [custom post types](https://wordpress.org/documentation/article/post-types/#custom-types). Try the following steps:
-
-1. Make sure that none of your Custom Post Types and single pages have the same name. If they do, rename the single page, including the [slug](https://wordpress.org/documentation/article/glossary/#post-slug).
+You may experience problems with 404 errors and [custom post types](https://wordpress.org/documentation/article/post-types/#custom-types). Try the following steps: 1. Make sure that none of your Custom Post Types and single pages have the same name. If they do, rename the single page, including the [slug](https://wordpress.org/documentation/article/glossary/#post-slug).
 2. Log in to your WordPress Administration Screens, navigate to **Settings &gt; Permalinks**. Select the default permalinks. Save. Then reselect your preferred permalinks. This will flush the rewrite rules and should solve your problem.
 
 ## Specific Error Messages
 
-There are a number of different errors that will appear in your error logs. To access your error logs you will need to turn on [debugging](https://wordpress.org/documentation/article/editing-wp-config-php/#wp_debug) and then locate your error log via FTP. The following information will help you to decipher some of the common error messages.
+There are a number of different errors that will appear in your error logs. To access your error logs you will need to turn on [debugging](https://wordpress.org/documentation/article/editing-wp-config-php/#wp_debug) and then locate your error log via FTP. The following information will help you to decipher some of the common error messages. ### PHP Errors
 
-### PHP Errors
-
-Below are some common PHP error messages.
-
-#### Fatal Errors and Warnings
+Below are some common PHP error messages. #### Fatal Errors and Warnings
 
 ##### Cannot modify header information – headers already sent
 
-If you receive a warning that WordPress cannot modify header information and headers are already sent, it usually means that you have spaces or characters before the opening tags or after the closing tags. Read how to [fix the headers already sent error](https://wordpress.org/documentation/article/faq-troubleshooting/#how-do-i-solve-the-headers-already-sent-warning-problem).
+If you receive a warning that WordPress cannot modify header information and headers are already sent, it usually means that you have spaces or characters before the opening tags or after the closing tags. Read how to [fix the headers already sent error](https://wordpress.org/documentation/article/faq-troubleshooting/#how-do-i-solve-the-headers-already-sent-warning-problem). If you are experiencing this problem when you have just installed WordPress you may have introduced a syntax error into `wp-config.php`. [These instructions will help you to fix the error](#advanced-administration/before-install/howto-install). ##### Call to undefined function
 
-If you are experiencing this problem when you have just installed WordPress you may have introduced a syntax error into `wp-config.php`. [These instructions will help you to fix the error](#advanced-administration/before-install/howto-install).
-
-##### Call to undefined function
-
-An error reading call to undefined function could mean that a WordPress Plugin is trying to find a file or data which isn’t present or accessible in the code. Reasons for this include:
-
-- An error when trying to auto-install or auto-upgrade a Plugin. Try [installing or upgrading the Plugin manually](https://wordpress.org/documentation/article/managing-plugins/#manual-plugin-installation).
+An error reading call to undefined function could mean that a WordPress Plugin is trying to find a file or data which isn’t present or accessible in the code. Reasons for this include: - An error when trying to auto-install or auto-upgrade a Plugin. Try [installing or upgrading the Plugin manually](https://wordpress.org/documentation/article/managing-plugins/#manual-plugin-installation).
 - An error when trying to auto-install or auto-upgrade a Theme. Try [installing or upgrading the Theme manually](https://wordpress.org/documentation/article/using-themes/#adding-new-themes).
 - You may be using an [incompatible WordPress Plugin](https://wordpress.org/documentation/article/managing-plugins/#plugin-compatibility) or incompatible Theme. This could happen with older versions of WordPress and a new WordPress Plugin, or if you are trying to use a WordPress Multisite Plugin on a single site installation. Upgrade WordPress to resolve this issue.
 - You may be trying to call a function that doesn’t exist. Check `functions.php` for misspellings.
 
-Try deactivating the WordPress Plugin or changing the WordPress Theme that caused the error to appear. If you are unable to do this from within the Administration Screens, you may have to do this [manually via FTP](https://wordpress.org/documentation/article/faq-troubleshooting/#how-to-deactivate-all-plugins-when-not-able-to-access-the-administrative-menus).
+Try deactivating the WordPress Plugin or changing the WordPress Theme that caused the error to appear. If you are unable to do this from within the Administration Screens, you may have to do this [manually via FTP](https://wordpress.org/documentation/article/faq-troubleshooting/#how-to-deactivate-all-plugins-when-not-able-to-access-the-administrative-menus). ##### Allowed memory size exhausted
 
-##### Allowed memory size exhausted
-
-An Allowed Memory Size Exhausted error means that your WordPress installation doesn’t have enough memory to achieve what you want. You can try out the following steps:
-
-- Increase your [memory limit in wp-config.php](https://wordpress.org/documentation/article/editing-wp-config-php/#increasing-memory-allocated-to-php)
+An Allowed Memory Size Exhausted error means that your WordPress installation doesn’t have enough memory to achieve what you want. You can try out the following steps: - Increase your [memory limit in wp-config.php](https://wordpress.org/documentation/article/editing-wp-config-php/#increasing-memory-allocated-to-php)
 - Increase your memory limit by editing `php.ini`. This is not a file that comes with WordPress so if you are unfamiliar with it you should contact your web host about increasing your memory limit.
 
 ##### Maximum execution time exceeded
 
-You may receive a message such as “Maximum execution time of 30 seconds exceeded” or “Maximum execution time of 60 seconds exceeded”. This means that it is taking to longer for a process to complete and it is timing out. There are a number of ways to fix this error.
-
-**Editing `.htaccess`**
-
-**Make sure you back up `.htaccess` before you edit it.**
-
-Add the following line to `.htaccess`:
-
-```
+You may receive a message such as “Maximum execution time of 30 seconds exceeded” or “Maximum execution time of 60 seconds exceeded”. This means that it is taking to longer for a process to complete and it is timing out. There are a number of ways to fix this error. **Editing `.htaccess`****Make sure you back up `.htaccess` before you edit it.**Add the following line to `.htaccess`: ```
 php_value max_execution_time 60
 
 ```
 
-**Editing `php.ini`**
-
-Add the following to `php.ini`
-
-```
+**Editing `php.ini`**Add the following to `php.ini````
 max_execution_time = 60
 
 ```
 
-If you are unsure of how to make these changes, or if you are on shared hosting that prevents you from making them yourself, you should contact your hosting provider and ask them to increase your maximum execution time.
-
-#### Parse errors
+If you are unsure of how to make these changes, or if you are on shared hosting that prevents you from making them yourself, you should contact your hosting provider and ask them to increase your maximum execution time. #### Parse errors
 
 ##### Syntax Error
 
-A syntax error means that you have made a mistake while creating your PHP structure. You could, for example, be:
-
-- Missing a `;` at the end of an individual line.
+A syntax error means that you have made a mistake while creating your PHP structure. You could, for example, be: - Missing a `;` at the end of an individual line.
 - Using curly quotation marks.
 - Missing a curly bracket.
 
-When this error appears it will tell you which file the error appears in (`functions.php` for example) and approximately which line (it may not always be the exact line so be sure to check just before and just after) in the code.
+When this error appears it will tell you which file the error appears in (`functions.php` for example) and approximately which line (it may not always be the exact line so be sure to check just before and just after) in the code. ##### Unexpected
 
-##### Unexpected
-
-If you are receiving an error which says ‘parse error: unexpected’ this usually means that you have forgotten to include a character. The most common are:
-
-- **Unexpected ‘=’** : you have forgotten to include the $ when referencing a variable
+If you are receiving an error which says ‘parse error: unexpected’ this usually means that you have forgotten to include a character. The most common are: - **Unexpected ‘=’** : you have forgotten to include the $ when referencing a variable
 - **Unexpected ‘)’** : you have forgotten to include the opening bracket (
 - **Unexpected ‘(‘** : you have forgotten to include the closing bracket )
 - **Unexpected T\_STRING**: you have forgotten a quotation mark or a semi-colon at the end of the previous line
@@ -5361,75 +5150,35 @@ If you are receiving an error which says ‘parse error: unexpected’ this usua
 
 #### Use of an undefined constant
 
-As with parse errors, “use of an undefined constant” means that you are missing a character. It could be one of the following:
-
-- Missing a $ when referencing a variable
+As with parse errors, “use of an undefined constant” means that you are missing a character. It could be one of the following: - Missing a $ when referencing a variable
 - Missing quotation marks around array keys
 
 ### Database Errors
 
-The following errors may appear in relation to your WordPress database.
+The following errors may appear in relation to your WordPress database. #### Error 13 – Cannot Create/Write to File
 
-#### Error 13 – Cannot Create/Write to File
-
-There are a number of reasons why you may be experiencing this error.
-
-**MySQL cannot create a temporary file.**
-
-The MySQL variable `tmpdir` is set to a directory that cannot be written to when using PHP to access MySQL. To verify this, enter MySQL at the command line and type `show variables`. You’ll get a long list and one of them will read: **tmpdir = /somedir/** (whatever your setting is.)
-
-To solve this, alter the **tmpdir** variable to point to a writable directory.
-
-1. Find the **my.cnf** file. On \*nix systems this is usually in **/etc/**. On Windows system, Find the **my.ini**.
+There are a number of reasons why you may be experiencing this error. **MySQL cannot create a temporary file.** The MySQL variable `tmpdir` is set to a directory that cannot be written to when using PHP to access MySQL. To verify this, enter MySQL at the command line and type `show variables`. You’ll get a long list and one of them will read: **tmpdir = /somedir/** (whatever your setting is.) To solve this, alter the **tmpdir** variable to point to a writable directory. 1. Find the **my.cnf** file. On \*nix systems this is usually in **/etc/**. On Windows system, Find the **my.ini**.
 2. Once found, open this in a simple text editor and find the **\[mysqld\]** section.
 3. Under this section, find the **tmpdir** line. If this line is commented (has a **\#** at the start), delete the **\#** and edit the line so that it reads: **tmpdir = /writable/dir** where **/writable/dir** is a directory to which you can write. Some use **/tmp**, or you might also try **/var/tmp** or **/usr/tmp**. On Windows, use **C:/Windows/tmp**.
 4. Save the file.
 5. Shutdown MySQL by typing `mysqlshutdown -u -p shutdown`.
 6. Start MySQL by going to the MySQL directory and typing `./bin/safe_mysqld &`. Usually the MySQL directory is in **/usr/local** or sometimes in **/usr/** on Linux systems.
 
-**The** [**file permissions**](#advanced-administration/server/file-permissions) **are incorrect**
+**The** [**file permissions**](#advanced-administration/server/file-permissions) **are incorrect**Correct the [File Permissions](#advanced-administration/server/file-permissions). If none of this make sense and you have someone to administrate your system for you, show the above to them and they should be able to figure it out. #### CREATE Command Denied to User
 
-Correct the [File Permissions](#advanced-administration/server/file-permissions).
+This error occurs when the user assigned to the database does not have adequate permissions to perform the action to create columns and tables in the database. You will need to log in to [CPanel](https://wordpress.org/documentation/article/using-cpanel/) or [Plesk](https://www.plesk.com/) to give your database user adequate permissions. Alternatively you can [create a new user to assign to your database](https://wordpress.org/documentation/article/using-cpanel/#step-3-add-user-to-database). If you do create a new user you will need to ensure that it is [updated in](https://wordpress.org/documentation/article/using-cpanel/#editing-the-wordpress-config-file) `[wp-config.php](https://wordpress.org/documentation/article/using-cpanel/#editing-the-wordpress-config-file)`. #### Error
 
-If none of this make sense and you have someone to administrate your system for you, show the above to them and they should be able to figure it out.
-
-#### CREATE Command Denied to User
-
-This error occurs when the user assigned to the database does not have adequate permissions to perform the action to create columns and tables in the database. You will need to log in to [CPanel](https://wordpress.org/documentation/article/using-cpanel/) or [Plesk](https://www.plesk.com/) to give your database user adequate permissions.
-
-Alternatively you can [create a new user to assign to your database](https://wordpress.org/documentation/article/using-cpanel/#step-3-add-user-to-database). If you do create a new user you will need to ensure that it is [updated in](https://wordpress.org/documentation/article/using-cpanel/#editing-the-wordpress-config-file) `[wp-config.php](https://wordpress.org/documentation/article/using-cpanel/#editing-the-wordpress-config-file)`.
-
-#### Error
-
-It could be because:
-
-- you are out of space on /tmp (wherever tmpdir is), or,
+It could be because: - you are out of space on /tmp (wherever tmpdir is), or,
 - you have too many files in /tmp (even if there is lots of free space), or,
 - Your cache on your server is full
 
-This is a MySQL error and has nothing to do with WordPress directly; you should contact your host about it. Some users have reported that running a “repair table” command in [phpMyAdmin](#advanced-administration/upgrade/phpmyadmin) fixed the problem.
+This is a MySQL error and has nothing to do with WordPress directly; you should contact your host about it. Some users have reported that running a “repair table” command in [phpMyAdmin](#advanced-administration/upgrade/phpmyadmin) fixed the problem. #### Error 145
 
-#### Error 145
+This indicates that a table in your database is damaged or corrupted. If you are comfortable using [phpMyAdmin](#advanced-administration/upgrade/phpmyadmin) you can use [these instructions on repairing your MySQL database tables](https://wordpress.org/documentation/article/faq-troubleshooting-2/#how-do-you-repair-a-mysql-database-table). **Always [backup your database](https://wordpress.org/documentation/article/backing-up-your-database/) before performing any actions on it.**If you have not used phpMyAdmin before, or are uncomfortable doing so, contact your web host and ask them to run CHECK/REPAIR on your database. #### Unknown Column
 
-This indicates that a table in your database is damaged or corrupted. If you are comfortable using [phpMyAdmin](#advanced-administration/upgrade/phpmyadmin) you can use [these instructions on repairing your MySQL database tables](https://wordpress.org/documentation/article/faq-troubleshooting-2/#how-do-you-repair-a-mysql-database-table).
-
-**Always [backup your database](https://wordpress.org/documentation/article/backing-up-your-database/) before performing any actions on it.**
-
-If you have not used phpMyAdmin before, or are uncomfortable doing so, contact your web host and ask them to run CHECK/REPAIR on your database.
-
-#### Unknown Column
-
-An unknown column error can be caused by a missing column in the database. If you have just upgraded WordPress then try manually upgrading again. To update your WordPress site manually, see the [Update article](https://wordpress.org/documentation/article/updating-wordpress/#manual-update).
-
-If you are running a database query when you encounter the error then you may by using incorrect quotation marks for the identifier quote character. This [question on Stack Overflow provides more details](https://stackoverflow.com/questions/1346209/unknown-column-in-field-list-error-on-mysql-update-query). Also see the [MySQL documentation](https://dev.mysql.com/doc/refman/8.2/en/identifiers.html).
-
-## Resources
+An unknown column error can be caused by a missing column in the database. If you have just upgraded WordPress then try manually upgrading again. To update your WordPress site manually, see the [Update article](https://wordpress.org/documentation/article/updating-wordpress/#manual-update). If you are running a database query when you encounter the error then you may by using incorrect quotation marks for the identifier quote character. This [question on Stack Overflow provides more details](https://stackoverflow.com/questions/1346209/unknown-column-in-field-list-error-on-mysql-update-query). Also see the [MySQL documentation](https://dev.mysql.com/doc/refman/8.2/en/identifiers.html). ## Resources
 
 - [MySQL Error Codes and Messages](https://dev.mysql.com/doc/refman/en/error-messages-server.html)
-
-## Changelog
-
-- 2023-01-20: Copy content from [Common WordPress Errors](https://wordpress.org/documentation/article/common-wordpress-errors/)
 
 ---
 
@@ -5437,9 +5186,7 @@ If you are running a database query when you encounter the error then you may by
 
 Source: https://developer.wordpress.org/advanced-administration/upgrade/
 
-## Changelog
 
-- 2022-08-16: Nothing here, yet.
 
 ---
 
@@ -5463,10 +5210,6 @@ Why use FileZilla? Because, like WordPress, it is released under the GPL. So, it
 3. [FileZilla’s Extensive Documentation](https://wiki.filezilla-project.org/Documentation)
 
 Want to try a different FTP or SFTP client? [Find more on Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_FTP_clients).
-
-## Changelog
-
-- 2022-09-11: Original content from [FTP Clients](https://wordpress.org/documentation/article/ftp-clients/). Minor copy-editing.
 
 ---
 
@@ -5529,11 +5272,6 @@ Look at the top area of the FileZilla main window and check the messages.
 2. If it says that the user does not exist or *Incorrect Login* and so on, check the Site Manager setting and ensure that it reflects what your FTP account and password details provided by your host says, or use the web server administration interface provided to you by your host to re-check the existence of the FTP account. Check your password carefully. It is case-sensitive (capitals and small letters). You may want to ask your web host for some assistance, too.
 3. If it says *Could not retrieve directory listing*, you may need to change the Transfer Setting. From Site Manager, select your FTP Server and click the *Transfer Settings* tab. Select *Passive* from Transfer mode and click OK.
 
-## Changelog
-
-- 2023-05-05: Correct and clarify the Connecting section.
-- 2022-09-11: Original content from [Using FileZilla](https://wordpress.org/documentation/article/using-filezilla/).
-
 ---
 
 # phpMyAdmin <a name="advanced-administration/upgrade/phpmyadmin" />
@@ -5553,10 +5291,6 @@ The phpMyAdmin program is handy for performing maintenance operations on tables,
 Often host control panels, such as cPanel and Plesk, have phpMyAdmin pre-installed, so there is nothing special you have to do to use it. It is usually linked from the database page. Ask your host if this is available.
 
 You can download phpMyAdmin yourself and install it from the main [phpMyAdmin project page](https://www.phpmyadmin.net/).
-
-## Changelog
-
-- 2022-09-11: Original content from [phpMyAdmin](https://wordpress.org/documentation/article/phpmyadmin/).
 
 ---
 
@@ -5817,7 +5551,7 @@ Losses:
 
 When WordPress 6.3 was released, support for PHP 5.6 dropped and PHP 7.0 was stablished as the minimum PHP version. Upgrading from PHP 5.6.20+ to PHP 7.0+ should be very stable.
 
-When WordPress 6.6 was released, support for PHP 7.0 and 7.1 dropped and PHP 7.2.25 was stablished as the minimum PHP version. Upgrading from PHP 7.0+, or PHP 7.1+ to PHP 7.2+ should be very stable. WordPress 6.6 also supports PHP 8.2 so you can try switching to PHP 8.2 when upgraded WordPress.
+When WordPress 6.6 was released, support for PHP 7.0 and 7.1 dropped and PHP 7.2.24 was stablished as the minimum PHP version. Upgrading from PHP 7.0+, or PHP 7.1+ to PHP 7.2+ should be very stable. WordPress 6.6 also supports PHP 8.2 so you can try switching to PHP 8.2 when upgraded WordPress.
 
 Upgrade everything normally. Everything should work fine.
 
@@ -6031,11 +5765,6 @@ apply_filters( 'auto_core_update_send_email', true, $type, $core_update, $result
 - More examples at <https://make.wordpress.org/core/2013/10/25/the-definitive-guide-to-disabling-auto-updates-in-wordpress-3-7/>
 - More information here: [How Do I Configure Automatic Updates in WordPress 3.7?](https://wordpress.stackexchange.com/questions/120081/how-do-i-configure-automatic-updates-in-wordpress-3-7)
 - Info about wp-cli conflict: <https://github.com/wp-cli/wp-cli/issues/1310>
-
-## Changelog
-
-- 2024-06-05: Original content from [Upgrading WordPress](https://make.wordpress.org/hosting/handbook/upgrading/)
-- 2022-10-25: Original content from [Configuring Automatic Background Updates](https://wordpress.org/documentation/article/configuring-automatic-background-updates/), and [Upgrading WordPress – Extended Instructions](https://wordpress.org/documentation/article/upgrading-wordpress-extended-instructions/).
 
 ---
 
@@ -6561,10 +6290,6 @@ If the old site is no longer available and you find you have forgotten to copy s
 
 Another option might be the [Internet Archive Wayback Machine](https://archive.org/web/). They may have a copy of the site (or some part of it) archived.
 
-## Changelog
-
-- 2022-09-11: Original content from [Changing The Site URL](https://wordpress.org/documentation/article/changing-the-site-url/), and [Moving WordPress](https://wordpress.org/documentation/article/moving-wordpress/).
-
 ---
 
 # WordPress Multisite / Network <a name="advanced-administration/multisite" />
@@ -6578,10 +6303,6 @@ One can use a multisite for a variety of purposes. Multisite is, for example, us
 The content in a Multisite has its own unique tables in the database, only the user table is shared between the instances.
 
 You can create a multisite that works with subdirectories (“path-based”) or use domains or subdomains (“domain-based”). For how to map the domains, see [WordPress Multisite Domain Mapping](#advanced-administration/multisite/domain-mapping)
-
-## Changelog
-
-- 2023-05-19: First content.
 
 ---
 
@@ -6706,10 +6427,6 @@ You *cannot choose **Sub-directory** Install* (for a path-based network) if your
 
 *See `wp-admin/network.php` for more detail)*
 
-## Changelog
-
-- 2022-10-21: Original content from [Before You Create A Network](https://wordpress.org/documentation/article/before-you-create-a-network/).
-
 ---
 
 # Create A Network <a name="advanced-administration/multisite/create-network" />
@@ -6828,10 +6545,6 @@ For help troubleshooting:
 - [Installing Multiple Blogs](#advanced-administration/before-install/multiple-instances)
 - [How to adapt my plugin to Multisite?](https://stackoverflow.com/questions/13960514/how-to-adapt-my-plugin-to-multisite/)
 
-## Changelog
-
-- 2022-10-21: Original content from [Create A Network](https://wordpress.org/documentation/article/create-a-network/).
-
 ---
 
 # WordPress Multisite Domain Mapping <a name="advanced-administration/multisite/domain-mapping" />
@@ -6872,10 +6585,6 @@ define( 'COOKIE_DOMAIN', $_SERVER['HTTP_HOST'] );
 1. [Create A Network](#advanced-administration/multisite/create-network)
 2. [MultiSite Network Administration](#advanced-administration/multisite/administration)
 3. [Installing Multiple Blogs](#advanced-administration/before-install/multiple-instances)
-
-## Changelog
-
-- 2022-10-25: Original content from [WordPress Multisite Domain Mapping](https://wordpress.org/documentation/article/wordpress-multisite-domain-mapping/).
 
 ---
 
@@ -7104,10 +6813,6 @@ Moving Multisite is more complicated than moving a single install. Please read [
 
 When you’ve created your WordPress Network for importing other sites, you need to look at the [Migrating Multiple Blogs into WordPress Multisite](https://wordpress.org/documentation/article/migrating-multiple-blogs-into-wordpress-multisite/) article.
 
-## Changelog
-
-- 2022-10-25: Original content from [Multisite Network Administration](https://wordpress.org/documentation/article/multisite-network-administration/).
-
 ---
 
 # Network Admin <a name="advanced-administration/multisite/admin" />
@@ -7237,10 +6942,6 @@ If for any reason a site does not get upgraded, each site should be upgraded whe
 **Upgrade Network** Click this button to start the upgrade process. Clicking the Upgrade Network button will step through each site in the network, five at a time, and make sure any database updates are applied.
 
 If a version update to core has not happened, clicking this button won’t affect anything.
-
-## Changelog
-
-- 2022-10-21: Original content from [Network Admin](https://wordpress.org/documentation/article/network-admin/), [Network Admin Sites Screen](https://wordpress.org/documentation/article/network-admin-sites-screen/), and [Network Admin Updates Screen](https://wordpress.org/documentation/article/network-admin-updates-screen/).
 
 ---
 
@@ -7392,10 +7093,6 @@ Default is English.
 
 On WordPress Multisite the default setting for plugins is disabled. This means your users won’t have access to the plugin admin panel inside their dashboard unless you first enable access to plugins network wide.
 
-## Changelog
-
-- 2023-04-25: Original content from [Network Admin Settings Screen](https://wordpress.org/documentation/article/network-admin-settings-screen/).
-
 ---
 
 # Migrate WordPress sites into WordPress Multisite <a name="advanced-administration/multisite/sites-multisite" />
@@ -7480,19 +7177,13 @@ If the old site is no longer available and you find you have forgotten to copy s
 
 Another option might be the [Internet Archive Wayback Machine](https://archive.org/web/). They may have a copy of the site (or some part of it) archived.
 
-## Changelog
-
-- 2023-01-20: Original content from [Migrating multiple blogs into WordPress multisite](https://wordpress.org/documentation/article/migrating-multiple-blogs-into-wordpress-multisite/)
-
 ---
 
 # Plugins <a name="advanced-administration/plugins" />
 
 Source: https://developer.wordpress.org/advanced-administration/plugins/
 
-## Changelog
 
-- 2022-08-16: Nothing here, yet.
 
 ---
 
@@ -7534,10 +7225,6 @@ Under the editor, there is a dropdown menu listing function names found in the P
 ## Update File
 
 Remember to click this button to save the changes you have made to the Plugin file. After clicking this button you should see a splash message at the top of the screen saying “File edited successfully”. If you don’t see that message, then your changes are not saved! Note that if a file is not writeable the Update File button will not be available.
-
-## Changelog
-
-- 2023-04-10: Original content from [Plugin File Editor Screen](https://wordpress.org/documentation/article/plugins-editor-screen/). Minor additions and copy-editing.
 
 ---
 
@@ -7583,10 +7270,6 @@ Thus “Must-Use” is effectively a [Backronym](https://en.wikipedia.org/wiki/B
 
 - `get_mu_plugins()` is located in [wp-admin/includes/plugin.php](https://core.trac.wordpress.org/browser/tags/4.5.3/src/wp-admin/includes/plugin.php#L0).
 - `wp_get_mu_plugins()` is located in [wp-includes/load.php](https://core.trac.wordpress.org/browser/tags/4.5.3/src/wp-includes/load.php#L0).
-
-## Changelog
-
-- 2022-09-11: Original content from [Must Use Plugins](https://wordpress.org/documentation/article/must-use-plugins/). Minor additions and copy-editing.
 
 ---
 
@@ -7662,11 +7345,6 @@ Optimizing themes for performance includes minimizing server requests, reducing 
 
 Proper security practices include keeping themes and WordPress core up-to-date, securing database access, and sanitizing user input to prevent vulnerabilities.
 
-## Changelog
-
-- 2023-11-06: Added Update Theme Informationen.
-- 2022-08-16: Nothing here, yet.
-
 ---
 
 # Security <a name="advanced-administration/security" />
@@ -7687,11 +7365,6 @@ Security largely consists of reducing risk and planning for recovery. Most secur
 
 Security is also about more than WordPress. It is also about making sure your hosting environment is secure and your personal online practices and behaviors keep you safe. Good security depends on the technology in use and the people using the technology. Obsolete or out-of-date technology can have bugs or vulnerabilities that can put your WordPress website at risk. People’s bad online practices can also put your WordPress website as risk. It is important to make sure that not only do you keep the technology you use up-to-date and maintained but also that employees are using security best practices when using the Internet and when interacting with your hosting platform or customer WordPress sites.
 
-## Changelog
-
-- 2022-08-16: Nothing here, yet.
-- 2023-06-08: Moved from https://make.wordpress.org/hosting/handbook/security/
-
 ---
 
 # Your password <a name="advanced-administration/security/logging-in" />
@@ -7702,10 +7375,6 @@ Creating an extension [of this post about resetting your password](https://wordp
 
 [See this issue on github on sections to take over](https://github.com/WordPress/Documentation-Issue-Tracker/issues/79) with the following note:  
 – promote WP CLI above the other options, for being the safest.
-
-## Changelog
-
-- 2022-09-27: Adding the bare essentials.
 
 ---
 
@@ -7774,10 +7443,6 @@ You can [search for two-step authentication plugins](https://wordpress.org/plugi
 ### Related
 
 - [Brute Force Attacks](#advanced-administration/security/brute-force)
-
-## Changelog
-
-- 2022-10-25: Original content from [Two Step Authentication](https://wordpress.org/documentation/article/two-step-authentication/).
 
 ---
 
@@ -7970,11 +7635,6 @@ Various plugins exist to take automatic scheduled backups of your WordPress data
 
 - [WordPress Backups](#advanced-administration/security/backup)
 - [Upgrading WordPress Extended](#advanced-administration/upgrade/upgrading)
-
-## Changelog
-
-- 2022-10-25: Original content from [Restoring Your Database From Backup](https://wordpress.org/documentation/article/restoring-your-database-from-backup/).
-- 2022-09-11: Original content from [WordPress Backups](https://wordpress.org/documentation/article/wordpress-backups/).
 
 ---
 
@@ -8273,10 +7933,6 @@ user@linux:~/files/blog>
 
 ```
 
-## Changelog
-
-- 2022-10-25: Original content from [Backing Up Your Database](#advanced-administration/security/backupdatabase/).
-
 ---
 
 # Backing Up Your WordPress Files <a name="advanced-administration/security/backup/files" />
@@ -8330,10 +7986,6 @@ Most website hosts provide software to back up your site. Check with your host t
 Using [FTP Clients](#advanced-administration/upgrade/ftp) or [UNIX Shell Skills](https://codex.wordpress.org/UNIX_Shell_Skills) you can copy the files to a folder on your computer. Once there, you can zip or compress them into a zip file to save space, allowing you to keep several versions.
 
 Normally, there would be no need to copy the WordPress core files, as you can replace them from a fresh download of the WordPress zip file. The important files to back up would be your wp-config.php file, which contains your settings and your wp-content directory (plus its contents) which contains all your theme and plugin files.
-
-## Changelog
-
-- 2022-10-25: Original content from [Backing Up Your WordPress Files](https://wordpress.org/documentation/article/backing-up-your-wordpress-files/).
 
 ---
 
@@ -8407,7 +8059,7 @@ For instance, with Nginx you need to have these lines:
 ```
 location / {
     proxy_pass http://your_host_name:your_port;
-    proxy_set_header Host $host;
+    proxy_set_header Host $host:$server_port;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Host $server_name;
@@ -8596,10 +8248,6 @@ More testing, preferably with a packet sniffer and some hardcore network analysi
 #### Limitations
 
 The author assumes (but hasn’t checked) that if the user has stored cookies/told their browser to remember passwords (not based on form fields but if using certain external auth mechanism) and hits https://www.example.com/wp-admin/, those packets are sent in the clear and the cookie/auth headers could be intercepted. Therefore, to ensure maximum security, the user should explicitly use the https host or always log in at the beginning of new sessions.
-
-## Changelog
-
-- 2022-10-25: Original content from [Why should I use HTTPS](https://wordpress.org/documentation/article/why-should-i-use-https/), and [Administration Over SSL](https://wordpress.org/documentation/article/administration-over-ssl/).
 
 ---
 
@@ -8915,10 +8563,6 @@ Services like CloudFlare and Sucuri CloudProxy can also help mitigate these atta
 - [How to: Protect WordPress from brute-force XML-RPC attacks](https://www.saotn.org/how-to-wordpress-protection-from-brute-force-xml-rpc-attacks/)
 - [Liquid Web: ModSecurity Rules To Alleviate Brute Force Attacks](https://www.liquidweb.com/kb/wordpress-modsecurity-rules/)
 - [Swiss Army Knife for WordPress (SAK4WP)](https://github.com/orbisius/sak4wp/) – Free Open Source Tool that can help you protect your wp-login.php and /wp-admin/ but not /wp-admin/admin-ajax.php with one click and much more
-
-## Changelog
-
-- 2022-10-25: Original content from [Brute Force Attacks](https://wordpress.org/documentation/article/brute-force-attacks/).
 
 ---
 
@@ -9319,10 +8963,6 @@ If the attacker tries to deface your site or add malware, you can also detect th
 - [Brad Williams: Lock it Up (Video)](https://wordpress.tv/2010/01/23/brad-williams-security-boston10/)
 - [Security Plugins](https://wordpress.org/plugins/tags/security)
 
-## Changelog
-
-- 2022-10-25: Original content from [Hardening WordPress](https://wordpress.org/documentation/article/hardening-wordpress/).
-
 ---
 
 # Display Errors <a name="advanced-administration/security/hardening/display-errors" />
@@ -9355,10 +8995,6 @@ If your server uses FastCGI/PHP-FPM, it may be possible disable the display\_err
 
 If these examples do not work for you, or if you need more instructions, please reach out to your hosting provider.
 
-## Changelog
-
-- 2023-09-14: Setup, and Adding text.
-
 ---
 
 # Monitoring <a name="advanced-administration/security/monitoring" />
@@ -9379,20 +9015,13 @@ While a site’s services may be responding, to a user, a site being “up” me
 
 It is best practice to use performance profiling tools, such as New Relic, AppDynamics or Tideways, to diagnose the performance bottlenecks of your website and infrastructure. These tools will give you insight such as slow performing functions, external HTTP requests, slow database queries and more that are causing poor performance.
 
-## Changelog
-
-- 2023-05-29: Updated from [Hosting Handbook](https://make.wordpress.org/hosting/handbook/reliability/#monitoring)
-- 2023-03-04: Add new file.
-
 ---
 
 # Performance / Optimization <a name="advanced-administration/performance" />
 
 Source: https://developer.wordpress.org/advanced-administration/performance/
 
-## Changelog
 
-- 2022-08-16: Nothing here, yet.
 
 ---
 
@@ -9439,10 +9068,6 @@ Adding an opcode cache like [Opcache](https://www.php.net/manual/en/book.opcache
 - [Core Caching Concepts in WordPress](https://www.tollmanz.com/core-caching-concepts-in-wordpress/)
 - [Best Practices for Speeding Up Your Web Site](https://developer.yahoo.com/performance/rules.html) – Expires / Cache-Control Header and ETags (by Yahoo! Developer Network)
 - [WebSiteOptimization.com: Use Server Cache Control to Improve Performance](https://www.websiteoptimization.com/speed/tweak/cache/)
-
-## Changelog
-
-- 2022-09-04: Original content from [Optimization – Caching](https://wordpress.org/documentation/article/optimization-caching/).
 
 ---
 
@@ -9685,11 +9310,6 @@ If you use a Persistent Object Cache, options (whether autoloaded or not) load f
     - [Presentation on HyperDB and High Performance from WordCamp 2007 (San Francisco)](https://onemansblog.com/2007/08/16/wordcamp-2007-hyperdb-and-high-performance-wordpress/)
 - [50 tips su Web Performance Optimization per siti ad alto traffico WordCamp Bologna (Italy) 2013](https://www.slideshare.net/AndreaCardinali/50-tips-su-web-performance-optimization-per-siti-ad-alto-traffico-wpcamp-bologna-2013)
 
-## Changelog
-
-- 2023-05-03: Revised content to comply with [External Linking Policy](https://make.wordpress.org/docs/handbook/documentation-team-handbook/external-linking-policy/).
-- 2022-09-11: Original content from [Optimization](https://wordpress.org/documentation/article/optimization/).
-
 ---
 
 # PHP Optimization <a name="advanced-administration/performance/php" />
@@ -9776,10 +9396,6 @@ Bear in mind that on shared hosting accounts, those limits are usually set on a 
 
 The `wp-cron.php` script is responsible for causing certain tasks to be scheduled and executed automatically. Every time someone visits your website, `wp-cron.php` checks whether it is time to execute a job or not. Even though these checks are small and fast they consume time and produce load. For this reason, it’s worth considering setting the [`DISABLE_WP_CRON` constant](#advanced-administration/wordpress/wp-config) and using an alternative method to trigger WordPress’ cron system. Note, however, that the WordPress cron system is designed with performance in mind and requires minimal resources to operate so it’s not mandatory to replace it unless you really need to do so.
 
-## Changelog
-
-- 2023-06-08: New page created.
-
 ---
 
 # Debugging WordPress <a name="advanced-administration/debug" />
@@ -9805,10 +9421,6 @@ When it comes to [debugging a WordPress site](#advanced-administration/debug/deb
 ## Test-driving
 
 [Test-driving](#advanced-administration/debug/test-driving) refers to the process of testing a website before making it live. This process allows developers to identify and resolve any issues or bugs before the site is made available to the public. Test-driving is typically performed in a sandbox environment. Creating a sandbox environment is covered in this section.
-
-## Changelog
-
-- 2023-02-17: Added original content.
 
 ---
 
@@ -9975,11 +9587,6 @@ There are many [debugging plugins](https://wordpress.org/plugins/search/debug/) 
 
 For example, [Debug Bar](https://wordpress.org/plugins/debug-bar/) adds a debug menu to the admin bar that shows query, cache, and other helpful debugging information. When WP\_DEBUG is enabled, it also tracks PHP Warnings and Notices to make them easier to find.
 
-## Changelog
-
-- 2023-02-01: Updated original content.
-- 2022-09-11: Original content from [Debugging in WordPress](https://wordpress.org/documentation/article/debugging-in-wordpress/); ticket from [Github](https://github.com/WordPress/Documentation-Issue-Tracker/issues/349).
-
 ---
 
 # Debugging a WordPress Network <a name="advanced-administration/debug/debug-network" />
@@ -10107,11 +9714,6 @@ One or more database tables are unavailable. The database may need to be repaire
 
 - [WordPress → Support → Multisite](https://wordpress.org/support/forum/multisite/)
 
-## Changelog
-
-- 2023-02-17: Updated original content
-- 2022-10-21: Original content from [Debugging a WordPress Network](https://wordpress.org/documentation/article/debugging-a-wordpress-network/).
-
 ---
 
 # Using Your Browser to Diagnose JavaScript Errors <a name="advanced-administration/debug/debug-javascript" />
@@ -10179,10 +9781,6 @@ Please include the below information:
 - the location of the error – both the file name and the line number
 - the context of the error – including the whole error stack will help developers
 - If possible, a link to the web page showing the error
-
-## Changelog
-
-- 2022-09-11: Original content from [Using Your Browser to Diagnose JavaScript Errors](https://wordpress.org/documentation/article/using-your-browser-to-diagnose-javascript-errors/). Consolidated Developer Tools instructions, removed IE documentation.
 
 ---
 
@@ -10471,10 +10069,6 @@ Coming soon – how to move your test site from your computer back live onto you
 
 - [qSandbox.com – Create a free WordPress test site to try (new) plugins and themes](https://qsandbox.com/app/)
 
-## Changelog
-
-- 2022-09-11: Original content from [Test driving WordPress](https://wordpress.org/documentation/article/test-driving-wordpress/).
-
 ---
 
 # Version Control <a name="advanced-administration/debug/version-control" />
@@ -10484,11 +10078,6 @@ Source: https://developer.wordpress.org/advanced-administration/debug/version-co
 Version control is a way of tracking the changes made to files over time by different people, such as the code for a website or another application. It allows people to track the revision history of code and to revert or apply changes easily via the command line. It is also a good way to debug your website if something goes wrong, as you can quickly restore to a previous state of the site’s code without restoring from a full backup.
 
 A lot of WordPress hosts offer version control but there are third-party services and self hosted options as well.
-
-## Changelog
-
-- 2023-05-29: Synced with [Hosting Handbook](https://make.wordpress.org/hosting/handbook/reliability/#version-control)
-- 2023-03-03: Created a new page for *Version control*
 
 ---
 
@@ -10567,10 +10156,6 @@ Other than that, these are some solid resources for you to review:
 - [JavaScript: The Definitive Guide](https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016/)
 - [PHP Cookbook](https://www.oreilly.com/library/view/php-cookbook/9781098121310/)
 - [Programming PHP](https://www.oreilly.com/library/view/programming-php-4th/9781492054122/)
-
-## Changelog
-
-- 2022-09-04: Original content from [Know Your Sources](https://codex.wordpress.org/Know_Your_Sources), based on ticket [Github](https://github.com/WordPress/Documentation-Issue-Tracker/issues/328#issuecomment-1144870008).
 
 ---
 
@@ -10899,8 +10484,3 @@ Remember, that it is advisable to have a current backup of your database at all 
 See also:
 
 - [WordPress Backups](#advanced-administration/security/backup)
-
-## Changelog
-
-- 2023-02-17: Links updated, and some fixes for deprecated content.
-- 2023-01-31: Original content from [FAQ Troubleshooting](https://wordpress.org/documentation/article/faq-troubleshooting-2/).

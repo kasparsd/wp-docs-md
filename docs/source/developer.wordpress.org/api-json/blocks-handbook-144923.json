@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-private-apis/"
     },
-    "modified": "2024-10-30T17:09:46",
-    "modified_gmt": "2024-10-30T17:09:46",
+    "modified": "2025-07-08T10:15:33",
+    "modified_gmt": "2025-07-08T10:15:33",
     "slug": "packages-private-apis",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134521,
-    "menu_order": 311,
+    "menu_order": 313,
     "template": "",
     "meta": {
         "footnotes": ""

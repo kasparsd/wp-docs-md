@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/contributors/code/how-to-get-your-pull-request-reviewed/"
     },
-    "modified": "2025-01-07T18:34:07",
-    "modified_gmt": "2025-01-07T18:34:07",
+    "modified": "2025-07-08T10:15:35",
+    "modified_gmt": "2025-07-08T10:15:35",
     "slug": "how-to-get-your-pull-request-reviewed",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 135090,
-    "menu_order": 388,
+    "menu_order": 390,
     "template": "",
     "meta": {
         "footnotes": ""

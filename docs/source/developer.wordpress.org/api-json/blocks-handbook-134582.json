@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-nux/"
     },
-    "modified": "2025-01-06T18:49:12",
-    "modified_gmt": "2025-01-06T18:49:12",
+    "modified": "2025-07-08T10:15:56",
+    "modified_gmt": "2025-07-08T10:15:56",
     "slug": "packages-nux",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134521,
-    "menu_order": 301,
+    "menu_order": 303,
     "template": "",
     "meta": {
         "footnotes": ""

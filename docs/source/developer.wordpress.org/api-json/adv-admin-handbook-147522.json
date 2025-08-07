@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/debug/version-control/"
     },
-    "modified": "2024-07-17T05:54:39",
-    "modified_gmt": "2024-07-17T05:54:39",
+    "modified": "2025-07-07T21:30:49",
+    "modified_gmt": "2025-07-07T21:30:49",
     "slug": "version-control",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Version Control"
     },
     "content": {
-        "rendered": "<p>Version control is a way of tracking the changes made to files over time by different people, such as the code for a website or another application. It allows people to track the revision history of code and to revert or apply changes easily via the command line. It is also a good way to debug your website if something goes wrong, as you can quickly restore to a previous state of the site&#8217;s code without restoring from a full backup.</p>\n<p>A lot of WordPress hosts offer version control but there are third-party services and self hosted options as well.</p>\n<h2>Changelog</h2>\n<ul>\n<li>2023-05-29: Synced with <a href=\"https://make.wordpress.org/hosting/handbook/reliability/#version-control\">Hosting Handbook</a></li>\n<li>2023-03-03: Created a new page for <em>Version control</em></li>\n</ul>\n",
+        "rendered": "<p>Version control is a way of tracking the changes made to files over time by different people, such as the code for a website or another application. It allows people to track the revision history of code and to revert or apply changes easily via the command line. It is also a good way to debug your website if something goes wrong, as you can quickly restore to a previous state of the site&#8217;s code without restoring from a full backup.</p>\n<p>A lot of WordPress hosts offer version control but there are third-party services and self hosted options as well.</p>\n",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 3,
+                "count": 4,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/147522/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 154462,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/147522/revisions/154462"
+                "id": 159044,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/147522/revisions/159044"
             }
         ],
         "up": [

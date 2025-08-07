@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/components/number-control/"
     },
-    "modified": "2025-02-17T02:04:13",
-    "modified_gmt": "2025-02-17T02:04:13",
+    "modified": "2025-07-08T10:16:07",
+    "modified_gmt": "2025-07-08T10:16:07",
     "slug": "number-control",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134435,
-    "menu_order": 186,
+    "menu_order": 188,
     "template": "",
     "meta": {
         "footnotes": ""

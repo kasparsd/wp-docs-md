@@ -1,0 +1,97 @@
+{
+    "id": 11403,
+    "date": "2014-10-23T17:51:34",
+    "date_gmt": "2014-10-23T17:51:34",
+    "guid": {
+        "rendered": "http://developer.wordpress.org/?post_type=theme-handbook&#038;p=11403"
+    },
+    "modified": "2025-08-07T06:21:49",
+    "modified_gmt": "2025-08-07T06:21:49",
+    "slug": "theme-testing",
+    "status": "publish",
+    "type": "theme-handbook",
+    "link": "https://developer.wordpress.org/themes/advanced-topics/theme-testing/",
+    "title": {
+        "rendered": "Theme Testing"
+    },
+    "content": {
+        "rendered": "\n<p>The <a href=\"https://github.com/WordPress/theme-test-data\">Theme Unit Test data</a>\u00a0is a WordPress import file will fill a WordPress site with enough stub data (posts, media, users) to test a theme.</p>\n\n\n\n<p>The Theme Unit Tests are manual tests to walk through to test theme functionality and how the theme responds to the edge-cases of content and settings.</p>\n\n\n\n<h3 class=\"wp-block-heading\" id=\"theme_unit_test\">Theme Unit Test Overview</h3>\n\n\n\n<ol class=\"wp-block-list\">\n<li>Fix PHP and WordPress errors. Add the following debug setting to your\u00a0<code>wp-config.php</code>\u00a0file to see deprecated function calls and other WordPress-related errors:\u00a0<br><code>define('WP_DEBUG', true);</code><br> See\u00a0<a href=\"https://codex.wordpress.org/WordPress_Deprecated_Functions_Hook\" target=\"_blank\" rel=\"noreferrer noopener\">Deprecated Functions Hook</a>\u00a0for more information.</li>\n\n\n\n<li>Check template files against\u00a0<a href=\"https://developer.wordpress.org/themes/template-files-section/\" target=\"_blank\" rel=\"noreferrer noopener\">Template File Checklist</a>\u00a0(see above).</li>\n\n\n\n<li>Do a run-through using the\u00a0<a href=\"https://make.wordpress.org/themes/handbook/review/theme-unit-test/\" target=\"_blank\" rel=\"noreferrer noopener\">Theme Unit Test</a>.</li>\n\n\n\n<li>Validate HTML and CSS. See\u00a0<a href=\"https://developer.wordpress.org/themes/advanced-topics/validating-your-theme/\" target=\"_blank\" rel=\"noreferrer noopener\">Validating a Website</a>.</li>\n\n\n\n<li>Check for JavaScript errors.</li>\n\n\n\n<li>Test in all your target browsers. For example Safari, Chrome, Opera, Firefox and Microsoft Edge.</li>\n\n\n\n<li>Clean up any extraneous comments, debug settings or TODO items.</li>\n\n\n\n<li>See\u00a0<a href=\"https://make.wordpress.org/themes/handbook/review/\" target=\"_blank\" rel=\"noreferrer noopener\">Theme Review</a>\u00a0if you are publicly releasing the Theme by submitting it to the Themes Directory.</li>\n</ol>\n\n\n\n<p></p>\n",
+        "protected": false
+    },
+    "author": 12560283,
+    "featured_media": 0,
+    "parent": 5821,
+    "menu_order": 200,
+    "template": "",
+    "meta": {
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-11403",
+        "theme-handbook",
+        "type-theme-handbook",
+        "status-publish",
+        "hentry",
+        "type-handbook"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/theme-handbook/11403",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/theme-handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/types/theme-handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/users/12560283"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 7,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/theme-handbook/11403/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 159186,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/theme-handbook/11403/revisions/159186"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/theme-handbook/5821"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/media?parent=11403"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

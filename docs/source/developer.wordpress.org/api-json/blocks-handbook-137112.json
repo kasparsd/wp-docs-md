@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/components/toggle-group-control-option/"
     },
-    "modified": "2024-11-20T17:49:08",
-    "modified_gmt": "2024-11-20T17:49:08",
+    "modified": "2025-07-08T10:15:40",
+    "modified_gmt": "2025-07-08T10:15:40",
     "slug": "toggle-group-control-option",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134435,
-    "menu_order": 216,
+    "menu_order": 218,
     "template": "",
     "meta": {
         "footnotes": ""

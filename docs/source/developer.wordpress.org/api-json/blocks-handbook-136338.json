@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-readable-js-assets-webpack-plugin/"
     },
-    "modified": "2024-10-30T17:09:59",
-    "modified_gmt": "2024-10-30T17:09:59",
+    "modified": "2025-07-08T10:15:42",
+    "modified_gmt": "2025-07-08T10:15:42",
     "slug": "packages-readable-js-assets-webpack-plugin",
     "status": "publish",
     "type": "blocks-handbook",
@@ -21,7 +21,7 @@
     "author": 0,
     "featured_media": 0,
     "parent": 134521,
-    "menu_order": 314,
+    "menu_order": 316,
     "template": "",
     "meta": {
         "footnotes": ""
