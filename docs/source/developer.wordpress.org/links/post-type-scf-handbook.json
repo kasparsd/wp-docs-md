@@ -5,7 +5,9 @@
     ],
     "https://developer.wordpress.org/secure-custom-fields/concepts/architecture/": [],
     "https://developer.wordpress.org/secure-custom-fields/concepts/security/": [],
-    "https://developer.wordpress.org/secure-custom-fields/contributing/": [],
+    "https://developer.wordpress.org/secure-custom-fields/contributing/": [
+        "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/"
+    ],
     "https://developer.wordpress.org/secure-custom-fields/contributing/documentation/": [
         "https://make.wordpress.org/docs/style-guide/"
     ],
@@ -214,8 +216,10 @@
     "https://developer.wordpress.org/secure-custom-fields/code-reference/admin/admin-notices-file/": [],
     "https://developer.wordpress.org/secure-custom-fields/code-reference/admin/admin-tools-file/": [],
     "https://developer.wordpress.org/secure-custom-fields/code-reference/admin/": [
+        "admin-commands-file",
         "admin-notices-file",
-        "admin-tools-file"
+        "admin-tools-file",
+        "beta-features-file"
     ],
     "https://developer.wordpress.org/secure-custom-fields/code-reference/api/api-helpers-file/": [
         "https://developer.wordpress.org/reference/functions/init/",
@@ -287,7 +291,8 @@
         "acf-rest-api-functions-file",
         "class-acf-rest-api-file",
         "class-acf-rest-embed-links-file",
-        "class-acf-rest-request-file"
+        "class-acf-rest-request-file",
+        "class-acf-rest-types-endpoint-file"
     ],
     "https://developer.wordpress.org/secure-custom-fields/features/field/": [
         "accordion",
@@ -359,5 +364,10 @@
         "../tutorials/",
         "../contributing/",
         "../code-reference/"
-    ]
+    ],
+    "https://developer.wordpress.org/secure-custom-fields/code-reference/admin/admin-commands-file/": [],
+    "https://developer.wordpress.org/secure-custom-fields/code-reference/admin/beta-features-file/": [],
+    "https://developer.wordpress.org/secure-custom-fields/code-reference/rest-api/class-acf-rest-types-endpoint-file/": [],
+    "https://developer.wordpress.org/secure-custom-fields/features/field/nav_menu/": [],
+    "https://developer.wordpress.org/secure-custom-fields/features/field/nav_menu/nav_menu-tutorial/": []
 }

@@ -291,9 +291,9 @@
         "https://developer.wordpress.org/apis/security/nonces/",
         "http://en.wikipedia.org/wiki/Cross-site_request_forgery",
         "https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/",
-        "https://ec.haxx.se/http/http-auth",
+        "https://ec.haxx.se/libcurl-http/auth.html#basic",
         "https://tools.ietf.org/html/rfc7617",
-        "https://ec.haxx.se/http/http-auth",
+        "https://ec.haxx.se/http/auth.html",
         "https://wordpress.org/plugins/rest-api-oauth1/",
         "https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/",
         "https://github.com/WP-API/Basic-Auth"

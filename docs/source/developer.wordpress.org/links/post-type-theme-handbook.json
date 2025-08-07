@@ -526,6 +526,14 @@
         "https://developer.wordpress.org/themes/basics/including-css-javascript/",
         "https://api.jquery.com/jQuery.noConflict/"
     ],
+    "https://developer.wordpress.org/themes/advanced-topics/theme-testing/": [
+        "https://github.com/WordPress/theme-test-data",
+        "https://codex.wordpress.org/WordPress_Deprecated_Functions_Hook",
+        "https://developer.wordpress.org/themes/template-files-section/",
+        "https://make.wordpress.org/themes/handbook/review/theme-unit-test/",
+        "https://developer.wordpress.org/themes/advanced-topics/validating-your-theme/",
+        "https://make.wordpress.org/themes/handbook/review/"
+    ],
     "https://developer.wordpress.org/themes/advanced-topics/plugin-api-hooks/": [
         "https://codex.wordpress.org/Plugin_API",
         "https://developer.wordpress.org/reference/functions/wp_head/",
@@ -1058,11 +1066,11 @@
     "https://developer.wordpress.org/themes/getting-started/tools-and-setup/": [
         "https://developer.wordpress.org/block-editor/getting-started/devenv/get-started-with-wp-env/",
         "https://www.docker.com/",
+        "https://developer.wordpress.com/studio/",
         "https://localwp.com/",
         "https://www.mamp.info/en/mamp/mac/",
-        "https://developer.wordpress.com/studio/",
-        "https://varyingvagrantvagrants.org/",
         "https://www.apachefriends.org/",
+        "https://varyingvagrantvagrants.org/",
         "https://make.wordpress.org/core/handbook/tutorials/installing-a-local-server/",
         "https://developer.wordpress.org/advanced-administration/before-install/howto-install/",
         "https://i0.wp.com/developer.wordpress.org/files/2023/11/vs-code-editor.png?ssl=1",

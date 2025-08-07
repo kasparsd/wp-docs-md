@@ -472,11 +472,10 @@
         "https://make.wordpress.org/core/2013/10/25/the-definitive-guide-to-disabling-auto-updates-in-wordpress-3-7/"
     ],
     "https://developer.wordpress.org/apis/hooks/filter-reference/": [
-        "/Plugin_API",
-        "/Writing_a_Plugin",
-        "/Plugin_API/Action_Reference",
-        "/Plugin_API/Hooks_2.0.x",
-        "http://adambrown.info/p/wp_hooks",
+        "https://developer.wordpress.org/themes/advanced-topics/plugin-api-hooks/",
+        "https://developer.wordpress.org/plugins/intro/",
+        "https://developer.wordpress.org/apis/hooks/action-reference/",
+        "https://developer.wordpress.org/reference/hooks/",
         "/#Category_and_Term_Filters",
         "/#Author_and_User_Filters",
         "/#Link_Filters",

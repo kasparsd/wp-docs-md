@@ -21,8 +21,7 @@
         "https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/",
         "https://developer.wordpress.org/advanced-administration/server/file-permissions/",
         "https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/",
-        "https://developer.wordpress.org/advanced-administration/before-install/howto-install/",
-        "https://wordpress.org/documentation/article/before-you-install/"
+        "https://developer.wordpress.org/advanced-administration/before-install/howto-install/"
     ],
     "https://developer.wordpress.org/advanced-administration/before-install/creating-database/": [
         "https://wordpress.org/documentation/article/wordpress-glossary/#phpMyAdmin",
@@ -34,8 +33,7 @@
         "https://i0.wp.com/wordpress.org/documentation/files/2018/11/plesk-db-768x558.png?ssl=1",
         "https://wordpress.org/documentation/article/wordpress-glossary/#cPanel",
         "https://wordpress.org/documentation/article/using-cpanel/",
-        "https://wordpress.org/documentation/article/wordpress-glossary/#cPanel",
-        "https://wordpress.org/documentation/article/creating-database-for-wordpress/"
+        "https://wordpress.org/documentation/article/wordpress-glossary/#cPanel"
     ],
     "https://developer.wordpress.org/advanced-administration/before-install/howto-install/": [
         "#",
@@ -85,9 +83,7 @@
         "https://wordpress.org/documentation/article/glossary/#shell",
         "https://wordpress.org/documentation/article/glossary/#text-editor",
         "https://wordpress.org/documentation/article/glossary/#php",
-        "https://wordpress.org/documentation/article/glossary/#html",
-        "https://make.wordpress.org/core/2015/04/02/the-utf8mb4-upgrade/",
-        "https://wordpress.org/documentation/article/how-to-install-wordpress/"
+        "https://wordpress.org/documentation/article/glossary/#html"
     ],
     "https://developer.wordpress.org/advanced-administration/before-install/development/": [
         "https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/",
@@ -103,9 +99,7 @@
         "https://instantwp.com/",
         "https://developer.wordpress.com/studio/",
         "https://en.wikipedia.org/wiki/Software_appliance",
-        "https://www.turnkeylinux.org/wordpress",
-        "https://wordpress.org/documentation/article/running-a-development-copy-of-wordpress/",
-        "https://wordpress.org/documentation/article/installing-wordpress-on-your-own-computer/"
+        "https://www.turnkeylinux.org/wordpress"
     ],
     "https://developer.wordpress.org/advanced-administration/before-install/in-your-language/": [
         "https://codex.wordpress.org/I18n_for_WordPress_Developers",
@@ -124,8 +118,7 @@
         "https://developer.wordpress.org/advanced-administration/multisite/create-network/",
         "https://translate.wordpress.org",
         "https://make.wordpress.org/polyglots/handbook/tools/glotpress-translate-wordpress-org/",
-        "https://make.wordpress.org/polyglots/handbook/",
-        "https://wordpress.org/documentation/article/installing-wordpress-in-your-language/"
+        "https://make.wordpress.org/polyglots/handbook/"
     ],
     "https://developer.wordpress.org/advanced-administration/before-install/multiple-instances/": [
         "https://wordpress.org/documentation/article/wordpress-glossary/#mysql",
@@ -141,8 +134,7 @@
         "https://developer.wordpress.org/advanced-administration/wordpress/wp-config/",
         "https://developer.wordpress.org/advanced-administration/wordpress/wp-config/",
         "https://developer.wordpress.org/advanced-administration/before-install/howto-install/",
-        "https://developer.wordpress.org/advanced-administration/wordpress/wp-config/#custom-user-and-usermeta-tables",
-        "https://wordpress.org/support/article/installing-multiple-blogs/"
+        "https://developer.wordpress.org/advanced-administration/wordpress/wp-config/#custom-user-and-usermeta-tables"
     ],
     "https://developer.wordpress.org/advanced-administration/before-install/popular-providers/": [
         "https://www.atlantic.net/community/howto/install-wordpress-ubuntu-14/",
@@ -169,8 +161,7 @@
         "https://www.linode.com/docs/guides/how-to-install-wordpress-almalinux-8/",
         "https://learn.microsoft.com/azure/app-service/quickstart-wordpress",
         "https://learn.microsoft.com/troubleshoot/azure/app-service/web-apps-open-source-technologies-faqs",
-        "https://learn.microsoft.com/en-us/search/?terms=wordpress",
-        "https://wordpress.org/documentation/article/installing-wordpress-at-popular-hosting-companies/"
+        "https://learn.microsoft.com/en-us/search/?terms=wordpress"
     ],
     "https://developer.wordpress.org/advanced-administration/server/": [],
     "https://developer.wordpress.org/advanced-administration/server/file-permissions/": [
@@ -193,8 +184,7 @@
         "https://web.archive.org/web/20190715230319/http://www.washington.edu/computing/unix/permissions.html",
         "#about-chmod",
         "https://wordpress.org/documentation/article/using-permalinks/",
-        "https://en.wikipedia.org/wiki/Security-Enhanced_Linux",
-        "https://wordpress.org/documentation/article/changing-file-permissions/"
+        "https://en.wikipedia.org/wiki/Security-Enhanced_Linux"
     ],
     "https://developer.wordpress.org/advanced-administration/server/server-info/": [
         "https://wordpress.org/documentation/article/glossary#php",
@@ -203,8 +193,7 @@
         "https://www.wordpress.org/support/forums/",
         "https://www.php.net/phpinfo",
         "https://www.zend.com/manual/function.phpinfo.php",
-        "https://github.com/abelcallejo/wordpress-environment",
-        "https://wordpress.org/documentation/article/finding-server-info/"
+        "https://github.com/abelcallejo/wordpress-environment"
     ],
     "https://developer.wordpress.org/advanced-administration/server/wordpress-in-directory/": [
         "https://wordpress.org/documentation/wordpress-version/version-3-5/",
@@ -219,24 +208,21 @@
         "https://wordpress.org/documentation/article/editing-wp-config-php/#moving-plugin-folder",
         "https://wordpress.org/documentation/article/editing-wp-config-php/#moving-themes-folder",
         "https://wordpress.org/documentation/article/editing-wp-config-php/#moving-uploads-folder",
-        "https://caddy.community/t/using-caddy-to-give-wordpress-its-own-directory/13185",
-        "https://wordpress.org/documentation/article/giving-wordpress-its-own-directory/"
+        "https://caddy.community/t/using-caddy-to-give-wordpress-its-own-directory/13185"
     ],
     "https://developer.wordpress.org/advanced-administration/server/subdomains-wildcard/": [
         "https://wordpress.org/documentation/article/wordpress-glossary/#multisite",
         "https://developer.wordpress.org/advanced-administration/multisite/create-network/",
         "https://codex.wordpress.org/Configuring_Wildcard_Subdomains_for_multi_site_under_Plesk_Control_Panel",
         "https://help.directadmin.com/item.php?id=127",
-        "https://forum.directadmin.com/threads/wildcard-subdomains-yea-i-know-its-a-common-one.29074/#post-195033",
-        "https://wordpress.org/documentation/article/configuring-wildcard-subdomains/"
+        "https://forum.directadmin.com/threads/wildcard-subdomains-yea-i-know-its-a-common-one.29074/#post-195033"
     ],
     "https://developer.wordpress.org/advanced-administration/server/empty-database/": [
         "https://developer.wordpress.org/advanced-administration/upgrade/phpmyadmin/",
         "https://developer.wordpress.org/advanced-administration/security/backup/#accessing-phpmyadmin",
         "https://developer.wordpress.org/advanced-administration/security/backup/",
         "https://developer.wordpress.org/advanced-administration/security/backup/database/",
-        "https://codex.wordpress.org/Database_Description",
-        "https://wordpress.org/documentation/article/emptying-a-database-table/"
+        "https://codex.wordpress.org/Database_Description"
     ],
     "https://developer.wordpress.org/advanced-administration/server/web-server/": [
         "https://developer.wordpress.org/advanced-administration/server/web-server/httpd/",
@@ -263,13 +249,11 @@
         "https://thecustomizewindows.com/2015/12/nginx-wordpress-installation-guide-steps/",
         "https://centminmod.com/nginx_configure_wordpress.html",
         "http://kbeezie.com/securing-nginx-php/",
-        "https://nealpoole.com/blog/2011/04/setting-up-php-fastcgi-and-nginx-dont-trust-the-tutorials-check-your-configuration/",
-        "https://wordpress.org/documentation/article/nginx/"
+        "https://nealpoole.com/blog/2011/04/setting-up-php-fastcgi-and-nginx-dont-trust-the-tutorials-check-your-configuration/"
     ],
     "https://developer.wordpress.org/advanced-administration/server/control-panel/": [
         "https://docs.cpanel.net/knowledge-base/third-party/how-to-install-wordpress-with-cpanel/",
-        "https://get.plesk.com/",
-        "https://wordpress.org/documentation/article/using-cpanel/"
+        "https://get.plesk.com/"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/": [],
     "https://developer.wordpress.org/advanced-administration/wordpress/wp-config/": [
@@ -311,11 +295,7 @@
         "https://developer.wordpress.org/reference/functions/dbdelta/",
         "https://wordpress.org/documentation/wordpress-version/version-4-0/",
         "https://developer.wordpress.org/advanced-administration/security/https/",
-        "https://make.wordpress.org/core/2013/10/25/the-definitive-guide-to-disabling-auto-updates-in-wordpress-3-7/",
-        "https://developer.wordpress.org/apis/wp-config-php/",
-        "https://github.com/WordPress/Documentation-Issue-Tracker/issues/349",
-        "https://wordpress.org/documentation/article/editing-wp-config-php/",
-        "https://github.com/WordPress/Advanced-administration-handbook/issues/89"
+        "https://make.wordpress.org/core/2013/10/25/the-definitive-guide-to-disabling-auto-updates-in-wordpress-3-7/"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/site-architecture/": [
         "#Core_Structure",
@@ -360,9 +340,7 @@
         "https://codex.wordpress.org/Designing_Themes_for_Public_Release",
         "https://learn.wordpress.org/",
         "https://codex.wordpress.org/Blog_Design_and_Layout",
-        "https://codex.wordpress.org/Stepping_Into_Template_Tags",
-        "https://codex.wordpress.org/Site_Architecture_1.5",
-        "https://github.com/WordPress/Documentation-Issue-Tracker/issues/332"
+        "https://codex.wordpress.org/Stepping_Into_Template_Tags"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/cookies/": [
         "https://support.google.com/chrome/answer/95647",
@@ -375,8 +353,7 @@
         "https://wordpress.org/documentation/article/administration-screens",
         "https://en.wikipedia.org/wiki/HTTP_cookie",
         "http://www.faqs.org/rfcs/rfc2965.html",
-        "https://www.php.net/manual/en/features.cookies.php",
-        "https://wordpress.org/documentation/article/cookies/"
+        "https://www.php.net/manual/en/features.cookies.php"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/update-services/": [
         "https://xmlrpc.com/",
@@ -385,8 +362,7 @@
         "https://wordpress.org/documentation/article/administration-screens/#settings-configuration-settings",
         "https://wordpress.org/documentation/article/settings-writing-screen/",
         "https://feedshark.brainbliss.com/",
-        "https://wordpress.org/plugins/activate-update-services/",
-        "https://wordpress.org/documentation/article/update-services/"
+        "https://wordpress.org/plugins/activate-update-services/"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/edit-files/": [
         "https://wordpress.org/documentation/article/worik-with-themes/",
@@ -428,8 +404,7 @@
         "https://www.ultraedit.com/",
         "https://www.vim.org/",
         "https://code.visualstudio.com/",
-        "https://netbeans.apache.org/",
-        "https://wordpress.org/documentation/article/editing-files/"
+        "https://netbeans.apache.org/"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/css/": [
         "https://wordpress.org/documentation/article/styles-overview/#applying-custom-css",
@@ -470,9 +445,7 @@
         "https://codex.wordpress.org/CSS_Shorthand",
         "https://developer.wordpress.org/advanced-administration/resources/#CSS",
         "https://codex.wordpress.org/Conditional_Comment_CSS",
-        "https://codex.wordpress.org/Validating_a_Website",
-        "https://wordpress.org/documentation/article/css/",
-        "https://github.com/WordPress/Documentation-Issue-Tracker/issues/424"
+        "https://codex.wordpress.org/Validating_a_Website"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/feeds/": [
         "https://developer.wordpress.org/reference/functions/bloginfo/",
@@ -487,9 +460,7 @@
         "<?php",
         "http://www.feedicons.com/",
         "https://kalsey.com/tools/buttonmaker/",
-        "<?php",
-        "https://wordpress.org/documentation/article/wordpress-feeds/",
-        "https://github.com/WordPress/Advanced-administration-handbook/issues/93"
+        "<?php"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/multilingual/": [
         "https://wordpress.org/about/roadmap/",
@@ -498,8 +469,7 @@
         "https://developer.wordpress.org/advanced-administration/multisite/create-network/",
         "https://wordpress.org/plugins/search/multilingual",
         "https://developer.wordpress.org/advanced-administration/security/backup/database/",
-        "https://developer.wordpress.org/advanced-administration/before-install/in-your-language/",
-        "https://wordpress.org/documentation/article/multilingual-wordpress/"
+        "https://developer.wordpress.org/advanced-administration/before-install/in-your-language/"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/oembed/": [
         "https://developer.wordpress.org/reference/hooks/oembed_providers/",
@@ -507,15 +477,13 @@
         "https://oembed.com/providers.json",
         "https://developer.wordpress.org/reference/functions/wp_oembed_add_provider/",
         "https://developer.wordpress.org/reference/functions/wp_embed_register_handler/",
-        "https://developer.wordpress.org/reference/functions/wp_oembed_remove_provider/",
-        "https://oembed.com"
+        "https://developer.wordpress.org/reference/functions/wp_oembed_remove_provider/"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/loopback/": [
         "https://developer.wordpress.org/advanced-administration/upgrade/ftp/",
         "https://wordpress.org/documentation/article/faq-troubleshooting/",
         "https://developer.wordpress.org/advanced-administration/upgrade/ftp/",
-        "https://wordpress.org/plugins/health-check/",
-        "https://wordpress.org/documentation/article/loopbacks/"
+        "https://wordpress.org/plugins/health-check/"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/common-errors/": [
         "https://wordpress.org/documentation/",
@@ -574,8 +542,7 @@
         "https://wordpress.org/documentation/article/updating-wordpress/#manual-update",
         "https://stackoverflow.com/questions/1346209/unknown-column-in-field-list-error-on-mysql-update-query",
         "https://dev.mysql.com/doc/refman/8.2/en/identifiers.html",
-        "https://dev.mysql.com/doc/refman/en/error-messages-server.html",
-        "https://wordpress.org/documentation/article/common-wordpress-errors/"
+        "https://dev.mysql.com/doc/refman/en/error-messages-server.html"
     ],
     "https://developer.wordpress.org/advanced-administration/upgrade/": [],
     "https://developer.wordpress.org/advanced-administration/upgrade/ftp/": [
@@ -586,18 +553,15 @@
         "https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/",
         "https://developer.wordpress.org/advanced-administration/server/file-permissions/",
         "https://wiki.filezilla-project.org/Documentation",
-        "https://en.wikipedia.org/wiki/Comparison_of_FTP_clients",
-        "https://wordpress.org/documentation/article/ftp-clients/"
+        "https://en.wikipedia.org/wiki/Comparison_of_FTP_clients"
     ],
     "https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/": [
         "https://filezilla-project.org/",
-        "https://filezilla-project.org/client_features.php",
-        "https://wordpress.org/documentation/article/using-filezilla/"
+        "https://filezilla-project.org/client_features.php"
     ],
     "https://developer.wordpress.org/advanced-administration/upgrade/phpmyadmin/": [
         "https://wordpress.org/support/welcome/#asking-for-support",
-        "https://www.phpmyadmin.net/",
-        "https://wordpress.org/documentation/article/phpmyadmin/"
+        "https://www.phpmyadmin.net/"
     ],
     "https://developer.wordpress.org/advanced-administration/upgrade/upgrading/": [
         "https://wordpress.org/documentation/article/updating-wordpress/",
@@ -618,38 +582,20 @@
         "https://developer.wordpress.org/advanced-administration/upgrade/upgrading/#step-14-review-what-has-changed-in-wordpress",
         "https://developer.wordpress.org/advanced-administration/before-install/howto-install/#common-installation-problems",
         "https://wordpress.org/download/release-archive/",
-        "https://wordpress.org/documentation/article/glossary#mysql",
-        "https://codex.wordpress.org/Database_Description",
-        "https://wordpress.org/article/backing-up-your-database/",
-        "https://wordpress.org/documentation/article/wordpress-glossary/#.htaccess",
-        "https://developer.wordpress.org/advanced-administration/upgrade/ftp/",
-        "https://developer.wordpress.org/advanced-administration/security/backup/#backing-up-your-wordpress-site",
-        "https://wordpress.org/documentation/article/glossary#text-editor",
-        "https://wordpress.org/documentation/article/administration-screens/",
-        "https://wordpress.org/documentation/article/faq-troubleshooting/#how-to-deactivate-all-plugins-when-not-able-to-access-the-administrative-menus",
-        "https://wordpress.org/support/forums/",
-        "https://wordpress.org/support/forums/",
-        "https://wordpress.org/download/",
-        "https://wordpress.org/documentation/article/glossary#shell",
-        "https://wordpress.org/documentation/article/glossary#web-server",
-        "https://wordpress.org/documentation/article/wordpress-glossary/#FTP",
-        "https://developer.wordpress.org/advanced-administration/upgrade/ftp/",
-        "https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/",
-        "https://developer.wordpress.org/advanced-administration/upgrade/ftp/",
-        "https://developer.wordpress.org/advanced-administration/upgrade/ftp/",
-        "https://wordpress.org/documentation/article/glossary#ftp",
-        "https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/",
-        "https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/",
-        "https://codex.wordpress.org/Uploading_WordPress_to_a_remote_host",
-        "https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/",
-        "https://codex.wordpress.org/Uploading_WordPress_to_a_remote_host",
-        "https://wordpress.org/documentation/article/administration-screens/",
-        "https://wordpress.org/documentation/article/administration-screens/#permalinks",
-        "https://wordpress.org/documentation/article/settings-permalinks-screen/",
-        "https://wordpress.org/documentation/article/wordpress-glossary/#.htaccess",
-        "https://wordpress.org/documentation/article/using-permalinks/",
-        "https://wordpress.org/documentation/article/wordpress-glossary/#.htaccess",
-        "https://codex.wordpress.org/WordPress_Versions",
+        "https://codex.wordpress.org/Converting_Database_Character_Sets",
+        "https://wordpress.org/themes/twentyten/",
+        "https://wordpress.org/wordpress-4.1.zip",
+        "https://wordpress.org/download/releases/",
+        "https://codex.wordpress.org/Converting_Database_Character_Sets",
+        "https://wp-cli.org/",
+        "https://wordpress.org/themes/twentyten/",
+        "https://wordpress.org/wordpress-4.9.zip",
+        "https://wordpress.org/download/releases/",
+        "https://codex.wordpress.org/Converting_Database_Character_Sets",
+        "https://wp-cli.org/",
+        "https://wordpress.org/themes/twentyten/",
+        "https://wordpress.org/wordpress-5.3.zip",
+        "https://wordpress.org/download/releases/",
         "https://wordpress.org/documentation/article/administration-screens",
         "https://codex.wordpress.org/WordPress_Versions",
         "https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/",
@@ -664,9 +610,7 @@
         "https://developer.wordpress.org/reference/functions/__return_false",
         "https://make.wordpress.org/core/2013/10/25/the-definitive-guide-to-disabling-auto-updates-in-wordpress-3-7/",
         "https://wordpress.stackexchange.com/questions/120081/how-do-i-configure-automatic-updates-in-wordpress-3-7",
-        "https://github.com/wp-cli/wp-cli/issues/1310",
-        "https://wordpress.org/documentation/article/configuring-automatic-background-updates/",
-        "https://wordpress.org/documentation/article/upgrading-wordpress-extended-instructions/"
+        "https://github.com/wp-cli/wp-cli/issues/1310"
     ],
     "https://developer.wordpress.org/advanced-administration/upgrade/migrating/": [
         "https://developer.wordpress.org/advanced-administration/security/backup/database/",
@@ -719,9 +663,7 @@
         "https://developer.wordpress.org/advanced-administration/before-install/howto-install/",
         "https://developer.wordpress.org/advanced-administration/multisite/create-network/",
         "https://wordpress.org/support/forums/",
-        "https://archive.org/web/",
-        "https://wordpress.org/documentation/article/changing-the-site-url/",
-        "https://wordpress.org/documentation/article/moving-wordpress/"
+        "https://archive.org/web/"
     ],
     "https://developer.wordpress.org/advanced-administration/multisite/": [
         "https://developer.wordpress.org/advanced-administration/multisite/prepare-network/#server-requirements",
@@ -747,8 +689,7 @@
         "https://wordpress.org/documentation/article/configuring-wildcard-subdomains/",
         "https://developer.wordpress.org/advanced-administration/server/wordpress-in-directory/",
         "https://i0.wp.com/wordpress.org/documentation/files/2018/11/no-www.png?ssl=1",
-        "https://developer.wordpress.org/advanced-administration/multisite/administration/#switching-network-types",
-        "https://wordpress.org/documentation/article/before-you-create-a-network/"
+        "https://developer.wordpress.org/advanced-administration/multisite/administration/#switching-network-types"
     ],
     "https://developer.wordpress.org/advanced-administration/multisite/create-network/": [
         "https://wordpress.org/documentation/article/glossary/#network",
@@ -782,15 +723,13 @@
         "https://developer.wordpress.org/advanced-administration/debug/debug-network/",
         "https://wordpress.org/documentation/article/hosting-wordpress/",
         "https://developer.wordpress.org/advanced-administration/before-install/multiple-instances/",
-        "https://stackoverflow.com/questions/13960514/how-to-adapt-my-plugin-to-multisite/",
-        "https://wordpress.org/documentation/article/create-a-network/"
+        "https://stackoverflow.com/questions/13960514/how-to-adapt-my-plugin-to-multisite/"
     ],
     "https://developer.wordpress.org/advanced-administration/multisite/domain-mapping/": [
         "https://wordpress.org/plugins/wordpress-mu-domain-mapping",
         "https://developer.wordpress.org/advanced-administration/multisite/create-network/",
         "https://developer.wordpress.org/advanced-administration/multisite/administration/",
-        "https://developer.wordpress.org/advanced-administration/before-install/multiple-instances/",
-        "https://wordpress.org/documentation/article/wordpress-multisite-domain-mapping/"
+        "https://developer.wordpress.org/advanced-administration/before-install/multiple-instances/"
     ],
     "https://developer.wordpress.org/advanced-administration/multisite/administration/": [
         "https://developer.wordpress.org/advanced-administration/multisite/create-network/",
@@ -800,8 +739,7 @@
         "https://wordpress.org/documentation/article/customize-permalinks/",
         "https://developer.wordpress.org/advanced-administration/multisite/domain-mapping/",
         "https://developer.wordpress.org/advanced-administration/upgrade/migrating/#moving-wordpress-multisite",
-        "https://wordpress.org/documentation/article/migrating-multiple-blogs-into-wordpress-multisite/",
-        "https://wordpress.org/documentation/article/multisite-network-administration/"
+        "https://wordpress.org/documentation/article/migrating-multiple-blogs-into-wordpress-multisite/"
     ],
     "https://developer.wordpress.org/advanced-administration/multisite/admin/": [
         "https://wordpress.org/documentation/article/glossary#multisite",
@@ -837,18 +775,14 @@
         "#upgrade-network",
         "https://wordpress.org/documentation/article/glossary#network",
         "#available-updates",
-        "https://i0.wp.com/wordpress.org/documentation/files/2019/04/superadmin-update.png?ssl=1",
-        "https://wordpress.org/documentation/article/network-admin/",
-        "https://wordpress.org/documentation/article/network-admin-sites-screen/",
-        "https://wordpress.org/documentation/article/network-admin-updates-screen/"
+        "https://i0.wp.com/wordpress.org/documentation/files/2019/04/superadmin-update.png?ssl=1"
     ],
     "https://developer.wordpress.org/advanced-administration/multisite/sites-multisite/": [
         "https://wordpress.org/documentation/article/tools-export-screen/",
         "https://developer.wordpress.org/advanced-administration/before-install/howto-install/",
         "https://developer.wordpress.org/advanced-administration/multisite/create-network/",
         "https://wordpress.org/documentation/forums/",
-        "https://archive.org/web/",
-        "https://wordpress.org/documentation/article/migrating-multiple-blogs-into-wordpress-multisite/"
+        "https://archive.org/web/"
     ],
     "https://developer.wordpress.org/advanced-administration/plugins/": [],
     "https://developer.wordpress.org/advanced-administration/plugins/mu-plugins/": [
@@ -858,8 +792,7 @@
         "https://wordpress.org/documentation/article/wordpress-glossary/#PHP",
         "https://en.wikipedia.org/wiki/Recursive_acronym",
         "https://core.trac.wordpress.org/browser/tags/4.5.3/src/wp-admin/includes/plugin.php#L0",
-        "https://core.trac.wordpress.org/browser/tags/4.5.3/src/wp-includes/load.php#L0",
-        "https://wordpress.org/documentation/article/must-use-plugins/"
+        "https://core.trac.wordpress.org/browser/tags/4.5.3/src/wp-includes/load.php#L0"
     ],
     "https://developer.wordpress.org/advanced-administration/themes/": [],
     "https://developer.wordpress.org/advanced-administration/security/": [
@@ -882,8 +815,7 @@
         "https://wordpress.org/plugins/rublon/",
         "https://wordpress.org/plugins/two-factor/",
         "https://wordpress.org/plugins/wordfence/",
-        "https://developer.wordpress.org/advanced-administration/security/brute-force/",
-        "https://wordpress.org/documentation/article/two-step-authentication/"
+        "https://developer.wordpress.org/advanced-administration/security/brute-force/"
     ],
     "https://developer.wordpress.org/advanced-administration/security/backup/": [
         "https://wordpress.org/plugins/search.php?q=backup",
@@ -903,9 +835,7 @@
         "https://developer.wordpress.org/advanced-administration/upgrade/ftp/",
         "https://developer.wordpress.org/advanced-administration/upgrade/ftp/filezilla/",
         "https://developer.wordpress.org/advanced-administration/security/backup/",
-        "https://developer.wordpress.org/advanced-administration/upgrade/upgrading/",
-        "https://wordpress.org/documentation/article/restoring-your-database-from-backup/",
-        "https://wordpress.org/documentation/article/wordpress-backups/"
+        "https://developer.wordpress.org/advanced-administration/upgrade/upgrading/"
     ],
     "https://developer.wordpress.org/advanced-administration/security/https/": [
         "https://wordpress.org/documentation/article/editing-wp-config-php/",
@@ -914,9 +844,7 @@
         "https://httpd.apache.org/docs/2.0/ssl/ssl_faq.html#vhosts2",
         "https://wordpress.org/documentation/article/customize-permalinks/",
         "https://core.trac.wordpress.org/ticket/10079",
-        "https://wordpress.org/support/topic/securing-loginphp-with-ssl/",
-        "https://wordpress.org/documentation/article/why-should-i-use-https/",
-        "https://wordpress.org/documentation/article/administration-over-ssl/"
+        "https://wordpress.org/support/topic/securing-loginphp-with-ssl/"
     ],
     "https://developer.wordpress.org/advanced-administration/security/brute-force/": [
         "https://wordpress.org/plugins/change-username/",
@@ -933,8 +861,7 @@
         "https://blog.sucuri.net/2013/04/protecting-against-wordpress-brute-force-attacks.html",
         "https://www.saotn.org/how-to-wordpress-protection-from-brute-force-xml-rpc-attacks/",
         "https://www.liquidweb.com/kb/wordpress-modsecurity-rules/",
-        "https://github.com/orbisius/sak4wp/",
-        "https://wordpress.org/documentation/article/brute-force-attacks/"
+        "https://github.com/orbisius/sak4wp/"
     ],
     "https://developer.wordpress.org/advanced-administration/security/hardening/": [
         "https://wordpress.org/about/security/",
@@ -1001,8 +928,7 @@
         "https://blog.sucuri.net/2012/08/wordpress-security-cutting-through-the-bs.html",
         "https://newcodepoet.files.wordpress.com/2012/07/lockingdownwordpress1-1.pdf",
         "https://wordpress.tv/2010/01/23/brad-williams-security-boston10/",
-        "https://wordpress.org/plugins/tags/security",
-        "https://wordpress.org/documentation/article/hardening-wordpress/"
+        "https://wordpress.org/plugins/tags/security"
     ],
     "https://developer.wordpress.org/advanced-administration/performance/": [],
     "https://developer.wordpress.org/advanced-administration/performance/cache/": [
@@ -1019,8 +945,7 @@
         "https://www.varnish-cache.org/",
         "https://www.tollmanz.com/core-caching-concepts-in-wordpress/",
         "https://developer.yahoo.com/performance/rules.html",
-        "https://www.websiteoptimization.com/speed/tweak/cache/",
-        "https://wordpress.org/documentation/article/optimization-caching/"
+        "https://www.websiteoptimization.com/speed/tweak/cache/"
     ],
     "https://developer.wordpress.org/advanced-administration/performance/optimization/": [
         "#how-to-improve-performance-in-wordpress",
@@ -1068,9 +993,7 @@
         "https://www.slideshare.net/AlmogBaku/wordpress-optimization-16678718",
         "https://barry.blog/2007/07/22/high-performance-wordpress/",
         "https://onemansblog.com/2007/08/16/wordcamp-2007-hyperdb-and-high-performance-wordpress/",
-        "https://www.slideshare.net/AndreaCardinali/50-tips-su-web-performance-optimization-per-siti-ad-alto-traffico-wpcamp-bologna-2013",
-        "https://make.wordpress.org/docs/handbook/documentation-team-handbook/external-linking-policy/",
-        "https://wordpress.org/documentation/article/optimization/"
+        "https://www.slideshare.net/AndreaCardinali/50-tips-su-web-performance-optimization-per-siti-ad-alto-traffico-wpcamp-bologna-2013"
     ],
     "https://developer.wordpress.org/advanced-administration/debug/": [
         "https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/",
@@ -1085,9 +1008,7 @@
         "https://developer.wordpress.org/plugins/plugin-basics/",
         "https://wordpress.org/plugins/search/code+snippets/",
         "https://wordpress.org/plugins/search/debug/",
-        "https://wordpress.org/plugins/debug-bar/",
-        "https://wordpress.org/documentation/article/debugging-in-wordpress/",
-        "https://github.com/WordPress/Documentation-Issue-Tracker/issues/349"
+        "https://wordpress.org/plugins/debug-bar/"
     ],
     "https://developer.wordpress.org/advanced-administration/debug/debug-network/": [
         "https://wordpress.org/documentation/article/multisite-network-administration/",
@@ -1095,13 +1016,11 @@
         "https://developer.wordpress.org/advanced-administration/wordpress/wp-config/",
         "https://codex.wordpress.org/Database_Description#Multisite_Table_Overview",
         "https://multilingualpress.org/wordpress-multisite-network/",
-        "https://wordpress.org/support/forum/multisite/",
-        "https://wordpress.org/documentation/article/debugging-a-wordpress-network/"
+        "https://wordpress.org/support/forum/multisite/"
     ],
     "https://developer.wordpress.org/advanced-administration/debug/debug-javascript/": [
         "https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/#script_debug",
-        "https://wordpress.org/documentation/forum/how-to-and-troubleshooting",
-        "https://wordpress.org/documentation/article/using-your-browser-to-diagnose-javascript-errors/"
+        "https://wordpress.org/documentation/forum/how-to-and-troubleshooting"
     ],
     "https://developer.wordpress.org/advanced-administration/debug/test-driving/": [
         "https://wordpress.org/documentation/article/using-themes/",
@@ -1120,8 +1039,7 @@
         "https://wordpress.org/documentation/files/2018/11/phpmyadmin-export-tab.jpg",
         "https://developer.wordpress.org/advanced-administration/upgrade/ftp/",
         "https://wordpress.org/documentation/article/wordpress-glossary/#Text%20editor",
-        "https://qsandbox.com/app/",
-        "https://wordpress.org/documentation/article/test-driving-wordpress/"
+        "https://qsandbox.com/app/"
     ],
     "https://developer.wordpress.org/advanced-administration/resources/": [
         "https://developer.wordpress.org/themes/",
@@ -1159,16 +1077,13 @@
         "https://eloquentjavascript.net/",
         "https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016/",
         "https://www.oreilly.com/library/view/php-cookbook/9781098121310/",
-        "https://www.oreilly.com/library/view/programming-php-4th/9781492054122/",
-        "https://codex.wordpress.org/Know_Your_Sources",
-        "https://github.com/WordPress/Documentation-Issue-Tracker/issues/328#issuecomment-1144870008"
+        "https://www.oreilly.com/library/view/programming-php-4th/9781492054122/"
     ],
     "https://developer.wordpress.org/advanced-administration/plugins/editor-screen/": [
         "https://wordpress.org/plugins/",
         "https://wordpress.org/documentation/article/block-themes/",
         "https://developer.wordpress.org/reference/",
-        "https://www.php.net/",
-        "https://wordpress.org/documentation/article/plugins-editor-screen/"
+        "https://www.php.net/"
     ],
     "https://developer.wordpress.org/advanced-administration/server/web-server/httpd/": [
         "https://httpd.apache.org/docs/trunk/mod/core.html#options",
@@ -1194,8 +1109,7 @@
         "https://wordpress.org/documentation/article/customize-permalinks/",
         "https://wordpress.org/documentation/article/changing-file-permissions/",
         "https://codex.wordpress.org/UNIX%20Shell%20Skills",
-        "https://codex.wordpress.org/Rewrite%20API",
-        "https://wordpress.org/documentation/article/htaccess/"
+        "https://codex.wordpress.org/Rewrite%20API"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/post-formats/": [
         "https://codex.wordpress.org/Theme_Features",
@@ -1233,8 +1147,7 @@
         "https://nacin.com/2011/01/27/on-standardized-post-formats/",
         "https://markjaquith.wordpress.com/2010/11/12/post-formats-vs-custom-post-types/",
         "https://dougal.gunters.org/blog/2010/12/10/smarter-post-formats/",
-        "https://generatewp.com/theme-support/",
-        "https://wordpress.org/documentation/article/post-formats/"
+        "https://generatewp.com/theme-support/"
     ],
     "https://developer.wordpress.org/advanced-administration/wordpress/import/": [
         "https://wordpress.org/documentation/article/administration-screens/#tools-managing-your-blog",
@@ -1272,15 +1185,13 @@
         "https://github.com/drewm/textpattern-to-wordpress",
         "https://blog.birdhouse.org/2008/08/17/get-your-twitter-timeline-into-wordpress/",
         "#movable-type-and-typepad",
-        "https://www.timwylie.com/xword.html",
-        "https://wordpress.org/documentation/article/importing-content/"
+        "https://www.timwylie.com/xword.html"
     ],
     "https://developer.wordpress.org/advanced-administration/multisite/admin/settings/": [
         "SITE_URL",
         "https://developer.wordpress.org/reference/hooks/upload_mimes/",
         "https://github.com/WordPress/WordPress/blob/master/wp-includes/functions.php",
-        "https://developer.wordpress.org/reference/hooks/upload_mimes/",
-        "https://wordpress.org/documentation/article/network-admin-settings-screen/"
+        "https://developer.wordpress.org/reference/hooks/upload_mimes/"
     ],
     "https://developer.wordpress.org/advanced-administration/security/backup/database/": [
         "https://developer.wordpress.org/advanced-administration/security/backup/",
@@ -1331,8 +1242,7 @@
         "https://developer.wordpress.org/advanced-administration/upgrade/phpmyadmin/",
         "https://developer.wordpress.org/advanced-administration/upgrade/phpmyadmin/",
         "https://wordpress.org/documentation/",
-        "https://developer.wordpress.org/advanced-administration/security/backup/database/#using-straight-mysqlmariadb-commands",
-        "https://developer.wordpress.org/advanced-administration/security/backup/database/"
+        "https://developer.wordpress.org/advanced-administration/security/backup/database/#using-straight-mysqlmariadb-commands"
     ],
     "https://developer.wordpress.org/advanced-administration/security/backup/files/": [
         "https://developer.wordpress.org/advanced-administration/security/backup/database/",
@@ -1342,8 +1252,7 @@
         "https://developer.wordpress.org/advanced-administration/security/backup/#backing-up-your-wordpress-site",
         "https://winscp.net/eng/index.php",
         "https://developer.wordpress.org/advanced-administration/upgrade/ftp/",
-        "https://codex.wordpress.org/UNIX_Shell_Skills",
-        "https://wordpress.org/documentation/article/backing-up-your-wordpress-files/"
+        "https://codex.wordpress.org/UNIX_Shell_Skills"
     ],
     "https://developer.wordpress.org/advanced-administration/resources/faq/": [
         "https://wordpress.org/support/topic/i-make-changes-and-nothing-happens/",
@@ -1398,15 +1307,10 @@
         "https://dev.mysql.com/doc/refman/8.0/en/myisam-repair.html",
         "https://developer.wordpress.org/advanced-administration/upgrade/phpmyadmin/",
         "https://developer.wordpress.org/advanced-administration/upgrade/phpmyadmin/",
-        "https://developer.wordpress.org/advanced-administration/security/backup/",
-        "https://wordpress.org/documentation/article/faq-troubleshooting-2/"
+        "https://developer.wordpress.org/advanced-administration/security/backup/"
     ],
-    "https://developer.wordpress.org/advanced-administration/debug/version-control/": [
-        "https://make.wordpress.org/hosting/handbook/reliability/#version-control"
-    ],
-    "https://developer.wordpress.org/advanced-administration/security/monitoring/": [
-        "https://make.wordpress.org/hosting/handbook/reliability/#monitoring"
-    ],
+    "https://developer.wordpress.org/advanced-administration/debug/version-control/": [],
+    "https://developer.wordpress.org/advanced-administration/security/monitoring/": [],
     "https://developer.wordpress.org/advanced-administration/performance/php/": [
         "https://make.wordpress.org/core/handbook/references/php-compatibility-and-wordpress-versions/",
         "https://www.php.net/supported-versions.php",
