@@ -23536,6 +23536,10 @@
         "https://developer.wordpress.org/sitemap-6.xml"
     ],
     [
+        "https://developer.wordpress.org/themes/advanced-topics/theme-testing/",
+        "https://developer.wordpress.org/sitemap-6.xml"
+    ],
+    [
         "https://developer.wordpress.org/themes/advanced-topics/plugin-api-hooks/",
         "https://developer.wordpress.org/sitemap-6.xml"
     ],
@@ -23997,7 +24001,7 @@
     ],
     [
         "https://developer.wordpress.org/plugins/taxonomies/",
-        "https://developer.wordpress.org/sitemap-6.xml"
+        "https://developer.wordpress.org/sitemap-7.xml"
     ],
     [
         "https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/",
@@ -27997,7 +28001,7 @@
     ],
     [
         "https://developer.wordpress.org/reference/functions/update_network_cache/",
-        "https://developer.wordpress.org/sitemap-7.xml"
+        "https://developer.wordpress.org/sitemap-8.xml"
     ],
     [
         "https://developer.wordpress.org/reference/functions/_prime_network_caches/",
@@ -31997,7 +32001,7 @@
     ],
     [
         "https://developer.wordpress.org/reference/hooks/embed_thumbnail_id/",
-        "https://developer.wordpress.org/sitemap-8.xml"
+        "https://developer.wordpress.org/sitemap-9.xml"
     ],
     [
         "https://developer.wordpress.org/reference/classes/wpdb/parse_db_host/",
@@ -35997,7 +36001,7 @@
     ],
     [
         "https://developer.wordpress.org/reference/classes/wp_recovery_mode_cookie_service/is_cookie_set/",
-        "https://developer.wordpress.org/sitemap-9.xml"
+        "https://developer.wordpress.org/sitemap-10.xml"
     ],
     [
         "https://developer.wordpress.org/reference/classes/wp_recovery_mode_cookie_service/set_cookie/",
@@ -39997,7 +40001,7 @@
     ],
     [
         "https://developer.wordpress.org/reference/functions/wp_sanitize_script_attributes/",
-        "https://developer.wordpress.org/sitemap-10.xml"
+        "https://developer.wordpress.org/sitemap-11.xml"
     ],
     [
         "https://developer.wordpress.org/reference/functions/wp_get_script_tag/",
@@ -43997,7 +44001,7 @@
     ],
     [
         "https://developer.wordpress.org/advanced-administration/security/hardening/",
-        "https://developer.wordpress.org/sitemap-11.xml"
+        "https://developer.wordpress.org/sitemap-12.xml"
     ],
     [
         "https://developer.wordpress.org/advanced-administration/performance/",
@@ -47997,7 +48001,7 @@
     ],
     [
         "https://developer.wordpress.org/reference/classes/wp_interactivity_api/extract_prefix_and_suffix/",
-        "https://developer.wordpress.org/sitemap-12.xml"
+        "https://developer.wordpress.org/sitemap-13.xml"
     ],
     [
         "https://developer.wordpress.org/reference/classes/wp_interactivity_api/extract_directive_value/",
@@ -49837,6 +49841,42 @@
     ],
     [
         "https://developer.wordpress.org/reference/hooks/bulk_action_observer_ids/",
+        "https://developer.wordpress.org/sitemap-13.xml"
+    ],
+    [
+        "https://developer.wordpress.org/cli/commands/transient/patch/",
+        "https://developer.wordpress.org/sitemap-13.xml"
+    ],
+    [
+        "https://developer.wordpress.org/cli/commands/transient/pluck/",
+        "https://developer.wordpress.org/sitemap-13.xml"
+    ],
+    [
+        "https://developer.wordpress.org/secure-custom-fields/code-reference/admin/admin-commands-file/",
+        "https://developer.wordpress.org/sitemap-13.xml"
+    ],
+    [
+        "https://developer.wordpress.org/secure-custom-fields/code-reference/admin/beta-features-file/",
+        "https://developer.wordpress.org/sitemap-13.xml"
+    ],
+    [
+        "https://developer.wordpress.org/secure-custom-fields/code-reference/rest-api/class-acf-rest-types-endpoint-file/",
+        "https://developer.wordpress.org/sitemap-13.xml"
+    ],
+    [
+        "https://developer.wordpress.org/secure-custom-fields/features/field/nav_menu/",
+        "https://developer.wordpress.org/sitemap-13.xml"
+    ],
+    [
+        "https://developer.wordpress.org/secure-custom-fields/features/field/nav_menu/nav_menu-tutorial/",
+        "https://developer.wordpress.org/sitemap-13.xml"
+    ],
+    [
+        "https://developer.wordpress.org/block-editor/reference-guides/components/date-calendar/",
+        "https://developer.wordpress.org/sitemap-13.xml"
+    ],
+    [
+        "https://developer.wordpress.org/block-editor/reference-guides/components/date-range-calendar/",
         "https://developer.wordpress.org/sitemap-13.xml"
     ],
     [
