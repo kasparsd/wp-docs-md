@@ -28,6 +28,8 @@ $markdowner->getEnvironment()->addConverter( new TableConverter() );
 
 $docs = new WP_Docs( $markdowner );
 
+$handbooks_md = [];
+
 $wp_developer = new WP_API_Client( 
 	'https://developer.wordpress.org', 
 	__DIR__ . '/docs/source/developer.wordpress.org' 
@@ -50,7 +52,6 @@ $content_types = [
 	// 'wp-parser-method',
 ];
 
-$handbooks_md = [];
 foreach ( $content_types as $content_type ) {
 	$content_md = [];
 	$toc = [];
@@ -78,7 +79,7 @@ foreach ( $content_types as $content_type ) {
 	$toc = $wp_developer->sort_posts( $toc, $post_parents, $post_order );
 	$content_md = $wp_developer->sort_posts( $content_md, $post_parents, $post_order );
 
-	$handbooks_md[ $content_type ] = implode( 
+	$content_md = implode( 
 		"\n\n",
 		[
 			'Table of Contents:',
@@ -86,18 +87,14 @@ foreach ( $content_types as $content_type ) {
 			implode( "\n\n---\n\n", $content_md ),
 		] 
 	);
+	
+	$handbooks_md[ 'developer-wp-' . $content_type ] = $content_md;
 
 	file_put_contents(
 		sprintf( '%s/docs/wp-%s.md', __DIR__, $content_type ), 
-		$handbooks_md[ $content_type ]
+		$content_md
 	);
 }
-
-// Update the combined handbook file.
-file_put_contents(
-	sprintf( '%s/docs/wp-handbooks.md', __DIR__ ), 
-	implode( "\n\n---\n\n", $handbooks_md )
-);
 
 if ( isset( $cli_options['content-links'] ) ) {
 	foreach ( $content_types as $content_type ) {
@@ -162,6 +159,8 @@ foreach ( $content_types as $content_type ) {
 			implode( "\n\n---\n\n", $content_md ),
 		] 
 	);
+
+	$handbooks_md[ 'wp-org-docs-' . $content_type ] = $content_md;
 
 	file_put_contents(
 		sprintf( '%s/docs/wp-%s.md', __DIR__, $content_type ), 
@@ -236,6 +235,8 @@ foreach ( $content_types as $content_type ) {
 		] 
 	);
 
+	$handbooks_md[ 'wp-cli-' . $content_type ] = $content_md;
+
 	file_put_contents(
 		sprintf( '%s/docs/wp-cli-%s.md', __DIR__, $content_type ), 
 		$content_md
@@ -253,3 +254,9 @@ if ( isset( $cli_options['sitemaps'] ) ) {
 	$sitemap_urls = $wp_cli->get_sitemap_urls();
 	$wp_org->save_json( 'sitemaps.json', $sitemap_urls );
 }
+
+// Update the combined handbook file.
+file_put_contents(
+	sprintf( '%s/docs/wp-handbooks.md', __DIR__ ), 
+	implode( "\n\n---\n\n", $handbooks_md )
+);
