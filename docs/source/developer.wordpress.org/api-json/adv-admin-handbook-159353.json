@@ -1,0 +1,91 @@
+{
+    "id": 159353,
+    "date": "2025-08-19T00:45:32",
+    "date_gmt": "2025-08-19T00:45:32",
+    "guid": {
+        "rendered": "https://developer.wordpress.org/advanced-administration/server/mail/"
+    },
+    "modified": "2025-08-19T01:00:33",
+    "modified_gmt": "2025-08-19T01:00:33",
+    "slug": "mail",
+    "status": "publish",
+    "type": "adv-admin-handbook",
+    "link": "https://developer.wordpress.org/advanced-administration/server/mail/",
+    "title": {
+        "rendered": "Mail"
+    },
+    "content": {
+        "rendered": "<p>This page details the philosphy, operations, and the recommended practices of making mailing work on WordPress.</p>\n<h2>Prerequisites</h2>\n<p>Before starting, you&#8217;ll need to have a basic understanding of the <a href=\"https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol\">SMTP protocol</a> and the  roles of each of its nodes (<a href=\"https://en.wikipedia.org/wiki/Mail_user_agent\">MUA</a> and <a href=\"https://en.wikipedia.org/wiki/Message_transfer_agent\">MTA</a>).</p>\n<h2>WordPress&#8217;s Philosophy on Mailing</h2>\n<p>WordPress&#8217;s role as a CMS is to act as a <a href=\"https://en.wikipedia.org/wiki/Mail_user_agent\">MUA</a>, not a MTA, in the email route. Hence, <code>wp_mail()</code> is setup by default to rely on the presence of a local MTA.</p>\n<p>WordPress can neither be a reliable or performant MTA (the same holds true for most other CMSs as well). Test benchmarks have shown that when WordPress is acting as a MTA itself (either via remote SMTP calls or HTTP API), page load time suffers by magnitudes due to network connection overhead compared to relaying to a local MTA.</p>\n<h2>How WordPress&#8217;s Mailing operates out-of-the-box</h2>\n<p>WordPress uses the <code>wp_mail()</code> function that utilizes the <a href=\"https://github.com/PHPMailer/PHPMailer\">PHPMailer</a> library in its default configuration. By default configuration, the PHPMailer library uses PHP&#8217;s internal <code>mail()</code> function that requires the presence of a sendmail equivalent binary acting as <a href=\"https://en.wikipedia.org/wiki/Message_transfer_agent\">MTA</a> (configured via <code>sendmail_path</code> setting in <code>php.ini</code> which defaults to <code>/usr/sbin/sendmail</code> on most systems). Hence, in order for WordPress to work out-of-the-box, one needs to have the related mailing environment properly configured.</p>\n<p>This is generally not a problem if you are using a managed hosting service, but if you are running your own server and do not have a SMTP server (MTA) set up and/or the related mailing environment properly configured, the outgoing mail is unlikely to send.</p>\n<h2>Recommended Actions</h2>\n<p>Besides the technical aspects, it&#8217;s worthwhile to outline the recommended solutions given the different scenarios so the admins do not end up choosing solutions that don&#8217;t fit them.</p>\n<p>If your WordPress site is on managed hosting, then there&#8217;s typically nothing extra you need to do. Mails originated from your WordPress install shall work out-of-the-box. All mailing related questions shall be directed to your webhost.</p>\n<p>If you&#8217;re on unmanged hosting (i.e. running your own server), there are typically three ways you can setup your mails:</p>\n<ul>\n<li>Setup a local MTA or dedicated mail servers that sends mails directly: in this method, you as the admin is responsible for everything. Please keep in mind, even if you&#8217;ve configured all the related software correctly, you may still run into issues as mail deliverability extend into factors outside of your control such as IP reputation. Due to the amount of overhead and ongoing maintenance required, this method is typically reserved if you&#8217;ve the need to send very large volume of emails or you&#8217;re a large webhost and need to be in control of the mail service.</p>\n</li>\n<li>\n<p>Setup a local MTA and have it relay mails to a third party mailing service. This is the recommended method for most self-hosted setups, is easier to implement than the previous one, and still retains compatibility with WordPress&#8217; philosophy. If you don&#8217;t want to deal with the complexity of mail deliverability issues in running a MTA, this is way to go. In fact, some smaller web hosts utilize this method (they would hold a business account with the third party mailing services and relay all the mails to the mailing service). If you host and manage your own site and need to send to a sizable newsletter audience, this method is also ideal.</p>\n</li>\n<li>\n<p>Use a SMTP plugin and configure it to utilize a third party mailing service: doing this way, your WordPress install becomes a MTA itself. While the setup is much easier compared to other methods, your site may encounter significant performance degratdation due to network connection overhead.</p>\n</li>\n</ul>\n<h2>Setting up your own mail servers</h2>\n<p>If you are running your own *NIX server, you should have either <code>postfix</code> or <code>sendmail</code> equivalent on your machine and just need to set them up (you may search on the web for how-tos). If you wish to use a third party mailing service, the recommended practice is to setup your local MTA to relay mail to the remote SMTP server as this will prevent the page load time from suffering. If you do not want to manually setup a complete mail server such as <code>postfix</code> or <code>sendmail</code> on your *NIX box, there are two other ways:</p>\n<ul>\n<li>Use a relay MTA in place of a local full-featured MTA: for example, <a href=\"https://wiki.debian.org/msmtp\">msmtp-mta</a> is a simplified MTA that can be used to relay emails using a remote SMTP server (i.e. a remote MTA). The package provides a <code>/usr/sbin/sendmail</code> symlink to <code>msmtp</code> and has sendmail compatible interface that other software can use directly. On a Windows machine, try a sendmail emulator like <a href=\"https://github.com/sendmail-tls1-2/main\">Fake sendmail for Windows with TLS v1.2 support</a>.</p>\n</li>\n<li>\n<p>Use SMTP plugins: You can install <a href=\"https://wordpress.org/plugins/search/smtp/\">SMTP plugins</a> from the WP.org plugin directory. These type of plugins overrides <code>wp_mail()</code> default settings to use PHPMailer&#8217;s internal SMTP method instead, which utlize remote third party mailing services to send mail on your behalf of your domain. Doing this way, your WordPress install becomes a MTA itself. Please keep in mind, the performance of the page load time may degrade significantly utilizing this method.</p>\n</li>\n</ul>\n<h3>Windows Host Server Specific</h3>\n<p>Check your \u201cRelay\u201d settings on the SMTP Virtual Server. Grant access to\u00a0<code>127.0.0.1</code>\u00a0. Then in your\u00a0<code>php.ini</code>\u00a0file, set the\u00a0<code>SMTP</code>\u00a0setting to the same IP address. Also set\u00a0<code>smtp_port</code>\u00a0to\u00a0<code>25</code>.</p>\n<h3>Ensuring Deliverability</h3>\n<h4>Ensure Proper Return Address is Used</h4>\n<p>By default, the WordPress mailer fills in the <code>From:</code> field with\u00a0<em>wordpress@example.com</em>\u00a0and the <code>From:</code> name as\u00a0<em>WordPress</em>.</p>\n<p>This is fine if this is a valid e-mail address. For example, if your domain is <em>example.com</em> and your email is\u00a0<em>wordpress@example.com</em>, your host shall pass the email on for delivery. It will probably send your mail as long as\u00a0<em>example.com</em>\u00a0is setup to send and receive mail, even if\u00a0<em>wordpress</em>\u00a0is not a valid mail box. But if you set your real email as the <code>From:</code> address and it\u2019s something like\u00a0<em>wordpress@example.net</em>, the mail may not send because the DNS records of\u00a0<em>example.net</em>\u00a0did not authorize its mails to be handled by your mail server.</p>\n<h4>When Treated as Spam</h4>\n<p>Your email message may have been routed to a spam folder or even worse, simply discarded as malicious. There are a couple measures you can use to convince recipient\u2019s mail servers that your message is legitimate and should be delivered as addressed. If you have a personal site, setting up SPF is the bare minimum to ensure deliverability. If your site also deals with commercial transaction related content, setting up both SPF and DKIM would be ideal, if not required.</p>\n<h5>SPF (Sender Policy Framework)</h5>\n<p>This is the most common anti-spam measure used. If you are on a managed hosting service, there is a good chance your host has set this up for the mail server you are using. Have WordPress email you and check the message headers for evidence that the message passed the SPF check. You can get a message sent by following the Forgot Password link on the login page. To keep your old password, do not follow the link in the message.</p>\n<p>If your system email failed the SPF check, you can set up the credentials if you have access to your DNS records and your mail server\u2019s domain belongs to you. Check the return path of the email your system sent. If the mail server listed there has your domain name, you can set up SPF credentials. There are several how-tos on the Internet.</p>\n<h5>DKIM (Domain Key Identified Mail)</h5>\n<p>This system is also used. You can use both SPF and DKIM in the same message. Again, just as with SPF, you can check if your receiving mailserver verified your host\u2019s domain key by examining the mail header. There is a fair chance no signature key was provided, indicating your host chose to not use this protocol. Also as with SPF, if you can edit your DNS records and the mail server belongs to your domain, you can set up DKIM credentials yourself. Some how-tos exist if you search the Internet.</p>\n<p>To get WordPress to send the proper DKIM keys, hook the\u00a0<code>'phpmailer_init'</code>\u00a0action. You are passed the\u00a0<code>$phpmailer</code>\u00a0object. Set the necessary properties and return the object. See the class source code for more information. It\u2019s on\u00a0<a href=\"https://github.com/WordPress/wordpress-develop/blob/trunk/src/wp-includes/PHPMailer/PHPMailer.php\">wp-includes/PHPMailer/PHPMailer.php</a>.</p>\n",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 145826,
+    "menu_order": 8,
+    "template": "",
+    "meta": {
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-159353",
+        "adv-admin-handbook",
+        "type-adv-admin-handbook",
+        "status-publish",
+        "hentry",
+        "type-handbook"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/159353",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/types/adv-admin-handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/159353/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 159354,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/159353/revisions/159354"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145826"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/media?parent=159353"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

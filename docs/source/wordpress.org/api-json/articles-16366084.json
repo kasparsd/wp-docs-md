@@ -1,0 +1,109 @@
+{
+    "id": 16366084,
+    "date": "2025-08-14T21:31:05",
+    "date_gmt": "2025-08-14T21:31:05",
+    "guid": {
+        "rendered": "https://wordpress.org/documentation/?post_type=helphub_article&#038;p=16366084"
+    },
+    "modified": "2025-08-14T21:31:05",
+    "modified_gmt": "2025-08-14T21:31:05",
+    "slug": "recovery-mode",
+    "status": "publish",
+    "type": "helphub_article",
+    "link": "https://wordpress.org/documentation/article/recovery-mode/",
+    "title": {
+        "rendered": "Recovery Mode"
+    },
+    "content": {
+        "rendered": "\n<p>Recovery Mode is a built-in WordPress feature (<a href=\"https://make.wordpress.org/core/2019/04/16/fatal-error-recovery-mode-in-5-2/\">introduced in version 5.2)</a> that in some cases may help you regain access to your site when a fatal error occurs, without the need to use FTP and/or editing code directly. A fatal error is often caused by a plugin, theme, or custom code and it prevents normal login or site operation. Instead of showing a blank page or &#8220;White Screen of Death,&#8221; WordPress enters a safe mode that lets you log in to troubleshoot and fix the issue.</p>\n\n\n\n<h3 class=\"wp-block-heading\">When does Recovery Mode activate?</h3>\n\n\n\n<p>WordPress automatically activates Recovery Mode when it detects a fatal PHP error during a regular page load (not via CRON or background tasks). These errors commonly stem from incompatible or faulty plugins or themes. When this mode is activated, a user facing error screen will display on the site to explain that the site is experiencing technical difficulties so site visitors are aware:</p>\n\n\n\n<figure class=\"wp-block-image size-large is-resized\"><img decoding=\"async\" src=\"https://wordpress.org/support/files/2025/08/image-1024x262.png\" alt=\"An example of the error one would see on the frontend of a site when something has gone wrong, saying &quot;There has been a critical error on this website. Learn more about troubleshooting WordPress.&quot;\" class=\"wp-image-18599618\" style=\"width:650px\" /></figure>\n\n\n\n<p>At the same time, an email will be sent to the administrator\u2019s email address informing them about the problems and with a link to login to the site with recovery mode activated:</p>\n\n\n\n<figure class=\"wp-block-image size-large\"><img decoding=\"async\" src=\"https://wordpress.org/support/files/2025/08/Email-for-recovery-mode-1024x459.png\" alt=\"A text of an email one would receive when recovery mode starts, with various identifying information blocked out.\" class=\"wp-image-18599623\" /></figure>\n\n\n\n<p>Keep in mind that WordPress loads active plugins in a set order. If your site uses a plugin to change how outgoing emails are sent, but a fatal error happens before that plugin loads, the email will be sent directly from your web server. If your server\u2019s email settings aren\u2019t fully trusted or its IP address is flagged for spam, the email might never reach the admin\u2019s inbox\u2014it could be filtered to spam or blocked entirely during delivery.</p>\n\n\n\n<h3 class=\"wp-block-heading\">How to enter Recovery Mode</h3>\n\n\n\n<p>You\u2019ll receive an email in your site administrator\u2019s email account with a link to login and details about the error. Click the link to access your site in Recovery Mode and then proceed to login. You will see a notice about Recovery Mode upon logging in:&nbsp;</p>\n\n\n\n<figure class=\"wp-block-image size-large is-resized\"><img decoding=\"async\" src=\"https://wordpress.org/support/files/2025/08/image-2-926x1024.png\" alt=\"Admin login for a WordPress site, showing a notice above that says &quot;Recovery Mode Initialized. Please log in to continue.&quot;\" class=\"wp-image-18599620\" style=\"width:500px\" /></figure>\n\n\n\n<h3 class=\"wp-block-heading\">What happens in Recovery Mode</h3>\n\n\n\n<ul class=\"wp-block-list\">\n<li>Faulty plugins or themes are paused just for your admin session so you can log in safely.</li>\n\n\n\n<li>Your dashboard loads with error notices pointing to the problematic component.</li>\n\n\n\n<li>You can deactivate or fix the issue without affecting your site\u2019s frontend users or needing FTP.</li>\n</ul>\n\n\n\n<h3 class=\"wp-block-heading\">What to do in Recovery Mode</h3>\n\n\n\n<ol class=\"wp-block-list\">\n<li>Log in via the special Recovery Mode link received via your administrator email.&nbsp;</li>\n\n\n\n<li>Look for notices indicating which plugin or theme failed. Go to Plugins or Appearance &gt; Themes to deactivate the problematic item. This is typically a temporary solution to the underlying problem, but provides an immediate resolution for the site to load.</li>\n\n\n\n<li>If you edited code (e.g. functions.php), correct it before resuming.</li>\n\n\n\n<li>Once fixed, click \u201cExit Recovery Mode\u201d and verify your site works normally. Usually, you will see the ability to exit this mode in the admin toolbar.&nbsp;</li>\n</ol>\n\n\n\n<h3 class=\"wp-block-heading\">What to do if the recovery email notification doesn\u2019t arrive</h3>\n\n\n\n<p>You can still use the methods described in <a href=\"https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/\">Advanced Administration Handbook</a> for debugging WordPress.&nbsp;</p>\n\n\n\n<p>If you\u2019re using a professional web hosting provider, their customer support may be able to help you. Please contact them directly.&nbsp;</p>\n\n\n\n<p>If you\u2019re comfortable using FTP (or, if it\u2019s available with your web host \u2014 an online file handler) you may temporarily deactivate one or several plugins by renaming their folder names. For instance, you may deactivate the Hello Dolly plugin using FTP by renaming the folder <code>/wp-content/plugins/hello-dolly</code> to <code>wp-content/plugins/hello-dolly-1/</code>. This method can be useful if your debug log indicates that the fatal error happens within a specific plugin or if you suspect any particular plugin of causing trouble.&nbsp;<br></p>\n",
+        "protected": false
+    },
+    "excerpt": {
+        "rendered": "<p>Recovery Mode is a built-in WordPress feature (introduced in version 5.2) that in some cases may help you regain access to your site when a fatal error occurs, without the need to use FTP and/or editing code directly. A fatal error is often caused by a plugin, theme, or custom code and it prevents normal [&hellip;]</p>\n",
+        "protected": false
+    },
+    "featured_media": 0,
+    "menu_order": 0,
+    "comment_status": "open",
+    "ping_status": "closed",
+    "template": "",
+    "meta": {
+        "advanced_seo_description": "",
+        "jetpack_seo_html_title": "",
+        "jetpack_seo_noindex": false
+    },
+    "category": [
+        33,
+        73
+    ],
+    "class_list": [
+        "post-16366084",
+        "helphub_article",
+        "type-helphub_article",
+        "status-publish",
+        "hentry",
+        "category-maintenance",
+        "category-technical-guides"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/articles/16366084",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/articles"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/types/helphub_article"
+            }
+        ],
+        "replies": [
+            {
+                "embeddable": true,
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/comments?post=16366084"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/articles/16366084/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 16366085,
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/articles/16366084/revisions/16366085"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/media?parent=16366084"
+            }
+        ],
+        "wp:term": [
+            {
+                "taxonomy": "category",
+                "embeddable": true,
+                "href": "https://wordpress.org/documentation/wp-json/wp/v2/category?post=16366084"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

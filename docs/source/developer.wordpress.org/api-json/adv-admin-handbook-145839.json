@@ -5,8 +5,8 @@
     "guid": {
         "rendered": "https://developer.wordpress.org/advanced-administration/wordpress/update-services/"
     },
-    "modified": "2025-07-07T21:30:59",
-    "modified_gmt": "2025-07-07T21:30:59",
+    "modified": "2025-08-13T23:45:38",
+    "modified_gmt": "2025-08-13T23:45:38",
     "slug": "update-services",
     "status": "publish",
     "type": "adv-admin-handbook",
@@ -15,7 +15,7 @@
         "rendered": "Update Services"
     },
     "content": {
-        "rendered": "<p>Update Services are tools you can use to let other people know you&#8217;ve updated your blog. WordPress automatically notifies popular Update Services that you&#8217;ve updated your blog by sending a <a href=\"https://xmlrpc.com/\">XML-RPC</a> <a href=\"https://wordpress.org/documentation/article/glossary/#pingback\">ping</a> each time you create or update a post. In turn, Update Services process the ping and updates their proprietary indices with <em>your</em> update.</p>\n<h2>Common Usage</h2>\n<p>Most people use <a href=\"https://pingomatic.com/\">Ping-o-Matic</a> which, with just one &#8220;ping&#8221; from you, will let many other services know that you&#8217;ve updated. As for why, Ping-O-Matic puts it best:</p>\n<blockquote><p>\n  Ping-O-Matic is a service to update different search engines that your blog has updated.<br />\n  We regularly check downstream services to make sure that they&#8217;re legit and still work. So while it may appear like we have fewer services, they&#8217;re the most important ones.\n</p></blockquote>\n<p>If you do not want the update services to be pinged, remove all the update service URIs listed under &#8220;Update Services&#8221; on the <a href=\"https://wordpress.org/documentation/article/administration-screens/#settings-configuration-settings\">Settings</a>-&gt;<a href=\"https://wordpress.org/documentation/article/settings-writing-screen/\">Writing</a> administration screen of your WordPress installation.</p>\n<p><img data-recalc-dims=\"1\" decoding=\"async\" src=\"https://i0.wp.com/wordpress.org/documentation/files/2018/10/update_service.png?ssl=1\" alt=\"Screenshot of the Update Services screen.\" /></p>\n<p>Certain web hosts \u2013 particularly free ones \u2013 disable the PHP functions used to alert update services. If your web host prevents pings, you should stop WordPress from attempting to ping.</p>\n<h2>XML-RPC Ping Services</h2>\n<pre><code>http://rpc.pingomatic.com\nhttp://rpc.twingly.com\nhttp://www.blogdigger.com/RPC2\nhttp://ping.blo.gs/\nhttp://ping.feedburner.com\nhttp://rpc.weblogs.com/RPC2\nhttp://www.pingmyblog.com\n</code></pre>\n<h2>Alternatives</h2>\n<p>An alternative is <a href=\"https://feedshark.brainbliss.com/\">Feed Shark</a>, which pings over 60 services for free.</p>\n<h2>WordPress Multisite Network</h2>\n<p>By default, editing the Ping Services for a WordPress Multisite network site is disabled. This can be re-enabled with a plugin such as the <a href=\"https://wordpress.org/plugins/activate-update-services/\">Activate Update Services</a> plugin.</p>\n",
+        "rendered": "<p>Update Services are tools you can use to let other people know you&#8217;ve updated your blog. WordPress automatically notifies popular Update Services that you&#8217;ve updated your blog by sending a <a href=\"https://xmlrpc.com/\">XML-RPC</a> <a href=\"https://wordpress.org/documentation/article/glossary/#pingback\">ping</a> each time you create or update a post. In turn, Update Services process the ping and updates their proprietary indices with <em>your</em> update.</p>\n<h2>Common Usage</h2>\n<p>Most people use <a href=\"https://pingomatic.com/\">Ping-o-Matic</a> which, with just one &#8220;ping&#8221; from you, will let many other services know that you&#8217;ve updated. As for why, Ping-O-Matic puts it best:</p>\n<blockquote><p>\n  Ping-O-Matic is a service to update different search engines that your blog has updated.<br />\n  We regularly check downstream services to make sure that they&#8217;re legit and still work. So while it may appear like we have fewer services, they&#8217;re the most important ones.\n</p></blockquote>\n<p>If you do not want the update services to be pinged, remove all the update service URIs listed under &#8220;Update Services&#8221; on the <a href=\"https://wordpress.org/documentation/article/administration-screens/#settings-configuration-settings\">Settings</a>-&gt;<a href=\"https://wordpress.org/documentation/article/settings-writing-screen/\">Writing</a> administration screen of your WordPress installation.</p>\n<p><img data-recalc-dims=\"1\" decoding=\"async\" src=\"https://i0.wp.com/wordpress.org/documentation/files/2025/06/update_service.png?ssl=1\" alt=\"Screenshot of the Update Services screen.\" /></p>\n<p>Certain web hosts \u2013 particularly free ones \u2013 disable the PHP functions used to alert update services. If your web host prevents pings, you should stop WordPress from attempting to ping.</p>\n<h2>XML-RPC Ping Services</h2>\n<pre><code>https://rpc.pingomatic.com\nhttps://rpc.twingly.com\nhttp://ping.blo.gs/\n</code></pre>\n<h2>Alternatives</h2>\n<p>An alternative is <a href=\"https://feedshark.brainbliss.com/\">Feed Shark</a>, which pings over 60 services for free.</p>\n<h2>WordPress Multisite Network</h2>\n<p>By default, editing the Ping Services for a WordPress Multisite network site is disabled. This can be re-enabled with a plugin such as the <a href=\"https://wordpress.org/plugins/activate-update-services/\">Activate Update Services</a> plugin.</p>\n",
         "protected": false
     },
     "author": 0,
@@ -59,14 +59,14 @@
         ],
         "version-history": [
             {
-                "count": 4,
+                "count": 5,
                 "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145839/revisions"
             }
         ],
         "predecessor-version": [
             {
-                "id": 159092,
-                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145839/revisions/159092"
+                "id": 159277,
+                "href": "https://developer.wordpress.org/wp-json/wp/v2/adv-admin-handbook/145839/revisions/159277"
             }
         ],
         "up": [
