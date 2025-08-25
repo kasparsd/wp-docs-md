@@ -1327,5 +1327,17 @@
     "https://developer.wordpress.org/advanced-administration/security/hardening/display-errors/": [
         "https://www.php.net/manual/en/errorfunc.configuration.php#ini.display-errors",
         "https://owasp.org/www-community/Improper_Error_Handling"
+    ],
+    "https://developer.wordpress.org/advanced-administration/server/mail/": [
+        "https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol",
+        "https://en.wikipedia.org/wiki/Mail_user_agent",
+        "https://en.wikipedia.org/wiki/Message_transfer_agent",
+        "https://en.wikipedia.org/wiki/Mail_user_agent",
+        "https://github.com/PHPMailer/PHPMailer",
+        "https://en.wikipedia.org/wiki/Message_transfer_agent",
+        "https://wiki.debian.org/msmtp",
+        "https://github.com/sendmail-tls1-2/main",
+        "https://wordpress.org/plugins/search/smtp/",
+        "https://github.com/WordPress/wordpress-develop/blob/trunk/src/wp-includes/PHPMailer/PHPMailer.php"
     ]
 }

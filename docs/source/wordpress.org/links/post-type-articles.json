@@ -4087,6 +4087,7 @@
         "https://wordpress.org/support/welcome/"
     ],
     "https://wordpress.org/documentation/article/twenty-twenty-one-changelog/": [
+        "https://core.trac.wordpress.org/ticket/63613",
         "https://wordpress.org/documentation/wordpress-version/version-6-8/",
         "https://core.trac.wordpress.org/ticket/62895",
         "https://core.trac.wordpress.org/ticket/62973",
@@ -7559,6 +7560,7 @@
     "https://wordpress.org/documentation/article/site-editor-pages/": [
         "https://wordpress.org/documentation/article/block-themes/",
         "https://wordpress.org/documentation/article/site-editor/",
+        "https://wordpress.org/documentation/article/site-editor-command-palette/",
         "https://wordpress.org/documentation/article/settings-reading-screen/",
         "https://wordpress.org/documentation/article/create-pages/#pages-screen",
         "https://wordpress.org/documentation/article/styles-overview/",
@@ -7995,6 +7997,7 @@
         "https://core.trac.wordpress.org/ticket/31839"
     ],
     "https://wordpress.org/documentation/article/twenty-fourteen-changelog/": [
+        "https://core.trac.wordpress.org/ticket/63520",
         "https://wordpress.org/documentation/wordpress-version/version-6-8/",
         "https://core.trac.wordpress.org/ticket/62969",
         "https://core.trac.wordpress.org/ticket/62895",
@@ -8487,6 +8490,7 @@
         "https://core.trac.wordpress.org/ticket/39109"
     ],
     "https://wordpress.org/documentation/article/twenty-sixteen-changelog/": [
+        "https://core.trac.wordpress.org/ticket/63424",
         "https://wordpress.org/documentation/wordpress-version/version-6-8/",
         "https://core.trac.wordpress.org/ticket/62895",
         "https://core.trac.wordpress.org/ticket/62238",
@@ -9111,6 +9115,7 @@
         "https://wordpress.org/documentation/article/twenty-twenty-five-changelog/"
     ],
     "https://wordpress.org/documentation/article/twenty-twenty-five-changelog/": [
+        "https://core.trac.wordpress.org/ticket/63399",
         "https://wordpress.org/documentation/wordpress-version/version-6-8/",
         "https://core.trac.wordpress.org/ticket/62482",
         "https://core.trac.wordpress.org/ticket/62455"
@@ -9141,5 +9146,9 @@
         "https://wordpress.org/documentation/article/query-loop-block/",
         "https://wordpress.org/documentation/article/work-with-blocks/",
         "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel"
+    ],
+    "https://wordpress.org/documentation/article/recovery-mode/": [
+        "https://make.wordpress.org/core/2019/04/16/fatal-error-recovery-mode-in-5-2/",
+        "https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/"
     ]
 }

@@ -2600,6 +2600,10 @@
         "https://developer.wordpress.org/reference/functions/register_meta/#parameters"
     ],
     "https://developer.wordpress.org/block-editor/reference-guides/core-blocks/": [
+        "https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/accordion",
+        "https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/accordion-content",
+        "https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/accordion-header",
+        "https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/accordion-panel",
         "https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/archives",
         "https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/audio",
         "https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/avatar",
