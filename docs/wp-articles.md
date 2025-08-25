@@ -288,6 +288,7 @@ Table of Contents:
 - [Query Total block](#documentation/article/query-total-block)
 - [Query Title block](#documentation/article/query-title-block)
 - [Title block](#documentation/article/title-block)
+- [Recovery Mode](#documentation/article/recovery-mode)
 - [Twenty Ten](#documentation/article/twenty-ten)
 - [Twenty Eleven](#documentation/article/twenty-eleven)
 - [Twenty Twelve](#documentation/article/twenty-twelve)
@@ -21967,6 +21968,12 @@ The best way to find accurate and concise WordPress information is to get it dir
 
 Source: https://wordpress.org/documentation/article/twenty-twenty-one-changelog/
 
+## Version 2.6
+
+Released: August 5, 2025
+
+- Add navigation menu toggle behaviors earlier, at `DOMContentLoaded` instead of at the `load` event. [\#63613](https://core.trac.wordpress.org/ticket/63613)
+
 ## Version 2.5
 
 Released: April 15, 2025 with [WordPress 6.8](#documentation/wordpress-version/version-6-8)
@@ -31502,7 +31509,7 @@ When you select **Pages**, WordPress shows a sidebar with a list of pages, page-
 
 You will find your site icon or the WordPress logo at the top of the sidebar. Clicking on this image takes you back to the WordPress dashboard.
 
-Next is your site title and a button that opens the Command Palette. You will recognize the Command Palette button by the icon of the magnifying glass. You can select the back button if you want to go back to the main Site Editor menu.
+Next is your site title and a button that opens the [Command Palette](#documentation/article/site-editor-command-palette). You will recognize the Command Palette button by the icon of the magnifying glass. You can select the back button if you want to go back to the main Site Editor menu.
 
 ![The page sidebar with a menu with all pages that are published or drafts.](https://wordpress.org/documentation/files/2023/07/63-pages-sidebar-inner.png)### Page list
 
@@ -32966,6 +32973,12 @@ Initial Release.
 
 Source: https://wordpress.org/documentation/article/twenty-fourteen-changelog/
 
+## Version 4.3
+
+Released: August 5, 2025
+
+- Fix link color for Latest Comments blocks when added in the Content Sidebar. [\#63520](https://core.trac.wordpress.org/ticket/63520)
+
 ## Version 4.2
 
 Released: April 15, 2025 with [WordPress 6.8](#documentation/wordpress-version/version-6-8)
@@ -33853,6 +33866,12 @@ Initial Release.
 # Twenty Sixteen changelog <a name="documentation/article/twenty-sixteen-changelog" />
 
 Source: https://wordpress.org/documentation/article/twenty-sixteen-changelog/
+
+## Version 3.6
+
+Released: August 5, 2025
+
+- Ensure that the Quote block’s Plain style does not have a border in the editor. [\#63424](https://core.trac.wordpress.org/ticket/63424)
 
 ## Version 3.5
 
@@ -34754,7 +34773,7 @@ Source: https://wordpress.org/documentation/article/twenty-twelve-changelog/
 
 ## Version 4.6
 
-Released July 15, 2025, with [WordPress 6.8.2](#documentation/wordpress-version/version-6-8-2).
+Released July 16, 2025, with [WordPress 6.8.2](#documentation/wordpress-version/version-6-8-2).
 
 - Fix alignment and styling of `figcaption` elements in the block editor. [\#63073](https://core.trac.wordpress.org/ticket/63073)
 
@@ -35259,6 +35278,12 @@ For details refer to this support article: [Border settings overview](#documenta
 
 Source: https://wordpress.org/documentation/article/twenty-twenty-five-changelog/
 
+## Version 1.3
+
+Released: August 5, 2025
+
+- Ensure editor styles are enqueued, using a relative path in `add_editor_style()` instead of a full URL. [\#63399](https://core.trac.wordpress.org/ticket/63399)
+
 ## Version 1.2
 
 Released: April 15, 2025 with [WordPress 6.8](#documentation/wordpress-version/version-6-8)
@@ -35530,6 +35555,47 @@ It controls the page link’s `<a href="https://developer.mozilla.org/en-US/docs
 - 2022-12-12 
     - Updated screenshots for 6.1
 - Created 2022-03-17
+
+---
+
+# Recovery Mode <a name="documentation/article/recovery-mode" />
+
+Source: https://wordpress.org/documentation/article/recovery-mode/
+
+Recovery Mode is a built-in WordPress feature ([introduced in version 5.2)](https://make.wordpress.org/core/2019/04/16/fatal-error-recovery-mode-in-5-2/) that in some cases may help you regain access to your site when a fatal error occurs, without the need to use FTP and/or editing code directly. A fatal error is often caused by a plugin, theme, or custom code and it prevents normal login or site operation. Instead of showing a blank page or “White Screen of Death,” WordPress enters a safe mode that lets you log in to troubleshoot and fix the issue.
+
+### When does Recovery Mode activate?
+
+WordPress automatically activates Recovery Mode when it detects a fatal PHP error during a regular page load (not via CRON or background tasks). These errors commonly stem from incompatible or faulty plugins or themes. When this mode is activated, a user facing error screen will display on the site to explain that the site is experiencing technical difficulties so site visitors are aware:
+
+![An example of the error one would see on the frontend of a site when something has gone wrong, saying "There has been a critical error on this website. Learn more about troubleshooting WordPress."](https://wordpress.org/support/files/2025/08/image-1024x262.png)At the same time, an email will be sent to the administrator’s email address informing them about the problems and with a link to login to the site with recovery mode activated:
+
+![A text of an email one would receive when recovery mode starts, with various identifying information blocked out.](https://wordpress.org/support/files/2025/08/Email-for-recovery-mode-1024x459.png)Keep in mind that WordPress loads active plugins in a set order. If your site uses a plugin to change how outgoing emails are sent, but a fatal error happens before that plugin loads, the email will be sent directly from your web server. If your server’s email settings aren’t fully trusted or its IP address is flagged for spam, the email might never reach the admin’s inbox—it could be filtered to spam or blocked entirely during delivery.
+
+### How to enter Recovery Mode
+
+You’ll receive an email in your site administrator’s email account with a link to login and details about the error. Click the link to access your site in Recovery Mode and then proceed to login. You will see a notice about Recovery Mode upon logging in:
+
+![Admin login for a WordPress site, showing a notice above that says "Recovery Mode Initialized. Please log in to continue."](https://wordpress.org/support/files/2025/08/image-2-926x1024.png)### What happens in Recovery Mode
+
+- Faulty plugins or themes are paused just for your admin session so you can log in safely.
+- Your dashboard loads with error notices pointing to the problematic component.
+- You can deactivate or fix the issue without affecting your site’s frontend users or needing FTP.
+
+### What to do in Recovery Mode
+
+1. Log in via the special Recovery Mode link received via your administrator email.
+2. Look for notices indicating which plugin or theme failed. Go to Plugins or Appearance &gt; Themes to deactivate the problematic item. This is typically a temporary solution to the underlying problem, but provides an immediate resolution for the site to load.
+3. If you edited code (e.g. functions.php), correct it before resuming.
+4. Once fixed, click “Exit Recovery Mode” and verify your site works normally. Usually, you will see the ability to exit this mode in the admin toolbar.
+
+### What to do if the recovery email notification doesn’t arrive
+
+You can still use the methods described in [Advanced Administration Handbook](https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/) for debugging WordPress.
+
+If you’re using a professional web hosting provider, their customer support may be able to help you. Please contact them directly.
+
+If you’re comfortable using FTP (or, if it’s available with your web host — an online file handler) you may temporarily deactivate one or several plugins by renaming their folder names. For instance, you may deactivate the Hello Dolly plugin using FTP by renaming the folder `/wp-content/plugins/hello-dolly` to `wp-content/plugins/hello-dolly-1/`. This method can be useful if your debug log indicates that the fatal error happens within a specific plugin or if you suspect any particular plugin of causing trouble.
 
 ---
 

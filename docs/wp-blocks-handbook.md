@@ -211,12 +211,12 @@ Table of Contents:
 - [Snackbar](#block-editor/reference-guides/components/snackbar)
 - [Spacer](#block-editor/reference-guides/components/spacer)
 - [Spinner](#block-editor/reference-guides/components/spinner)
-- [TextControl](#block-editor/reference-guides/components/text-control)
 - [Surface](#block-editor/reference-guides/components/surface)
 - [TabPanel](#block-editor/reference-guides/components/tab-panel)
+- [TextControl](#block-editor/reference-guides/components/text-control)
 - [TextHighlight](#block-editor/reference-guides/components/text-highlight)
-- [TextareaControl](#block-editor/reference-guides/components/textarea-control)
 - [Text](#block-editor/reference-guides/components/text)
+- [TextareaControl](#block-editor/reference-guides/components/textarea-control)
 - [ToggleControl](#block-editor/reference-guides/components/toggle-control)
 - [ToggleGroupControlOptionBase](#block-editor/reference-guides/components/toggle-group-control-option-base)
 - [ToggleGroupControlOptionIcon](#block-editor/reference-guides/components/toggle-group-control-option-icon)
@@ -17769,6 +17769,51 @@ This page lists the blocks included in the block-library package.
 - Blocks marked with **Experimental:** true are only available when Gutenberg is active.
 - Blocks marked with **Experimental:** fse are only available in the Site Editor.
 
+## Accordion
+
+Displays a group of accordion headers and associated expandable content. ([Source](https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/accordion))
+
+- **Name:** core/accordion
+- **Experimental:** true
+- **Category:** design
+- **Allowed Blocks:** core/accordion-content
+- **Supports:** align (full, wide), background (backgroundImage, backgroundSize), color (background, gradient, text), interactivity, layout, shadow, spacing (blockGap, margin, padding), html
+- **Attributes:** allowedBlocks, autoclose, iconPosition, showIcon
+
+## Accordion Content
+
+Displays a section of content in an accordion, including a header and expandable content. ([Source](https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/accordion-content))
+
+- **Name:** core/accordion-content
+- **Experimental:** true
+- **Category:** design
+- **Parent:** core/accordion
+- **Allowed Blocks:** core/accordion-header, core/accordion-panel
+- **Supports:** align (full, wide), color (background, gradient, text), interactivity, shadow, spacing (blockGap, margin)
+- **Attributes:** openByDefault
+
+## Accordion Header
+
+Displays an accordion header. ([Source](https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/accordion-header))
+
+- **Name:** core/accordion-header
+- **Experimental:** true
+- **Category:** design
+- **Parent:** core/accordion-content
+- **Supports:** anchor, border, color (background, gradient, text), interactivity, shadow, spacing (margin, padding), typography (fontSize, textAlign), align
+- **Attributes:** iconPosition, level, levelOptions, openByDefault, showIcon, textAlignment, title
+
+## Accordion Panel
+
+Displays an accordion panel. ([Source](https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/accordion-panel))
+
+- **Name:** core/accordion-panel
+- **Experimental:** true
+- **Category:** design
+- **Parent:** core/accordion-content
+- **Supports:** border, color (background, gradient, text), interactivity, shadow, spacing (blockGap, margin, padding), typography (fontSize, lineHeight)
+- **Attributes:** allowedBlocks, isSelected, openByDefault, templateLock
+
 ## Archives
 
 Display a date archive of your posts. ([Source](https://github.com/WordPress/gutenberg/tree/trunk/packages/block-library/src/archives))
@@ -18052,7 +18097,7 @@ A form. ([Source](https://github.com/WordPress/gutenberg/tree/trunk/packages/blo
 - **Experimental:** true
 - **Category:** common
 - **Allowed Blocks:** core/paragraph, core/heading, core/form-input, core/form-submit-button, core/form-submission-notification, core/group, core/columns
-- **Supports:** anchor, color (background, gradients, link, text), spacing (margin, padding), typography (fontSize, lineHeight), className
+- **Supports:** anchor, color (background, gradients, link, text), spacing (margin, padding), typography (fontSize, lineHeight)
 - **Attributes:** action, email, method, submissionMethod
 
 ## Input Field
@@ -25409,6 +25454,7 @@ Settings related to borders.
 | radius | Allow users to set custom border radius. | `boolean` | `false` |
 | style | Allow users to set custom border styles. | `boolean` | `false` |
 | width | Allow users to set custom border widths. | `boolean` | `false` |
+| radiusSizes | Border radius size presets for the border radius selector. | `[ { name, slug, size } ]` |  |
 
 ---
 
@@ -37605,153 +37651,6 @@ Check out the [Storybook page](https://wordpress.github.io/gutenberg/?path=/docs
 
 ---
 
-# TextControl <a name="block-editor/reference-guides/components/text-control" />
-
-Source: https://developer.wordpress.org/block-editor/reference-guides/components/text-control/
-
-TextControl components let users enter and edit text.
-
-![Unfilled and filled TextControl components](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl.png?ssl=1)
-
-## Design guidelines
-
-### Usage
-
-#### When to use TextControls
-
-TextControls are best used for free text entry. If you have a set of predefined options you want users to select from, it’s best to use a more constrained component, such as a SelectControl, RadioControl, CheckboxControl, or RangeControl.
-
-Because TextControls are single-line fields, they are not suitable for collecting long responses. For those, use a text area instead.
-
-TextControls should:
-
-- Stand out and indicate that users can input information.
-- Have clearly differentiated states (selected/unselected, active/inactive).
-- Make it easy to understand the requested information and to address any errors.
-- Have visible labels; placeholder text is not an acceptable replacement for a label as it vanishes when users start typing.
-
-### Anatomy
-
-![Features of a TextControl component with numbered labels](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl-Anatomy.png?ssl=1)
-
-1. Label
-2. Input container
-3. Input text
-
-#### Label text
-
-Label text is used to inform users as to what information is requested for a text field. Every text field should have a label. Label text should be above the input field, and always visible.
-
-#### Containers
-
-Containers improve the discoverability of text fields by creating contrast between the text field and surrounding content.
-
-![A TextControl with a stroke around the container to clearly indicate the input area](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl-Do.png?ssl=1)
-
-**Do**  
-A stroke around the container clearly indicates that users can input information.
-
-![A TextControl without a clear visual marker to indicate the input area](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl-Dont.png?ssl=1)
-
-**Don’t**  
-Don’t use unclear visual markers to indicate a text field.
-
-## Development guidelines
-
-### Usage
-
-Render a user interface to input the name of an additional css class.
-
-```js
-import { useState } from 'react';
-import { TextControl } from '@wordpress/components';
-
-const MyTextControl = () => {
-    const [ className, setClassName ] = useState( '' );
-
-    return (
-        <TextControl
-            __nextHasNoMarginBottom
-            __next40pxDefaultSize
-            label="Additional CSS Class"
-            value={ className }
-            onChange={ ( value ) => setClassName( value ) }
-        />
-    );
-};
-
-```
-
-### Props
-
-The set of props accepted by the component will be specified below.  
-Props not included in this set will be applied to the input element.
-
-#### label
-
-If this property is added, a label will be generated using label property as the content.
-
-- Type: `String`
-- Required: No
-
-#### hideLabelFromVision
-
-If true, the label will only be visible to screen readers.
-
-- Type: `Boolean`
-- Required: No
-
-#### help
-
-If this property is added, a help text will be generated using help property as the content.
-
-- Type: `String`
-- Required: No
-
-#### type
-
-Type of the input element to render. Defaults to “text”.
-
-- Type: `String`
-- Required: No
-- Default: “text”
-
-#### value
-
-The current value of the input.
-
-- Type: `String | Number`
-- Required: Yes
-
-#### className
-
-The class that will be added with “components-base-control” to the classes of the wrapper div.  
-If no className is passed only components-base-control is used.
-
-- Type: `String`
-- Required: No
-
-#### onChange
-
-A function that receives the value of the input.
-
-- Type: `function`
-- Required: Yes
-
-#### \_\_next40pxDefaultSize
-
-Start opting into the larger default height that will become the default size in a future version.
-
-- Type: `Boolean`
-- Required: No
-- Default: `false`
-
-## Related components
-
-- To offer users more constrained options for input, use SelectControl, RadioControl, CheckboxControl, or RangeControl.
-
----
-
 # Surface <a name="block-editor/reference-guides/components/surface" />
 
 Source: https://developer.wordpress.org/block-editor/reference-guides/components/surface/
@@ -37994,6 +37893,153 @@ A function which renders the tabviews given the selected tab. The function is pa
 
 ---
 
+# TextControl <a name="block-editor/reference-guides/components/text-control" />
+
+Source: https://developer.wordpress.org/block-editor/reference-guides/components/text-control/
+
+TextControl components let users enter and edit text.
+
+![Unfilled and filled TextControl components](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl.png?ssl=1)
+
+## Design guidelines
+
+### Usage
+
+#### When to use TextControls
+
+TextControls are best used for free text entry. If you have a set of predefined options you want users to select from, it’s best to use a more constrained component, such as a SelectControl, RadioControl, CheckboxControl, or RangeControl.
+
+Because TextControls are single-line fields, they are not suitable for collecting long responses. For those, use a text area instead.
+
+TextControls should:
+
+- Stand out and indicate that users can input information.
+- Have clearly differentiated states (selected/unselected, active/inactive).
+- Make it easy to understand the requested information and to address any errors.
+- Have visible labels; placeholder text is not an acceptable replacement for a label as it vanishes when users start typing.
+
+### Anatomy
+
+![Features of a TextControl component with numbered labels](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl-Anatomy.png?ssl=1)
+
+1. Label
+2. Input container
+3. Input text
+
+#### Label text
+
+Label text is used to inform users as to what information is requested for a text field. Every text field should have a label. Label text should be above the input field, and always visible.
+
+#### Containers
+
+Containers improve the discoverability of text fields by creating contrast between the text field and surrounding content.
+
+![A TextControl with a stroke around the container to clearly indicate the input area](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl-Do.png?ssl=1)
+
+**Do**  
+A stroke around the container clearly indicates that users can input information.
+
+![A TextControl without a clear visual marker to indicate the input area](https://i0.wp.com/make.wordpress.org/design/files/2019/03/TextControl-Dont.png?ssl=1)
+
+**Don’t**  
+Don’t use unclear visual markers to indicate a text field.
+
+## Development guidelines
+
+### Usage
+
+Render a user interface to input the name of an additional css class.
+
+```js
+import { useState } from 'react';
+import { TextControl } from '@wordpress/components';
+
+const MyTextControl = () => {
+    const [ className, setClassName ] = useState( '' );
+
+    return (
+        <TextControl
+            __nextHasNoMarginBottom
+            __next40pxDefaultSize
+            label="Additional CSS Class"
+            value={ className }
+            onChange={ ( value ) => setClassName( value ) }
+        />
+    );
+};
+
+```
+
+### Props
+
+The set of props accepted by the component will be specified below.  
+Props not included in this set will be applied to the input element.
+
+#### label
+
+If this property is added, a label will be generated using label property as the content.
+
+- Type: `String`
+- Required: No
+
+#### hideLabelFromVision
+
+If true, the label will only be visible to screen readers.
+
+- Type: `Boolean`
+- Required: No
+
+#### help
+
+If this property is added, a help text will be generated using help property as the content.
+
+- Type: `String`
+- Required: No
+
+#### type
+
+Type of the input element to render. Defaults to “text”.
+
+- Type: `String`
+- Required: No
+- Default: “text”
+
+#### value
+
+The current value of the input.
+
+- Type: `String | Number`
+- Required: Yes
+
+#### className
+
+The class that will be added with “components-base-control” to the classes of the wrapper div.  
+If no className is passed only components-base-control is used.
+
+- Type: `String`
+- Required: No
+
+#### onChange
+
+A function that receives the value of the input.
+
+- Type: `function`
+- Required: Yes
+
+#### \_\_next40pxDefaultSize
+
+Start opting into the larger default height that will become the default size in a future version.
+
+- Type: `Boolean`
+- Required: No
+- Default: `false`
+
+## Related components
+
+- To offer users more constrained options for input, use SelectControl, RadioControl, CheckboxControl, or RangeControl.
+
+---
+
 # TextHighlight <a name="block-editor/reference-guides/components/text-highlight" />
 
 Source: https://developer.wordpress.org/block-editor/reference-guides/components/text-highlight/
@@ -38035,156 +38081,6 @@ The string of text to be tested for occurrences of then given `highlight`.
 
 - Required: Yes
 - Default: `''`
-
----
-
-# TextareaControl <a name="block-editor/reference-guides/components/textarea-control" />
-
-Source: https://developer.wordpress.org/block-editor/reference-guides/components/textarea-control/
-
-TextareaControls are TextControls that allow for multiple lines of text, and wrap overflow text onto a new line. They are a fixed height and scroll vertically when the cursor reaches the bottom of the field.
-
-![An empty TextareaControl, and a focused TextareaControl with some content entered.](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl.png?ssl=1)
-
-## Design guidelines
-
-### Usage
-
-#### When to use TextareaControl
-
-Use TextareaControl when you need to encourage users enter an amount of text that’s longer than a single line. (A bigger box can encourage people to be more verbose, where a smaller one encourages them to be succinct.)
-
-TextareaControl should:
-
-- Stand out from the background of the page and indicate that users can input information.
-- Have clearly differentiated active/inactive states, including focus styling.
-- Make it easy to understand and address any errors via clear and direct error notices.
-- Make it easy to understand the requested information by using a clear and descriptive label.
-
-#### When not to use TextareaControl
-
-Do not use TextareaControl if you need to let users enter shorter answers (no longer than a single line), such as a phone number or name. In this case, you should use `Text Control`.
-
-![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Answers-Do.png?ssl=1)
-
-**Do**
-
-Use TextareaControl to let users to enter text longer than a single line.
-
-![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Answers-Dont.png?ssl=1)
-
-**Don’t**
-
-Use TextareaControl for shorter answers.
-
-## Anatomy
-
-![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Anatomy.png?ssl=1)
-
-1. Container
-2. Label
-
-### Containers
-
-Containers improve the discoverability of text fields by creating contrast between the text field and surrounding content.
-
-![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Stroke-Do.png?ssl=1)
-
-**Do**  
-Use a stroke around the container, which clearly indicates that users can input information.
-
-![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Stroke-Dont.png?ssl=1)
-
-**Don’t**  
-Use unclear visual markers to indicate a text field.
-
-### Label text
-
-Label text is used to inform users as to what information is requested for a text field. Every text field should have a label. Label text should be above the input field, and always visible. Write labels in sentence capitalization.
-
-### Error text
-
-When text input isn’t accepted, an error message can display instructions on how to fix it. Error messages are displayed below the input line, replacing helper text until fixed.
-
-![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Error.png?ssl=1)
-
-## Development guidelines
-
-### Usage
-
-```jsx
-import { useState } from 'react';
-import { TextareaControl } from '@wordpress/components';
-
-const MyTextareaControl = () => {
-    const [ text, setText ] = useState( '' );
-
-    return (
-        <TextareaControl
-          __nextHasNoMarginBottom
-            label="Text"
-            help="Enter some text"
-            value={ text }
-            onChange={ ( value ) => setText( value ) }
-        />
-    );
-};
-
-```
-
-### Props
-
-The set of props accepted by the component will be specified below.
-
-Props not included in this set will be applied to the textarea element.
-
-#### `help`: `string | Element`
-
-If this property is added, a help text will be generated using help property as the content.
-
-- Required: No
-
-#### `hideLabelFromVision`: `boolean`
-
-If true, the label will only be visible to screen readers.
-
-- Required: No
-
-#### `label`: `string`
-
-If this property is added, a label will be generated using label property as the content.
-
-- Required: No
-
-#### `onChange`: `( value: string ) => void`
-
-A function that receives the new value of the textarea each time it changes.
-
-- Required: Yes
-
-#### `rows`: `number`
-
-The number of rows the textarea should contain.
-
-- Required: No
-- Default: 4
-
-#### `value`: `string`
-
-The current value of the textarea.
-
-- Required: Yes
-
-#### `__nextHasNoMarginBottom`: `Boolean`
-
-Start opting into the new margin-free styles that will become the default in a future version.
-
-- Required: No
-- Default: `false`
-
-## Related components
-
-- For a field where users only enter one line of text, use the `TextControl` component.
 
 ---
 
@@ -38441,6 +38337,156 @@ function Example() {
 **Type**: `CSSProperties['fontWeight']`,`TextWeight`
 
 Adjusts font-weight of the text.
+
+---
+
+# TextareaControl <a name="block-editor/reference-guides/components/textarea-control" />
+
+Source: https://developer.wordpress.org/block-editor/reference-guides/components/textarea-control/
+
+TextareaControls are TextControls that allow for multiple lines of text, and wrap overflow text onto a new line. They are a fixed height and scroll vertically when the cursor reaches the bottom of the field.
+
+![An empty TextareaControl, and a focused TextareaControl with some content entered.](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl.png?ssl=1)
+
+## Design guidelines
+
+### Usage
+
+#### When to use TextareaControl
+
+Use TextareaControl when you need to encourage users enter an amount of text that’s longer than a single line. (A bigger box can encourage people to be more verbose, where a smaller one encourages them to be succinct.)
+
+TextareaControl should:
+
+- Stand out from the background of the page and indicate that users can input information.
+- Have clearly differentiated active/inactive states, including focus styling.
+- Make it easy to understand and address any errors via clear and direct error notices.
+- Make it easy to understand the requested information by using a clear and descriptive label.
+
+#### When not to use TextareaControl
+
+Do not use TextareaControl if you need to let users enter shorter answers (no longer than a single line), such as a phone number or name. In this case, you should use `Text Control`.
+
+![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Answers-Do.png?ssl=1)
+
+**Do**
+
+Use TextareaControl to let users to enter text longer than a single line.
+
+![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Answers-Dont.png?ssl=1)
+
+**Don’t**
+
+Use TextareaControl for shorter answers.
+
+## Anatomy
+
+![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Anatomy.png?ssl=1)
+
+1. Container
+2. Label
+
+### Containers
+
+Containers improve the discoverability of text fields by creating contrast between the text field and surrounding content.
+
+![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Stroke-Do.png?ssl=1)
+
+**Do**  
+Use a stroke around the container, which clearly indicates that users can input information.
+
+![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Stroke-Dont.png?ssl=1)
+
+**Don’t**  
+Use unclear visual markers to indicate a text field.
+
+### Label text
+
+Label text is used to inform users as to what information is requested for a text field. Every text field should have a label. Label text should be above the input field, and always visible. Write labels in sentence capitalization.
+
+### Error text
+
+When text input isn’t accepted, an error message can display instructions on how to fix it. Error messages are displayed below the input line, replacing helper text until fixed.
+
+![](https://i0.wp.com/wordpress.org/gutenberg/files/2019/01/TextareaControl-Error.png?ssl=1)
+
+## Development guidelines
+
+### Usage
+
+```jsx
+import { useState } from 'react';
+import { TextareaControl } from '@wordpress/components';
+
+const MyTextareaControl = () => {
+    const [ text, setText ] = useState( '' );
+
+    return (
+        <TextareaControl
+          __nextHasNoMarginBottom
+            label="Text"
+            help="Enter some text"
+            value={ text }
+            onChange={ ( value ) => setText( value ) }
+        />
+    );
+};
+
+```
+
+### Props
+
+The set of props accepted by the component will be specified below.
+
+Props not included in this set will be applied to the textarea element.
+
+#### `help`: `string | Element`
+
+If this property is added, a help text will be generated using help property as the content.
+
+- Required: No
+
+#### `hideLabelFromVision`: `boolean`
+
+If true, the label will only be visible to screen readers.
+
+- Required: No
+
+#### `label`: `string`
+
+If this property is added, a label will be generated using label property as the content.
+
+- Required: No
+
+#### `onChange`: `( value: string ) => void`
+
+A function that receives the new value of the textarea each time it changes.
+
+- Required: Yes
+
+#### `rows`: `number`
+
+The number of rows the textarea should contain.
+
+- Required: No
+- Default: 4
+
+#### `value`: `string`
+
+The current value of the textarea.
+
+- Required: Yes
+
+#### `__nextHasNoMarginBottom`: `Boolean`
+
+Start opting into the new margin-free styles that will become the default in a future version.
+
+- Required: No
+- Default: `false`
+
+## Related components
+
+- For a field where users only enter one line of text, use the `TextControl` component.
 
 ---
 
@@ -44261,6 +44307,7 @@ There are two ways to register commands: static or dynamic. Both methods receive
 - `icon`: An SVG icon
 - `callback`: A callback function that is called when the command is selected
 - `context`: (Optional) The context of the command
+- `keywords`: (Optional) An array of keywords for search matching
 
 ### Static commands
 
@@ -45234,6 +45281,10 @@ npm install @wordpress/core-commands --save
 *This package assumes that your code will run in an **ES2015+** environment. If you’re using an environment that has limited or no support for such language features and APIs, you should include [the polyfill shipped in `@wordpress/babel-preset-default`](https://github.com/WordPress/gutenberg/tree/HEAD/packages/babel-preset-default#polyfill) in your code.*
 
 ## API
+
+### initializeCommandPalette
+
+Initializes the Command Palette.
 
 ### privateApis
 
@@ -48130,12 +48181,13 @@ the store.
 
 ### batch
 
-As a response of `dispatch` calls, WordPress data based applications updates the connected components (Components using `useSelect` or `withSelect`). This update happens in two steps:
+The `batch` method allows multiple store updates to occur simultaneously, reducing unnecessary executions of selectors and component re-renders during sequential state changes.
 
-- The selectors are called with the update state.
-- If the selectors return values that are different than the previous (strict equality), the component rerenders.
+In WordPress data applications, dispatching consecutive actions typically triggers store listeners and runs selectors, which can lead to re-renders. The `batch` method pauses these listeners and only activates them once at the end, ensuring selectors run only once with the final state.
 
-As the application grows, this can become costful, so it’s important to ensure that we avoid running both these if possible. One of these situations happen when an interaction requires multiple consecutive `dispatch` calls in order to update the state properly. To avoid rerendering the components each time we call `dispatch`, we can wrap the sequential dispatch calls in `batch` which will ensure that the components only call selectors and rerender once at the end of the sequence.
+This method is particularly effective for optimizing performance with expensive selectors, ensuring atomic operations across multiple stores, and creating single undo/redo entries for several synchronous updates.
+
+Unlike React’s built-in batching or React Redux’s `batch` function, `registry.batch` operates at the store listener level, completely avoiding unnecessary selector computations.
 
 *Usage*
 
@@ -48145,15 +48197,17 @@ import { useRegistry } from '@wordpress/data';
 function Component() {
     const registry = useRegistry();
 
-    function callback() {
-        // This will only rerender the components once.
+    function handleComplexUpdate() {
+        // Without batch: listeners are called 3 times, which can result in multiple component re-renders.
+        // With batch: notifies listeners once, resulting in a single component re-render as needed.
         registry.batch( () => {
-            registry.dispatch( someStore ).someAction();
-            registry.dispatch( someStore ).someOtherAction();
+            registry.dispatch( 'someStore' ).someAction();
+            registry.dispatch( 'someStore' ).someOtherAction();
+            registry.dispatch( 'someStore' ).thirdAction();
         } );
     }
 
-    return <button onClick={ callback }>Click me</button>;
+    return <button onClick={ handleComplexUpdate }>Update</button>;
 }
 
 ```
@@ -48723,9 +48777,9 @@ Whether the data is loading. `false` by default.
 
 #### `defaultLayouts`: `Record< string, view >`
 
-This property provides layout information about active view types. If empty, this enables all layout types (see “Layout Types”) with empty layout data.
+This property limits the available layout and provides layout information about active view types. If empty, this enables all layout types (see “Layout Types”) with empty layout data.
 
-For example, this is how you’d enable only the table view type:
+For example, this is how you’d enable only the table and grid layout type and set whether those layouts show media by default:
 
 ```js
 const defaultLayouts = {
@@ -48739,7 +48793,7 @@ const defaultLayouts = {
 
 ```
 
-The `defaultLayouts` property should be an object that includes properties named `table`, `grid`, or `list`. These properties are applied to the view object each time the user switches to the corresponding layout.
+The `defaultLayouts` property should be an object that includes properties named `table`, `grid`, and/or `list`. These properties are applied to the view object each time the user switches to the corresponding layout.
 
 #### `selection`: `string[]`
 
@@ -48783,9 +48837,9 @@ The component receives the following props:
 
 React component to be rendered next to the view config button.
 
-#### `perPageSizes`: `number[]`
+#### `config`: false | { perPageSizes: number\[\] }
 
-A list of numbers used to control the available item counts per page. It’s optional. Defaults to `[10, 20, 50, 100]`. The list needs to have a minimum of 2 items and a maximum of 6, otherwise the UI component won’t be displayed.
+Optional. Set it to `false` to hide the view config control entirely. Pass an object with a list of `perPageSizes` to control the available item counts per page (defaults to `[10, 20, 50, 100]`). `perPageSizes` needs to have a minimum of 2 items and a maximum of 6, otherwise the UI component won’t be displayed.
 
 #### `empty`: React node
 
@@ -48926,15 +48980,17 @@ const fields = [
 
 #### `form`: `Object[]`
 
-- `type`: either `regular` or `panel`.
-- `labelPosition`: either `side`, `top`, or `none`.
+- `layout`: an object describing the layout used to render the top-level fields present in `fields`. See `layout` prop in “Form Field API”.
 - `fields`: a list of fields ids that should be rendered. Field ids can also be defined as an object and allow you to define a `layout`, `labelPosition` or `children` if displaying combined fields. See “Form Field API” for a description of every property.
 
 Example:
 
 ```js
 const form = {
-    type: 'panel',
+    layout: {
+        type: 'panel',
+        labelPosition: 'side'
+    },
     fields: [
         'title',
         'data',
@@ -49706,32 +49762,60 @@ Example:
 
 ### `layout`
 
-The same as the `form.type`, either `regular` or `panel` only for the individual field. It defaults to `form.type`.
+Represents the type of layout used to render the field. It’ll be one of Regular, Panel, or Card. This prop is the same as the `form.layout` prop.
 
-- Type: `string`.
+#### Regular
 
-Example:
+- `type`: `regular`. Required.
+- `labelPosition`: one of `side`, `top`, or `none`. Optional. `top` by default.
+
+For example:
 
 ```js
 {
     id: 'field_id',
-    layout: 'regular'
+    layout: {
+        type: 'regular',
+        labelPosition: 'side'
+    },
 }
 
 ```
 
-### `labelPosition`
+#### Panel
 
-The same as the `form.labelPosition`, either `side`, `top`, or `none` for the individual field. It defaults to `form.labelPosition`.
+- `type`: `panel`. Required.
+- `labelPosition`: one of `side`, `top`, or `none`. Optional. `top` by default.
 
-- Type: `string`.
-
-Example:
+For example:
 
 ```js
 {
     id: 'field_id',
-    labelPosition: 'none'
+    layout: {
+        type: 'panel',
+        labelPosition: 'top'
+    },
+}
+
+```
+
+#### Card
+
+- `type`: `card`. Required.
+- `isOpened`: boolean. Optional. `true` by default.
+- `withHeader`: boolean. Optional. `true` by default.
+
+For example:
+
+```js
+{
+    id: 'field_id',
+    layout: {
+        type: 'card',
+        isOpened: false,
+        withHeader: true,
+    },
 }
 
 ```
@@ -56229,6 +56313,22 @@ One notable difference between the JS and PHP hooks API is that in the JS versio
 - `actions`
 - `filters`
 - `defaultHooks`
+
+## Parameters
+
+### hookName
+
+Should be a non empty string containing only numbers, letters, dashes, periods and underscores. Also, the hook name cannot begin with `__`.
+
+- Type: `String`
+- Required: Yes
+
+### namespace
+
+Should be a non empty string containing only numbers, letters, dashes, periods, underscores and slashes. It should take the form `vendor/plugin/function`.
+
+- Type: `String`
+- Required: Yes
 
 ### Events on action/filter add or remove
 
@@ -65981,8 +66081,9 @@ Action that updates attributes of multiple blocks with the specified client IDs.
 *Parameters*
 
 - *clientIds* `string|string[]`: Block client IDs.
-- *attributes* `Object`: Block attributes to be merged. Should be keyed by clientIds if uniqueByBlock is true.
-- *uniqueByBlock* `boolean`: true if each block in clientIds array has a unique set of attributes
+- *attributes* `Object`: Block attributes to be merged. Should be keyed by clientIds if `options.uniqueByBlock` is true.
+- *options* `Object`: Updating options.
+- *options.uniqueByBlock* `[boolean]`: Whether each block in clientIds array has a unique set of attributes.
 
 *Returns*
 
