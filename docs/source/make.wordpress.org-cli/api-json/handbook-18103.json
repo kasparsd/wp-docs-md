@@ -1,0 +1,98 @@
+{
+    "id": 18103,
+    "date": "2025-06-12T00:42:39",
+    "date_gmt": "2025-06-12T00:42:39",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/code-review/"
+    },
+    "modified": "2025-07-01T13:08:15",
+    "modified_gmt": "2025-07-01T13:08:15",
+    "slug": "code-review",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/contributions/code-review/",
+    "title": {
+        "rendered": "Code Review"
+    },
+    "content": {
+        "rendered": "<p>Code review is a <span tabindex='0' class='glossary-item-container'>core<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Core</span> <span class='glossary-item-description'>Core is the set of software required to run WordPress. The Core Development Team builds WordPress.</span></span></span> part of the <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> project\u2019s software development workflow. Code review and pairing on code are necessary to maintain quality output, as well as build cohesive styles in our work. Having a well-understood and cohesive style can make all our work easier to approach and maintain for new as well as established developers. If done right, code review can also be a learning process for all involved. Here\u2019s <a href=\"#a-typical-code-review-workflow\">a typical code review workflow</a>:</p>\n<ul>\n<li><a href=\"#what-code-review-is\">What code review is</a></li>\n<li><a href=\"#how-to-review-code\">How to review code</a></li>\n<li><a href=\"#how-to-receive-code-review\">How to receive code review</a></li>\n</ul>\n<h2>A typical code review workflow</h2>\n<p>We\u2019re currently using <span tabindex='0' class='glossary-item-container'>GitHub<span class='glossary-item-hidden-content'><span class='glossary-item-header'>GitHub</span> <span class='glossary-item-description'>GitHub is a website that offers online implementation of git repositories that can easily be shared, copied and modified by other developers. Public repositories are free to host, private repositories require a paid subscription. GitHub introduced the concept of the \u2018pull request\u2019 where code changes done in branches by contributors can be reviewed and discussed before being merged be the repository owner.  <a href=\"https://github.com/\">https://github.com/</a></span></span></span> for everything. Read up on <a href=\"https://make.wordpress.org/cli/handbook/pull-requests/\">our GitHub workflow</a> for details of process, naming, usage of issues and pull requests. A moderately complex issue will typically be addressed across multiple pull requests, each tackling a distinct part of the issue. This makes review simpler because each review stage will be looking at a small code.</p>\n<ul>\n<li>On every commit pushed to a GH branch, our CI automated tests \u2014 linting for all code, unit tests for functional code, and ideally, behavioral and automated acceptance testing \u2014 are run on Travis.</li>\n<li>If the build passes, the PR can be reviewed. If not, the original developer is responsible for getting the build to the point where it passes.</li>\n<li>When the original developer is satisfied with their work, they can request a review from the <a href=\"https://make.wordpress.org/cli/handbook/committers-credo/\">committers team</a> by assigning <code>@wp-cli/committers</code> for review.</li>\n<li>Simple pull requests can often be merged by the developer who reviews them. More complex changesets will often require conversations back and forth between reviewer and developer, and should have secondary reviewers.</li>\n<li>GitHub\u2019s \u201cFiles Changed\u201d tab is a good place to leave inline comments on specific parts of the changeset. More general comments can be left on the pull request\u2019s \u201cConversation\u201d tab.</li>\n<li>The reviewer may suggest changes in the form of a pull request off of the branch being reviewed, or in comments.</li>\n<li>The developer will make changes suggested, discuss the issue for clarity, and may mention the reviewer when they are satisfied with their work.</li>\n<li>If a pull request needs final cleanup before merging or has been abandoned, the <a href=\"https://help.github.com/articles/committing-changes-to-a-pull-request-branch-created-from-a-fork/\">reviewer can commit directly to the branch</a>. However, avoid rewriting code without consultation.</li>\n<li>When the reviewer is satisfied with the changes, they can either merge or assign the pull request to a second reviewer for merge. The original developer (and ideally the reviewer) should both be available for a couple of days post-merge to address any issues that arise.</li>\n</ul>\n<h2>What code review is</h2>\n<p>A good way to visualize the objectives of code review is <a href=\"https://www.dein.fr/posts/2015-02-18-maslows-pyramid-of-code-review\">this analogy</a> to Maslow\u2019s \u201cHierarchy of Needs\u201d pyramid. From the most basic to the highest level, a reviewer checks that code is <strong>Correct</strong>, <strong>Secure</strong>, <strong>Readable</strong>, <strong>Elegant</strong>, and <strong>Altruistic</strong>. It\u2019s important to keep this sense of priorities: if a change introduces unhandled edge cases, bugs, or security vulnerabilities, those issues need to be addressed before coding style guidelines or beautification practices preferences will matter.</p>\n<p><img data-recalc-dims=\"1\" decoding=\"async\" src=\"https://i0.wp.com/cloud.githubusercontent.com/assets/665992/7326019/1603bcd2-ea77-11e4-8510-4d7f76ca2ad1.png?w=776&#038;ssl=1\" alt=\"code-review-pyramid\"></p>\n<h3>How to review code</h3>\n<p><em>As a reviewer</em>, your first job is to get an understanding of what the proposed change does and why it\u2019s essential. There\u2019s no point in critiquing anything until you understand what it does, why it\u2019s necessary, and what decisions went into the way this was built.</p>\n<p>Next, look it over for correctness. Are all functions that take parameters and produce output covered by functional unit tests? Do they actually do what they\u2019re supposed to? Can you picture an edge case where a function would error unexpectedly or return something other than the expected result? If this command has output, does it render properly in all situations? Are all global flags handled? Does it have unsurprising fallbacks for uncommon situations? Does it handle errors with clear output messages?</p>\n<p>If it addresses the business and <span tabindex='0' class='glossary-item-container'>UX<span class='glossary-item-hidden-content'><span class='glossary-item-header'>UX</span> <span class='glossary-item-description'>UX is an acronym for User Experience - the way the user uses the UI. Think \u2018what they are doing\u2019 and less about how they do it.</span></span></span> requirements, the next thing to check for is security. Does it follow basic sanitization and escaping practices for all untrusted input? If it interacts with other aspects of the codebase, is it liberal in the inputs it accepts and conservative in its output, making sure to only pass expected values? Think like an attacker. If there\u2019s any way a malicious agent could exploit this code, or an unlucky user could trigger a bug that fatals or looks bad, it\u2019s your job to find it.</p>\n<p>Next, check for readability. Functions, variables, and files should be named clearly according to their meaning. Everything should adhere to the surrounding code style.</p>\n<blockquote><p>\n  All code in any code-base should look like a single person typed it, no  matter how many people contributed.</p>\n<p>  \u2014 <a href=\"https://github.com/rwaldron/idiomatic.js/\">Principles of writing Idiomatic JavaScript</a>\n</p></blockquote>\n<p>As readability is inherently subjective, this requires the ability to look back from the immediate code changes to the bigger picture. Think of someone months down the road trying to trace a given code path through the current changeset. Are there unnecessary steps that could be simplified? Are code comments and inline documentation robust enough to recreate the thought process behind the code?</p>\n<p>Finally, check for elegance and overall quality. Code should follow existing and known patterns so that others can understand it at a glance. If a change introduces a chance to refactor surrounding functionality, to abstract and standardize old code into new patterns, suggest those opportunities.</p>\n<h3>How to receive code review</h3>\n<p><em>As the person receiving the code review</em>, your job is to learn from suggestions. Defensiveness, stubbornness, or impatience can prevent you from getting the most out of suggestions. It\u2019s OK to explain yourself if you feel the reviewer seemed to misunderstand your intent. Arguing semantics or insisting on the correctness of one approach is almost always a bad habit and distracts from the team process. If something isn\u2019t clear to someone familiar with the codebase who\u2019s reviewing your work today, it will definitely be unclear to a new developer being on-boarded six months from now.</p>\n<p>It\u2019s best to respond to the issues addressed by the reviewer as quickly as possible. Keep in mind that the review process requires context switching on the part of the reviewer as well as on your part, and the more immediate that process is, the less disruptive that context switch will be.</p>\n<h2>Additional readings</h2>\n<ul>\n<li>\n<p><a href=\"http://glen.nu/ramblings/oncodereview.php\">Glen Sanford: On code review</a> \u2013 \u201cPending code reviews represent blocked threads of execution[, code review should always be your top priority]\u201d</p>\n</li>\n<li>\n<p><a href=\"http://www.techrepublic.com/article/the-ten-commandments-of-egoless-programming/\">The Ten Commandments of Egoless Programming</a> \u2013 \u201cUnderstand and accept that you will make mistakes. The point is to find them early before they make it into production.\u201d</p>\n</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18369,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18103",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18103",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18103/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18362,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18103/revisions/18362"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18103"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

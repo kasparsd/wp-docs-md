@@ -1,0 +1,98 @@
+{
+    "id": 18112,
+    "date": "2025-06-12T00:42:40",
+    "date_gmt": "2025-06-12T00:42:40",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/doctor-check-option-value/"
+    },
+    "modified": "2025-07-01T13:13:08",
+    "modified_gmt": "2025-07-01T13:13:08",
+    "slug": "doctor-check-option-value",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/doctor/doctor-check-option-value/",
+    "title": {
+        "rendered": "Write a check for asserting the value of a given option"
+    },
+    "content": {
+        "rendered": "<p>One of the check types included in <code>wp doctor</code> is <code>Option_Value</code>, or the ability to assert that a given option is a specific value. The check type is in use by a couple of the <a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-default-checks/\">default diagnostic checks</a>, and you can use the <code>Option_Value</code> check type in your <a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-customize-config/\">custom <code>doctor.yml</code> configuration file</a>.</p>\n<p>As an example, here are two checks using <code>Option_Value</code>, one which ensures the blog is public and the other which ensures users can\u2019t register:</p>\n<pre><code>option-blog-public:\n  check: Option_Value\n  options:\n    option: blog_public\n    value: 1\noption-users-can-register:\n  check: Option_Value\n  options:\n    option: users_can_register\n    value: 0\n</code></pre>\n<p>Run together, you might see:</p>\n<pre><code>$ wp doctor check --config=option-value.yml --all\n+---------------------------+---------+-------------------------------------------------+\n| name                      | status  | message                                         |\n+---------------------------+---------+-------------------------------------------------+\n| option-blog-public        | error   | Site is private but expected to be public.      |\n| option-users-can-register | success | Option 'users_can_register' is '0' as expected. |\n+---------------------------+---------+-------------------------------------------------+\n</code></pre>\n<p>The <code>Option_Value</code> check type accepts the following options:</p>\n<ul>\n<li>\u2018option\u2019: Name of the option.</li>\n<li>\u2018value\u2019: Option is expected to be a specific value.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18117,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18112",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18112",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18112/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18353,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18112/revisions/18353"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18117"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18112"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

@@ -1,0 +1,98 @@
+{
+    "id": 18121,
+    "date": "2025-06-12T00:42:41",
+    "date_gmt": "2025-06-12T00:42:41",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/governance/"
+    },
+    "modified": "2025-07-01T13:08:15",
+    "modified_gmt": "2025-07-01T13:08:15",
+    "slug": "governance",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/contributions/governance/",
+    "title": {
+        "rendered": "Governance"
+    },
+    "content": {
+        "rendered": "<p>This document describes the governance structure of the <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> project.</p>\n<h2>Who\u2019s in charge?</h2>\n<p>WP-CLI has one maintainer: <a href=\"http://github.com/schlessera\">schlessera</a>. On a day to day basis, final decision-making authority resides with him.</p>\n<p>The project roadmap is an organic, evolving vision developed between the project\u2019s maintainers, committers, and contributors. Generally, we try to make decisions in <a href=\"https://make.wordpress.org/cli/handbook/philosophy/\">alignment with the project\u2019s philosophy</a> and <a href=\"https://make.wordpress.org/cli/handbook/committers-credo/\">committers credo</a>.</p>\n<h2>Why are some people members of the WP-CLI organization?</h2>\n<p>On occasion, we <a href=\"https://github.com/orgs/wp-cli/teams/committers\">grant write access to contributors</a> who have demonstrated, over a period of time, that they are capable and invested in moving the project forward. These committers are expected to:</p>\n<ul>\n<li>Hold product and code quality in the highest regard.</li>\n<li>Exhibit stellar judgement and communication.</li>\n<li>Participate in the project on a consistent basis.</li>\n</ul>\n<p>Becoming a committer can seem glamorous, but it also comes with expectations of responsibility, commitment, and humility.</p>\n<p><a href=\"https://github.com/andreascreten\">andreascreten</a> is the original author of WP-CLI. <a href=\"https://github.com/scribu\">scribu</a> and <a href=\"https://github.com/danielbachhuber\">danielbachhuber</a> have been long time maintainers. <a href=\"https://github.com/schlessera\">schlessera</a> is the current maintainer.</p>\n<p>The maintainer is the person most directly responsible for the reliability and longevity of the project. They are expected to:<br>\n* Hold WP-CLI\u2019s overall quality in the utmost regard.<br>\n* Refine the project\u2019s vision and direction, and make sure it\u2019s understood by all.<br>\n* Enable everyone from new users to experienced committers.<br>\n* Take care of the boring day-to-day work (keeping CI passing, triaging new issues, etc.).</p>\n<h2>What\u2019s the connection between WP-CLI and WordPress?</h2>\n<p>As of December 2017, WP-CLI is a <a href=\"https://make.wordpress.org/core/2016/12/28/supporting-the-future-of-wp-cli/\">formal WordPress project</a>.</p>\n<p>Practically speaking, this means we get to take advantage of the WordPress project\u2019s people and software infrastructure:</p>\n<ul>\n<li>Much of the WP-CLI documentation is hosted on the <span tabindex='0' class='glossary-item-container'>wordpress.org<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WordPress.org</span> <span class='glossary-item-description'>The community site where WordPress code is created and shared by the users. This is where you can download the source code for WordPress core, plugins and themes as well as the central location for community conversations and organization.  <a href=\"https://wordpress.org/\">https://wordpress.org/</a></span></span></span> domain.</li>\n<li>We get to use the <code>#cli</code> channel in the <a href=\"https://make.wordpress.org/chat/\">WordPress Slack organization</a>.</li>\n<li>If we need help with something, we can ask.</li>\n<li>Two <span tabindex='0' class='glossary-item-container'>core<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Core</span> <span class='glossary-item-description'>Core is the set of software required to run WordPress. The Core Development Team builds WordPress.</span></span></span> committers (<a href=\"https://github.com/dd32\">dd32</a> and <a href=\"https://github.com/pento\">pento</a>) have ownership permissions to the WP-CLI <span tabindex='0' class='glossary-item-container'>GitHub<span class='glossary-item-hidden-content'><span class='glossary-item-header'>GitHub</span> <span class='glossary-item-description'>GitHub is a website that offers online implementation of git repositories that can easily be shared, copied and modified by other developers. Public repositories are free to host, private repositories require a paid subscription. GitHub introduced the concept of the \u2018pull request\u2019 where code changes done in branches by contributors can be reviewed and discussed before being merged be the repository owner.  <a href=\"https://github.com/\">https://github.com/</a></span></span></span> organization, in the unlikely event everyone else gets hit by a bus.</li>\n</ul>\n<p>Other than this, WP-CLI operates independently.</p>\n<h2>How does all of this work?</h2>\n<p>The <a href=\"https://github.com/wp-cli\">WP-CLI GitHub organization</a> contains all project code repositories. Some commands are bundled with WP-CLI, while others are independently installable. Commands are bundled with WP-CLI when they\u2019re stable, closely aligned with the <a href=\"https://make.wordpress.org/cli/handbook/philosophy/\">project philosophy</a>, and useful to a majority of users.</p>\n<p><a href=\"https://github.com/wp-cli/wp-cli\">wp-cli/wp-cli</a> is the main project repository, which pulls in command packages and other dependencies through Composer. Composer defines which version of which dependencies is included in the build. Changes to command packages are included in WP-CLI proper when a stable release is tagged for the package.</p>\n<p>Nightly Phar builds are created by a Travis job that calls <a href=\"https://github.com/wp-cli/wp-cli/blob/master/ci/deploy.sh\">deploy.sh</a> and pushes the build artifact to the <a href=\"http://github.com/wp-cli/builds\">builds repository</a>. Releases are prepared manually <a href=\"https://make.wordpress.org/cli/handbook/release-checklist/\">in accordance to the release checklist</a>.</p>\n<p>The <code>wp-cli.org</code> domain is currently owned by <a href=\"https://github.com/andreascreten\">andreascreten</a>. <span tabindex='0' class='glossary-item-container'>DNS<span class='glossary-item-hidden-content'><span class='glossary-item-header'>DNS</span> <span class='glossary-item-description'>DNS is an acronym for Domain Name System - how you assign a human readable address to a website\u2019s exact numeric coded location (ie. wordpress.org uses the actual IP address 198.143.164.252).</span></span></span> is managed through a <a href=\"https://www.cloudflare.com/\">Cloudflare</a> account that <a href=\"https://github.com/danielbachhuber\">danielbachhuber</a> holds credentials to.</p>\n<p>Much of the WP-CLI documentation (command pages, etc.) is editable through <a href=\"https://github.com/wp-cli/handbook/\">wp-cli/handbook</a>, and then synced to WordPress.org. The WP-CLI.org homepage is <a href=\"http://github.com/wp-cli/wp-cli.github.com\">hosted on GitHub Pages</a>.</p>\n<p>From time to time, you may see a pull request from the <code>wp-make-coffee</code> bot. These originate from a donated WebFaction server running some cron jobs calling bash scripts:</p>\n<pre><code class=\"language-bash\">5 4 * * 1,3,5 source ~/.bash_profile; WP_CLI_DIR=~/wp-cli bash ~/wp-cli/utils/auto-composer-update.sh &gt; ~/auto-composer-update.log 2&gt;&amp;1\n5 6 * * 1,3,5 source ~/.bash_profile; WP_CLI_DIR=~/wp-cli-bundle bash ~/wp-cli-bundle/utils/auto-composer-update.sh &gt; ~/auto-composer-update-bundle.log 2&gt;&amp;1\n</code></pre>\n<p>The <a href=\"https://twitter.com/wpcli\">wpcli</a> Twitter account is managed by <a href=\"https://github.com/schlessera\">schlessera</a>.</p>\n<p>If you <a href=\"https://make.wordpress.org/cli/subscribe/\">subscribe for email updates</a>, your email address is registered with <span tabindex='0' class='glossary-item-container'>WordPress.com<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WordPress.com</span> <span class='glossary-item-description'>An online implementation of WordPress code that lets you immediately access a new WordPress environment to publish your content.  WordPress.com is a private company owned by Automattic that hosts the largest multisite in the world. This is arguably the best place to start blogging if you have never touched WordPress before. <a href=\"https://wordpress.com/\">https://wordpress.com/</a></span></span></span> through Automattic\u2019s Jetpack <span tabindex='0' class='glossary-item-container'>plugin<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Plugin</span> <span class='glossary-item-description'>A plugin is a piece of software containing a group of functions that can be added to a WordPress website. They can extend functionality or add new features to your WordPress websites. WordPress plugins are written in the PHP programming language and integrate seamlessly with WordPress. These can be free in the WordPress.org Plugin Directory https://wordpress.org/plugins/ or can be cost-based plugin from a third-party</span></span></span>.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18369,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18121",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18121",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 2,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18121/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18366,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18121/revisions/18366"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18121"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

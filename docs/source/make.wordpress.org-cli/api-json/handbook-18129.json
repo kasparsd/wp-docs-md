@@ -1,0 +1,98 @@
+{
+    "id": 18129,
+    "date": "2025-06-12T00:42:41",
+    "date_gmt": "2025-06-12T00:42:41",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/identify-plugin-theme-conflict/"
+    },
+    "modified": "2025-07-01T13:11:11",
+    "modified_gmt": "2025-07-01T13:11:11",
+    "slug": "identify-plugin-theme-conflict",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/how-to/identify-plugin-theme-conflict/",
+    "title": {
+        "rendered": "Identify a Plugin or Theme Conflict"
+    },
+    "content": {
+        "rendered": "<p>Is <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> not working with your WordPress install, but you don\u2019t know why? It might be a <span tabindex='0' class='glossary-item-container'>plugin<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Plugin</span> <span class='glossary-item-description'>A plugin is a piece of software containing a group of functions that can be added to a WordPress website. They can extend functionality or add new features to your WordPress websites. WordPress plugins are written in the PHP programming language and integrate seamlessly with WordPress. These can be free in the WordPress.org Plugin Directory https://wordpress.org/plugins/ or can be cost-based plugin from a third-party</span></span></span> or theme conflicting with the WP-CLI load process.</p>\n<p>To verify, first run <code>wp --skip-plugins --skip-themes</code> to execute WP-CLI without loading plugins or themes. If WP-CLI runs as expected with plugins and themes skipped, then the problem is caused by one of those plugins or the active theme.</p>\n<p>To see if the source of the problem is the active theme, run <code>wp --skip-themes</code> to see if WP-CLI loads as expected.</p>\n<p>To see if the source of the problem is an active plugin, run wp <code>--skip-plugins=&lt;plugin-slug&gt;</code> for each active plugin to see which plugin blocks the full execution of WP-CLI. For instance, skipping the Akismet plugin would be:</p>\n<pre><code>wp --skip-plugins=akismet\n</code></pre>\n<p>Or, use <code>xargs</code> to try the entire list of active plugins:</p>\n<pre><code>wp plugin list --field=name --status=active --skip-plugins | xargs -n1 -I % wp --skip-plugins=% plugin get % --field=name\n</code></pre>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18128,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18129",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18129",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18129/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18336,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18129/revisions/18336"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18128"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18129"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

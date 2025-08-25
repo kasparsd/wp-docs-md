@@ -1,0 +1,98 @@
+{
+    "id": 18116,
+    "date": "2025-06-12T00:42:40",
+    "date_gmt": "2025-06-12T00:42:40",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/doctor-write-custom-check/"
+    },
+    "modified": "2025-07-01T13:13:08",
+    "modified_gmt": "2025-07-01T13:13:08",
+    "slug": "doctor-write-custom-check",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/doctor/doctor-write-custom-check/",
+    "title": {
+        "rendered": "Write a custom check to perform an arbitrary assertion"
+    },
+    "content": {
+        "rendered": "<p>Because <code>wp doctor</code> checks are built on top of a foundational abstraction, it\u2019s relatively straightforward for you to write your own custom check. The basic requirement is that you create a class extending <code>runcommand\\Doctor\\Checks\\Check</code> that implements a <code>run()</code> method. The <code>run()</code> must set a status and message based on whatever procedural logic As an example, here\u2019s an annotated custom check to assert Akismet is activated with a valid <span tabindex='0' class='glossary-item-container'>API<span class='glossary-item-hidden-content'><span class='glossary-item-header'>API</span> <span class='glossary-item-description'>An API or Application Programming Interface is a software intermediary that allows programs to interact with each other and share data in limited, clearly defined ways.</span></span></span> key:</p>\n<pre><code>&lt;?php\n\n/**\n * Ensures Akismet is activated with the appropriate credentials.\n */\nclass Akismet_Activated extends runcommand\\Doctor\\Checks\\Check {\n\n    public function __construct( $options = array() ) {\n        parent::__construct( $options );\n        // Every check is to run on 'after_wp_load' by default.\n        // You could instead use 'before_wp_load' or 'after_wp_config_load'\n        $this-&gt;set_when( 'after_wp_load' );\n    }\n\n    public function run() {\n        // If the Akismet isn't activated, bail early.\n        if ( ! class_exists( 'Akismet' ) ) {\n            $this-&gt;set_status( 'error' );\n            $this-&gt;set_message( \"Akismet doesn't appear to be activated.\" );\n            return;\n        }\n        // Verify that the API exists.\n        $api_key = Akismet::get_api_key();\n        if ( empty( $api_key ) ) {\n            $this-&gt;set_status( 'error' );\n            $this-&gt;set_message( 'API key is missing.' );\n            return;\n        }\n        // Verify that the API key is valid.\n        $verification = Akismet::verify_key( $api_key );\n        if ( 'failed' === $verification ) {\n            $this-&gt;set_status( 'error' );\n            $this-&gt;set_message( 'API key verification failed.' );\n            return;\n        }\n        // Everything looks good, so report a success.\n        $this-&gt;set_status( 'success' );\n        $this-&gt;set_message( 'Akismet is activated with a verified API key.' );\n    }\n\n}\n</code></pre>\n<p>If the class were placed in an <code>akismet-activated.php</code> file, you could register it with:</p>\n<pre><code>plugin-akismet-activated:\n  class: Akismet_Activated\n  require: akismet-activated.php\n</code></pre>\n<p>Then, run the config file:</p>\n<pre><code>$ wp doctor check plugin-akismet-activated --config=doctor.yml\n+--------------------------+--------+---------------------+\n| name                     | status | message             |\n+--------------------------+--------+---------------------+\n| plugin-akismet-activated | error  | API key is missing. |\n+--------------------------+--------+---------------------+\n</code></pre>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18117,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18116",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18116",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18116/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18349,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18116/revisions/18349"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18117"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18116"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

@@ -1,0 +1,91 @@
+{
+    "id": 18150,
+    "date": "2025-06-12T00:42:42",
+    "date_gmt": "2025-06-12T00:42:42",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/internal-api/wp-cli-debug/"
+    },
+    "modified": "2025-07-01T12:55:37",
+    "modified_gmt": "2025-07-01T12:55:37",
+    "slug": "wp-cli-debug",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/internal-api/wp-cli-debug/",
+    "title": {
+        "rendered": "WP_CLI::debug()"
+    },
+    "content": {
+        "rendered": "<p>Display debug message prefixed with \"Debug: \" when <code>--debug</code> is used.</p>\n<hr>\n<h2>Usage</h2>\n<pre><code>WP_CLI::debug( $message, $group = false )\n</code></pre>\n<div>\n<strong>$message</strong> (string|WP_Error|Exception|Throwable) Message to write to STDERR.<br>\n<strong>$group</strong> (string|bool) Organize debug message to a specific group.<br>\n<strong>@return</strong> (void) \n</div>\n<hr>\n<h2>Notes</h2>\n<p>Debug message is written to STDERR, and includes script execution time.</p>\n<p>Helpful for optionally showing greater detail when needed. Used throughout<br>\n<span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> bootstrap process for easier debugging and profiling.</p>\n<pre><code># Called in `WP_CLI\\Runner::set_wp_root()`.\nprivate static function set_wp_root( $path ) {\n    define( 'ABSPATH', Utils\\trailingslashit( $path ) );\n    WP_CLI::debug( 'ABSPATH defined: ' . ABSPATH );\n    $_SERVER['DOCUMENT_ROOT'] = realpath( $path );\n}\n\n# Debug details only appear when `--debug` is used.\n# $ wp --debug\n# [...]\n# Debug: ABSPATH defined: /srv/www/wordpress-develop.dev/src/ (0.225s)\n</code></pre>\n<p>Use <code>false</code> to not group the message.</p>\n<p><em>Internal <span tabindex='0' class='glossary-item-container'>API<span class='glossary-item-hidden-content'><span class='glossary-item-header'>API</span> <span class='glossary-item-description'>An API or Application Programming Interface is a software intermediary that allows programs to interact with each other and share data in limited, clearly defined ways.</span></span></span> documentation is generated from the WP-CLI codebase on every release. To suggest improvements, please submit a pull request.</em></p>\n<hr>\n<h2>Related</h2>\n<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-format-items/\">WP_CLI\\Utils\\format_items()</a></strong> \u2013 Render a collection of items as an ASCII table, <span tabindex='0' class='glossary-item-container'>JSON<span class='glossary-item-hidden-content'><span class='glossary-item-header'>JSON</span> <span class='glossary-item-description'>JSON, or JavaScript Object Notation, is a minimal, readable format for structuring data. It is used primarily to transmit data between a server and web application, as an alternative to XML.</span></span></span>, CSV, YAML, list of ids, or count.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-make-progress-bar/\">WP_CLI\\Utils\\make_progress_bar()</a></strong> \u2013 Create a progress bar to display percent completion of a given operation.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-colorize/\">WP_CLI::colorize()</a></strong> \u2013 Colorize a string for output.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-line/\">WP_CLI::line()</a></strong> \u2013 Display informational message without prefix, and ignore `\u2013quiet`.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-log/\">WP_CLI::log()</a></strong> \u2013 Display informational message without prefix.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-success/\">WP_CLI::success()</a></strong> \u2013 Display success message prefixed with \"Success: \".</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-warning/\">WP_CLI::warning()</a></strong> \u2013 Display warning message prefixed with \"Warning: \".</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-error/\">WP_CLI::error()</a></strong> \u2013 Display error message prefixed with \"Error: \" and exit script.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-halt/\">WP_CLI::halt()</a></strong> \u2013 Halt script execution with a specific return code.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-error-multi-line/\">WP_CLI::error_multi_line()</a></strong> \u2013 Display a multi-line error message in a red box. Doesn\u2019t exit script.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 18132,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18150",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18150",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18150/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18315,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18150/revisions/18315"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18132"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18150"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

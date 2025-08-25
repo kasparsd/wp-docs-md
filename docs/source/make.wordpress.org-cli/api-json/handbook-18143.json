@@ -1,0 +1,98 @@
+{
+    "id": 18143,
+    "date": "2025-06-12T00:42:42",
+    "date_gmt": "2025-06-12T00:42:42",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/tools/"
+    },
+    "modified": "2025-07-01T13:07:22",
+    "modified_gmt": "2025-07-01T13:07:22",
+    "slug": "tools",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/tools/",
+    "title": {
+        "rendered": "Tools"
+    },
+    "content": {
+        "rendered": "<p>The following is a list of projects that integrate with <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> in some form. For installable WP-CLI packages, please see the <a href=\"https://wp-cli.org/package-index/\">package index</a>.</p>\n<h2>Plugins</h2>\n<p>The following table is an alphabetical list of known commands defined in WordPress plugins:</p>\n<table>\n<thead>\n<tr>\n<th align=\"left\"><strong>Command</strong></th>\n<th align=\"left\"><strong>WordPress <span tabindex='0' class='glossary-item-container'>plugin<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Plugin</span> <span class='glossary-item-description'>A plugin is a piece of software containing a group of functions that can be added to a WordPress website. They can extend functionality or add new features to your WordPress websites. WordPress plugins are written in the PHP programming language and integrate seamlessly with WordPress. These can be free in the WordPress.org Plugin Directory https://wordpress.org/plugins/ or can be cost-based plugin from a third-party</span></span></span></strong></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"left\">acf</td>\n<td align=\"left\"><a href=\"https://github.com/hoppinger/advanced-custom-fields-wpcli\">Advanced Custom Fields wp-cli</a></td>\n</tr>\n<tr>\n<td align=\"left\">amt</td>\n<td align=\"left\"><a href=\"http://www.codetrax.org/projects/wp-add-meta-tags/wiki/Command_Line_Interface\">Add-Meta-Tags command line interface</a></td>\n</tr>\n<tr>\n<td align=\"left\">any-ipsum</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/any-ipsum/\">Any Ipsum</a></td>\n</tr>\n<tr>\n<td align=\"left\">backup</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/backupwordpress/\">BackUpWordPress</a></td>\n</tr>\n<tr>\n<td align=\"left\">backwpup</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/backwpup/\">BackWPup</a></td>\n</tr>\n<tr>\n<td align=\"left\">blog-dupe</td>\n<td align=\"left\"><a href=\"https://github.com/trepmal/blog-duplicator\">blog-duplicator</a></td>\n</tr>\n<tr>\n<td align=\"left\">camptix</td>\n<td align=\"left\"><a href=\"https://github.com/Automattic/camptix\">CampTix</a></td>\n</tr>\n<tr>\n<td align=\"left\">check-content</td>\n<td align=\"left\"><a href=\"https://github.com/mattclegg/wp-cli_check-content\">CheckContent</a></td>\n</tr>\n<tr>\n<td align=\"left\">co-authors-plus</td>\n<td align=\"left\"><a href=\"https://github.com/automattic/co-authors-plus\">Co-Authors Plus</a></td>\n</tr>\n<tr>\n<td align=\"left\">composer</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/composer\">Composer</a></td>\n</tr>\n<tr>\n<td align=\"left\">config</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/wp-cfm/\">WP-CFM</a></td>\n</tr>\n<tr>\n<td align=\"left\">crontrol</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/wp-crontrol/\">WP-Crontrol</a></td>\n</tr>\n<tr>\n<td align=\"left\">csv</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/advanced-csv-importer/\">Advanced CSV Importer</a></td>\n</tr>\n<tr>\n<td align=\"left\"><span tabindex='0' class='glossary-item-container'>deploy<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Deploy</span> <span class='glossary-item-description'>Launching code from a local development environment to the production web server, so that it's available to visitors.</span></span></span></td>\n<td align=\"left\"><a href=\"https://github.com/demental/wp-deploy-flow\">wp-deploy-flow</a></td>\n</tr>\n<tr>\n<td align=\"left\">developer</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/developer/\">Developer</a></td>\n</tr>\n<tr>\n<td align=\"left\">edd</td>\n<td align=\"left\"><a href=\"https://easydigitaldownloads.com/docs/wp-cli-commands/\">Easy Digital Downloads</a></td>\n</tr>\n<tr>\n<td align=\"left\">elasticpress</td>\n<td align=\"left\"><a href=\"https://github.com/10up/ElasticPress\">ElasticPress</a></td>\n</tr>\n<tr>\n<td align=\"left\"><span tabindex='0' class='glossary-item-container'>github<span class='glossary-item-hidden-content'><span class='glossary-item-header'>GitHub</span> <span class='glossary-item-description'>GitHub is a website that offers online implementation of git repositories that can easily be shared, copied and modified by other developers. Public repositories are free to host, private repositories require a paid subscription. GitHub introduced the concept of the \u2018pull request\u2019 where code changes done in branches by contributors can be reviewed and discussed before being merged be the repository owner.  <a href=\"https://github.com/\">https://github.com/</a></span></span></span>-updater</td>\n<td align=\"left\"><a href=\"https://github.com/afragen/github-updater\">GitHub Updater</a></td>\n</tr>\n<tr>\n<td align=\"left\">google-sitemap</td>\n<td align=\"left\"><a href=\"https://github.com/wp-cli/google-sitemap-generator-cli\">Google Sitemap Generator CLI</a></td>\n</tr>\n<tr>\n<td align=\"left\">image-gen</td>\n<td align=\"left\"><a href=\"https://github.com/trepmal/image-gen/\">Image Gen</a></td>\n</tr>\n<tr>\n<td align=\"left\">import_sidebar</td>\n<td align=\"left\"><a href=\"https://github.com/cftp/widget-importer\">Widget Import Export</a></td>\n</tr>\n<tr>\n<td align=\"left\">itelic</td>\n<td align=\"left\"><a href=\"https://github.com/iron-bound-designs/exchange-addon-licensing\">Licensing for Exchange</a></td>\n</tr>\n<tr>\n<td align=\"left\">jekyll-export</td>\n<td align=\"left\"><a href=\"https://github.com/benbalter/wordpress-to-jekyll-exporter/\">WordPress to Jekyll Exporter</a></td>\n</tr>\n<tr>\n<td align=\"left\">jetpack</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/jetpack/\">Jetpack by WordPress.com</a></td>\n</tr>\n<tr>\n<td align=\"left\">liveblog</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/liveblog/\">Liveblog</a></td>\n</tr>\n<tr>\n<td align=\"left\">mainwp</td>\n<td align=\"left\"><a href=\"https://mainwp.com/\">MainWP</a></td>\n</tr>\n<tr>\n<td align=\"left\">migrate</td>\n<td align=\"left\"><a href=\"https://github.com/duncanjbrown/WP-CLI-Migrate/\">WP Migrate DB CLI Interface</a></td>\n</tr>\n<tr>\n<td align=\"left\">migratedb</td>\n<td align=\"left\"><a href=\"https://deliciousbrains.com/wp-migrate-db-pro/doc/cli-addon/\">WP Migrate DB Pro</a></td>\n</tr>\n<tr>\n<td align=\"left\">more-plugin-info</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/more-plugin-info/\">More Plugin Info</a></td>\n</tr>\n<tr>\n<td align=\"left\">multi-device</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/multi-device-switcher/\">Multi Device Switcher</a></td>\n</tr>\n<tr>\n<td align=\"left\"><span tabindex='0' class='glossary-item-container'>nginx<span class='glossary-item-hidden-content'><span class='glossary-item-header'>NGINX</span> <span class='glossary-item-description'>NGINX is open source software for web serving, reverse proxying, caching, load balancing, media streaming, and more. It started out as a web server designed for maximum performance and stability. In addition to its HTTP server capabilities, NGINX can also function as a proxy server for email (IMAP, POP3, and SMTP) and a reverse proxy and load balancer for HTTP, TCP, and UDP servers. <a href=\"https://www.nginx.com/\">https://www.nginx.com/</a>.</span></span></span></td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/nginx-champuru/\">Nginx Cache Controller</a></td>\n</tr>\n<tr>\n<td align=\"left\">optimize</td>\n<td align=\"left\"><a href=\"https://getwpo.com/\">WP-Optimize</a></td>\n</tr>\n<tr>\n<td align=\"left\">orderweight</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/woo-order-weight/\">Order Weight for WooCommerce</a></td>\n</tr>\n<tr>\n<td align=\"left\">p2-by-email</td>\n<td align=\"left\"><a href=\"https://github.com/humanmade/P2-By-Email\">P2 By Email</a></td>\n</tr>\n<tr>\n<td align=\"left\">p2-resolved-posts</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/p2-resolved-posts/\">P2 Resolved Posts</a></td>\n</tr>\n<tr>\n<td align=\"left\">p2p</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/posts-to-posts/\">Posts 2 Posts</a></td>\n</tr>\n<tr>\n<td align=\"left\">pdf-light-viewer</td>\n<td align=\"left\"><a href=\"https://github.com/antongorodezkiy/pdf-light-viewer\">PDF Light Viewer</a></td>\n</tr>\n<tr>\n<td align=\"left\">phpcompat</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/php-compatibility-checker/\">PHP Compatibility Checker</a></td>\n</tr>\n<tr>\n<td align=\"left\">post-gen</td>\n<td align=\"left\"><a href=\"https://github.com/trepmal/post-gen/\">Post Gen</a></td>\n</tr>\n<tr>\n<td align=\"left\">quick-mail</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/quick-mail/\">Quick Mail</a></td>\n</tr>\n<tr>\n<td align=\"left\">rest-api-toolbox</td>\n<td align=\"left\"><a href=\"https://github.com/petenelson/wp-rest-api-toolbox\">REST API Toolbox</a></td>\n</tr>\n<tr>\n<td align=\"left\">redis-cache</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/redis-cache/\">Redis Object Cache</a></td>\n</tr>\n<tr>\n<td align=\"left\"><span tabindex='0' class='glossary-item-container'>revisions<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Revisions</span> <span class='glossary-item-description'>The WordPress revisions system stores a record of each saved draft or published update. The revision system allows you to see what changes were made in each revision by dragging a slider (or using the Next/Previous buttons). The display indicates what has changed in each revision.</span></span></span></td>\n<td align=\"left\"><a href=\"https://github.com/trepmal/wp-revisions-cli/\">wp-revisions-cli</a></td>\n</tr>\n<tr>\n<td align=\"left\">revision-strike</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/revision-strike/\">Revision Strike</a></td>\n</tr>\n<tr>\n<td align=\"left\">safe-redirect-manager</td>\n<td align=\"left\"><a href=\"https://github.com/10up/safe-redirect-manager\">Safe Redirect Manager</a></td>\n</tr>\n<tr>\n<td align=\"left\">scheduled-unsticky</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/scheduled-unsticky/\">Scheduled Unsticky</a></td>\n</tr>\n<tr>\n<td align=\"left\">simple-history</td>\n<td align=\"left\"><a href=\"https://simple-history.com/\">Simple History</a></td>\n</tr>\n<tr>\n<td align=\"left\">site duplicate</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/multisite-clone-duplicator/\">MultiSite Clone Duplicator</a></td>\n</tr>\n<tr>\n<td align=\"left\">stream</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/stream/\">WP Stream</a></td>\n</tr>\n<tr>\n<td align=\"left\">super-cache</td>\n<td align=\"left\"><a href=\"https://github.com/wp-cli/wp-super-cache-cli\">WP Super Cache CLI</a></td>\n</tr>\n<tr>\n<td align=\"left\">supportpress</td>\n<td align=\"left\"><a href=\"https://github.com/SupportFlow/supportflow\">SupportFlow</a></td>\n</tr>\n<tr>\n<td align=\"left\">themecheck</td>\n<td align=\"left\"><a href=\"https://github.com/anhskohbo/wp-cli-themecheck\">wp-cli-themecheck</a></td>\n</tr>\n<tr>\n<td align=\"left\">thinkup</td>\n<td align=\"left\"><a href=\"https://github.com/taras/wp-cli-thinkup-import\">Thinkup Import WP CLI Commands</a></td>\n</tr>\n<tr>\n<td align=\"left\">total-cache</td>\n<td align=\"left\"><a href=\"https://wordpress.org/plugins/w3-total-cache/\">W3 Total Cache</a></td>\n</tr>\n<tr>\n<td align=\"left\">updraftplus</td>\n<td align=\"left\"><a href=\"https://updraftplus.com/\">UpdraftPlus</a></td>\n</tr>\n<tr>\n<td align=\"left\">Unsplash</td>\n<td align=\"left\"><a href=\"https://github.com/A5hleyRich/wp-cli-unsplash-command\">Import images from Unsplash into your Media Library</a></td>\n</tr>\n<tr>\n<td align=\"left\">wp2static</td>\n<td align=\"left\"><a href=\"https://github.com/elementor/wp2static\">Generate &amp; deploy a static HTML version of your site</a></td>\n</tr>\n<tr>\n<td align=\"left\">yoast</td>\n<td align=\"left\"><a href=\"https://developer.yoast.com/features/wp-cli/reindex-indexables/\">Reindex Indexables on Yoast</a></td>\n</tr>\n</tbody>\n</table>\n<p>If you implement a WP-CLI command in one of your plugins, please list it here.</p>\n<h2>Wrappers</h2>\n<ul>\n<li><a href=\"https://github.com/francescolaffi/chef-wp-cli\">Chef WP-CLI</a> \u2013 WP provisioning using Chef</li>\n<li><a href=\"https://github.com/gtg092x/node-wp-cli\">node-wp-cli</a> \u2013 Node JS wrapper for WP-CLI</li>\n<li><a href=\"https://github.com/rmccue/puppet-wp\">Puppet WP-CLI</a> \u2013 WP provisioning using Puppet</li>\n<li><a href=\"https://github.com/hasanen/wpcli\">wpcli gem</a> \u2013 run WP-CLI commands from Ruby</li>\n<li><a href=\"https://github.com/szepeviktor/wplib\">wplib</a> \u2013 shell scripts for managing multiple sites</li>\n<li><a href=\"https://github.com/charleslouis/wp_cli_helpers\">wpcli helpers</a> \u2013 a bundle of time saver aliases and functions for the shell</li>\n<li><a href=\"https://github.com/MarioKnight/cPanel-wp-management\">cPanel-wp-management</a> \u2013 shell scripts designed to <span tabindex='0' class='glossary-item-container'>loop<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Loop</span> <span class='glossary-item-description'>The Loop is PHP code used by WordPress to display posts. Using The Loop, WordPress processes each post to be displayed on the current page, and formats it according to how it matches specified criteria within The Loop tags. Any HTML or PHP code in the Loop will be processed on each post. <a href=\"https://codex.wordpress.org/The_Loop\">https://codex.wordpress.org/The_Loop</a>.</span></span></span> through all accounts on cPanel servers</li>\n<li><a href=\"https://www.plesk.com/wp-toolkit/\">Plesk WordPress Toolkit</a> \u2013 WordPress installations management <span tabindex='0' class='glossary-item-container'>UI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>UI</span> <span class='glossary-item-description'>UI is an acronym for User Interface - the layout of the page the user interacts with. Think \u2018how are they doing that\u2019 and less about what they are doing.</span></span></span> backed by WP-CLI</li>\n</ul>\n<h2>Editor plugins</h2>\n<ul>\n<li>Vim \u2013 <a href=\"https://github.com/dsawardekar/wordpress.vim\">https://github.com/dsawardekar/wordpress.vim</a></li>\n<li>Netbeans \u2013 <a href=\"https://github.com/junichi11/netbeans-wordpress-plugin\">https://github.com/junichi11/netbeans-wordpress-plugin</a></li>\n</ul>\n<h2>Vagrant boxes</h2>\n<ul>\n<li><a href=\"https://github.com/roots/trellis\">Trellis</a></li>\n<li><a href=\"https://github.com/Varying-Vagrant-Vagrants/VVV\">Varying Vagrant Vagrants</a></li>\n</ul>\n<h2>Misc</h2>\n<ul>\n<li><a href=\"https://github.com/AnsiPress/AnsiPress\">AnsiPress</a> \u2013 Setup NGINX/WordPress Stack</li>\n<li><a href=\"https://github.com/roots/bedrock\">Bedrock</a> \u2013 WP base stack</li>\n<li><a href=\"https://github.com/rtCamp/easyengine/\">EasyEngine</a> \u2013 Hosting control panel</li>\n<li><a href=\"https://github.com/cityindex/wordpress-development-flow\">WordPress Development Flow</a> \u2013 retired</li>\n<li><a href=\"http://wpcligui.com/\">WP-CLI GUI</a> \u2013 a GUI to assist with installing WP using WP-CLI</li>\n<li><a href=\"https://github.com/WP-API/OAuth1\">WP-API Oauth</a> \u2013 WP <span tabindex='0' class='glossary-item-container'>REST API<span class='glossary-item-hidden-content'><span class='glossary-item-header'>REST API</span> <span class='glossary-item-description'>The REST API is an acronym for the RESTful Application Program Interface (API) that uses HTTP requests to GET, PUT, POST and DELETE data. It is how the front end of an application (think \u201cphone app\u201d or \u201cwebsite\u201d) can communicate with the data store (think \u201cdatabase\u201d or \u201cfile system\u201d) <a href=\"https://developer.wordpress.org/rest-api/\">https://developer.wordpress.org/rest-api/</a>.</span></span></span> \u2013 OAuth 1.0a Server</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18371,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18143",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18143",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18143/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18322,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18143/revisions/18322"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18371"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18143"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

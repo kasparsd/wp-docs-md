@@ -1,0 +1,98 @@
+{
+    "id": 18102,
+    "date": "2025-06-12T00:42:39",
+    "date_gmt": "2025-06-12T00:42:39",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/bug-reports/"
+    },
+    "modified": "2025-07-01T13:08:15",
+    "modified_gmt": "2025-07-01T13:08:15",
+    "slug": "bug-reports",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/contributions/bug-reports/",
+    "title": {
+        "rendered": "Bug Reports"
+    },
+    "content": {
+        "rendered": "<p>Think you\u2019ve found a bug? We\u2019d love for you to help us get it fixed.</p>\n<p>Before you create a new issue, you should:</p>\n<ul>\n<li><a href=\"https://github.com/search?q=org%3Awp-cli+label%3Abug+is%3Aopen+sort%3Aupdated-desc&amp;type=issues\">Search existing issues</a> to see if there\u2019s an existing resolution to it, or if it\u2019s already been fixed in a newer version.</li>\n<li>Check our documentation on <a href=\"https://make.wordpress.org/cli/handbook/common-issues/\">common issues and their fixes</a>. It\u2019s worth reading through the <span tabindex='0' class='glossary-item-container'>GitHub<span class='glossary-item-hidden-content'><span class='glossary-item-header'>GitHub</span> <span class='glossary-item-description'>GitHub is a website that offers online implementation of git repositories that can easily be shared, copied and modified by other developers. Public repositories are free to host, private repositories require a paid subscription. GitHub introduced the concept of the \u2018pull request\u2019 where code changes done in branches by contributors can be reviewed and discussed before being merged be the repository owner.  <a href=\"https://github.com/\">https://github.com/</a></span></span></span> issues linked on the page, as the error listed may not be exactly the error you\u2019re experiencing.</li>\n<li>Reproduce the issue in a fresh installation of WordPress (e.g. Twenty Sixteen or similar, with no plugins active). If the issue only reproduces in a custom environment, then the issue is a bug in your environment, not <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> (make sure <code>WP_DEBUG</code> is enabled, which will often give you more visibility into the issue). You may be able to <a href=\"https://make.wordpress.org/cli/handbook/identify-plugin-theme-conflict/\">track down the error to a specific plugin or theme</a>.</li>\n</ul>\n<p>Once you\u2019ve done a bit of searching and discovered there isn\u2019t prior art for your bug, please create a new GitHub issue in the appropriate repository. Providing the summary, steps to reproduce, environmental details, and other specifics identified below will help guarantee you are submitting a full bug report.</p>\n<p><strong>Summary</strong></p>\n<p>In narrative form, such as \u201cWhile testing feature x, I encountered z.\u201d</p>\n<blockquote><p>\n  <strong>Summary:</strong></p>\n<p>  After installing the following package on newest nightly version of the WP-CLI, I receive \u201cis not a registered wp command error\u201d\n</p></blockquote>\n<p><strong>Steps to reproduce the bug</strong></p>\n<p>Please be as detailed and specific as possible. It\u2019s a good idea to go back and follow your steps a second time to make sure another user can recreate the issue by following the steps directly without assuming any actions.</p>\n<blockquote><p>\n  <strong>Steps to reproduce:</strong></p>\n<ol>\n<li>Run command \u2018wp package install wp-cli/scaffold-package-command:@stable\u2019</li>\n<li>Allow installation process to complete</li>\n<li>\u2018Success: Package installed.\u2019 is displayed</li>\n<li>Run \u2018wp help scaffold package\u2019</li>\n<li>Observe \u2018Error: \u2018scaffold package\u2019 is not a registered wp command.\u2019</li>\n</ol>\n</blockquote>\n<p>If you have a great deal of output to share, please <a href=\"https://gist.github.com/\">create a GitHub gist</a> and link to it in the issue.</p>\n<p><strong>Environment</strong></p>\n<p>Your bug may also be environment-specific. Because WP-CLI is a tool whose behavior is different from system to system, please include some environmental details in your issue if you think they\u2019re relevant.</p>\n<pre><code># What PHP environment does WP-CLI run in?\nwp cli info\n# Are you running suhosin? If so, make sure you've added `suhosin.executor.include.whitelist = phar` to your php.ini\nphp -m | grep -i suhosin\n# Can you share the results of which wp ?\nwhich -a wp\nstat $(which wp)\n# Are you running any packages? If one is causing a problem, you can use `--skip-packages` to skip loading them\nwp package list\n</code></pre>\n<p><strong>Results and impacts</strong></p>\n<p>Explain how the bug affects your usage, including severity level (what were the expected results, what were the actual results? who, how and to what degree affected?).</p>\n<blockquote><p>\n  <strong>Severity</strong> \u2013 High</p>\n<p>  <strong>Expected Results:</strong> Running <code>wp help scaffold package</code> displays help information for installed command.</p>\n<p>  <strong>Actual Results:</strong> \u2018Error: \u2018scaffold package\u2019 is not a registered wp command\u2019 is displayed.</p>\n<p>  This command is crucial for the daily function of our business. 1.2k other users also have installed this package and will be affected.</p>\n<p>  The installed package works without issue using WP-CLI <code>1.2.0-alpha-3182ac4</code>\n</p></blockquote>\n<p><strong>Workarounds</strong></p>\n<p>Do any workarounds exist? If so, what are they?</p>\n<blockquote><p>\n  <strong>Workaround:</strong> Rollback to working version of WP-CLI\n</p></blockquote>\n<p><strong>Relevant diagnostics</strong></p>\n<p>Include any crash reports, stack traces or debug output relevant to the issue. Any screenshots or gifs of issue are helpful too!</p>\n<p>Have a lot of output? Make your issue easier to understand by <a href=\"https://gist.github.com/\">creating a GitHub gist</a> and linking to it in the issue.</p>\n<p>If you include the <code>--debug</code> flag when executing WP-CLI (e.g. <code>wp post list --debug</code>), you may get more verbosity into the source of the error to include in the report.</p>\n<blockquote>\n<pre><code>$ wp package install wp-cli/scaffold-package-command:@stable\nInstalling package wp-cli/scaffold-package-command (@stable)\nUpdating /root/.wp-cli/packages/composer.json to require the package...\nUsing Composer to install the package...\n---\nLoading composer repositories with package information\nUpdating dependencies\nResolving dependencies through SAT\nDependency resolution completed in 0.001 seconds\nAnalyzed 421 packages to resolve dependencies\nAnalyzed 96 rules to resolve dependencies\nPackage operations: 1 install, 0 updates, 0 removals\nInstalls: wp-cli/scaffold-package-command:1.2.0\n - Installing wp-cli/scaffold-package-command (1.2.0)\nWriting lock file\nGenerating autoload files\n---\nSuccess: Package installed.\n</code></pre>\n<pre><code>$ wp help scaffold package --debug\nDebug (bootstrap): Loading packages from: /root/.wp-cli/packages/vendor/autoload.php (0.044s)\nDebug (bootstrap): No readable global config found (0.193s)\nDebug (bootstrap): No project config found (0.194s)\nDebug (bootstrap): argv: /usr/local/bin/wp help scaffold package --debug (0.194s)\nDebug (bootstrap): ABSPATH defined: /home/fu/public_html/ (0.195s)\nDebug (bootstrap): Begin WordPress load (0.195s)\nDebug (bootstrap): wp-config.php path: /home/fu/public_html/wp-config.php (0.196s)\nDebug (bootstrap): Loaded WordPress (1.323s)\nDebug (bootstrap): Running command: help (1.323s)\nError: 'scaffold package' is not a registered wp command.\n</code></pre>\n<p>  wp scaffold package does not work either:</p>\n<pre><code>$ wp scaffold package\nError: 'scaffold package' is not a registered subcommand of 'scaffold'. See 'wp help scaffold'.\n</code></pre>\n</blockquote>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18369,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18102",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18102",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18102/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18363,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18102/revisions/18363"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18102"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

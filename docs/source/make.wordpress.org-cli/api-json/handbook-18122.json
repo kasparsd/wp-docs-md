@@ -1,0 +1,98 @@
+{
+    "id": 18122,
+    "date": "2025-06-12T00:42:41",
+    "date_gmt": "2025-06-12T00:42:41",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/hack-day/"
+    },
+    "modified": "2025-07-01T13:13:24",
+    "modified_gmt": "2025-07-01T13:13:24",
+    "slug": "hack-day",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/contributions/hack-day/",
+    "title": {
+        "rendered": "WP-CLI Hack Day"
+    },
+    "content": {
+        "rendered": "<p>Welcome to <a href=\"https://make.wordpress.org/cli/2024/04/02/save-the-date-wp-cli-hack-day-on-friday-april-26th/\">WP-CLI Hack Day</a>! We appreciate you taking time to contribute to the project.</p>\n<p><strong>We\u2019d love to help you submit at least one pull request today</strong>. Given this goal, you\u2019ll likely want to <strong>start with something small and attainable</strong>. After you\u2019ve submitted your first pull request for the day, you\u2019re welcome to work on something more ambitious.</p>\n<p>When do you submit a pull request during Hack Day, please add <code>Related https://github.com/wp-cli/wp-cli/issues/5935</code> so we can easily keep track of them. We\u2019ll include them in a recap post at the end of the day.</p>\n<p>We put together this guide to make contributing as straightforward as possible. Please also join the <a href=\"https://wordpress.slack.com/messages/C02RP4T41\">#cli channel in WordPress.org Slack</a> (<a href=\"https://make.wordpress.org/chat/\">sign up instructions</a>) to chat with other contributors, for questions, etc.</p>\n<p>Your leads for the day are: <a href=\"https://github.com/schlessera\">schlessera</a>, <a href=\"https://github.com/danielbachhuber\">danielbachhuber</a>, <a href=\"https://github.com/swissspidy\">swissspidy</a></p>\n<h2>Open Video Sessions</h2>\n<p>During the Hack Day, we\u2019ll have two open video chat sessions:</p>\n<ul>\n<li><a href=\"https://www.timeanddate.com/worldclock/fixedtime.html?iso=20240426T0900\">\ud83d\udd53 02:00-03:00 PST / 05:00-06:00 EST / 09:00-10:00 UTC / 11:00-12:00 CEST / 18:00-19:00 JST</a></li>\n<li><a href=\"https://www.timeanddate.com/worldclock/fixedtime.html?iso=20240426T1500\">\ud83d\udd53 08:00-09:00 PST / 11:00-12:00 EST / 15:00-16:00 UTC / 17:00-18:00 CEST / 00:00-01:00 JST</a></li>\n</ul>\n<p>These sessions are a great opportunity to discuss remaining issues live, chat about the progress we\u2019ve made, and to connect with the community. Feel free to join these to talk through any challenges or share your updates!</p>\n<h2>Getting Started</h2>\n<p>If you normally use <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> on your web host or via Brew, you\u2019re most likely using the Phar executable (<code>wp-cli.phar</code>). This Phar executable file is the \u201cbuilt\u201d, singular version of WP-CLI. It is compiled from a couple dozen repositories in the WP-CLI <span tabindex='0' class='glossary-item-container'>GitHub<span class='glossary-item-hidden-content'><span class='glossary-item-header'>GitHub</span> <span class='glossary-item-description'>GitHub is a website that offers online implementation of git repositories that can easily be shared, copied and modified by other developers. Public repositories are free to host, private repositories require a paid subscription. GitHub introduced the concept of the \u2018pull request\u2019 where code changes done in branches by contributors can be reviewed and discussed before being merged be the repository owner.  <a href=\"https://github.com/\">https://github.com/</a></span></span></span> organization.</p>\n<p>In order to make code changes to WP-CLI, you\u2019ll need to set up the <code>wp-cli-dev</code> development environment on your local machine. Before you can proceed, though, you\u2019ll need to make sure you have <a href=\"https://getcomposer.org/\">Composer</a>, <span tabindex='0' class='glossary-item-container'>PHP<span class='glossary-item-hidden-content'><span class='glossary-item-header'>PHP</span> <span class='glossary-item-description'>PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. <a href=\"https://www.php.net/manual/en/preface.php\">https://www.php.net/manual/en/preface.php</a>.</span></span></span>, and a functioning <span tabindex='0' class='glossary-item-container'>MySQL<span class='glossary-item-hidden-content'><span class='glossary-item-header'>MySQL</span> <span class='glossary-item-description'>MySQL is a relational database management system. A database is a structured collection of data where content, configuration and other options are stored. <a href=\"https://www.mysql.com/\">https://www.mysql.com/</a>.</span></span></span> or MariaDB server on your local machine.</p>\n<p>Once the prequisites are met, clone the GitHub repository and run the installation process:</p>\n<pre><code class=\"language-bash\">git clone https://github.com/wp-cli/wp-cli-dev wp-cli-dev\ncd wp-cli-dev\ncomposer install\ncomposer prepare-tests\n</code></pre>\n<p>The <code>wp-cli-dev</code> installation process clones all of WP-CLI\u2019s repositories to your local machine. After the installation process is complete, you can make changes in whichever repository you like. You\u2019ll need to fork the repository in order to push your feature branch, however. <a href=\"https://github.com/cli/cli\">GitHub\u2019s CLI</a> is pretty helpful for this:</p>\n<pre><code class=\"language-bash\">cd core-command\ngh repo fork\n</code></pre>\n<p>We have started a video tutorial series that you can watch here: <a href=\"https://www.youtube.com/playlist?list=PL_B8Y6K6MH2d6T7pYa6dloUgk67mfBT4K\">WP-CLI Contribution Tutorials</a>. These videos will provide an overview of the packages and then go through setting up the development environment to allow you to run automated tests locally.</p>\n<p>All WP-CLI pull requests are expected to have tests. <a href=\"https://github.com/wp-cli/wp-cli/issues/5858\">Watch a ~10 minute video introduction</a>, or see <a href=\"https://make.wordpress.org/cli/handbook/contributions/pull-requests/#running-and-writing-tests\">running and writing tests</a> for the written version.</p>\n<h2>Suggested Tickets</h2>\n<p>To help you be successful during the day, we curated a list of reasonably approachable and actionable issues.</p>\n<p>Feel free to comment directly on the issue if you plan to work on it. We don\u2019t usually assign issues, so no need to worry about that.</p>\n<p><strong>New contributors</strong></p>\n<ul>\n<li><a href=\"https://github.com/wp-cli/media-command/issues/196\">Regenerating a single image size (re-)generates auto-scaled big images &amp; auto-rotated images</a></li>\n<li><a href=\"https://github.com/wp-cli/extension-command/issues/261\">wp plugin update all doesnt display info which plugin is being updated</a></li>\n<li><a href=\"https://github.com/wp-cli/media-command/issues/195\">No thumbnail when importing PDF file using <code>media import</code></a></li>\n<li><a href=\"https://github.com/wp-cli/extension-command/issues/74\">Allow theme slug renaming</a></li>\n<li><a href=\"https://github.com/wp-cli/extension-command/issues/410\">Subtheme installation fails after installing main theme, if subtheme was tried first, due to left-behind directory</a></li>\n<li><a href=\"https://github.com/wp-cli/extension-command/issues/241\">Include more information with wp plugin list</a></li>\n<li><a href=\"https://github.com/wp-cli/db-command/issues/158\">Output only matching IDs in db search</a></li>\n<li><a href=\"https://github.com/wp-cli/config-command/issues/113\">DB-Check fails if Database requires SSL</a></li>\n</ul>\n<p>See <a href=\"https://github.com/issues?q=is%3Aopen+org%3Awp-cli+is%3Aissue+sort%3Aupdated-desc+label%3Agood-first-issue+\">issues labeled \u2018good-first-issue\u2019</a> or <a href=\"https://github.com/issues?q=is%3Aopen+org%3Awp-cli+is%3Aissue+sort%3Aupdated-desc+label%3Acontributor-day\">issues labeled \u2018contributor-day\u2019</a> for a broader list.</p>\n<p><strong>Seasoned contributors</strong></p>\n<ul>\n<li><a href=\"https://github.com/wp-cli/extension-command/issues/407\">Plugin Dependencies Support</a></li>\n<li><a href=\"https://github.com/wp-cli/wp-cli/issues/5645\">Set WP_CLI_PACKAGES_DIR in config file</a></li>\n<li><a href=\"https://github.com/wp-cli/extension-command/issues/363\">Cache wp plugin install from GitHub</a></li>\n<li><a href=\"https://github.com/wp-cli/import-command/issues/83\">Improve speed of import when uploads are available locally</a></li>\n<li><a href=\"https://github.com/wp-cli/search-replace-command/issues/186\">Introduce a dedicated search-replace url command</a></li>\n</ul>\n<p>You\u2019re obviously welcome to work on <a href=\"https://github.com/issues?q=is%3Aopen+org%3Awp-cli+is%3Aissue+sort%3Aupdated-desc\">any other issue</a> you\u2019d like too! <a href=\"https://github.com/issues?q=is%3Aopen%20org%3Awp-cli%20is%3Aissue%20sort%3Acreated-desc%20label%3Abug\">Bug fixes in particular are very welcome</a>. This day can be a good opportunity to discuss trickier issues and brainstorm approaches.</p>\n<h2>Thank You for Contributing</h2>\n<p>We appreciate your taking the time to participate in the Hack Day and contribute to <code>wp-cli</code>. Have fun, and we look forward to seeing you on <a href=\"https://wordpress.slack.com/messages/C02RP4T41\">Slack</a>!</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18369,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18122",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18122",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18122/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18343,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18122/revisions/18343"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18122"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

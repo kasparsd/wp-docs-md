@@ -1,0 +1,91 @@
+{
+    "id": 18190,
+    "date": "2025-06-12T00:42:45",
+    "date_gmt": "2025-06-12T00:42:45",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/behat-steps/given-a-misconfigured-wp-content-dir-constant-directory/"
+    },
+    "modified": "2025-07-01T12:55:28",
+    "modified_gmt": "2025-07-01T12:55:28",
+    "slug": "given-a-misconfigured-wp-content-dir-constant-directory",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/behat-steps/given-a-misconfigured-wp-content-dir-constant-directory/",
+    "title": {
+        "rendered": "Given a misconfigured WP_CONTENT_DIR constant directory"
+    },
+    "content": {
+        "rendered": "<p>Modify wp-config.php to set <code>WP_CONTENT_DIR</code> to an empty string.</p>\n<hr>\n<h2>Usage</h2>\n<p><code>Scenario: My example scenario<br>\n  Given a WP install<br>\n  And a misconfigured WP_CONTENT_DIR constant directory</code></p>\n<p><em>Behat steps documentation is generated from the <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> codebase on every release. To suggest improvements, please submit a pull request.</em></p>\n<hr>\n<h2>Related</h2>\n<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-an-empty-directory/\">Given an empty directory</a></strong> \u2013 Creates an empty directory.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-an-empty-non-existent-directory/\">Given /^an? (empty|non-existent) ([^\\s]+) directory$/</a></strong> \u2013 Creates or deletes a specific directory.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-an-empty-cache/\">Given an empty cache</a></strong> \u2013 Clears the WP-CLI cache directory.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-an-file-cache-file/\">Given /^an? ([^\\s]+) (file|cache file):$/</a></strong> \u2013 Creates a file with the given contents.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-replaced-with-in-the-file/\">Given /^\"([^\"]+)\" replaced with \"([^\"]+)\" in the ([^\\s]+) file$/</a></strong> \u2013 Search and replace a string in a file using regex.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-that-http-requests-to-will-respond-with/\">Given /^that HTTP requests to (.*?) will respond with:$/</a></strong> \u2013 Mock <span tabindex='0' class='glossary-item-container'>HTTP<span class='glossary-item-hidden-content'><span class='glossary-item-header'>HTTP</span> <span class='glossary-item-description'>HTTP is an acronym for Hyper Text Transfer Protocol. HTTP  is the underlying protocol used by the World Wide Web and this protocol defines how messages are formatted and transmitted, and what actions Web servers and browsers should take in response to various commands.</span></span></span> requests to a given <span tabindex='0' class='glossary-item-container'>URL<span class='glossary-item-hidden-content'><span class='glossary-item-header'>URL</span> <span class='glossary-item-description'>A specific web address of a website or web page on the Internet, such as a website\u2019s URL www.wordpress.org</span></span></span>.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-wp-files/\">Given WP files</a></strong> \u2013 Download WordPress files without installing.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-wp-config-php/\">Given wp-config.php</a></strong> \u2013 Create a wp-config.php file using `wp config create`.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-a-database/\">Given a database</a></strong> \u2013 Creates an empty database.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-a-wp-installation/\">Given a WP install(ation)</a></strong> \u2013 Installs WordPress.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-a-wp-installation-in-subdir/\">Given a WP install(ation) in :subdir</a></strong> \u2013 Installs WordPress in a given directory.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-a-wp-installation-with-composer/\">Given a WP install(ation) with Composer</a></strong> \u2013 Installs WordPress with Composer.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-a-wp-installation-with-composer-and-a-custom-vendor-directory-vendor-directory/\">Given a WP install(ation) with Composer and a custom vendor directory :vendor_directory</a></strong> \u2013 Installs WordPress with Composer and a custom vendor directory.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-a-wp-multisite-subdirectory-subdomaininstall-installation/\">Given /^a WP multisite (subdirectory|subdomain)?\\s?(install|installation)$/</a></strong> \u2013 Installs WordPress <span tabindex='0' class='glossary-item-container'>Multisite<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Multisite</span> <span class='glossary-item-description'>Multisite is a WordPress feature which allows users to create a network of sites on a single WordPress installation. Available since WordPress version 3.0, Multisite is a continuation of WPMU or WordPress Multiuser project. WordPress MultiUser project was discontinued and its features were included into WordPress core.<a href=\"https://codex.wordpress.org/Create_A_Network\">https://codex.wordpress.org/Create_A_Network</a>.</span></span></span>.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-these-installed-and-active-plugins/\">Given these installed and active plugins:</a></strong> \u2013 Installs and activates one or more plugins.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-a-custom-wp-content-directory/\">Given a custom wp-content directory</a></strong> \u2013 Configure a custom `wp-content` directory.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-download/\">Given download:</a></strong> \u2013 Download multiple files into the given destinations.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-save-stdout-stderr-as/\">Given /^save (STDOUT|STDERR) ([\\\u2019].+[^\\\u2019])?\\s?as \\{(\\w+)\\}$/</a></strong> \u2013 Store STDOUT or STDERR contents in a variable.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-a-new-phar-with-the-same-version-version/\">Given /^a new Phar with (?:the same version|version \"([^\"]+)\")$/</a></strong> \u2013 Build a new WP-CLI Phar file with a given version.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-a-downloaded-phar-with-the-same-version-version/\">Given /^a downloaded Phar with (?:the same version|version \"([^\"]+)\")$/</a></strong> \u2013 Download a specific WP-CLI Phar version from <span tabindex='0' class='glossary-item-container'>GitHub<span class='glossary-item-hidden-content'><span class='glossary-item-header'>GitHub</span> <span class='glossary-item-description'>GitHub is a website that offers online implementation of git repositories that can easily be shared, copied and modified by other developers. Public repositories are free to host, private repositories require a paid subscription. GitHub introduced the concept of the \u2018pull request\u2019 where code changes done in branches by contributors can be reviewed and discussed before being merged be the repository owner.  <a href=\"https://github.com/\">https://github.com/</a></span></span></span>.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-save-the-file-as/\">Given /^save the (.+) file ([\\\u2019].+[^\\\u2019])?as \\{(\\w+)\\}$/</a></strong> \u2013 Stores the contents of the given file in a variable.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-a-dependency-on-current-wp-cli/\">Given a dependency on current wp-cli</a></strong> \u2013 Add `wp-cli/wp-cli` as a Composer dependency.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-a-php-built-in-web-server/\">Given a PHP built-in web server</a></strong> \u2013 Start a <span tabindex='0' class='glossary-item-container'>PHP<span class='glossary-item-hidden-content'><span class='glossary-item-header'>PHP</span> <span class='glossary-item-description'>PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. <a href=\"https://www.php.net/manual/en/preface.php\">https://www.php.net/manual/en/preface.php</a>.</span></span></span> built-in web server in the current directory.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/given-a-php-built-in-web-server-to-serve-subdir/\">Given a PHP built-in web server to serve :subdir</a></strong> \u2013 Start a PHP built-in web server in the given subdirectory.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 18101,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18190",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18190",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18190/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18275,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18190/revisions/18275"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18101"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18190"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

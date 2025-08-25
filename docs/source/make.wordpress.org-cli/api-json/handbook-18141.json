@@ -1,0 +1,98 @@
+{
+    "id": 18141,
+    "date": "2025-06-12T00:42:42",
+    "date_gmt": "2025-06-12T00:42:42",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/sharing-wp-cli-packages/"
+    },
+    "modified": "2025-07-01T13:13:52",
+    "modified_gmt": "2025-07-01T13:13:52",
+    "slug": "sharing-wp-cli-packages",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/sharing-wp-cli-packages/",
+    "title": {
+        "rendered": "Sharing WP-CLI Packages"
+    },
+    "content": {
+        "rendered": "<p>By default, <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> places <a href=\"https://developer.wordpress.org/cli/commands/package/\">installed packages</a> in <code>~/.wp-cli/packages/</code>, a hidden subdirectory for the user\u2019s home directory.</p>\n<p>Because the home directory is different for each user, this naturally means each system user will have a separate directory of installed packages. If you have multiple active shell users on a server, and want to share installed WP-CLI packages between them, there are a couple of supported ways to do this.</p>\n<h2><code>WP_CLI_PACKAGES_DIR</code> environment variable</h2>\n<p>To override the directory WP-CLI uses for installed packages, provide a <code>WP_CLI_PACKAGES_DIR</code> environment variable. If you wish for multiple users to share the same packages directory, you can simply provide the same <code>WP_CLI_PACKAGES_DIR</code> environment variable for each user.</p>\n<pre><code>vim /etc/environment\nexport WP_CLI_PACKAGES_DIR=/usr/local/lib/wp-cli-packages\n</code></pre>\n<p>Similarly, you can make sure the directory is only writable by a specific user to make packages available to all users, but only installable by the specific user.</p>\n<p>It\u2019s worth noting the <code>WP_CLI_PACKAGES_DIR</code> environment variable <em>overrides</em> WP-CLI\u2019s default behavior of loading packages installed in the user\u2019s home directory. If you want to support both, you\u2019ll need to take the second approach.</p>\n<h3>Composer project in a shared directory</h3>\n<p>WP-CLI\u2019s installed packages directory is simply a Composer project under the hood. Given this architecture, you can create your own Composer project in an arbitrary directory, and load it into scope using WP-CLI\u2019s <code>--require=&lt;path&gt;</code> flag.</p>\n<p>First, create your Composer project.</p>\n<pre><code>$ mkdir /usr/local/lib/wp-cli-packages\n$ cd /usr/local/lib/wp-cli-packages\n$ composer init -n --name=runcommand/wp-cli-packages -s=dev --repository=https://wp-cli.org/package-index/\n$ composer require runcommand/hook\nUsing version dev-master for runcommand/hook\n./composer.json has been updated\nLoading composer repositories with package information\nUpdating dependencies (including require-dev)\n  - Installing runcommand/hook (dev-master 7a7beae)\n    Cloning 7a7beae2013eeea243cc44524a7c5c21da11979e\n\nWriting lock file\nGenerating autoload files\n</code></pre>\n<p>Now, once your Composer project has a dependency or two, you can use <code>wp --require=&lt;path/to/autoload&gt;</code> (or the equivalent <code>config.yml</code> statement) to load the packages into WP-CLI.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18370,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18141",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18141",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18141/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18324,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18141/revisions/18324"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18370"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18141"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

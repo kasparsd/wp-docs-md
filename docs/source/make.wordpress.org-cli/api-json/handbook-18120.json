@@ -1,0 +1,98 @@
+{
+    "id": 18120,
+    "date": "2025-06-12T00:42:40",
+    "date_gmt": "2025-06-12T00:42:40",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/force-output-specific-locale/"
+    },
+    "modified": "2025-07-01T13:10:50",
+    "modified_gmt": "2025-07-01T13:10:50",
+    "slug": "force-output-specific-locale",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/force-output-specific-locale/",
+    "title": {
+        "rendered": "Force output to a specific locale"
+    },
+    "content": {
+        "rendered": "<p><span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> always outputs English because it doesn\u2019t support localization. But, because WordPress supports localization, you may see non-English output when performing specific commands.</p>\n<p>For instance:</p>\n<pre><code>$ wp theme update --all\n\u05de\u05e2\u05d1\u05e8 \u05dc\u05de\u05e6\u05d1 \u05ea\u05d7\u05d6\u05d5\u05e7\u05d4...\n\u05de\u05d5\u05e8\u05d9\u05d3 \u05e2\u05d3\u05db\u05d5\u05e0\u05d9\u05dd \u05de-https://downloads.wordpress.org/theme/hueman.3.3.25.zip...\nUsing cached file '/home/xxx/.wp-cli/cache/theme/hueman-3.3.25.zip'...\n\u05e4\u05ea\u05d9\u05d7\u05ea \u05e2\u05d3\u05db\u05d5\u05df...\n\u05d4\u05ea\u05e7\u05e0\u05ea \u05d2\u05e8\u05e1\u05d4 \u05d7\u05d3\u05e9\u05d4...\n\u05d4\u05e1\u05e8\u05ea \u05d4\u05d2\u05e8\u05e1\u05d4 \u05d4\u05e7\u05d5\u05d3\u05de\u05ea \u05e9\u05dc \u05d4\u05ea\u05d1\u05e0\u05d9\u05ea...\n\u05d4\u05ea\u05d1\u05e0\u05d9\u05ea \u05e2\u05d5\u05d3\u05db\u05e0\u05d4 \u05d1\u05d4\u05e6\u05dc\u05d7\u05d4.\n\u05d1\u05d9\u05d8\u05d5\u05dc \u05de\u05e6\u05d1 \u05ea\u05d7\u05d6\u05d5\u05e7\u05d4...\n+--------+-------------+-------------+---------+\n| name   | old_version | new_version | status  |\n+--------+-------------+-------------+---------+\n| hueman | 3.3.24      | 3.3.25      | Updated |\n+--------+-------------+-------------+---------+\nSuccess: Updated 1 of 1 themes.\n</code></pre>\n<p>To force WordPress to always output English at the command line, you need to <span tabindex='0' class='glossary-item-container'>filter<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Filter</span> <span class='glossary-item-description'>Filters are one of the two types of Hooks <a href=\"https://codex.wordpress.org/Plugin_API/Hooks\">https://codex.wordpress.org/Plugin_API/Hooks</a>. They provide a way for functions to modify data of other functions. They are the counterpart to Actions. Unlike Actions, filters are meant to work in an isolated manner, and should never have side effects such as affecting global variables and output.</span></span></span> the active locale.</p>\n<p>Given a <code>force-locale.php</code> file:</p>\n<pre><code>&lt;?php\nWP_CLI::add_wp_hook( 'pre_option_WPLANG', function() {\n    return 'en_US';\n});\n</code></pre>\n<p>You can force the locale to <code>en_US</code> with:</p>\n<pre><code>wp --require=force-locale.php\n</code></pre>\n<p>One nice thing about this approach is that you can easily apply it across multiple WP installs <a href=\"https://make.wordpress.org/cli/handbook/config/#config-files\">using a config file</a>.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18370,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18120",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18120",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18120/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18345,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18120/revisions/18345"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18370"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18120"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

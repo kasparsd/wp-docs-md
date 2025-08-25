@@ -1,0 +1,91 @@
+{
+    "id": 18177,
+    "date": "2025-06-12T00:42:44",
+    "date_gmt": "2025-06-12T00:42:44",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-make-progress-bar/"
+    },
+    "modified": "2025-07-01T12:55:31",
+    "modified_gmt": "2025-07-01T12:55:31",
+    "slug": "wp-cli-utils-make-progress-bar",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/internal-api/wp-cli-utils-make-progress-bar/",
+    "title": {
+        "rendered": "WP_CLI\\Utils\\make_progress_bar()"
+    },
+    "content": {
+        "rendered": "<p>Create a progress bar to display percent completion of a given operation.</p>\n<hr>\n<h2>Usage</h2>\n<pre><code>WP_CLI\\Utils\\make_progress_bar( $message, $count, $interval = 100 )\n</code></pre>\n<div>\n<strong>$message</strong> (string) Text to display before the progress bar.<br>\n<strong>$count</strong> (integer) Total number of ticks to be performed.<br>\n<strong>$interval</strong> (int) Optional. The interval in milliseconds between updates. Default 100.<br>\n<strong>@return</strong> (\\cli\\progress\\Bar|\\WP_CLI\\NoOp) \n</div>\n<hr>\n<h2>Notes</h2>\n<p>Progress bar is written to STDOUT, and disabled when command is piped. Progress<br>\nadvances with <code>$progress-&gt;tick()</code>, and completes with <code>$progress-&gt;finish()</code>.<br>\nProcess bar also indicates elapsed time and expected total time.</p>\n<pre><code># `wp user generate` ticks progress bar each time a new user is created.\n#\n# $ wp user generate --count=500\n# Generating users  22 % [=======&gt;                             ] 0:05 / 0:23\n\n$progress = \\WP_CLI\\Utils\\make_progress_bar( 'Generating users', $count );\nfor ( $i = 0; $i &lt; $count; $i++ ) {\n    // uses wp_insert_user() to insert the user\n    $progress-&gt;tick();\n}\n$progress-&gt;finish();\n</code></pre>\n<p><em>Internal <span tabindex='0' class='glossary-item-container'>API<span class='glossary-item-hidden-content'><span class='glossary-item-header'>API</span> <span class='glossary-item-description'>An API or Application Programming Interface is a software intermediary that allows programs to interact with each other and share data in limited, clearly defined ways.</span></span></span> documentation is generated from the <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> codebase on every release. To suggest improvements, please submit a pull request.</em></p>\n<hr>\n<h2>Related</h2>\n<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-format-items/\">WP_CLI\\Utils\\format_items()</a></strong> \u2013 Render a collection of items as an ASCII table, <span tabindex='0' class='glossary-item-container'>JSON<span class='glossary-item-hidden-content'><span class='glossary-item-header'>JSON</span> <span class='glossary-item-description'>JSON, or JavaScript Object Notation, is a minimal, readable format for structuring data. It is used primarily to transmit data between a server and web application, as an alternative to XML.</span></span></span>, CSV, YAML, list of ids, or count.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-colorize/\">WP_CLI::colorize()</a></strong> \u2013 Colorize a string for output.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-line/\">WP_CLI::line()</a></strong> \u2013 Display informational message without prefix, and ignore `\u2013quiet`.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-log/\">WP_CLI::log()</a></strong> \u2013 Display informational message without prefix.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-success/\">WP_CLI::success()</a></strong> \u2013 Display success message prefixed with \"Success: \".</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-debug/\">WP_CLI::debug()</a></strong> \u2013 Display debug message prefixed with \"Debug: \" when `\u2013debug` is used.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-warning/\">WP_CLI::warning()</a></strong> \u2013 Display warning message prefixed with \"Warning: \".</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-error/\">WP_CLI::error()</a></strong> \u2013 Display error message prefixed with \"Error: \" and exit script.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-halt/\">WP_CLI::halt()</a></strong> \u2013 Halt script execution with a specific return code.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-error-multi-line/\">WP_CLI::error_multi_line()</a></strong> \u2013 Display a multi-line error message in a red box. Doesn\u2019t exit script.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 18132,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18177",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18177",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18177/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18288,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18177/revisions/18288"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18132"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18177"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

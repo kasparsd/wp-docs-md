@@ -1,0 +1,98 @@
+{
+    "id": 18142,
+    "date": "2025-06-12T00:42:42",
+    "date_gmt": "2025-06-12T00:42:42",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/shell-friends/"
+    },
+    "modified": "2025-07-01T13:07:17",
+    "modified_gmt": "2025-07-01T13:07:17",
+    "slug": "shell-friends",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/shell-friends/",
+    "title": {
+        "rendered": "Shell Friends"
+    },
+    "content": {
+        "rendered": "<p>As you advance upon your use of <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span>, you\u2019ll find that a little bit of command line knowledge can have a huge impact on your workflow. Here are some of our favorite shell helper utilities.</p>\n<h2>You Should Know</h2>\n<h3>Search through your bash history</h3>\n<p>Did you know that every command you run on your shell is saved to history? Search through your history with <code>CTRL + R</code>:</p>\n<pre><code class=\"language-bash\">$ wp core download --version=nightly --force\nbck-i-search: wp\n</code></pre>\n<p>When \u2018bck-i-search\u2019 appears, your keystrokes will search against commands saved in your bash history. Hit <code>return</code> to run the current selection.</p>\n<p>Or another way to search history is grepping the output from the <code>history</code> command like:</p>\n<pre><code class=\"language-bash\">$ history | grep wp\n</code></pre>\n<p>Any of the commands found in that list can be re-executed by bang-number, so for example if the output says your desired command is #218, you just do <code>!218</code></p>\n<h3>Combine WP-CLI commands</h3>\n<p>In many cases, it can be extremely powerful to be able to pass the results of one command to another. Composability is a <a href=\"https://make.wordpress.org/cli/handbook/philosophy/\">key philosophy</a> of WP-CLI, and there are two common approaches for composing commands.</p>\n<p><em>Command substitution</em> passes the output of one command to another command, without any transformation to the output.</p>\n<p><code>wp post list</code> only lists posts; it doesn\u2019t perform any operation on them. In this example, the command lists page ids as space-separated values.</p>\n<pre><code class=\"language-bash\">$ wp post list --post_type='page' --format=ids\n1164 1186\n</code></pre>\n<p>Combining <code>wp post list</code> with <code>wp post delete</code> lets you easily delete all posts. In this example, <code>$()</code> lets us pass the space-separated page ids to <code>wp post delete</code>.</p>\n<pre><code class=\"language-bash\">$ wp post delete $(wp post list --post_type='page' --format=ids)\nSuccess: Trashed post 1164.\nSuccess: Trashed post 1186.\n</code></pre>\n<p>If you need a bit more flexibility, <em>xargs</em> lets you pass the output of one command to another command, while performing minor transformation on the output.</p>\n<p>You may want to assign all editor capabilities to the author role. However, <code>wp cap list</code> lists capabilities separated by newlines, and <code>wp cap add</code> only accepts space-separated capabilities. Enter, <code>xargs</code>, whose default behavior is to split newline output into a space-separated list. Note the <code>|</code> shell operator, which passes the results of <code>wp cap list</code> to <code>xargs</code>. Without <code>|</code>, you\u2019ll see a WP-CLI error.</p>\n<pre><code class=\"language-bash\">$ wp cap list 'editor' | xargs wp cap add 'author'\nSuccess: Added 24 capabilities to 'author' role.\n</code></pre>\n<p><code>wp user generate</code> only generates users; it doesn\u2019t perform supplemental operations. In this example, <code>wp user generate</code> passes user ids to <code>xargs</code>, which splits the space-separated ids into a list and calls <code>wp user meta add</code> for each.</p>\n<pre><code class=\"language-bash\">$ wp user generate --count=5 --format=ids | xargs -0 -d ' ' -I % wp user meta add % foo bar\nSuccess: Added custom field.\nSuccess: Added custom field.\nSuccess: Added custom field.\nSuccess: Added custom field.\nSuccess: Added custom field.\n</code></pre>\n<h3>Define aliases, short macros to common commands</h3>\n<p>If you find yourself running the same commands quite often, you can define aliases to them for easier access.</p>\n<p>Run all three status check commands with one <code>check-all</code> alias. In this example, running <code>alias</code> creates a <code>check-all</code> alias for the current shell session. Save the same statement to your <code>~/.bashrc</code> or <code>~/.zshrc</code> to always have it available.</p>\n<pre><code class=\"language-bash\">$ alias check-all='wp core check-update &amp;&amp; wp plugin list --update=available &amp;&amp; wp theme list --update=available'\n$ check-all\n+-----------------+-------------+-----------------------------------------------------------+\n| version         | update_type | package_url                                               |\n+-----------------+-------------+-----------------------------------------------------------+\n| 4.7-beta4-39322 | minor       | https://wordpress.org/nightly-builds/wordpress-latest.zip |\n+-----------------+-------------+-----------------------------------------------------------+\n+-------------------------+----------+-----------+--------------+\n| name                    | status   | update    | version      |\n+-------------------------+----------+-----------+--------------+\n| akismet                 | inactive | available | 3.1.8        |\n| co-authors-plus         | inactive | available | 3.1.1        |\n| wp-redis                | inactive | available | 0.2.2        |\n| rest-api                | active   | available | 2.0-beta13.1 |\n| wp-api-oauth1           | inactive | available | 0.2          |\n+-------------------------+----------+-----------+--------------+\n+----------------------+----------+-----------+---------+\n| name                 | status   | update    | version |\n+----------------------+----------+-----------+---------+\n| p2                   | inactive | available | 1.4.2   |\n+----------------------+----------+-----------+---------+\n</code></pre>\n<h3>Save command output</h3>\n<p>WP-CLI commands send output to both <code>STDOUT</code> and <code>STDERR</code>, depending on the nature of the message. You may not notice there are two destinations, because WP-CLI renders both inside your shell. However, if you want to capture your output to a file, the distinction matters.</p>\n<p>Simply using <code>&gt;</code> will capture STDOUT from the command to a file.</p>\n<pre><code class=\"language-bash\">$ wp import wordpress.wxr --authors=create &gt; import.log\n</code></pre>\n<p>Redirect STDERR to STDOUT with <code>2&gt;&amp;1</code>, and then capture STDOUT to a log file.</p>\n<pre><code class=\"language-bash\">$ wp import wordpress.wxr --authors=create &gt; import.log 2&gt;&amp;1\n</code></pre>\n<p>When you\u2019re capturing output to a file, you won\u2019t see the output in your current shell session. However, you can open a second shell session and run <code>tail -f &lt;file&gt;</code> to see the output as it\u2019s added to the file.</p>\n<p>Alternatively, you can use <code>tee</code> that writes to both standard output and files. You only have to pipe the output to the command and specify the file name.</p>\n<pre><code class=\"language-bash\">$ wp import wordpress.wxr --authors=create | tee import.log\n</code></pre>\n<p>This will display the output in the current shell screen and also write it to the log file.</p>\n<p>Note that if the file already exists, it will be overwritten. If you want to append the output to the file, use the <code>-a</code> option.</p>\n<pre><code class=\"language-bash\">$ wp import wordpress.wxr --authors=create | tee -a import.log\n</code></pre>\n<h2>Snippets</h2>\n<p>Are you an expert in bash or zsh? Share your tips here.</p>\n<h3>Take a look at the <span tabindex='0' class='glossary-item-container'>plugin<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Plugin</span> <span class='glossary-item-description'>A plugin is a piece of software containing a group of functions that can be added to a WordPress website. They can extend functionality or add new features to your WordPress websites. WordPress plugins are written in the PHP programming language and integrate seamlessly with WordPress. These can be free in the WordPress.org Plugin Directory https://wordpress.org/plugins/ or can be cost-based plugin from a third-party</span></span></span> changelog</h3>\n<p>Needs <code>elinks</code> to browse <span tabindex='0' class='glossary-item-container'>HTML<span class='glossary-item-hidden-content'><span class='glossary-item-header'>HTML</span> <span class='glossary-item-description'>HTML is an acronym for Hyper Text Markup Language. It is a markup language that is used in the development of web pages and websites.</span></span></span>.</p>\n<pre><code class=\"language-bash\">wget -qO- https://api.wordpress.org/plugins/info/1.0/akismet|php -r '$seri=unserialize(stream_get_contents(STDIN)); echo $seri-&gt;sections[\"changelog\"];'|elinks -force-html\n</code></pre>\n<p>Explanation</p>\n<ul>\n<li>set wget quiet &amp; query the <span tabindex='0' class='glossary-item-container'>WordPress.org<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WordPress.org</span> <span class='glossary-item-description'>The community site where WordPress code is created and shared by the users. This is where you can download the source code for WordPress core, plugins and themes as well as the central location for community conversations and organization.  <a href=\"https://wordpress.org/\">https://wordpress.org/</a></span></span></span> Plugin <span tabindex='0' class='glossary-item-container'>API<span class='glossary-item-hidden-content'><span class='glossary-item-header'>API</span> <span class='glossary-item-description'>An API or Application Programming Interface is a software intermediary that allows programs to interact with each other and share data in limited, clearly defined ways.</span></span></span></li>\n<li>unserialize with php, <code>stream_get_contents(STDIN)</code> means \u201cget all from <em>stdin</em>\u201c</li>\n<li>echo the changelog part from the API\u2019s reply</li>\n<li>fire up elinks (a console browser) to view the changelog</li>\n</ul>\n<h3>Start wp-cli with ABSPATH in the current dir and under the current dir\u2019s owner</h3>\n<pre><code class=\"language-bash\">#!/bin/bash\n\nsudo -u $(stat . -c %U) -- wp --path=\"$PWD\" \"$@\"\n</code></pre>\n<p>Explanation</p>\n<p>The <code>stat</code> command returns the owner of the current directory, WordPress root.</p>\n<h3>Install and Configure WordPress with WP-CLI</h3>\n<pre><code class=\"language-bash\">wp_install () \n{ \n    wp core download --path=$1;\n    cd $1;\n    read -p 'name the database:' dbname;\n    wp config create --dbname=$dbname --dbuser=root --dbpass=awoods --dbhost=localhost;\n    wp db create;\n    wp core install --prompt\n}\n\n$ source ~/.bashrc\n$ wp_install new-site\n</code></pre>\n<p>Explanation</p>\n<p>Add this function to your ~/.bashrc are reload your shell (or open a new shell).<br>\nYou\u2019ll need to substitute these database credentials with your own.<br>\nWhen you need to create a new WordPress site, call this function and specify the<br>\nname of the directory where you want to create the site. This emulates the<br>\nweb-based install process.</p>\n<h3>List all image <span tabindex='0' class='glossary-item-container'>URL<span class='glossary-item-hidden-content'><span class='glossary-item-header'>URL</span> <span class='glossary-item-description'>A specific web address of a website or web page on the Internet, such as a website\u2019s URL www.wordpress.org</span></span></span>-s in posts</h3>\n<pre><code class=\"language-bash\">wp post list --field=ID|xargs -I % wp post get % --field=post_content|sed -ne 's;.*\\(https\\?\\S\\+\\(jpe\\?g\\|png\\|gif\\)\\).*;\\1;gp'\n</code></pre>\n<p>Explanation</p>\n<ul>\n<li>List all post ID-s</li>\n<li>Get each content (xargs)</li>\n<li>Display only image URL-s (sed)</li>\n</ul>\n<h3>Create a page from a file and flag it with the file name</h3>\n<pre><code class=\"language-bash\">wp post create new_page.html --post_type=page --post_title=\"New Page\" --porcelain | xargs -I % wp post meta add % imported_from new_page.html\n</code></pre>\n<p>Explanation</p>\n<ul>\n<li>Create a page (\u2013porcelain will return only the new post ID)</li>\n<li>Create post <span tabindex='0' class='glossary-item-container'>meta<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Meta</span> <span class='glossary-item-description'>Meta is a term that refers to the inside workings of a group. For us, this is the team that works on internal WordPress sites like WordCamp Central and Make WordPress.</span></span></span> with xargs using \u201c-I %\u201d to signify the placeholder template for the new post ID</li>\n</ul>\n<h3>Change to a certain WordPress installation\u2019s directory from a menu</h3>\n<pre><code class=\"language-bash\">#!/bin/bash\n\nWP_TOP_PATH=\"/home/\"\nMENU_TEXT=\"Choose an installation\"\nGAUGE_TEXT=\"Searching for WordPress\"\n\ndeclare -a MENU\nWPS=\"$(wp --allow-root find \"$WP_TOP_PATH\" --field=version_path)\"\nWP_TOTAL=\"$(wc -l &lt;&lt;&lt; \"$WPS\")\"\nWP_COUNT=\"0\"\n\nwhile read -r WP; do\n    WP_LOCAL=\"${WP%wp-includes/version.php}\"\n\n    NAME=\"$(cd \"$WP_LOCAL\"; sudo -u \"$(stat . -c %U)\" -- wp --no-debug --quiet option get blogname)\"\n    if [ -z \"$NAME\" ]; then\n        NAME=\"(unknown)\"\n    fi\n    MENU+=( \"$WP_LOCAL\" \"$NAME\" )\n\n    echo \"$((++WP_COUNT * 100 / WP_TOTAL))\".\ndone &lt;&lt;&lt; \"$WPS\" &gt; &gt;(whiptail --gauge \"$GAUGE_TEXT\" 7 74 0)\n\nWP_LOCAL=\"$(whiptail --title \"WordPress\" --menu \"$MENU_TEXT\"  $((${#MENU[*]} / 2 + 7)) 74 10 \"${MENU[@]}\" 3&gt;&amp;1 1&gt;&amp;2 2&gt;&amp;3)\"\n\nif [ $? -ne 0 ] || [ ! -d \"$WP_LOCAL\" ]; then\n    echo \"Cannot find '${WP_LOCAL}'\" 1&gt;&amp;2\n    exit 100\nfi\n\necho \"cd ${WP_LOCAL}\"\n</code></pre>\n<p>Explanation</p>\n<ul>\n<li>Needs <code>wp-cli/find-command</code> and <code>whiptail</code></li>\n<li>Find all WordPress installations below <code>$WP_TOP_PATH</code> \u2013 must be run as root</li>\n<li>Display a progress bar while getting <code>blogname</code> of each installation</li>\n<li>Choose one installation from a nice menu and display <code>cd</code> command for it</li>\n</ul>\n<h3>Discard <span tabindex='0' class='glossary-item-container'>header<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Header</span> <span class='glossary-item-description'>The header of your site is typically the first thing people will experience. The masthead or header art located across the top of your page is part of the look and feel of your website. It can influence a visitor\u2019s opinion about your content and you/ your organization\u2019s brand. It may also look different on different screen sizes.</span></span></span> row from a CSV</h3>\n<p>By default, <code>--format=csv</code> includes a header row:</p>\n<pre><code class=\"language-bash\">$ wp user list --format=csv\nID,user_login,display_name,user_email,user_registered,roles\n1,daniel,daniel,daniel@handbuilt.co,\"2022-12-21 23:05:16\",administrator\n</code></pre>\n<p>If you\u2019d like to discard the header row, <code>tail</code> is pretty helpful:</p>\n<pre><code class=\"language-bash\">$ wp user list --format=csv | tail -n +2\n1,daniel,daniel,daniel@handbuilt.co,\"2022-12-21 23:05:16\",administrator\n</code></pre>\n<h3>Sort plugins or themes by certain column(s)</h3>\n<ul>\n<li><strong>Challenge</strong>: wp-cli\u2019s <code>&lt;plugin|theme&gt; list</code> commands have no option by which column(s) to sort.</li>\n<li><strong>Solution</strong>: You can output as <code>--format=csv</code> and then simply pipe into a <span tabindex='0' class='glossary-item-container'>CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>CLI</span> <span class='glossary-item-description'>Command Line Interface. Terminal (Bash) in Mac, Command Prompt in Windows, or WP-CLI for WordPress.</span></span></span> app which has sorting functions built-in.\n<ul>\n<li>E.g. if you want to sort by status and then by name with <a href=\"https://github.com/johnkerl/miller#readme\">miller</a>, short form <code>mlr</code>:\n<p>$ wp plugin list \u2013format=csv | mlr \u2013icsv \u2013opprint sort -f status,name</p>\n</li>\n<li>\n<p>Explanation:</p>\n</li>\n<li>Manpage says: <code>sort -f {comma-separated field names} Lexical ascending</code></li>\n<li>In our example this means: Sort the plugins lexically ascending, first by status, then by name.</li>\n</ul>\n</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18371,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18142",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18142",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18142/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18323,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18142/revisions/18323"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18371"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18142"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

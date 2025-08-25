@@ -1,0 +1,98 @@
+{
+    "id": 18119,
+    "date": "2025-06-12T00:42:40",
+    "date_gmt": "2025-06-12T00:42:40",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/external-resources/"
+    },
+    "modified": "2025-07-01T13:10:42",
+    "modified_gmt": "2025-07-01T13:10:42",
+    "slug": "external-resources",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/external-resources/",
+    "title": {
+        "rendered": "External Resources"
+    },
+    "content": {
+        "rendered": "<h2>Blog posts &amp; tutorials</h2>\n<ul>\n<li><a href=\"https://scribu.net/wordpress/a-command-line-interface-for-wordpress.html\">scribu: A Command-Line Interface for WordPress</a></li>\n<li><a href=\"https://madewithlove.com/blog/wp-cli-wordpress-command-line-tools/\">madewithlove: WP-CLI: WordPress Command Line Tools</a></li>\n<li><a href=\"https://halfelf.org/2012/command-line-wp/\">Mika Epstein: Command Line WP</a></li>\n<li><a href=\"https://blog.teamtreehouse.com/tame-wordpress-from-the-command-line-with-wp-cli\">Treehouse Blog: Tame WordPress from the Command Line with wp-cli</a></li>\n<li><a href=\"https://mattwiebe.wordpress.com/2014/01/15/why-you-should-develop-plugins-with-wp-cli/\">Matt Wiebe: Why You Should Develop Plugins With wp-cli</a></li>\n<li><a href=\"https://torquemag.io/using-wp-cli-to-set-up-a-test-version-of-your-site/\">Torque: Using WP CLI to Set Up a Test Version of Your Site</a></li>\n<li><a href=\"https://guides.wp-bullet.com/category/wp-cli/\">WP Bullet Guides: Useful Bash Scripts Utilizing WP-CLI</a> </li>\n</ul>\n<h2>Slides</h2>\n<ul>\n<li><a href=\"https://speakerdeck.com/francescolaffi/wpday-bologna-2013-wp-cli\">Francesco Laffi: WPday Bologna 2013: wp-cli</a></li>\n<li><a href=\"https://docs.google.com/presentation/d/1iDYvmM_52ww_iB4aGMAYL_KJ1pnElAVm40c7IrZtyz8/edit\">Michael Bastos: Command Line WordPress Step by Step</a></li>\n<li><a href=\"https://www.slideshare.net/slideshow/nerds-2014wpcli/39052931/\">Kelly Dwan: Importing (any!) Content with WP-CLI</a></li>\n<li><a href=\"https://slid.es/jmslbam/wp-cli-wp-meetup010-25-nov-2013\">Jaime Martinez: Simplify your day to day tasks with WP-CLI</a></li>\n</ul>\n<h2>Videos</h2>\n<ul>\n<li><a href=\"https://wordpress.tv/2013/02/23/cristi-burka-command-line-learnings-for-make-benefit-glorious-nation-of-wordpress/\">scribu: Command Line Learnings For Make Benefit Glorious Nation Of WordPress</a></li>\n<li><a href=\"https://wordpress.tv/2013/08/06/mike-schroder-magical-wordpress-management-using-wp-cli/\">Mike Schroder: Magical WordPress Management using WP-CLI</a></li>\n<li><a href=\"https://wordpress.tv/2012/08/21/daniel-bachhuber-wordpress-at-the-command-line/\">Daniel Bachhuber: WordPress at the Command Line</a></li>\n<li><a href=\"https://wordpress.tv/2016/03/26/aj-morris-using-wp-cli-to-create-your-own-managed-wordpress-hosting/\">AJ Morris: Managing WordPress from the Command Line</a></li>\n<li><a href=\"https://wordpress.tv/2015/09/15/shawn-hooper-wp-cli-save-time-managing-command-line/\">Shawn Hooper: WP-CLI \u2013 Save Time by Managing WordPress from the Command Line</a></li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18370,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18119",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18119",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18119/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18346,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18119/revisions/18346"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18370"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18119"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

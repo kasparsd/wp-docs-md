@@ -1,0 +1,91 @@
+{
+    "id": 18155,
+    "date": "2025-06-12T00:42:43",
+    "date_gmt": "2025-06-12T00:42:43",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/internal-api/wp-cli-get-php-binary/"
+    },
+    "modified": "2025-07-01T12:55:36",
+    "modified_gmt": "2025-07-01T12:55:36",
+    "slug": "wp-cli-get-php-binary",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/internal-api/wp-cli-get-php-binary/",
+    "title": {
+        "rendered": "WP_CLI::get_php_binary()"
+    },
+    "content": {
+        "rendered": "<p>Get the path to the <span tabindex='0' class='glossary-item-container'>PHP<span class='glossary-item-hidden-content'><span class='glossary-item-header'>PHP</span> <span class='glossary-item-description'>PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. <a href=\"https://www.php.net/manual/en/preface.php\">https://www.php.net/manual/en/preface.php</a>.</span></span></span> binary used when executing <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span>.</p>\n<hr>\n<h2>Usage</h2>\n<pre><code>WP_CLI::get_php_binary()\n</code></pre>\n<div>\n<strong>@return</strong> (string) \n</div>\n<hr>\n<h2>Notes</h2>\n<p>Environment values permit specific binaries to be indicated.</p>\n<p>Note: moved to Utils, left for BC.</p>\n<p><em>Internal <span tabindex='0' class='glossary-item-container'>API<span class='glossary-item-hidden-content'><span class='glossary-item-header'>API</span> <span class='glossary-item-description'>An API or Application Programming Interface is a software intermediary that allows programs to interact with each other and share data in limited, clearly defined ways.</span></span></span> documentation is generated from the WP-CLI codebase on every release. To suggest improvements, please submit a pull request.</em></p>\n<hr>\n<h2>Related</h2>\n<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-get-home-dir/\">WP_CLI\\Utils\\get_home_dir()</a></strong> \u2013 Get the home directory.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-trailingslashit/\">WP_CLI\\Utils\\trailingslashit()</a></strong> \u2013 Appends a trailing slash.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-normalize-path/\">WP_CLI\\Utils\\normalize_path()</a></strong> \u2013 Normalize a filesystem path.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-get-temp-dir/\">WP_CLI\\Utils\\get_temp_dir()</a></strong> \u2013 Get the system\u2019s temp directory. Warns user if it isn\u2019t writable.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-get-php-binary/\">WP_CLI\\Utils\\get_php_binary()</a></strong> \u2013 Get the path to the PHP binary used when executing WP-CLI.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 18132,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18155",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18155",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18155/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18310,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18155/revisions/18310"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18132"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18155"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

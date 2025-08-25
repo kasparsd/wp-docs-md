@@ -1,0 +1,91 @@
+{
+    "id": 18163,
+    "date": "2025-06-12T00:42:43",
+    "date_gmt": "2025-06-12T00:42:43",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/internal-api/wp-cli-run-command/"
+    },
+    "modified": "2025-07-01T12:55:34",
+    "modified_gmt": "2025-07-01T12:55:34",
+    "slug": "wp-cli-run-command",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/internal-api/wp-cli-run-command/",
+    "title": {
+        "rendered": "WP_CLI::run_command()"
+    },
+    "content": {
+        "rendered": "<p>Run a given command within the current process using the same global parameters.</p>\n<hr>\n<h2>Usage</h2>\n<pre><code>WP_CLI::run_command( $args, $assoc_args = [] )\n</code></pre>\n<div>\n<strong>$args</strong> (array) Positional arguments including command name.<br>\n<strong>$assoc_args</strong> (array) \n</div>\n<hr>\n<h2>Notes</h2>\n<p>Use <code>WP_CLI::runcommand()</code> instead, which is easier to use and works better.</p>\n<p>To run a command using a new process with the same global parameters,<br>\nuse WP_CLI::launch_self(). To run a command using a new process with<br>\ndifferent global parameters, use WP_CLI::launch().</p>\n<pre><code>ob_start();\nWP_CLI::run_command( array( 'cli', 'cmd-dump' ) );\n$ret = ob_get_clean();\n</code></pre>\n<p><em>Internal <span tabindex='0' class='glossary-item-container'>API<span class='glossary-item-hidden-content'><span class='glossary-item-header'>API</span> <span class='glossary-item-description'>An API or Application Programming Interface is a software intermediary that allows programs to interact with each other and share data in limited, clearly defined ways.</span></span></span> documentation is generated from the <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> codebase on every release. To suggest improvements, please submit a pull request.</em></p>\n<hr>\n<h2>Related</h2>\n<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-launch/\">WP_CLI::launch()</a></strong> \u2013 Launch an arbitrary external process that takes over I/O.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-launch-self/\">WP_CLI::launch_self()</a></strong> \u2013 Run a WP-CLI command in a new process reusing the current runtime arguments.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-runcommand/\">WP_CLI::runcommand()</a></strong> \u2013 Run a WP-CLI command.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 18132,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18163",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18163",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18163/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18302,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18163/revisions/18302"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18132"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18163"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

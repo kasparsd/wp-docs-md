@@ -1,0 +1,91 @@
+{
+    "id": 18147,
+    "date": "2025-06-12T00:42:42",
+    "date_gmt": "2025-06-12T00:42:42",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/internal-api/wp-cli-add-wp-hook/"
+    },
+    "modified": "2025-07-01T12:55:37",
+    "modified_gmt": "2025-07-01T12:55:37",
+    "slug": "wp-cli-add-wp-hook",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/internal-api/wp-cli-add-wp-hook/",
+    "title": {
+        "rendered": "WP_CLI::add_wp_hook()"
+    },
+    "content": {
+        "rendered": "<p>Add a callback to a WordPress action or <span tabindex='0' class='glossary-item-container'>filter<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Filter</span> <span class='glossary-item-description'>Filters are one of the two types of Hooks <a href=\"https://codex.wordpress.org/Plugin_API/Hooks\">https://codex.wordpress.org/Plugin_API/Hooks</a>. They provide a way for functions to modify data of other functions. They are the counterpart to Actions. Unlike Actions, filters are meant to work in an isolated manner, and should never have side effects such as affecting global variables and output.</span></span></span>.</p>\n<hr>\n<h2>Usage</h2>\n<pre><code>WP_CLI::add_wp_hook( $tag, $function_to_add, $priority = 10, $accepted_args = 1 )\n</code></pre>\n<div>\n<strong>$tag</strong> (string) Named WordPress action or filter.<br>\n<strong>$function_to_add</strong> (mixed) Callable to execute when the action or filter is evaluated.<br>\n<strong>$priority</strong> (integer) Priority to add the callback as.<br>\n<strong>$accepted_args</strong> (integer) Number of arguments to pass to callback.<br>\n<strong>@return</strong> (true) \n</div>\n<hr>\n<h2>Notes</h2>\n<p><code>add_action()</code> without needing access to <code>add_action()</code>. If WordPress is<br>\nalready loaded though, you should use <code>add_action()</code> (and <code>add_filter()</code>)<br>\ninstead.</p>\n<p><em>Internal <span tabindex='0' class='glossary-item-container'>API<span class='glossary-item-hidden-content'><span class='glossary-item-header'>API</span> <span class='glossary-item-description'>An API or Application Programming Interface is a software intermediary that allows programs to interact with each other and share data in limited, clearly defined ways.</span></span></span> documentation is generated from the <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> codebase on every release. To suggest improvements, please submit a pull request.</em></p>\n<hr>\n<h2>Related</h2>\n<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-add-hook/\">WP_CLI::add_hook()</a></strong> \u2013 Schedule a callback to be executed at a certain point.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-do-hook/\">WP_CLI::do_hook()</a></strong> \u2013 Execute callbacks registered to a given hook.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-add-command/\">WP_CLI::add_command()</a></strong> \u2013 Register a command to WP-CLI.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 18132,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18147",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18147",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18147/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18318,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18147/revisions/18318"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18132"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18147"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

@@ -1,0 +1,98 @@
+{
+    "id": 18109,
+    "date": "2025-06-12T00:42:40",
+    "date_gmt": "2025-06-12T00:42:40",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/contributor-day/"
+    },
+    "modified": "2025-07-01T13:13:24",
+    "modified_gmt": "2025-07-01T13:13:24",
+    "slug": "contributor-day",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/contributions/contributor-day/",
+    "title": {
+        "rendered": "WordCamp Contributor Day"
+    },
+    "content": {
+        "rendered": "<p>Welcome to <span tabindex='0' class='glossary-item-container'>WordCamp<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WordCamp</span> <span class='glossary-item-description'>WordCamps are casual, locally-organized conferences covering everything related to WordPress. They're one of the places where the WordPress community comes together to teach one another what they\u2019ve learned throughout the year and share the joy. <a href=\"https://central.wordcamp.org/about/\">Learn more</a>.</span></span></span> <span tabindex='0' class='glossary-item-container'>Contributor Day<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Contributor Day</span> <span class='glossary-item-description'>Contributor Days are standalone days, frequently held before or after WordCamps but they can also happen at any time. They are events where people get together to work on various areas of <a href=\"https://make.wordpress.org/\">https://make.wordpress.org/</a> There are many teams that people can participate in, each with a different focus. <a href=\"https://2017.us.wordcamp.org/contributor-day/\">https://2017.us.wordcamp.org/contributor-day/</a> <a href=\"https://make.wordpress.org/support/handbook/getting-started/getting-started-at-a-contributor-day/\">https://make.wordpress.org/support/handbook/getting-started/getting-started-at-a-contributor-day/</a>.</span></span></span>! We appreciate you sharing your time with <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span>.</p>\n<p>We\u2019d love to help you submit at least one pull request, so we put together this guide to make it as straightforward as possible. We\u2019re here to support you however we can.</p>\n<p>When you submit your pull request, add `Related https://github.com/wp-cli/wp-cli/issues/5985` so we can see all pull requests created during the day. We\u2019ll give these some special promotion in the next release notes.</p>\n<p>Your table leads for the day are: <a href=\"https://github.com/schlessera\">schlessera</a>, <a href=\"https://github.com/BrianHenryIE\">BrianHenryIE</a></p>\n<p>A few seasoned WP-CLI contributors are also helping out: TBD</p>\n<h2>Getting Started</h2>\n<p>If you normally use WP-CLI on your web host or via Brew, you\u2019re most likely using the Phar executable. The Phar executable is the \u201cbuilt\u201d, single-file version of WP-CLI. It\u2019s compiled from a couple dozen repositories in the WP-CLI <span tabindex='0' class='glossary-item-container'>GitHub<span class='glossary-item-hidden-content'><span class='glossary-item-header'>GitHub</span> <span class='glossary-item-description'>GitHub is a website that offers online implementation of git repositories that can easily be shared, copied and modified by other developers. Public repositories are free to host, private repositories require a paid subscription. GitHub introduced the concept of the \u2018pull request\u2019 where code changes done in branches by contributors can be reviewed and discussed before being merged be the repository owner.  <a href=\"https://github.com/\">https://github.com/</a></span></span></span> organization, so modifying WP-CLI requires working amongst those repositories.</p>\n<p>Before you can work on WP-CLI, you\u2019ll need to first make sure you have <span tabindex='0' class='glossary-item-container'>PHP<span class='glossary-item-hidden-content'><span class='glossary-item-header'>PHP</span> <span class='glossary-item-description'>PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. <a href=\"https://www.php.net/manual/en/preface.php\">https://www.php.net/manual/en/preface.php</a>.</span></span></span> and a functioning <span tabindex='0' class='glossary-item-container'>MySQL<span class='glossary-item-hidden-content'><span class='glossary-item-header'>MySQL</span> <span class='glossary-item-description'>MySQL is a relational database management system. A database is a structured collection of data where content, configuration and other options are stored. <a href=\"https://www.mysql.com/\">https://www.mysql.com/</a>.</span></span></span> or MariaDB server. Once those prerequisites are met, install the <a href=\"https://github.com/wp-cli/wp-cli-dev\"><code>wp-cli-dev</code> development environment</a> to start contributing:</p>\n<pre><code>git clone https://github.com/wp-cli/wp-cli-dev\ncd wp-cli-dev\ncomposer install\n</code></pre>\n<p>The <code>wp-cli-dev</code> installation process clones all of WP-CLI\u2019s repositories to your local machine. After it\u2019s complete, you\u2019ll be able to make changes in whichever repository you\u2019d like. However, you\u2019ll need to fork the repository and add it as a remote in order to push your feature branch.</p>\n<p>All WP-CLI pull requests are expected to have tests. See <a href=\"https://make.wordpress.org/cli/handbook/contributions/pull-requests/#running-and-writing-tests\">running and writing tests</a> for a complete introduction.</p>\n<h2>Suggested Tickets</h2>\n<p>To help you be successful during Contributor Day, we curated a list of reasonably approachable and actionable issues. Feel free to comment directly on the issue if you plan to work on it. We don\u2019t usually assign issues, so no need to worry about that.</p>\n<p><strong>New contributors</strong></p>\n<ul>\n<li><a href=\"https://github.com/wp-cli/config-command/issues/180\">\u201cwp config create\u201d generates wrong DB_PASSWORD in wp-config.php when db password has \u201c</a></li>\n<li><a href=\"https://github.com/wp-cli/media-command/issues/146\">Import into specific directory/location</a></li>\n<li><a href=\"https://github.com/wp-cli/checksum-command/issues/64\">Add \u2013exclude=, argument to skip files</a></li>\n<li><a href=\"https://github.com/wp-cli/language-command/issues/84\">Not possible to install translations for en_US</a></li>\n<li><a href=\"https://github.com/wp-cli/cache-command/issues/68\">Support WP-Stash in \u2018wp cache type\u2019</a></li>\n<li><a href=\"https://github.com/wp-cli/media-command/issues/95\">Add reason for skipping regeneration</a></li>\n<li><a href=\"https://github.com/wp-cli/export-command/issues/42\">wp export is not exporting term meta data</a></li>\n</ul>\n<p><strong>Seasoned contributors</strong></p>\n<ul>\n<li><a href=\"https://github.com/wp-cli/ideas/issues/188\">Add commands to export and import SQLite databases</a></li>\n<li><a href=\"https://github.com/wp-cli/.github/issues/94\">SQLite Compatibility (multiple issues)</a></li>\n<li><a href=\"https://github.com/wp-cli/media-command/issues/196\">Regenerating a single image size (re-)generates auto-scaled big images &amp; auto-rotated images</a></li>\n<li><a href=\"https://github.com/wp-cli/cron-command/issues/27\">wp cron event run \u2013due-now doesn\u2019t respect doing_cron transient</a></li>\n<li><a href=\"https://github.com/wp-cli/wp-cli/issues/5815\">Update command doesn\u2019t escape php_binary path, update fails when path has spaces</a></li>\n<li><a href=\"https://github.com/wp-cli/wp-cli/issues/5541\">Associative argument contains double quotes if the command is called with WP_CLI::runcommand()</a></li>\n</ul>\n<p>You\u2019re obviously welcome to work on any other issue you\u2019d like too! Contributor Day can be a good opportunity to discuss trickier issues and brainstorm approaches.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18369,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18109",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18109",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18109/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18356,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18109/revisions/18356"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18109"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

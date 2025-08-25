@@ -1,0 +1,98 @@
+{
+    "id": 18136,
+    "date": "2025-06-12T00:42:42",
+    "date_gmt": "2025-06-12T00:42:42",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/quick-start/"
+    },
+    "modified": "2025-07-01T13:12:35",
+    "modified_gmt": "2025-07-01T13:12:35",
+    "slug": "quick-start",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/quick-start/",
+    "title": {
+        "rendered": "Quick Start"
+    },
+    "content": {
+        "rendered": "<p>Congratulations! You\u2019ve <a href=\"https://make.wordpress.org/cli/handbook/installing/\">installed WP-CLI</a> for the first time, and are ready to level-up your use of WordPress. This page contains a brief introduction to <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> with some example usage.</p>\n<h2>Introduction</h2>\n<p>WP-CLI is a command line interface for WordPress. The project\u2019s goal is to offer a complete alternative to the WordPress admin; for any action you might want to perform in the WordPress admin, there should be an equivalent WP-CLI command.</p>\n<p>For instance, because you can install a <span tabindex='0' class='glossary-item-container'>plugin<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Plugin</span> <span class='glossary-item-description'>A plugin is a piece of software containing a group of functions that can be added to a WordPress website. They can extend functionality or add new features to your WordPress websites. WordPress plugins are written in the PHP programming language and integrate seamlessly with WordPress. These can be free in the WordPress.org Plugin Directory https://wordpress.org/plugins/ or can be cost-based plugin from a third-party</span></span></span> from the WordPress admin, you can also <a href=\"https://developer.wordpress.org/cli/commands/plugin/install/\">install a plugin</a> with WP-CLI:</p>\n<pre><code>$ wp plugin install akismet\nInstalling Akismet (3.1.8)\nDownloading install package from https://downloads.wordpress.org/plugin/akismet.3.1.8.zip...\nUnpacking the package...\nInstalling the plugin...\nPlugin installed successfully.\n</code></pre>\n<p>And, because you can also activate plugins from the WordPress admin, you can <a href=\"https://developer.wordpress.org/cli/commands/plugin/activate/\">activate a plugin</a> with WP-CLI:</p>\n<pre><code>$ wp plugin activate akismet\nSuccess: Plugin 'akismet' activated.\n</code></pre>\n<p>One key difference between using the WordPress admin and WP-CLI: performing any action takes many fewer clicks. As you become more familiar with the command line, you\u2019ll notice performing a given task with WP-CLI is generally much faster than performing the same task through the WordPress admin. Investing time upfront into learning how to better use WP-CLI pays dividends in the long term.</p>\n<h2>Common Terms</h2>\n<p>Throughout your usage of WP-CLI, you\u2019ll hear certain terms used over and over again.</p>\n<p>For instance, a <em>command</em> is an atomic unit of WP-CLI functionality. <code>wp plugin install</code> is one such command, as is <code>wp plugin activate</code>. Commands represent a name (e.g. \u2018plugin install\u2019) and a callback, and are registered with <code>WP_CLI::add_command()</code> (<a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-add-command/\">doc</a>).</p>\n<p>The <em>synopsis</em> defines which <em>positional</em> and <em>associative</em> arguments a command accepts. Let\u2019s take a look at the synopsis for <code>wp plugin install</code>:</p>\n<pre><code>$ wp plugin install\nusage: wp plugin install &lt;plugin|zip|url&gt;... [--version=&lt;version&gt;] [--force] [--activate] [--activate-network]\n</code></pre>\n<p>In this example, <code>&lt;plugin|zip|url&gt;...</code> is the accepted <em>positional</em> argument. In fact, <code>wp plugin install</code> accepts the same positional argument (the slug, ZIP, or <span tabindex='0' class='glossary-item-container'>URL<span class='glossary-item-hidden-content'><span class='glossary-item-header'>URL</span> <span class='glossary-item-description'>A specific web address of a website or web page on the Internet, such as a website\u2019s URL www.wordpress.org</span></span></span> of a plugin to install) multiple times. <code>[--version=&lt;version&gt;]</code> is one of the accepted <em>associative</em> arguments. It\u2019s used to denote the version of the plugin to install. Notice, too, the square brackets around the argument definition; square brackets mean the argument is optional.</p>\n<p>WP-CLI also has a <a href=\"https://make.wordpress.org/cli/handbook/config/\">series of <em>global</em> arguments</a> which work with all commands. For instance, including <code>--debug</code> means your command execution will display all <span tabindex='0' class='glossary-item-container'>PHP<span class='glossary-item-hidden-content'><span class='glossary-item-header'>PHP</span> <span class='glossary-item-description'>PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. <a href=\"https://www.php.net/manual/en/preface.php\">https://www.php.net/manual/en/preface.php</a>.</span></span></span> errors, and add extra verbosity to the WP-CLI bootstrap process.</p>\n<h2>Practical Examples</h2>\n<p>Ready to dive in? Here are some common examples of how WP-CLI is used:</p>\n<p><strong>Download and install WordPress in seconds</strong></p>\n<ol>\n<li>Download the latest version of WordPress with <code>wp core download</code> (<a href=\"https://developer.wordpress.org/cli/commands/core/download/\">doc</a>).</li>\n</ol>\n<pre><code>$ wp core download --path=wpclidemo.dev\nCreating directory '/srv/www/wpclidemo.dev/'.\nDownloading WordPress 4.6.1 (en_US)...\nUsing cached file '/home/vagrant/.wp-cli/cache/core/wordpress-4.6.1-en_US.tar.gz'...\nSuccess: WordPress downloaded.\n</code></pre>\n<ol>\n<li>Create a new wp-config.php file with <code>wp config create</code> (<a href=\"https://developer.wordpress.org/cli/commands/config/create/\">doc</a>).</li>\n</ol>\n<pre><code>$ cd wpclidemo.dev\n$ wp config create --dbname=wpclidemo --dbuser=root --prompt=dbpass\n1/10 [--dbpass=&lt;dbpass&gt;]:\nSuccess: Generated 'wp-config.php' file.\n</code></pre>\n<ol>\n<li>Create the database based on wp-config.php with <code>wp db create</code> (<a href=\"https://developer.wordpress.org/cli/commands/db/create/\">doc</a>).</li>\n</ol>\n<pre><code>$ wp db create\nSuccess: Database created.\n</code></pre>\n<ol>\n<li>Install WordPress with <code>wp core install</code> (<a href=\"https://developer.wordpress.org/cli/commands/core/install/\">doc</a>).</li>\n</ol>\n<pre><code>$ wp core install --url=wpclidemo.dev --title=\"WP-CLI\" --admin_user=wpcli --admin_password=wpcli --admin_email=info@wp-cli.org\nSuccess: WordPress installed successfully.\n</code></pre>\n<p>That\u2019s it!</p>\n<p><strong>Update plugins to their latest version</strong></p>\n<p>Use <code>wp plugin update --all</code> (<a href=\"https://developer.wordpress.org/cli/commands/plugin/update/\">doc</a>) to update all plugins to their latest version.</p>\n<pre><code>$ wp plugin update --all\nEnabling Maintenance mode...\nDownloading update from https://downloads.wordpress.org/plugin/akismet.3.1.11.zip...\nUnpacking the update...\nInstalling the latest version...\nRemoving the old version of the plugin...\nPlugin updated successfully.\nDownloading update from https://downloads.wordpress.org/plugin/nginx-champuru.3.2.0.zip...\nUnpacking the update...\nInstalling the latest version...\nRemoving the old version of the plugin...\nPlugin updated successfully.\nDisabling Maintenance mode...\nSuccess: Updated 2/2 plugins.\n+------------------------+-------------+-------------+---------+\n| name                   | old_version | new_version | status  |\n+------------------------+-------------+-------------+---------+\n| akismet                | 3.1.3       | 3.1.11      | Updated |\n| nginx-cache-controller | 3.1.1       | 3.2.0       | Updated |\n+------------------------+-------------+-------------+---------+\n</code></pre>\n<p><strong>Add a user as a super-admin</strong></p>\n<p>On <span tabindex='0' class='glossary-item-container'>multisite<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Multisite</span> <span class='glossary-item-description'>Multisite is a WordPress feature which allows users to create a network of sites on a single WordPress installation. Available since WordPress version 3.0, Multisite is a continuation of WPMU or WordPress Multiuser project. WordPress MultiUser project was discontinued and its features were included into WordPress core.<a href=\"https://codex.wordpress.org/Create_A_Network\">https://codex.wordpress.org/Create_A_Network</a>.</span></span></span>, use <code>wp super-admin add</code> (<a href=\"https://developer.wordpress.org/cli/commands/super-admin/add/\">doc</a>) to grant super admin capabilities to an existing user.</p>\n<pre><code>$ wp super-admin add wpcli\nSuccess: Granted super-admin capabilities.\n</code></pre>\n<p><strong>Regenerate thumbnails</strong></p>\n<p>If you\u2019ve added or changed an image size registered with <code>add_image_size()</code>, you may want to use <code>wp media regenerate</code> (<a href=\"https://developer.wordpress.org/cli/commands/media/regenerate/\">doc</a>) so your theme displays the correct image size.</p>\n<pre><code>wp media regenerate --yes\nFound 1 image to regenerate.\n1/1 Regenerated thumbnails for \"charlie-gpa\" (ID 4).\nSuccess: Finished regenerating the image.\n</code></pre>\n<p><strong>Search and replace URLs</strong></p>\n<p>If you\u2019re moving a database from one domain to another, <code>wp search-replace</code> (<a href=\"https://developer.wordpress.org/cli/commands/search-replace/\">doc</a>) makes it easy to update all URL references in your database.</p>\n<p>To see which links will be replaced in your database, use the \u2013dry-run flag:</p>\n<pre><code>wp search-replace 'http://oldsite.com' 'http://newsite.com' --dry-run\n</code></pre>\n<p>When ready to replace the links, run:</p>\n<pre><code>wp search-replace 'http://oldsite.com' 'http://newsite.com'\n</code></pre>\n<p>Wondering what\u2019s next? Browse through <a href=\"https://developer.wordpress.org/cli/commands/\">all of WP-CLI\u2019s commands</a> to explore your new world. For more detailed information about creating custom commands, visit the <a href=\"https://make.wordpress.org/cli/handbook/guides/commands-cookbook/\">WP-CLI Commands Cookbook</a>. Or, catch up with <a href=\"https://make.wordpress.org/cli/handbook/shell-friends/\">shell friends</a> to learn about helpful command line utilities.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18370,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18136",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18136",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18136/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18329,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18136/revisions/18329"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18370"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18136"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

@@ -1,0 +1,92 @@
+{
+    "id": 18369,
+    "date": "2025-07-01T13:05:18",
+    "date_gmt": "2025-07-01T13:05:18",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/contributions/"
+    },
+    "modified": "2025-08-25T16:55:19",
+    "modified_gmt": "2025-08-25T16:55:19",
+    "slug": "contributions",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/contributions/",
+    "title": {
+        "rendered": "Contributions"
+    },
+    "content": {
+        "rendered": "<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/contributions/bug-reports/\">Bug reports</a></strong> \u2013 Help ensure your issue is resolved in a timely manner.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/contributions/contributing/\">Contributing</a></strong> \u2013 An introduction to the contributing process.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/contributions/contributor-day/\">WordCamp Contributor Day</a></strong> \u2013 Quick-start guide for <span tabindex='0' class='glossary-item-container'>WordCamp<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WordCamp</span> <span class='glossary-item-description'>WordCamps are casual, locally-organized conferences covering everything related to WordPress. They're one of the places where the WordPress community comes together to teach one another what they\u2019ve learned throughout the year and share the joy. <a href=\"https://central.wordcamp.org/about/\">Learn more</a>.</span></span></span> Contributor Days.</li>\n<li><strong><a href=\"https://github.com/wp-cli/ideas\">Ideas</a></strong> \u2013 Up-vote existing ideas or submit your own.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/contributions/governance/\">Governance</a></strong> \u2013 Summary of those behind <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span>.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/contributions/implementation-details/\">Implementation details</a></strong> \u2013 Catalog of historical design decisions.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/contributions/philosophy/\">Philosophy</a></strong> \u2013 Guidelines which inform project scope, command organization, and behavior.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/contributions/pull-requests/\">Pull requests</a></strong> \u2013 Submit your first bug fix or new feature.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/contributions/release-checklist/\">Release checklist</a></strong> \u2013 Tasks performed during the process of tagging a release.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/contributions/roadmap/\">Roadmap</a></strong> \u2013 Where WP-CLI is going in the future.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/contributions/code-review/\">Code Review</a></strong> \u2013 Quality Assurance on WP-CLI</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/contributions/committers-credo/\">Committers credo</a></strong> \u2013 Product quality, Stellar judgement, Consistent participation</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/contributions/repository-management/\">Repository Management</a></strong> \u2013 Naming, Versions, Milestones, Labels</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 0,
+    "menu_order": 1,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18369",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18374,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369/revisions/18374"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18369"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

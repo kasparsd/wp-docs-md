@@ -1,0 +1,91 @@
+{
+    "id": 18230,
+    "date": "2025-06-12T00:42:48",
+    "date_gmt": "2025-06-12T00:42:48",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/behat-steps/when-i-run-try-from/"
+    },
+    "modified": "2025-07-01T12:55:19",
+    "modified_gmt": "2025-07-01T12:55:19",
+    "slug": "when-i-run-try-from",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/behat-steps/when-i-run-try-from/",
+    "title": {
+        "rendered": "When /^I (run|try) `([^`]+)` from &#8216;([^\\s]+)&#8217;$/"
+    },
+    "content": {
+        "rendered": "<p>Run or try a given command in a subdirectory.</p>\n<hr>\n<h2>Usage</h2>\n<p><code>run</code> expects an exit code 0, whereas <code>try</code> allows for non-zero exit codes.</p>\n<pre><code>Scenario: My example scenario\n  When I run `wp core is-installed`\n  Then STDOUT should be empty\n\n  When I run `wp core is-installed` from 'foo/wp-content'\n  Then STDOUT should be empty\n</code></pre>\n<p><em>Behat steps documentation is generated from the <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> codebase on every release. To suggest improvements, please submit a pull request.</em></p>\n<hr>\n<h2>Related</h2>\n<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/when-i-launch-in-the-background/\">When /^I launch in the background `([^`]+)`$/</a></strong> \u2013 Launch a given command in the background.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/when-i-run-try/\">When /^I (run|try) `([^`]+)`$/</a></strong> \u2013 Run or try a given command.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/when-i-run-try-the-previous-command-again/\">When /^I (run|try) the previous command again$/</a></strong> \u2013 Run or try the previous command again.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 18101,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18230",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18230",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18230/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18235,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18230/revisions/18235"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18101"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18230"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

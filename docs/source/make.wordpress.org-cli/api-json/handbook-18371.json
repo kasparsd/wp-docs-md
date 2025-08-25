@@ -1,0 +1,92 @@
+{
+    "id": 18371,
+    "date": "2025-07-01T13:05:18",
+    "date_gmt": "2025-07-01T13:05:18",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/references/"
+    },
+    "modified": "2025-08-25T16:55:19",
+    "modified_gmt": "2025-08-25T16:55:19",
+    "slug": "references",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/",
+    "title": {
+        "rendered": "References"
+    },
+    "content": {
+        "rendered": "<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/references/config/\">Global parameters</a></strong> \u2013 Variables defining how a command is executed, including which WordPress user the command is run as and which WordPress instance the command is run against.</li>\n<li><strong><a href=\"https://developer.wordpress.org/cli/commands/\">Built-in commands</a></strong> \u2013 Commands included in every copy of <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span>.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/references/internal-api/\">Internal API</a></strong> \u2013 Stable utilities considered safe to use in community commands.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/references/documentation-standards/\">Documentation standards</a></strong> \u2013 Standards for annotating WP-CLI commands.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/references/hosting-companies/\">Hosting companies</a></strong> \u2013 List of hosting companies where WP-CLI is installed by default.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/references/shell-friends/\">Shell friends</a></strong> \u2013 Helpful shortcuts for bash and zsh.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/references/tools/\">Integrated tools</a></strong> \u2013 Plugins, wrappers, and other projects that integrate with WP-CLI in some form.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 0,
+    "menu_order": 4,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18371",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18371",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18371/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18372,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18371/revisions/18372"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18371"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

@@ -1,0 +1,98 @@
+{
+    "id": 18117,
+    "date": "2025-06-12T00:42:40",
+    "date_gmt": "2025-06-12T00:42:40",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/doctor/"
+    },
+    "modified": "2025-07-01T13:16:07",
+    "modified_gmt": "2025-07-01T13:16:07",
+    "slug": "doctor",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/doctor/",
+    "title": {
+        "rendered": "Doctor Guides"
+    },
+    "content": {
+        "rendered": "<p>Here are some helpful guides for using <code>wp doctor</code>:</p>\n<ul>\n<li><a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-default-checks/\">Default doctor diagnostic checks</a></li>\n<li><a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-customize-config/\">Customize doctor diagnostic checks</a></li>\n<li><a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-write-custom-check/\">Write a custom check to perform an arbitrary assertion</a></li>\n<li><a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-check-file-contents/\">Write a check for verifying contents of WordPress files</a></li>\n<li><a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-check-option-value/\">Write a check for asserting the value of a given option</a></li>\n<li><a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-check-constant-value/\">Write a check for asserting the value of a given constant</a></li>\n<li><a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-check-plugin-status/\">Check status of a given plugin</a></li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18370,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18117",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18117",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18117/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18348,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18117/revisions/18348"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18370"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18117"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

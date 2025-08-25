@@ -1,0 +1,98 @@
+{
+    "id": 18137,
+    "date": "2025-06-12T00:42:42",
+    "date_gmt": "2025-06-12T00:42:42",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/release-checklist/"
+    },
+    "modified": "2025-07-01T13:14:07",
+    "modified_gmt": "2025-07-01T13:14:07",
+    "slug": "release-checklist",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/contributions/release-checklist/",
+    "title": {
+        "rendered": "Release Checklist"
+    },
+    "content": {
+        "rendered": "<p>There are two different release checklists available from within the <a href=\"https://github.com/wp-cli/wp-cli\"><code>wp-cli/wp-cli</code><br>\n</a> repository:</p>\n<ul>\n<li>Generate a <a href=\"https://github.com/wp-cli/wp-cli/issues/new?assignees=schlessera&amp;labels=i%3A+scope%3Adistribution&amp;template=4-REGULAR_RELEASE_CHECKLIST.md&amp;title=Release+checklist+for+v2.x.x\">\ud83d\ude80 Regular Release Checklist</a> \u2013 applies to major (2.x.x) and minor (x.1.x) releases.</li>\n<li>Generate a <a href=\"https://github.com/wp-cli/wp-cli/issues/new?assignees=schlessera&amp;labels=i%3A+scope%3Adistribution&amp;template=5-PATCH_RELEASE_CHECKLIST.md&amp;title=Release+checklist+for+v2.x.x\">\ud83d\udd27 Patch Release Checklist</a> \u2013 applies to patch (x.x.1) releases only.</li>\n</ul>\n<p>As a first step for initiating a release process, the corresponding checklist should be generated and added to the milestone it relates to.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18369,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18137",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18137",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18137/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18328,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18137/revisions/18328"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18137"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

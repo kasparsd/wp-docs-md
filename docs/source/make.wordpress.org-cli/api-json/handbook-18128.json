@@ -1,0 +1,92 @@
+{
+    "id": 18128,
+    "date": "2025-06-12T00:42:41",
+    "date_gmt": "2025-06-12T00:42:41",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/how-to/"
+    },
+    "modified": "2025-08-25T16:55:32",
+    "modified_gmt": "2025-08-25T16:55:32",
+    "slug": "how-to",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/how-to/",
+    "title": {
+        "rendered": "How to WP-CLI"
+    },
+    "content": {
+        "rendered": "<h2>Introduction</h2>\n<p>Using <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span>, you can perform specific tasks using the command line instead of accessing the WordPress admin panel. In the following section, we will cover step by step some of these<br>\ntasks.</p>\n<ul>\n<li>\n<p><a href=\"https://make.wordpress.org/cli/handbook/how-to-install/\">How-to install WordPress</a></p>\n</li>\n<li>\n<p><a href=\"https://make.wordpress.org/cli/handbook/how-to-maintenance-mode\">How to put the website in maintenance mode</a></p>\n</li>\n<li>\n<p><a href=\"https://make.wordpress.org/cli/handbook/\">How-to start the webserver</a></p>\n</li>\n<li>\n<p><a href=\"https://make.wordpress.org/cli/handbook/how-to-create-custom-plugins\">How to create a custom plugin</a></p>\n</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 0,
+    "menu_order": 3,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18128",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18128",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18128/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18337,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18128/revisions/18337"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18128"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

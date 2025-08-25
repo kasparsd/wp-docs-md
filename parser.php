@@ -180,3 +180,76 @@ if ( isset( $cli_options['sitemaps'] ) ) {
 	$sitemap_urls = $wp_org->get_sitemap_urls();
 	$wp_org->save_json( 'sitemaps.json', $sitemap_urls );
 }
+
+/**
+ * WP-CLI documentation parser.
+ */
+$wp_cli = new WP_API_Client( 
+	'https://make.wordpress.org/cli', 
+	__DIR__ . '/docs/source/make.wordpress.org-cli' 
+);
+
+$wp_cli->set_delay( 10 ); // Workaround for WP.org rate limiting.
+
+$content_types = [
+	'handbook',
+];
+
+foreach ( $content_types as $content_type ) {
+	$content_md = [];
+	$toc = [];
+	
+	if ( isset( $cli_options['update'] ) ) {
+		$json_files = $wp_cli->get_from_rest_api( $content_type );
+	} else {
+		$json_files = $wp_cli->get_json_files_for_content_types( [ $content_type ] );
+	}
+
+	// Collect for sorting.
+	$post_parents = [];
+	$post_order = [];
+
+	foreach ( $json_files as $json_file ) {
+		$json = $wp_cli->get_json( $json_file );
+
+		// Skip development-only pages.
+		if ( false !== strpos( $json['link'], '/behat-steps/' ) ) {
+			continue;
+		}
+
+		$post_parents[ $json['id'] ] = $json['parent'] ?? 0;
+		$post_order[ $json['id'] ] = $json['menu_order'] ?? 0;
+
+		$toc[ $json['id'] ] = sprintf( '- [%s](#%s)', $json['title']['rendered'], $docs->get_anchor_id_for_url( $json['link'] ) );
+		$content_md[ $json['id'] ] = $docs->get_post_json_as_markdown( $json );
+	}
+
+	$toc = $wp_cli->sort_posts( $toc, $post_parents, $post_order );
+	$content_md = $wp_cli->sort_posts( $content_md, $post_parents, $post_order );
+
+	$content_md = implode( 
+		"\n\n",
+		[
+			'Table of Contents:',
+			implode( "\n", $toc ),
+			implode( "\n\n---\n\n", $content_md ),
+		] 
+	);
+
+	file_put_contents(
+		sprintf( '%s/docs/wp-cli-%s.md', __DIR__, $content_type ), 
+		$content_md
+	);
+}
+
+if ( isset( $cli_options['content-links'] ) ) {
+	foreach ( $content_types as $content_type ) {
+		$links = $wp_cli->get_link_urls_in_content_types( [ $content_type ] );
+		$wp_cli->save_json( sprintf( 'links/post-type-%s.json', $content_type ), $links );
+	}
+}
+
+if ( isset( $cli_options['sitemaps'] ) ) {
+	$sitemap_urls = $wp_cli->get_sitemap_urls();
+	$wp_org->save_json( 'sitemaps.json', $sitemap_urls );
+}

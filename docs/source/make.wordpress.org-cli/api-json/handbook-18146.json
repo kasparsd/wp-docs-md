@@ -1,0 +1,91 @@
+{
+    "id": 18146,
+    "date": "2025-06-12T00:42:42",
+    "date_gmt": "2025-06-12T00:42:42",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/internal-api/wp-cli-add-hook/"
+    },
+    "modified": "2025-07-01T12:55:38",
+    "modified_gmt": "2025-07-01T12:55:38",
+    "slug": "wp-cli-add-hook",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/internal-api/wp-cli-add-hook/",
+    "title": {
+        "rendered": "WP_CLI::add_hook()"
+    },
+    "content": {
+        "rendered": "<p>Schedule a callback to be executed at a certain point.</p>\n<hr>\n<h2>Usage</h2>\n<pre><code>WP_CLI::add_hook( $when, $callback )\n</code></pre>\n<div>\n<strong>$when</strong> (string) Identifier for the hook.<br>\n<strong>$callback</strong> (mixed) Callback to execute when hook is called.<br>\n<strong>@return</strong> (void) \n</div>\n<hr>\n<h2>Notes</h2>\n<p><span tabindex='0' class='glossary-item-container'>Hooks<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Hooks</span> <span class='glossary-item-description'>In WordPress theme and development, hooks are functions that can be applied to an action or a Filter in WordPress. Actions are functions performed when a certain event occurs in WordPress. Filters allow you to modify certain functions. Arguments used to hook both filters and actions look the same.</span></span></span> conceptually are very similar to WordPress actions. <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> hooks<br>\nare typically called before WordPress is loaded.</p>\n<p>WP-CLI hooks include:</p>\n<ul>\n<li><code>before_add_command:&lt;command&gt;</code> \u2013 Before the command is added.</li>\n<li><code>after_add_command:&lt;command&gt;</code> \u2013 After the command was added.</li>\n<li><code>before_invoke:&lt;command&gt;</code> (1) \u2013 Just before a command is invoked.</li>\n<li><code>after_invoke:&lt;command&gt;</code> (1) \u2013 Just after a command is invoked.</li>\n<li><code>find_command_to_run_pre</code> \u2013 Just before WP-CLI finds the command to run.</li>\n<li><code>before_registering_contexts</code> (1) \u2013 Before the contexts are registered.</li>\n<li><code>before_wp_load</code> \u2013 Just before the WP load process begins.</li>\n<li><code>before_wp_config_load</code> \u2013 After wp-config.php has been located.</li>\n<li><code>after_wp_config_load</code> \u2013 After wp-config.php has been loaded into scope.</li>\n<li><code>after_wp_load</code> \u2013 Just after the WP load process has completed.</li>\n<li><code>before_run_command</code> (3) \u2013 Just before the command is executed.</li>\n</ul>\n<p>The parentheses behind the hook name denote the number of arguments<br>\nbeing passed into the hook. For such hooks, the callback should return<br>\nthe first argument again, making them work like a WP <span tabindex='0' class='glossary-item-container'>filter<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Filter</span> <span class='glossary-item-description'>Filters are one of the two types of Hooks <a href=\"https://codex.wordpress.org/Plugin_API/Hooks\">https://codex.wordpress.org/Plugin_API/Hooks</a>. They provide a way for functions to modify data of other functions. They are the counterpart to Actions. Unlike Actions, filters are meant to work in an isolated manner, and should never have side effects such as affecting global variables and output.</span></span></span>.</p>\n<p>WP-CLI commands can create their own hooks with <code>WP_CLI::do_hook()</code>.</p>\n<p>If additional arguments are passed through the <code>WP_CLI::do_hook()</code> call,<br>\nthese will be passed on to the callback provided by <code>WP_CLI::add_hook()</code>.</p>\n<pre><code># `wp network meta` confirms command is executing in multisite context.\nWP_CLI::add_command( 'network meta', 'Network_Meta_Command', array(\n   'before_invoke' =&gt; function ( $name ) {\n       if ( !is_multisite() ) {\n           WP_CLI::error( 'This is not a multisite installation.' );\n       }\n   }\n) );\n</code></pre>\n<p><em>Internal <span tabindex='0' class='glossary-item-container'>API<span class='glossary-item-hidden-content'><span class='glossary-item-header'>API</span> <span class='glossary-item-description'>An API or Application Programming Interface is a software intermediary that allows programs to interact with each other and share data in limited, clearly defined ways.</span></span></span> documentation is generated from the WP-CLI codebase on every release. To suggest improvements, please submit a pull request.</em></p>\n<hr>\n<h2>Related</h2>\n<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-do-hook/\">WP_CLI::do_hook()</a></strong> \u2013 Execute callbacks registered to a given hook.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-add-wp-hook/\">WP_CLI::add_wp_hook()</a></strong> \u2013 Add a callback to a WordPress action or filter.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-add-command/\">WP_CLI::add_command()</a></strong> \u2013 Register a command to WP-CLI.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 18132,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18146",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18146",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18146/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18319,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18146/revisions/18319"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18132"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18146"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

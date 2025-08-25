@@ -1,0 +1,98 @@
+{
+    "id": 18133,
+    "date": "2025-06-12T00:42:41",
+    "date_gmt": "2025-06-12T00:42:41",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/philosophy/"
+    },
+    "modified": "2025-07-01T13:12:01",
+    "modified_gmt": "2025-07-01T13:12:01",
+    "slug": "philosophy",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/contributions/philosophy/",
+    "title": {
+        "rendered": "Philosophy"
+    },
+    "content": {
+        "rendered": "<p><span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> is the command-line interface for WordPress. It provides commands for actions that can be performed in the WordPress backend (e.g. <code>wp theme activate</code> and <code>wp user create</code>), as well as commands for actions that don\u2019t have an equivalent web <span tabindex='0' class='glossary-item-container'>UI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>UI</span> <span class='glossary-item-description'>UI is an acronym for User Interface - the layout of the page the user interacts with. Think \u2018how are they doing that\u2019 and less about what they are doing.</span></span></span> (e.g. <code>wp cron event run</code>, <code>wp search-replace</code>, and <code>wp scaffold child-theme</code>).</p>\n<p>WP-CLI\u2019s guiding principle is to be the fastest and canonical way to manage WordPress:</p>\n<ul>\n<li>Speed is inherently present in the simplicity of the command-line interface, and the ability to chain multiple commands together into a more complex operation.</li>\n<li>When functionality ends up in WP-CLI, it should be good enough to become the defacto solution to the problem.</li>\n<li>\u201cManaging WordPress\u201d is the ever-evolving problem space in which we operate. WP-CLI should always focus on making <em>existing management patterns</em> more efficient.</li>\n</ul>\n<p>This page contains a list of guidelines that should inform decisions related to scope, command organization and behavior:</p>\n<h2>Good commands are simple, interact with WordPress, and solve one unique problem.</h2>\n<p>When a command implements existing WordPress functionality (e.g. <code>wp export</code>), it should mirror and re-use existing WordPress behavior as much as possible. Doing so ensures it meets the user\u2019s assumed expectations of behavior.</p>\n<p>When a command adds functionality not present in the WordPress admin (e.g. <code>wp search-replace</code>), it should solve one unique problem and interact with WordPress in some way. Good commands are born of true user need; for a new proposed WP-CLI command, there probably should be existing prior art in the ecosystem.</p>\n<p>If a command provides useful functionality, but it doesn\u2019t have anything to do with WordPress, it doesn\u2019t belong in WP-CLI. Similarly, an idea for a command is sometimes better implemented as a change to documentation instead.</p>\n<h2>Consistency makes for an enjoyable user experience.</h2>\n<p>Whenever possible, commands should emulate one another with consistent usage behavior, argument names, and documentation.</p>\n<h2>Decisions, not options.</h2>\n<p>WordPress\u2019 philosophy <a href=\"https://wordpress.org/about/philosophy/\">states</a>:</p>\n<blockquote><p>\n  [The end user is considered first when making implementation decisions]. A great example of this consideration is software options. Every time you give a user an option, you are asking them to make a decision. When a user doesn\u2019t care or understand the option this ultimately leads to frustration. As developers we sometimes feel that providing options for everything is a good thing, you can never have too many choices, right? Ultimately these choices end up being technical ones, choices that the average end user has no interest in. It\u2019s our duty as developers to make smart design decisions and avoid putting the weight of technical choices on our end users.\n</p></blockquote>\n<p>The same principle applies to WP-CLI. In every case, we should first try to improve the default behavior. Options should be added sparingly, only when a solution is required and no other solutions are available.</p>\n<p>As a rule of thumb, once a command has a half-dozen options or more, it becomes difficult to understand how the command will operate under each condition.</p>\n<h2>Composability is always a good idea.</h2>\n<p>One of the most useful ideas in UNIX was that of <a href=\"http://en.wikipedia.org/wiki/Pipeline_%28Unix%29\">pipelines</a>.</p>\n<p>WP-CLI commands should be composable, i.e. the output from one command should be easily pipe-able to another command.</p>\n<p>A corollary of this is that commands should be <em>orthogonal</em>, which means that there should be no overlapping functionality between commands. (<code>wp plugin install --activate</code> is an exception).</p>\n<p>See <a href=\"https://make.wordpress.org/cli/handbook/references/shell-friends/\">Shell Friends</a> for specific examples of how this philosophy is applied.</p>\n<h2>Readability trumps number of keystrokes.</h2>\n<p>Most of the commands in WP-CLI will be used non-interactively, so make the parameter names self-documenting.</p>\n<h2>Don\u2019t assume anything.</h2>\n<p>Bundled commands MUST work on any given WordPress install (provided that it\u2019s a new enough version), no matter how it\u2019s configured and no matter how much data it has.</p>\n<p>As a corollary, bundled commands should not assume the presence of any <span tabindex='0' class='glossary-item-container'>plugin<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Plugin</span> <span class='glossary-item-description'>A plugin is a piece of software containing a group of functions that can be added to a WordPress website. They can extend functionality or add new features to your WordPress websites. WordPress plugins are written in the PHP programming language and integrate seamlessly with WordPress. These can be free in the WordPress.org Plugin Directory https://wordpress.org/plugins/ or can be cost-based plugin from a third-party</span></span></span> or theme.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18369,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18133",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18133",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18133/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18332,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18133/revisions/18332"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18133"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

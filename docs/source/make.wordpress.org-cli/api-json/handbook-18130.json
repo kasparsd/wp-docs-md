@@ -1,0 +1,98 @@
+{
+    "id": 18130,
+    "date": "2025-06-12T00:42:41",
+    "date_gmt": "2025-06-12T00:42:41",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/implementation-details/"
+    },
+    "modified": "2025-07-01T13:11:27",
+    "modified_gmt": "2025-07-01T13:11:27",
+    "slug": "implementation-details",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/contributions/implementation-details/",
+    "title": {
+        "rendered": "Implementation Details"
+    },
+    "content": {
+        "rendered": "<p>This page contains some history on various implementation details of <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span>.</p>\n<h2>Bootstrapping WordPress</h2>\n<p>On a normal web request, your web server calls the <code>index.php</code> file in the root of the web directory to bootstrap the WordPress load process:</p>\n<pre><code>&lt;?php\n/**\n * Front to the WordPress application. This file doesn't do anything, but loads\n * wp-blog-header.php which does and tells WordPress to load the theme.\n *\n * @package WordPress\n */\n\n/**\n * Tells WordPress to load the WordPress theme and output it.\n *\n * @var bool\n */\ndefine('WP_USE_THEMES', true);\n\n/** Loads the WordPress Environment and Template */\nrequire( dirname( __FILE__ ) . '/wp-blog-header.php' );\n</code></pre>\n<p>You\u2019ll notice <code>index.php</code> calls <code>wp-blog-header.php</code>, which then calls <code>wp-load.php</code>, which then calls <code>wp-config.php</code>, which then calls <code>wp-settings.php</code>.</p>\n<p>This last file, <code>wp-settings.php</code>, is WordPress\u2019 primary bootstrap file. It loads your plugins, active theme, and calls the <code>init</code> action.</p>\n<p>On the command line, WP-CLI follows a similar process to bootstrap WordPress. However, instead of loading <code>index.php</code>, using the <code>wp</code> command starts with this:</p>\n<pre><code>&lt;?php\n\n// Can be used by plugins/themes to check if WP-CLI is running or not\ndefine( 'WP_CLI', true );\ndefine( 'WP_CLI_VERSION', trim( file_get_contents( WP_CLI_ROOT . '/VERSION' ) ) );\ndefine( 'WP_CLI_START_MICROTIME', microtime( true ) );\n\n// Set common headers, to prevent warnings from plugins\n$_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.0';\n$_SERVER['HTTP_USER_AGENT'] = '';\n$_SERVER['REQUEST_METHOD'] = 'GET';\n$_SERVER['REMOTE_ADDR'] = '127.0.0.1';\n\ninclude WP_CLI_ROOT . '/php/utils.php';\ninclude WP_CLI_ROOT . '/php/dispatcher.php';\ninclude WP_CLI_ROOT . '/php/class-wp-cli.php';\ninclude WP_CLI_ROOT . '/php/class-wp-cli-command.php';\n\n\\WP_CLI\\Utils\\load_dependencies();\n\nWP_CLI::get_runner()-&gt;start();\n</code></pre>\n<p>WP-CLI includes a good amount of setup code prior to calling <code>wp-settings.php</code>. Its bootstrapping process is different than a web request in a couple of notable ways.</p>\n<h3><code>wp-config.php</code> is parsed, and then executed</h3>\n<p>Rather than calling <code>wp-config.php</code> directly, WP-CLI gets the contents of <code>wp-config.php</code>, parses out the <code>require_once ABSPATH . 'wp-settings.php';</code> statement, and loads the constants into scope with <code>eval()</code>. Read \u201c<a href=\"https://make.wordpress.org/cli/2013/10/24/how-wp-cli-loads-wordpress/\">How WP-CLI loads WordPress</a>\u201d for a narrative on the historical reasons. After that, WP-CLI used a custom <code>wp-settings-cli.php</code> until v0.24.0 [<a href=\"https://github.com/wp-cli/wp-cli/issues/2278\">#2278</a>], but parsing <code>wp-config.php</code> was kept for backwards compatibility purposes. See also <a href=\"https://github.com/wp-cli/wp-cli/issues/1631\">#1631</a>.</p>\n<h3>WordPress is loaded inside of a function</h3>\n<p>WP-CLI loads WordPress with the <code>WP_CLI::get_runner()-&gt;load_wordpress()</code> method, meaning WordPress plugins and themes aren\u2019t loaded in global scope. Any global variables used in plugins or themes need to be explicitly globalized. See <a href=\"https://github.com/wp-cli/wp-cli/issues/2089\">#2089</a> for the history of this decision.</p>\n<p>Once <code>WP_CLI::get_runner()-&gt;load_wordpress()</code> calls <code>wp-settings.php</code>, WordPress handles the rest of the bootstrap process.</p>\n<h2>Command Help Text</h2>\n<p>The <code>wp help &lt;command&gt;</code> has been through several incarnations.</p>\n<p>Since WP-CLI 0.3, it invoked a static <code>help()</code> method in the command class, if it existed. (<a href=\"https://github.com/wp-cli/wp-cli/commit/48a8887d46be25e0c0ad326975729ec816c17331\">48a8887d</a>)</p>\n<p>Since WP-CLI 0.6, it looked for a <code>&lt;command&gt;.1</code> ROFF file and displayed it using <code>man</code>. The ROFF file was compiled from a corresponding <code>&lt;command&gt;.txt</code> markdown file and from PHPDoc metadata. (<a href=\"https://github.com/wp-cli/wp-cli/issues/24\">#24</a>).</p>\n<p>Since WP-CLI 0.11, it generates the help text on the fly. (<a href=\"https://github.com/wp-cli/wp-cli/pull/548\">#548</a>)</p>\n<h2>WP_ADMIN</h2>\n<p>Most WP-CLI commands perform administrative actions and they need access to code defined in <code>wp-admin/includes</code>. This code can be loaded on-demand or preemptively.</p>\n<p>The question is: should the <code>WP_ADMIN</code> constant be set to <code>true</code> or <code>false</code>?</p>\n<p>Initially, WP-CLI just loaded the wp-admin code and didn\u2019t mess with the WP_ADMIN constant at all.</p>\n<p>Then, it sort of pretended it was doing a front-end page load, for doing integration testing (<a href=\"https://github.com/wp-cli/wp-cli/issues/69\">#69</a>). <sup><a href=\"#note-1\">[1]</a></sup></p>\n<p>Then it pretended it was loading wp-admin, to side-step caching plugins (<a href=\"https://github.com/wp-cli/wp-cli/issues/164\">#164</a>).</p>\n<p>Then it stopped pretending it was loading wp-admin (<a href=\"https://github.com/wp-cli/wp-cli/issues/352\">#352</a>), because we found a better way to side-step caching plugins. <sup><a href=\"#note-2\">[2]</a></sup></p>\n<hr>\n<ul>\n<li><sup><a name=\"note-1\">[1]</a></sup>: It turned out that the official WordPress testing suite had a better solution: the <code>go_to()</code> method.</li>\n<li><sup><a name=\"note-2\">[2]</a></sup>: The solution was rolling our own <code>wp-settings.php</code> file.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18369,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18130",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18130",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18130/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18335,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18130/revisions/18335"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18130"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

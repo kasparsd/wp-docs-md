@@ -1,0 +1,92 @@
+{
+    "id": 18370,
+    "date": "2025-07-01T13:05:18",
+    "date_gmt": "2025-07-01T13:05:18",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/guides/"
+    },
+    "modified": "2025-08-25T16:55:19",
+    "modified_gmt": "2025-08-25T16:55:19",
+    "slug": "guides",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/",
+    "title": {
+        "rendered": "Guides"
+    },
+    "content": {
+        "rendered": "<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/guides/installing/\">Installing</a></strong> \u2013 Recommended and alternative installation mechanisms.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/guides/quick-start/\">Quick start</a></strong> \u2013 Where to begin after you\u2019ve installed <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> for the first time.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/guides/running-commands-remotely/\">Running commands remotely</a></strong> \u2013 Learn how to remotely control multiple servers at once. </li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/guides/commands-cookbook/\">Commands cookbook</a></strong> \u2013 The full 101 how commands work, writing your own, and sharing them with the world.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/guides/common-issues/\">Common issues and their fixes</a></strong> \u2013 In case of fire, break glass.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/guides/external-resources/\">External resources</a></strong> \u2013 Blog posts, slides and videos from users.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/guides/force-output-specific-locale/\">Force output to a specific locale</a></strong> \u2013 Localisation issue</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/guides/identify-plugin-theme-conflict/\">Identify a Plugin or Theme Conflict</a></strong> \u2013 Debugging advise</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/guides/sharing-wp-cli-packages/\">Sharing WP-CLI Packages</a></strong> \u2013 Some words about your environment</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/guides/troubleshooting/\">Troubleshooting Guide</a></strong> \u2013 Some help to troubleshoot</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 0,
+    "menu_order": 2,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18370",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18370",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18370/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18373,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18370/revisions/18373"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18370"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

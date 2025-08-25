@@ -1,0 +1,98 @@
+{
+    "id": 18125,
+    "date": "2025-06-12T00:42:41",
+    "date_gmt": "2025-06-12T00:42:41",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/how-to-install/"
+    },
+    "modified": "2025-07-01T13:09:01",
+    "modified_gmt": "2025-07-01T13:09:01",
+    "slug": "how-to-install",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/how-to/how-to-install/",
+    "title": {
+        "rendered": "How to install WordPress"
+    },
+    "content": {
+        "rendered": "<p>Downloading and installing WordPress using <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> is straight forward. It takes four steps.<br>\nFirst, you will need to download WordPress using the <code>wp core download</code> command.</p>\n<h3>Step 1 \u2013 Download WordPress</h3>\n<p>The syntax of the command to download WordPress is the following: <code>wp core download [--path=&lt;path&gt;] [--locale=&lt;locale&gt;] [--version=&lt;version&gt;] [--skip-content] [--force]</code></p>\n<pre><code>    $ wp core download --path=wpdemo.test --locale=it_IT\n    Creating directory '/wpdemo.test/'.\n    Downloading WordPress 5.4.1 (it_IT)...\n    md5 hash verified: 3fa03967b47cdfbf263462d451cdcdb8\n    Success: WordPress downloaded.\n</code></pre>\n<p>The command above creates a <code>wpdemo.test/</code> folder inside your current working directory and downloads the latest WordPress version. You can replace the <code>--path=wpdemo.test</code> with your<br>\ndesired folder name and the <code>--locale=it_IT</code> with your desired locale. You can omit the <code>--locale</code> option and, that will download by default WordPress in American English using the locale en_US.</p>\n<h3>Step 2 \u2013 Generate a config file</h3>\n<p>In this step, we will generate a config file and set up the database<br>\ncredentials for our installation.<br>\nThe basic syntax of the command is the following: <code>wp config create --dbname=&lt;dbname&gt; --dbuser=&lt;dbuser&gt; [--dbpass=&lt;dbpass&gt;]</code></p>\n<pre><code>    $ wp config create --dbname=your_db_name_here --dbuser=your_db_user_here --prompt=dbpass\n    1/10 [--dbpass=&lt;dbpass&gt;]: type_your_password\n    Success: Generated 'wp-config.php' file.\n</code></pre>\n<p>The command above generates the <code>wp-config.php</code> file and adds to it the database credentials that you passed. Make sure to replace <code>your_db_name_here</code> with the name you want to assign to the database, replace <code>your_db_user_here</code> with your database user and type the database password when prompted with the following: <code>1/10 [--dbpass=&lt;dbpass&gt;]:</code></p>\n<h3>Step 3 \u2013 Create the database</h3>\n<p>In this step, we are going to create the database based on the information we passed to the <code>wp-config.php</code> file in step 2.</p>\n<pre><code>    $ wp db create\n    Success: Database created.\n</code></pre>\n<p>Now we are ready to move to the final step where we install WordPress.</p>\n<h3>Step 4 \u2013 Install WordPress</h3>\n<p>To install WordPress now, we need to run one last command.</p>\n<pre><code>    $ wp core install --url=wpclidemo.dev --title=\"WP-CLI\" --admin_user=wpcli --admin_password=wpcli --admin_email=info@wp-cli.org\n    Success: WordPress installed successfully.\n</code></pre>\n<p>Remember to replace the values passed to each of the following options with your details:</p>\n<ul>\n<li><code>--url=wpclidemo.dev</code> replace wpclidemo.dev with your website url,</li>\n<li><code>--title=\"WP-CLI\"</code> replace WP-CLI with the name you want to assign to the website,</li>\n<li><code>--admin_user=wpcli</code> replace wpcli with the username you want to assign to the website administrator</li>\n<li><code>--admin_password=wpcli</code> replace wpcli with the password you want to use to access the WordPress administrator panel.</li>\n</ul>\n<p>Congratulations! You have successfully installed WordPress using WP-CLI.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18128,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18125",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18125",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18125/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18340,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18125/revisions/18340"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18128"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18125"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

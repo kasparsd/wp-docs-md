@@ -1,0 +1,91 @@
+{
+    "id": 18166,
+    "date": "2025-06-12T00:42:43",
+    "date_gmt": "2025-06-12T00:42:43",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-basename/"
+    },
+    "modified": "2025-07-01T12:55:33",
+    "modified_gmt": "2025-07-01T12:55:33",
+    "slug": "wp-cli-utils-basename",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/internal-api/wp-cli-utils-basename/",
+    "title": {
+        "rendered": "WP_CLI\\Utils\\basename()"
+    },
+    "content": {
+        "rendered": "<p>Locale-independent version of basename()</p>\n<hr>\n<h2>Usage</h2>\n<pre><code>WP_CLI\\Utils\\basename( $path, $suffix = '' )\n</code></pre>\n<div>\n<strong>$path</strong> (string) <br>\n<strong>$suffix</strong> (string) <br>\n<strong>@return</strong> (string) \n</div>\n<p><em>Internal <span tabindex='0' class='glossary-item-container'>API<span class='glossary-item-hidden-content'><span class='glossary-item-header'>API</span> <span class='glossary-item-description'>An API or Application Programming Interface is a software intermediary that allows programs to interact with each other and share data in limited, clearly defined ways.</span></span></span> documentation is generated from the <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> codebase on every release. To suggest improvements, please submit a pull request.</em></p>\n<hr>\n<h2>Related</h2>\n<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-write-csv/\">WP_CLI\\Utils\\write_csv()</a></strong> \u2013 Write data as CSV to a given file.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-http-request/\">WP_CLI\\Utils\\http_request()</a></strong> \u2013 Make a <span tabindex='0' class='glossary-item-container'>HTTP<span class='glossary-item-hidden-content'><span class='glossary-item-header'>HTTP</span> <span class='glossary-item-description'>HTTP is an acronym for Hyper Text Transfer Protocol. HTTP  is the underlying protocol used by the World Wide Web and this protocol defines how messages are formatted and transmitted, and what actions Web servers and browsers should take in response to various commands.</span></span></span> request to a remote <span tabindex='0' class='glossary-item-container'>URL<span class='glossary-item-hidden-content'><span class='glossary-item-header'>URL</span> <span class='glossary-item-description'>A specific web address of a website or web page on the Internet, such as a website\u2019s URL www.wordpress.org</span></span></span>.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-get-named-sem-ver/\">WP_CLI\\Utils\\get_named_sem_ver()</a></strong> \u2013 Compare two version strings to get the named semantic version.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-parse-ssh-url/\">WP_CLI\\Utils\\parse_ssh_url()</a></strong> \u2013 Parse a <span tabindex='0' class='glossary-item-container'>SSH<span class='glossary-item-hidden-content'><span class='glossary-item-header'>SSH</span> <span class='glossary-item-description'>Secure SHell - a protocol for securely connecting to a remote system in addition to or in place of a password.</span></span></span> url for its host, port, and path.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-ispiped/\">WP_CLI\\Utils\\isPiped()</a></strong> \u2013 Checks whether the output of the current script is a TTY or a pipe / redirect</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-proc-open-compat/\">WP_CLI\\Utils\\proc_open_compat()</a></strong> \u2013 Windows compatible `proc_open()`. Works around bug in <span tabindex='0' class='glossary-item-container'>PHP<span class='glossary-item-hidden-content'><span class='glossary-item-header'>PHP</span> <span class='glossary-item-description'>PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. <a href=\"https://www.php.net/manual/en/preface.php\">https://www.php.net/manual/en/preface.php</a>.</span></span></span>, and also deals with *nix-like `ENV_VAR=blah cmd` environment variable prefixes.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/internal-api/wp-cli-utils-esc-like/\">WP_CLI\\Utils\\esc_like()</a></strong> \u2013 First half of escaping for LIKE special characters % and _ before preparing for <span tabindex='0' class='glossary-item-container'>MySQL<span class='glossary-item-hidden-content'><span class='glossary-item-header'>MySQL</span> <span class='glossary-item-description'>MySQL is a relational database management system. A database is a structured collection of data where content, configuration and other options are stored. <a href=\"https://www.mysql.com/\">https://www.mysql.com/</a>.</span></span></span>.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 18132,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18166",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18166",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18166/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18299,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18166/revisions/18299"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18132"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18166"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

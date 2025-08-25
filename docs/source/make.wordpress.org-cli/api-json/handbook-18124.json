@@ -1,0 +1,98 @@
+{
+    "id": 18124,
+    "date": "2025-06-12T00:42:41",
+    "date_gmt": "2025-06-12T00:42:41",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/how-to-create-custom-plugins/"
+    },
+    "modified": "2025-07-01T13:09:01",
+    "modified_gmt": "2025-07-01T13:09:01",
+    "slug": "how-to-create-custom-plugins",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/how-to/how-to-create-custom-plugins/",
+    "title": {
+        "rendered": "How to create a custom plugin:"
+    },
+    "content": {
+        "rendered": "<p>If you want to create your plugins, <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> has a powerful scaffold command that allows us to generate starter code. In this guide we will see how to generate starter code for a basic <span tabindex='0' class='glossary-item-container'>plugin<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Plugin</span> <span class='glossary-item-description'>A plugin is a piece of software containing a group of functions that can be added to a WordPress website. They can extend functionality or add new features to your WordPress websites. WordPress plugins are written in the PHP programming language and integrate seamlessly with WordPress. These can be free in the WordPress.org Plugin Directory https://wordpress.org/plugins/ or can be cost-based plugin from a third-party</span></span></span>.</p>\n<h2>Step 1 \u2013 Scaffold the plugin files</h2>\n<p>The following command uses several options to lets us specify the plugin slug, its name, description, author name and uri as well as the plugin uri. You can replace the values passed to the options below to customize the plugin based on your needs.</p>\n<pre><code>    $ wp scaffold plugin wpcli-demo-plugin --plugin_name=\"WP-CLI Demo Plugin\" --plugin_description=\"This is a wp-cli demo plugin\" --plugin_author=wp-cli --plugin_author_uri=\"https://wp-cli.org\" --plugin_uri=\"https://plugins.wp-cli.org/demo-plugin\"\n    Success: Created test files.\n</code></pre>\n<p>The above command generates a new folder called <code>wpcli-demo-plugin</code> in the plugins directory, with the following files structure.</p>\n<pre><code>| - bin/\n| - tests/\n| - .gitignore\n| - .editorconfig\n| - .phpcs.xml.dist\n| - .travis.yml\n| - Gruntfile.js\n| - package.json\n| - phpunit.xml.dist\n| - readme.txt\n| - wpcli-demo-plugin.php\n</code></pre>\n<p>Unless you use the \u2013skip-tests flag the following files are always generated:</p>\n<ul>\n<li><code>phpunit.xml.dist</code> is the configuration file for PHPUnit.</li>\n<li><code>.travis.yml</code> is the configuration file for Travis CI. Use <code>--ci=&lt;provider&gt;</code> to select a different service.</li>\n<li><code>bin/install-wp-tests.sh</code> configures the WordPress test suite and a test database.</li>\n<li><code>tests/bootstrap.php</code> is the file that makes the current plugin active when running the test suite.</li>\n<li><code>tests/test-sample.php</code> is a sample file containing test cases.</li>\n<li><code>.phpcs.xml.dist</code> is a collection of PHP_CodeSniffer rules.</li>\n</ul>\n<h2>Step 2 \u2013 create a <span tabindex='0' class='glossary-item-container'>custom post type<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Custom Post Type</span> <span class='glossary-item-description'>WordPress can hold and display many different types of content. A single item of such a content is generally called a post, although post is also a specific post type. Custom Post Types gives your site the ability to have templated posts, to simplify the concept.</span></span></span>:</h2>\n<p>We can now use the scaffold command again to add a custom post type inside our new plugin using the <code>wp scaffold post-type</code> command.</p>\n<pre><code>    $ wp scaffold post-type books --label=Book --textdomain=wpcli-demo-plugin --dashicon=dashicons-book-alt --plugin=wpcli-demo-plugin\n    Success: Created '/wpcli-demo-plugin/post-types/books.php'.\n</code></pre>\n<h2>Step 3 \u2013 Write code inside the main file:</h2>\n<p>The main plugin file <code>wpcli-demo-plugin.php</code> is the starting point that we can use to write our plugin logic.</p>\n<p>Inside the main plugin file lets now reference the new post type we just created.</p>\n<p>Open in your favourite text editor the file <code>wpcli-demo-plugin.php</code><br>\nand under the line saying \u201cyour code starts here\u201d add the following:</p>\n<pre><code>\\\\Your code starts here.\nrequire('post-types/books.php');\n</code></pre>\n<h2>Step 4 \u2013 Activate the plugin</h2>\n<p>You can now use two wp-cli commands to check the list of plugins and activate your newly created plugin.<br>\n<code>wp plugin list</code> and <code>wp plugin activate</code>. The first command lists all plugins installed while the second<br>\nactivates a given plugin.</p>\n<pre><code>    $ wp plugin list\n    +-------------------+----------+-----------+---------+\n    | name              | status   | update    | version |\n    +-------------------+----------+-----------+---------+\n    | akismet           | inactive | available | 4.1.5   |\n    | hello             | inactive | none      | 1.7.2   |\n    | wpcli-demo-plugin | inactive | none      | 0.1.0   |\n    +-------------------+----------+-----------+---------+\n</code></pre>\n<p>From the list above we can see that our plugin wpcli-demo-plugin is inactive. Let\u2019s enable it using the other command.</p>\n<pre><code>    $ wp plugin activate wpcli-demo-plugin\n    Plugin 'wpcli-demo-plugin' activated.\n    Success: Activated 1 of 1 plugins.\n</code></pre>\n<p>Our plugin is now active. We can visit the WordPress admin panel and<br>\nstart using our books custom post type.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18128,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18124",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18124",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18124/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18341,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18124/revisions/18341"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18128"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18124"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

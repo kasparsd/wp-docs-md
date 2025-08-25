@@ -1,0 +1,98 @@
+{
+    "id": 18111,
+    "date": "2025-06-12T00:42:40",
+    "date_gmt": "2025-06-12T00:42:40",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/doctor-check-file-contents/"
+    },
+    "modified": "2025-07-01T13:13:08",
+    "modified_gmt": "2025-07-01T13:13:08",
+    "slug": "doctor-check-file-contents",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/doctor/doctor-check-file-contents/",
+    "title": {
+        "rendered": "Write a check for verifying contents of WordPress files"
+    },
+    "content": {
+        "rendered": "<p>One of the check types included in <code>wp doctor</code> is <code>File_Contents</code>, or the ability to check all or a selection of WordPress files for a given regex pattern. The check type is in use by a couple of the <a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-default-checks/\">default diagnostic checks</a>, and you can use the <code>File_Contents</code> check type in your <a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-customize-config/\">custom <code>doctor.yml</code> configuration file</a>.</p>\n<p>The <code>File_Contents</code> check type is the most efficient way to check WordPress files because it only iterates the filesystem once, regardless of how many file checks you\u2019ve registered.</p>\n<p>As an example, here are two checks using <code>File_Contents</code>, one which ensures sessions aren\u2019t used by plugins and the other which ensures <code>$_SERVER['SERVER_NAME']</code> isn\u2019t used in <code>wp-config.php</code>:</p>\n<pre><code>file-sessions:\n  check: File_Contents\n  options:\n    regex: .*(session_start|\\$_SESSION).*\n    only_wp_content: true\nfile-server-name-wp-config:\n  check: File_Contents\n  options:\n    regex: define\\(.+WP_(HOME|SITEURL).+\\$_SERVER.+SERVER_NAME\n    path: wp-config.php\n</code></pre>\n<p>Run together, you might see:</p>\n<pre><code>$ wp doctor check --config=file-contents.yml --all\n+----------------------------+---------+-----------------------------------------------------------------------------------------+\n| name                       | status  | message                                                                                 |\n+----------------------------+---------+-----------------------------------------------------------------------------------------+\n| file-sessions              | success | All 'php' files passed check for '.*(session_start|\\$_SESSION).*'.                      |\n| file-server-name-wp-config | success | All 'php' files passed check for 'define\\(.+WP_(HOME|SITEURL).+\\$_SERVER.+SERVER_NAME'. |\n+----------------------------+---------+-----------------------------------------------------------------------------------------+\n</code></pre>\n<p>The <code>File_Contents</code> check type accepts the following options:</p>\n<ul>\n<li>\u2018regex\u2019: Regex pattern to check against each file\u2019s contents.</li>\n<li>\u2018extension\u2019. File extension to check. Defaults to \u2018php\u2019. Separate multiple file extensions with a \u2018|\u2019.</li>\n<li>\u2018path\u2019. Check a specific file path. Value should be relative to <code>ABSPATH</code> (e.g. \u2018wp-content\u2019 or \u2018wp-config.php\u2019).</li>\n<li>\u2018only_wp_content\u2019: Only check the wp-content directory.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18117,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18111",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18111",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18111/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18354,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18111/revisions/18354"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18117"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18111"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

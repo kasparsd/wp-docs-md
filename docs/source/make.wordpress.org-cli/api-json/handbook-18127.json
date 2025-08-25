@@ -1,0 +1,98 @@
+{
+    "id": 18127,
+    "date": "2025-06-12T00:42:41",
+    "date_gmt": "2025-06-12T00:42:41",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/how-to-start-webserver/"
+    },
+    "modified": "2025-07-01T13:09:01",
+    "modified_gmt": "2025-07-01T13:09:01",
+    "slug": "how-to-start-webserver",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/how-to/how-to-start-webserver/",
+    "title": {
+        "rendered": "How to start the webserver"
+    },
+    "content": {
+        "rendered": "<p>You can use the command <code>wp server</code> to launches <span tabindex='0' class='glossary-item-container'>PHP<span class='glossary-item-hidden-content'><span class='glossary-item-header'>PHP</span> <span class='glossary-item-description'>PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. <a href=\"https://www.php.net/manual/en/preface.php\">https://www.php.net/manual/en/preface.php</a>.</span></span></span>\u2019s built-in web server for a specific WordPress installation. By default, the webserver will start using the localhost and default port 8080 but, you can change them using the <code>--host</code> and <code>--port</code> options.</p>\n<h3>Step 1 \u2013 Start the web server using the default settings</h3>\n<pre><code>    $ wp server\n    PHP 7.2.24-0ubuntu0.18.04.4 Development Server started at Thu Jun  4 17:40:13 2020\n    Listening on http://localhost:8080\n    Document root is ../wpdemo.test\n    Press Ctrl-C to quit.\n</code></pre>\n<p>The command above starts the server using the default settings. We can now open our browser<br>\nand visit the link http://localhost:8080 to access our WordPress installation.</p>\n<h3>Step 2 \u2013 Start the web server using different settings</h3>\n<p>If you want to specify a different port number or host, you can pass them to the following flags:<br>\n<code>--port</code> and <code>--host</code></p>\n<pre><code>    $ wp server --port=9090 --host=192.168.0.4\n</code></pre>\n<p>The command above will start the webserver and listen for requests on http://192.168.0.4:9090<br>\nyou can open the browser and visit the page to access your WordPress installation.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18128,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18127",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18127",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18127/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18338,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18127/revisions/18338"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18128"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18127"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

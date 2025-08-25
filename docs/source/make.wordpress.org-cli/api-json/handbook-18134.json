@@ -1,0 +1,98 @@
+{
+    "id": 18134,
+    "date": "2025-06-12T00:42:41",
+    "date_gmt": "2025-06-12T00:42:41",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/plugin-unit-tests/"
+    },
+    "modified": "2025-07-01T13:12:12",
+    "modified_gmt": "2025-07-01T13:12:12",
+    "slug": "plugin-unit-tests",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/how-to/plugin-unit-tests/",
+    "title": {
+        "rendered": "Plugin Integration Tests"
+    },
+    "content": {
+        "rendered": "<p>This guide demonstrates how to run integration tests on both Travis CI and locally. The scaffolding uses the WordPress <span tabindex='0' class='glossary-item-container'>Core<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Core</span> <span class='glossary-item-description'>Core is the set of software required to run WordPress. The Core Development Team builds WordPress.</span></span></span> \u201cunit tests\u201d that serve to unit-test WordPress Core. Unit tests are useful for testing plugins and themes as well, but if they are used in that way, it turns those tests into \u201cintegration tests\u201d \u2013 they test the integration between a <span tabindex='0' class='glossary-item-container'>plugin<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Plugin</span> <span class='glossary-item-description'>A plugin is a piece of software containing a group of functions that can be added to a WordPress website. They can extend functionality or add new features to your WordPress websites. WordPress plugins are written in the PHP programming language and integrate seamlessly with WordPress. These can be free in the WordPress.org Plugin Directory https://wordpress.org/plugins/ or can be cost-based plugin from a third-party</span></span></span>/theme and WordPress Core. Proper unit tests for a plugin or theme would not load WordPress.</p>\n<h2>Running tests on Travis CI</h2>\n<p>If you host your plugin on <span tabindex='0' class='glossary-item-container'>GitHub<span class='glossary-item-hidden-content'><span class='glossary-item-header'>GitHub</span> <span class='glossary-item-description'>GitHub is a website that offers online implementation of git repositories that can easily be shared, copied and modified by other developers. Public repositories are free to host, private repositories require a paid subscription. GitHub introduced the concept of the \u2018pull request\u2019 where code changes done in branches by contributors can be reviewed and discussed before being merged be the repository owner.  <a href=\"https://github.com/\">https://github.com/</a></span></span></span> and enable <a href=\"https://docs.travis-ci.com/\">Travis CI</a>, the tests will be run automatically after every commit you make to the plugin.</p>\n<p>All you need to do to enable this is copy and then edit the following files from the <a href=\"https://github.com/wp-cli/sample-plugin\">WP-CLI sample plugin</a>:</p>\n<ul>\n<li><code>.travis.yml</code>, <code>phpunit.xml.dist</code> and <code>phpcs.ruleset.xml</code> files</li>\n<li><code>tests</code> folder</li>\n</ul>\n<p>See the docs for an <a href=\"https://developer.wordpress.org/cli/commands/scaffold/plugin-tests/\">explanation of what each file does</a>. You will then need to specify your unit tests in the <code>tests/</code> folder.</p>\n<h2>Running tests locally</h2>\n<p>Running tests locally can be beneficial during development as it is quicker than committing changes and waiting for Travis CI to run the tests.</p>\n<p>We\u2019re going to assume that:</p>\n<ul>\n<li>You already have a plugin called <code>my-plugin</code></li>\n<li>You have installed <code>git</code>, <code>svn</code>, <code>php</code>, <code>apache</code> (<a href=\"https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04\">How To Install Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 16.04</a>)</li>\n</ul>\n<p>So, let\u2019s get started:</p>\n<h3>1. <a href=\"https://github.com/sebastianbergmann/phpunit#installation\">Install PHPUnit</a></h3>\n<p>The version of PHPUnit to install depends on both <span tabindex='0' class='glossary-item-container'>PHP<span class='glossary-item-hidden-content'><span class='glossary-item-header'>PHP</span> <span class='glossary-item-description'>PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. <a href=\"https://www.php.net/manual/en/preface.php\">https://www.php.net/manual/en/preface.php</a>.</span></span></span> and WordPress versions.<br>\nSee: <a href=\"https://make.wordpress.org/core/handbook/references/phpunit-compatibility-and-wordpress-versions/\">PHPUnit Compatibility and WordPress Versions \u2013 Make WordPress Core</a></p>\n<h3>2. Generate the plugin test files</h3>\n<p><code>bash<br>\n  wp scaffold plugin-tests my-plugin</code></p>\n<p>This command will generate all the files needed for running tests, including a <code>.travis.yml</code> file.</p>\n<h3>3. Initialize the testing environment locally</h3>\n<p><code>cd</code> into the plugin directory and run the install script (you will need to have <code>wget</code> installed).</p>\n<p><code>bash<br>\n  bash bin/install-wp-tests.sh wordpress_test root '' localhost latest</code></p>\n<p>The install script first installs a copy of WordPress in the <code>/tmp</code> directory (by default) as well as the WordPress unit testing tools. Then it creates a database to be used while running tests. The parameters that are passed to <code>install-wp-tests.sh</code> setup the test database.</p>\n<ul>\n<li><code>wordpress_test</code> is the name of the test database (<strong>all data will be deleted!</strong>)</li>\n<li><code>root</code> is the <span tabindex='0' class='glossary-item-container'>MySQL<span class='glossary-item-hidden-content'><span class='glossary-item-header'>MySQL</span> <span class='glossary-item-description'>MySQL is a relational database management system. A database is a structured collection of data where content, configuration and other options are stored. <a href=\"https://www.mysql.com/\">https://www.mysql.com/</a>.</span></span></span> user name</li>\n<li><code>''</code> is the MySQL user password</li>\n<li><code>localhost</code> is the MySQL server host</li>\n<li><code>latest</code> is the WordPress version; could also be <code>3.7</code>, <code>3.6.2</code> etc.</li>\n</ul>\n<p>NOTE: This script can be run multiple times without errors, but it will <em>not</em> overwrite previously existing files. So if your DB credentials change, or you want to switch to a different instance of mysql, simply re-running the script won\u2019t be enough. You\u2019ll need to manually edit the <code>wp-config.php</code> that\u2019s installed in <code>/tmp</code>.</p>\n<h3>4. Run the plugin tests</h3>\n<pre><code class=\"language-bash\">phpunit\n</code></pre>\n<p>If you have trouble running the install script or PHPUnit, check <a href=\"http://wp-cli.org/#support\">Support section</a> for help and answers to common issues.</p>\n<h2>Integrating WP Unit Testing in Windows</h2>\n<p>Tried and gotten stuck setting up unit tests for your project in Windows?</p>\n<p>First, know that some <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> commands don\u2019t work in Windows, so you\u2019ll want to use Cygwin. Cygwin is also <a href=\"https://make.wordpress.org/core/handbook/tutorials/working-with-patches/\">preferred by the WordPress core project</a>.</p>\n<p>Second, the <code>bin/install-wp-tests.sh</code> script doesn\u2019t work directly in Windows. Windows 10 <a href=\"http://www.pcworld.com/article/3106463/windows/how-to-get-bash-on-windows-10-with-the-anniversary-update.html\">introduced a Windows Subsystem for Linux</a> but older versions require extra effort. Cygwin is preferred because it runs bash scripts by default.</p>\n<p>Third, the bash installation script uses <code>which</code>, a Linux command not available by default in Windows. <code>cURL</code>, <code>svn</code> and <code>wget</code> all can be installed in Windows as separate packages.</p>\n<p>Lastly, sometimes the bash script fails to build WordPress because of how it uses tmp folders. If it fails, then you can manually install WordPress to a writeable directory, and then manually create <code>wp-tests-config.php</code>.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18128,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18134",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18134",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18134/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18331,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18134/revisions/18331"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18128"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18134"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

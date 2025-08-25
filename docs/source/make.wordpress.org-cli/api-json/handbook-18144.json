@@ -1,0 +1,98 @@
+{
+    "id": 18144,
+    "date": "2025-06-12T00:42:42",
+    "date_gmt": "2025-06-12T00:42:42",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/troubleshooting/"
+    },
+    "modified": "2025-07-01T13:13:44",
+    "modified_gmt": "2025-07-01T13:13:44",
+    "slug": "troubleshooting",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/troubleshooting/",
+    "title": {
+        "rendered": "Troubleshooting Guide"
+    },
+    "content": {
+        "rendered": "<p>Before you start to report a new issue on the <span tabindex='0' class='glossary-item-container'>GitHub<span class='glossary-item-hidden-content'><span class='glossary-item-header'>GitHub</span> <span class='glossary-item-description'>GitHub is a website that offers online implementation of git repositories that can easily be shared, copied and modified by other developers. Public repositories are free to host, private repositories require a paid subscription. GitHub introduced the concept of the \u2018pull request\u2019 where code changes done in branches by contributors can be reviewed and discussed before being merged be the repository owner.  <a href=\"https://github.com/\">https://github.com/</a></span></span></span> repository, make sure to check your local installation, as some settings may typically result in an unexpected outcome of your <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> commands.</p>\n<h3>How do I get more verbose informations about my WP-CLI installation?</h3>\n<p>WP-CLI offers the command <code>wp --info</code>, which provides you with a lot of information about your WP-CLI install environment. The output will tell you,<br>\n* what operating system and shell you work on<br>\n* which <span tabindex='0' class='glossary-item-container'>PHP<span class='glossary-item-hidden-content'><span class='glossary-item-header'>PHP</span> <span class='glossary-item-description'>PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. <a href=\"https://www.php.net/manual/en/preface.php\">https://www.php.net/manual/en/preface.php</a>.</span></span></span> binary is used to run WP-CLI<br>\n* what version of PHP is used<br>\n* where to find WP-CLI\u2019s root directory<br>\n* where to find the vendor directory of WP-CLI<br>\n* which WP-CLI binary  you are currently working with (phar path)<br>\n* where WP-CLI packages are stored<br>\n* where to find global and project configuration files for WP-CLI and<br>\n* which version of WP-CLI you use.</p>\n<h3>What should I do, before I start debugging issues?</h3>\n<p>Before you start to debug issues, make sure you are using the latest version of WP-CLI. The latest version may already have solved an issue you experience. The command <code>wp cli update</code> will upgrade your WP-CLI version or confirm you already use the latest version. If the installation hangs, please ensure that you are allowed to connect to GitHub using <span tabindex='0' class='glossary-item-container'>SSL<span class='glossary-item-hidden-content'><span class='glossary-item-header'>SSL</span> <span class='glossary-item-description'>Secure Socket Layer - Encryption from the server to the browser and back. Prevents prying eyes from seeing what you are sending between your browser and the server.</span></span></span> (port 443) and git (port 9418) for outbound connections.</p>\n<h3>What should I do if the WP-CLI output is different than expected?</h3>\n<p>Before starting to investigate a bug, you should be aware of the factors that can change the default behavior of WP-CLI and how you can check whether they might be at the root of the issue. There are five main subsystems for modifying this default behavior: environment variables, configuration files, WP-CLI packages, <code>wp-config.php</code> file and WordPress extensions (plugins, themes, must-use plugins, drop-ins).</p>\n<h4>Environment Variables</h4>\n<p>The setup of your working environment is a prerequisite for running WP-CLI. You can check your current environment settings with the shell command <code>env</code>.</p>\n<p>If you want to run WP-CLI remotely using <span tabindex='0' class='glossary-item-container'>SSH<span class='glossary-item-hidden-content'><span class='glossary-item-header'>SSH</span> <span class='glossary-item-description'>Secure SHell - a protocol for securely connecting to a remote system in addition to or in place of a password.</span></span></span>, it is required that the command <code>wp</code> is accessible on the path of the remote server. WP-CLI\u2019s behavior can also be changed at runtime through the use of environment variables:</p>\n<ul>\n<li><code>WP_CLI_CACHE_DIR</code> \u2013 Directory to store the WP-CLI file cache. Default is <code>~/.wp-cli/cache/</code>.</li>\n<li><code>WP_CLI_CONFIG_PATH</code> \u2013 Path to the global <code>config.yml</code> file. Default is <code>~/.wp-cli/config.yml</code>.</li>\n<li><code>WP_CLI_CUSTOM_SHELL</code> \u2013 Allows the user to override the default <code>/bin/bash</code> shell used.</li>\n<li><code>WP_CLI_DISABLE_AUTO_CHECK_UPDATE</code> \u2013 Disable WP-CLI automatic checks for updates.</li>\n<li><code>WP_CLI_DOCKER_NO_TTY</code> \u2013 Ignore detected tty status and remove the <code>--tty</code> flag from <code>docker exec</code> when running WP-CLI against a docker container via ssh.</li>\n<li><code>WP_CLI_DOCKER_NO_INTERACTIVE</code> \u2013 Ignore detected tty status and remove the <code>--interactive</code> flag from <code>docker exec</code> when running WP-CLI against a docker container via ssh.</li>\n<li><code>WP_CLI_PACKAGES_DIR</code> \u2013 Directory to store packages installed through WP-CLI\u2019s package management. Default is <code>~/.wp-cli/packages/</code>.</li>\n<li><code>WP_CLI_PHP</code> \u2013 PHP binary path to use when overriding the system default (only works for non-Phar installation).</li>\n<li><code>WP_CLI_PHP_ARGS</code> \u2013 Arguments to pass to the PHP binary when invoking WP-CLI (only works for non-Phar installation).</li>\n<li><code>WP_CLI_SSH_PRE_CMD</code> \u2013 When using <code>--ssh=&lt;ssh&gt;</code>, perform a command before WP-CLI calls WP-CLI on the remote server.</li>\n<li><code>WP_CLI_SSH_BINARY</code> \u2013 When using <code>--ssh=&lt;ssh&gt;</code>, this is the command that will be called on the remote machine in place of <code>wp</code>.</li>\n<li><code>WP_CLI_STRICT_ARGS_MODE</code> \u2013 Avoid ambiguity by telling WP-CLI to treat any arguments before the command as global, and after the command as local.</li>\n<li><code>WP_CLI_SUPPRESS_GLOBAL_PARAMS</code> \u2013 Set to <code>true</code> to skip showing the global parameters at the end of the help screen. This saves screen estate for advanced users.</li>\n<li><code>WP_CLI_FORCE_USER_LOGIN</code> \u2013 Set to <code>1</code> to force the value provided to the <code>--user</code> flag to be interpreted as a login instead of an ID, to get around ambiguous types.</li>\n<li><code>WP_CLI_EARLY_REQUIRE</code> \u2013 Load one or more custom PHP files (comma-separated) early on in the bootstrap process.</li>\n<li><code>WP_CLI_REQUIRE</code> \u2013 Load one or more custom PHP files (comma-separated) after the bootstrap process. This has the same effect as <code>--require</code> on the command line or a <code>require</code> mapping in a wp-cli.yml config file.</li>\n<li><code>WP_CLI_USER_AGENT</code> \u2013 Sets the <code>$_SERVER['HTTP_USER_AGENT']</code> value that some plugins and tools rely on.</li>\n</ul>\n<p>To set an environment variable on demand, you can place the environment variable definition before the WP-CLI command you mean to run (e.g. <code>EDITOR=vim wp post edit 1</code>); to overwrite environment variables, use <code>export VARIABLE=value</code> in your <code>~/.bashrc</code> or <code>~.zhsrc</code>.</p>\n<h4>WP-CLI Configuration Files</h4>\n<p>Configuration files let you customize the behavior of WP-CLI to adapt it to your personal needs or those of your project. If the configuration file is incorrect or includes unwanted modifications to the default behavior, the output of WP-CLI will most likely reflect the error.</p>\n<p>Note that a project configuration file can override settings in a global configuration file.</p>\n<p>Rename or delete your configuration file(s) and compare the result, to find out if a configuration setting might have caused the issue.</p>\n<h4>WP-CLI Packages</h4>\n<p>WP-CLI packages are community-maintained projects built on WP-CLI. They can contain WP-CLI commands, but they can also just extend WP-CLI in some way. While WP-CLI might be perfectly working, a package with errors can cause unexpected results, too. To skip loading all installed packages, use <code>wp --skip-packages</code>.</p>\n<h4>WordPress Configuration File (<code>wp-config.php</code>)</h4>\n<p>Errors may result from moving or editing <code>wp-config.php</code> beyond what WP-CLI supports. If you get a parse error, check the file encoding of your <code>wp-config.php</code> (UTF-8 without BOM).</p>\n<p>Make sure that the line <code>require_once(ABSPATH . 'wp-settings.php');</code> remains in the <code>wp-config.php</code> file and don\u2019t modify <code>wp-config.php</code> beyond constant definitions. If you call WordPress functions within <code>wp-config.php</code>, PHP will fail with a fatal error.</p>\n<p>If you want to use <code>$_SERVER['HTTP_HOST']</code> in your <code>wp-config.php</code>, you\u2019ll need to set a default value in WP-CLI context:</p>\n<pre><code>if ( defined( 'WP_CLI' ) &amp;&amp; WP_CLI &amp;&amp; ! isset( $_SERVER['HTTP_HOST'] ) ) {\n    $_SERVER['HTTP_HOST'] = `example.com';\n}\n</code></pre>\n<p>Instead of <code>$_SERVER['document_root']</code> use <code>dirname( __FILE__ )</code> or similar.</p>\n<h4>WordPress Extensions</h4>\n<p>WordPress Themes and Plugins might conflict with the loading process of WP-CLI or interfere e.g. by redirecting users. They often make assumptions that are not true in the WP-CLI context, like using the hostname of the current request (which is a concept that does not exist within command-line context).</p>\n<p>You can bypass single plugins and themes (e.g. <code>--skip-plugins=akismet</code>) or skip them entirely (<code>wp --skip-plugins --skip-themes</code>).</p>\n<h3>What should I do if WP-CLI reports an error?</h3>\n<p>Common problems are the result of changes in your <code>wp-config.php</code> or web server configuration. The section \u201c<a href=\"https://make.wordpress.org/cli/handbook/common-issues/\">Common issues</a>\u201d of the handbook lists the most common error messages and explains how to handle these errors.</p>\n<p>Try to reproduce the issue in a fresh installation of WordPress with a default Theme (Twenty \u2026) and no plugins installed. If the issue only reproduces in a custom environment, then the issue is a bug in your environment, not WP-CLI. Also make sure to enable WordPress\u2019 debugging mode by setting the constant <code>define( 'WP_DEBUG', true );</code> in your <code>wp-config.php</code>. It may reveal problems with your existing WordPress installation, not caused by WP-CLI.</p>\n<p>Additionally you can use WP-CLI\u2019s global parameter <code>--debug</code> to show all PHP errors and add verbosity to WP-CLI bootstrap.</p>\n<h3>I have checked all above, but still have an issue. Where can I report issues?</h3>\n<p>If you think you\u2019ve found a bug, we\u2019d love to hear from you to get it fixed.</p>\n<p>Bug reporting for WP-CLI is handled on GitHub. Before you create a new issue, please <a href=\"https://github.com/search?q=org%3Awp-cli+label%3Abug+is%3Aopen+sort%3Aupdated-desc&amp;type=issues\">search existing issues</a> to see if there\u2019s an existing resolution to it. If there isn\u2019t an open or fixed issue for your bug, please <a href=\"https://make.wordpress.org/cli/handbook/bug-reports/\">follow our guidelines for submitting a bug report</a> to make sure it gets addressed in a timely manner. Providing the summary, steps to reproduce, environmental details, and other specifics identified below will help guarantee you are submitting a full bug report.</p>\n<p>Please provide us with:<br>\n* a summary of the issue in narrative form,<br>\n* a detailed and specific list of steps to reproduce the issue,<br>\n* details of the environment you\u2019re working on,<br>\n* a description, how the bug affects your usage (i.e. expected results compared with actual results), including * severity level,<br>\n* possible workarounds and<br>\n* relevant diagnostics, such as crash reports, stack traces or debug output.</p>\n<p>You can find a verbose description of these details of an issue report in the <a href=\"https://make.wordpress.org/cli/handbook/bug-reports/\">guidelines for submitting a bug report</a>.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18370,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18144",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18144",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 2,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18144/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18365,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18144/revisions/18365"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18370"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18144"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

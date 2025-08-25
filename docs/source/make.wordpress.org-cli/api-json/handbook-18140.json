@@ -1,0 +1,98 @@
+{
+    "id": 18140,
+    "date": "2025-06-12T00:42:42",
+    "date_gmt": "2025-06-12T00:42:42",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/running-commands-remotely/"
+    },
+    "modified": "2025-07-01T13:14:15",
+    "modified_gmt": "2025-07-01T13:14:15",
+    "slug": "running-commands-remotely",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/running-commands-remotely/",
+    "title": {
+        "rendered": "Running Commands Remotely"
+    },
+    "content": {
+        "rendered": "<h2>Using an <span tabindex='0' class='glossary-item-container'>SSH<span class='glossary-item-hidden-content'><span class='glossary-item-header'>SSH</span> <span class='glossary-item-description'>Secure SHell - a protocol for securely connecting to a remote system in addition to or in place of a password.</span></span></span> connection</h2>\n<p><span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> accepts an <code>--ssh=[&lt;scheme&gt;:][&lt;user&gt;@]&lt;host&gt;[:&lt;port&gt;][&lt;path&gt;]</code> global parameter for running a command against a remote WordPress install. This argument works similarly to how the SSH connection is parameterized in tools like <code>scp</code> or <code>git</code>.</p>\n<p>Under the hood, WP-CLI proxies commands to the ssh executable, which then passes them to the WP-CLI installed on the remote machine. The syntax for <code>--ssh=[&lt;scheme&gt;:][&lt;user&gt;@]&lt;host&gt;[:&lt;port&gt;][&lt;path&gt;]</code> is interpreted according to the following rules:</p>\n<ul>\n<li>The <strong>scheme</strong> argument defaults to <code>ssh</code> and alternately accepts options for <code>vagrant</code>, <code>docker</code> and <code>docker-compose</code>.</li>\n<li>If you provide just the <strong>host</strong> (e.g. <code>wp --ssh=example.com</code>), the user will be inferred from your current system user, the port will be the default SSH port (22) and the path will be the SSH user\u2019s home directory.</li>\n<li>You can override the <strong>user</strong> by adding it as a prefix terminated by the at sign (e.g. <code>wp --ssh=admin_user@example.com</code>).</li>\n<li>You can override the <strong>port</strong> by adding it as a suffix prepended by a colon (e.g. <code>wp --ssh=example.com:2222</code>). </li>\n<li>You can override the <strong>path</strong> by adding it as a suffix (e.g. <code>wp --ssh=example.com~/webapps/production</code>). The path comes immediately after the port, or after the TLD of the host if you didn\u2019t explicitly set a port.</li>\n<li>You can alternatively provide a known <strong>alias</strong>, stored in <code>~/.ssh/config</code> (e.g. <code>wp --ssh=rc</code> for the <code>@rc</code> alias).</li>\n</ul>\n<p><strong>Note: you need to have a copy of WP-CLI installed on the remote server, accessible as <code>wp</code>.</strong></p>\n<p>Furthermore, <code>--ssh=&lt;host&gt;</code> won\u2019t load your <code>~/.bash_profile</code> if you have a shell alias defined, or are extending the <code>$PATH</code> environment variable. If this affects you, <a href=\"https://make.wordpress.org/cli/handbook/running-commands-remotely/#making-wp-cli-accessible-on-a-remote-server\">here\u2019s a more thorough explanation</a> of how you can make <code>wp</code> accessible.</p>\n<h3>Scheme</h3>\n<p>You can utilize the scheme component of the ssh argument to define a shorthand for connecting to local containerized or virtualized machines.</p>\n<p>The <strong>scheme</strong> argument is set to <code>ssh</code> by default, but it also accepts <code>vagrant</code>, <code>docker</code>, and <code>docker-compose</code> as alternate options.</p>\n<h4>docker</h4>\n<p>To use Docker, the command is: <code>wp rewrite flush --ssh=docker:&lt;name&gt;</code><br>\nThe Docker container\u2019s name can be found by using the <code>docker ps</code> command.</p>\n<h4>docker-compose</h4>\n<p>For Docker Compose, the command is: <code>wp option get home_url --ssh=docker-compose:&lt;name&gt;</code><br>\nThe Docker container\u2019s name can be located in the <code>docker-compose.yml</code> file.</p>\n<h4>vagrant</h4>\n<p>With Vagrant, you can use the command: <code>wp rewrite flush --ssh=vagrant:&lt;name&gt;</code></p>\n<h2>Aliases</h2>\n<p>WP-CLI aliases are shortcuts you register in your <code>wp-cli.yml</code> or <code>config.yml</code> to effortlessly run commands against any WordPress install.</p>\n<p>For instance, when you are working locally, have registered a new rewrite rule and need to flush rewrites inside of your Vagrant-based virtual machine, you can run:</p>\n<pre><code># Run the flush command on the development environment\n$ wp @dev rewrite flush\nSuccess: Rewrite rules flushed.\n</code></pre>\n<p>Then, once the code goes to production, you can run:</p>\n<pre><code># Run the flush command on the production environment\n$ wp @prod rewrite flush\nSuccess: Rewrite rules flushed.\n</code></pre>\n<p>You don\u2019t need to SSH into machines, change directories, and generally spend a full minute to get to a given WordPress install, you can just let WP-CLI know what machine to work with and it knows how to make the actual connection.</p>\n<p>It can also easily utilize Vagrant\u2019s ssh helper command to figure out the SSH parameters, by piping the WP-CLI command to <code>vagrant ssh</code> using the <code>vagrant</code> scheme like <code>--ssh=vagrant:default</code> where <code>default</code> is the Vagrant machine name/id, or if defined as an alias like the examples below. Some Vagrant boxes <a href=\"https://github.com/Chassis/Chassis/tree/main\">ship this by default</a> so you can use WP-CLI from the host machine out-of-the-box.</p>\n<p>Additionally, alias groups let you register groups of aliases. If you want to run a command against both configured example sites, you can use a group like <code>@both</code>:</p>\n<pre><code># Run the update check on both environments\n$ wp @both core check-update\nSuccess: WordPress is at the latest version.\nSuccess: WordPress is at the latest version.\n</code></pre>\n<p>Aliases can be registered in your project\u2019s <code>wp-cli.yml</code> file, or your user\u2019s global <code>~/.wp-cli/config.yml</code> file:</p>\n<pre><code class=\"language-yaml\">@prod:\n  ssh: dev_user@example.com~/webapps/production\n@dev:\n  ssh: vagrant@192.168.50.10/srv/www/example.dev\n@local:\n  ssh: vagrant:default\n@both:\n  - @prod\n  - @dev\n</code></pre>\n<p>You can find more information about how to set up your configuration files in the <a href=\"https://make.wordpress.org/cli/handbook/config/#config-files\">Config section</a>.</p>\n<h2>Running custom commands remotely</h2>\n<p>If you want to run a custom command on a remote server, that custom command needs to be installed on the remote server, but it does not have to be installed on the local machine you\u2019re launching <code>wp</code> from.</p>\n<p>You can use the WP-CLI package manager remotely to install custom commands to remote machines.</p>\n<p>Example:</p>\n<pre><code># The command is not installed on either local or remote machine\n$ wp db ack\nError: 'ack' is not a registered subcommand of 'db'. See 'wp help db'.\n$ wp @dev db ack\nError: 'ack' is not a registered subcommand of 'db'. See 'wp help db'.\n\n# To make the command work on the remote machine, we can install it remotely\n# through the WP-CLI package manager\n$ wp @dev package install runcommand/db-ack\nInstalling package runcommand/db-ack (dev-master)\nUpdating /home/vagrant/.wp-cli/packages/composer.json to require the package...\nUsing Composer to install the package...\n---\nLoading composer repositories with package information\nUpdating dependencies\nResolving dependencies through SAT\nDependency resolution completed in 0.311 seconds\nAnalyzed 4726 packages to resolve dependencies\nAnalyzed 162199 rules to resolve dependencies\nPackage operations: 1 install, 0 updates, 0 removals\nInstalls: runcommand/db-ack:dev-master aff8ccc\n - Installing runcommand/db-ack (dev-master aff8ccc)\nWriting lock file\nGenerating autoload files\n---\nSuccess: Package installed.\n\n# Now we can run the command remotely, even though it is not installed locally\n$ wp @dev db ack test_email@example.com\nwp_users:user_email\n9:test_email@example.com\n</code></pre>\n<h2>Making WP-CLI accessible on a remote server</h2>\n<p>Running a command remotely through SSH requires having <code>wp</code> accessible on the <code>$PATH</code> on the remote server. Because SSH connections don\u2019t load <code>~/.bashrc</code> or <code>~/.zshrc</code>, you may need to specify a custom <code>$PATH</code> when using <code>wp --ssh=&lt;host&gt;</code>.  A few ways to make <code>wp</code> available on the remote server are:</p>\n<h3>Copy WP-CLI binary to $HOME / bin</h3>\n<p>In many Linux distros, <code>$HOME/bin</code> is in the <code>$PATH</code> by default, so a way to make <code>wp</code> accessible is to create a <code>$HOME/bin</code> directory, if it doesn\u2019t already exist, and move the WP-CLI binary into <code>$HOME/bin/wp</code>:</p>\n<pre><code class=\"language-sh\">mkdir -p ~/bin\ncd ~/bin\ncurl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar\nchmod +x wp-cli.phar\nmv wp-cli.phar wp\n</code></pre>\n<p>If <code>$HOME/bin</code> is not already in your path, then you can define it in your <code>~/.bashrc</code> file or equivalent for your remote server\u2019s specific shell:</p>\n<pre><code class=\"language-sh\">#.bashrc\nPATH=\"$HOME/bin:$PATH\"\n</code></pre>\n<h3>Specify the $PATH in $HOME / .ssh/ environment</h3>\n<p>Another way to achieve this is to specify the <code>$PATH</code> in the remote machine user\u2019s <code>~/.ssh/environment</code> file, provided that that machine\u2019s <code>sshd</code> has been configured with <code>PermitUserEnvironment=yes</code> (see <a href=\"https://en.wikibooks.org/wiki/OpenSSH/Client_Configuration_Files#.7E.2F.ssh.2Fenvironment\">OpenSSH documentation</a>).</p>\n<h3>Remote non-interactive shell resolves aliases and runs wp as alias with php</h3>\n<p>Some webhosts are configured very restrictive:<br>\n\u2013 They do not allow you to execute your own shellscripts, so everything from method <a href=\"#copy-wp-cli-binary-to-home-bin\">WP-CLI binary</a> fails.<br>\n\u2013 <code>sshd</code> is configured with <code>PermitUserEnvironment=no</code>, so customizing <a href=\"#specify-the-path-in-home-ssh-environment\">~/.ssh/environment</a> has no effect and fails too.<br>\n\u2013 Also <a href=\"#using-before_ssh-hook-on-client-machine\">using the before_ssh hook on the client machine</a> will not help you, as in all cases you cannot run <code>wp</code> on the remote.</p>\n<p>The solution: On the remote configure <code>~/.bashrc</code> like this:</p>\n<h4>Configure the remote non-interactive shell to resolve aliases</h4>\n<ul>\n<li>By default <a href=\"https://unix.stackexchange.com/questions/425319/how-do-i-execute-a-remote-alias-over-an-ssh/425323#425323\">aliases in non-interactive shells are not resolved</a> but you can change that:\n<ul>\n<li>Somewhere very much on top of your <code>~/.bashrc</code> (certainly before the first alias definitions) insert:</li>\n</ul>\n<pre><code>shopt -s expand_aliases\n</code></pre>\n<ul>\n<li>Be also sure that there\u2019s no mechanism which exits the non-interactive shell too early! If you have something like the following construct on top (e.g. Ubuntu is configured like this) then outcomment or delete all lines of the construct:</li>\n</ul>\n<pre><code># If not running interactively, don't do anything\n[ -z \"$PS1\" ] &amp;&amp; return\n</code></pre>\n</li>\n</ul>\n<h4>Alias wp to php which runs the WP-CLI binary</h4>\n<ul>\n<li>Somewhere after the <code>shopt -s expand_aliases</code> line insert:\n<ul>\n<li><code>alias wp=\"php ~/bin/wp\"</code></li>\n<li>or</li>\n<li><code>alias wp=\"php ~/bin/wp-cli.phar\"</code></li>\n</ul>\n</li>\n<li>In other words: You have an alias \u201cwp\u201d which is a one liner where php runs the WP-CLI binary by stating the path to the <code>wpi-cli.phar</code> file, wherever it may be, under whatever name it may have.\n<ul>\n<li><code>php</code> is allowed on basically any webhost.</li>\n<li>And the <code>wp-cli.phar</code> file itself must not even have the execute flag set (=\u201dcan be entirely passive\u201d), as formally the file gets run (=interpreted) by <code>php</code>. <strong>Note:</strong> An executable <code>~/bin/wp</code> file (the renamed <code>wp-cli.phar</code> with an execute flag) of course also gets run by the <code>php</code> interpreter eventually. But the invocation in the shell is formally different. And that is what makes the crucial difference here.</li>\n</ul>\n</li>\n</ul>\n<h3>Using before_ssh hook on client machine</h3>\n<p>Alternatively, in case you cannot make it work from within the server, you can achieve the same effect by hooking into the <code>before_ssh</code> hook, and defining an environment variable with the command you\u2019d like to run:</p>\n<pre><code class=\"language-php\">WP_CLI::add_hook( 'before_ssh', function() {\n\n    $host = WP_CLI\\Utils\\parse_ssh_url(\n        WP_CLI::get_runner()-&gt;config['ssh'],\n        PHP_URL_HOST\n    );\n\n    switch( $host ) {\n        case 'example.com':\n            putenv( 'WP_CLI_SSH_PRE_CMD=export PATH=$HOME/bin:$PATH' );\n            break;\n    }\n} );\n</code></pre>\n<p>If you put the code above in a <code>pre-ssh.php</code> file, you can load it for your entire environment by requiring it from your <code>~/.wp-cli/config.yml</code> file:</p>\n<pre><code class=\"language-yaml\">require:\n  - pre-ssh.php\n</code></pre>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18370,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18140",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18140",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18140/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18325,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18140/revisions/18325"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18370"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18140"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

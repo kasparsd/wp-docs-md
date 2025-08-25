@@ -1,0 +1,98 @@
+{
+    "id": 18123,
+    "date": "2025-06-12T00:42:41",
+    "date_gmt": "2025-06-12T00:42:41",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/hosting-companies/"
+    },
+    "modified": "2025-07-01T13:06:53",
+    "modified_gmt": "2025-07-01T13:06:53",
+    "slug": "hosting-companies",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/hosting-companies/",
+    "title": {
+        "rendered": "Hosting Companies"
+    },
+    "content": {
+        "rendered": "<p>The following is a list of hosting companies that have <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> installed by default for their customers, i.e. when they first <span tabindex='0' class='glossary-item-container'>SSH<span class='glossary-item-hidden-content'><span class='glossary-item-header'>SSH</span> <span class='glossary-item-description'>Secure SHell - a protocol for securely connecting to a remote system in addition to or in place of a password.</span></span></span> into their server, the <code>wp</code> command is already available.</p>\n<p>In alphabetical order:</p>\n<ul>\n<li><a href=\"https://www.2020media.com/\">2020Media</a></li>\n<li><a href=\"https://www.20i.com/\">20i</a></li>\n<li><a href=\"https://www.34sp.com\">34SP.com</a></li>\n<li><a href=\"https://www.a2hosting.com/\">A2 Hosting</a></li>\n<li><a href=\"https://alldomains.hosting/webhosting-server.html\">Alldomains.Hosting</a></li>\n<li><a href=\"https://www.altis-dxp.com/\">Altis Cloud Platform</a></li>\n<li><a href=\"https://www.altushost.com/\">AltusHost</a></li>\n<li><a href=\"https://amimoto-ami.com/\">Amimoto</a></li>\n<li><a href=\"https://bigcloudy.com/\">BigCloudy</a></li>\n<li><a href=\"https://www.bluehost.com/\">Bluehost</a></li>\n<li><a href=\"https://cyberfusion.io\">Cyberfusion</a></li>\n<li><a href=\"https://www.hypernode.com/nl/\">Hypernode</a></li>\n<li><a href=\"https://www.cloudhostworld.com\">CloudHostWorld</a></li>\n<li><a href=\"https://www.cloudways.com/en/\">Cloudways</a></li>\n<li><a href=\"https://convesio.com\">Convesio</a></li>\n<li><a href=\"https://curanet.dk\">Curanet</a></li>\n<li><a href=\"https://d9.hosting\">D9 Hosting</a></li>\n<li><a href=\"https://dandomain.dk\">DanDomain</a></li>\n<li><a href=\"https://dataperk.com\">DataPerk</a></li>\n<li><a href=\"https://dhosting.pl/\">Dhosting.pl</a></li>\n<li><a href=\"https://dinahosting.com/\">dinahosting</a></li>\n<li><a href=\"https://www.domaintechnik.at/hosting-oesterreich.html\">Domaintechnik.AT</a></li>\n<li><a href=\"https://www.dreamhost.com/\">Dreamhost</a></li>\n<li><a href=\"https://www.fasthosts.co.uk/\">Fasthosts</a></li>\n<li><a href=\"https://www.godaddy.com/help/use-wp-cli-to-manage-your-site-12066\">GoDaddy</a></li>\n<li><a href=\"https://www.greengeeks.com/tutorials/wp-cli/\">GreenGeeks</a></li>\n<li><a href=\"https://gridhosting.co.uk/\">Grid Hosting</a></li>\n<li><a href=\"https://www.hoasted.com/reseller/\">Hoasted</a></li>\n<li><a href=\"https://www.hosting4agency.com/news/wp-cli-come-usarlo/\">Hosting4Agency</a></li>\n<li><a href=\"https://host4geeks.com/managed-wordpress-hosting\">Host4Geeks</a></li>\n<li><a href=\"https://www.hosterion.com\">Hosterion</a></li>\n<li><a href=\"https://www.hostgator.com/\">HostGator</a></li>\n<li><a href=\"https://hostico.ro\">Hostico</a></li>\n<li><a href=\"https://www.hostinger.com\">Hostinger</a></li>\n<li><a href=\"https://www.hostpapa.com\">HostPapa</a></li>\n<li><a href=\"https://hostpresto.com\">HostPresto</a></li>\n<li><a href=\"https://hostriver.ro/gazduire-wordpress\">HostRiver</a></li>\n<li><a href=\"https:///www.icdsoft.com\">ICDSoft</a></li>\n<li><a href=\"https://www.infomaniak.com/en/create-a-website/wordpress-hosting\">Infomaniak</a></li>\n<li><a href=\"https://www.ionos.com/\">IONOS</a></li>\n<li><a href=\"https://jdm.pl\">JDM.pl</a></li>\n<li><a href=\"https://kdaws.com\">KDAWS.com</a></li>\n<li><a href=\"https://kinsta.com\">Kinsta</a></li>\n<li><a href=\"https://kiravo.net\">Kiravo</a></li>\n<li><a href=\"https://www.knownhost.com\">KnownHost</a></li>\n<li><a href=\"https://krystal.io/\">Krystal Hosting</a></li>\n<li><a href=\"https://www.lh.pl/hosting\">LH.pl</a></li>\n<li><a href=\"https://www.lima-city.de/webhosting/wordpress\">lima-city</a></li>\n<li><a href=\"https://liquidweb.com/wordpress\">Liquid Web</a></li>\n<li><a href=\"https://www.managedwphosting.nl/\">ManagedWPHosting</a></li>\n<li><a href=\"https://minhost.no\">MinHost</a></li>\n<li><a href=\"https://www.mittwald.de/\">Mittwald</a></li>\n<li><a href=\"https://monarobase.net/wordpress\">Monarobase</a></li>\n<li><a href=\"https://www.monstermegs.com\">MonsterMegs</a></li>\n<li><a href=\"https://www.namehero.com\">NameHero</a></li>\n<li><a href=\"https://www.nearlyfreespeech.net/\">NearlyFreeSpeech.NET</a></li>\n<li><a href=\"https://www.netsite.dk/\">Netsite</a></li>\n<li><a href=\"https://netzadresse.at/\">Netzadresse.at</a></li>\n<li><a href=\"https://www.nexcess.net/\">Nexcess.Net</a></li>\n<li><a href=\"https://www.oderland.com/\">Oderland Hosting Services</a></li>\n<li><a href=\"https://www.one.com/\">One.com</a></li>\n<li><a href=\"https://pagely.com/\">Pagely</a></li>\n<li><a href=\"https://pantheon.io\">Pantheon</a></li>\n<li><a href=\"https://radwebhosting.com\">Rad Web Hosting</a></li>\n<li><a href=\"https://rocket.net\">Rocket.net</a></li>\n<li><a href=\"https://www.rosehosting.com\">RoseHosting</a></li>\n<li><a href=\"https://www.savvii.com/\">Savvii</a></li>\n<li><a href=\"https://www.scannet.dk\">ScanNet</a></li>\n<li><a href=\"https://seravo.com\">Seravo.com</a></li>\n<li><a href=\"https://servebolt.com\">Servebolt.com</a></li>\n<li><a href=\"https://simplenet.ro\">Simplenet.ro</a></li>\n<li><a href=\"https://www.simply.com\">Simply.com</a></li>\n<li><a href=\"https://www.site5.com/\">Site5</a></li>\n<li><a href=\"https://sitedistrict.com/\">SiteDistrict</a></li>\n<li><a href=\"https://www.siteground.com/\">SiteGround</a></li>\n<li><a href=\"https://spinupwp.com/\">SpinupWP</a></li>\n<li><a href=\"https://theemailshop.co.uk/\">The Email Shop</a></li>\n<li><a href=\"https://templ.io/\">Templ</a></li>\n<li><a href=\"https://truefalsehosting.rs\">True-False Hosting</a></li>\n<li><a href=\"https://trulywp.com/\">TrulyWP</a></li>\n<li><a href=\"https://tvcnet.com/\">TVC.Net</a></li>\n<li><a href=\"https://unlimited.rs/\">UNLIMITED.RS</a></li>\n<li><a href=\"https://www.veerotech.net/\">Veerotech</a></li>\n<li><a href=\"https://voteq.co.uk/\">Voteq \u2013 Website Solutions</a></li>\n<li><a href=\"https://www.wannafind.dk\">Wannafind</a></li>\n<li><a href=\"https://www.wnpower.com/\">WNPower Hosting</a></li>\n<li><a href=\"https://wordpress.com/\">WordPress.com</a></li>\n<li><a href=\"https://wpengine.com\">WP Engine.com</a></li>\n<li><a href=\"https://wpprovider.nl/\">WP Provider</a></li>\n<li><a href=\"https://xel.nl\">XEL</a></li>\n<li><a href=\"https://zenbox.pl\">Zenbox</a></li>\n<li><a href=\"https://zenithmedia.ca/wordpress-website-hosting/\">Zenith Media Canada</a></li>\n</ul>\n<p>The following is a list of hosting companies that use WP-CLI, whereby their customers can write and request the running of standard and custom WP-CLI commands:</p>\n<ul>\n<li><a href=\"https://pressidium.com\">Pressidium</a></li>\n<li><a href=\"https://www.presslabs.com\">Presslabs</a></li>\n<li><a href=\"https://wpvip.com/\">WordPress VIP</a></li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18371,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18123",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18123",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18123/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18342,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18123/revisions/18342"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18371"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18123"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

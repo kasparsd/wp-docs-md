@@ -1,0 +1,98 @@
+{
+    "id": 18114,
+    "date": "2025-06-12T00:42:40",
+    "date_gmt": "2025-06-12T00:42:40",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/doctor-customize-config/"
+    },
+    "modified": "2025-07-01T13:10:29",
+    "modified_gmt": "2025-07-01T13:10:29",
+    "slug": "doctor-customize-config",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/doctor/doctor-customize-config/",
+    "title": {
+        "rendered": "Customize doctor diagnostic checks"
+    },
+    "content": {
+        "rendered": "<p>Even though <code>wp doctor</code> comes with a <a href=\"https://make.wordpress.org/cli/handbook/doctor-default-checks/\">number of default diagnostic checks</a>, it\u2019s designed with extensibility at its <span tabindex='0' class='glossary-item-container'>core<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Core</span> <span class='glossary-item-description'>Core is the set of software required to run WordPress. The Core Development Team builds WordPress.</span></span></span>. Checks are defined at runtime, read from a <code>doctor.yml</code> configuration file naming each check with its options.</p>\n<h2>doctor.yml format</h2>\n<p>Let\u2019s take a look at the first two checks in the included <code>doctor.yml</code>:</p>\n<pre><code>autoload-options-size:\n  check: Autoload_Options_Size\nconstant-savequeries-falsy:\n  check: Constant_Definition\n  options:\n    constant: SAVEQUERIES\n    falsy: true\n</code></pre>\n<p>In this example:</p>\n<ul>\n<li>\u2018autoload-options-size\u2019 and \u2018constant-savequeries-falsy\u2019 are the <em>names</em> for the checks. Names must be unique amongst all registered checks.</li>\n<li><code>Autoload_Options_Size</code> and <code>Constant_Definition</code> are reusable check classes in the <code>runcommand\\Doctor\\Checks</code> namespace. You can use them too, or you can write your own class extending <code>runcommand\\Doctor\\Checks\\Check</code> and supply it as \u2018class: yourNamespace\\yourClassName\u2019.</li>\n<li>\u2018constant\u2019 and \u2018falsy\u2019 are configuration options accepted by the <code>Constant_Definition</code> class. In this case, we\u2019re telling doctor to ensure <code>SAVEQUERIES</code> is either false or undefined.</li>\n</ul>\n<p>For the sake of completeness, it\u2019s also worth noting <code>Autoload_Options_Size</code> accepts \u2018threshold_kb\u2019 as an optional configuration option. The default value for \u2018threshold_kb\u2019 is 900, so it doesn\u2019t needed be included in the <code>doctor.yml</code>.</p>\n<h2>Custom doctor.yml configuration files</h2>\n<p>Run your own doctor checks by creating a <code>doctor.yml</code> and supplying it with <code>wp doctor check --config=doctor.yml</code>. Use different configurations for different environments by creating separate <code>prod.yml</code> and <code>dev.yml</code> files.</p>\n<p>If you want your custom file to extend an existing doctor config, you can use the magical <code>_</code> config file option to define which config file to inherit. \u2018default\u2019 is a magic reference to the bundled <code>doctor.yml</code>; you also specify an entire file path.</p>\n<p>Take a look at this example:</p>\n<pre><code>_:\n  inherit: default\n  skipped_checks:\n    - autoload-options-size\nconstant-disallow-file-mods-falsy:\n  check: Constant_Definition\n  options:\n    constant: DISALLOW_FILE_MODS\n    falsy: true\nplugin-akismet-active\n  check: Plugin_Status\n  options:\n    plugin: akismet\n    status: active\nplugin-akismet-valid-api-key:\n  class: Akismet_Valid_API_Key\n  require: akismet-valid-api-key.php\n</code></pre>\n<p>This custom <code>doctor.yml</code> file:</p>\n<ul>\n<li>Inherits all default diagnostic checks except for \u2018autoload-options-size\u2019.</li>\n<li>Defines a \u2018constant-disallow-file-mods-falsy\u2019 check to ensure the <code>DISALLOW_FILE_MODS</code> constant is falsy.</li>\n<li>Defines a \u2018<span tabindex='0' class='glossary-item-container'>plugin<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Plugin</span> <span class='glossary-item-description'>A plugin is a piece of software containing a group of functions that can be added to a WordPress website. They can extend functionality or add new features to your WordPress websites. WordPress plugins are written in the PHP programming language and integrate seamlessly with WordPress. These can be free in the WordPress.org Plugin Directory https://wordpress.org/plugins/ or can be cost-based plugin from a third-party</span></span></span>-akismet-active\u2019 check to ensure Akismet is active.</li>\n<li>Defines a \u2018plugin-akismet-valid-api-key\u2019 <a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-write-custom-check/\">custom check in a akismet-valid-api-key.php file</a> to ensure Akismet has a valid <span tabindex='0' class='glossary-item-container'>API<span class='glossary-item-hidden-content'><span class='glossary-item-header'>API</span> <span class='glossary-item-description'>An API or Application Programming Interface is a software intermediary that allows programs to interact with each other and share data in limited, clearly defined ways.</span></span></span> key.</li>\n</ul>\n<h2>Available check types</h2>\n<p>Some <code>wp doctor</code> check types are configurable, meaning the default setting can be changed, while other check types are abstracted in such a way that they can be reusable. For instance, the <code>Autoload_Options_Size</code> check accepts an option \u2018threshold_kb\u2019 while <code>Plugin_Status</code> accepts \u2018plugin\u2019 and \u2018status\u2019 as options.</p>\n<p>The configurable check types include:</p>\n<ul>\n<li><code>check: Autoload_Options_Size</code>: Accepts \u2018threshold_kb\u2019 as an option to set the threshold in kilobytes. Default value is 900.</li>\n<li><code>check: Cron_Count</code>: Accepts \u2018threshold_count\u2019 as an option to set the threshold of total cron jobs. Default value is 50.</li>\n<li><code>check: Cron_Duplicates</code>: Accepts \u2018threshold_count\u2019 as an option to set the threshold of duplicate cron jobs. Default value is 10.</li>\n<li><code>check: Plugin_Active_Count</code>: Accepts \u2018threshold_count\u2019 as an option to set the threshold of total active plugins. Default is 80.</li>\n<li><code>check: Plugin_Deactivated</code>: Accepts \u2018threshold_percentage\u2019 as an option to set the threshold of percentage deactivated plugins. Default is 40.</li>\n</ul>\n<p>The abstracted check types include:</p>\n<ul>\n<li><code>check: Constant_Definition</code>: Assert a given constant as defined, a specific value, or falsy. <a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-check-constant-value/\">Learn more</a>.</li>\n<li><code>check: File_Contents</code>: Check all or a selection of WordPress files for a given regex pattern. <a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-check-file-contents/\">Learn more</a>.</li>\n<li><code>check: Option_Value</code>: Assert a given option as a specific value. <a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-check-option-value/\">Learn more</a>.</li>\n<li><code>check: Plugin_Status</code>: Assert a given plugin as active, installed, or uninstalled. <a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-check-plugin-status/\">Learn more</a>.</li>\n</ul>\n<p>Of course, some check types don\u2019t need configuration options:</p>\n<ul>\n<li><code>check: Core_Update</code>: Errors when new WordPress <span tabindex='0' class='glossary-item-container'>minor release<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Minor Release</span> <span class='glossary-item-description'>A set of releases or versions having the same minor version number may be collectively referred to as .x , for example version 5.2.x to refer to versions 5.2, 5.2.1, 5.2.3, and all other versions in the 5.2 (five dot two) branch of that software. Minor Releases often make improvements to existing features and functionality.</span></span></span> is available; warns for <span tabindex='0' class='glossary-item-container'>major release<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Major Release</span> <span class='glossary-item-description'>A set of releases or versions having the same major version number may be collectively referred to as \u201cX.Y\u201d -- for example version 5.2.x to refer to versions 5.2, 5.2.1, and all other versions in the 5.2. (five dot two dot) branch of that software. Major Releases often are the introduction of new major features and functionality.</span></span></span>.</li>\n<li><code>check: Core_Verify_Checksums</code>: Verifies WordPress files against published checksums; errors on failure.</li>\n<li><code>check: Plugin_Update</code>: Warns when there are plugin updates available.</li>\n<li><code>check: Theme_Update</code>: Warns when there are theme updates available.</li>\n</ul>\n<p>You can <a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-write-custom-check/\">write your own custom check type</a> by extending the <code>runcommand\\Doctor\\Checks\\Check</code> class.</p>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18117,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18114",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18114",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18114/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18351,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18114/revisions/18351"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18117"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18114"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

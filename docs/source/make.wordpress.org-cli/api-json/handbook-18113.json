@@ -1,0 +1,98 @@
+{
+    "id": 18113,
+    "date": "2025-06-12T00:42:40",
+    "date_gmt": "2025-06-12T00:42:40",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/doctor-check-plugin-status/"
+    },
+    "modified": "2025-07-01T13:09:23",
+    "modified_gmt": "2025-07-01T13:09:23",
+    "slug": "doctor-check-plugin-status",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/guides/doctor/doctor-check-plugin-status/",
+    "title": {
+        "rendered": "Check status of a given plugin"
+    },
+    "content": {
+        "rendered": "<p>One of the check types included in <code>wp doctor</code> is <code>Plugin_Status</code>, or the ability to assert that a given <span tabindex='0' class='glossary-item-container'>plugin<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Plugin</span> <span class='glossary-item-description'>A plugin is a piece of software containing a group of functions that can be added to a WordPress website. They can extend functionality or add new features to your WordPress websites. WordPress plugins are written in the PHP programming language and integrate seamlessly with WordPress. These can be free in the WordPress.org Plugin Directory https://wordpress.org/plugins/ or can be cost-based plugin from a third-party</span></span></span> should be active, installed, or uninstalled. Although the check type isn\u2019t use by any of the <a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-default-checks/\">default diagnostic checks</a>, you can use the <code>Plugin_Status</code> check type in your <a href=\"https://make.wordpress.org/cli/handbook/guides/doctor/doctor-customize-config/\">custom <code>doctor.yml</code> configuration file</a>.</p>\n<p>As an example, here are two checks using <code>Plugin_Status</code>, one which ensures Akismet is active on the system and other which ensures Hello Dolly is uninstalled:</p>\n<pre><code>plugin-akismet-active:\n  check: Plugin_Status\n  options:\n    name: akismet\n    status: active\nplugin-hello-uninstalled:\n  check: Plugin_Status\n  options:\n    name: hello\n    status: uninstalled\n</code></pre>\n<p>Run together, you might see:</p>\n<pre><code>$ wp doctor check --config=plugin-status.yml --all\n+--------------------------+---------+----------------------------------------------------------------+\n| name                     | status  | message                                                        |\n+--------------------------+---------+----------------------------------------------------------------+\n| plugin-akismet-active    | success | Plugin 'akismet' is 'active' as expected.                      |\n| plugin-hello-uninstalled | error   | Plugin 'hello' is 'inactive' but expected to be 'uninstalled'. |\n+--------------------------+---------+----------------------------------------------------------------+\n</code></pre>\n<p>The <code>Plugin_Status</code> check type accepts the following options:</p>\n<ul>\n<li>\u2018name\u2019: Name of the plugin as it appears in <code>wp plugin list</code>.</li>\n<li>\u2018status\u2019: Expected plugin status as one of \u2018active\u2019, \u2018installed\u2019, or \u2018uninstalled\u2019.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18117,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18113",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18113",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18113/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18352,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18113/revisions/18352"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18117"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18113"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

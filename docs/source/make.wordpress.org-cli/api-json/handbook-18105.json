@@ -1,0 +1,98 @@
+{
+    "id": 18105,
+    "date": "2025-06-12T00:42:39",
+    "date_gmt": "2025-06-12T00:42:39",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/committers-credo/"
+    },
+    "modified": "2025-07-01T13:08:15",
+    "modified_gmt": "2025-07-01T13:08:15",
+    "slug": "committers-credo",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/contributions/committers-credo/",
+    "title": {
+        "rendered": "Committers Credo"
+    },
+    "content": {
+        "rendered": "<p>Some people have write access to <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> repositories. These people are identified in the following teams:</p>\n<ul>\n<li><a href=\"https://github.com/orgs/wp-cli/teams/maintainers\">maintainers</a> \u2013 Project leadership</li>\n<li><a href=\"https://github.com/orgs/wp-cli/teams/committers\">committers</a> \u2013 Trusted contributors</li>\n</ul>\n<p>This \u201cCommitters credo\u201d is a living document. It\u2019s meant to establish generally agreed upon standards for committers, and will continue to evolve over time.</p>\n<h2>Product quality</h2>\n<p>WP-CLI is a project depended upon by the entire WordPress ecosystem. This trust is earned by producing a consistent, dependable, and high quality product. WP-CLI committers hold product and code quality in the highest regard.</p>\n<p>Practically-speaking:</p>\n<ul>\n<li>Given a choice between Good, Fast, and Cheap, we pick Good and Slow. Creating great software is a journey, not a destination.</li>\n<li>Product decisions are made <a href=\"https://make.wordpress.org/cli/handbook/philosophy/\">in alignment with our core philosophy</a>.</li>\n<li><a href=\"https://make.wordpress.org/cli/handbook/code-review/\">Code review is an integral part of our development workflow</a>. Pull requests need approval of at least one other committer before merging. If you\u2019d like more than one code review, please don\u2019t hesitate to request one. You can request a review from a specific person, or from the <code>@wp-cli/committers</code> team.</li>\n<li>If you need help with something, ask for help. Seriously, ask for help any time you feel like you need help. No sense getting stuck.</li>\n</ul>\n<h2>Stellar judgement</h2>\n<p>A great product is a reflection of thoughtful, deliberate, and considered decision-making. WP-CLI committers exhibit stellar judgement with making decisions on new features, fixing bugs, merging others pull requests, and generally working on the project.</p>\n<p>The basis of this decision-making ensures:</p>\n<ul>\n<li>New features fit within the <a href=\"https://make.wordpress.org/cli/handbook/philosophy/\">scope and philosophy of the WP-CLI project</a>.</li>\n<li>Bug fixes are prioritized, because bugs negatively affect the product quality.</li>\n<li>Pull requests include tests covering the scope of the change.</li>\n<li>Potential code additions are evaluated on their maintenance burden as well as their usefulness.</li>\n</ul>\n<h2>Consistent participation</h2>\n<p>Effective involvement with the WP-CLI project requires consistent involvement, clarity of communication, and a propensity to help others.</p>\n<p>As a widely adopted project, WP-CLI has a diverse user base. Helping this user base has tremendous opportunity for impact. WP-CLI committers prioritize clearing others\u2019 blockers over their own work, knowing this is a key contributor to a stable community.</p>\n<p>Notably, the idea that \u201c<a href=\"http://glen.nu/ramblings/oncodereview.php\">pending code reviews represent blocked threads of execution</a>\u201d can be applied broadly across all forms of collaboration. Prioritize providing feedback to others over your own work, if your feedback is blocking their progress. Request a <a href=\"https://make.wordpress.org/cli/handbook/code-review/\">code review</a> for a pull request by assigning the <code>@wp-cli/committers</code> team for review.</p>\n<p>Committer participation isn\u2019t just committing code. Often, you can have a huge amount of impact by investing a little bit of your time into:</p>\n<ul>\n<li>Refining an existing piece of documentation, or drafting a new one.</li>\n<li>Helping a contributor with whatever is needed to finish up their pull request.\n<ul>\n<li>If a contributor abandons a pull request (e.g. no activity in two weeks) that\u2019s close to a mergeable state, you can <a href=\"https://help.github.com/articles/committing-changes-to-a-pull-request-branch-created-from-a-fork/\">perform any necessary cleanup by committing directly to their branch</a> and get it over the finish line.</li>\n</ul>\n</li>\n<li>Triaging issues by spending 5-10 minutes further diagnosing the report and commenting with additional information you\u2019ve discovered.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18369,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18105",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18105",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18105/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18360,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18105/revisions/18360"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18105"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

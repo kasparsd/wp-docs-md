@@ -1,0 +1,91 @@
+{
+    "id": 18225,
+    "date": "2025-06-12T00:42:47",
+    "date_gmt": "2025-06-12T00:42:47",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/behat-steps/then-the-contents-of-the-file-should-not-match/"
+    },
+    "modified": "2025-07-01T12:55:20",
+    "modified_gmt": "2025-07-01T12:55:20",
+    "slug": "then-the-contents-of-the-file-should-not-match",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/behat-steps/then-the-contents-of-the-file-should-not-match/",
+    "title": {
+        "rendered": "Then /^the contents of the (.+) file should( not)? match (((\\/.+\\/)|(#.+#))([a-z]+)?)$/"
+    },
+    "content": {
+        "rendered": "<p>Match file contents against a regex.</p>\n<hr>\n<h2>Usage</h2>\n<pre><code>Scenario: My example scenario\n  When I run `wp scaffold plugin hello-world`\n  Then the contents of the wp-content/plugins/hello-world/languages/hello-world.pot file should match /X-Generator:\\s/\n</code></pre>\n<p><em>Behat steps documentation is generated from the <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> codebase on every release. To suggest improvements, please submit a pull request.</em></p>\n<hr>\n<h2>Related</h2>\n<ul>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-the-return-code-should-not-be/\">Then /^the return code should( not)? be (\\d+)$/</a></strong> \u2013 Expect a specific exit code of the previous command.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-stderr-should-strictly-be-contain-not-contain/\">Then /^(STDOUT|STDERR) should( strictly)? (be|contain|not contain):$/</a></strong> \u2013 Check the contents of STDOUT or STDERR.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-stderr-should-be-a-number/\">Then /^(STDOUT|STDERR) should be a number$/</a></strong> \u2013 Expect STDOUT or STDERR to be a numeric value.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-stderr-should-not-be-a-number/\">Then /^(STDOUT|STDERR) should not be a number$/</a></strong> \u2013 Expect STDOUT or STDERR to not be a numeric value.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-should-be-a-table-containing-rows/\">Then /^STDOUT should be a table containing rows:$/</a></strong> \u2013 Expect STDOUT to be a table containing the given rows.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-should-end-with-a-table-containing-rows/\">Then /^STDOUT should end with a table containing rows:$/</a></strong> \u2013 Expect STDOUT to end with a table containing the given rows.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-should-be-json-containing/\">Then /^STDOUT should be JSON containing:$/</a></strong> \u2013 Expect valid <span tabindex='0' class='glossary-item-container'>JSON<span class='glossary-item-hidden-content'><span class='glossary-item-header'>JSON</span> <span class='glossary-item-description'>JSON, or JavaScript Object Notation, is a minimal, readable format for structuring data. It is used primarily to transmit data between a server and web application, as an alternative to XML.</span></span></span> output in STDOUT.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-should-be-a-json-array-containing/\">Then /^STDOUT should be a JSON array containing:$/</a></strong> \u2013 Expect valid JSON array output in STDOUT.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-should-be-csv-containing/\">Then /^STDOUT should be CSV containing:$/</a></strong> \u2013 Expect STDOUT to be CSV containing certain values.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-should-be-yaml-containing/\">Then /^STDOUT should be YAML containing:$/</a></strong> \u2013 Expect STDOUT to be YAML containig certain content.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-stderr-should-be-empty/\">Then /^(STDOUT|STDERR) should be empty$/</a></strong> \u2013 Expect STDOUT or STDERR to be empty.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-stderr-should-not-be-empty/\">Then /^(STDOUT|STDERR) should not be empty$/</a></strong> \u2013 Expect STDOUT or STDERR not to be empty.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-stderr-should-be-a-version-string-w/\">Then /^(STDOUT|STDERR) should be a version string (&lt;|&lt;=|&gt;|&gt;=|==|=|!=|&lt;&gt;) ([+\\w.{}-]+)$/</a></strong> \u2013 Expect STDOUT or STDERR to be a version string comparing to the given version.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-the-file-directory-should-strictly-exist-not-exist-be-contain-not-contain/\">Then /^the (.+) (file|directory) should( strictly)? (exist|not exist|be:|contain:|not contain:)$/</a></strong> \u2013 Expect a certain file or directory to (not) exist or (not) contain certain contents.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-stdout-stderr-should-not-match/\">Then /^(STDOUT|STDERR) should( not)? match (((\\/.+\\/)|(#.+#))([a-z]+)?)$/</a></strong> \u2013 Match STDOUT or STDERR against a regex.</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-an-email-should-be-sent-not-be-sent/\">Then /^an email should (be sent|not be sent)$/</a></strong> \u2013 Expect an email to be sent (or not).</li>\n<li><strong><a href=\"https://make.wordpress.org/cli/handbook/behat-steps/then-the-http-status-code-should-be-code/\">Then the HTTP status code should be :code</a></strong> \u2013 Expect the HTTP status code for visiting `http://localhost:8080`.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 0,
+    "featured_media": 0,
+    "parent": 18101,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18225",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18225",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18225/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18240,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18225/revisions/18240"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18101"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18225"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

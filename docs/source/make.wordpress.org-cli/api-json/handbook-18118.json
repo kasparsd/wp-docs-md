@@ -1,0 +1,98 @@
+{
+    "id": 18118,
+    "date": "2025-06-12T00:42:40",
+    "date_gmt": "2025-06-12T00:42:40",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/documentation-standards/"
+    },
+    "modified": "2025-07-01T13:06:47",
+    "modified_gmt": "2025-07-01T13:06:47",
+    "slug": "documentation-standards",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/references/documentation-standards/",
+    "title": {
+        "rendered": "Documentation Standards"
+    },
+    "content": {
+        "rendered": "<p>To promote similarity and consistency between <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> commands, we\u2019ve produced these documentation standards we\u2019d encourage you to follow. Commonality is a key component of usability, because it reduces the mental overhead required when switching between commands.</p>\n<p>Pull requests against the WP-CLI project are reviewed for these standards. Please follow these standards for your custom commands as well.</p>\n<h3>Command annotation</h3>\n<p>Here\u2019s an example of the PHPdoc annotating the <code>wp cron event schedule</code> command:</p>\n<pre><code>/**\n * Schedule a new cron event.\n *\n * ## OPTIONS\n *\n * &lt;hook&gt;\n * : The hook name.\n *\n * [&lt;next-run&gt;]\n * : A Unix timestamp or an English textual datetime description compatible with `strtotime()`. Defaults to now.\n *\n * [&lt;recurrence&gt;]\n * : How often the event should recur. See `wp cron schedule list` for available schedule names. Defaults to no recurrence.\n *\n * [--&lt;field&gt;=&lt;value&gt;]\n * : Associative args for the event.\n *\n * ## EXAMPLES\n *\n *     # Schedule a new cron event.\n *     $ wp cron event schedule cron_test\n *     Success: Scheduled event with hook 'cron_test' for 2016-05-31 10:19:16 GMT.\n *\n *     # Schedule new cron event with hourly recurrence.\n *     $ wp cron event schedule cron_test now hourly\n *     Success: Scheduled event with hook 'cron_test' for 2016-05-31 10:20:32 GMT.\n *\n *     # Schedule new cron event and pass associative arguments.\n *     $ wp cron event schedule cron_test '+1 hour' --foo=1 --bar=2\n *     Success: Scheduled event with hook 'cron_test' for 2016-05-31 11:21:35 GMT.\n */\n</code></pre>\n<p>To break the example down piece by piece:</p>\n<ul>\n<li>\u201cSchedule a new cron event.\u201d is the command description. The command description should be under 50 characters and written in an active, present tense.</li>\n<li>The options section should begin with <code>## OPTIONS</code>. Keep a blank line before and after the heading.</li>\n<li>Each option should be named in a manner that concisely describes its purpose.</li>\n<li>The example section should start with <code>## EXAMPLES</code>. Keep a blank line before and after the heading.</li>\n<li>Include a blank line before and after each example to help visually indicate each as a separate example.</li>\n<li>Each example should have 3 parts.\n<ul>\n<li>Description\n<ul>\n<li>Must start with <code>#</code> and a space.</li>\n<li>Sentence should start with a capital letter.</li>\n<li>Comment must end in full-stops, exclamation marks, or question marks.</li>\n<li>Eg: <code># Create database.</code></li>\n</ul>\n</li>\n<li>Command\n<ul>\n<li>Must start with <code>$</code> and a space. Eg: <code>$ wp db create</code></li>\n</ul>\n</li>\n<li>Sample Output\n<ul>\n<li>Keep exact output. Note spaces and indentation in the output. Exception: If output is very long, it could be truncated to show suitable section only.</li>\n<li>Eg: <code>Success: Database created.</code></li>\n</ul>\n</li>\n</ul>\n</li>\n<li>If possible, keep at least two examples for each command. One showing basic use and another advanced use. More use cases the better.</li>\n</ul>\n<p>For more details on how WP-CLI understands the PHPdoc, please see the <a href=\"https://make.wordpress.org/cli/handbook/commands-cookbook/\">commands cookbook</a>.</p>\n<h3>Class annotation</h3>\n<p>For classes representing a collection of subcommands, we\u2019d encourage you to use class-level annotation to provide an introduction to the collection.</p>\n<pre><code>/**\n * Manage options.\n *\n * ## EXAMPLES\n *\n *     # Get site URL.\n *     $ wp option get siteurl\n *     http://example.com\n *\n *     # Add option.\n *     $ wp option add my_option foobar\n *     Success: Added 'my_option' option.\n *\n *     # Update option.\n *     $ wp option update my_option '{\"foo\": \"bar\"}' --format=json\n *     Success: Updated 'my_option' option.\n *\n *     # Delete option.\n *     $ wp option delete my_option\n *     Success: Deleted 'my_option' option.\n */\n</code></pre>\n<ul>\n<li>Class could have multiple examples. Please follow standards for examples on a command doc.</li>\n</ul>\n<h3>Messages within command execution</h3>\n<pre><code>$ wp theme activate twentysixteen\nSuccess: Switched to 'Twenty Sixteen' theme.\n</code></pre>\n<ul>\n<li>Message must start with a capital letter.\n<ul>\n<li>Exception: When message starts with a special key and is wrapped with quotes. Eg \u2013 <code>'movie' is not a registered post type.</code></li>\n</ul>\n</li>\n<li>If single line message, it must end with <code>.</code>.\n<ul>\n<li>Exception: There should be no trailing character in the end when colon <code>:</code> is used like this. <code>Invalid ID: 123</code></li>\n<li>Exception: Message to display in progress bar can omit trailing period. Eg \u2013 <code>Generating comments</code></li>\n</ul>\n</li>\n<li>Filenames and folder names must be wrapped with quotes ( <code>'</code> ).</li>\n<li>Roles, <span tabindex='0' class='glossary-item-container'>sidebar<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Sidebar</span> <span class='glossary-item-description'>A sidebar in WordPress is referred to a widget-ready area used by WordPress themes to display information that is not a part of the main content. It is not always a vertical column on the side. It can be a horizontal rectangle below or above the content area, footer, header, or any where in the theme.</span></span></span> ID, post type key, <span tabindex='0' class='glossary-item-container'>taxonomy<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Taxonomy</span> <span class='glossary-item-description'>A taxonomy is a way to group things together. In WordPress, some common taxonomies are category, link, tag, or post format. <a href=\"https://codex.wordpress.org/Taxonomies#Default_Taxonomies\">https://codex.wordpress.org/Taxonomies#Default_Taxonomies</a>.</span></span></span> key must be wrapped with quotes.</li>\n<li>Message in the context of ongoing action could end with <code>...</code>. Eg \u2013 `Downloading from https://github.com/wp-cli/wp-cli/releases/download/v0.23.1/wp-cli-0.23.1.phar\u2026`</li>\n</ul>\n<h3>Command parameter description</h3>\n<p>If there is a set of allowed values for a command parameter, we have set special format (mostly similar to YAML) for default value and available options.</p>\n<pre><code>[--format=&lt;format&gt;]\n: Render output in a particular format.\n---\ndefault: table\noptions:\n  - table\n  - csv\n  - json\n  - count\n  - yaml\n---\n</code></pre>\n<ul>\n<li>Section starts with <code>---</code> in the separate line next to the param description.</li>\n<li>In the next line keep default value with <code>default: value</code>.</li>\n<li>For options, start with <code>options:</code> in the following line.</li>\n<li>Keep value in the following pattern: 2 space, <code>-</code>, 1 space, value</li>\n<li>Close section with <code>---</code>.</li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18371,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18118",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18118",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18118/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18347,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18118/revisions/18347"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18371"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18118"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}

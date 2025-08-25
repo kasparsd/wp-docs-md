@@ -1,0 +1,98 @@
+{
+    "id": 18138,
+    "date": "2025-06-12T00:42:42",
+    "date_gmt": "2025-06-12T00:42:42",
+    "guid": {
+        "rendered": "https://make.wordpress.org/cli/handbook/repository-management/"
+    },
+    "modified": "2025-07-01T13:14:01",
+    "modified_gmt": "2025-07-01T13:14:01",
+    "slug": "repository-management",
+    "status": "publish",
+    "type": "handbook",
+    "link": "https://make.wordpress.org/cli/handbook/contributions/repository-management/",
+    "title": {
+        "rendered": "Repository Management"
+    },
+    "content": {
+        "rendered": "<h2>Package Names</h2>\n<p>Package names for the official <code>wp-cli</code> <span tabindex='0' class='glossary-item-container'>GitHub<span class='glossary-item-hidden-content'><span class='glossary-item-header'>GitHub</span> <span class='glossary-item-description'>GitHub is a website that offers online implementation of git repositories that can easily be shared, copied and modified by other developers. Public repositories are free to host, private repositories require a paid subscription. GitHub introduced the concept of the \u2018pull request\u2019 where code changes done in branches by contributors can be reviewed and discussed before being merged be the repository owner.  <a href=\"https://github.com/\">https://github.com/</a></span></span></span> organization need to be discussed upfront with the <a href=\"https://github.com/orgs/wp-cli/teams/maintainers\">maintainers</a>.</p>\n<p>Before creating a new repository, it\u2019s important to discuss the repository first. This discussion helps establish consensus on what purpose the codebase serves, and where it lives best in the <span tabindex='0' class='glossary-item-container'>WP-CLI<span class='glossary-item-hidden-content'><span class='glossary-item-header'>WP-CLI</span> <span class='glossary-item-description'>WP-CLI is the Command Line Interface for WordPress, used to do administrative and development tasks in a programmatic way. The project page is <a href=\"http://wp-cli.org/\">http://wp-cli.org/</a> <a href=\"https://make.wordpress.org/cli/\">https://make.wordpress.org/cli/</a></span></span></span> ecosystem.</p>\n<p>Package names for WP-CLI commands must end with the <code>-command</code> suffix for clarity, and also to distinguish them from the non-command repositories.</p>\n<p>Before new repositories are created for commands, a decision needs to be made whether the command deserves its own repository or whether it should be included within an existing repository instead.</p>\n<p><em>Example: <code>wp-cli/scaffold-package-command</code>.</em></p>\n<h2>Package Versions</h2>\n<p>Package versions follow the <a href=\"http://semver.org/\">Semantic Versioning Specification (SemVer)</a>.</p>\n<p>In layman\u2019s terms for us, this typically means:</p>\n<ul>\n<li><em>Patch releases</em> (e.g. 1.0.x) are used for bug fixes, documentation changes, small enhancements, etc.</li>\n<li><em>Minor releases</em> (e.g. 1.x.0) are used when a new command is introduced to a package, or a major enhancement is made to an existing command.</li>\n<li><em>Major releases</em> (e.g. x.0.0) are used when changes to the framework change the WP-CLI <span tabindex='0' class='glossary-item-container'>API<span class='glossary-item-hidden-content'><span class='glossary-item-header'>API</span> <span class='glossary-item-description'>An API or Application Programming Interface is a software intermediary that allows programs to interact with each other and share data in limited, clearly defined ways.</span></span></span> in a breaking way.</li>\n</ul>\n<h2>Milestones</h2>\n<p>Open milestones usually point to the next version to be released.</p>\n<p>As the release notes are built using the milestones, both pull requests and issues that are to be merged need to be set to the upcoming milestone, so that these pull requests will be part of the release notes.</p>\n<h2>Labels</h2>\n<p>Labels are an important organizational tool to communicate the state and progress of the work being done. <a href=\"https://github.com/orgs/wp-cli/teams/committers\">Committers</a> are required to keep these up-to-date.</p>\n<p>Keeping issues and pull requests accurately labeled helps us make sense of issue tracker usage in aggregate and more easily search closed issues and pull requests for past discussion.</p>\n<h3>Groups Of Labels</h3>\n<p>Labels can be part of a label group, a concept that is applicable to all packages. The actual labels that are available can depend on the actual package, but the groups always have the same semantic role.</p>\n<h4>Command</h4>\n<p>The labels that define what exact command a given issue/pull request applies to are prefixed with <code>command:</code></p>\n<p><em>Example: <code>command:cli-update</code></em></p>\n<h4>Scope</h4>\n<p>The labels that define what scope the current issue/pull request applies to are prefixed with <code>scope:</code>.</p>\n<p>Used scopes:</p>\n<ul>\n<li><code>scope:bootstrap</code> \u2013 Part of the bootstrap process, which loads both WP-CLI as well as WordPress <span tabindex='0' class='glossary-item-container'>Core<span class='glossary-item-hidden-content'><span class='glossary-item-header'>Core</span> <span class='glossary-item-description'>Core is the set of software required to run WordPress. The Core Development Team builds WordPress.</span></span></span>.</li>\n<li><code>scope:distribution</code> \u2013 Part of the distribution process, where the Phar is being built and releases are produced.</li>\n<li><code>scope:documentation</code> \u2013 Part of the handbook, command reference or inline help.</li>\n<li><code>scope:framework</code> \u2013 Part of the WP-CLI framework itself, which provides the architecture, API and helper functions to make commands possible.</li>\n<li><code>scope:testing</code> \u2013 Part of the unit or functional tests.</li>\n<li><code>scope:website</code> \u2013 Part of the website infrastructure on <code>wp-cli.org</code> or <code>make.wordpress.org</code>.</li>\n</ul>\n<h4>State</h4>\n<p>The labels that defined what state a given issue/pull request is in are prefixed with <code>state:</code>.</p>\n<p>Used states:</p>\n<ul>\n<li><code>state:unconfirmed</code> \u2013 The bug/problem in the issue could not be replicated yet or might be related to the reporter\u2019s environment.</li>\n<li><code>state:unsupported</code> \u2013 The issue is outside of the scope of a bug report and cannot be supported on GitHub. The reporter should be pointed towards one of the <a href=\"http://wp-cli.org/#support\">support channels</a>.</li>\n</ul>\n<h4>Command</h4>\n<p>The labels that define what specific command a given issue/pull request is related to are prefixed with <code>command:</code>.</p>\n<p>Some examples:</p>\n<ul>\n<li><code>command:core</code> \u2013 Relates to one or more of the subcommands under the <code>wp core</code> parent command.</li>\n<li><code>command:cli-check-update</code> \u2013 Relates to the <code>wp cli check-update</code> command.</li>\n<li><code>command:post-meta-update</code> \u2013 Relates to the <code>wp post-meta update</code> command.</li>\n</ul>\n<h3>Required Labels</h3>\n<p>Some labels have a special meaning and/or might be used for automated workflows down the road. These are required across all official packages.</p>\n<h4>Bug</h4>\n<p>The <code>bug</code> label denotes an issue that is a confirmed bug where the code does not produce the expected result.</p>\n<p>Bugs are specific to unexpected behavior of existing functionality. Functionality perceived to be missing is not a bug, but an enhancement.</p>\n<h4>Upstream Bug</h4>\n<p>The <code>upstream-bug</code> label denotes an issue that is a bug in upstream software (e.g. WordPress core, <span tabindex='0' class='glossary-item-container'>PHP<span class='glossary-item-hidden-content'><span class='glossary-item-header'>PHP</span> <span class='glossary-item-description'>PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. <a href=\"https://www.php.net/manual/en/preface.php\">https://www.php.net/manual/en/preface.php</a>.</span></span></span>, etc.) that won\u2019t be fixed in WP-CLI.</p>\n<h4>Good First Issue</h4>\n<p>The <code>good-first-issue</code> label denotes an issue that is a good entry point for new contributors wanting to get their feet wet.</p>\n<p>Good first issues are small in scope and don\u2019t require extensive technical expertise or historical project knowledge to get started.</p>\n<h2>Commits</h2>\n<p>No direct commits are to be done against the default branch (<code>main</code>/<code>master</code>) branch of the packages. All code changes need to go through a pull request workflow.</p>\n<h2>Pull Requests</h2>\n<p>All code changes go through a pull request workflow.</p>\n<p>Every submitted pull request needs to go through a <a href=\"https://make.wordpress.org/cli/handbook/code-review/\">code review</a>, and needs to be approved by at least one of the <a href=\"https://github.com/orgs/wp-cli/teams/committers\">committers</a>.</p>\n<h3>Merge Pre-Conditions</h3>\n<p>Non-trivial pull requests should be preceded by a related issue that defines the problem to solve and allows for discussion of the most appropriate solution before actually writing code.</p>\n<p>If a pull request is submitted by one of the <a href=\"https://github.com/orgs/wp-cli/teams/committers\">committers</a>, the submitter should set the \u201cReviewers\u201d for that pull request to <code>wp-cli/committers</code> if a general code review is needed, or to one or more specific committer profiles if the expertise of a specific person is needed/wanted.</p>\n<p>If a pull request is submitted by an external contributor, the <a href=\"https://github.com/orgs/wp-cli/teams/committers\">committers</a> should be responsive and provide quick feedback to encourage further contributions.</p>\n<h3>Unmergeable Contributions</h3>\n<p>Sometimes, a pull request may not be mergeable, no matter how much additional effort is applied to it (e.g. out of scope, etc.). In these cases, it\u2019s best to let the contributor down as softly and firmly as possible, both to encourage future involvement and avoid flame wars.</p>\n<p>Make sure to:</p>\n<ol>\n<li>Thank the contributor for their time and effort.</li>\n<li>Fully explain the reasoning behind the decision to close the pull request.</li>\n<li>Link to as much supporting documentation as possible.</li>\n</ol>\n<p>If you\u2019d like a template to follow:</p>\n<blockquote><p>\n  Thanks ________ for the time you\u2019ve spent on this pull request.</p>\n<p>  I\u2019m closing this pull request because ________. To clarify further, ________.</p>\n<p>  For more details, please see ________ and ________.\n</p></blockquote>\n<h3>Merge Conditions</h3>\n<p>Apart from needing to be approved, pull requests also need to have their tests in a passing state before they can be merged. When both of these conditions are true, any <a href=\"https://github.com/orgs/wp-cli/teams/committers\">committer</a> can merge the pull request by:</p>\n<ol>\n<li>Ensuring that all applicable labels have been set.</li>\n<li>Ensuring that the correct milestone has been set.</li>\n<li>Ensuring that the branch is deleted after the merge (if applicable).</li>\n<li>Adapting the title of the pull-request as needed. The ideal pull request title is one that can be copied and pasted into release notes as is.</li>\n</ol>\n<p>Once a pull request is merged, the committer should make sure any corresponding issues are also closed and assigned to the correct milestone.</p>\n<h2>Releases</h2>\n<h3>WP-CLI Releases</h3>\n<p>WP-CLI releases are scheduled and communicated well in advance by the <a href=\"https://github.com/orgs/wp-cli/teams/maintainers\">maintainers</a>.</p>\n<p>When the release is ready, it is prepared and executed according to the <a href=\"https://make.wordpress.org/cli/handbook/contributions/release-checklist/\">release checklist</a> by one of the <a href=\"https://github.com/orgs/wp-cli/teams/maintainers\">maintainers</a>.</p>\n<h3>Package Releases</h3>\n<p>Package releases happen on an as-needed basis and are executed by the <a href=\"https://github.com/orgs/wp-cli/teams/maintainers\">maintainers</a>. A package is tagged for a release when:</p>\n<ul>\n<li>It has a reasonable number of changes that have been sitting for a while (couple weeks or more) and would benefit from landing in the nightly build.</li>\n<li>It has a substantial enhancement (e.g. a new command) that\u2019s worth getting into the nightly build for pre-release validation.</li>\n</ul>\n<p>Tagging a release should be postponed (for a few to several days) if there\u2019s an open pull request that makes sense to include in the release.</p>\n<p>Package release notes should include the subject of and a link to each merged pull request. It\u2019s not necessary to include minor documentation, coding standard, and test suite changes. Feel free to edit the subject for clarity. See <a href=\"https://github.com/wp-cli/scaffold-command/releases/tag/v1.0.6\">wp-cli/scaffold-command v1.0.6</a> for an example.</p>\n<p>Importantly, tagging a package release is also an opportunity to perform a final review of product quality:</p>\n<ul>\n<li>Each merged pull request makes sense to ship, and has sufficient test coverage and documentation.</li>\n<li>The package\u2019s README.md is up-to-date.</li>\n<li>No breaking changes were introduced, unless explicitly intended.</li>\n</ul>\n<p>Sometime after a new package version is tagged, the <code>wp-make-coffee</code> bot submits a pull request against <code>wp-cli/wp-cli</code> with the results of <code>composer update</code>. When this pull request is merged, the package release will end up in the WP-CLI nightly build.</p>\n<h2>Tips &amp; Tools</h2>\n<h3>GitHub Searches</h3>\n<p>There are a lot of useful ways to search GitHub. These searches can be put into bookmarks or embedded into pages as a link.</p>\n<p>Here are some examples:</p>\n<ul>\n<li><a href=\"https://github.com/search?q=org%3Awp-cli+is%3Aopen+sort%3Aupdated-desc&amp;type=issues\">Open issues &amp; pull requests across all WP-CLI repositories, sorted by last updated</a></li>\n<li><a href=\"https://github.com/search?q=org%3Awp-cli+is%3Amerged+no%3Amilestone+sort%3Aupdated-desc&amp;type=issues\">Merged pull requests across all WP-CLI repositories that have no milestone, sorted by last updated</a></li>\n<li><a href=\"https://github.com/search?q=org%3Awp-cli+is%3Aclosed+no%3Alabel+sort%3Aupdated-desc&amp;type=issues\">Closed issues &amp; pull requests across all WP-CLI repositories that have no label, sorted by last updated</a></li>\n</ul>\n<nav class='o2-post-footer-actions'><ul class='o2-post-footer-action-row'></ul><div class='o2-post-footer-action-likes'></div><ul class='o2-post-footer-action-row'></ul></nav>",
+        "protected": false
+    },
+    "author": 368236,
+    "featured_media": 0,
+    "parent": 18369,
+    "menu_order": 0,
+    "template": "",
+    "meta": {
+        "jetpack_post_was_ever_published": false,
+        "footnotes": ""
+    },
+    "class_list": [
+        "post-18138",
+        "handbook",
+        "type-handbook",
+        "status-publish",
+        "hentry",
+        "author-swissspidy"
+    ],
+    "revision_note": "",
+    "jetpack_sharing_enabled": true,
+    "_links": {
+        "self": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18138",
+                "targetHints": {
+                    "allow": [
+                        "GET"
+                    ]
+                }
+            }
+        ],
+        "collection": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook"
+            }
+        ],
+        "about": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/types/handbook"
+            }
+        ],
+        "author": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/users/368236"
+            }
+        ],
+        "version-history": [
+            {
+                "count": 1,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18138/revisions"
+            }
+        ],
+        "predecessor-version": [
+            {
+                "id": 18327,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18138/revisions/18327"
+            }
+        ],
+        "up": [
+            {
+                "embeddable": true,
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/handbook/18369"
+            }
+        ],
+        "wp:attachment": [
+            {
+                "href": "https://make.wordpress.org/cli/wp-json/wp/v2/media?parent=18138"
+            }
+        ],
+        "curies": [
+            {
+                "name": "wp",
+                "href": "https://api.w.org/{rel}",
+                "templated": true
+            }
+        ]
+    }
+}
